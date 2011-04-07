@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YANFOE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="YANFOE_Scrapers_net_live_search_api_LiveSearchService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://api.search.live.net:80/soap.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

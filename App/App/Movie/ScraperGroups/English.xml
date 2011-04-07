@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MovieScraperGroupModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ScraperDescription />
+  <ScraperName>English</ScraperName>
+  <Title>Imdb</Title>
+  <Year>Imdb</Year>
+  <OrigionalTitle />
+  <Rating>Imdb</Rating>
+  <Tagline>Imdb</Tagline>
+  <Plot>Imdb</Plot>
+  <Outline />
+  <Certification>Imdb</Certification>
+  <Director>Imdb</Director>
+  <Country>Imdb</Country>
+  <Studio>Imdb</Studio>
+  <Language>Imdb</Language>
+  <Genre>Imdb</Genre>
+  <Runtime>Imdb</Runtime>
+  <Top250>Imdb</Top250>
+  <ReleaseDate>Imdb</ReleaseDate>
+  <Votes>Imdb</Votes>
+  <Cast>Imdb</Cast>
+  <Writers>Imdb</Writers>
+  <Mpaa>Imdb</Mpaa>
+  <Fanart>TheMovieDB</Fanart>
+  <Poster>TheMovieDB</Poster>
+  <Trailer>Apple</Trailer>
+</MovieScraperGroupModel>
