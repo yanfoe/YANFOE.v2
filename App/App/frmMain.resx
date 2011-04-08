@@ -123,6 +123,9 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>36</value>
   </metadata>
+  <data name="memoEdit2.EditValue" xml:space="preserve">
+    <value>Albert Camacho, Allen Shope, Brian Bonner, Christian Lefrançois, Dan Woods, D Cook, Gary Gallagher, Ian Birch, Joseph Searfoss Jr, Jason Womack, Manny Gonzalez, Michael IJspelder, Michael Falls, Mitchel Waterman, Morgan Bohman, Neil Abbott, Nicolas Katsidis, Philip Chambers</value>
+  </data>
   <data name="memoEdit1.EditValue" xml:space="preserve">
     <value>YANFOE 2 is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
 
