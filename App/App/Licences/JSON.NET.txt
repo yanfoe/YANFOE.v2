@@ -1,0 +1,12 @@
+﻿"The Json.NET library allows the simple and safe reading and writing of JSON objects from .NET. Using readers and writers, similar to .NET’s XML API, Json.NET will be familiar to most .NET developers and makes passing messages between .NET and JavaScript a snap.
+
+Copyright 2006 James Newton-King
+http://www.newtonsoft.com
+
+This work is licensed under the Creative Commons Attribution 2.5 License
+http://creativecommons.org/licenses/by/2.5/
+
+You are free:
+   * to copy, distribute, display, and perform the work
+   * to make derivative works
+   * to make commercial use of the work"

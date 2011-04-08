@@ -1,0 +1,31 @@
+﻿YANFOE 2.0 - Copyright (c) 2011 The YANFOE Project
+http://www.yanfoe.com
+
+LICENCE
+-------
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
+or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+
+DISCLAIMER
+----------
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+BUILDING YANFOE
+---------------
+YANFOE 2.0 is written in C# 4.0.
+
+To build your own copy of YANFOE you will need to aquire licences for, and install the following products:
+
++ Visual Studio 2010 (http://www.microsoft.com/visualstudio/en-gb)
++ DevExpress WinForms Controls (http://www.devexpress.com/Products/NET/Controls/WinForms/)
+
+CONTACT YANFOE
+--------------
+You can contact The YANFOE Project at russell@yanfoe.com

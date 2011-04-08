@@ -120,6 +120,7 @@
     <Compile Include="Models\IOModels\MovieSaveSettings.cs" />
     <Compile Include="Models\IOModels\TvSaveSettings.cs" />
     <Compile Include="Models\TvModels\Scan\EpisodeDetails.cs" />
+    <None Include="README" />
     <Compile Include="Scrapers\Movie\Models\AppleTrailers\AppleTrailerResultsModel.cs" />
     <Compile Include="Scrapers\Movie\Models\AppleTrailers\AppleTrailerSearchModel.cs" />
     <Compile Include="Models\SetsModels\MovieSetModel.cs" />
@@ -837,6 +838,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Licences\YANFOE.licence" />
     <Content Include="Movie\ScraperGroups\English.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
