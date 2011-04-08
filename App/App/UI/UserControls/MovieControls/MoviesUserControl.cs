@@ -228,10 +228,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             if (count == 1)
             {
-                if (this.IsReadyForScrape())
-                {
-                    Factories.Scraper.MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
-                }
+                Factories.Scraper.MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
             }
             else if (count > 1)
             {

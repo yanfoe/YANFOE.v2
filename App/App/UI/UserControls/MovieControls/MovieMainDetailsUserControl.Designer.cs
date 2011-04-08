@@ -210,9 +210,9 @@
             this.btnRejectMultiChanges.Enabled = false;
             this.btnRejectMultiChanges.Image = global::YANFOE.Properties.Resources.delete;
             this.btnRejectMultiChanges.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnRejectMultiChanges.Location = new System.Drawing.Point(653, 211);
+            this.btnRejectMultiChanges.Location = new System.Drawing.Point(652, 211);
             this.btnRejectMultiChanges.Name = "btnRejectMultiChanges";
-            this.btnRejectMultiChanges.Size = new System.Drawing.Size(104, 30);
+            this.btnRejectMultiChanges.Size = new System.Drawing.Size(105, 30);
             this.btnRejectMultiChanges.StyleController = this.layoutControl1;
             toolTipTitleItem1.Text = "Cancel Multi Edit Changes";
             superToolTip1.Items.Add(toolTipTitleItem1);
@@ -224,9 +224,9 @@
             this.btnAcceptMultiChanges.Enabled = false;
             this.btnAcceptMultiChanges.Image = global::YANFOE.Properties.Resources.accept24;
             this.btnAcceptMultiChanges.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnAcceptMultiChanges.Location = new System.Drawing.Point(546, 211);
+            this.btnAcceptMultiChanges.Location = new System.Drawing.Point(544, 211);
             this.btnAcceptMultiChanges.Name = "btnAcceptMultiChanges";
-            this.btnAcceptMultiChanges.Size = new System.Drawing.Size(103, 30);
+            this.btnAcceptMultiChanges.Size = new System.Drawing.Size(104, 30);
             this.btnAcceptMultiChanges.StyleController = this.layoutControl1;
             toolTipTitleItem2.Text = "Accept Multi Edit Changes";
             superToolTip2.Items.Add(toolTipTitleItem2);
@@ -236,9 +236,9 @@
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.groupControl1);
-            this.panelControl1.Location = new System.Drawing.Point(546, 29);
+            this.panelControl1.Location = new System.Drawing.Point(544, 29);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(211, 178);
+            this.panelControl1.Size = new System.Drawing.Size(213, 178);
             this.panelControl1.TabIndex = 33;
             // 
             // groupControl1
@@ -247,7 +247,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(2, 2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(207, 174);
+            this.groupControl1.Size = new System.Drawing.Size(209, 174);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Multi Edit Mode";
             // 
@@ -257,16 +257,17 @@
             this.memoEdit1.EditValue = "Multi Edit mode allows you to edit multiple movies at once.";
             this.memoEdit1.Location = new System.Drawing.Point(2, 22);
             this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(203, 150);
+            this.memoEdit1.Properties.ReadOnly = true;
+            this.memoEdit1.Size = new System.Drawing.Size(205, 150);
             this.memoEdit1.TabIndex = 1;
             // 
             // btnActorTrash
             // 
             this.btnActorTrash.Image = global::YANFOE.Properties.Resources.trash32;
             this.btnActorTrash.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnActorTrash.Location = new System.Drawing.Point(642, 470);
+            this.btnActorTrash.Location = new System.Drawing.Point(641, 470);
             this.btnActorTrash.Name = "btnActorTrash";
-            this.btnActorTrash.Size = new System.Drawing.Size(115, 38);
+            this.btnActorTrash.Size = new System.Drawing.Size(116, 38);
             this.btnActorTrash.StyleController = this.layoutControl1;
             toolTipTitleItem3.Text = "Delete Actor";
             superToolTip3.Items.Add(toolTipTitleItem3);
@@ -279,9 +280,9 @@
             this.btnActorDown.Enabled = false;
             this.btnActorDown.Image = global::YANFOE.Properties.Resources.down32;
             this.btnActorDown.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnActorDown.Location = new System.Drawing.Point(593, 470);
+            this.btnActorDown.Location = new System.Drawing.Point(591, 470);
             this.btnActorDown.Name = "btnActorDown";
-            this.btnActorDown.Size = new System.Drawing.Size(45, 38);
+            this.btnActorDown.Size = new System.Drawing.Size(46, 38);
             this.btnActorDown.StyleController = this.layoutControl1;
             toolTipTitleItem4.Text = "Move Actor Down";
             superToolTip4.Items.Add(toolTipTitleItem4);
@@ -293,7 +294,7 @@
             this.btnActorUp.Enabled = false;
             this.btnActorUp.Image = global::YANFOE.Properties.Resources.up32;
             this.btnActorUp.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnActorUp.Location = new System.Drawing.Point(546, 470);
+            this.btnActorUp.Location = new System.Drawing.Point(544, 470);
             this.btnActorUp.Name = "btnActorUp";
             this.btnActorUp.Size = new System.Drawing.Size(43, 38);
             this.btnActorUp.StyleController = this.layoutControl1;
@@ -338,10 +339,10 @@
             // 
             // grdActors
             // 
-            this.grdActors.Location = new System.Drawing.Point(546, 251);
+            this.grdActors.Location = new System.Drawing.Point(544, 251);
             this.grdActors.MainView = this.gridViewActors;
             this.grdActors.Name = "grdActors";
-            this.grdActors.Size = new System.Drawing.Size(211, 215);
+            this.grdActors.Size = new System.Drawing.Size(213, 215);
             this.grdActors.TabIndex = 23;
             this.grdActors.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewActors});
@@ -353,6 +354,7 @@
             this.clmRole});
             this.gridViewActors.GridControl = this.grdActors;
             this.gridViewActors.Name = "gridViewActors";
+            this.gridViewActors.OptionsDetail.EnableMasterViewMode = false;
             this.gridViewActors.OptionsSelection.MultiSelect = true;
             this.gridViewActors.OptionsView.ShowGroupPanel = false;
             // 
@@ -416,10 +418,10 @@
             // 
             // txtOutline
             // 
-            this.txtOutline.Location = new System.Drawing.Point(65, 200);
+            this.txtOutline.Location = new System.Drawing.Point(65, 198);
             this.txtOutline.MinimumSize = new System.Drawing.Size(0, 30);
             this.txtOutline.Name = "txtOutline";
-            this.txtOutline.Size = new System.Drawing.Size(467, 167);
+            this.txtOutline.Size = new System.Drawing.Size(467, 169);
             this.txtOutline.StyleController = this.layoutControl1;
             this.txtOutline.TabIndex = 7;
             // 
@@ -526,14 +528,14 @@
             // 
             // cmbScraperGroup
             // 
-            this.cmbScraperGroup.Location = new System.Drawing.Point(543, 2);
+            this.cmbScraperGroup.Location = new System.Drawing.Point(541, 2);
             this.cmbScraperGroup.Name = "cmbScraperGroup";
             this.cmbScraperGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbScraperGroup.Properties.NullValuePrompt = "Pick a scraper group.";
             this.cmbScraperGroup.Properties.NullValuePromptShowForEmptyValue = true;
             this.cmbScraperGroup.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbScraperGroup.Size = new System.Drawing.Size(217, 20);
+            this.cmbScraperGroup.Size = new System.Drawing.Size(219, 20);
             this.cmbScraperGroup.StyleController = this.layoutControl1;
             this.cmbScraperGroup.TabIndex = 32;
             // 
@@ -617,9 +619,9 @@
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem4.Control = this.txtOutline;
             this.layoutControlItem4.CustomizationFormText = "Outline:";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 198);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 196);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(534, 171);
+            this.layoutControlItem4.Size = new System.Drawing.Size(534, 173);
             this.layoutControlItem4.Text = "Outline";
             this.layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Default;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(59, 13);
@@ -786,7 +788,7 @@
             this.splitterItem1.CustomizationFormText = "splitterItem1";
             this.splitterItem1.Location = new System.Drawing.Point(534, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(7, 513);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 513);
             // 
             // layoutControlItem17
             // 
@@ -818,7 +820,7 @@
             this.splitterItem2.CustomizationFormText = "splitterItem2";
             this.splitterItem2.Location = new System.Drawing.Point(0, 191);
             this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(534, 7);
+            this.splitterItem2.Size = new System.Drawing.Size(534, 5);
             // 
             // layoutLanguage
             // 
@@ -836,9 +838,9 @@
             // 
             this.layoutControlItem11.Control = this.cmbScraperGroup;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(541, 0);
+            this.layoutControlItem11.Location = new System.Drawing.Point(539, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(221, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(223, 24);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -852,10 +854,10 @@
             this.layoutControlItem22,
             this.layoutControlItem23,
             this.layoutControlItem24});
-            this.layActorsGroup.Location = new System.Drawing.Point(541, 246);
+            this.layActorsGroup.Location = new System.Drawing.Point(539, 246);
             this.layActorsGroup.Name = "layActorsGroup";
             this.layActorsGroup.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layActorsGroup.Size = new System.Drawing.Size(221, 267);
+            this.layActorsGroup.Size = new System.Drawing.Size(223, 267);
             this.layActorsGroup.Text = "layActorsGroup";
             this.layActorsGroup.TextVisible = false;
             // 
@@ -865,7 +867,7 @@
             this.lblActorsGrd.CustomizationFormText = "layoutControlItem18";
             this.lblActorsGrd.Location = new System.Drawing.Point(0, 0);
             this.lblActorsGrd.Name = "lblActorsGrd";
-            this.lblActorsGrd.Size = new System.Drawing.Size(215, 219);
+            this.lblActorsGrd.Size = new System.Drawing.Size(217, 219);
             this.lblActorsGrd.Text = "lblActorsGrd";
             this.lblActorsGrd.TextSize = new System.Drawing.Size(0, 0);
             this.lblActorsGrd.TextToControlDistance = 0;
@@ -889,7 +891,7 @@
             this.layoutControlItem23.CustomizationFormText = "layoutControlItem23";
             this.layoutControlItem23.Location = new System.Drawing.Point(47, 219);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(49, 42);
+            this.layoutControlItem23.Size = new System.Drawing.Size(50, 42);
             this.layoutControlItem23.Text = "layoutControlItem23";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem23.TextToControlDistance = 0;
@@ -899,9 +901,9 @@
             // 
             this.layoutControlItem24.Control = this.btnActorTrash;
             this.layoutControlItem24.CustomizationFormText = "layoutControlItem24";
-            this.layoutControlItem24.Location = new System.Drawing.Point(96, 219);
+            this.layoutControlItem24.Location = new System.Drawing.Point(97, 219);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(119, 42);
+            this.layoutControlItem24.Size = new System.Drawing.Size(120, 42);
             this.layoutControlItem24.Text = "layoutControlItem24";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem24.TextToControlDistance = 0;
@@ -914,10 +916,10 @@
             this.layoutControlItem13,
             this.layoutControlItem12,
             this.layMultiEditKey});
-            this.layMultiGroup.Location = new System.Drawing.Point(541, 24);
+            this.layMultiGroup.Location = new System.Drawing.Point(539, 24);
             this.layMultiGroup.Name = "layMultiGroup";
             this.layMultiGroup.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layMultiGroup.Size = new System.Drawing.Size(221, 222);
+            this.layMultiGroup.Size = new System.Drawing.Size(223, 222);
             this.layMultiGroup.Text = "layMultiGroup";
             this.layMultiGroup.TextVisible = false;
             this.layMultiGroup.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -926,9 +928,9 @@
             // 
             this.layoutControlItem13.Control = this.btnRejectMultiChanges;
             this.layoutControlItem13.CustomizationFormText = "layoutControlItem13";
-            this.layoutControlItem13.Location = new System.Drawing.Point(107, 182);
+            this.layoutControlItem13.Location = new System.Drawing.Point(108, 182);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(108, 34);
+            this.layoutControlItem13.Size = new System.Drawing.Size(109, 34);
             this.layoutControlItem13.Text = "layoutControlItem13";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem13.TextToControlDistance = 0;
@@ -940,7 +942,7 @@
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 182);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(107, 34);
+            this.layoutControlItem12.Size = new System.Drawing.Size(108, 34);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;
@@ -952,7 +954,7 @@
             this.layMultiEditKey.CustomizationFormText = "layoutControlItem12";
             this.layMultiEditKey.Location = new System.Drawing.Point(0, 0);
             this.layMultiEditKey.Name = "lblMultiEditKey";
-            this.layMultiEditKey.Size = new System.Drawing.Size(215, 182);
+            this.layMultiEditKey.Size = new System.Drawing.Size(217, 182);
             this.layMultiEditKey.Text = "layMultiEditKey";
             this.layMultiEditKey.TextSize = new System.Drawing.Size(0, 0);
             this.layMultiEditKey.TextToControlDistance = 0;
