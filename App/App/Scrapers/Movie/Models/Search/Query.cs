@@ -14,6 +14,7 @@
 
 namespace YANFOE.Scrapers.Movie.Models.Search
 {
+    using System;
     using System.ComponentModel;
 
     /// <summary>
@@ -48,5 +49,7 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         /// </summary>
         /// <value>The results.</value>
         public BindingList<QueryResult> Results { get; set; }
+
+        public string ImdbId { get; set; }
     }
 }

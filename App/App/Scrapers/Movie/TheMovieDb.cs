@@ -149,14 +149,30 @@ namespace YANFOE.Scrapers.Movie
         {
             try
             {
-                var xml =
-                    Downloader.ProcessDownload(
-                        string.Format(
-                            "http://api.themoviedb.org/2.1/Movie.search/en/xml/{0}/{1}",
-                            Settings.ConstSettings.Application.TheMovieDBApi,
-                            query.Title),
-                        DownloadType.Html,
-                        Section.Movies);
+                string xml;
+
+                if (!string.IsNullOrEmpty(query.ImdbId))
+                {
+                    xml =
+                        Downloader.ProcessDownload(
+                            string.Format(
+                                "http://api.themoviedb.org/2.1/Movie.imdbLookup/en/xml/{0}/{1}",
+                                Settings.ConstSettings.Application.TheMovieDBApi,
+                                query.ImdbId),
+                            DownloadType.Html,
+                            Section.Movies);
+                }
+                else
+                {
+                    xml =
+                        Downloader.ProcessDownload(
+                            string.Format(
+                                "http://api.themoviedb.org/2.1/Movie.search/en/xml/{0}/{1}",
+                                Settings.ConstSettings.Application.TheMovieDBApi,
+                                query.Title),
+                            DownloadType.Html,
+                            Section.Movies);
+                }
 
                 if (string.IsNullOrEmpty(xml))
                 {

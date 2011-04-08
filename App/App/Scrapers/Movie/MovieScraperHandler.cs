@@ -30,6 +30,7 @@ namespace YANFOE.Scrapers.Movie
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Interfaces;
     using YANFOE.Scrapers.Movie.Models.ScraperGroup;
+    using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
 
@@ -526,6 +527,34 @@ namespace YANFOE.Scrapers.Movie
         /// </returns>
         private static string GetScraperID(string scraperName, MovieModel movie)
         {
+            if (string.IsNullOrEmpty(movie.ImdbId) || string.IsNullOrEmpty(movie.TmdbId))
+            {
+                var results = new BindingList<QueryResult>();
+                var query = new Query
+                {
+                    Results = results,
+                    Title = movie.Title,
+                    Year = movie.Year.ToString(),
+                    ImdbId = movie.ImdbId
+                 
+                };
+
+                MovieScrapeFactory.QuickSearchTmdb(query);
+
+                if (query.Results.Count > 0)
+                {
+                    if (string.IsNullOrEmpty(movie.ImdbId))
+                    {
+                        movie.ImdbId = query.Results[0].ImdbID;
+                    }
+
+                    if (string.IsNullOrEmpty(movie.TmdbId))
+                    {
+                        movie.TmdbId = query.Results[0].TmdbID;
+                    }
+                }
+            }
+
             switch (scraperName)
             {
                 case "Imdb":
