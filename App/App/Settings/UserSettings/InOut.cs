@@ -95,6 +95,7 @@ namespace YANFOE.Settings.UserSettings
             this.FillNfoTypes();
             this.FillPosterType();
             this.FillFanartType();
+            this.FillTrailerType();
             this.FillBannerType();
             this.FillEpisodeType();
 
@@ -145,6 +146,11 @@ namespace YANFOE.Settings.UserSettings
         /// Gets or sets FanartTypes.
         /// </summary>
         public List<string> FanartTypes { get; set; }
+
+        /// <summary>
+        /// Gets or sets TrailerTypes.
+        /// </summary>
+        public List<string> TrailerTypes { get; set; }
 
         /// <summary>
         /// Gets or sets ImageExtentions.
@@ -397,18 +403,21 @@ namespace YANFOE.Settings.UserSettings
 
             this.MovieSaveSettings[NFOType.YAMJ].NormalPosterNameTemplate = "<path><filename>.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].NormalFanartNameTemplate = "<path><filename>.fanart.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].NormalTrailerNameTemplate = "<path><filename>.[TRAILER-<trailername>].<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].NormalNfoNameTemplate = "<path><filename>.nfo";
             this.MovieSaveSettings[NFOType.YAMJ].NormalSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].NormalSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
 
             this.MovieSaveSettings[NFOType.YAMJ].DvdPosterNameTemplate = "<path><filename>.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].DvdFanartNameTemplate = "<path><filename>.fanart.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].DvdTrailerNameTemplate = "<path><filename>.[TRAILER-<trailername>].<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].DvdNfoNameTemplate = "<path><filename>.nfo";
             this.MovieSaveSettings[NFOType.YAMJ].DvdSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].DvdSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
 
             this.MovieSaveSettings[NFOType.YAMJ].BlurayPosterNameTemplate = "<path><filename>.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].BlurayFanartNameTemplate = "<path><filename>.fanart.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].BlurayTrailerNameTemplate = "<path><filename>.[TRAILER-<trailername>].<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].BlurayNfoNameTemplate = "<path><filename>.nfo";
             this.MovieSaveSettings[NFOType.YAMJ].BluraySetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].BluraySetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
@@ -511,6 +520,14 @@ namespace YANFOE.Settings.UserSettings
         private void FillFanartType()
         {
             this.FanartTypes = new List<string> { "<fileName>-fanart", "<fileName>.fanart" };
+        }
+
+        /// <summary>
+        /// The fill trailer type.
+        /// </summary>
+        private void FillTrailerType()
+        {
+            this.TrailerTypes = new List<string> { "<fileName>-[TRAILER-<trailerName>]", "<fileName>.[TRAILER-<trailerName>]" };
         }
 
         /// <summary>

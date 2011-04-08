@@ -18,6 +18,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using System;
 
     using YANFOE.Factories;
+    using YANFOE.Tools.Models;
 
     public partial class MovieTrailerUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -86,7 +87,32 @@ namespace YANFOE.UI.UserControls.MovieControls
 
         #endregion
 
+        private void grdViewTrailers_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            for (int i = 0; i < grdViewTrailers.RowCount; i++)
+            {
+                if (i != e.RowHandle)
+                {
+                    ((TrailerDetailsModel)grdViewTrailers.GetRow(i)).SelectedTrailer = false;
+                }
+                else if (((TrailerDetailsModel)grdViewTrailers.GetRow(i)).SelectedTrailer)
+                {
+                    MovieDBFactory.GetCurrentMovie().CurrentTrailerUrl =
+                        ((TrailerDetailsModel)grdViewTrailers.GetRow(i)).UriFull.ToString();
+                }
+                else if (!((TrailerDetailsModel)grdViewTrailers.GetRow(i)).SelectedTrailer)
+                {
+                    MovieDBFactory.GetCurrentMovie().CurrentTrailerUrl = string.Empty;
+                }
+            }
+        }
+
 
         #endregion
+
+        private void chkSelectedTrailer_CheckedChanged(object sender, EventArgs e)
+        {
+            grdViewTrailers.PostEditor();
+        }
     }
 }

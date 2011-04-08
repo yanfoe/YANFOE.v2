@@ -28,6 +28,10 @@ namespace YANFOE.UI.UserControls.DownloadControls
             ucDownloadThread2.UpdateProgress("Thread 2", Downloader.Progress2);
             ucDownloadThread3.UpdateProgress("Thread 3", Downloader.Progress3);
             ucDownloadThread4.UpdateProgress("Thread 4", Downloader.Progress4);
+            ucDownloadThread5.UpdateProgress("Thread 5 : Not Implemented", null);
+            ucDownloadThread6.UpdateProgress("Thread 6 : Not Implemented", null);
+            ucDownloadThread7.UpdateProgress("Thread 7 : Not Implemented", null);
+            ucDownloadThread8.UpdateProgress("Thread 8 : Not Implemented", null);
 
             gridControl1.DataSource = Downloader.BackgroundDownloadQue;
         }

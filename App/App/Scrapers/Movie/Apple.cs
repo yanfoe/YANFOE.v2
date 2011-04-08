@@ -114,7 +114,8 @@ namespace YANFOE.Scrapers.Movie
                         {
                             foreach (Match trailerMatch in matchCollection)
                             {
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
+                                output.Add(new TrailerDetailsModel(trailerMatch.Value.Insert(trailerMatch.Value.LastIndexOf('_') + 1, "h"), 0, "Unk", atsm.results[i].title));
                             }
 
                             continue;
@@ -126,6 +127,7 @@ namespace YANFOE.Scrapers.Movie
                         {
                             foreach (Match trailerMatch in matchCollection)
                             {
+                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
                                 output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
                             }
 
@@ -138,7 +140,8 @@ namespace YANFOE.Scrapers.Movie
                         {
                             foreach (Match trailerMatch in matchCollection)
                             {
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
+                                output.Add(new TrailerDetailsModel(trailerMatch.Value.Insert(trailerMatch.Value.LastIndexOf('_') + 1, "h"), 0, "Unk", atsm.results[i].title));
                             }
 
                             continue;
@@ -150,6 +153,7 @@ namespace YANFOE.Scrapers.Movie
                         {
                             foreach (Match trailerMatch in matchCollection)
                             {
+                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
                                 output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
                             }
 

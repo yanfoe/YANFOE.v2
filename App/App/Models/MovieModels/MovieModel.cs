@@ -78,6 +78,11 @@ namespace YANFOE.Models.MovieModels
         private bool changedPoster;
 
         /// <summary>
+        /// Changed Trailer back field
+        /// </summary>
+        private bool changedTrailer;
+
+        /// <summary>
         /// Changed Text backing field
         /// </summary>
         private bool changedText;
@@ -259,6 +264,7 @@ namespace YANFOE.Models.MovieModels
 
             this.ChangedText = false;
             this.ChangedPoster = false;
+            this.ChangedTrailer = false;
             this.changeList = new BindingList<string>();
 
             this.Title = string.Empty;
@@ -290,6 +296,7 @@ namespace YANFOE.Models.MovieModels
             this.NfoPathOnDisk = string.Empty;
             this.PosterPathOnDisk = string.Empty;
             this.FanartPathOnDisk = string.Empty;
+            this.TrailerPathOnDisk = string.Empty;
 
             this.PropertyChanged += this.MovieModel_PropertyChanged;
         }
@@ -429,6 +436,27 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.changedPoster = value;
                     this.OnPropertyChanged("ChangedPoster");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [changed image].
+        /// </summary>
+        /// <value><c>true</c> if [changed image]; otherwise, <c>false</c>.</value>
+        public bool ChangedTrailer
+        {
+            get
+            {
+                return this.changedTrailer;
+            }
+
+            set
+            {
+                if (this.changedTrailer != value)
+                {
+                    this.changedTrailer = value;
+                    this.OnPropertyChanged("ChangedTrailer");
                 }
             }
         }

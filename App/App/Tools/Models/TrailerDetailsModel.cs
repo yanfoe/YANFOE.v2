@@ -164,10 +164,6 @@ namespace YANFOE.Tools.Models
             set
             {
                 this.selectedTrailer = value;
-                if (this.selectedTrailer && uriFull != null)
-                {
-                    Downloader.ProcessDownload(this.uriFull.ToString().Insert(uriFull.ToString().LastIndexOf('_') + 1, "h"), DownloadType.AppleBinary, Section.Movies, true);
-                }
                 this.OnPropertyChanged("SelectedTrailer");
             }
         }

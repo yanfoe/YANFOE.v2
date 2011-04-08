@@ -87,12 +87,14 @@
             this.grdViewTrailers.Name = "grdViewTrailers";
             this.grdViewTrailers.OptionsDetail.EnableMasterViewMode = false;
             this.grdViewTrailers.OptionsView.ShowGroupPanel = false;
+            this.grdViewTrailers.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grdViewTrailers_CellValueChanged);
             // 
             // clmTrailerMovieTitle
             // 
             this.clmTrailerMovieTitle.Caption = "Movie Title";
             this.clmTrailerMovieTitle.FieldName = "TrailerMovieTitle";
             this.clmTrailerMovieTitle.Name = "clmTrailerMovieTitle";
+            this.clmTrailerMovieTitle.OptionsColumn.AllowEdit = false;
             this.clmTrailerMovieTitle.Visible = true;
             this.clmTrailerMovieTitle.VisibleIndex = 0;
             this.clmTrailerMovieTitle.Width = 121;
@@ -102,9 +104,10 @@
             this.clmTrailerLocation.Caption = "Trailer Location";
             this.clmTrailerLocation.FieldName = "UriFull";
             this.clmTrailerLocation.Name = "clmTrailerLocation";
+            this.clmTrailerLocation.OptionsColumn.AllowEdit = false;
             this.clmTrailerLocation.Visible = true;
             this.clmTrailerLocation.VisibleIndex = 1;
-            this.clmTrailerLocation.Width = 484;
+            this.clmTrailerLocation.Width = 545;
             // 
             // grdSelectTrailer
             // 
@@ -114,12 +117,13 @@
             this.grdSelectTrailer.Name = "grdSelectTrailer";
             this.grdSelectTrailer.Visible = true;
             this.grdSelectTrailer.VisibleIndex = 2;
-            this.grdSelectTrailer.Width = 62;
+            this.grdSelectTrailer.Width = 20;
             // 
             // chkSelectedTrailer
             // 
             this.chkSelectedTrailer.AutoHeight = false;
             this.chkSelectedTrailer.Name = "chkSelectedTrailer";
+            this.chkSelectedTrailer.CheckedChanged += new System.EventHandler(this.chkSelectedTrailer_CheckedChanged);
             // 
             // layoutControl1
             // 

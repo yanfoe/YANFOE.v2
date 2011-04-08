@@ -53,16 +53,16 @@ namespace YANFOE.IO
         /// <param name="pathFrom">
         /// The path from.
         /// </param>
-        /// <param name="pathToo">
-        /// The path too.
+        /// <param name="pathTo">
+        /// The path to.
         /// </param>
-        public void CopyFile(string pathFrom, string pathToo)
+        public void CopyFile(string pathFrom, string pathTo)
         {
-            if (pathFrom != pathToo)
+            if (pathFrom != pathTo)
             {
                 try
                 {
-                    File.Copy(pathFrom, pathToo, true);
+                    File.Copy(pathFrom, pathTo, true);
                 }
                 catch (Exception exception)
                 {
@@ -211,8 +211,11 @@ namespace YANFOE.IO
         /// </param>
         public void SaveMovie(MovieModel movieModel)
         {
+            string actualTrailerFileName = "";
+            string actualTrailerFileNameExt = "";
             string actualFilePath = movieModel.AssociatedFiles.Media[0].FileModel.Path;
             string actualFileName = movieModel.AssociatedFiles.Media[0].FileModel.FilenameWithOutExt;
+            string currentTrailerUrl = movieModel.CurrentTrailerUrl;
 
             MovieSaveSettings movieSaveSettings = Get.InOutCollection.CurrentMovieSaveSettings;
 
@@ -226,11 +229,15 @@ namespace YANFOE.IO
             string fanartPathFrom = Downloader.ProcessDownload(
                 movieModel.CurrentFanartImageUrl, DownloadType.Binary, Section.Movies);
 
+            string trailerPathFrom = Downloader.ProcessDownload(
+                movieModel.CurrentTrailerUrl, DownloadType.AppleBinary, Section.Movies);
+
             string nfoXml = GenerateOutput.GenerateMovieOutput(movieModel);
 
             string nfoTemplate;
             string posterTemplate;
             string fanartTemplate;
+            string trailerTemplate;
             string setPosterTemplate;
             string setFanartTemplate;
 
@@ -242,6 +249,7 @@ namespace YANFOE.IO
                 nfoTemplate = movieSaveSettings.DvdNfoNameTemplate;
                 posterTemplate = movieSaveSettings.DvdPosterNameTemplate;
                 fanartTemplate = movieSaveSettings.DvdFanartNameTemplate;
+                trailerTemplate = movieSaveSettings.DvdTrailerNameTemplate;
                 setPosterTemplate = movieSaveSettings.DvdSetPosterNameTemplate;
                 setFanartTemplate = movieSaveSettings.DvdSetFanartNameTemplate;
             }
@@ -253,6 +261,7 @@ namespace YANFOE.IO
                 nfoTemplate = movieSaveSettings.BlurayNfoNameTemplate;
                 posterTemplate = movieSaveSettings.BlurayPosterNameTemplate;
                 fanartTemplate = movieSaveSettings.BlurayFanartNameTemplate;
+                trailerTemplate = movieSaveSettings.BlurayTrailerNameTemplate;
                 setPosterTemplate = movieSaveSettings.BluraySetPosterNameTemplate;
                 setFanartTemplate = movieSaveSettings.BluraySetFanartNameTemplate;
             }
@@ -261,10 +270,17 @@ namespace YANFOE.IO
                 nfoTemplate = movieSaveSettings.NormalNfoNameTemplate;
                 posterTemplate = movieSaveSettings.NormalPosterNameTemplate;
                 fanartTemplate = movieSaveSettings.NormalFanartNameTemplate;
+                trailerTemplate = movieSaveSettings.NormalTrailerNameTemplate;
                 setPosterTemplate = movieSaveSettings.NormalSetPosterNameTemplate;
                 setFanartTemplate = movieSaveSettings.NormalSetFanartNameTemplate;
             }
 
+            if (!string.IsNullOrEmpty(currentTrailerUrl))
+            {
+                actualTrailerFileName = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('/')+1, currentTrailerUrl.LastIndexOf('.') - currentTrailerUrl.LastIndexOf('/')-1);
+                actualTrailerFileNameExt = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('.')+1);
+            }
+            
             string nfoOutputName = nfoTemplate.Replace("<path>", actualFilePath).Replace("<filename>", actualFileName);
 
             string posterOutputName =
@@ -275,11 +291,15 @@ namespace YANFOE.IO
                 fanartTemplate.Replace("<path>", actualFilePath).Replace("<filename>", actualFileName).Replace(
                     "<ext>", "jpg");
 
+            string trailerOutputName =
+                trailerTemplate.Replace("<path>", actualFilePath).Replace("<filename>", actualFileName).Replace(
+                    "<trailername>", actualTrailerFileName).Replace("<ext>", actualTrailerFileNameExt);
+
             string setPosterOutputPath = setPosterTemplate.Replace("<path>", actualFilePath).Replace(
-                "<filename", actualFileName);
+                "<filename>", actualFileName);
 
             string setFanartOutputPath = setFanartTemplate.Replace("<path>", actualFilePath).Replace(
-                "<filename", actualFileName);
+                "<filename>", actualFileName);
 
             // Handle Set Images
             List<string> sets = MovieSetManager.GetSetsContainingMovie(movieModel);
@@ -383,6 +403,27 @@ namespace YANFOE.IO
                 catch (Exception ex)
                 {
                     Log.WriteToLog(LogSeverity.Error, 0, "Saving Fanart Failed for " + movieModel.Title, ex.Message);
+                }
+            }
+
+            if (movieSaveSettings.IoType == MovieIOType.All || movieSaveSettings.IoType == MovieIOType.Trailer)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(movieModel.CurrentTrailerUrl))
+                    {
+                        this.CopyFile(trailerPathFrom, trailerOutputName);
+                        movieModel.ChangedTrailer = false;
+                        Log.WriteToLog(
+                            LogSeverity.Info,
+                            0,
+                            "Trailer Saved To Disk for " + movieModel.Title,
+                            fanartPathFrom + " -> " + fanartOutputName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteToLog(LogSeverity.Error, 0, "Saving Trailer Failed for " + movieModel.Title, ex.Message);
                 }
             }
         }

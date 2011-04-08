@@ -81,6 +81,8 @@ namespace YANFOE.UI.Dialogs.DSettings
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "NormalPosterNameTemplate");
             this.txtNormalFanartPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "NormalFanartNameTemplate");
+            this.txtNormalTrailerPath.DataBindings.Add(
+                "Text", Get.InOutCollection.CurrentMovieSaveSettings, "NormalTrailerNameTemplate");
             this.txtNormalSetPosterPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "NormalSetPosterNameTemplate");
             this.txtNormalSetFanartPath.DataBindings.Add(
@@ -92,6 +94,8 @@ namespace YANFOE.UI.Dialogs.DSettings
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "DvdPosterNameTemplate");
             this.txtDVDFanartPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "DvdFanartNameTemplate");
+            this.txtDVDTrailerPath.DataBindings.Add(
+                "Text", Get.InOutCollection.CurrentMovieSaveSettings, "DvdTrailerNameTemplate");
             this.txtDvdSetPosterPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "DvdSetPosterNameTemplate");
             this.txtDvdSetFanartPath.DataBindings.Add(
@@ -103,6 +107,8 @@ namespace YANFOE.UI.Dialogs.DSettings
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "BlurayPosterNameTemplate");
             this.txtBlurayFanartPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "BlurayFanartNameTemplate");
+            this.txtBlurayTrailerPath.DataBindings.Add(
+                "Text", Get.InOutCollection.CurrentMovieSaveSettings, "BlurayTrailerNameTemplate");
             this.txtBluraySetPosterPath.DataBindings.Add(
                 "Text", Get.InOutCollection.CurrentMovieSaveSettings, "BluraySetPosterNameTemplate");
             this.txtBluraySetFanartPath.DataBindings.Add(
@@ -132,6 +138,8 @@ namespace YANFOE.UI.Dialogs.DSettings
             this.txtBlurayFanartPreview.Text =
                 Get.InOutCollection.CurrentMovieSaveSettings.BlurayFanartNameTemplate.Replace("<path>", demoPath).
                     Replace("<filename>", demoFileName).Replace("<ext>", DemoExtention);
+
+            // Add demo for trailer
 
             this.txtBluraySetPosterPreview.Text =
                 Get.InOutCollection.CurrentMovieSaveSettings.BluraySetPosterNameTemplate.Replace("<path>", demoPath).
@@ -167,6 +175,8 @@ namespace YANFOE.UI.Dialogs.DSettings
                 Get.InOutCollection.CurrentMovieSaveSettings.DvdFanartNameTemplate.Replace("<path>", demoPath).Replace(
                     "<filename>", demoFileName).Replace("<ext>", DemoExtention);
 
+            // Add demo for trailer
+
             this.txtDVDSetPosterPreview.Text =
                 Get.InOutCollection.CurrentMovieSaveSettings.DvdSetPosterNameTemplate.Replace("<path>", demoPath).
                     Replace("<filename>", demoFileName).Replace("<ext>", DemoExtention).Replace(
@@ -201,6 +211,8 @@ namespace YANFOE.UI.Dialogs.DSettings
             this.txtNormalFanartPreview.Text =
                 Get.InOutCollection.CurrentMovieSaveSettings.NormalFanartNameTemplate.Replace("<path>", demoPath).
                     Replace("<filename>", demoFileName).Replace("<ext>", DemoExtention);
+
+            // Add Demo for trailer
 
             this.txtNormalSetPosterPreview.Text =
                 Get.InOutCollection.CurrentMovieSaveSettings.NormalSetPosterNameTemplate.Replace("<path>", demoPath).

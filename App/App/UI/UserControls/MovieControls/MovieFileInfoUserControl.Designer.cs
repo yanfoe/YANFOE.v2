@@ -52,6 +52,8 @@
             this.clmFilePath});
             this.grdViewFileInfo.GridControl = this.grdFileInfo;
             this.grdViewFileInfo.Name = "grdViewFileInfo";
+            this.grdViewFileInfo.OptionsDetail.EnableMasterViewMode = false;
+            this.grdViewFileInfo.OptionsView.ShowGroupPanel = false;
             // 
             // clmFilePath
             // 

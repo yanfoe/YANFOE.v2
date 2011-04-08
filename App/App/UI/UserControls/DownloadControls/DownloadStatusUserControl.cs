@@ -30,7 +30,7 @@ namespace YANFOE.UI.UserControls.DownloadControls
         public DownloadStatusUserControl()
         {
             InitializeComponent();
-            
+
             Progress = new Progress();
 
             timer = new Timer();
@@ -41,8 +41,11 @@ namespace YANFOE.UI.UserControls.DownloadControls
 
         void TimerTick(object sender, System.EventArgs e)
         {
-            this.txtStatus.Text = this.Progress.Message;
-            this.prgBar.Position = this.Progress.Percent;
+            if (Progress != null)
+            {
+                this.txtStatus.Text = this.Progress.Message;
+                this.prgBar.Position = this.Progress.Percent;
+            }
         }
 
         public void UpdateProgress(string groupTitle, Progress prog)

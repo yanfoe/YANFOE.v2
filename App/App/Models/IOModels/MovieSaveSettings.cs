@@ -43,6 +43,11 @@ namespace YANFOE.Models.IOModels
         private string blurayPosterNameTemplate;
 
         /// <summary>
+        /// The bluray trailer name template.
+        /// </summary>
+        private string blurayTrailerNameTemplate;
+
+        /// <summary>
         /// The bluray set fanart name template.
         /// </summary>
         private string bluraySetFanartNameTemplate;
@@ -66,6 +71,11 @@ namespace YANFOE.Models.IOModels
         /// The dvd poster name template.
         /// </summary>
         private string dvdPosterNameTemplate;
+
+        /// <summary>
+        /// The dvd trailer name template.
+        /// </summary>
+        private string dvdTrailerNameTemplate;
 
         /// <summary>
         /// The dvd set fanart name template.
@@ -103,6 +113,11 @@ namespace YANFOE.Models.IOModels
         private string normalPosterNameTemplate;
 
         /// <summary>
+        /// The normal trailer name template.
+        /// </summary>
+        private string normalTrailerNameTemplate;
+
+        /// <summary>
         /// The normal set fanart name template.
         /// </summary>
         private string normalSetFanartNameTemplate;
@@ -127,18 +142,21 @@ namespace YANFOE.Models.IOModels
             this.NormalNfoNameTemplate = string.Empty;
             this.NormalPosterNameTemplate = string.Empty;
             this.NormalFanartNameTemplate = string.Empty;
+            this.NormalTrailerNameTemplate = string.Empty;
             this.NormalSetPosterNameTemplate = string.Empty;
             this.NormalSetFanartNameTemplate = string.Empty;
 
             this.DvdNfoNameTemplate = string.Empty;
             this.DvdPosterNameTemplate = string.Empty;
             this.DvdFanartNameTemplate = string.Empty;
+            this.DvdTrailerNameTemplate = string.Empty;
             this.DvdSetPosterNameTemplate = string.Empty;
             this.DvdSetFanartNameTemplate = string.Empty;
 
             this.BlurayNfoNameTemplate = string.Empty;
             this.BlurayPosterNameTemplate = string.Empty;
             this.BlurayFanartNameTemplate = string.Empty;
+            this.BlurayTrailerNameTemplate = string.Empty;
             this.BluraySetPosterNameTemplate = string.Empty;
             this.BluraySetFanartNameTemplate = string.Empty;
         }
@@ -204,6 +222,26 @@ namespace YANFOE.Models.IOModels
             {
                 this.blurayPosterNameTemplate = value;
                 this.OnPropertyChanged("BlurayPosterNameTemplate");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the bluray trailer name template.
+        /// </summary>
+        /// <value>
+        /// The bluray trailer name template.
+        /// </value>
+        public string BlurayTrailerNameTemplate
+        {
+            get
+            {
+                return this.blurayTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.blurayTrailerNameTemplate = value;
+                this.OnPropertyChanged("BlurayTrailerNameTemplate");
             }
         }
 
@@ -304,6 +342,26 @@ namespace YANFOE.Models.IOModels
             {
                 this.dvdPosterNameTemplate = value;
                 this.OnPropertyChanged("DvdPosterNameTemplate");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the DVD trailer name template.
+        /// </summary>
+        /// <value>
+        /// The DVD trailer name template.
+        /// </value>
+        public string DvdTrailerNameTemplate
+        {
+            get
+            {
+                return this.dvdTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.dvdTrailerNameTemplate = value;
+                this.OnPropertyChanged("DvdTrailerNameTemplate");
             }
         }
 
@@ -449,6 +507,26 @@ namespace YANFOE.Models.IOModels
             {
                 this.normalPosterNameTemplate = value;
                 this.OnPropertyChanged("NormalPosterNameTemplate");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the trailer name template.
+        /// </summary>
+        /// <value>
+        /// The trailer name template.
+        /// </value>
+        public string NormalTrailerNameTemplate
+        {
+            get
+            {
+                return this.normalTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.normalTrailerNameTemplate = value;
+                this.OnPropertyChanged("NormalTrailerNameTemplate");
             }
         }
 

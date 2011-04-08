@@ -37,7 +37,12 @@ namespace YANFOE.Factories.InOut.Enum
         /// <summary>
         /// Movie IO Type : Fanart
         /// </summary>
-        Fanart, 
+        Fanart,
+
+        /// <summary>
+        /// Movie IO Type : Trailer
+        /// </summary>
+        Trailer, 
 
         /// <summary>
         /// Movie IO Type : Images
