@@ -149,7 +149,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                                     var index = (double)runningByteTotal;
                                     var total = (double)byteBuffer.Length;
                                     var progressPercentageDouble = index / total;
-                                    var progressPercentageInteger = (int)progressPercentageDouble * 100;
+                                    var progressPercentageInteger = (int)(progressPercentageDouble * 100);
 
                                     downloadItem.Progress.Percent = progressPercentageInteger;
 
