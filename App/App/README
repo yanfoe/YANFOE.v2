@@ -17,9 +17,21 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSE
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
 USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+RUNNING YANFOE
+--------------
+YANFOE 2.0 does require installation. 
+
+You are required though to install .net Framework 4.0
+http://www.microsoft.com/downloads/en/details.aspx?FamilyID=9cfb2d51-5ff4-4491-b0e5-b386f32c0992&displaylang=en
+
+To Start YANFOE 2.0 double click "YANFOE.exe". 
+
 BUILDING YANFOE
 ---------------
 YANFOE 2.0 is written in C# 4.0.
+
+The source code for YANFOE can be obtained from the YANFOE code repository.
+https://github.com/yanfoe/YANFOE.v2
 
 To build your own copy of YANFOE you will need to aquire licences for, and install the following products:
 
