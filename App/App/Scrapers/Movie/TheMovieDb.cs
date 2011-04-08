@@ -194,7 +194,9 @@ namespace YANFOE.Scrapers.Movie
                     XDocument xmlDocImages = XDocument.Parse(movie.ToString());
 
                     var images = (from i in xmlDocImages.Descendants("image")
-                                  where i.Attribute("type").Value == "poster" && i.Attribute("size").Value == "cover"
+                                  where 
+                                    i.Attribute("type").Value == "poster" && 
+                                    i.Attribute("size").Value == "cover"
                                   select i.Attribute("url").Value).ToList();
 
                     var queryResult = new QueryResult();
