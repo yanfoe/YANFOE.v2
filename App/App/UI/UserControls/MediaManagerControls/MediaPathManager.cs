@@ -166,6 +166,9 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             var frmEditMediaPath = new FrmEditMediaPath(FrmEditMediaPath.MediaPathActionType.Add);
             frmEditMediaPath.ShowDialog(this);
+
+            grdViewMain.RefreshData();
+            ButRefresh_Click(null, null);
         }
 
         /// <summary>

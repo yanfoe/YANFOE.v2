@@ -104,10 +104,19 @@ namespace YANFOE.Tools.IO
 
                 string f1 = f;
 
-                MediaPathFileModel check =
-                    (from r in mediaPathModel.FileCollection where r.PathAndFileName == f1 select r).SingleOrDefault();
+                var check = false;
 
-                if (check == null)
+                for (int index = 0; index < mediaPathModel.FileCollection.Count; index++)
+                {
+                    var file = mediaPathModel.FileCollection[index];
+                    if (file.PathAndFileName == f1)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+
+                if (!check)
                 {
                     mediaPathModel.FileCollection.Add(obj);
                 }
