@@ -51,7 +51,7 @@ namespace YANFOE
             this.InitializeComponent();
 
             this.Text = string.Format(
-                "YANFOE 2 - Early Alpha 1 - r{0}", 
+                "YANFOE 2 - Alpha 2", 
                 Application.ApplicationBuild);
 
             SkinManager.EnableFormSkins();
