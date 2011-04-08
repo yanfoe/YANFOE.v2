@@ -35,8 +35,9 @@ namespace YANFOE
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.mnuFileSaveDatabase = new DevExpress.XtraBars.BarButtonItem();
@@ -88,7 +89,7 @@ namespace YANFOE
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.uiTimer = new System.Windows.Forms.Timer();
+            this.uiTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -611,7 +612,7 @@ namespace YANFOE
             this.LookAndFeel.SkinName = "Sharp Plus";
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "YANFOE 2 - Early Alpha 1 - r14 (For Subscribers Only. Do not distribute)";
+            this.Text = "YANFOE 2 - Early Alpha 1";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
