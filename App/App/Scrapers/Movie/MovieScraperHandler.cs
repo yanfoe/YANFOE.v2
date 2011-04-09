@@ -231,7 +231,7 @@ namespace YANFOE.Scrapers.Movie
 
             bool outResult = true;
 
-            if (!string.IsNullOrEmpty(scraperGroup.Title))
+            if (!string.IsNullOrEmpty(scraperGroup.Title) && scraperGroup.Title != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Title, ScrapeFields.Title, out result);
@@ -242,7 +242,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Year))
+            if (!string.IsNullOrEmpty(scraperGroup.Year) && scraperGroup.Year != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Year, ScrapeFields.Year, out result);
@@ -253,7 +253,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Top250))
+            if (!string.IsNullOrEmpty(scraperGroup.Top250) && scraperGroup.Top250 != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Top250, ScrapeFields.Top250, out result);
@@ -264,7 +264,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Cast))
+            if (!string.IsNullOrEmpty(scraperGroup.Cast) && scraperGroup.Cast != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Cast, ScrapeFields.Cast, out result);
@@ -275,7 +275,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Certification))
+            if (!string.IsNullOrEmpty(scraperGroup.Certification) && scraperGroup.Certification != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Certification, ScrapeFields.Certification, out result);
@@ -286,7 +286,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Mpaa))
+            if (!string.IsNullOrEmpty(scraperGroup.Mpaa) && scraperGroup.Mpaa != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Mpaa, ScrapeFields.Mpaa, out result);
@@ -297,7 +297,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Country))
+            if (!string.IsNullOrEmpty(scraperGroup.Country) && scraperGroup.Country != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Country, ScrapeFields.Country, out result);
@@ -308,7 +308,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Director))
+            if (!string.IsNullOrEmpty(scraperGroup.Director) && scraperGroup.Director != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Director, ScrapeFields.Director, out result);
@@ -319,7 +319,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Fanart))
+            if (!string.IsNullOrEmpty(scraperGroup.Fanart) && scraperGroup.Fanart != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Fanart, ScrapeFields.Fanart, out result);
@@ -330,7 +330,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Genre))
+            if (!string.IsNullOrEmpty(scraperGroup.Genre) && scraperGroup.Genre != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Genre, ScrapeFields.Genre, out result);
@@ -341,7 +341,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Language))
+            if (!string.IsNullOrEmpty(scraperGroup.Language) && scraperGroup.Language != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Language, ScrapeFields.Language, out result);
@@ -352,7 +352,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Outline))
+            if (!string.IsNullOrEmpty(scraperGroup.Outline) && scraperGroup.Outline != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Outline, ScrapeFields.Outline, out result);
@@ -363,7 +363,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Plot))
+            if (!string.IsNullOrEmpty(scraperGroup.Plot) && scraperGroup.Plot != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Plot, ScrapeFields.Plot, out result);
@@ -374,7 +374,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Rating))
+            if (!string.IsNullOrEmpty(scraperGroup.Rating) && scraperGroup.Rating != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Rating, ScrapeFields.Rating, out result);
@@ -385,7 +385,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.ReleaseDate))
+            if (!string.IsNullOrEmpty(scraperGroup.ReleaseDate) && scraperGroup.ReleaseDate != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.ReleaseDate, ScrapeFields.ReleaseDate, out result);
@@ -396,7 +396,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Runtime))
+            if (!string.IsNullOrEmpty(scraperGroup.Runtime) && scraperGroup.Runtime != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Runtime, ScrapeFields.Runtime, out result);
@@ -407,7 +407,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Studio))
+            if (!string.IsNullOrEmpty(scraperGroup.Studio) && scraperGroup.Studio != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Studio, ScrapeFields.Studio, out result);
@@ -418,7 +418,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Tagline))
+            if (!string.IsNullOrEmpty(scraperGroup.Tagline) && scraperGroup.Tagline != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Tagline, ScrapeFields.Tagline, out result);
@@ -429,7 +429,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Votes))
+            if (!string.IsNullOrEmpty(scraperGroup.Votes) && scraperGroup.Votes != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Votes, ScrapeFields.Votes, out result);
@@ -440,7 +440,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Writers))
+            if (!string.IsNullOrEmpty(scraperGroup.Writers) && scraperGroup.Writers != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Writers, ScrapeFields.Writers, out result);
@@ -451,7 +451,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Poster))
+            if (!string.IsNullOrEmpty(scraperGroup.Poster) && scraperGroup.Poster != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Poster, ScrapeFields.Poster, out result);
@@ -462,7 +462,7 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
-            if (!string.IsNullOrEmpty(scraperGroup.Trailer))
+            if (!string.IsNullOrEmpty(scraperGroup.Trailer) && scraperGroup.Trailer != "<None>")
             {
                 bool result;
                 this.ScrapeValues(movie, scraperGroup.Trailer, ScrapeFields.Trailer, out result);

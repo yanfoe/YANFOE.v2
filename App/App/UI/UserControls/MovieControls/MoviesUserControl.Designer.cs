@@ -30,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
@@ -69,7 +70,7 @@
             this.clmLocked = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmReleased = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RepositoryImageComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.tabByPoster = new DevExpress.XtraTab.XtraTabPage();
             this.galleryControl1 = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
@@ -107,14 +108,14 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
-            this.popupSave = new DevExpress.XtraBars.PopupMenu();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.popupSave = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnSaveNfo = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveAllImages = new DevExpress.XtraBars.BarButtonItem();
             this.btnSavePoster = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveFanart = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu();
+            this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -125,7 +126,7 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.imageCollection1 = new DevExpress.Utils.ImageCollection();
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();

@@ -476,31 +476,31 @@ namespace YANFOE.UI.Dialogs.Movies
 
             PopulateCombo(this.cmbAutoPopulate, MovieScraperHandler.ReturnAllScrapersAsStringList());
 
-            PopulateCombo(this.cmbTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Title));
-            PopulateCombo(this.cmbYear, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Year));
+            PopulateCombo(this.cmbTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Title, true));
+            PopulateCombo(this.cmbYear, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Year, true));
             PopulateCombo(
-                this.cmbOrigionalTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.OrigionalTitle));
-            PopulateCombo(this.cmbRating, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Rating));
-            PopulateCombo(this.cmbTagline, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Tagline));
-            PopulateCombo(this.cmbPlot, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Plot));
-            PopulateCombo(this.cmbOutline, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Outline));
-            PopulateCombo(this.cmbCertification, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Tagline));
-            PopulateCombo(this.cmbCountry, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Country));
-            PopulateCombo(this.cmbStudio, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Studio));
-            PopulateCombo(this.cmbReleaseDate, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.ReleaseDate));
-            PopulateCombo(this.cmbTop250, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Top250));
-            PopulateCombo(this.cmbVotes, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Votes));
-            PopulateCombo(this.cmbLanguage, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Language));
-            PopulateCombo(this.cmbGenre, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Genre));
+                this.cmbOrigionalTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.OrigionalTitle, true));
+            PopulateCombo(this.cmbRating, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Rating, true));
+            PopulateCombo(this.cmbTagline, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Tagline, true));
+            PopulateCombo(this.cmbPlot, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Plot, true));
+            PopulateCombo(this.cmbOutline, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Outline, true));
+            PopulateCombo(this.cmbCertification, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Tagline, true));
+            PopulateCombo(this.cmbCountry, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Country, true));
+            PopulateCombo(this.cmbStudio, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Studio, true));
+            PopulateCombo(this.cmbReleaseDate, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.ReleaseDate, true));
+            PopulateCombo(this.cmbTop250, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Top250, true));
+            PopulateCombo(this.cmbVotes, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Votes, true));
+            PopulateCombo(this.cmbLanguage, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Language, true));
+            PopulateCombo(this.cmbGenre, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Genre, true));
             PopulateCombo(
-                this.cmbRuntime, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Runtime, addMediaInfo: true));
-            PopulateCombo(this.cmbCast, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Cast));
-            PopulateCombo(this.cmbDirector, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Director));
-            PopulateCombo(this.cmbWriter, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Writers));
-            PopulateCombo(this.cmbMpaa, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Mpaa));
-            PopulateCombo(this.cmbFanart, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Fanart));
-            PopulateCombo(this.cmbPosters, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Poster));
-            PopulateCombo(this.cmbTrailer, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Trailer));
+                this.cmbRuntime, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Runtime, true, addMediaInfo: true));
+            PopulateCombo(this.cmbCast, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Cast, true));
+            PopulateCombo(this.cmbDirector, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Director, true));
+            PopulateCombo(this.cmbWriter, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Writers, true));
+            PopulateCombo(this.cmbMpaa, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Mpaa, true));
+            PopulateCombo(this.cmbFanart, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Fanart, true));
+            PopulateCombo(this.cmbPosters, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Poster, true));
+            PopulateCombo(this.cmbTrailer, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Trailer, true));
 
             this.RefreshDatabindings();
         }
