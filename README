@@ -1,7 +1,7 @@
 ﻿YANFOE 2.0 - Copyright (c) 2011 The YANFOE Project
 http://www.yanfoe.com
 
-LICENCE
+LICENSE
 -------
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
 To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
@@ -19,12 +19,12 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 RUNNING YANFOE
 --------------
-YANFOE 2.0 NOT does require installation. 
+YANFOE 2.0 does NOT require installation. 
 
-You are required though to install .net Framework 4.0
+You are, however, required to install .NET Framework 4.0
 http://www.microsoft.com/downloads/en/details.aspx?FamilyID=9cfb2d51-5ff4-4491-b0e5-b386f32c0992&displaylang=en
 
-To Start YANFOE 2.0 double click "YANFOE.exe". 
+To start YANFOE 2.0 double click "YANFOE.exe"
 
 BUILDING YANFOE
 ---------------
@@ -33,7 +33,7 @@ YANFOE 2.0 is written in C# 4.0.
 The source code for YANFOE can be obtained from the YANFOE code repository.
 https://github.com/yanfoe/YANFOE.v2
 
-To build your own copy of YANFOE you will need to aquire licences for, and install the following products:
+To build your own copy of YANFOE you will need to install and acquire licenses for the following products:
 
 + Visual Studio 2010 (http://www.microsoft.com/visualstudio/en-gb)
 + DevExpress WinForms Controls (http://www.devexpress.com/Products/NET/Controls/WinForms/)
