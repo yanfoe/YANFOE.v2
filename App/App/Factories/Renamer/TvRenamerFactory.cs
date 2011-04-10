@@ -180,13 +180,13 @@ namespace YANFOE.Factories.Renamer
         {
             string seriesName;
 
-            string season1;
-            string season2;
+            string season1 = string.Empty;
+            string season2 = string.Empty;
 
-            string episode1;
-            string episode2;
+            string episode1 = string.Empty;
+            string episode2 = string.Empty;
 
-            string episodeName;
+            string episodeName = string.Empty;
 
             bool doRename;
 
@@ -212,16 +212,17 @@ namespace YANFOE.Factories.Renamer
 
                 List<Episode> episodesContaining = GetEpisodesContainingFile(episode);
 
-                season1 = "s" + seasonNumber;
-                season2 = string.Format("s{0:00}", seasonNumber);
+                season1 = "S" + seasonNumber;
+                season2 = string.Format("S{0:00}", seasonNumber);
 
                 doRename = false;
 
                 if (episodesContaining.Count == 1)
                 {
-                    episode1 = "e" + episode.EpisodeNumber;
-                    episode2 = "e" + string.Format("{0:00}", episode.EpisodeNumber);
+                    episode1 = "E" + episode.EpisodeNumber;
+                    episode2 = "E" + string.Format("{0:00}", episode.EpisodeNumber);
                     doRename = true;
+                    episodeName = episode.EpisodeName;
                 }
                 else
                 {
@@ -234,14 +235,15 @@ namespace YANFOE.Factories.Renamer
                             doRename = true;
                         }
 
-                        episode1 += "e" + ep.EpisodeNumber;
-                        episode2 += "e" + string.Format("{0:00}", ep.EpisodeNumber);
+                        episode1 += "E" + ep.EpisodeNumber;
+                        episode2 += "E" + string.Format("{0:00}", ep.EpisodeNumber);
 
+                        episodeName += string.Format("{0} ", ep.EpisodeName);
                         count++;
                     }
+                    episodeName = episodeName.TrimEnd();
                 }
 
-                episodeName = episode.EpisodeName;
             }
 
             string episodeTemplate = Get.InOutCollection.EpisodeNamingTemplate;
