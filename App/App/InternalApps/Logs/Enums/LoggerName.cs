@@ -42,6 +42,26 @@ namespace YANFOE.InternalApps.Logs.Enums
         /// <summary>
         /// Downloader 4 thread log
         /// </summary>
-        Downloader4 = 4
+        Downloader4 = 4,
+
+        /// <summary>
+        /// Downloader 5 thread log
+        /// </summary>
+        Downloader5 = 5,
+
+        /// <summary>
+        /// Downloader 6 thread log
+        /// </summary>
+        Downloader6 = 6,
+
+        /// <summary>
+        /// Downloader 7 thread log
+        /// </summary>
+        Downloader7 = 7,
+
+        /// <summary>
+        /// Downloader 8 thread log
+        /// </summary>
+        Downloader8 = 8
     }
 }

@@ -43,24 +43,24 @@ namespace YANFOE.InternalApps.DownloadManager
         #region Constants and Fields
 
         /// <summary>
-        /// The background worker 1.
+        /// The background workers.
         /// </summary>
-        private static readonly BackgroundWorker BackgroundWorker1;
+        private static readonly BindingList<BackgroundWorker> BackgroundWorkers;
 
         /// <summary>
-        /// The background worker 2.
+        /// The thread count.
         /// </summary>
-        private static readonly BackgroundWorker BackgroundWorker2;
+        private static readonly int numThreads;
 
         /// <summary>
-        /// The background worker 3.
+        /// The current queue count.
         /// </summary>
-        private static readonly BackgroundWorker BackgroundWorker3;
+        private static Object currentQueueLock;
 
         /// <summary>
-        /// The background worker 4.
+        /// The current queue count.
         /// </summary>
-        private static readonly BackgroundWorker BackgroundWorker4;
+        private static int currentQueue;
 
         /// <summary>
         /// The ui timer.
@@ -76,29 +76,23 @@ namespace YANFOE.InternalApps.DownloadManager
         /// </summary>
         static Downloader()
         {
-            Progress1 = new Progress();
-            Progress2 = new Progress();
-            Progress3 = new Progress();
-            Progress4 = new Progress();
+            currentQueueLock = new Object();
+            CurrentQue = 0;
+            numThreads = 8;
+            Progress = new BindingList<Progress>();
+            BackgroundWorkers = new BindingList<BackgroundWorker>();
+
+            for (int i = 0; i < numThreads; i++)
+            {
+                Progress.Add(new Progress());
+                BackgroundWorkers.Add(new BackgroundWorker());
+                BackgroundWorkers[i].DoWork += BackgroundWorkerDoWork;
+                BackgroundWorkers[i].RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
+            }
 
             uiTimer = new Timer { Interval = 100 };
             uiTimer.Tick += UITimer_Tick;
             uiTimer.Start();
-
-            BackgroundWorker1 = new BackgroundWorker();
-            BackgroundWorker2 = new BackgroundWorker();
-            BackgroundWorker3 = new BackgroundWorker();
-            BackgroundWorker4 = new BackgroundWorker();
-
-            BackgroundWorker1.DoWork += BackgroundWorkerDoWork;
-            BackgroundWorker2.DoWork += BackgroundWorkerDoWork;
-            BackgroundWorker3.DoWork += BackgroundWorkerDoWork;
-            BackgroundWorker4.DoWork += BackgroundWorkerDoWork;
-
-            BackgroundWorker1.RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
-            BackgroundWorker2.RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
-            BackgroundWorker3.RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
-            BackgroundWorker4.RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
 
             BackgroundDownloadQue = new BindingList<DownloadItem>();
 
@@ -124,7 +118,23 @@ namespace YANFOE.InternalApps.DownloadManager
         /// <value>
         /// The current que.
         /// </value>
-        public static int CurrentQue { get; set; }
+        public static int CurrentQue
+        {
+            get
+            {
+                lock (currentQueueLock)
+                {
+                    return currentQueue;
+                }
+            }
+            set
+            {
+                lock (currentQueueLock)
+                {
+                    currentQueue = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets Downloading.
@@ -132,24 +142,9 @@ namespace YANFOE.InternalApps.DownloadManager
         public static BindingList<string> Downloading { get; set; }
 
         /// <summary>
-        /// Gets or sets Progress1.
+        /// Gets or sets Progress indicators.
         /// </summary>
-        public static Progress Progress1 { get; set; }
-
-        /// <summary>
-        /// Gets or sets Progress2.
-        /// </summary>
-        public static Progress Progress2 { get; set; }
-
-        /// <summary>
-        /// Gets or sets Progress3.
-        /// </summary>
-        public static Progress Progress3 { get; set; }
-
-        /// <summary>
-        /// Gets or sets Progress4.
-        /// </summary>
-        public static Progress Progress4 { get; set; }
+        public static BindingList<Progress> Progress { get; set; }
 
         #endregion
 
@@ -172,7 +167,10 @@ namespace YANFOE.InternalApps.DownloadManager
 
             if (!File.Exists(path))
             {
-                BackgroundDownloadQue.Add(downloadItem);
+                lock (BackgroundDownloadQue)
+                {
+                    BackgroundDownloadQue.Add(downloadItem);
+                }
             }
         }
 
@@ -228,173 +226,96 @@ namespace YANFOE.InternalApps.DownloadManager
         /// The process download.
         /// </returns>
         public static string ProcessDownload(
-            string url, 
-            DownloadType type, 
-            Section section, 
-            bool skipCache = false, 
+            string url,
+            DownloadType type,
+            Section section,
+            bool skipCache = false,
             CookieContainer cookieContainer = null)
         {
+            bool found = false;
+
             if (url == null)
             {
                 return string.Empty;
             }
 
-            CurrentQue++;
-
-            Downloading.Add(url);
-
-            bool found = false;
-
-            if (InBackgroundQue(url))
-            {
-                RemoveFromBackgroundQue(url);
-            }
-
             var item = new DownloadItem
+            {
+                Type = type,
+                Url = url,
+                Section = section,
+                IgnoreCache = skipCache,
+                CookieContainer = cookieContainer
+            };
+
+            try
+            {
+                lock (currentQueueLock)
                 {
-                    Type = type, 
-                    Url = url, 
-                    Section = section, 
-                    IgnoreCache = skipCache, 
-                    CookieContainer = cookieContainer
-                };
+                    currentQueue++;
+                }
+
+                Downloading.Add(url);
+
+                if (InBackgroundQue(url))
+                {
+                    RemoveFromBackgroundQue(url);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Error, 0, string.Format("Thread Download Setup {0}", url), ex.Message);
+            }
 
             do
             {
-                if (!BackgroundWorker1.IsBusy)
+                for (int i = 0; i < numThreads; i++)
                 {
-                    try
+                    if (!BackgroundWorkers[i].IsBusy)
                     {
-                        item.ThreadID = 1;
-                        item.Progress = Progress1;
-                        BackgroundWorker1.RunWorkerAsync(item);
-                        found = true;
-
-                        do
+                        try
                         {
-                            Application.DoEvents();
-                            Thread.Sleep(50);
-                        }
-                        while (BackgroundWorker1.IsBusy);
+                            item.ThreadID = i+1;
+                            item.Progress = Progress[i];
+                            BackgroundWorkers[i].RunWorkerAsync(item);
+                            found = true;
 
-                        if (Downloading.Contains(url))
+                            do
+                            {
+                                Application.DoEvents();
+                                Thread.Sleep(50);
+                            }
+                            while (BackgroundWorkers[i].IsBusy);
+
+                            if (Downloading.Contains(url))
+                            {
+                                Downloading.Remove(url);
+                            }
+
+                            lock (currentQueueLock)
+                            {
+                                currentQueue--;
+                            }
+
+                            return item.Result.Result;
+                        }
+                        catch (Exception ex)
                         {
-                            Downloading.Remove(url);
+                            Log.WriteToLog(LogSeverity.Error, 0, string.Format("Thread {0} Downloading {1}", i, url), ex.Message);
                         }
-
-                        CurrentQue--;
-
-                        return item.Result.Result;
                     }
-                    catch (Exception ex)
-                    {
-                        Log.WriteToLog(LogSeverity.Error, 0, "Thread 1 Downloading " + url, ex.Message);
-                    }
-                }
 
-                if (!BackgroundWorker2.IsBusy)
-                {
-                    try
-                    {
-                        item.ThreadID = 2;
-                        item.Progress = Progress2;
-
-                        BackgroundWorker2.RunWorkerAsync(item);
-
-                        found = true;
-
-                        do
-                        {
-                            Application.DoEvents();
-                            Thread.Sleep(50);
-                        }
-                        while (BackgroundWorker2.IsBusy);
-
-                        if (Downloading.Contains(url))
-                        {
-                            Downloading.Remove(url);
-                        }
-
-                        CurrentQue--;
-
-                        return item.Result.Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.WriteToLog(LogSeverity.Error, 0, "Thread 2 Downloading " + url, ex.Message);
-                    }
-                }
-
-                if (!BackgroundWorker3.IsBusy)
-                {
-                    try
-                    {
-                        item.ThreadID = 3;
-                        item.Progress = Progress3;
-
-                        BackgroundWorker3.RunWorkerAsync(item);
-
-                        found = true;
-
-                        do
-                        {
-                            Application.DoEvents();
-                            Thread.Sleep(50);
-                        }
-                        while (BackgroundWorker3.IsBusy);
-
-                        if (Downloading.Contains(url))
-                        {
-                            Downloading.Remove(url);
-                        }
-
-                        CurrentQue--;
-
-                        return item.Result.Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.WriteToLog(LogSeverity.Error, 0, "Thread 3 Downloading " + url, ex.Message);
-                    }
-                }
-
-                if (!BackgroundWorker4.IsBusy)
-                {
-                    try
-                    {
-                        item.ThreadID = 4;
-                        item.Progress = Progress4;
-
-                        BackgroundWorker4.RunWorkerAsync(item);
-
-                        found = true;
-
-                        do
-                        {
-                            Application.DoEvents();
-                            Thread.Sleep(50);
-                        }
-                        while (BackgroundWorker4.IsBusy);
-
-                        if (Downloading.Contains(url))
-                        {
-                            Downloading.Remove(url);
-                        }
-
-                        CurrentQue--;
-
-                        return item.Result.Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.WriteToLog(LogSeverity.Error, 0, "Thread 4 Downloading " + url, ex.Message);
-                    }
                 }
 
                 Application.DoEvents();
                 Thread.Sleep(50);
             }
             while (found == false);
+
+            lock (currentQueueLock)
+            {
+                currentQueue--;
+            }
 
             return null;
         }
@@ -407,12 +328,15 @@ namespace YANFOE.InternalApps.DownloadManager
         /// </param>
         public static void RemoveFromBackgroundQue(string url)
         {
-            for (int index = 0; index < BackgroundDownloadQue.Count; index++)
+            lock (BackgroundDownloadQue)
             {
-                var item = BackgroundDownloadQue[index];
-                if (item.Url == url)
+                for (int index = 0; index < BackgroundDownloadQue.Count; index++)
                 {
-                    BackgroundDownloadQue.Remove(item);
+                    var item = BackgroundDownloadQue[index];
+                    if (item.Url == url)
+                    {
+                        BackgroundDownloadQue.Remove(item);
+                    }
                 }
             }
         }
@@ -467,16 +391,19 @@ namespace YANFOE.InternalApps.DownloadManager
         {
             do
             {
-                if (CurrentQue < 4 && Get.Web.EnableBackgroundQueProcessing)
+                if (CurrentQue < numThreads && Get.Web.EnableBackgroundQueProcessing)
                 {
-                    if (BackgroundDownloadQue.Count > 0)
+                    lock (BackgroundDownloadQue)
                     {
-                        DownloadItem item = BackgroundDownloadQue[0];
-                        BackgroundDownloadQue.Remove(item);
+                        if (BackgroundDownloadQue.Count > 0)
+                        {
+                            DownloadItem item = BackgroundDownloadQue[0];
+                            BackgroundDownloadQue.Remove(item);
 
-                        var bgw = new BackgroundWorker();
-                        bgw.DoWork += Bgw_DoWork;
-                        bgw.RunWorkerAsync(item);
+                            var bgw = new BackgroundWorker();
+                            bgw.DoWork += Bgw_DoWork;
+                            bgw.RunWorkerAsync(item);
+                        }
                     }
                 }
 
@@ -552,10 +479,10 @@ namespace YANFOE.InternalApps.DownloadManager
         /// </param>
         private static void UITimer_Tick(object sender, EventArgs e)
         {
-            ProgressManage(Progress1, 1);
-            ProgressManage(Progress2, 2);
-            ProgressManage(Progress3, 3);
-            ProgressManage(Progress4, 4);
+            for (int i = 0; i < numThreads; i++)
+            {
+                ProgressManage(Progress[i], i);
+            }
         }
 
         #endregion

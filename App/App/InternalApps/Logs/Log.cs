@@ -17,6 +17,8 @@ namespace YANFOE.InternalApps.Logs
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.IO;
 
     using BitFactory.Logging;
 
@@ -33,7 +35,14 @@ namespace YANFOE.InternalApps.Logs
         /// <summary>
         /// The main file log.
         /// </summary>
-        private static readonly FileLogger MainFileLog = new FileLogger(string.Empty);
+        private static readonly FileLogger MainFileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "mainFileLog.txt"));
 
         /// <summary>
         /// Collection of loggers by LoggerName
@@ -58,7 +67,14 @@ namespace YANFOE.InternalApps.Logs
         /// <summary>
         /// The thread 1 file log.
         /// </summary>
-        private static readonly FileLogger thread1FileLog = new FileLogger(string.Empty);
+        private static readonly FileLogger thread1FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread1FileLog.txt"));
 
         /// <summary>
         /// The thread 1 internal log.
@@ -68,7 +84,14 @@ namespace YANFOE.InternalApps.Logs
         /// <summary>
         /// The thread 2 file log.
         /// </summary>
-        private static readonly FileLogger thread2FileLog = new FileLogger(string.Empty);
+        private static readonly FileLogger thread2FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread2FileLog.txt"));
 
         /// <summary>
         /// The thread 2 internal log.
@@ -78,7 +101,14 @@ namespace YANFOE.InternalApps.Logs
         /// <summary>
         /// The thread 3 file log.
         /// </summary>
-        private static readonly FileLogger thread3FileLog = new FileLogger(string.Empty);
+        private static readonly FileLogger thread3FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread3FileLog.txt"));
 
         /// <summary>
         /// The thread 3 internal log.
@@ -88,12 +118,87 @@ namespace YANFOE.InternalApps.Logs
         /// <summary>
         /// The thread 4 file log.
         /// </summary>
-        private static readonly FileLogger thread4FileLog = new FileLogger(string.Empty);
+        private static readonly FileLogger thread4FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread4FileLog.txt"));
 
         /// <summary>
         /// The thread 4 internal log.
         /// </summary>
         private static readonly BindingList<LogModel> thread4InternalLog = new BindingList<LogModel>();
+
+        /// <summary>
+        /// The thread 5 file log.
+        /// </summary>
+        private static readonly FileLogger thread5FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread5FileLog.txt"));
+
+        /// <summary>
+        /// The thread 5 internal log.
+        /// </summary>
+        private static readonly BindingList<LogModel> thread5InternalLog = new BindingList<LogModel>();
+
+        /// <summary>
+        /// The thread 6 file log.
+        /// </summary>
+        private static readonly FileLogger thread6FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread6FileLog.txt"));
+
+        /// <summary>
+        /// The thread 6 internal log.
+        /// </summary>
+        private static readonly BindingList<LogModel> thread6InternalLog = new BindingList<LogModel>();
+
+        /// <summary>
+        /// The thread 7 file log.
+        /// </summary>
+        private static readonly FileLogger thread7FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread7FileLog.txt"));
+
+        /// <summary>
+        /// The thread 7 internal log.
+        /// </summary>
+        private static readonly BindingList<LogModel> thread7InternalLog = new BindingList<LogModel>();
+
+        /// <summary>
+        /// The thread 4 file log.
+        /// </summary>
+        private static readonly FileLogger thread8FileLog =
+            new FileLogger(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{1}Logs{1}{2}",
+                    Directory.GetCurrentDirectory(),
+                    Path.DirectorySeparatorChar,
+                    "thread8FileLog.txt"));
+
+        /// <summary>
+        /// The thread 8 internal log.
+        /// </summary>
+        private static readonly BindingList<LogModel> thread8InternalLog = new BindingList<LogModel>();
 
         #endregion
 
@@ -110,7 +215,11 @@ namespace YANFOE.InternalApps.Logs
                     { LoggerName.Downloader1, LogState.Started },
                     { LoggerName.Downloader2, LogState.Started },
                     { LoggerName.Downloader3, LogState.Started },
-                    { LoggerName.Downloader4, LogState.Started }
+                    { LoggerName.Downloader4, LogState.Started },
+                    { LoggerName.Downloader5, LogState.Started },
+                    { LoggerName.Downloader6, LogState.Started },
+                    { LoggerName.Downloader7, LogState.Started },
+                    { LoggerName.Downloader8, LogState.Started }
                 };
 
             fileLoggers = new Dictionary<LoggerName, FileLogger>
@@ -119,7 +228,11 @@ namespace YANFOE.InternalApps.Logs
                     { LoggerName.Downloader1, thread1FileLog },
                     { LoggerName.Downloader2, thread2FileLog },
                     { LoggerName.Downloader3, thread3FileLog },
-                    { LoggerName.Downloader4, thread4FileLog }
+                    { LoggerName.Downloader4, thread4FileLog },
+                    { LoggerName.Downloader5, thread5FileLog },
+                    { LoggerName.Downloader6, thread6FileLog },
+                    { LoggerName.Downloader7, thread7FileLog },
+                    { LoggerName.Downloader8, thread8FileLog }
                 };
 
             internalLoggers = new Dictionary<LoggerName, BindingList<LogModel>>
@@ -129,6 +242,10 @@ namespace YANFOE.InternalApps.Logs
                     { LoggerName.Downloader2, thread2InternalLog },
                     { LoggerName.Downloader3, thread3InternalLog },
                     { LoggerName.Downloader4, thread4InternalLog },
+                    { LoggerName.Downloader5, thread5InternalLog },
+                    { LoggerName.Downloader6, thread6InternalLog },
+                    { LoggerName.Downloader7, thread7InternalLog },
+                    { LoggerName.Downloader8, thread8InternalLog }
                 };
         }
 

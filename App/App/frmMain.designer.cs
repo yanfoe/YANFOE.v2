@@ -35,9 +35,8 @@ namespace YANFOE
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.mnuFileSaveDatabase = new DevExpress.XtraBars.BarButtonItem();
@@ -77,6 +76,9 @@ namespace YANFOE
             this.logsUserControl1 = new YANFOE.UI.UserControls.LogControls.LogsUserControl();
             this.tabAbout = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.memoEdit2 = new DevExpress.XtraEditors.MemoEdit();
+            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
+            this.hyperLinkEdit4 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.hyperLinkEdit3 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.hyperLinkEdit2 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.hyperLinkEdit1 = new DevExpress.XtraEditors.HyperLinkEdit();
@@ -89,6 +91,7 @@ namespace YANFOE
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -98,6 +101,9 @@ namespace YANFOE
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -107,14 +113,11 @@ namespace YANFOE
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.uiTimer = new System.Windows.Forms.Timer(this.components);
-            this.hyperLinkEdit4 = new DevExpress.XtraEditors.HyperLinkEdit();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.memoEdit2 = new DevExpress.XtraEditors.MemoEdit();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.uiTimer = new System.Windows.Forms.Timer();
+            this.picThread8 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread5 = new DevExpress.XtraEditors.PictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -127,6 +130,9 @@ namespace YANFOE
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).BeginInit();
@@ -139,6 +145,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -148,6 +155,9 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picThread4.Properties)).BeginInit();
@@ -155,13 +165,10 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -517,6 +524,38 @@ namespace YANFOE
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // memoEdit2
+            // 
+            this.memoEdit2.EditValue = resources.GetString("memoEdit2.EditValue");
+            this.memoEdit2.Location = new System.Drawing.Point(523, 336);
+            this.memoEdit2.MenuManager = this.barManager1;
+            this.memoEdit2.Name = "memoEdit2";
+            this.memoEdit2.Properties.ReadOnly = true;
+            this.memoEdit2.Size = new System.Drawing.Size(439, 101);
+            this.memoEdit2.StyleController = this.layoutControl1;
+            this.memoEdit2.TabIndex = 14;
+            // 
+            // textEdit5
+            // 
+            this.textEdit5.EditValue = "Nicolas Katsidis";
+            this.textEdit5.Location = new System.Drawing.Point(117, 184);
+            this.textEdit5.MenuManager = this.barManager1;
+            this.textEdit5.Name = "textEdit5";
+            this.textEdit5.Properties.ReadOnly = true;
+            this.textEdit5.Size = new System.Drawing.Size(378, 20);
+            this.textEdit5.StyleController = this.layoutControl1;
+            this.textEdit5.TabIndex = 13;
+            // 
+            // hyperLinkEdit4
+            // 
+            this.hyperLinkEdit4.EditValue = "http://www.yanfoe.com/forum/";
+            this.hyperLinkEdit4.Location = new System.Drawing.Point(117, 300);
+            this.hyperLinkEdit4.MenuManager = this.barManager1;
+            this.hyperLinkEdit4.Name = "hyperLinkEdit4";
+            this.hyperLinkEdit4.Size = new System.Drawing.Size(378, 20);
+            this.hyperLinkEdit4.StyleController = this.layoutControl1;
+            this.hyperLinkEdit4.TabIndex = 12;
+            // 
             // hyperLinkEdit3
             // 
             this.hyperLinkEdit3.EditValue = "https://github.com/yanfoe/YANFOE.v2";
@@ -653,6 +692,18 @@ namespace YANFOE
             this.layoutControlItem2.Text = "Developer";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(89, 13);
             // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem10.Control = this.textEdit5;
+            this.layoutControlItem10.CustomizationFormText = "QA Team";
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(475, 24);
+            this.layoutControlItem10.Text = "QA Team";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(89, 13);
+            // 
             // layoutControlGroup3
             // 
             this.layoutControlGroup3.CustomizationFormText = "Version Info";
@@ -759,6 +810,40 @@ namespace YANFOE
             this.layoutControlItem8.Text = "Source Code";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(89, 13);
             // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem9.Control = this.hyperLinkEdit4;
+            this.layoutControlItem9.CustomizationFormText = "Forum";
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(475, 24);
+            this.layoutControlItem9.Text = "Forum";
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(89, 13);
+            // 
+            // layoutControlGroup6
+            // 
+            this.layoutControlGroup6.CustomizationFormText = "Thanks";
+            this.layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem11});
+            this.layoutControlGroup6.Location = new System.Drawing.Point(499, 292);
+            this.layoutControlGroup6.Name = "layoutControlGroup6";
+            this.layoutControlGroup6.Size = new System.Drawing.Size(467, 149);
+            this.layoutControlGroup6.Text = "Thanks";
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.memoEdit2;
+            this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(443, 105);
+            this.layoutControlItem11.Text = "layoutControlItem11";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem11.TextToControlDistance = 0;
+            this.layoutControlItem11.TextVisible = false;
+            // 
             // barButtonItem3
             // 
             this.barButtonItem3.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
@@ -776,6 +861,10 @@ namespace YANFOE
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.picThread8);
+            this.panelControl1.Controls.Add(this.picThread7);
+            this.panelControl1.Controls.Add(this.picThread6);
+            this.panelControl1.Controls.Add(this.picThread5);
             this.panelControl1.Controls.Add(this.lblDownloadStatus);
             this.panelControl1.Controls.Add(this.picThread4);
             this.panelControl1.Controls.Add(this.picThread3);
@@ -791,7 +880,7 @@ namespace YANFOE
             // 
             // lblDownloadStatus
             // 
-            this.lblDownloadStatus.Location = new System.Drawing.Point(102, 6);
+            this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
             this.lblDownloadStatus.Name = "lblDownloadStatus";
             this.lblDownloadStatus.Size = new System.Drawing.Size(63, 13);
             this.lblDownloadStatus.TabIndex = 7;
@@ -865,83 +954,57 @@ namespace YANFOE
             this.uiTimer.Interval = 50;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
             // 
-            // hyperLinkEdit4
+            // picThread8
             // 
-            this.hyperLinkEdit4.EditValue = "http://www.yanfoe.com/forum/";
-            this.hyperLinkEdit4.Location = new System.Drawing.Point(117, 300);
-            this.hyperLinkEdit4.MenuManager = this.barManager1;
-            this.hyperLinkEdit4.Name = "hyperLinkEdit4";
-            this.hyperLinkEdit4.Size = new System.Drawing.Size(378, 20);
-            this.hyperLinkEdit4.StyleController = this.layoutControl1;
-            this.hyperLinkEdit4.TabIndex = 12;
+            this.picThread8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread8.Location = new System.Drawing.Point(168, 3);
+            this.picThread8.MenuManager = this.barManager1;
+            this.picThread8.Name = "picThread8";
+            this.picThread8.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread8.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread8.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread8.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread8.Size = new System.Drawing.Size(24, 24);
+            this.picThread8.TabIndex = 11;
             // 
-            // layoutControlItem9
+            // picThread7
             // 
-            this.layoutControlItem9.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem9.Control = this.hyperLinkEdit4;
-            this.layoutControlItem9.CustomizationFormText = "Forum";
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 48);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(475, 24);
-            this.layoutControlItem9.Text = "Forum";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(89, 13);
+            this.picThread7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread7.Location = new System.Drawing.Point(144, 3);
+            this.picThread7.MenuManager = this.barManager1;
+            this.picThread7.Name = "picThread7";
+            this.picThread7.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread7.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread7.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread7.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread7.Size = new System.Drawing.Size(24, 24);
+            this.picThread7.TabIndex = 10;
             // 
-            // textEdit5
+            // picThread6
             // 
-            this.textEdit5.EditValue = "Nicolas Katsidis";
-            this.textEdit5.Location = new System.Drawing.Point(117, 184);
-            this.textEdit5.MenuManager = this.barManager1;
-            this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Properties.ReadOnly = true;
-            this.textEdit5.Size = new System.Drawing.Size(378, 20);
-            this.textEdit5.StyleController = this.layoutControl1;
-            this.textEdit5.TabIndex = 13;
+            this.picThread6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread6.Location = new System.Drawing.Point(120, 3);
+            this.picThread6.MenuManager = this.barManager1;
+            this.picThread6.Name = "picThread6";
+            this.picThread6.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread6.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread6.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread6.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread6.Size = new System.Drawing.Size(24, 24);
+            this.picThread6.TabIndex = 9;
             // 
-            // layoutControlItem10
+            // picThread5
             // 
-            this.layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem10.Control = this.textEdit5;
-            this.layoutControlItem10.CustomizationFormText = "QA Team";
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 48);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(475, 24);
-            this.layoutControlItem10.Text = "QA Team";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(89, 13);
-            // 
-            // memoEdit2
-            // 
-            this.memoEdit2.EditValue = resources.GetString("memoEdit2.EditValue");
-            this.memoEdit2.Location = new System.Drawing.Point(523, 336);
-            this.memoEdit2.MenuManager = this.barManager1;
-            this.memoEdit2.Name = "memoEdit2";
-            this.memoEdit2.Properties.ReadOnly = true;
-            this.memoEdit2.Size = new System.Drawing.Size(439, 101);
-            this.memoEdit2.StyleController = this.layoutControl1;
-            this.memoEdit2.TabIndex = 14;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.memoEdit2;
-            this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(443, 105);
-            this.layoutControlItem11.Text = "layoutControlItem11";
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem11.TextToControlDistance = 0;
-            this.layoutControlItem11.TextVisible = false;
-            // 
-            // layoutControlGroup6
-            // 
-            this.layoutControlGroup6.CustomizationFormText = "Thanks";
-            this.layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem11});
-            this.layoutControlGroup6.Location = new System.Drawing.Point(499, 292);
-            this.layoutControlGroup6.Name = "layoutControlGroup6";
-            this.layoutControlGroup6.Size = new System.Drawing.Size(467, 149);
-            this.layoutControlGroup6.Text = "Thanks";
+            this.picThread5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread5.Location = new System.Drawing.Point(96, 3);
+            this.picThread5.MenuManager = this.barManager1;
+            this.picThread5.Name = "picThread5";
+            this.picThread5.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread5.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread5.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread5.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread5.Size = new System.Drawing.Size(24, 24);
+            this.picThread5.TabIndex = 8;
             // 
             // FrmMain
             // 
@@ -973,6 +1036,9 @@ namespace YANFOE
             this.tabAbout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).EndInit();
@@ -985,6 +1051,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -994,6 +1061,9 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
@@ -1002,13 +1072,10 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1094,5 +1161,9 @@ namespace YANFOE
         private DevExpress.XtraEditors.MemoEdit memoEdit2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraEditors.PictureEdit picThread8;
+        private DevExpress.XtraEditors.PictureEdit picThread7;
+        private DevExpress.XtraEditors.PictureEdit picThread6;
+        private DevExpress.XtraEditors.PictureEdit picThread5;
     }
 }

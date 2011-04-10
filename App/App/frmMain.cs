@@ -165,7 +165,7 @@ namespace YANFOE
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void UiTimer_Tick(object sender, EventArgs e)
         {
-            if (Downloader.Progress1.Message.Contains("Idle."))
+            if (Downloader.Progress[0].Message.Contains("Idle."))
             {
                 this.picThread1.Image = Resources.globe_faded16;
                 this.picThread1.ToolTip = string.Empty;
@@ -179,10 +179,10 @@ namespace YANFOE
 
                 this.picThread3.Image = Resources.globe16;
 
-                this.picThread1.ToolTip = Downloader.Progress1.Message;
+                this.picThread1.ToolTip = Downloader.Progress[0].Message;
             }
 
-            if (Downloader.Progress2.Message.Contains("Idle."))
+            if (Downloader.Progress[1].Message.Contains("Idle."))
             {
                 this.picThread2.Image = Resources.globe_faded16;
                 this.picThread2.ToolTip = string.Empty;
@@ -196,10 +196,10 @@ namespace YANFOE
 
                 this.picThread3.Image = Resources.globe16;
 
-                this.picThread2.ToolTip = Downloader.Progress2.Message;
+                this.picThread2.ToolTip = Downloader.Progress[1].Message;
             }
 
-            if (Downloader.Progress3.Message.Contains("Idle."))
+            if (Downloader.Progress[2].Message.Contains("Idle."))
             {
                 this.picThread3.Image = Resources.globe_faded16;
                 this.picThread3.ToolTip = string.Empty;
@@ -212,10 +212,10 @@ namespace YANFOE
                 }
 
                 this.picThread3.Image = Resources.globe16;
-                this.picThread3.ToolTip = Downloader.Progress3.Message;
+                this.picThread3.ToolTip = Downloader.Progress[2].Message;
             }
 
-            if (Downloader.Progress4.Message.Contains("Idle."))
+            if (Downloader.Progress[3].Message.Contains("Idle."))
             {
                 this.picThread4.Image = Resources.globe_faded16;
                 this.picThread4.ToolTip = string.Empty;
@@ -228,7 +228,71 @@ namespace YANFOE
                 }
 
                 this.picThread4.Image = Resources.globe16;
-                this.picThread4.ToolTip = Downloader.Progress4.Message;
+                this.picThread4.ToolTip = Downloader.Progress[3].Message;
+            }
+
+            if (Downloader.Progress[4].Message.Contains("Idle."))
+            {
+                this.picThread5.Image = Resources.globe_faded16;
+                this.picThread5.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread5.Image != Resources.globe16)
+                {
+                    this.picThread5.Image = Resources.globe16;
+                }
+
+                this.picThread5.Image = Resources.globe16;
+                this.picThread5.ToolTip = Downloader.Progress[4].Message;
+            }
+
+            if (Downloader.Progress[5].Message.Contains("Idle."))
+            {
+                this.picThread6.Image = Resources.globe_faded16;
+                this.picThread6.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread6.Image != Resources.globe16)
+                {
+                    this.picThread6.Image = Resources.globe16;
+                }
+
+                this.picThread6.Image = Resources.globe16;
+                this.picThread6.ToolTip = Downloader.Progress[5].Message;
+            }
+
+            if (Downloader.Progress[6].Message.Contains("Idle."))
+            {
+                this.picThread7.Image = Resources.globe_faded16;
+                this.picThread7.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread7.Image != Resources.globe16)
+                {
+                    this.picThread7.Image = Resources.globe16;
+                }
+
+                this.picThread7.Image = Resources.globe16;
+                this.picThread7.ToolTip = Downloader.Progress[6].Message;
+            }
+
+            if (Downloader.Progress[7].Message.Contains("Idle."))
+            {
+                this.picThread8.Image = Resources.globe_faded16;
+                this.picThread8.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread8.Image != Resources.globe16)
+                {
+                    this.picThread8.Image = Resources.globe16;
+                }
+
+                this.picThread8.Image = Resources.globe16;
+                this.picThread8.ToolTip = Downloader.Progress[7].Message;
             }
 
             this.lblDownloadStatus.Text = string.Format(

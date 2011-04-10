@@ -123,7 +123,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
             }
             catch (Exception ex)
             {
-                Log.WriteToLog(LogSeverity.Error, LoggerName.GeneralLog, "Download Html", ex.Message);
+                Log.WriteToLog(LogSeverity.Error, LoggerName.GeneralLog, string.Format("Download Html {0}", downloadItem.Url), ex.Message);
                 return;
             }
         }
