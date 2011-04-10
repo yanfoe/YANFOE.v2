@@ -645,7 +645,7 @@ namespace YANFOE.Models.MovieModels
                     this.currentTrailerUrl = value;
 
                     this.OnPropertyChanged("CurrentTrailerUrl");
-                    this.ChangedPoster = true;
+                    this.ChangedTrailer = true;
                 }
             }
         }

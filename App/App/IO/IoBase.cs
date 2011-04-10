@@ -418,7 +418,7 @@ namespace YANFOE.IO
                             LogSeverity.Info,
                             0,
                             "Trailer Saved To Disk for " + movieModel.Title,
-                            fanartPathFrom + " -> " + fanartOutputName);
+                            trailerPathFrom + " -> " + trailerOutputName);
                     }
                 }
                 catch (Exception ex)

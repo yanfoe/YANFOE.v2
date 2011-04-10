@@ -94,74 +94,163 @@ namespace YANFOE.Scrapers.Movie
                 {
                     for (int i = 0; i < atsm.results.Count; i++)
                     {
-                        if ((itmsIndex = atsm.results[i].location.IndexOf("itms://")) != -1)
+                        if (atsm.results[i].title.ToLower() == id.ToLower())
                         {
-                            moviePage = "http" + atsm.results[i].location.Substring(itmsIndex + 4);
-                        }
-                        else
-                        {
-                            moviePage = this.GetAbsoluteURL(
-                                "http://trailers.apple.com/trailers/", atsm.results[i].location);
-                        }
-
-                        string movieHDPage = this.GetAbsoluteURL(moviePage, "hd");
-                        string moviePlaylist = this.GetAbsoluteURL(moviePage, "includes/playlists/web.inc");
-                        string movieHDPlaylist = this.GetAbsoluteURL(moviePage, "hd/includes/playlists/web.inc");
-
-                        html = Downloader.ProcessDownload(moviePage, DownloadType.Html, Section.Movies);
-                        matchCollection = trailerRegex.Matches(html);
-                        if (matchCollection.Count != 0)
-                        {
-                            foreach (Match trailerMatch in matchCollection)
+                            if ((itmsIndex = atsm.results[i].location.IndexOf("itms://")) != -1)
                             {
-                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value.Insert(trailerMatch.Value.LastIndexOf('_') + 1, "h"), 0, "Unk", atsm.results[i].title));
+                                moviePage = "http" + atsm.results[i].location.Substring(itmsIndex + 4);
+                            }
+                            else
+                            {
+                                moviePage = this.GetAbsoluteURL(
+                                    "http://trailers.apple.com/trailers/", atsm.results[i].location);
                             }
 
-                            continue;
-                        }
+                            string movieHDPage = this.GetAbsoluteURL(moviePage, "hd");
+                            string moviePlaylist = this.GetAbsoluteURL(moviePage, "includes/playlists/web.inc");
+                            string movieHDPlaylist = this.GetAbsoluteURL(moviePage, "hd/includes/playlists/web.inc");
 
-                        html = Downloader.ProcessDownload(movieHDPage, DownloadType.Html, Section.Movies);
-                        matchCollection = trailerRegex.Matches(html);
-                        if (matchCollection.Count != 0)
-                        {
-                            foreach (Match trailerMatch in matchCollection)
+                            html = Downloader.ProcessDownload(moviePage, DownloadType.Html, Section.Movies);
+                            matchCollection = trailerRegex.Matches(html);
+                            if (matchCollection.Count != 0)
                             {
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                foreach (Match trailerMatch in matchCollection)
+                                {
+                                    int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
+                                    if (lastUnderscore == -1) continue;
+                                    if (trailerMatch.Value[lastUnderscore+1] != 'h')
+                                    {
+                                        output.Add(
+                                            new TrailerDetailsModel(
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
+                                                0,
+                                                "Unk",
+                                                atsm.results[i].title));
+                                    }
+                                    else
+                                    {
+                                        if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
+                                                    0,
+                                                    "Unk",
+                                                    atsm.results[i].title));
+                                        else
+                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                    }
+                                }
+
+                                continue;
                             }
 
-                            continue;
-                        }
-
-                        html = Downloader.ProcessDownload(moviePlaylist, DownloadType.Html, Section.Movies);
-                        matchCollection = trailerRegex.Matches(html);
-                        if (matchCollection.Count != 0)
-                        {
-                            foreach (Match trailerMatch in matchCollection)
+                            html = Downloader.ProcessDownload(movieHDPage, DownloadType.Html, Section.Movies);
+                            matchCollection = trailerRegex.Matches(html);
+                            if (matchCollection.Count != 0)
                             {
-                                if (trailerMatch.Value.LastIndexOf('_') == -1) continue;
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value.Insert(trailerMatch.Value.LastIndexOf('_') + 1, "h"), 0, "Unk", atsm.results[i].title));
+                                foreach (Match trailerMatch in matchCollection)
+                                {
+                                    int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
+                                    if (lastUnderscore == -1) continue;
+                                    if (trailerMatch.Value[lastUnderscore + 1] != 'h')
+                                    {
+                                        output.Add(
+                                            new TrailerDetailsModel(
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
+                                                0,
+                                                "Unk",
+                                                atsm.results[i].title));
+                                    }
+                                    else
+                                    {
+                                        if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
+                                                    0,
+                                                    "Unk",
+                                                    atsm.results[i].title));
+                                        else
+                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                    }
+                                }
+
+                                continue;
                             }
 
-                            continue;
-                        }
-
-                        html = Downloader.ProcessDownload(movieHDPlaylist, DownloadType.Html, Section.Movies);
-                        matchCollection = trailerRegex.Matches(html);
-                        if (matchCollection.Count != 0)
-                        {
-                            foreach (Match trailerMatch in matchCollection)
+                            html = Downloader.ProcessDownload(moviePlaylist, DownloadType.Html, Section.Movies);
+                            matchCollection = trailerRegex.Matches(html);
+                            if (matchCollection.Count != 0)
                             {
-                                output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                foreach (Match trailerMatch in matchCollection)
+                                {
+                                    int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
+                                    if (lastUnderscore == -1) continue;
+                                    if (trailerMatch.Value[lastUnderscore + 1] != 'h')
+                                    {
+                                        output.Add(
+                                            new TrailerDetailsModel(
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
+                                                0,
+                                                "Unk",
+                                                atsm.results[i].title));
+                                    }
+                                    else
+                                    {
+                                        if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
+                                                    0,
+                                                    "Unk",
+                                                    atsm.results[i].title));
+                                        else
+                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                    }
+                                }
+
+                                continue;
                             }
 
-                            continue;
+                            html = Downloader.ProcessDownload(movieHDPlaylist, DownloadType.Html, Section.Movies);
+                            matchCollection = trailerRegex.Matches(html);
+                            if (matchCollection.Count != 0)
+                            {
+                                foreach (Match trailerMatch in matchCollection)
+                                {
+                                    int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
+                                    if (lastUnderscore == -1) continue;
+                                    if (trailerMatch.Value[lastUnderscore + 1] != 'h')
+                                    {
+                                        output.Add(
+                                            new TrailerDetailsModel(
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
+                                                0,
+                                                "Unk",
+                                                atsm.results[i].title));
+                                    }
+                                    else
+                                    {
+                                        if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
+                                                    0,
+                                                    "Unk",
+                                                    atsm.results[i].title));
+                                        else
+                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, 0, "Unk", atsm.results[i].title));
+                                    }
+                                }
+
+                                continue;
+                            }
                         }
                     }
 
                     return output.IsFilled();
                 }
-                
+
                 return false;
             }
             catch (Exception ex)

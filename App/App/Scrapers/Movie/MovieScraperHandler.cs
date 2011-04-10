@@ -1305,12 +1305,6 @@ namespace YANFOE.Scrapers.Movie
 
             if (scrapeSuccess)
             {
-                if (output.Count > 0)
-                {
-                    // Set the movie properties
-                    movie.CurrentTrailerUrl = output[0].UriFull.ToString();
-                }
-
                 movie.AlternativeTrailers = output;
             }
             else
