@@ -194,10 +194,10 @@ namespace YANFOE.Factories.Renamer
             {
                 seriesName = "Star Trek: Deep Space Nine";
 
-                season1 = "2";
-                season2 = "02";
-                episode1 = "5";
-                episode2 = "05";
+                season1 = "S2";
+                season2 = "S02";
+                episode1 = "E5";
+                episode2 = "E05";
 
                 episodeName = "Cardassians";
                 doRename = false;

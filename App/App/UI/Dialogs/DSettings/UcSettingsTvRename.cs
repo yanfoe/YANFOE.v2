@@ -35,7 +35,7 @@ namespace YANFOE.UI.Dialogs.DSettings
         {
             this.InitializeComponent();
 
-            this.txtRenameTemplate.DataBindings.Add("Text", Get.InOutCollection, "EpisodeNamingTemplate");
+            this.txtRenameTemplate.Text = Get.InOutCollection.EpisodeNamingTemplate;
 
             this.txtSeriesNameTemplate.Text = TvRenamerFactory.SeriesNameTemplate;
             this.txtEpisodeName.Text = TvRenamerFactory.EpisodeNameTemplate;
@@ -64,6 +64,8 @@ namespace YANFOE.UI.Dialogs.DSettings
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void TxtRenameTemplate_TextChanged(object sender, EventArgs e)
         {
+            Get.InOutCollection.EpisodeNamingTemplate = this.txtRenameTemplate.Text;
+
             this.UpdatePreview();
         }
 
