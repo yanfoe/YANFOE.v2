@@ -1005,7 +1005,7 @@ namespace YANFOE
             this.LookAndFeel.SkinName = "Sharp Plus";
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "YANFOE 2 - Early Alpha 1";
+            this.Text = "YANFOE 2";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();

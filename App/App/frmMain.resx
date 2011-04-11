@@ -123,15 +123,6 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>36</value>
   </metadata>
-  <data name="memoEdit2.EditValue" xml:space="preserve">
-    <value>Albert Camacho, Allen Shope, Brian Bonner, Christian Lefrançois, Dan Woods, D Cook, Gary Gallagher, Ian Birch, Joseph Searfoss Jr, Jason Womack, Manny Gonzalez, Michael IJspelder, Michael Falls, Mitchel Waterman, Morgan Bohman, Neil Abbott, Nicolas Katsidis, Philip Chambers</value>
-  </data>
-  <data name="memoEdit1.EditValue" xml:space="preserve">
-    <value>YANFOE 2 is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
-
-To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
-or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -670,6 +661,15 @@ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisc
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
+  </data>
+  <data name="memoEdit2.EditValue" xml:space="preserve">
+    <value>Albert Camacho, Allen Shope, Brian Bonner, Christian Lefrançois, Dan Woods, D Cook, Gary Gallagher, Ian Birch, Joseph Searfoss Jr, Jason Womack, Manny Gonzalez, Michael IJspelder, Michael Falls, Mitchel Waterman, Morgan Bohman, Neil Abbott, Nicolas Katsidis, Philip Chambers</value>
+  </data>
+  <data name="memoEdit1.EditValue" xml:space="preserve">
+    <value>YANFOE 2 is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
+or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</value>
   </data>
   <metadata name="uiTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>309, 17</value>
