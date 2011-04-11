@@ -35,8 +35,9 @@ namespace YANFOE
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barSubItem5 = new DevExpress.XtraBars.BarSubItem();
             this.mnuFileSaveDatabase = new DevExpress.XtraBars.BarButtonItem();
@@ -46,9 +47,7 @@ namespace YANFOE
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mnuToolsMovieScraperGroupManager = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem9 = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -107,17 +106,17 @@ namespace YANFOE
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.picThread8 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
+            this.picThread5 = new DevExpress.XtraEditors.PictureEdit();
             this.lblDownloadStatus = new DevExpress.XtraEditors.LabelControl();
             this.picThread4 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread3 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.uiTimer = new System.Windows.Forms.Timer();
-            this.picThread8 = new DevExpress.XtraEditors.PictureEdit();
-            this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
-            this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
-            this.picThread5 = new DevExpress.XtraEditors.PictureEdit();
+            this.uiTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -160,15 +159,15 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -194,9 +193,7 @@ namespace YANFOE
             this.barStaticItem2,
             this.barStaticItem3,
             this.barSubItem9,
-            this.barButtonItem2,
             this.mnuFileExit,
-            this.barButtonItem5,
             this.barButtonItem6,
             this.mnuToolsMovieScraperGroupManager,
             this.mnuFileSaveDatabase,
@@ -281,28 +278,14 @@ namespace YANFOE
             this.barSubItem9.Caption = "Help";
             this.barSubItem9.Id = 19;
             this.barSubItem9.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6, true)});
             this.barSubItem9.Name = "barSubItem9";
-            // 
-            // barButtonItem5
-            // 
-            this.barButtonItem5.Id = 26;
-            this.barButtonItem5.Name = "barButtonItem5";
             // 
             // barButtonItem6
             // 
             this.barButtonItem6.Caption = "Check For Updates";
             this.barButtonItem6.Id = 24;
             this.barButtonItem6.Name = "barButtonItem6";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = global::YANFOE.Language.FrmMain_Menu_About;
-            this.barButtonItem2.Glyph = global::YANFOE.Properties.Resources.home;
-            this.barButtonItem2.Id = 20;
-            this.barButtonItem2.Name = "barButtonItem2";
             // 
             // barDockControlTop
             // 
@@ -416,7 +399,7 @@ namespace YANFOE
             this.tabMediaManager.Controls.Add(this.mediaManagerUc1);
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
-            this.tabMediaManager.Size = new System.Drawing.Size(986, 461);
+            this.tabMediaManager.Size = new System.Drawing.Size(988, 463);
             this.tabMediaManager.Text = "Media Manager";
             // 
             // mediaManagerUc1
@@ -424,7 +407,7 @@ namespace YANFOE
             this.mediaManagerUc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaManagerUc1.Location = new System.Drawing.Point(0, 0);
             this.mediaManagerUc1.Name = "mediaManagerUc1";
-            this.mediaManagerUc1.Size = new System.Drawing.Size(986, 461);
+            this.mediaManagerUc1.Size = new System.Drawing.Size(988, 463);
             this.mediaManagerUc1.TabIndex = 0;
             // 
             // tabMovies
@@ -432,7 +415,7 @@ namespace YANFOE
             this.tabMovies.Controls.Add(this.moviesUserControl1);
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(986, 461);
+            this.tabMovies.Size = new System.Drawing.Size(988, 463);
             this.tabMovies.Text = "Movies";
             // 
             // moviesUserControl1
@@ -452,7 +435,7 @@ namespace YANFOE
             this.tabTv.Controls.Add(this.tvUserControl1);
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(986, 461);
+            this.tabTv.Size = new System.Drawing.Size(988, 463);
             this.tabTv.Text = "TV";
             // 
             // tvUserControl1
@@ -468,7 +451,7 @@ namespace YANFOE
             this.tabDownloads.Controls.Add(this.downloadsUserControl1);
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
-            this.tabDownloads.Size = new System.Drawing.Size(986, 461);
+            this.tabDownloads.Size = new System.Drawing.Size(988, 463);
             this.tabDownloads.Text = "Downloads";
             // 
             // downloadsUserControl1
@@ -484,7 +467,7 @@ namespace YANFOE
             this.tabLogs.Controls.Add(this.logsUserControl1);
             this.tabLogs.Image = global::YANFOE.Properties.Resources.books24;
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Size = new System.Drawing.Size(986, 461);
+            this.tabLogs.Size = new System.Drawing.Size(988, 463);
             this.tabLogs.Text = "Logs";
             // 
             // logsUserControl1
@@ -499,7 +482,7 @@ namespace YANFOE
             // 
             this.tabAbout.Controls.Add(this.layoutControl1);
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(986, 461);
+            this.tabAbout.Size = new System.Drawing.Size(988, 463);
             this.tabAbout.Text = "About";
             // 
             // layoutControl1
@@ -878,6 +861,58 @@ namespace YANFOE
             this.panelControl1.Size = new System.Drawing.Size(992, 27);
             this.panelControl1.TabIndex = 9;
             // 
+            // picThread8
+            // 
+            this.picThread8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread8.Location = new System.Drawing.Point(168, 3);
+            this.picThread8.MenuManager = this.barManager1;
+            this.picThread8.Name = "picThread8";
+            this.picThread8.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread8.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread8.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread8.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread8.Size = new System.Drawing.Size(24, 24);
+            this.picThread8.TabIndex = 11;
+            // 
+            // picThread7
+            // 
+            this.picThread7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread7.Location = new System.Drawing.Point(144, 3);
+            this.picThread7.MenuManager = this.barManager1;
+            this.picThread7.Name = "picThread7";
+            this.picThread7.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread7.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread7.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread7.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread7.Size = new System.Drawing.Size(24, 24);
+            this.picThread7.TabIndex = 10;
+            // 
+            // picThread6
+            // 
+            this.picThread6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread6.Location = new System.Drawing.Point(120, 3);
+            this.picThread6.MenuManager = this.barManager1;
+            this.picThread6.Name = "picThread6";
+            this.picThread6.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread6.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread6.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread6.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread6.Size = new System.Drawing.Size(24, 24);
+            this.picThread6.TabIndex = 9;
+            // 
+            // picThread5
+            // 
+            this.picThread5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picThread5.Location = new System.Drawing.Point(96, 3);
+            this.picThread5.MenuManager = this.barManager1;
+            this.picThread5.Name = "picThread5";
+            this.picThread5.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picThread5.Properties.Appearance.Options.UseBackColor = true;
+            this.picThread5.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picThread5.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picThread5.Size = new System.Drawing.Size(24, 24);
+            this.picThread5.TabIndex = 8;
+            // 
             // lblDownloadStatus
             // 
             this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
@@ -954,58 +989,6 @@ namespace YANFOE
             this.uiTimer.Interval = 50;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
             // 
-            // picThread8
-            // 
-            this.picThread8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picThread8.Location = new System.Drawing.Point(168, 3);
-            this.picThread8.MenuManager = this.barManager1;
-            this.picThread8.Name = "picThread8";
-            this.picThread8.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.picThread8.Properties.Appearance.Options.UseBackColor = true;
-            this.picThread8.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.picThread8.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picThread8.Size = new System.Drawing.Size(24, 24);
-            this.picThread8.TabIndex = 11;
-            // 
-            // picThread7
-            // 
-            this.picThread7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picThread7.Location = new System.Drawing.Point(144, 3);
-            this.picThread7.MenuManager = this.barManager1;
-            this.picThread7.Name = "picThread7";
-            this.picThread7.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.picThread7.Properties.Appearance.Options.UseBackColor = true;
-            this.picThread7.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.picThread7.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picThread7.Size = new System.Drawing.Size(24, 24);
-            this.picThread7.TabIndex = 10;
-            // 
-            // picThread6
-            // 
-            this.picThread6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picThread6.Location = new System.Drawing.Point(120, 3);
-            this.picThread6.MenuManager = this.barManager1;
-            this.picThread6.Name = "picThread6";
-            this.picThread6.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.picThread6.Properties.Appearance.Options.UseBackColor = true;
-            this.picThread6.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.picThread6.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picThread6.Size = new System.Drawing.Size(24, 24);
-            this.picThread6.TabIndex = 9;
-            // 
-            // picThread5
-            // 
-            this.picThread5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picThread5.Location = new System.Drawing.Point(96, 3);
-            this.picThread5.MenuManager = this.barManager1;
-            this.picThread5.Name = "picThread5";
-            this.picThread5.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.picThread5.Properties.Appearance.Options.UseBackColor = true;
-            this.picThread5.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.picThread5.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.picThread5.Size = new System.Drawing.Size(24, 24);
-            this.picThread5.TabIndex = 8;
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1067,15 +1050,15 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picThread5.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1116,12 +1099,10 @@ namespace YANFOE
         private LogsUserControl logsUserControl1;
         private DevExpress.XtraBars.BarButtonItem mnuFileExit;
         private DevExpress.XtraBars.BarSubItem barSubItem9;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraTab.XtraTabPage tabAbout;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem mnuToolsMovieScraperGroupManager;
         private DevExpress.XtraBars.BarButtonItem mnuFileSaveDatabase;
