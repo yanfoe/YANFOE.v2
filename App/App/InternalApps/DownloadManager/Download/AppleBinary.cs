@@ -31,7 +31,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
         /// Gets the specified download item.
         /// </summary>
         /// <param name="downloadItem">The download item.</param>
-        public static void Get(DownloadItem downloadItem)
+        public static new void Get(DownloadItem downloadItem)
         {
             downloadItem.Result = new BinaryResult();
 

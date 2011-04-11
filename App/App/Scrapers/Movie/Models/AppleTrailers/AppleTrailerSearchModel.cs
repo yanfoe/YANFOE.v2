@@ -52,22 +52,6 @@ namespace YANFOE.Scrapers.Movie.Models.AppleTrailers
 
         #endregion
 
-        #region Events
-
-        /// <summary>
-        /// The locked status changed.
-        /// </summary>
-        [field: NonSerialized]
-        public event EventHandler LockedStatusChanged;
-
-        /// <summary>
-        /// The marked status changed.
-        /// </summary>
-        [field: NonSerialized]
-        public event EventHandler MarkedStatusChanged;
-
-        #endregion
-
         #region Properties
 
         public bool error { get; set; }

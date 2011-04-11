@@ -185,8 +185,6 @@ namespace YANFOE.InternalApps.DownloadManager
         /// </returns>
         public static bool InBackgroundQue(string url)
         {
-            List<DownloadItem> result;
-
             var count = 0;
 
             lock (BackgroundDownloadQue)

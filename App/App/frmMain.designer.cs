@@ -1114,7 +1114,6 @@ namespace YANFOE
         private DevExpress.XtraEditors.LabelControl lblDownloadStatus;
         private MediaManagerUc mediaManagerUc1;
         private DevExpress.XtraBars.BarButtonItem mnuEditSettings;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.XtraEditors.MemoEdit memoEdit1;
         private DevExpress.XtraEditors.TextEdit textEdit4;
         private DevExpress.XtraEditors.TextEdit textEdit3;
