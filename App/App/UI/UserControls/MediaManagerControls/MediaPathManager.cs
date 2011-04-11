@@ -168,7 +168,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             frmEditMediaPath.ShowDialog(this);
 
             grdViewMain.RefreshData();
-            ButRefresh_Click(null, null);
+            // ButRefresh_Click(null, null);
         }
 
         /// <summary>

@@ -30,10 +30,10 @@
         {
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabMediaPaths = new DevExpress.XtraTab.XtraTabPage();
+            this.mediaPathManager1 = new YANFOE.UI.UserControls.MediaManagerControls.MediaPathManager();
             this.tabMovies = new DevExpress.XtraTab.XtraTabPage();
             this.importMoviesUc1 = new YANFOE.UI.UserControls.MediaManagerControls.ImportMoviesUc();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.mediaPathManager1 = new YANFOE.UI.UserControls.MediaManagerControls.MediaPathManager();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.tabMediaPaths.SuspendLayout();
@@ -57,14 +57,23 @@
             // 
             this.tabMediaPaths.Controls.Add(this.mediaPathManager1);
             this.tabMediaPaths.Name = "tabMediaPaths";
-            this.tabMediaPaths.Size = new System.Drawing.Size(824, 643);
+            this.tabMediaPaths.Size = new System.Drawing.Size(822, 642);
             this.tabMediaPaths.Text = "Media Paths";
+            // 
+            // mediaPathManager1
+            // 
+            this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
+            this.mediaPathManager1.Name = "mediaPathManager1";
+            this.mediaPathManager1.Size = new System.Drawing.Size(822, 642);
+            this.mediaPathManager1.TabIndex = 0;
+            this.mediaPathManager1.Load += new System.EventHandler(this.mediaPathManager1_Load);
             // 
             // tabMovies
             // 
             this.tabMovies.Controls.Add(this.importMoviesUc1);
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(824, 643);
+            this.tabMovies.Size = new System.Drawing.Size(822, 642);
             this.tabMovies.Text = "Movies";
             // 
             // importMoviesUc1
@@ -78,16 +87,8 @@
             // xtraTabPage1
             // 
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(824, 643);
+            this.xtraTabPage1.Size = new System.Drawing.Size(822, 642);
             this.xtraTabPage1.Text = "xtraTabPage1";
-            // 
-            // mediaPathManager1
-            // 
-            this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
-            this.mediaPathManager1.Name = "mediaPathManager1";
-            this.mediaPathManager1.Size = new System.Drawing.Size(824, 643);
-            this.mediaPathManager1.TabIndex = 0;
             // 
             // MediaManagerUc
             // 

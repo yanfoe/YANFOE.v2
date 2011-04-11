@@ -104,21 +104,19 @@ namespace YANFOE.Tools.IO
 
                 string f1 = f;
 
-                var check = false;
-
-                for (int index = 0; index < mediaPathModel.FileCollection.Count; index++)
+                try
                 {
-                    var file = mediaPathModel.FileCollection[index];
-                    if (file.PathAndFileName == f1)
+
+                    var check = mediaPathModel.FileCollection.Any(file => file.PathAndFileName == f1);
+
+                    if (!check)
                     {
-                        check = true;
-                        break;
+                        mediaPathModel.FileCollection.Add(obj);
                     }
                 }
-
-                if (!check)
+                catch
                 {
-                    mediaPathModel.FileCollection.Add(obj);
+                    
                 }
             }
         }

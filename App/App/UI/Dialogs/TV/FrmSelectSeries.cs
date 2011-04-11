@@ -195,7 +195,7 @@ namespace YANFOE.UI.Dialogs.TV
             if (!string.IsNullOrEmpty(result.Banner))
             {
                 string url = result.Banner;
-                url = TheTvdb.ReturnBannerDownloadPath(url);
+                url = TheTvdb.ReturnBannerDownloadPath(url, true);
 
                 string path = Downloader.ProcessDownload(url, DownloadType.Binary, Section.Tv);
 

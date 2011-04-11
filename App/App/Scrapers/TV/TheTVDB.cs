@@ -95,8 +95,13 @@ namespace YANFOE.Scrapers.TV
         /// <returns>
         /// The return banner download path.
         /// </returns>
-        public static string ReturnBannerDownloadPath(string filename)
+        public static string ReturnBannerDownloadPath(string filename, bool useCache = false)
         {
+            if (useCache)
+            {
+                return string.Format(@"http://cache.thetvdb.com/banners/_cache/{0}", filename); 
+            }
+
             return string.Format(@"http://cache.thetvdb.com/banners/{0}", filename);
         }
 
@@ -263,7 +268,7 @@ namespace YANFOE.Scrapers.TV
 
             if (!string.IsNullOrEmpty(details.SeriesBannerUrl))
             {
-                string url = "http://cache.thetvdb.com/banners/" + details.SeriesBannerUrl;
+                string url = "http://cache.thetvdb.com/banners/_cache/" + details.SeriesBannerUrl;
 
                 string imagePath = Downloader.ProcessDownload(url, DownloadType.Binary, Section.Tv);
 

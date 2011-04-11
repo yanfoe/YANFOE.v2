@@ -86,5 +86,10 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             this.xtraTabControl1.SelectedTabPage = this.tabMovies;
         }
+
+        private void mediaPathManager1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
