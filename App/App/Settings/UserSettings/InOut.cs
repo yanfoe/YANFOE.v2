@@ -111,11 +111,21 @@ namespace YANFOE.Settings.UserSettings
             this.EpisodeNamingTemplate = "<seriesname> <season2><episode2> <episodename>";
 
             this.RenameTV = true;
+
+            this.MinimumMovieSize = 104857600;
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the minimum size of the movie.
+        /// </summary>
+        /// <value>
+        /// The minimum size of the movie.
+        /// </value>
+        public int MinimumMovieSize { get; set; }
 
         /// <summary>
         /// Gets or sets BannerTypes.

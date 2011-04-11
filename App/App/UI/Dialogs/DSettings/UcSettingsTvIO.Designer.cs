@@ -325,7 +325,7 @@
             // 
             this.xtraTabPage3.Controls.Add(this.layoutControl2);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(714, 479);
+            this.xtraTabPage3.Size = new System.Drawing.Size(716, 481);
             this.xtraTabPage3.Text = "Normal";
             // 
             // layoutControl2
@@ -354,7 +354,7 @@
             this.layoutControl2.Location = new System.Drawing.Point(0, 0);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(714, 479);
+            this.layoutControl2.Size = new System.Drawing.Size(716, 481);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -363,7 +363,7 @@
             this.ucSettingsTvIOKey1.Location = new System.Drawing.Point(12, 372);
             this.ucSettingsTvIOKey1.MinimumSize = new System.Drawing.Size(0, 74);
             this.ucSettingsTvIOKey1.Name = "ucSettingsTvIOKey1";
-            this.ucSettingsTvIOKey1.Size = new System.Drawing.Size(690, 95);
+            this.ucSettingsTvIOKey1.Size = new System.Drawing.Size(692, 97);
             this.ucSettingsTvIOKey1.TabIndex = 24;
             // 
             // txtSeasonFanartPreview
@@ -371,7 +371,7 @@
             this.txtSeasonFanartPreview.Location = new System.Drawing.Point(151, 276);
             this.txtSeasonFanartPreview.Name = "txtSeasonFanartPreview";
             this.txtSeasonFanartPreview.Properties.ReadOnly = true;
-            this.txtSeasonFanartPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeasonFanartPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeasonFanartPreview.StyleController = this.layoutControl2;
             this.txtSeasonFanartPreview.TabIndex = 23;
             // 
@@ -380,7 +380,7 @@
             this.txtEpisodeScreenshotPreview.Location = new System.Drawing.Point(151, 348);
             this.txtEpisodeScreenshotPreview.Name = "txtEpisodeScreenshotPreview";
             this.txtEpisodeScreenshotPreview.Properties.ReadOnly = true;
-            this.txtEpisodeScreenshotPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtEpisodeScreenshotPreview.Size = new System.Drawing.Size(553, 20);
             this.txtEpisodeScreenshotPreview.StyleController = this.layoutControl2;
             this.txtEpisodeScreenshotPreview.TabIndex = 22;
             // 
@@ -389,7 +389,7 @@
             this.txtEpisodeNFOPreview.Location = new System.Drawing.Point(151, 324);
             this.txtEpisodeNFOPreview.Name = "txtEpisodeNFOPreview";
             this.txtEpisodeNFOPreview.Properties.ReadOnly = true;
-            this.txtEpisodeNFOPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtEpisodeNFOPreview.Size = new System.Drawing.Size(553, 20);
             this.txtEpisodeNFOPreview.StyleController = this.layoutControl2;
             this.txtEpisodeNFOPreview.TabIndex = 21;
             // 
@@ -399,7 +399,7 @@
             this.txtSeasonBannerPreview.Location = new System.Drawing.Point(151, 300);
             this.txtSeasonBannerPreview.Name = "txtSeasonBannerPreview";
             this.txtSeasonBannerPreview.Properties.ReadOnly = true;
-            this.txtSeasonBannerPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeasonBannerPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeasonBannerPreview.StyleController = this.layoutControl2;
             this.txtSeasonBannerPreview.TabIndex = 20;
             // 
@@ -408,7 +408,7 @@
             this.txtSeasonPosterPreview.Location = new System.Drawing.Point(151, 252);
             this.txtSeasonPosterPreview.Name = "txtSeasonPosterPreview";
             this.txtSeasonPosterPreview.Properties.ReadOnly = true;
-            this.txtSeasonPosterPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeasonPosterPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeasonPosterPreview.StyleController = this.layoutControl2;
             this.txtSeasonPosterPreview.TabIndex = 19;
             // 
@@ -417,7 +417,7 @@
             this.txtSeriesFanartPreview.Location = new System.Drawing.Point(151, 228);
             this.txtSeriesFanartPreview.Name = "txtSeriesFanartPreview";
             this.txtSeriesFanartPreview.Properties.ReadOnly = true;
-            this.txtSeriesFanartPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeriesFanartPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeriesFanartPreview.StyleController = this.layoutControl2;
             this.txtSeriesFanartPreview.TabIndex = 18;
             // 
@@ -426,7 +426,7 @@
             this.txtSeriesBannerPreview.Location = new System.Drawing.Point(151, 204);
             this.txtSeriesBannerPreview.Name = "txtSeriesBannerPreview";
             this.txtSeriesBannerPreview.Properties.ReadOnly = true;
-            this.txtSeriesBannerPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeriesBannerPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeriesBannerPreview.StyleController = this.layoutControl2;
             this.txtSeriesBannerPreview.TabIndex = 17;
             // 
@@ -436,7 +436,7 @@
             this.txtSeriesPosterPreview.Location = new System.Drawing.Point(151, 180);
             this.txtSeriesPosterPreview.Name = "txtSeriesPosterPreview";
             this.txtSeriesPosterPreview.Properties.ReadOnly = true;
-            this.txtSeriesPosterPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeriesPosterPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeriesPosterPreview.StyleController = this.layoutControl2;
             this.txtSeriesPosterPreview.TabIndex = 16;
             // 
@@ -445,7 +445,7 @@
             this.txtSeriesNFOPreview.Location = new System.Drawing.Point(151, 156);
             this.txtSeriesNFOPreview.Name = "txtSeriesNFOPreview";
             this.txtSeriesNFOPreview.Properties.ReadOnly = true;
-            this.txtSeriesNFOPreview.Size = new System.Drawing.Size(551, 20);
+            this.txtSeriesNFOPreview.Size = new System.Drawing.Size(553, 20);
             this.txtSeriesNFOPreview.StyleController = this.layoutControl2;
             this.txtSeriesNFOPreview.TabIndex = 15;
             // 
@@ -453,16 +453,16 @@
             // 
             this.txtNormalTestPath.Location = new System.Drawing.Point(151, 132);
             this.txtNormalTestPath.Name = "txtNormalTestPath";
-            this.txtNormalTestPath.Size = new System.Drawing.Size(551, 20);
+            this.txtNormalTestPath.Size = new System.Drawing.Size(553, 20);
             this.txtNormalTestPath.StyleController = this.layoutControl2;
             this.txtNormalTestPath.TabIndex = 14;
             this.txtNormalTestPath.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
             // 
             // txtEpisodeScreenshot
             // 
-            this.txtEpisodeScreenshot.Location = new System.Drawing.Point(498, 108);
+            this.txtEpisodeScreenshot.Location = new System.Drawing.Point(499, 108);
             this.txtEpisodeScreenshot.Name = "txtEpisodeScreenshot";
-            this.txtEpisodeScreenshot.Size = new System.Drawing.Size(204, 20);
+            this.txtEpisodeScreenshot.Size = new System.Drawing.Size(205, 20);
             this.txtEpisodeScreenshot.StyleController = this.layoutControl2;
             this.txtEpisodeScreenshot.TabIndex = 12;
             this.txtEpisodeScreenshot.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -471,7 +471,7 @@
             // 
             this.txtEpisodeNFO.Location = new System.Drawing.Point(151, 108);
             this.txtEpisodeNFO.Name = "txtEpisodeNFO";
-            this.txtEpisodeNFO.Size = new System.Drawing.Size(204, 20);
+            this.txtEpisodeNFO.Size = new System.Drawing.Size(205, 20);
             this.txtEpisodeNFO.StyleController = this.layoutControl2;
             this.txtEpisodeNFO.TabIndex = 11;
             this.txtEpisodeNFO.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -480,16 +480,16 @@
             // 
             this.txtSeasonBanner.Location = new System.Drawing.Point(151, 84);
             this.txtSeasonBanner.Name = "txtSeasonBanner";
-            this.txtSeasonBanner.Size = new System.Drawing.Size(204, 20);
+            this.txtSeasonBanner.Size = new System.Drawing.Size(205, 20);
             this.txtSeasonBanner.StyleController = this.layoutControl2;
             this.txtSeasonBanner.TabIndex = 10;
             this.txtSeasonBanner.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
             // 
             // txtSeasonFanart
             // 
-            this.txtSeasonFanart.Location = new System.Drawing.Point(498, 60);
+            this.txtSeasonFanart.Location = new System.Drawing.Point(499, 60);
             this.txtSeasonFanart.Name = "txtSeasonFanart";
-            this.txtSeasonFanart.Size = new System.Drawing.Size(204, 20);
+            this.txtSeasonFanart.Size = new System.Drawing.Size(205, 20);
             this.txtSeasonFanart.StyleController = this.layoutControl2;
             this.txtSeasonFanart.TabIndex = 9;
             this.txtSeasonFanart.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -498,16 +498,16 @@
             // 
             this.txtSeasonPoster.Location = new System.Drawing.Point(151, 60);
             this.txtSeasonPoster.Name = "txtSeasonPoster";
-            this.txtSeasonPoster.Size = new System.Drawing.Size(204, 20);
+            this.txtSeasonPoster.Size = new System.Drawing.Size(205, 20);
             this.txtSeasonPoster.StyleController = this.layoutControl2;
             this.txtSeasonPoster.TabIndex = 8;
             this.txtSeasonPoster.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
             // 
             // txtSeriesFanart
             // 
-            this.txtSeriesFanart.Location = new System.Drawing.Point(498, 36);
+            this.txtSeriesFanart.Location = new System.Drawing.Point(499, 36);
             this.txtSeriesFanart.Name = "txtSeriesFanart";
-            this.txtSeriesFanart.Size = new System.Drawing.Size(204, 20);
+            this.txtSeriesFanart.Size = new System.Drawing.Size(205, 20);
             this.txtSeriesFanart.StyleController = this.layoutControl2;
             this.txtSeriesFanart.TabIndex = 7;
             this.txtSeriesFanart.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -516,16 +516,16 @@
             // 
             this.txtSeriesBanner.Location = new System.Drawing.Point(151, 36);
             this.txtSeriesBanner.Name = "txtSeriesBanner";
-            this.txtSeriesBanner.Size = new System.Drawing.Size(204, 20);
+            this.txtSeriesBanner.Size = new System.Drawing.Size(205, 20);
             this.txtSeriesBanner.StyleController = this.layoutControl2;
             this.txtSeriesBanner.TabIndex = 6;
             this.txtSeriesBanner.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
             // 
             // txtSeriesPoster
             // 
-            this.txtSeriesPoster.Location = new System.Drawing.Point(498, 12);
+            this.txtSeriesPoster.Location = new System.Drawing.Point(499, 12);
             this.txtSeriesPoster.Name = "txtSeriesPoster";
-            this.txtSeriesPoster.Size = new System.Drawing.Size(204, 20);
+            this.txtSeriesPoster.Size = new System.Drawing.Size(205, 20);
             this.txtSeriesPoster.StyleController = this.layoutControl2;
             this.txtSeriesPoster.TabIndex = 5;
             this.txtSeriesPoster.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -534,7 +534,7 @@
             // 
             this.txtSeriesNFO.Location = new System.Drawing.Point(151, 12);
             this.txtSeriesNFO.Name = "txtSeriesNFO";
-            this.txtSeriesNFO.Size = new System.Drawing.Size(204, 20);
+            this.txtSeriesNFO.Size = new System.Drawing.Size(205, 20);
             this.txtSeriesNFO.StyleController = this.layoutControl2;
             this.txtSeriesNFO.TabIndex = 4;
             this.txtSeriesNFO.EditValueChanged += new System.EventHandler(this.TxtNormal_EditValueChanged);
@@ -567,7 +567,7 @@
             this.layoutControlItem12});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(714, 479);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(716, 481);
             this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
@@ -580,7 +580,7 @@
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem2.Text = "Series NFO";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -592,7 +592,7 @@
             this.layoutControlItem4.CustomizationFormText = "Series Banner";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem4.Text = "Series Banner";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -604,7 +604,7 @@
             this.layoutControlItem6.CustomizationFormText = "Season Poster";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem6.Text = "Season Poster";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -616,7 +616,7 @@
             this.layoutControlItem9.CustomizationFormText = "Episode NFO";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem9.Text = "Episode NFO";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -626,9 +626,9 @@
             this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem10.Control = this.txtEpisodeScreenshot;
             this.layoutControlItem10.CustomizationFormText = "Episode Screenshot";
-            this.layoutControlItem10.Location = new System.Drawing.Point(347, 96);
+            this.layoutControlItem10.Location = new System.Drawing.Point(348, 96);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem10.Text = "Episode Screenshot";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -638,9 +638,9 @@
             this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem3.Control = this.txtSeriesPoster;
             this.layoutControlItem3.CustomizationFormText = "Series Poster";
-            this.layoutControlItem3.Location = new System.Drawing.Point(347, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(348, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem3.Text = "Series Poster";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -650,9 +650,9 @@
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem5.Control = this.txtSeriesFanart;
             this.layoutControlItem5.CustomizationFormText = "Series Fanart";
-            this.layoutControlItem5.Location = new System.Drawing.Point(347, 24);
+            this.layoutControlItem5.Location = new System.Drawing.Point(348, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem5.Text = "Series Fanart";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -662,9 +662,9 @@
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem7.Control = this.txtSeasonFanart;
             this.layoutControlItem7.CustomizationFormText = "Season Fanart";
-            this.layoutControlItem7.Location = new System.Drawing.Point(347, 48);
+            this.layoutControlItem7.Location = new System.Drawing.Point(348, 48);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(347, 48);
+            this.layoutControlItem7.Size = new System.Drawing.Size(348, 48);
             this.layoutControlItem7.Text = "Season Fanart";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -676,7 +676,7 @@
             this.layoutControlItem8.CustomizationFormText = "Season Banner";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(347, 24);
+            this.layoutControlItem8.Size = new System.Drawing.Size(348, 24);
             this.layoutControlItem8.Text = "Season Banner";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -688,7 +688,7 @@
             this.layoutControlItem15.CustomizationFormText = "Test Path";
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem15.Text = "Test Path";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -700,7 +700,7 @@
             this.layoutControlItem16.CustomizationFormText = "Series NFO Preview";
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem16.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem16.Text = "Series NFO Preview";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -712,7 +712,7 @@
             this.layoutControlItem17.CustomizationFormText = "Series Poster Preview";
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 168);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem17.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem17.Text = "Series Poster Preview";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -724,7 +724,7 @@
             this.layoutControlItem18.CustomizationFormText = "Series Banner Preview";
             this.layoutControlItem18.Location = new System.Drawing.Point(0, 192);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem18.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem18.Text = "Series Banner Preview";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -736,7 +736,7 @@
             this.layoutControlItem19.CustomizationFormText = "Series Fanart Preview";
             this.layoutControlItem19.Location = new System.Drawing.Point(0, 216);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem19.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem19.Text = "Series Fanart Preview";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -748,7 +748,7 @@
             this.layoutControlItem20.CustomizationFormText = "Season Poster Preview";
             this.layoutControlItem20.Location = new System.Drawing.Point(0, 240);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem20.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem20.Text = "Season Poster Preview";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -760,7 +760,7 @@
             this.layoutControlItem21.CustomizationFormText = "Season Banner Preview";
             this.layoutControlItem21.Location = new System.Drawing.Point(0, 288);
             this.layoutControlItem21.Name = "layoutControlItem21";
-            this.layoutControlItem21.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem21.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem21.Text = "Season Banner Preview";
             this.layoutControlItem21.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -772,7 +772,7 @@
             this.layoutControlItem22.CustomizationFormText = "Episode NFO Preview";
             this.layoutControlItem22.Location = new System.Drawing.Point(0, 312);
             this.layoutControlItem22.Name = "layoutControlItem22";
-            this.layoutControlItem22.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem22.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem22.Text = "Episode NFO Preview";
             this.layoutControlItem22.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -784,7 +784,7 @@
             this.layoutControlItem23.CustomizationFormText = "Episode Screenshot Preview";
             this.layoutControlItem23.Location = new System.Drawing.Point(0, 336);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem23.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem23.Text = "Episode Screenshot Preview";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -796,7 +796,7 @@
             this.layoutControlItem71.CustomizationFormText = "Season Fanart Preview";
             this.layoutControlItem71.Location = new System.Drawing.Point(0, 264);
             this.layoutControlItem71.Name = "layoutControlItem71";
-            this.layoutControlItem71.Size = new System.Drawing.Size(694, 24);
+            this.layoutControlItem71.Size = new System.Drawing.Size(696, 24);
             this.layoutControlItem71.Text = "Season Fanart Preview";
             this.layoutControlItem71.TextSize = new System.Drawing.Size(135, 13);
             // 
@@ -806,7 +806,7 @@
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 360);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(694, 99);
+            this.layoutControlItem12.Size = new System.Drawing.Size(696, 101);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;

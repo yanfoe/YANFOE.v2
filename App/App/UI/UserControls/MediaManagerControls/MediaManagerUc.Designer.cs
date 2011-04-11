@@ -57,7 +57,7 @@
             // 
             this.tabMediaPaths.Controls.Add(this.mediaPathManager1);
             this.tabMediaPaths.Name = "tabMediaPaths";
-            this.tabMediaPaths.Size = new System.Drawing.Size(822, 642);
+            this.tabMediaPaths.Size = new System.Drawing.Size(824, 644);
             this.tabMediaPaths.Text = "Media Paths";
             // 
             // mediaPathManager1
@@ -65,7 +65,7 @@
             this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
             this.mediaPathManager1.Name = "mediaPathManager1";
-            this.mediaPathManager1.Size = new System.Drawing.Size(822, 642);
+            this.mediaPathManager1.Size = new System.Drawing.Size(824, 644);
             this.mediaPathManager1.TabIndex = 0;
             this.mediaPathManager1.Load += new System.EventHandler(this.mediaPathManager1_Load);
             // 

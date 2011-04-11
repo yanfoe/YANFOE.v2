@@ -23,6 +23,7 @@ namespace YANFOE.Factories.Media
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
+    using YANFOE.Settings;
     using YANFOE.Tools.IO;
 
     /// <summary>
@@ -165,7 +166,7 @@ namespace YANFOE.Factories.Media
 
                         if (filePath.Type == MediaPathFileModel.MediaPathFileType.Movie)
                         {
-                            if (new System.IO.FileInfo(filePath.PathAndFileName).Length > 419430400)
+                            if (new System.IO.FileInfo(filePath.PathAndFileName).Length > Get.InOutCollection.MinimumMovieSize)
                             {
                                 if (!MasterMediaDBFactory.MovieDatabaseContains(filePath.PathAndFileName))
                                 {

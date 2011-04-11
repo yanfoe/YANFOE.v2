@@ -158,6 +158,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.Designer.cs">
       <DependentUpon>UcSettingsGeneralWeb.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.Designer.cs">
+      <DependentUpon>UcSettingsMovieIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -526,6 +532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.resx">
       <DependentUpon>UcSettingsGeneralWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMovieIN.resx">
+      <DependentUpon>UcSettingsMovieIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.resx">
       <DependentUpon>UcSettingsMoviesIO.cs</DependentUpon>
