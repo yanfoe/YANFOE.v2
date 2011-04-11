@@ -31,7 +31,7 @@ namespace YANFOE.Tools.Models
         /// <summary>
         /// The resolution.
         /// </summary>
-        private int resolution;
+        private string resolution;
 
         /// <summary>
         /// The trailer movie title.
@@ -63,7 +63,7 @@ namespace YANFOE.Tools.Models
         public TrailerDetailsModel()
         {
             this.uriFull = null;
-            this.resolution = 0;
+            this.resolution = "0";
             this.trailerType = "None";
             this.trailerMovieTitle = "N/A";
             this.selectedTrailer = false;
@@ -87,7 +87,7 @@ namespace YANFOE.Tools.Models
         /// <param name="selectedtrailer">
         /// The selectedtrailer. (Defaults to false)
         /// </param>
-        public TrailerDetailsModel(string url, int res, string trailertype, string trailermovietitle, bool selectedtrailer = false)
+        public TrailerDetailsModel(string url, string res, string trailertype, string trailermovietitle, bool selectedtrailer = false)
         {
             this.uriFull = new Uri(url);
             this.resolution = res;
@@ -103,7 +103,7 @@ namespace YANFOE.Tools.Models
         /// <summary>
         /// Gets or sets Resolution.
         /// </summary>
-        public int Resolution
+        public string Resolution
         {
             get
             {
