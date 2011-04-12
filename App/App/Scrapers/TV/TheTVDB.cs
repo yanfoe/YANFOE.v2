@@ -182,7 +182,7 @@ namespace YANFOE.Scrapers.TV
             SearchDetails selectResult = this.ProcessSearchResults(searchResults, name);
 
             // process results, and allow user to choose alternative options
-            if (selectResult.SeriesID == string.Empty)
+            if (selectResult == null || selectResult.SeriesID == string.Empty)
             {
                 return string.Empty;
             }

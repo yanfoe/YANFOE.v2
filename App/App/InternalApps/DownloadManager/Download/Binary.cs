@@ -65,6 +65,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
             
             if (File.Exists(path))
             {
+                //TODO System.IO.IOException: file used by another process - possible exception
                 File.Delete(path);
             }
 

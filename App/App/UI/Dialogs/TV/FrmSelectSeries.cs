@@ -148,10 +148,14 @@ namespace YANFOE.UI.Dialogs.TV
         /// </param>
         private void ButUse_Click(object sender, EventArgs e)
         {
-            string id =
-                Regex.Match(this.cmbSearchResults.SelectedValue.ToString(), @"(?<id>\d*?):.*?").Groups["id"].Value;
-            this.SelectedSeries = this.searchDetails.Single(s => s.ID.ToString() == id.ToString());
-            this.Close();
+            //fix for situation when user click on "OK" button and didn't choose any option from cmbSearchResults
+            if (this.cmbSearchResults.SelectedValue != null)
+            {
+                string id =
+                    Regex.Match(this.cmbSearchResults.SelectedValue.ToString(), @"(?<id>\d*?):.*?").Groups["id"].Value;
+                this.SelectedSeries = this.searchDetails.Single(s => s.ID.ToString() == id.ToString());
+                this.Close();
+            }
         }
 
         /// <summary>
