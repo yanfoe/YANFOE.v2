@@ -600,6 +600,20 @@ namespace YANFOE.Factories.Internal
         /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
         {
+            var bgw1 = new BackgroundWorker();
+            var bgw2 = new BackgroundWorker();
+            var bgw3 = new BackgroundWorker();
+            var bgw4 = new BackgroundWorker();
+            var bgw5 = new BackgroundWorker();
+            var bgw6 = new BackgroundWorker();
+
+            bgw1.DoWork += SavingTVDB_DoWork;
+            bgw2.DoWork += SavingTVDB_DoWork;
+            bgw3.DoWork += SavingTVDB_DoWork;
+            bgw4.DoWork += SavingTVDB_DoWork;
+            bgw5.DoWork += SavingTVDB_DoWork;
+            bgw6.DoWork += SavingTVDB_DoWork;
+
             SavingTVDBMax = TvDBFactory.TvDatabase.Count;
             SavingTVDBValue = 0;
 
@@ -607,34 +621,100 @@ namespace YANFOE.Factories.Internal
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
 
+            var processed = false;
+
+
             foreach (var series in TvDBFactory.TvDatabase)
             {
-                string title = FileNaming.RemoveIllegalChars(series.Key);
+                processed = false;
 
-                // Save Series
-                string writePath = path + title + ".Series";
-                string json = JsonConvert.SerializeObject(series.Value);
-                Gzip.CompressString(json, writePath + ".gz");
-
-                if (series.Value.SmallBanner != null)
+                do
                 {
-                    var smallBanner = new Bitmap(series.Value.SmallBanner);
-                    smallBanner.Save(path + title + ".banner.jpg");
+                    if (!bgw1.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw1.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else if (!bgw2.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw2.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else if (!bgw3.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw3.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else if (!bgw4.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw4.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else if (!bgw5.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw5.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else if (!bgw6.IsBusy)
+                    {
+                        SavingTVDBValue++;
+                        bgw6.RunWorkerAsync(series.Value);
+                        Application.DoEvents();
+                        processed = true;
+                    }
+                    else
+                    {
+                        Application.DoEvents();
+                        Thread.Sleep(50);
+                    }
                 }
+                while (processed == false);
+            }
+        }
 
-                if (series.Value.SmallFanart != null)
-                {
-                    var smallFanart = new Bitmap(series.Value.SmallFanart);
-                    smallFanart.Save(path + title + ".fanner.jpg");
-                }
+        /// <summary>
+        /// Handles the DoWork event of the SavingTVDB control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void SavingTVDB_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var series = e.Argument as Series;
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
+            
+            string title = FileNaming.RemoveIllegalChars(series.SeriesName);
 
-                if (series.Value.SmallPoster != null)
-                {
-                    var smallPoster = new Bitmap(series.Value.SmallPoster);
-                    smallPoster.Save(path + title + ".poster.jpg");
-                }
+            // Save Series
+            string writePath = path + title + ".Series";
+            string json = JsonConvert.SerializeObject(series);
+            Gzip.CompressString(json, writePath + ".gz");
 
-                SavingTVDBValue++;
+            if (series.SmallBanner != null)
+            {
+                var smallBanner = new Bitmap(series.SmallBanner);
+                smallBanner.Save(path + title + ".banner.jpg");
+            }
+
+            if (series.SmallFanart != null)
+            {
+                var smallFanart = new Bitmap(series.SmallFanart);
+                smallFanart.Save(path + title + ".fanner.jpg");
+            }
+
+            if (series.SmallPoster != null)
+            {
+                var smallPoster = new Bitmap(series.SmallPoster);
+                smallPoster.Save(path + title + ".poster.jpg");
             }
         }
 
