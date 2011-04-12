@@ -46,44 +46,31 @@ namespace YANFOE.Factories.Internal
     /// </summary>
     public static class DatabaseIOFactory
     {
-        static Timer tmr = new Timer();
-        static FrmSavingDB frmSavingDB = new FrmSavingDB();
+        #region Constants and Fields
 
         /// <summary>
-        /// Initializes the <see cref="DatabaseIOFactory"/> class.
+        /// Timer for the Start save dialog
+        /// </summary>
+        private static readonly Timer tmr = new Timer();
+
+        /// <summary>
+        /// The start save dialog
+        /// </summary>
+        private static FrmSavingDB frmSavingDB = new FrmSavingDB();
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes static members of the <see cref="DatabaseIOFactory"/> class. 
         /// </summary>
         static DatabaseIOFactory()
         {
             tmr.Tick += tmr_Tick;
         }
 
-        private static void StartSaveDialog()
-        {
-            frmSavingDB = new FrmSavingDB();
-            SavingMovieValue = -1;
-            SavingTVDBValue = -1;
-            frmSavingDB.Reset();
-            frmSavingDB.Show();
-            tmr.Start();
-        }
-
-        private static void tmr_Tick(object sender, System.EventArgs e)
-        {
-            frmSavingDB.SetMovieValue(SavingMovieValue);
-            frmSavingDB.SetMovieDBMax(SavingMovieMax);
-            frmSavingDB.SetTVDBValue(SavingTVDBValue);
-            frmSavingDB.SetTVDBMax(SavingTVDBMax);
-
-            if (SavingMovieValue == SavingMovieMax - 1)
-            {
-                frmSavingDB.MovieDBFinished();
-            }
-
-            if (SavingTVDBValue == SavingTVDBMax)
-            {
-                frmSavingDB.TvDBFinished();
-            }
-        }
+        #endregion
 
         #region Enums
 
@@ -130,17 +117,39 @@ namespace YANFOE.Factories.Internal
 
         #endregion
 
-        public static bool SavingMovieDB;
+        #region Properties
 
-        public static int SavingMovieValue;
+        /// <summary>
+        /// Gets or sets a value indicating whether SavingMovieDB.
+        /// </summary>
+        public static bool SavingMovieDB { get; set; }
 
-        public static int SavingMovieMax;
+        /// <summary>
+        /// Gets or sets SavingMovieMax.
+        /// </summary>
+        public static int SavingMovieMax { get; set; }
 
-        public static bool SavingTVDB;
+        /// <summary>
+        /// Gets or sets SavingMovieValue.
+        /// </summary>
+        public static int SavingMovieValue { get; set; }
 
-        public static int SavingTVDBValue;
+        /// <summary>
+        /// Gets or sets a value indicating whether SavingTVDB.
+        /// </summary>
+        public static bool SavingTVDB { get; set; }
 
-        public static int SavingTVDBMax;
+        /// <summary>
+        /// Gets or sets SavingTVDBMax.
+        /// </summary>
+        public static int SavingTVDBMax { get; set; }
+
+        /// <summary>
+        /// Gets or sets SavingTVDBValue.
+        /// </summary>
+        public static int SavingTVDBValue { get; set; }
+
+        #endregion
 
         #region Public Methods
 
@@ -373,10 +382,108 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
+        /// Saves the movie DB.
+        /// </summary>
+        private static void SaveMovieDB()
+        {
+            var bgwSaveMovieDB = new BackgroundWorker();
+            bgwSaveMovieDB.DoWork += bgwSaveMovieDB_DoWork;
+            bgwSaveMovieDB.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Saves the movie sets db
+        /// </summary>
+        private static void SaveMovieSets()
+        {
+            var bgwSaveMovieSets = new BackgroundWorker();
+            bgwSaveMovieSets.DoWork += bgwSaveMovieSets_DoWork;
+            bgwSaveMovieSets.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Saves the scan series pick.
+        /// </summary>
+        private static void SaveScanSeriesPick()
+        {
+            var bgwSaveScanSeriesPick = new BackgroundWorker();
+            bgwSaveScanSeriesPick.DoWork += bgwSaveScanSeriesPick_DoWork;
+            bgwSaveScanSeriesPick.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Saves the tv DB.
+        /// </summary>
+        private static void SaveTvDB()
+        {
+            var bgwSaveTvDB = new BackgroundWorker();
+            bgwSaveTvDB.DoWork += bgwSaveTvDB_DoWork;
+            bgwSaveTvDB.RunWorkerCompleted += bgwSaveTvDB_RunWorkerCompleted;
+            bgwSaveTvDB.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the SavingTVDB control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
+        private static void SavingTVDB_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var series = e.Argument as Series;
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
+
+            string title = FileNaming.RemoveIllegalChars(series.SeriesName);
+
+            // Save Series
+            string writePath = path + title + ".Series";
+            string json = JsonConvert.SerializeObject(series);
+            Gzip.CompressString(json, writePath + ".gz");
+
+            if (series.SmallBanner != null)
+            {
+                var smallBanner = new Bitmap(series.SmallBanner);
+                smallBanner.Save(path + title + ".banner.jpg");
+            }
+
+            if (series.SmallFanart != null)
+            {
+                var smallFanart = new Bitmap(series.SmallFanart);
+                smallFanart.Save(path + title + ".fanner.jpg");
+            }
+
+            if (series.SmallPoster != null)
+            {
+                var smallPoster = new Bitmap(series.SmallPoster);
+                smallPoster.Save(path + title + ".poster.jpg");
+            }
+        }
+
+        /// <summary>
+        /// Opens the StartSaveDialog
+        /// </summary>
+        private static void StartSaveDialog()
+        {
+            frmSavingDB = new FrmSavingDB();
+            SavingMovieValue = -1;
+            SavingTVDBValue = -1;
+            frmSavingDB.Reset();
+            frmSavingDB.Show();
+            tmr.Start();
+        }
+
+        /// <summary>
         /// Handles the DoWork event of the bgwSaveMediaPathDb control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
         private static void bgwSaveMediaPathDb_DoWork(object sender, DoWorkEventArgs e)
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
@@ -395,15 +502,14 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Saves the movie DB.
+        /// The bgw save movie d b_ do work.
         /// </summary>
-        private static void SaveMovieDB()
-        {
-            var bgwSaveMovieDB = new BackgroundWorker();
-            bgwSaveMovieDB.DoWork += bgwSaveMovieDB_DoWork;
-            bgwSaveMovieDB.RunWorkerAsync();
-        }
-
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
         {
             SavingMovieDB = true;
@@ -426,8 +532,8 @@ namespace YANFOE.Factories.Internal
             bgw5.DoWork += bgw_DoWork;
             bgw6.DoWork += bgw_DoWork;
 
-            var count = 0;
-            var max = MovieDBFactory.MovieDatabase.Count;
+            int count = 0;
+            int max = MovieDBFactory.MovieDatabase.Count;
 
             if (max == 0)
             {
@@ -490,49 +596,14 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgw control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
-        private static void bgw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
-
-            var movieModel = e.Argument as MovieModel;
-
-            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
-
-            string writePath = path + title + ".movie";
-            string json = JsonConvert.SerializeObject(movieModel);
-
-            Gzip.CompressString(json, writePath + ".gz");
-
-            if (movieModel.SmallPoster != null)
-            {
-                movieModel.SmallPoster.Save(path + title + ".poster.jpg");
-            }
-
-            if (movieModel.SmallFanart != null)
-            {
-                movieModel.SmallFanart.Save(path + title + ".fanart.jpg");
-            }
-        }
-
-        /// <summary>
-        /// Saves the movie sets db
-        /// </summary>
-        private static void SaveMovieSets()
-        {
-            var bgwSaveMovieSets = new BackgroundWorker();
-            bgwSaveMovieSets.DoWork += bgwSaveMovieSets_DoWork;
-            bgwSaveMovieSets.RunWorkerAsync();
-        }
-
-        /// <summary>
         /// Handles the DoWork event of the bgwSaveMovieSets control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
         private static void bgwSaveMovieSets_DoWork(object sender, DoWorkEventArgs e)
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
@@ -547,20 +618,14 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Saves the scan series pick.
-        /// </summary>
-        private static void SaveScanSeriesPick()
-        {
-            var bgwSaveScanSeriesPick = new BackgroundWorker();
-            bgwSaveScanSeriesPick.DoWork += bgwSaveScanSeriesPick_DoWork;
-            bgwSaveScanSeriesPick.RunWorkerAsync();
-        }
-
-        /// <summary>
         /// Handles the DoWork event of the bgwSaveScanSeriesPick control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
         private static void bgwSaveScanSeriesPick_DoWork(object sender, DoWorkEventArgs e)
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
@@ -573,31 +638,14 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Saves the tv DB.
-        /// </summary>
-        private static void SaveTvDB()
-        {
-            var bgwSaveTvDB = new BackgroundWorker();
-            bgwSaveTvDB.DoWork += bgwSaveTvDB_DoWork;
-            bgwSaveTvDB.RunWorkerCompleted += bgwSaveTvDB_RunWorkerCompleted;
-            bgwSaveTvDB.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSaveTvDB control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
-        private static void bgwSaveTvDB_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            frmSavingDB.TvDBFinished();
-        }
-
-        /// <summary>
         /// Handles the DoWork event of the bgwSaveTvDB control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
         private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
         {
             var bgw1 = new BackgroundWorker();
@@ -621,12 +669,9 @@ namespace YANFOE.Factories.Internal
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
 
-            var processed = false;
-
-
             foreach (var series in TvDBFactory.TvDatabase)
             {
-                processed = false;
+                bool processed = false;
 
                 do
                 {
@@ -683,38 +728,76 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Handles the DoWork event of the SavingTVDB control.
+        /// Handles the RunWorkerCompleted event of the bgwSaveTvDB control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
-        private static void SavingTVDB_DoWork(object sender, DoWorkEventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// </param>
+        private static void bgwSaveTvDB_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var series = e.Argument as Series;
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
-            
-            string title = FileNaming.RemoveIllegalChars(series.SeriesName);
+            frmSavingDB.TvDBFinished();
+        }
 
-            // Save Series
-            string writePath = path + title + ".Series";
-            string json = JsonConvert.SerializeObject(series);
+        /// <summary>
+        /// Handles the DoWork event of the bgw control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
+        private static void bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+
+            var movieModel = e.Argument as MovieModel;
+
+            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+
+            string writePath = path + title + ".movie";
+            string json = JsonConvert.SerializeObject(movieModel);
+
             Gzip.CompressString(json, writePath + ".gz");
 
-            if (series.SmallBanner != null)
+            if (movieModel.SmallPoster != null)
             {
-                var smallBanner = new Bitmap(series.SmallBanner);
-                smallBanner.Save(path + title + ".banner.jpg");
+                movieModel.SmallPoster.Save(path + title + ".poster.jpg");
             }
 
-            if (series.SmallFanart != null)
+            if (movieModel.SmallFanart != null)
             {
-                var smallFanart = new Bitmap(series.SmallFanart);
-                smallFanart.Save(path + title + ".fanner.jpg");
+                movieModel.SmallFanart.Save(path + title + ".fanart.jpg");
+            }
+        }
+
+        /// <summary>
+        /// Handles the Tick event of the tmr control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private static void tmr_Tick(object sender, EventArgs e)
+        {
+            frmSavingDB.SetMovieValue(SavingMovieValue);
+            frmSavingDB.SetMovieDBMax(SavingMovieMax);
+            frmSavingDB.SetTVDBValue(SavingTVDBValue);
+            frmSavingDB.SetTVDBMax(SavingTVDBMax);
+
+            if (SavingMovieValue == SavingMovieMax - 1)
+            {
+                frmSavingDB.MovieDBFinished();
             }
 
-            if (series.SmallPoster != null)
+            if (SavingTVDBValue == SavingTVDBMax)
             {
-                var smallPoster = new Bitmap(series.SmallPoster);
-                smallPoster.Save(path + title + ".poster.jpg");
+                frmSavingDB.TvDBFinished();
             }
         }
 
