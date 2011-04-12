@@ -37,12 +37,53 @@ namespace YANFOE.Factories.Internal
     using YANFOE.Tools.Compression;
     using YANFOE.Tools.IO;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.UI.Dialogs.General;
+
+    using Timer = System.Windows.Forms.Timer;
 
     /// <summary>
     /// The database io factory.
     /// </summary>
     public static class DatabaseIOFactory
     {
+        static Timer tmr = new Timer();
+        static FrmSavingDB frmSavingDB = new FrmSavingDB();
+
+        /// <summary>
+        /// Initializes the <see cref="DatabaseIOFactory"/> class.
+        /// </summary>
+        static DatabaseIOFactory()
+        {
+            tmr.Tick += tmr_Tick;
+        }
+
+        private static void StartSaveDialog()
+        {
+            SavingMovieValue = -1;
+            SavingTVDBValue = -1;
+            frmSavingDB.Reset();
+            frmSavingDB.Show();
+            tmr.Start();
+        }
+
+        private static void tmr_Tick(object sender, System.EventArgs e)
+        {
+            frmSavingDB.SetMovieValue(SavingMovieValue);
+            frmSavingDB.SetMovieDBMax(SavingMovieMax);
+            frmSavingDB.SetTVDBValue(SavingTVDBValue);
+            frmSavingDB.SetTVDBMax(SavingTVDBMax);
+
+            if (SavingMovieValue == SavingMovieMax - 1)
+            {
+                frmSavingDB.MovieDBFinished();
+            }
+
+            if (SavingTVDBValue == SavingTVDBMax - 1)
+            {
+                frmSavingDB.TvDBFinished();
+            }
+        }
+
         #region Enums
 
         /// <summary>
@@ -87,6 +128,18 @@ namespace YANFOE.Factories.Internal
         }
 
         #endregion
+
+        public static bool SavingMovieDB;
+
+        public static int SavingMovieValue;
+
+        public static int SavingMovieMax;
+
+        public static bool SavingTVDB;
+
+        public static int SavingTVDBValue;
+
+        public static int SavingTVDBMax;
 
         #region Public Methods
 
@@ -153,6 +206,7 @@ namespace YANFOE.Factories.Internal
                     SaveScanSeriesPick();
                     break;
                 case OutputName.All:
+                    StartSaveDialog();
                     SaveMovieDB();
                     SaveMediaPathDb();
                     SaveMovieSets();
@@ -165,6 +219,8 @@ namespace YANFOE.Factories.Internal
         #endregion
 
         #region Methods
+
+
 
         /// <summary>
         /// Loads the media path db.
@@ -337,7 +393,6 @@ namespace YANFOE.Factories.Internal
 
                 count++;
             }
-
         }
 
         /// <summary>
@@ -345,6 +400,15 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void SaveMovieDB()
         {
+            var bgwSaveMovieDB = new BackgroundWorker();
+            bgwSaveMovieDB.DoWork += bgwSaveMovieDB_DoWork;
+            bgwSaveMovieDB.RunWorkerAsync();
+        }
+
+        private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
+        {
+            SavingMovieDB = true;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -371,8 +435,12 @@ namespace YANFOE.Factories.Internal
                 return;
             }
 
+            SavingMovieMax = MovieDBFactory.MovieDatabase.Count;
+
             do
             {
+                SavingMovieValue = count;
+
                 MovieModel movieModel = MovieDBFactory.MovieDatabase[count];
 
                 if (!bgw1.IsBusy)
@@ -418,8 +486,15 @@ namespace YANFOE.Factories.Internal
                 }
             }
             while (count < max);
+
+            SavingMovieDB = false;
         }
 
+        /// <summary>
+        /// Handles the DoWork event of the bgw control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private static void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
@@ -505,7 +580,18 @@ namespace YANFOE.Factories.Internal
         {
             var bgwSaveTvDB = new BackgroundWorker();
             bgwSaveTvDB.DoWork += bgwSaveTvDB_DoWork;
+            bgwSaveTvDB.RunWorkerCompleted += bgwSaveTvDB_RunWorkerCompleted;
             bgwSaveTvDB.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the RunWorkerCompleted event of the bgwSaveTvDB control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private static void bgwSaveTvDB_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            frmSavingDB.TvDBFinished();
         }
 
         /// <summary>
@@ -515,6 +601,9 @@ namespace YANFOE.Factories.Internal
         /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingTVDBMax = TvDBFactory.TvDatabase.Count;
+            SavingTVDBValue = 0;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -545,6 +634,8 @@ namespace YANFOE.Factories.Internal
                     var smallPoster = new Bitmap(series.Value.SmallPoster);
                     smallPoster.Save(path + title + ".poster.jpg");
                 }
+
+                SavingTVDBValue++;
             }
         }
 

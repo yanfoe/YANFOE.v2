@@ -218,6 +218,12 @@
     <Compile Include="UI\Dialogs\General\FrmProcessingMoviesStatus.Designer.cs">
       <DependentUpon>FrmProcessingMoviesStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\General\FrmSavingDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmSavingDB.Designer.cs">
+      <DependentUpon>FrmSavingDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmSavingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmProcessingMoviesStatus.resx">
       <DependentUpon>FrmProcessingMoviesStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\FrmSavingDB.resx">
+      <DependentUpon>FrmSavingDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmSavingDialog.resx">
       <DependentUpon>FrmSavingDialog.cs</DependentUpon>
