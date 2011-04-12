@@ -194,7 +194,15 @@ namespace YANFOE.Tools.ThirdParty
         private static DateTime ConvertDateTime(uint high, uint low)
         {
             long fileTime = CombineHighLowInts(high, low);
-            return DateTime.FromFileTimeUtc(fileTime);
+            if (fileTime > DateTime.Now.Ticks || fileTime < DateTime.MinValue.Ticks)
+            {
+                return DateTime.UtcNow;
+            }
+            else
+            {
+                return DateTime.FromFileTimeUtc(fileTime);
+            }
+            
         }
 
         #endregion
@@ -716,8 +724,16 @@ namespace YANFOE.Tools.ThirdParty
                     // m_hndFindFile = null;
                     if (this.m_currentContext.SubdirectoriesToProcess == null)
                     {
-                        string[] subDirectories = Directory.GetDirectories(this.m_path);
-                        this.m_currentContext.SubdirectoriesToProcess = new Stack<string>(subDirectories);
+                        try
+                        {
+                            string[] subDirectories = Directory.GetDirectories(this.m_path);
+                            this.m_currentContext.SubdirectoriesToProcess = new Stack<string>(subDirectories);
+                        }
+                        catch (UnauthorizedAccessException e)
+                        {
+                            string[] subDirectories = new string[0];
+                            this.m_currentContext.SubdirectoriesToProcess = new Stack<string>(subDirectories);
+                        }
                     }
 
                     if (this.m_currentContext.SubdirectoriesToProcess.Count > 0)
