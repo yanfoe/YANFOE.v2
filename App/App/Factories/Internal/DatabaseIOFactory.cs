@@ -59,6 +59,7 @@ namespace YANFOE.Factories.Internal
 
         private static void StartSaveDialog()
         {
+            frmSavingDB = new FrmSavingDB();
             SavingMovieValue = -1;
             SavingTVDBValue = -1;
             frmSavingDB.Reset();
@@ -78,7 +79,7 @@ namespace YANFOE.Factories.Internal
                 frmSavingDB.MovieDBFinished();
             }
 
-            if (SavingTVDBValue == SavingTVDBMax - 1)
+            if (SavingTVDBValue == SavingTVDBMax)
             {
                 frmSavingDB.TvDBFinished();
             }
@@ -219,8 +220,6 @@ namespace YANFOE.Factories.Internal
         #endregion
 
         #region Methods
-
-
 
         /// <summary>
         /// Loads the media path db.
