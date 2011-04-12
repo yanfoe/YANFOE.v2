@@ -312,6 +312,18 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void SaveMediaPathDb()
         {
+            var bgwSaveMediaPathDb = new BackgroundWorker();
+            bgwSaveMediaPathDb.DoWork += bgwSaveMediaPathDb_DoWork;
+            bgwSaveMediaPathDb.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the bgwSaveMediaPathDb control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void bgwSaveMediaPathDb_DoWork(object sender, DoWorkEventArgs e)
+        {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -325,6 +337,7 @@ namespace YANFOE.Factories.Internal
 
                 count++;
             }
+
         }
 
         /// <summary>
@@ -335,8 +348,6 @@ namespace YANFOE.Factories.Internal
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
-
-            long start = DateTime.Now.Ticks;
 
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
@@ -407,10 +418,6 @@ namespace YANFOE.Factories.Internal
                 }
             }
             while (count < max);
-
-            long end = DateTime.Now.Ticks;
-
-            long executionTime = end - start;
         }
 
         private static void bgw_DoWork(object sender, DoWorkEventArgs e)
@@ -442,6 +449,18 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void SaveMovieSets()
         {
+            var bgwSaveMovieSets = new BackgroundWorker();
+            bgwSaveMovieSets.DoWork += bgwSaveMovieSets_DoWork;
+            bgwSaveMovieSets.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the bgwSaveMovieSets control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void bgwSaveMovieSets_DoWork(object sender, DoWorkEventArgs e)
+        {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -458,6 +477,18 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void SaveScanSeriesPick()
         {
+            var bgwSaveScanSeriesPick = new BackgroundWorker();
+            bgwSaveScanSeriesPick.DoWork += bgwSaveScanSeriesPick_DoWork;
+            bgwSaveScanSeriesPick.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the bgwSaveScanSeriesPick control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void bgwSaveScanSeriesPick_DoWork(object sender, DoWorkEventArgs e)
+        {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -471,6 +502,18 @@ namespace YANFOE.Factories.Internal
         /// Saves the tv DB.
         /// </summary>
         private static void SaveTvDB()
+        {
+            var bgwSaveTvDB = new BackgroundWorker();
+            bgwSaveTvDB.DoWork += bgwSaveTvDB_DoWork;
+            bgwSaveTvDB.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the bgwSaveTvDB control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
