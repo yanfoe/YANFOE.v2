@@ -881,10 +881,8 @@
     <Content Include="Movie\ScraperGroups\English.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\logo.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
-    <None Include="Resources\yanfoelogo.png" />
     <None Include="Resources\yanfoe.jpg" />
     <Content Include="y.ico" />
     <Content Include="y2.ico" />

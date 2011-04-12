@@ -28,7 +28,7 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// The current version of YANFOE.
         /// </summary>
-        public const string ApplicationVersion = "2.0 Alpha 1";
+        public const string ApplicationVersion = "2.0 Alpha 2";
 
         /// <summary>
         /// The current version of YANFOE.

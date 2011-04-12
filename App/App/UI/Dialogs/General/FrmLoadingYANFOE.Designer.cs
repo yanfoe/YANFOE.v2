@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblYANFOETitle = new DevExpress.XtraEditors.LabelControl();
             this.lblProgress1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.progress = new DevExpress.XtraEditors.ProgressBarControl();
@@ -37,14 +37,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.progress.Properties)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelControl1
+            // lblYANFOETitle
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Location = new System.Drawing.Point(41, 375);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(145, 18);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "YANFOE 2.0 - Alpha 2";
+            this.lblYANFOETitle.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYANFOETitle.Location = new System.Drawing.Point(41, 375);
+            this.lblYANFOETitle.Name = "lblYANFOETitle";
+            this.lblYANFOETitle.Size = new System.Drawing.Size(145, 18);
+            this.lblYANFOETitle.TabIndex = 0;
+            this.lblYANFOETitle.Text = "YANFOE 2.0 - Alpha 2";
             // 
             // lblProgress1
             // 
@@ -99,7 +99,7 @@
             this.Controls.Add(this.progress);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.lblProgress1);
-            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.lblYANFOETitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmLoadingYANFOE";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -112,7 +112,7 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblYANFOETitle;
         private DevExpress.XtraEditors.LabelControl lblProgress1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.ProgressBarControl progress;
