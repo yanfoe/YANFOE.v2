@@ -17,6 +17,8 @@ namespace YANFOE
     using System;
     using System.Windows.Forms;
 
+    using YANFOE.UI.Dialogs.General;
+
     static class Program
     {
         /// <summary>
@@ -35,7 +37,7 @@ namespace YANFOE
             DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true;
 #pragma warning restore 612,618
 
-            Application.Run(new FrmMain());
+            Application.Run(new FrmLoadingYANFOE());
         }
     }
 }

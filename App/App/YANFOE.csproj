@@ -208,6 +208,12 @@
     <Compile Include="UI\Dialogs\General\FrmEnterAValue.Designer.cs">
       <DependentUpon>FrmEnterAValue.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.Designer.cs">
+      <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmMoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -565,6 +571,9 @@
     <EmbeddedResource Include="UI\Dialogs\General\FrmEnterAValue.resx">
       <DependentUpon>FrmEnterAValue.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\FrmLoadingYANFOE.resx">
+      <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmMoveDialog.resx">
       <DependentUpon>FrmMoveDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -872,8 +881,11 @@
     <Content Include="Movie\ScraperGroups\English.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\logo.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
+    <None Include="Resources\yanfoelogo.png" />
+    <None Include="Resources\yanfoe.jpg" />
     <Content Include="y.ico" />
     <Content Include="y2.ico" />
     <None Include="Resources\LoadingGlobe.gif" />

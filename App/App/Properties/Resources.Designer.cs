@@ -781,9 +781,9 @@ namespace YANFOE.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap yqs {
+        public static System.Drawing.Bitmap yanfoe {
             get {
-                object obj = ResourceManager.GetObject("yqs", resourceCulture);
+                object obj = ResourceManager.GetObject("yanfoe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

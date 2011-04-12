@@ -46,7 +46,7 @@ namespace YANFOE
         /// </summary>
         public FrmMain()
         {
-            DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MediaPathDb);
+            //DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MediaPathDb);
 
             this.InitializeComponent();
 
@@ -61,7 +61,7 @@ namespace YANFOE
 
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
 
-            DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.All);
+            //DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.All);
         }
 
         #endregion
