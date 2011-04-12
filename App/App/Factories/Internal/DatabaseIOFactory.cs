@@ -14,10 +14,13 @@
 
 namespace YANFOE.Factories.Internal
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
+    using System.Threading;
+    using System.Windows.Forms;
 
     using Newtonsoft.Json;
 
@@ -333,23 +336,104 @@ namespace YANFOE.Factories.Internal
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
 
-            foreach (MovieModel movieModel in MovieDBFactory.MovieDatabase)
+            long start = DateTime.Now.Ticks;
+
+            var bgw1 = new BackgroundWorker();
+            var bgw2 = new BackgroundWorker();
+            var bgw3 = new BackgroundWorker();
+            var bgw4 = new BackgroundWorker();
+            var bgw5 = new BackgroundWorker();
+            var bgw6 = new BackgroundWorker();
+
+            bgw1.DoWork += bgw_DoWork;
+            bgw2.DoWork += bgw_DoWork;
+            bgw3.DoWork += bgw_DoWork;
+            bgw4.DoWork += bgw_DoWork;
+            bgw5.DoWork += bgw_DoWork;
+            bgw6.DoWork += bgw_DoWork;
+
+            var count = 0;
+            var max = MovieDBFactory.MovieDatabase.Count;
+
+            if (max == 0)
             {
-                string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+                return;
+            }
 
-                string writePath = path + title + ".movie";
-                string json = JsonConvert.SerializeObject(movieModel);
-                Gzip.CompressString(json, writePath + ".gz");
+            do
+            {
+                MovieModel movieModel = MovieDBFactory.MovieDatabase[count];
 
-                if (movieModel.SmallPoster != null)
+                if (!bgw1.IsBusy)
                 {
-                    movieModel.SmallPoster.Save(path + title + ".poster.jpg");
+                    count++;
+                    bgw1.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
                 }
-
-                if (movieModel.SmallFanart != null)
+                else if (!bgw2.IsBusy)
                 {
-                    movieModel.SmallFanart.Save(path + title + ".fanart.jpg");
+                    count++;
+                    bgw2.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
                 }
+                else if (!bgw3.IsBusy)
+                {
+                    count++;
+                    bgw3.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
+                }
+                else if (!bgw4.IsBusy)
+                {
+                    count++;
+                    bgw4.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
+                }
+                else if (!bgw5.IsBusy)
+                {
+                    count++;
+                    bgw5.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
+                }
+                else if (!bgw6.IsBusy)
+                {
+                    count++;
+                    bgw6.RunWorkerAsync(movieModel);
+                    Application.DoEvents();
+                }
+                else
+                {
+                    Application.DoEvents();
+                    Thread.Sleep(50);
+                }
+            }
+            while (count < max);
+
+            long end = DateTime.Now.Ticks;
+
+            long executionTime = end - start;
+        }
+
+        private static void bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+
+            var movieModel = e.Argument as MovieModel;
+
+            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+
+            string writePath = path + title + ".movie";
+            string json = JsonConvert.SerializeObject(movieModel);
+
+            Gzip.CompressString(json, writePath + ".gz");
+
+            if (movieModel.SmallPoster != null)
+            {
+                movieModel.SmallPoster.Save(path + title + ".poster.jpg");
+            }
+
+            if (movieModel.SmallFanart != null)
+            {
+                movieModel.SmallFanart.Save(path + title + ".fanart.jpg");
             }
         }
 

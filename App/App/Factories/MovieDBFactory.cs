@@ -852,16 +852,15 @@ namespace YANFOE.Factories
         {
             bool changed = false;
 
-            foreach (MovieModel movie in MovieDatabase)
+            for (int index = 0; index < MovieDatabase.Count; index++)
             {
+                MovieModel movie = MovieDatabase[index];
                 if (!inGallery.Contains(movie.MovieUniqueId))
                 {
                     if (movie.SmallPoster != null)
                     {
                         var galleryItem = new GalleryItem(movie.SmallPoster, movie.Title, string.Empty)
-                            {
-                               Tag = movie.MovieUniqueId 
-                            };
+                            { Tag = movie.MovieUniqueId };
 
                         if (!galleryGroup.Items.Contains(galleryItem))
                         {
