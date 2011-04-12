@@ -22,6 +22,7 @@ namespace YANFOE.Scrapers.TV
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Xml;
 
     using Ionic.Zip;
@@ -236,13 +237,13 @@ namespace YANFOE.Scrapers.TV
                 switch (e.FileName)
                 {
                     case "en.xml":
-                        output.En = File.ReadAllText(temp + "en.xml");
+                        output.En = File.ReadAllText(temp + "en.xml", Encoding.UTF8);
                         break;
                     case "banners.xml":
-                        output.Banners = File.ReadAllText(temp + "banners.xml");
+                        output.Banners = File.ReadAllText(temp + "banners.xml", Encoding.UTF8);
                         break;
                     case "actors.xml":
-                        output.Actors = File.ReadAllText(temp + "actors.xml");
+                        output.Actors = File.ReadAllText(temp + "actors.xml", Encoding.UTF8);
                         break;
                 }
             }
