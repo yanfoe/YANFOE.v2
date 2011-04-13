@@ -31,18 +31,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem13 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip12 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem14 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem3 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem15 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
@@ -50,11 +55,6 @@
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviesUserControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
@@ -126,7 +126,12 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -164,6 +169,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -203,9 +209,9 @@
             // grdMoviesList
             // 
             this.grdMoviesList.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.RelationName = "Level1";
+            gridLevelNode2.RelationName = "Level1";
             this.grdMoviesList.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.grdMoviesList.Location = new System.Drawing.Point(0, 0);
             this.grdMoviesList.MainView = this.grdViewByTitle;
             this.grdMoviesList.Name = "grdMoviesList";
@@ -234,6 +240,7 @@
             this.grdViewByTitle.OptionsSelection.MultiSelect = true;
             this.grdViewByTitle.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateAllContent;
             this.grdViewByTitle.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GrdViewByTitle_RowCellStyle);
+            this.grdViewByTitle.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grdViewByTitle_PopupMenuShowing);
             this.grdViewByTitle.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.GrdViewByTitle_SelectionChanged);
             this.grdViewByTitle.DoubleClick += new System.EventHandler(this.GrdViewByTitle_DoubleClick);
             // 
@@ -418,13 +425,13 @@
             this.simpleButton4.Location = new System.Drawing.Point(156, 2);
             this.simpleButton4.Name = "simpleButton4";
             this.simpleButton4.Size = new System.Drawing.Size(48, 40);
-            superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem1.Text = "Open Movie";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Clicking this link will open the movie files <fileName>\r\n";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.simpleButton4.SuperTip = superToolTip1;
+            superToolTip8.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem10.Text = "Open Movie";
+            toolTipItem6.LeftIndent = 6;
+            toolTipItem6.Text = "Clicking this link will open the movie files <fileName>\r\n";
+            superToolTip8.Items.Add(toolTipTitleItem10);
+            superToolTip8.Items.Add(toolTipItem6);
+            this.simpleButton4.SuperTip = superToolTip8;
             this.simpleButton4.TabIndex = 11;
             // 
             // simpleButton3
@@ -436,13 +443,13 @@
             this.simpleButton3.Location = new System.Drawing.Point(108, 2);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(48, 40);
-            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem2.Text = "Open Movie";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Clicking this link will open the movie files <fileName>\r\n";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.simpleButton3.SuperTip = superToolTip2;
+            superToolTip9.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem11.Text = "Open Movie";
+            toolTipItem7.LeftIndent = 6;
+            toolTipItem7.Text = "Clicking this link will open the movie files <fileName>\r\n";
+            superToolTip9.Items.Add(toolTipTitleItem11);
+            superToolTip9.Items.Add(toolTipItem7);
+            this.simpleButton3.SuperTip = superToolTip9;
             this.simpleButton3.TabIndex = 10;
             // 
             // panelControl2
@@ -461,16 +468,16 @@
             this.btnNew.Location = new System.Drawing.Point(625, 2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(48, 40);
-            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem3.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem3.Appearance.Options.UseImage = true;
-            toolTipTitleItem3.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem3.Text = "Movie is marked as New";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.btnNew.SuperTip = superToolTip3;
+            superToolTip10.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem12.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem12.Appearance.Options.UseImage = true;
+            toolTipTitleItem12.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem12.Text = "Movie is marked as New";
+            toolTipItem8.LeftIndent = 6;
+            toolTipItem8.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
+            superToolTip10.Items.Add(toolTipTitleItem12);
+            superToolTip10.Items.Add(toolTipItem8);
+            this.btnNew.SuperTip = superToolTip10;
             this.btnNew.TabIndex = 7;
             this.btnNew.Visible = false;
             this.btnNew.DoubleClick += new System.EventHandler(this.BtnNew_DoubleClick);
@@ -483,10 +490,10 @@
             this.btnMarked.Location = new System.Drawing.Point(673, 2);
             this.btnMarked.Name = "btnMarked";
             this.btnMarked.Size = new System.Drawing.Size(48, 40);
-            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem4.Text = "Marked / Unmarked";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.btnMarked.SuperTip = superToolTip4;
+            superToolTip11.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem13.Text = "Marked / Unmarked";
+            superToolTip11.Items.Add(toolTipTitleItem13);
+            this.btnMarked.SuperTip = superToolTip11;
             this.btnMarked.TabIndex = 6;
             this.btnMarked.Tag = "unmarked";
             this.btnMarked.Click += new System.EventHandler(this.BtnMarked_Click);
@@ -500,17 +507,17 @@
             this.btnSave.Name = "btnSave";
             this.barManager1.SetPopupContextMenu(this.btnSave, this.popupSave);
             this.btnSave.Size = new System.Drawing.Size(48, 40);
-            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem5.Text = "Save";
-            toolTipItem4.LeftIndent = 6;
-            toolTipItem4.Text = "Will Save Both NFO and Images To Disk";
-            toolTipTitleItem6.LeftIndent = 6;
-            toolTipTitleItem6.Text = "Right click for more options...\r\n";
-            superToolTip5.Items.Add(toolTipTitleItem5);
-            superToolTip5.Items.Add(toolTipItem4);
-            superToolTip5.Items.Add(toolTipSeparatorItem1);
-            superToolTip5.Items.Add(toolTipTitleItem6);
-            this.btnSave.SuperTip = superToolTip5;
+            superToolTip12.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem14.Text = "Save";
+            toolTipItem9.LeftIndent = 6;
+            toolTipItem9.Text = "Will Save Both NFO and Images To Disk";
+            toolTipTitleItem15.LeftIndent = 6;
+            toolTipTitleItem15.Text = "Right click for more options...\r\n";
+            superToolTip12.Items.Add(toolTipTitleItem14);
+            superToolTip12.Items.Add(toolTipItem9);
+            superToolTip12.Items.Add(toolTipSeparatorItem3);
+            superToolTip12.Items.Add(toolTipTitleItem15);
+            this.btnSave.SuperTip = superToolTip12;
             this.btnSave.TabIndex = 4;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -523,17 +530,17 @@
             this.btnLoadFromWeb.Name = "btnLoadFromWeb";
             this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
             this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 40);
-            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem7.Text = "Load From Web";
-            toolTipItem5.LeftIndent = 6;
-            toolTipItem5.Text = "Will download details using the scraper set for this movie.";
-            toolTipTitleItem8.LeftIndent = 6;
-            toolTipTitleItem8.Text = "Right click for more options...\r\n";
-            superToolTip6.Items.Add(toolTipTitleItem7);
-            superToolTip6.Items.Add(toolTipItem5);
-            superToolTip6.Items.Add(toolTipSeparatorItem2);
-            superToolTip6.Items.Add(toolTipTitleItem8);
-            this.btnLoadFromWeb.SuperTip = superToolTip6;
+            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem5.Text = "Load From Web";
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "Will download details using the scraper set for this movie.";
+            toolTipTitleItem6.LeftIndent = 6;
+            toolTipTitleItem6.Text = "Right click for more options...\r\n";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            superToolTip5.Items.Add(toolTipItem4);
+            superToolTip5.Items.Add(toolTipSeparatorItem1);
+            superToolTip5.Items.Add(toolTipTitleItem6);
+            this.btnLoadFromWeb.SuperTip = superToolTip5;
             this.btnLoadFromWeb.TabIndex = 0;
             this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
             // 
@@ -545,10 +552,10 @@
             this.btnLock.Location = new System.Drawing.Point(721, 2);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(48, 40);
-            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem9.Text = "Locked / Unlock";
-            superToolTip7.Items.Add(toolTipTitleItem9);
-            this.btnLock.SuperTip = superToolTip7;
+            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem7.Text = "Locked / Unlock";
+            superToolTip6.Items.Add(toolTipTitleItem7);
+            this.btnLock.SuperTip = superToolTip6;
             this.btnLock.TabIndex = 8;
             this.btnLock.Tag = "unlocked";
             this.btnLock.Click += new System.EventHandler(this.BtnLock_Click);
@@ -764,8 +771,12 @@
             this.btnSavePoster,
             this.btnSaveFanart,
             this.barButtonItem7,
-            this.barButtonItem8});
-            this.barManager1.MaxItemId = 11;
+            this.barButtonItem8,
+            this.barButtonItem3,
+            this.barButtonItem4,
+            this.barCheckItem1,
+            this.barCheckItem2});
+            this.barManager1.MaxItemId = 15;
             // 
             // popupSave
             // 
@@ -893,11 +904,43 @@
             this.barButtonItem2.Id = 3;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Lock";
+            this.barButtonItem3.Id = 11;
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Unlock";
+            this.barButtonItem4.Id = 12;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "Lock";
+            this.barCheckItem1.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.barCheckItem1.Id = 13;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // barCheckItem2
+            // 
+            this.barCheckItem2.Caption = "Mark";
+            this.barCheckItem2.Glyph = global::YANFOE.Properties.Resources.star_empty32;
+            this.barCheckItem2.Id = 14;
+            this.barCheckItem2.Name = "barCheckItem2";
+            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
             this.imageCollection1.Images.SetKeyName(0, "lock.png");
             this.imageCollection1.Images.SetKeyName(1, "star_full.png");
+            // 
+            // popupMovieList
+            // 
+            this.popupMovieList.Manager = this.barManager1;
+            this.popupMovieList.Name = "popupMovieList";
+            this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
             // 
             // MoviesUserControl
             // 
@@ -947,6 +990,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1024,6 +1068,11 @@
         private DevExpress.XtraLayout.SplitterItem splitterItem2;
         private MovieFileInfoUserControl movieFileInfoUserControl1;
         private MovieTrailerUserControl movieTrailerUserControl1;
+        private DevExpress.XtraBars.PopupMenu popupMovieList;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem2;
 
     }
 }

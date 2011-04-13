@@ -417,6 +417,7 @@
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Popups\MenuListPopup.cs" />
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

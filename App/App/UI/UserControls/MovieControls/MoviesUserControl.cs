@@ -15,12 +15,15 @@
 namespace YANFOE.UI.UserControls.MovieControls
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Drawing;
     using System.Windows.Forms;
 
     using BitFactory.Logging;
 
     using DevExpress.Utils;
+    using DevExpress.XtraBars;
     using DevExpress.XtraBars.Ribbon;
     using DevExpress.XtraEditors;
     using DevExpress.XtraGrid.Views.Grid;
@@ -434,6 +437,39 @@ namespace YANFOE.UI.UserControls.MovieControls
         private void BtnSaveNfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             this.StartSaveMovie(MovieIOType.Nfo);
+        }
+
+        /// <summary>
+        /// Handles the PopupMenuShowing event of the grdViewByTitle control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs"/> instance containing the event data.</param>
+        private void grdViewByTitle_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            var view = sender as GridView;
+
+            e.Allow = false;
+
+            this.popupMovieList.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
+        }
+
+        /// <summary>
+        /// Handles the BeforePopup event of the popupMovieList control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
+        private void popupMovieList_BeforePopup(object sender, CancelEventArgs e)
+        {
+            var rows = grdViewByTitle.GetSelectedRows();
+            var movieList = new List<MovieModel>();
+            
+            foreach (var row in rows)
+            {
+                movieList.Add(grdViewByTitle.GetRow(row) as MovieModel);
+            }
+
+
+            Popups.MenuListPopup.Generate(this.barManager1, popupMovieList, movieList);
         }
     }
 }
