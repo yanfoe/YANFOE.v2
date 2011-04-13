@@ -124,10 +124,10 @@
             // 
             // grdActors
             // 
-            this.grdActors.Location = new System.Drawing.Point(554, 101);
+            this.grdActors.Location = new System.Drawing.Point(552, 101);
             this.grdActors.MainView = this.gridViewActors;
             this.grdActors.Name = "grdActors";
-            this.grdActors.Size = new System.Drawing.Size(242, 355);
+            this.grdActors.Size = new System.Drawing.Size(244, 355);
             this.grdActors.TabIndex = 15;
             this.grdActors.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewActors});
@@ -162,9 +162,9 @@
             // txtEpisodeNumber
             // 
             this.txtEpisodeNumber.Enabled = false;
-            this.txtEpisodeNumber.Location = new System.Drawing.Point(617, 54);
+            this.txtEpisodeNumber.Location = new System.Drawing.Point(615, 54);
             this.txtEpisodeNumber.Name = "txtEpisodeNumber";
-            this.txtEpisodeNumber.Size = new System.Drawing.Size(182, 20);
+            this.txtEpisodeNumber.Size = new System.Drawing.Size(184, 20);
             this.txtEpisodeNumber.StyleController = this.layoutControl1;
             this.txtEpisodeNumber.TabIndex = 12;
             // 
@@ -180,21 +180,21 @@
             // 
             // txtLanguage
             // 
-            this.txtLanguage.Location = new System.Drawing.Point(617, 487);
+            this.txtLanguage.Location = new System.Drawing.Point(615, 487);
             this.txtLanguage.Name = "txtLanguage";
             this.txtLanguage.Properties.NullValuePrompt = "No Language";
             this.txtLanguage.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtLanguage.Size = new System.Drawing.Size(182, 20);
+            this.txtLanguage.Size = new System.Drawing.Size(184, 20);
             this.txtLanguage.StyleController = this.layoutControl1;
             this.txtLanguage.TabIndex = 8;
             // 
             // txtWriter
             // 
-            this.txtWriter.Location = new System.Drawing.Point(620, 460);
+            this.txtWriter.Location = new System.Drawing.Point(618, 460);
             this.txtWriter.Name = "txtWriter";
             this.txtWriter.Properties.NullValuePrompt = "No Writers";
             this.txtWriter.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtWriter.Size = new System.Drawing.Size(176, 20);
+            this.txtWriter.Size = new System.Drawing.Size(178, 20);
             this.txtWriter.StyleController = this.layoutControl1;
             this.txtWriter.TabIndex = 7;
             // 
@@ -323,9 +323,9 @@
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem5.Control = this.txtLanguage;
             this.layoutControlItem5.CustomizationFormText = "Language";
-            this.layoutControlItem5.Location = new System.Drawing.Point(549, 485);
+            this.layoutControlItem5.Location = new System.Drawing.Point(547, 485);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(252, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(254, 24);
             this.layoutControlItem5.Text = "Language";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(62, 13);
             // 
@@ -347,9 +347,9 @@
             this.layoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem9.Control = this.txtEpisodeNumber;
             this.layoutControlItem9.CustomizationFormText = "Episode #";
-            this.layoutControlItem9.Location = new System.Drawing.Point(549, 52);
+            this.layoutControlItem9.Location = new System.Drawing.Point(547, 52);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(252, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(254, 24);
             this.layoutControlItem9.Text = "Episode #";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(62, 13);
             // 
@@ -371,7 +371,7 @@
             this.splitterItem1.CustomizationFormText = "splitterItem1";
             this.splitterItem1.Location = new System.Drawing.Point(542, 52);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(7, 457);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 457);
             // 
             // layoutControlItem10
             // 
@@ -403,10 +403,10 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem11,
             this.layoutControlItem4});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(549, 76);
+            this.layoutControlGroup2.Location = new System.Drawing.Point(547, 76);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(252, 409);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(254, 409);
             this.layoutControlGroup2.Text = "Guest Stars";
             // 
             // layoutControlItem11
@@ -415,7 +415,7 @@
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(246, 359);
+            this.layoutControlItem11.Size = new System.Drawing.Size(248, 359);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -429,7 +429,7 @@
             this.layoutControlItem4.CustomizationFormText = "Writer";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 359);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(246, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(248, 24);
             this.layoutControlItem4.Text = "Writer";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(62, 13);
             // 
