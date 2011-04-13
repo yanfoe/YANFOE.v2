@@ -23,6 +23,7 @@ namespace YANFOE.UI.UserControls.TvControls
     using YANFOE.Factories;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Show;
+    using YANFOE.Settings;
 
     public partial class TvUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -348,6 +349,11 @@ namespace YANFOE.UI.UserControls.TvControls
                 gridViewEpisodes.RefreshData();
                 Factories.InOut.OutFactory.RefreshGrids = false;
             }
+        }
+
+        private void grdEpisodes_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            clmEpisodePath.Visible = Get.Ui.EnableTVPathColumn;
         }
     }
 }

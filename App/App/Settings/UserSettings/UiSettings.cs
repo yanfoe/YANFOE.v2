@@ -28,11 +28,17 @@ namespace YANFOE.Settings.UserSettings
         public UiSettings()
         {
             this.Skin = "Foggy";
+            this.EnableTVPathColumn = true;
         }
 
         /// <summary>
         /// Gets or sets Skin.
         /// </summary>
         public string Skin { get; set; }
+
+        /// <summary>
+        /// Gets or sets EnableTVPathColumn.
+        /// </summary>
+        public bool EnableTVPathColumn { get; set; }
     }
 }

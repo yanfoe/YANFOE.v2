@@ -30,13 +30,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
             this.tabTitle = new DevExpress.XtraTab.XtraTabPage();
             this.grdTvTitleList = new DevExpress.XtraGrid.GridControl();
             this.gridViewTvTitleList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmSeriesName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.tabBanner = new DevExpress.XtraTab.XtraTabPage();
             this.galleryBanners = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
@@ -94,7 +95,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -342,6 +343,7 @@
             this.grdEpisodes.ToolTipController = this.toolTipController1;
             this.grdEpisodes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewEpisodes});
+            this.grdEpisodes.Paint += new System.Windows.Forms.PaintEventHandler(this.grdEpisodes_Paint);
             // 
             // gridViewEpisodes
             // 
@@ -398,6 +400,7 @@
             this.clmEpisodePath.Caption = "Path";
             this.clmEpisodePath.FieldName = "FilePath.FileNameAndPath";
             this.clmEpisodePath.Name = "clmEpisodePath";
+            this.clmEpisodePath.OptionsColumn.AllowEdit = false;
             this.clmEpisodePath.Visible = true;
             this.clmEpisodePath.VisibleIndex = 3;
             // 

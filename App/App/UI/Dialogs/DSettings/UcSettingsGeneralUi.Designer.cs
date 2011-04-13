@@ -33,9 +33,11 @@
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.cmbSkinList = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.chkEnableTVPathColumn = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSkinList.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkEnableTVPathColumn.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -63,16 +65,27 @@
             this.cmbSkinList.SuperTip = superToolTip1;
             this.cmbSkinList.TabIndex = 0;
             // 
+            // chkEnableTVPathColumn
+            // 
+            this.chkEnableTVPathColumn.Location = new System.Drawing.Point(8, 90);
+            this.chkEnableTVPathColumn.Name = "chkEnableTVPathColumn";
+            this.chkEnableTVPathColumn.Properties.Caption = "Enable TV Episode Path && File Column";
+            this.chkEnableTVPathColumn.Size = new System.Drawing.Size(740, 19);
+            this.chkEnableTVPathColumn.TabIndex = 5;
+            this.chkEnableTVPathColumn.CheckedChanged += new System.EventHandler(this.chkEnableTVPathColumn_CheckedChanged);
+            // 
             // UcSettingsGeneralUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkEnableTVPathColumn);
             this.Controls.Add(this.groupControl1);
             this.Name = "UcSettingsGeneralUi";
             this.Size = new System.Drawing.Size(751, 570);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbSkinList.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkEnableTVPathColumn.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -81,6 +94,7 @@
 
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.ComboBoxEdit cmbSkinList;
+        private DevExpress.XtraEditors.CheckEdit chkEnableTVPathColumn;
 
     }
 }

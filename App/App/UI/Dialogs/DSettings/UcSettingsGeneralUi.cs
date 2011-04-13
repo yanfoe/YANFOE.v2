@@ -16,6 +16,8 @@ namespace YANFOE.UI.Dialogs.DSettings
 {
     using DevExpress.XtraEditors;
 
+    using YANFOE.Settings;
+
     /// <summary>
     /// UcSettingsGeneralUi backing class
     /// </summary>
@@ -29,6 +31,7 @@ namespace YANFOE.UI.Dialogs.DSettings
             InitializeComponent();
 
             this.PopulateSkinList();
+            this.chkEnableTVPathColumn.Checked = Get.Ui.EnableTVPathColumn;
         }
 
         /// <summary>
@@ -37,6 +40,11 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void PopulateSkinList()
         {
             Tools.UI.Skin.PopulateSkinListCombo(cmbSkinList);
+        }
+
+        private void chkEnableTVPathColumn_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Get.Ui.EnableTVPathColumn = chkEnableTVPathColumn.Checked;
         }
     }
 }
