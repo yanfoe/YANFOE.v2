@@ -960,7 +960,7 @@ namespace YANFOE.UI.UserControls.CommonControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void ImageMain_ImageChanged(object sender, EventArgs e)
         {
-            if (this.imageMain != null)
+            if (this.imageMain != null && this.imageMain.Image != null)
                 this.lblPicTitle.Text = string.Format("{0}x{1}", this.imageMain.Image.Width, this.imageMain.Image.Height);
         }
 
