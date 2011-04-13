@@ -235,7 +235,8 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void LoadMediaPathDb()
         {
-            MediaPathDBFactory.MediaPathDB = new BindingList<MediaPathModel>();
+            if (MediaPathDBFactory.MediaPathDB == null)
+                MediaPathDBFactory.MediaPathDB = new BindingList<MediaPathModel>();
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);

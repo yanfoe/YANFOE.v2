@@ -5,11 +5,13 @@
 
     using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
 
     public partial class FrmLoadingYANFOE : DevExpress.XtraEditors.XtraForm
     {
         private BackgroundWorker bgw = new BackgroundWorker();
 
+        private Form frmMain;
         /// <summary>
         /// Initializes a new instance of the <see cref="FrmLoadingYANFOE"/> class.
         /// </summary>
@@ -22,10 +24,17 @@
 
             lblVersion.Text = Settings.ConstSettings.Application.ApplicationBuild;
 
+            MediaPathDBFactory.MediaPathDB = new BindingList<MediaPathModel>();
+
+            // The MediaPathDB must be created prior to creating the main form.
+            // However, the main form must be created prior to loading the rest of the databases.
+            frmMain = new FrmMain();
+            
             this.bgw.DoWork += this.bgw_DoWork;
             this.bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
             this.bgw.ProgressChanged += this.bgw_ProgressChanged;
             this.bgw.WorkerReportsProgress = true;
+
             this.bgw.RunWorkerAsync();
         }
 
@@ -36,11 +45,11 @@
         /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.bgw.ReportProgress(17, "Loading Movie Database");
-            DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MovieDb);
-
-            this.bgw.ReportProgress(34, "Loading Media Path Database");
+            this.bgw.ReportProgress(17, "Loading Media Path Database");
             DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MediaPathDb);
+
+            this.bgw.ReportProgress(34, "Loading Movie Database");
+            DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MovieDb);
 
             this.bgw.ReportProgress(51, "Loading Media Sets Database");
             DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MovieSets);
@@ -78,7 +87,6 @@
         /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
         private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var frmMain = new FrmMain();
             frmMain.Show();
             this.Hide();
         }
