@@ -74,7 +74,7 @@ namespace YANFOE.Tools.Compression
             try
             {
                 using (var sourceStream = new MemoryStream(
-                    Encoding.Default.GetBytes(value)))
+                    Encoding.UTF8.GetBytes(value)))
                 {
                     using (var destinationStream = new FileStream(destinationFileName, FileMode.Create))
                     {
@@ -142,22 +142,24 @@ namespace YANFOE.Tools.Compression
                         gzipDecompressed.Close();
                         fileStreamDest.Close();
 
-                        f = File.ReadAllText(unpackedFilePath);
+                        f = File.ReadAllText(unpackedFilePath, Encoding.UTF8);
 
                         if (f.ToLower(CultureInfo.CurrentCulture).Contains("windows-1251"))
                         {
                             f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("windows-1251"));
                         }
-
-                        if (f.ToLower(CultureInfo.CurrentCulture).Contains("iso-8859-1"))
+                        else if (f.ToLower(CultureInfo.CurrentCulture).Contains("iso-8859-1"))
                         {
                             f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("ISO-8859-1"));
                         }
-
-                        if (f.ToLower(CultureInfo.CurrentCulture).Contains("filmup") ||
+                        else if (f.ToLower(CultureInfo.CurrentCulture).Contains("filmup") ||
                             f.ToLower(CultureInfo.CurrentCulture).Contains("filmdelta"))
                         {
                             f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("ISO-8859-1"));
+                        }
+                        else
+                        {
+                            f = File.ReadAllText(unpackedFilePath, Encoding.UTF8);
                         }
                     }
                 }
