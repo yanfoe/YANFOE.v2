@@ -16,6 +16,7 @@ namespace YANFOE
 {
     using System;
     using System.ComponentModel;
+    using System.Windows.Forms;
 
     using DevExpress.LookAndFeel;
     using DevExpress.Skins;
@@ -27,7 +28,6 @@ namespace YANFOE
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Properties;
-    using YANFOE.Settings.ConstSettings;
     using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.DSettings;
     using YANFOE.UI.Dialogs.Movies;
@@ -51,8 +51,9 @@ namespace YANFOE
             this.InitializeComponent();
 
             this.Text = string.Format(
-                "YANFOE 2 - Alpha 2", 
-                Application.ApplicationBuild);
+                "{0} {1}", 
+                Settings.ConstSettings.Application.ApplicationName,
+                Settings.ConstSettings.Application.ApplicationVersion);
 
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SkinName = Skin.SetCurrentSkin();
@@ -96,23 +97,6 @@ namespace YANFOE
         private void FrmMain_ListChanged(object sender, ListChangedEventArgs e)
         {
             this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
-        }
-
-        /// <summary>
-        /// Handles the Load event of the FrmMain control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            string r = Downloader.ProcessDownload(
-                "http://www.yanfoe.com/YNoCache-revision.txt", DownloadType.Html, Section.Movies);
-
-            if (r != Application.ApplicationBuild)
-            {
-                XtraMessageBox.Show("This Alpha Has Expired. Please Update.");
-                System.Windows.Forms.Application.Exit();
-            }
         }
 
         /// <summary>
@@ -300,5 +284,10 @@ namespace YANFOE
         }
 
         #endregion
+
+        private void FrmMain_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
