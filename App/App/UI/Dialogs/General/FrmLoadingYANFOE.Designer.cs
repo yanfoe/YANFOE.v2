@@ -34,6 +34,7 @@
             this.progress = new DevExpress.XtraEditors.ProgressBarControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.lblVersion = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.progress.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,6 +88,14 @@
             this.labelControl4.TabIndex = 5;
             this.labelControl4.Text = "The YANFOE Project";
             // 
+            // lblVersion
+            // 
+            this.lblVersion.Location = new System.Drawing.Point(41, 407);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(147, 13);
+            this.lblVersion.TabIndex = 6;
+            this.lblVersion.Text = "The Media Meta Data Manager";
+            // 
             // FrmLoadingYANFOE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +103,7 @@
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
             this.BackgroundImageStore = global::YANFOE.Properties.Resources.yanfoe;
             this.ClientSize = new System.Drawing.Size(501, 501);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.progress);
@@ -118,6 +128,7 @@
         private DevExpress.XtraEditors.ProgressBarControl progress;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl lblVersion;
 
 
     }

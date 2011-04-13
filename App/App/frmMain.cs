@@ -46,8 +46,6 @@ namespace YANFOE
         /// </summary>
         public FrmMain()
         {
-            //DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.MediaPathDb);
-
             this.InitializeComponent();
 
             this.Text = string.Format(
@@ -55,14 +53,15 @@ namespace YANFOE
                 Settings.ConstSettings.Application.ApplicationName,
                 Settings.ConstSettings.Application.ApplicationVersion);
 
+            txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
+            txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
+
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SkinName = Skin.SetCurrentSkin();
 
             Settings.Get.InOutCollection.SetCurrentSettings(NFOType.YAMJ);
 
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
-
-            //DatabaseIOFactory.Load(DatabaseIOFactory.OutputName.All);
         }
 
         #endregion

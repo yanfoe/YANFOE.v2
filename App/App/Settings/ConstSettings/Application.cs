@@ -33,7 +33,7 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// The current version of YANFOE.
         /// </summary>
-        public const string ApplicationBuild = "42";
+        public const string ApplicationBuild = "110412";
 
         /// <summary>
         /// Type (AKA Donor)

@@ -82,8 +82,8 @@ namespace YANFOE
             this.hyperLinkEdit2 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.hyperLinkEdit1 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
-            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
+            this.txtBuild = new DevExpress.XtraEditors.TextEdit();
+            this.txtVersion = new DevExpress.XtraEditors.TextEdit();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -136,8 +136,8 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBuild.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVersion.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -494,8 +494,8 @@ namespace YANFOE
             this.layoutControl1.Controls.Add(this.hyperLinkEdit2);
             this.layoutControl1.Controls.Add(this.hyperLinkEdit1);
             this.layoutControl1.Controls.Add(this.memoEdit1);
-            this.layoutControl1.Controls.Add(this.textEdit4);
-            this.layoutControl1.Controls.Add(this.textEdit3);
+            this.layoutControl1.Controls.Add(this.txtBuild);
+            this.layoutControl1.Controls.Add(this.txtVersion);
             this.layoutControl1.Controls.Add(this.textEdit2);
             this.layoutControl1.Controls.Add(this.textEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -580,26 +580,26 @@ namespace YANFOE
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 8;
             // 
-            // textEdit4
+            // txtBuild
             // 
-            this.textEdit4.Location = new System.Drawing.Point(117, 68);
-            this.textEdit4.MenuManager = this.barManager1;
-            this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Properties.ReadOnly = true;
-            this.textEdit4.Size = new System.Drawing.Size(845, 20);
-            this.textEdit4.StyleController = this.layoutControl1;
-            this.textEdit4.TabIndex = 7;
+            this.txtBuild.Location = new System.Drawing.Point(117, 68);
+            this.txtBuild.MenuManager = this.barManager1;
+            this.txtBuild.Name = "txtBuild";
+            this.txtBuild.Properties.ReadOnly = true;
+            this.txtBuild.Size = new System.Drawing.Size(845, 20);
+            this.txtBuild.StyleController = this.layoutControl1;
+            this.txtBuild.TabIndex = 7;
             // 
-            // textEdit3
+            // txtVersion
             // 
-            this.textEdit3.EditValue = "Alpha 2";
-            this.textEdit3.Location = new System.Drawing.Point(117, 44);
-            this.textEdit3.MenuManager = this.barManager1;
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Properties.ReadOnly = true;
-            this.textEdit3.Size = new System.Drawing.Size(845, 20);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 6;
+            this.txtVersion.EditValue = "Alpha 2";
+            this.txtVersion.Location = new System.Drawing.Point(117, 44);
+            this.txtVersion.MenuManager = this.barManager1;
+            this.txtVersion.Name = "txtVersion";
+            this.txtVersion.Properties.ReadOnly = true;
+            this.txtVersion.Size = new System.Drawing.Size(845, 20);
+            this.txtVersion.StyleController = this.layoutControl1;
+            this.txtVersion.TabIndex = 6;
             // 
             // textEdit2
             // 
@@ -702,7 +702,7 @@ namespace YANFOE
             // 
             this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem3.Control = this.textEdit3;
+            this.layoutControlItem3.Control = this.txtVersion;
             this.layoutControlItem3.CustomizationFormText = "Current Version";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -714,7 +714,7 @@ namespace YANFOE
             // 
             this.layoutControlItem4.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem4.Control = this.textEdit4;
+            this.layoutControlItem4.Control = this.txtBuild;
             this.layoutControlItem4.CustomizationFormText = "Build";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -1026,8 +1026,8 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBuild.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVersion.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -1115,8 +1115,8 @@ namespace YANFOE
         private MediaManagerUc mediaManagerUc1;
         private DevExpress.XtraBars.BarButtonItem mnuEditSettings;
         private DevExpress.XtraEditors.MemoEdit memoEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
+        private DevExpress.XtraEditors.TextEdit txtBuild;
+        private DevExpress.XtraEditors.TextEdit txtVersion;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;

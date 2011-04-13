@@ -20,6 +20,8 @@
             lblYANFOETitle.Text = Settings.ConstSettings.Application.ApplicationName + " " +
                                   Settings.ConstSettings.Application.ApplicationVersion;
 
+            lblVersion.Text = Settings.ConstSettings.Application.ApplicationBuild;
+
             this.bgw.DoWork += this.bgw_DoWork;
             this.bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
             this.bgw.ProgressChanged += this.bgw_ProgressChanged;
