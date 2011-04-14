@@ -23,9 +23,17 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Models.Search;
 
+    using System.Windows.Forms;
+
+    using Timer = System.Windows.Forms.Timer;
+
     public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraUserControl
     {
         #region Fields
+
+        private Timer tmr = new Timer();
+
+        private BackgroundWorker bgw = new BackgroundWorker();
 
         /// <summary>
         /// Used to display the current status to the UI
@@ -46,13 +54,25 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImportMoviesUc"/> class.
+        /// </summary>
         public ImportMoviesUc()
         {
             InitializeComponent();
 
-            this.SetupDataBindings();
-            this.SetupEventBindings();
-            this.ResetStatus();
+            tmr.Start();
+            tmr.Tick += new EventHandler(tmr_Tick);
+        }
+
+        /// <summary>
+        /// Handles the Tick event of the tmr control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        void tmr_Tick(object sender, EventArgs e)
+        {
+            FormElementsEnabled(!this.initializing);
         }
 
         #endregion
@@ -74,28 +94,34 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             this.grdMovies.DataSource = ImportMoviesFactory.ImportDatabase;
 
-            BackgroundWorker bgw = new BackgroundWorker();
+            bgw = new BackgroundWorker();
             bgw.DoWork += this.bgw_DoWork;
+            bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
             bgw.RunWorkerAsync();
-
+            btnOK.Enabled = false;
 
             this.ClearBindings();
             this.SetBindings();
-
-            this.initializing = false;
         }
 
-        void bgw_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Handles the DoWork event of the bgw control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             ImportMoviesFactory.ConvertMediaPathImportToDB();
         }
 
         /// <summary>
-        /// Setup Event Bindings
+        /// Handles the RunWorkerCompleted event of the bgw control.
         /// </summary>
-        private void SetupEventBindings()
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.bgwCollection = new BindingList<BackgroundWorker>();
+            this.initializing = false;
         }
 
         #endregion
