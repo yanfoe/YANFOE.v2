@@ -19,6 +19,7 @@ namespace YANFOE.Tools.Xml
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Xml;
 
     using YANFOE.Tools.Extentions;
@@ -272,7 +273,7 @@ namespace YANFOE.Tools.Xml
         /// </returns>
         public static XmlDocument OpenPath(string path)
         {
-            string xml = File.ReadAllText(path);
+            string xml = File.ReadAllText(path, Encoding.UTF8);
             var doc = new XmlDocument();
             try
             {
