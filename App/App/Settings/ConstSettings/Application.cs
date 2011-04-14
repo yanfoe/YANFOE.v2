@@ -23,7 +23,7 @@ namespace YANFOE.Settings.ConstSettings
     {
         static Application()
         {
-            ApplicationBuild = String.Format("{0:yyMMdd}", RetrieveLinkerTimestamp());
+            ApplicationBuild = String.Format("{0:yyMMddhh}", RetrieveLinkerTimestamp());
         }
 
         #region ApplicationNamingConditions
