@@ -14,11 +14,18 @@
 
 namespace YANFOE.Settings.ConstSettings
 {
+    using System;
+
     /// <summary>
     /// Application specific settings.
     /// </summary>
     public static class Application
     {
+        static Application()
+        {
+            ApplicationBuild = String.Format("{0:yyMMdd}", RetrieveLinkerTimestamp());
+        }
+
         #region ApplicationNamingConditions
         /// <summary>
         /// The string "YANFOE"
@@ -33,7 +40,7 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// The current version of YANFOE.
         /// </summary>
-        public const string ApplicationBuild = "110412";
+        public static string ApplicationBuild { get; private set; }
 
         /// <summary>
         /// Type (AKA Donor)
@@ -52,5 +59,38 @@ namespace YANFOE.Settings.ConstSettings
         /// </summary>
         public const string TvdbApi = "71F9C54F38B71B4F";
         #endregion
+
+        /// <summary>
+        /// Retrieves the linker timestamp By Joe Spivey
+        /// </summary>
+        /// <returns></returns>
+        public static DateTime RetrieveLinkerTimestamp()
+        {
+            string filePath = System.Reflection.Assembly.GetCallingAssembly().Location;
+            const int c_PeHeaderOffset = 60;
+            const int c_LinkerTimestampOffset = 8;
+            byte[] b = new byte[2048];
+            System.IO.Stream s = null;
+
+            try
+            {
+                s = new System.IO.FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                s.Read(b, 0, 2048);
+            }
+            finally
+            {
+                if (s != null)
+                {
+                    s.Close();
+                }
+            }
+
+            int i = System.BitConverter.ToInt32(b, c_PeHeaderOffset);
+            int secondsSince1970 = System.BitConverter.ToInt32(b, i + c_LinkerTimestampOffset);
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0);
+            dt = dt.AddSeconds(secondsSince1970);
+            dt = dt.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
+            return dt;
+        }
     }
 }
