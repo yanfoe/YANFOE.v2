@@ -49,6 +49,9 @@
     <Reference Include="BitFactory.Logging">
       <HintPath>.\Dlls\BitFactory.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>.\Dlls\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
