@@ -18,6 +18,7 @@ namespace YANFOE.Models.TvModels.Show
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Linq;
@@ -251,6 +252,14 @@ namespace YANFOE.Models.TvModels.Show
         #region Properties
 
         /// <summary>
+        /// Gets or sets a value indicating whether [database saved].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DatabaseSaved { get; set; }
+
+        /// <summary>
         /// Gets or sets the actors.
         /// </summary>
         /// <value>
@@ -364,6 +373,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (this.changedBanner != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedBanner = value;
                     this.OnPropertyChanged("ChangedBanner");
                 }
@@ -384,6 +394,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (this.changedFanart != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedFanart = value;
                     this.OnPropertyChanged("ChangedPoster");
                 }
@@ -404,6 +415,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (this.changedPoster != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedPoster = value;
                     this.OnPropertyChanged("ChangedPoster");
                 }
@@ -424,6 +436,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (this.changedText != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedText = value;
                     this.OnPropertyChanged("ChangedText");
                 }

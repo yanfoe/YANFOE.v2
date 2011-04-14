@@ -268,6 +268,23 @@ namespace YANFOE.Factories.Internal
 
                 var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
 
+                if (json.Contains(@"ChangedText"":false"))
+                {
+                    movieModel.ChangedText = false;
+                }
+
+                if (json.Contains(@"ChangedPoster"":false"))
+                {
+                    movieModel.ChangedPoster = false;
+                }
+
+                if (json.Contains(@"ChangedFanart"":false"))
+                {
+                    movieModel.ChangedFanart = false;
+                }
+
+                movieModel.DatabaseSaved = true;
+
                 MovieDBFactory.MovieDatabase.Add(movieModel);
 
                 string title = FileNaming.RemoveIllegalChars(movieModel.Title);
@@ -436,10 +453,8 @@ namespace YANFOE.Factories.Internal
         {
             var series = e.Argument as Series;
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
-
             string title = FileNaming.RemoveIllegalChars(series.SeriesName);
 
-            // Save Series
             string writePath = path + title + ".Series";
             string json = JsonConvert.SerializeObject(series);
             Gzip.CompressString(json, writePath + ".gz");
@@ -503,21 +518,16 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// The bgw save movie d b_ do work.
+        /// Handles the DoWork event of the bgwSaveMovieDB control.
         /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
         {
             SavingMovieDB = true;
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Folders.RemoveAllFilesInFolder(path);
 
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
@@ -526,12 +536,12 @@ namespace YANFOE.Factories.Internal
             var bgw5 = new BackgroundWorker();
             var bgw6 = new BackgroundWorker();
 
-            bgw1.DoWork += bgw_DoWork;
-            bgw2.DoWork += bgw_DoWork;
-            bgw3.DoWork += bgw_DoWork;
-            bgw4.DoWork += bgw_DoWork;
-            bgw5.DoWork += bgw_DoWork;
-            bgw6.DoWork += bgw_DoWork;
+            bgw1.DoWork += bgwSaveMovieDBWork_DoWork;
+            bgw2.DoWork += bgwSaveMovieDBWork_DoWork;
+            bgw3.DoWork += bgwSaveMovieDBWork_DoWork;
+            bgw4.DoWork += bgwSaveMovieDBWork_DoWork;
+            bgw5.DoWork += bgwSaveMovieDBWork_DoWork;
+            bgw6.DoWork += bgwSaveMovieDBWork_DoWork;
 
             int count = 0;
             int max = MovieDBFactory.MovieDatabase.Count;
@@ -609,7 +619,6 @@ namespace YANFOE.Factories.Internal
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Folders.RemoveAllFilesInFolder(path);
 
             foreach (MovieSetModel set in MovieSetManager.CurrentDatabase)
             {
@@ -631,7 +640,6 @@ namespace YANFOE.Factories.Internal
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Folders.RemoveAllFilesInFolder(path);
 
             const string WritePath = "SeriesPick";
             string json = JsonConvert.SerializeObject(ImportTvFactory.ScanSeriesPicks);
@@ -668,7 +676,6 @@ namespace YANFOE.Factories.Internal
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Folders.RemoveAllFilesInFolder(path);
 
             foreach (var series in TvDBFactory.TvDatabase)
             {
@@ -751,7 +758,7 @@ namespace YANFOE.Factories.Internal
         /// <param name="e">
         /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
         /// </param>
-        private static void bgw_DoWork(object sender, DoWorkEventArgs e)
+        private static void bgwSaveMovieDBWork_DoWork(object sender, DoWorkEventArgs e)
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
 
@@ -760,18 +767,38 @@ namespace YANFOE.Factories.Internal
             string title = FileNaming.RemoveIllegalChars(movieModel.Title);
 
             string writePath = path + title + ".movie";
-            string json = JsonConvert.SerializeObject(movieModel);
 
-            Gzip.CompressString(json, writePath + ".gz");
+            bool writeText = false;
+            bool writeImages = false;
 
-            if (movieModel.SmallPoster != null)
+            if (!movieModel.DatabaseSaved)
             {
-                movieModel.SmallPoster.Save(path + title + ".poster.jpg");
+                writeImages = true;
             }
 
-            if (movieModel.SmallFanart != null)
+            if (!movieModel.DatabaseSaved || movieModel.ChangedText)
             {
-                movieModel.SmallFanart.Save(path + title + ".fanart.jpg");
+                writeText = true;
+            }
+
+            if (writeText)
+            {
+                movieModel.DatabaseSaved = true;
+                string json = JsonConvert.SerializeObject(movieModel);
+                Gzip.CompressString(json, writePath + ".gz");
+            }
+
+            var posterPath = path + title + ".poster.jpg";
+            var fanartPath = path + title + ".fanart.jpg";
+
+            if (movieModel.SmallPoster != null && (movieModel.ChangedPoster || writeImages))
+            {
+                movieModel.SmallPoster.Save(posterPath);
+            }
+
+            if (movieModel.SmallFanart != null && (movieModel.ChangedFanart || writeImages))
+            {
+                movieModel.SmallFanart.Save(fanartPath);
             }
         }
 

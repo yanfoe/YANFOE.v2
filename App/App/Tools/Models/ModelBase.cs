@@ -132,16 +132,6 @@ namespace YANFOE.Tools.Models
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;
 
-            if (this.ChangedValues == null)
-            {
-                this.ChangedValues = new BindingList<string>();
-            }
-
-            if (!this.ChangedValues.Contains(name))
-            {
-                this.ChangedValues.Add(name);
-            }
-
             if (handler != null)
             {
                 try

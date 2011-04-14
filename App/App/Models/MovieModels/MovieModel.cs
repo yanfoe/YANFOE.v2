@@ -17,6 +17,7 @@ namespace YANFOE.Models.MovieModels
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Text;
@@ -322,6 +323,14 @@ namespace YANFOE.Models.MovieModels
         #region Properties
 
         /// <summary>
+        /// Gets or sets a value indicating whether [database saved].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DatabaseSaved { get; set; }
+
+        /// <summary>
         /// Gets a value indicating whether ActorsEnabled.
         /// </summary>
         public bool ActorsEnabled
@@ -413,6 +422,7 @@ namespace YANFOE.Models.MovieModels
             {
                 if (this.changedFanart != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedFanart = value;
                     this.OnPropertyChanged("ChangedFanart");
                 }
@@ -434,6 +444,7 @@ namespace YANFOE.Models.MovieModels
             {
                 if (this.changedPoster != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedPoster = value;
                     this.OnPropertyChanged("ChangedPoster");
                 }
@@ -455,6 +466,7 @@ namespace YANFOE.Models.MovieModels
             {
                 if (this.changedTrailer != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedTrailer = value;
                     this.OnPropertyChanged("ChangedTrailer");
                 }
@@ -476,6 +488,7 @@ namespace YANFOE.Models.MovieModels
             {
                 if (this.changedText != value)
                 {
+                    this.DatabaseSaved = false;
                     this.changedText = value;
                     this.OnPropertyChanged("ChangedText");
                 }
