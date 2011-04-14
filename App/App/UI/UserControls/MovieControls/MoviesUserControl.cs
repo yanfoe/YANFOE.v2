@@ -18,6 +18,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
+    using System.Linq;
     using System.Windows.Forms;
 
     using BitFactory.Logging;
@@ -461,15 +462,9 @@ namespace YANFOE.UI.UserControls.MovieControls
         private void popupMovieList_BeforePopup(object sender, CancelEventArgs e)
         {
             var rows = grdViewByTitle.GetSelectedRows();
-            var movieList = new List<MovieModel>();
-            
-            foreach (var row in rows)
-            {
-                movieList.Add(grdViewByTitle.GetRow(row) as MovieModel);
-            }
+            var movieList = rows.Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).ToList();
 
-
-            Popups.MenuListPopup.Generate(this.barManager1, popupMovieList, movieList);
+            Popups.MovieListPopup.Generate(this.barManager1, popupMovieList, movieList);
         }
     }
 }

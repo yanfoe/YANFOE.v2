@@ -306,7 +306,7 @@ namespace YANFOE.Tools.ThirdParty
     /// will need to look at the attibutes of each file returned (for example, you need
     /// to check each file in a directory to see if it was modified after a specific date).
     /// </remarks>
-    public static class FastDirectoryEnumerator
+    public static class FastDirectoryEnumerator2
     {
         #region Public Methods
 

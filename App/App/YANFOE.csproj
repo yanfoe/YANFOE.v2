@@ -147,6 +147,7 @@
     <Compile Include="Tools\ThirdParty\FastDirectoryEnumerator.cs" />
     <Compile Include="Tools\IO\FileNaming.cs" />
     <Compile Include="Tools\Text\IO.cs" />
+    <Compile Include="Tools\ThirdParty\FileLookup.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs">
       <SubType>UserControl</SubType>
@@ -417,7 +418,7 @@
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Popups\MenuListPopup.cs" />
+    <Compile Include="UI\Popups\MovieListPopup.cs" />
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

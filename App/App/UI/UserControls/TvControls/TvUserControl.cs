@@ -16,13 +16,18 @@ namespace YANFOE.UI.UserControls.TvControls
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using DevExpress.Utils;
+    using DevExpress.XtraBars;
+    using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
     using YANFOE.Factories;
+    using YANFOE.Models.MovieModels;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Show;
+    using YANFOE.Properties;
     using YANFOE.Settings;
 
     public partial class TvUserControl : DevExpress.XtraEditors.XtraUserControl
@@ -224,11 +229,11 @@ namespace YANFOE.UI.UserControls.TvControls
 
             if (series.ChangedText || series.ChangedPoster || series.ChangedFanart || series.ChangedBanner)
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextChanged;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextChanged;
             }
             else
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextNormal;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextNormal;
             }
         }
 
@@ -248,11 +253,11 @@ namespace YANFOE.UI.UserControls.TvControls
 
             if (season.ContainsChangedEpisodes())
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextChanged;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextChanged;
             }
             else
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextNormal;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextNormal;
             }
         }
 
@@ -272,11 +277,11 @@ namespace YANFOE.UI.UserControls.TvControls
 
             if (episode.ChangedText || episode.ChangedScreenshot)
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextChanged;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextChanged;
             }
             else
             {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextNormal;
+                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextNormal;
             }
         }
 
@@ -354,6 +359,35 @@ namespace YANFOE.UI.UserControls.TvControls
         private void grdEpisodes_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             clmEpisodePath.Visible = Get.Ui.EnableTVPathColumn;
+        }
+
+        private void gridViewTvTitleList_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            var view = sender as GridView;
+            e.Allow = false;
+
+            this.popupSeries.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
+        }
+
+        private void popupSeries_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var rows = gridViewTvTitleList.GetSelectedRows();           
+            var seriesList = rows.Select(row => this.gridViewTvTitleList.GetRow(row) as MasterSeriesListModel).ToList();
+
+            popupSeries.ClearLinks();
+
+            var addBarItem = new BarSubItem(barManager1, "Add Series");
+            addBarItem.Glyph = Resources.add32;
+            popupSeries.AddItem(addBarItem);
+
+            addBarItem.AddItem(new BarButtonItem(barManager1, "Add TvDB Series"));
+            addBarItem.AddItem(new BarButtonItem(barManager1, "Add Custom Series"));
+
+            var updateBarItem = new BarSubItem(barManager1, "Update Series");
+            updateBarItem.Glyph = Resources.globe32;
+            popupSeries.AddItem(updateBarItem);
+
+            updateBarItem.AddItem(new BarButtonItem(barManager1, "From TvDB"));
         }
     }
 }

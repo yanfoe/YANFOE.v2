@@ -58,7 +58,7 @@ namespace YANFOE.Tools.IO
                 }
 
                 path = path.Replace(Path.GetFileName(path), string.Empty);
-                string[] a = FastDirectoryEnumerator.EnumarateFilesPathList(path, pattern);
+                string[] a = FileHelper.GetFilesRecursive(path, pattern).ToArray();
                 return a.Select(name => new FileInfo(name)).Select(info => info.Length).Sum();
             }
             catch (Exception ex)

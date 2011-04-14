@@ -40,5 +40,7 @@ namespace YANFOE.Settings.UserSettings
         /// Gets or sets EnableTVPathColumn.
         /// </summary>
         public bool EnableTVPathColumn { get; set; }
+
+        public bool HideSeasonZero { get; set; }
     }
 }

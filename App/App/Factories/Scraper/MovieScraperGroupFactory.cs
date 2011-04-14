@@ -126,8 +126,8 @@ namespace YANFOE.Factories.Scraper
                 cmbScraperGroupList.Properties.Items.Clear();
 
                 string[] scraperGroupList =
-                    FastDirectoryEnumerator.EnumarateFilesPathList(
-                        Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.xml");
+                    FileHelper.GetFilesRecursive(
+                        Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.xml").ToArray();
 
                 foreach (string f in scraperGroupList)
                 {

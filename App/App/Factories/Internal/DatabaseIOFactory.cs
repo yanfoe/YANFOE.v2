@@ -258,13 +258,13 @@ namespace YANFOE.Factories.Internal
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            FileData[] files = FastDirectoryEnumerator.GetFiles(path, "*.movie.gz", SearchOption.TopDirectoryOnly);
+            var files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
 
             MovieDBFactory.MovieDatabase.Clear();
 
-            foreach (FileData file in files)
+            foreach (var file in files)
             {
-                string json = Gzip.Decompress(file.Path);
+                string json = Gzip.Decompress(file);
 
                 var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
 
@@ -312,13 +312,13 @@ namespace YANFOE.Factories.Internal
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
-            FileData[] files = FastDirectoryEnumerator.GetFiles(path, "*.MovieSet.gz", SearchOption.TopDirectoryOnly);
+            var files = FileHelper.GetFilesRecursive(path, "*.MovieSet.gz").ToArray();
 
             MovieSetManager.CurrentDatabase.Clear();
 
-            foreach (FileData file in files)
+            foreach (var file in files)
             {
-                string json = Gzip.Decompress(file.Path);
+                string json = Gzip.Decompress(file);
                 var set = JsonConvert.DeserializeObject(json, typeof(MovieSetModel)) as MovieSetModel;
 
                 MovieSetManager.CurrentDatabase.Add(set);
@@ -351,13 +351,13 @@ namespace YANFOE.Factories.Internal
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
-            FileData[] files = FastDirectoryEnumerator.GetFiles(path, "*.Series.gz", SearchOption.TopDirectoryOnly);
+            var files = FileHelper.GetFilesRecursive(path, "*.Series.gz");
 
             TvDBFactory.TvDatabase.Clear();
 
-            foreach (FileData file in files)
+            foreach (var file in files)
             {
-                string json = Gzip.Decompress(file.Path);
+                string json = Gzip.Decompress(file);
 
                 var series = JsonConvert.DeserializeObject(json, typeof(Series)) as Series;
 

@@ -83,6 +83,11 @@ namespace YANFOE.Tools.IO
         /// </param>
         private static void AddNewEntries(MediaPathModel mediaPathModel, string[] files)
         {
+            if (files == null)
+            {
+                return;
+            }
+
             foreach (string f in files)
             {
                 MediaPathFileModel.MediaPathFileType type = DetectType.FindType(
@@ -133,9 +138,7 @@ namespace YANFOE.Tools.IO
         private static void BgwDoWork(object sender, DoWorkEventArgs e)
         {
             var mediaPathModel = e.Argument as MediaPathModel;
-
-            string[] files = FastDirectoryEnumerator.EnumarateFilesPathList(
-                mediaPathModel.MediaPath, "*.*", SearchOption.AllDirectories);
+            var files = FileHelper.GetFilesRecursive(mediaPathModel.MediaPath).ToArray();
 
             var returnCollection = new List<object>(2) { mediaPathModel, files };
 

@@ -122,8 +122,8 @@ namespace YANFOE.Factories.Import
 
                 if (file.Path != currentGetPathFiles)
                 {
-                    var files = FastDirectoryEnumerator.EnumerateFiles(file.Path, "*.*", SearchOption.TopDirectoryOnly);
-                    getFiles = (from f in files select f.Path).ToArray();
+                    var files = FileHelper.GetFilesRecursive(file.Path, "*.*").ToArray();
+                    getFiles = (from f in files select f).ToArray();
 
                     currentGetPathFiles = file.Path;
                 }

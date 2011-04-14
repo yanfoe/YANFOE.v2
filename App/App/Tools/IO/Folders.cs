@@ -55,7 +55,7 @@ namespace YANFOE.Tools.IO
         /// </param>
         public static void RemoveAllFilesInFolder(string path)
         {
-            string[] files = FastDirectoryEnumerator.EnumarateFilesPathList(path);
+            string[] files = FileHelper.GetFilesRecursive(path).ToArray();
 
             foreach (string file in files)
             {

@@ -43,7 +43,7 @@ namespace YANFOE.Tools.IO
         /// <returns>All files in the path</returns>
         public static string[] FindAll(string path, SearchOption type)
         {
-            return FastDirectoryEnumerator.EnumarateFilesPathList(path, "*.*").ToArray();
+            return FileHelper.GetFilesRecursive(path).ToArray();
         }
 
         /// <summary>
@@ -60,10 +60,9 @@ namespace YANFOE.Tools.IO
 
             foreach (string ext in Get.InOutCollection.VideoExtentions)
             {
-                IEnumerable<FileData> files = FastDirectoryEnumerator.EnumerateFiles(
-                    path, "*." + ext.ToLower().ToList(), SearchOption.AllDirectories);
+                var files = FileHelper.GetFilesRecursive(path, "*." + ext.ToLower().ToList());
 
-                fileCollection.AddRange((from f in files select f.Path).ToList());
+                fileCollection.AddRange((from f in files select f).ToList());
             }
 
             return fileCollection.ToDictionary(

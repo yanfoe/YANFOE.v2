@@ -39,7 +39,7 @@ namespace YANFOE.Tools.IO
         {
             try
             {
-                string[] files = FastDirectoryEnumerator.EnumarateFilesPathList(target_dir);
+                var files = FileHelper.GetFilesRecursive(target_dir);
                 string[] dirs = Directory.GetDirectories(target_dir);
 
                 foreach (string file in files)
