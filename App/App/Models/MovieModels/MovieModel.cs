@@ -17,7 +17,6 @@ namespace YANFOE.Models.MovieModels
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Text;
@@ -59,6 +58,11 @@ namespace YANFOE.Models.MovieModels
         private readonly BindingList<string> changeList;
 
         /// <summary>
+        /// The allocine id.
+        /// </summary>
+        private string allocineId;
+
+        /// <summary>
         /// Busy backing field
         /// </summary>
         private bool busy;
@@ -79,14 +83,14 @@ namespace YANFOE.Models.MovieModels
         private bool changedPoster;
 
         /// <summary>
-        /// Changed Trailer back field
-        /// </summary>
-        private bool changedTrailer;
-
-        /// <summary>
         /// Changed Text backing field
         /// </summary>
         private bool changedText;
+
+        /// <summary>
+        /// Changed Trailer back field
+        /// </summary>
+        private bool changedTrailer;
 
         /// <summary>
         /// The current fanart image url.
@@ -109,14 +113,44 @@ namespace YANFOE.Models.MovieModels
         private string fanartPathOnDisk;
 
         /// <summary>
+        /// The film affinity id.
+        /// </summary>
+        private string filmAffinityId;
+
+        /// <summary>
+        /// The film delta id.
+        /// </summary>
+        private string filmDeltaId;
+
+        /// <summary>
+        /// The film up id.
+        /// </summary>
+        private string filmUpId;
+
+        /// <summary>
+        /// The film web id.
+        /// </summary>
+        private string filmWebId;
+
+        /// <summary>
         /// The imdb id.
         /// </summary>
         private string imdbId;
 
         /// <summary>
+        /// The impawards id.
+        /// </summary>
+        private string impawardsId;
+
+        /// <summary>
         /// The is new.
         /// </summary>
         private bool isNew;
+
+        /// <summary>
+        /// The kinopoisk id.
+        /// </summary>
+        private string kinopoiskId;
 
         /// <summary>
         /// The locked.
@@ -323,14 +357,6 @@ namespace YANFOE.Models.MovieModels
         #region Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether [database saved].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
-        /// </value>
-        public bool DatabaseSaved { get; set; }
-
-        /// <summary>
         /// Gets a value indicating whether ActorsEnabled.
         /// </summary>
         public bool ActorsEnabled
@@ -338,6 +364,24 @@ namespace YANFOE.Models.MovieModels
             get
             {
                 return !this.multiSelectModel;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets AllocineId.
+        /// </summary>
+        public string AllocineId
+        {
+            get
+            {
+                return this.allocineId;
+            }
+
+            set
+            {
+                this.allocineId = value;
+                this.OnPropertyChanged("AllocineId");
+                this.OnPropertyChanged("Status");
             }
         }
 
@@ -452,28 +496,6 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [changed image].
-        /// </summary>
-        /// <value><c>true</c> if [changed image]; otherwise, <c>false</c>.</value>
-        public bool ChangedTrailer
-        {
-            get
-            {
-                return this.changedTrailer;
-            }
-
-            set
-            {
-                if (this.changedTrailer != value)
-                {
-                    this.DatabaseSaved = false;
-                    this.changedTrailer = value;
-                    this.OnPropertyChanged("ChangedTrailer");
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether [changed text].
         /// </summary>
         /// <value><c>true</c> if [changed text]; otherwise, <c>false</c>.</value>
@@ -491,6 +513,28 @@ namespace YANFOE.Models.MovieModels
                     this.DatabaseSaved = false;
                     this.changedText = value;
                     this.OnPropertyChanged("ChangedText");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [changed image].
+        /// </summary>
+        /// <value><c>true</c> if [changed image]; otherwise, <c>false</c>.</value>
+        public bool ChangedTrailer
+        {
+            get
+            {
+                return this.changedTrailer;
+            }
+
+            set
+            {
+                if (this.changedTrailer != value)
+                {
+                    this.DatabaseSaved = false;
+                    this.changedTrailer = value;
+                    this.OnPropertyChanged("ChangedTrailer");
                 }
             }
         }
@@ -664,6 +708,14 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [database saved].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DatabaseSaved { get; set; }
+
+        /// <summary>
         /// Gets or sets the director.
         /// </summary>
         /// <value>The director.</value>
@@ -747,6 +799,78 @@ namespace YANFOE.Models.MovieModels
         public FileInfoModel FileInfo { get; set; }
 
         /// <summary>
+        /// Gets or sets FilmAffinityId.
+        /// </summary>
+        public string FilmAffinityId
+        {
+            get
+            {
+                return this.filmAffinityId;
+            }
+
+            set
+            {
+                this.filmAffinityId = value;
+                this.OnPropertyChanged("FilmAffinityId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets FilmDeltaId.
+        /// </summary>
+        public string FilmDeltaId
+        {
+            get
+            {
+                return this.filmDeltaId;
+            }
+
+            set
+            {
+                this.filmDeltaId = value;
+                this.OnPropertyChanged("FilmDeltaId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets FilmUpId.
+        /// </summary>
+        public string FilmUpId
+        {
+            get
+            {
+                return this.filmUpId;
+            }
+
+            set
+            {
+                this.filmUpId = value;
+                this.OnPropertyChanged("FilmUpId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets FilmWebId.
+        /// </summary>
+        public string FilmWebId
+        {
+            get
+            {
+                return this.filmWebId;
+            }
+
+            set
+            {
+                this.filmWebId = value;
+                this.OnPropertyChanged("FilmWebId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the genre.
         /// </summary>
         /// <value>The genre binding list.</value>
@@ -807,6 +931,24 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
+        /// Gets or sets ImpawardsId.
+        /// </summary>
+        public string ImpawardsId
+        {
+            get
+            {
+                return this.impawardsId;
+            }
+
+            set
+            {
+                this.impawardsId = value;
+                this.OnPropertyChanged("ImpawardsId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether IsBusy.
         /// </summary>
         public bool IsBusy
@@ -844,6 +986,24 @@ namespace YANFOE.Models.MovieModels
                     this.isNew = value;
                     this.OnPropertyChanged("IsNew");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets KinopoiskId.
+        /// </summary>
+        public string KinopoiskId
+        {
+            get
+            {
+                return this.kinopoiskId;
+            }
+
+            set
+            {
+                this.kinopoiskId = value;
+                this.OnPropertyChanged("KinopoiskId");
+                this.OnPropertyChanged("Status");
             }
         }
 
@@ -1097,7 +1257,7 @@ namespace YANFOE.Models.MovieModels
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.Width + "x" + image.Height)
                             {
-                                Tag = "moviePoster|" + image.UriFull
+                               Tag = "moviePoster|" + image.UriFull 
                             };
 
                         gallery.Items.Add(galleryItem);
@@ -1615,7 +1775,9 @@ namespace YANFOE.Models.MovieModels
         /// </param>
         public void GenerateSmallPoster(string path = null)
         {
-            this.SmallPoster = string.IsNullOrEmpty(path) ? Tools.ResizeImage(this.CurrentPosterImage, 100, 150) : ImageHandler.LoadImage(path, 100, 150);
+            this.SmallPoster = string.IsNullOrEmpty(path)
+                                   ? Tools.ResizeImage(this.CurrentPosterImage, 100, 150)
+                                   : ImageHandler.LoadImage(path, 100, 150);
         }
 
         /// <summary>

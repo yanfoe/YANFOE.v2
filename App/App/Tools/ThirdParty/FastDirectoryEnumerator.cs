@@ -729,7 +729,7 @@ namespace YANFOE.Tools.ThirdParty
                             string[] subDirectories = Directory.GetDirectories(this.m_path);
                             this.m_currentContext.SubdirectoriesToProcess = new Stack<string>(subDirectories);
                         }
-                        catch (UnauthorizedAccessException e)
+                        catch (UnauthorizedAccessException)
                         {
                             string[] subDirectories = new string[0];
                             this.m_currentContext.SubdirectoriesToProcess = new Stack<string>(subDirectories);

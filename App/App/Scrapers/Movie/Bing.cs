@@ -48,7 +48,7 @@ namespace YANFOE.Scrapers.Movie
 
                 query = query.Replace("%20", " ");
 
-                using (var service = new LiveSearchService())
+                using (var service = new BingService())
                 {
                     var searchRequest = new SearchRequest
                                             {

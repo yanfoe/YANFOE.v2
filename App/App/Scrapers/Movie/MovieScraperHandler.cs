@@ -563,6 +563,20 @@ namespace YANFOE.Scrapers.Movie
                     return movie.TmdbId;
                 case "Apple":
                     return movie.Title;
+                case "Allocine":
+                    return movie.AllocineId;
+                case "FilmAffinity":
+                    return movie.FilmAffinityId;
+                case "FilmDelta":
+                    return movie.FilmDeltaId;
+                case "FilmUp":
+                    return movie.FilmUpId;
+                case "FilmWeb":
+                    return movie.FilmWebId;
+                case "Impawards":
+                    return movie.ImpawardsId;
+                case "Kinopoisk":
+                    return movie.KinopoiskId;
             }
 
             return null;

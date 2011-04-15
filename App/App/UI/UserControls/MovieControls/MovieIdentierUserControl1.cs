@@ -46,10 +46,31 @@ namespace YANFOE.UI.UserControls.MovieControls
         private void SetupBindings()
         {
             txtImdbID.DataBindings.Clear();
-            txtImdbID.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "ImdbId");
+            txtImdbID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "ImdbId");
 
             txtTmdbId.DataBindings.Clear();
-            txtTmdbId.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "TmdbId");
+            txtTmdbId.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "TmdbId");
+        
+            txtAllocineID.DataBindings.Clear();
+            txtAllocineID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "AllocineId");
+
+            txtFilmAffinityID.DataBindings.Clear();
+            txtFilmAffinityID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "FilmAffinityId");
+
+            txtFilmDeltaID.DataBindings.Clear();
+            txtFilmDeltaID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "FilmDeltaId");
+
+            txtFilmUpID.DataBindings.Clear();
+            txtFilmUpID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "FilmUpId");
+
+            txtFilmWebID.DataBindings.Clear();
+            txtFilmWebID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "FilmWebId");
+
+            txtImpawardsID.DataBindings.Clear();
+            txtImpawardsID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "ImpawardsId");
+
+            txtKinopoiskID.DataBindings.Clear();
+            txtKinopoiskID.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie(), "KinopoiskId");
         }
 
         /// <summary>

@@ -61,6 +61,8 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             InitializeComponent();
 
+            bgwCollection = new BindingList<BackgroundWorker>();
+
             tmr.Start();
             tmr.Tick += new EventHandler(tmr_Tick);
         }
