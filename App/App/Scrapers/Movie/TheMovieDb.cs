@@ -20,6 +20,7 @@ namespace YANFOE.Scrapers.Movie
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
+    using System.Text;
     using System.Xml.Linq;
 
     using BitFactory.Logging;
@@ -88,6 +89,9 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.Poster,
                                                    ScrapeFields.Fanart
                                                });
+
+            this.HtmlEncoding = Encoding.UTF8;
+            this.HtmlBaseUrl = "themoviedb";
         }
 
         /// <summary>

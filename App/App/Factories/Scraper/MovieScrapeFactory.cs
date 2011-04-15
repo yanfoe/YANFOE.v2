@@ -132,13 +132,8 @@ namespace YANFOE.Factories.Scraper
         private static void BgwSingle_DoWork(object sender, DoWorkEventArgs e)
         {
             var obj = e.Argument as MovieModel;
-
-            using (var movieScraperHandler = new MovieScraperHandler())
-            {
-                obj.IsBusy = true;
-
-                movieScraperHandler.RunSingleScrape(obj);
-            }
+            obj.IsBusy = true;
+            MovieScraperHandler.RunSingleScrape(obj);
 
             e.Result = obj;
         }

@@ -17,6 +17,7 @@ namespace YANFOE.Scrapers.Movie
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
@@ -75,6 +76,9 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.Writers,
                                                    ScrapeFields.Poster
                                                });
+
+            this.HtmlEncoding = Encoding.UTF8;
+            this.HtmlBaseUrl = "filmweb";
         }
 
         /// <summary>

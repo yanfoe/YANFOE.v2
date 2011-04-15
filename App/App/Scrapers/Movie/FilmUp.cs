@@ -17,6 +17,7 @@ namespace YANFOE.Scrapers.Movie
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
@@ -72,6 +73,9 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.ReleaseDate,
                                                    ScrapeFields.Poster
                                                });
+
+            this.HtmlEncoding = Encoding.GetEncoding("iso-8859-1");
+            this.HtmlBaseUrl = "filmup";
         }
 
         /// <summary>

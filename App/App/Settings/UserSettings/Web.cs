@@ -15,7 +15,10 @@
 namespace YANFOE.Settings.UserSettings
 {
     using System;
+    using System.Collections.Generic;
+    using System.Text;
 
+    using YANFOE.Scrapers.Movie;
     using YANFOE.Tools.Models;
 
     /// <summary>
@@ -32,11 +35,29 @@ namespace YANFOE.Settings.UserSettings
         public Web()
         {
             this.ContructDefaultValues();
+            this.WebEncodings = new Dictionary<string, Encoding>();
+
+            this.BuildWebEncodings();
+        }
+
+        private void BuildWebEncodings()
+        {
+            var scrapers = MovieScraperHandler.ReturnAllScrapers();
+
+            foreach (var scraper in scrapers)
+            {
+                if (scraper.HtmlBaseUrl != null && scraper.HtmlEncoding != null)
+                {
+                    this.WebEncodings.Add(scraper.HtmlBaseUrl, scraper.HtmlEncoding);
+                }
+            }
         }
 
         #endregion
 
         #region Properties
+
+        public Dictionary<string, Encoding> WebEncodings { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether EnableAddToBackgroundQue.

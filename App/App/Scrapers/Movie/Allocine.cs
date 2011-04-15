@@ -18,6 +18,7 @@ namespace YANFOE.Scrapers.Movie
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
@@ -76,6 +77,9 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.ReleaseDate,
                                                    ScrapeFields.Runtime,
                                                });
+
+            this.HtmlEncoding = Encoding.UTF8;
+            this.HtmlBaseUrl = "allocine";
         }
 
         /// <summary>

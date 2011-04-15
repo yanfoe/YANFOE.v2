@@ -17,6 +17,7 @@ namespace YANFOE.Scrapers.Movie.Interfaces
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Text;
 
     using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools.Enums;
@@ -27,6 +28,22 @@ namespace YANFOE.Scrapers.Movie.Interfaces
     /// </summary>
     public interface IMovieScraper
     {
+        /// <summary>
+        /// Gets or sets the html encoding.
+        /// </summary>
+        /// <value>
+        /// The scrape encoding.
+        /// </value>
+        Encoding HtmlEncoding { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTML base.
+        /// </summary>
+        /// <value>
+        /// The HTML base.
+        /// </value>
+        string HtmlBaseUrl { get; set; }
+
         /// <summary>
         /// Gets the name of the scraper.
         /// </summary>

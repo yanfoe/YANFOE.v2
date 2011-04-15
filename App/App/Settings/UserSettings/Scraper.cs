@@ -33,6 +33,8 @@ namespace YANFOE.Settings.UserSettings
         {
             this.TvDbTime = string.Empty;
             this.Generic = new Generic();
+
+
         }
 
         #endregion

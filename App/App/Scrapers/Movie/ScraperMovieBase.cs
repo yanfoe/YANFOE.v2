@@ -18,6 +18,7 @@ namespace YANFOE.Scrapers.Movie
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Net;
+    using System.Text;
 
     using BitFactory.Logging;
 
@@ -70,6 +71,22 @@ namespace YANFOE.Scrapers.Movie
         /// </summary>
         /// <value>The cookie.</value>
         public CookieContainer Cookie { get; set; }
+
+        /// <summary>
+        /// Gets or sets the html encoding.
+        /// </summary>
+        /// <value>
+        /// The scrape encoding.
+        /// </value>
+        public Encoding HtmlEncoding { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTML base.
+        /// </summary>
+        /// <value>
+        /// The HTML base.
+        /// </value>
+        public string HtmlBaseUrl { get; set; }
 
         /// <summary>
         /// Searches bing for the scraper MovieUniqueId.

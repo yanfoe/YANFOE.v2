@@ -85,19 +85,14 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                 var outputString = webClient.DownloadString(downloadItem.Url);
 
                 var encode = Encoding.GetEncoding(1252);
-                if (downloadItem.Url.IndexOf("ofdb", StringComparison.CurrentCultureIgnoreCase) != -1 || downloadItem.Url.Contains("sratim") || downloadItem.Url.Contains("filmweb") || downloadItem.Url.Contains("allocine"))
-                {
-                    encode = Encoding.GetEncoding("UTF-8");
-                }
 
-                if (downloadItem.Url.Contains("filmaffinity") || downloadItem.Url.Contains("filmdelta"))
+                foreach (var encoding in Settings.Get.Web.WebEncodings)
                 {
-                    encode = Encoding.GetEncoding("ISO-8859-1");
-                }
-
-                if (downloadItem.Url.Contains("kinopoisk"))
-                {
-                    encode = Encoding.GetEncoding("windows-1251");
+                    if (downloadItem.Url.Contains(encoding.Key))
+                    {
+                        encode = encoding.Value;
+                        break;
+                    }
                 }
 
                 Log.WriteToLog(

@@ -144,22 +144,13 @@ namespace YANFOE.Tools.Compression
 
                         f = File.ReadAllText(unpackedFilePath, Encoding.UTF8);
 
-                        if (f.ToLower(CultureInfo.CurrentCulture).Contains("windows-1251"))
+                        foreach (var encoding in Settings.Get.Web.WebEncodings)
                         {
-                            f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("windows-1251"));
-                        }
-                        else if (f.ToLower(CultureInfo.CurrentCulture).Contains("iso-8859-1"))
-                        {
-                            f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("ISO-8859-1"));
-                        }
-                        else if (f.ToLower(CultureInfo.CurrentCulture).Contains("filmup") ||
-                            f.ToLower(CultureInfo.CurrentCulture).Contains("filmdelta"))
-                        {
-                            f = File.ReadAllText(unpackedFilePath, Encoding.GetEncoding("ISO-8859-1"));
-                        }
-                        else
-                        {
-                            f = File.ReadAllText(unpackedFilePath, Encoding.UTF8);
+                            if (f.Contains(encoding.Key))
+                            {
+                                f = File.ReadAllText(unpackedFilePath, encoding.Value);
+                                break;
+                            }
                         }
                     }
                 }
