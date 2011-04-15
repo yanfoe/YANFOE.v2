@@ -219,30 +219,18 @@ namespace YANFOE.Scrapers.Movie
             {
                 var ratingMatch = Regex.Matches(
                     this.GetHtml("main", threadID, id),
-                    @"</a><span\sclass=""moreinfo"">\x28(?<rating>.*?)\x29</span>",
+                    @"<span class=""moreinfo"">\((?<rating1>\d),(?<rating2>\d)\)</span></p></div><div class=""notezone",
                     RegexOptions.IgnoreCase);
 
-                var rating = "0.0";
+                output = 0.0;
 
-                if (ratingMatch.Count > 1)
+                if (ratingMatch.Count > 0)
                 {
-                    if (ratingMatch[1].Success)
-                    {
-                        rating = ratingMatch[1].Groups["rating"].Value;
-                    }
-                }
-                else
-                {
-                    if (ratingMatch.Count > 0)
-                    {
-                        if (ratingMatch[0].Success)
-                        {
-                            rating = ratingMatch[0].Groups["rating"].Value;
-                        }
-                    }
-                }
+                    double.TryParse(
+                        ratingMatch[0].Groups["rating1"].Value + "." + ratingMatch[0].Groups["rating2"].Value, out output);
 
-                output = !string.IsNullOrEmpty(rating) ? Maths.ProcessDouble(rating, 2.5).ToDouble() : 0;
+                    output = output + output;
+                }
 
                 return true;
             }
@@ -332,7 +320,7 @@ namespace YANFOE.Scrapers.Movie
             try
             {
                 var country = YRegex.Match(
-                    @"<a\shref=""/film/tous/pays-\d{4}/"">(?<country>.*?)</a>",
+                    @"Long-métrage<a\sclass=""underline""\shref="".*?"">(?<country>.*?)</a><span>",
                     this.GetHtml("main", threadID, id),
                     "country",
                     true);
@@ -400,19 +388,12 @@ namespace YANFOE.Scrapers.Movie
 
                 var m = Regex.Matches(
                     castBlock,
-                    @"/personne/fichepersonne_gen_cpersonne=\d*\.html"">\t\t\t*?<img src='(?<image>.*?)'.*?title='(?<actor>.*?)'.*?Rôle : (?<role>.*?)\t",
+                    "\">(?<actor>.{0,25})</a></h3></div><p>Rôle : (?<role>.*?)</p>",
                     RegexOptions.IgnoreCase);
-
-                const string EmptyImage = "http://images.allocine.fr/r_60_80/commons/emptymedia/AffichetteAllocine.gif";
 
                 foreach (Match match in m)
                 {
-                    var actor = new PersonModel(match.Groups["actor"].Value, match.Groups["role"].Value);
-
-                    if (match.Groups["image"].Value != EmptyImage)
-                    {
-                        actor.ImageUrl = match.Groups["image"].Value;
-                    }
+                    var actor = new PersonModel(match.Groups["actor"].Value, role: match.Groups["role"].Value);
 
                     output.Add(actor);
                 }
@@ -494,14 +475,14 @@ namespace YANFOE.Scrapers.Movie
 
                 var result1 = int.TryParse(
                         YRegex.Match(
-                            @"Durée\s:\s\s(?<hour>\d{2})h(?<minute>\d{2})min",
+                            @"Durée\s:\s(?<hour>\d{2})h(?<minute>\d{2})min",
                             this.GetHtml("main", threadID, id),
                             "hour"),
                         out hour);
 
                 var result2 = int.TryParse(
                         YRegex.Match(
-                            @"Durée\s:\s\s(?<hour>\d{2})h(?<minute>\d{2})min",
+                            @"Durée\s:\s(?<hour>\d{2})h(?<minute>\d{2})min",
                             this.GetHtml("main", threadID, id),
                             "minute"),
                         out minute);
