@@ -82,8 +82,6 @@ namespace YANFOE.InternalApps.DownloadManager.Download
 
                 webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
-                var outputString = webClient.DownloadString(downloadItem.Url);
-
                 var encode = Encoding.GetEncoding(1252);
 
                 foreach (var encoding in Settings.Get.Web.WebEncodings)
@@ -94,6 +92,10 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                         break;
                     }
                 }
+
+                webClient.Encoding = encode;
+
+                var outputString = webClient.DownloadString(downloadItem.Url);
 
                 Log.WriteToLog(
                     LogSeverity.Info,

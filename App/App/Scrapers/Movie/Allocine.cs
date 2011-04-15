@@ -124,7 +124,7 @@ namespace YANFOE.Scrapers.Movie
             try
             {
                 output = YRegex.Match(
-                    @"<title>\t(?<title>.*?)\s\(\d\d\d\d\)\s-\sAlloCiné</title>",
+                    @"<title>(?<title>.*?)\s\(\d\d\d\d\)\s-\sAlloCiné</title>",
                     this.GetHtml("main", threadID, id),
                     "title",
                     true);
@@ -303,7 +303,7 @@ namespace YANFOE.Scrapers.Movie
             {
                 output =
                     YRegex.Match(
-                        ">Synopsis : </span>(?<plot>.*?).</p>",
+                        ">Synopsis : </span>(?<plot>.*?)</span></p>",
                         this.GetHtml("main", threadID, id),
                         "plot",
                         true);
@@ -393,7 +393,7 @@ namespace YANFOE.Scrapers.Movie
             
             try
             {
-                var html = Downloader.ProcessDownload(this.GetHtml("cast", threadID, id), DownloadType.Html, Section.Movies).RemoveCharacterReturn();
+                var html = this.GetHtml("cast", threadID, id).RemoveCharacterReturn();
 
                 var castBlock =
                     Regex.Match(html, "<h2>Acteurs(?<body>.*?)Production", RegexOptions.IgnoreCase).Groups[0].Value;

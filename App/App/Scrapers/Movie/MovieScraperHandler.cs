@@ -19,7 +19,6 @@ namespace YANFOE.Scrapers.Movie
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
-    using System.Text;
     using System.Windows.Forms;
 
     using BitFactory.Logging;
@@ -515,30 +514,27 @@ namespace YANFOE.Scrapers.Movie
         /// </returns>
         private static string GetScraperID(string scraperName, MovieModel movie)
         {
-            if (string.IsNullOrEmpty(movie.ImdbId) || string.IsNullOrEmpty(movie.TmdbId))
+            var results = new BindingList<QueryResult>();
+            var query = new Query
+                        { Results = results, Title = movie.Title, Year = movie.Year.ToString(), ImdbId = movie.ImdbId };
+
+            if (scraperName == "Imdb" || scraperName == "TheMovieDB")
             {
-                var results = new BindingList<QueryResult>();
-                var query = new Query
+                if (string.IsNullOrEmpty(movie.ImdbId) || string.IsNullOrEmpty(movie.TmdbId))
                 {
-                    Results = results,
-                    Title = movie.Title,
-                    Year = movie.Year.ToString(),
-                    ImdbId = movie.ImdbId
-                 
-                };
+                    MovieScrapeFactory.QuickSearchTmdb(query);
 
-                MovieScrapeFactory.QuickSearchTmdb(query);
-
-                if (query.Results.Count > 0)
-                {
-                    if (string.IsNullOrEmpty(movie.ImdbId))
+                    if (query.Results.Count > 0)
                     {
-                        movie.ImdbId = query.Results[0].ImdbID;
-                    }
+                        if (string.IsNullOrEmpty(movie.ImdbId))
+                        {
+                            movie.ImdbId = query.Results[0].ImdbID;
+                        }
 
-                    if (string.IsNullOrEmpty(movie.TmdbId))
-                    {
-                        movie.TmdbId = query.Results[0].TmdbID;
+                        if (string.IsNullOrEmpty(movie.TmdbId))
+                        {
+                            movie.TmdbId = query.Results[0].TmdbID;
+                        }
                     }
                 }
             }
@@ -552,6 +548,19 @@ namespace YANFOE.Scrapers.Movie
                 case "Apple":
                     return movie.Title;
                 case "Allocine":
+                    if (string.IsNullOrEmpty(movie.AllocineId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.Allocine select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.AllocineId = query.Results[0].AllocineId;
+                        }
+                    }
+
                     return movie.AllocineId;
                 case "FilmAffinity":
                     return movie.FilmAffinityId;

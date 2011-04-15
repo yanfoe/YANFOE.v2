@@ -46,6 +46,7 @@ namespace YANFOE.Scrapers.Movie.Models.Search
             this.ImdbID = string.Empty;
             this.TmdbID = string.Empty;
             this.YanfoeId = string.Empty;
+            this.AllocineId = string.Empty;
         }
 
         #endregion
@@ -59,10 +60,18 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         public string AdditionalInfo { get; set; }
 
         /// <summary>
-        /// Gets or sets the imdb MovieUniqueId.
+        /// Gets or sets the imdb Id.
         /// </summary>
-        /// <value>The imdb MovieUniqueId.</value>
+        /// <value>The imdb Id.</value>
         public string ImdbID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allocine id.
+        /// </summary>
+        /// <value>
+        /// The allocine id.
+        /// </value>
+        public string AllocineId { get; set; }
 
         /// <summary>
         /// Gets or sets the language.
