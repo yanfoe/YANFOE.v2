@@ -92,7 +92,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format("{0} {1} site:filmup.leonardo.it/", query.Title, query.Year),
                     "http://filmup.leonardo.it/sc_",
-                    threadID);
+                    threadID,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 return query.Results.Count > 0;
             }

@@ -91,7 +91,7 @@ namespace YANFOE.UI.Dialogs.Movies
 
         #endregion
 
-        #region Methods
+   #region Methods
 
         /// <summary>
         /// The populate combo.

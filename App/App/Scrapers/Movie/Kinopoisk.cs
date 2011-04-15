@@ -95,7 +95,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format("{0} site:www.kinopoisk.ru/level/1/", query.Title),
                     string.Empty,
-                    threadID);
+                    threadID,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 return query.Results.Count > 0;
             }

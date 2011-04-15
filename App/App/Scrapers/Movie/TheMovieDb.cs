@@ -131,7 +131,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format(CultureInfo.CurrentCulture, "{0} {1} site:www.themoviedb.org", query.Title, query.Year),
                     string.Empty,
-                    threadID);
+                    threadID,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 return query.Results.Count > 0;
             }

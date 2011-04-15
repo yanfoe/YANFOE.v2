@@ -853,6 +853,7 @@
   <ItemGroup>
     <Folder Include="Factories\Scraper\SupportClasses\" />
     <Folder Include="Movie\Cache\" />
+    <Folder Include="Movie\ScraperGroups\" />
     <Folder Include="Tools\Collections\" />
   </ItemGroup>
   <ItemGroup>
@@ -882,9 +883,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Licences\.NET-DiscUtils.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Movie\ScraperGroups\English.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\refresh.png" />

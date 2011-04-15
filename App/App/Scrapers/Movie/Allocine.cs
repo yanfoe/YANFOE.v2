@@ -80,6 +80,10 @@ namespace YANFOE.Scrapers.Movie
 
             this.HtmlEncoding = Encoding.UTF8;
             this.HtmlBaseUrl = "allocine";
+
+            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sAlloCiné";
+            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sAlloCiné";
+            this.BingRegexMatchID = @"http://www\.allocine\.fr/film/fichefilm_gen_cfilm=(?<id>.*?)\.html";
         }
 
         /// <summary>
@@ -96,7 +100,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format(CultureInfo.CurrentCulture, "site:http://www.allocine.fr {0}%20{1}", query.Title, query.Year),
                     "http://www.allocine.fr/film/fichefilm_gen_cfilm=",
-                    threadID);
+                    threadID,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 return query.Results.Count > 0;
             }

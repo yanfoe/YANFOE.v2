@@ -75,7 +75,6 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.Rating,
                                                    ScrapeFields.Director,
                                                    ScrapeFields.Plot,
-                                                   ScrapeFields.Outline,
                                                    ScrapeFields.Certification,
                                                    ScrapeFields.Country,
                                                    ScrapeFields.Language,
@@ -94,6 +93,10 @@ namespace YANFOE.Scrapers.Movie
 
             this.HtmlEncoding = Encoding.GetEncoding("iso-8859-1");
             this.HtmlBaseUrl = "imdb";
+
+            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4}) - IMDb";
+            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4}) - IMDb";
+            this.BingRegexMatchID = @"(?<imdbid>tt\d{7})";
         }
 
         /// <summary>
@@ -161,7 +164,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format(CultureInfo.CurrentCulture, "{0} {1} site:www.imdb.com", query.Title, query.Year),
                     string.Empty,
-                    threadID);
+                    threadID,
+                    BingRegexMatchTitle,
+                    BingRegexMatchYear,
+                    BingRegexMatchID);
 
                 return query.Results.Count > 0;
             }

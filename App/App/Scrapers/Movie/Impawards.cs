@@ -79,7 +79,10 @@ namespace YANFOE.Scrapers.Movie
                 query.Results = Bing.SearchBing(
                     string.Format("{0}%20{1}%20site:www.impawards.com%20poster", query.Title, query.Year),
                     string.Empty,
-                    threadID);
+                    threadID,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
 
                 return query.Results.Count > 0;
             }

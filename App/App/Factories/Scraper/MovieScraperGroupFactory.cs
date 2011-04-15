@@ -23,9 +23,12 @@ namespace YANFOE.Factories.Scraper
 
     using DevExpress.XtraEditors;
 
+    using Newtonsoft.Json;
+
     using YANFOE.InternalApps.Logs;
     using YANFOE.Scrapers.Movie.Models.ScraperGroup;
     using YANFOE.Settings;
+    using YANFOE.Tools.Compression;
     using YANFOE.Tools.ThirdParty;
 
     /// <summary>
@@ -68,18 +71,17 @@ namespace YANFOE.Factories.Scraper
         /// </returns>
         public static MovieScraperGroupModel DeserializeXml(string scraperGroupName)
         {
-            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".xml";
+            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".gz";
 
             try
             {
-                var deserializer = new XmlSerializer(typeof(MovieScraperGroupModel));
-
                 if (File.Exists(path))
                 {
-                    using (TextReader textReader = new StreamReader(path))
-                    {
-                        return (MovieScraperGroupModel)deserializer.Deserialize(textReader);
-                    }
+                    string json = Gzip.Decompress(path);
+
+                    var scraperGroupModel = JsonConvert.DeserializeObject(json, typeof(MovieScraperGroupModel)) as MovieScraperGroupModel;
+
+                    return scraperGroupModel;
                 }
             }
             catch (Exception ex)
@@ -98,7 +100,7 @@ namespace YANFOE.Factories.Scraper
         /// <returns>The scaper group model.</returns>
         public static MovieScraperGroupModel GetScaperGroupModel(string scraperGroupName)
         {
-            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".xml";
+            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".gz";
 
             if (File.Exists(path))
             {
@@ -127,7 +129,7 @@ namespace YANFOE.Factories.Scraper
 
                 string[] scraperGroupList =
                     FileHelper.GetFilesRecursive(
-                        Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.xml").ToArray();
+                        Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.gz").ToArray();
 
                 foreach (string f in scraperGroupList)
                 {
@@ -148,16 +150,19 @@ namespace YANFOE.Factories.Scraper
         /// The serialize to xml.
         /// </summary>
         /// <param name="movie">The movie.</param>
-        public static void SerializeToXml(MovieScraperGroupModel movie)
+        public static void SerializeToXml(MovieScraperGroupModel scraperGroupModel)
         {
-            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + movie.ScraperName + ".xml";
+            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupModel.ScraperName;
 
             try
             {
-                var serializer = new XmlSerializer(typeof(MovieScraperGroupModel));
-                TextWriter textWriter = new StreamWriter(path);
-                serializer.Serialize(textWriter, movie);
-                textWriter.Close();
+                if (scraperGroupModel == null)
+                {
+                    scraperGroupModel = new MovieScraperGroupModel();
+                }
+
+                string json = JsonConvert.SerializeObject(scraperGroupModel);
+                Gzip.CompressString(json, path + ".gz");
             }
             catch (Exception ex)
             {

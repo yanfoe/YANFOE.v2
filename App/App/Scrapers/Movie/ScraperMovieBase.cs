@@ -88,6 +88,12 @@ namespace YANFOE.Scrapers.Movie
         /// </value>
         public string HtmlBaseUrl { get; set; }
 
+        public string BingRegexMatchTitle { get; set; }
+
+        public string BingRegexMatchYear { get; set; }
+
+        public string BingRegexMatchID { get; set; }
+
         /// <summary>
         /// Searches bing for the scraper MovieUniqueId.
         /// </summary>
