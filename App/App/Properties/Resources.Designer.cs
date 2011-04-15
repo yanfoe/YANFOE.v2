@@ -305,13 +305,6 @@ namespace YANFOE.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap imdb {
-            get {
-                object obj = ResourceManager.GetObject("imdb", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         public static System.Drawing.Bitmap LoadingGlobe {
             get {
                 object obj = ResourceManager.GetObject("LoadingGlobe", resourceCulture);
@@ -714,13 +707,6 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap television24 {
             get {
                 object obj = ResourceManager.GetObject("television24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap tmdb {
-            get {
-                object obj = ResourceManager.GetObject("tmdb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
