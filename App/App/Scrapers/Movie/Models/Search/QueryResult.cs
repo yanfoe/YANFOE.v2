@@ -47,6 +47,12 @@ namespace YANFOE.Scrapers.Movie.Models.Search
             this.TmdbID = string.Empty;
             this.YanfoeId = string.Empty;
             this.AllocineId = string.Empty;
+            this.FilmAffinityId = string.Empty;
+            this.FilmDeltaId = string.Empty;
+            this.FilmUpId = string.Empty;
+            this.FilmWebId = string.Empty;
+            this.ImpawardsId = string.Empty;
+            this.KinopoiskId = string.Empty;
         }
 
         #endregion
@@ -72,6 +78,54 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         /// The allocine id.
         /// </value>
         public string AllocineId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the film affinity id.
+        /// </summary>
+        /// <value>
+        /// The film affinity id.
+        /// </value>
+        public string FilmAffinityId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the film delta id.
+        /// </summary>
+        /// <value>
+        /// The film delta id.
+        /// </value>
+        public string FilmDeltaId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the film up id.
+        /// </summary>
+        /// <value>
+        /// The film up id.
+        /// </value>
+        public string FilmUpId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the film web id.
+        /// </summary>
+        /// <value>
+        /// The film web id.
+        /// </value>
+        public string FilmWebId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the impawards id.
+        /// </summary>
+        /// <value>
+        /// The impawards id.
+        /// </value>
+        public string ImpawardsId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the kinopoisk id.
+        /// </summary>
+        /// <value>
+        /// The kinopoisk id.
+        /// </value>
+        public string KinopoiskId { get; set; }
 
         /// <summary>
         /// Gets or sets the language.

@@ -24,6 +24,7 @@ namespace YANFOE.Scrapers.Movie
     using YANFOE.InternalApps.Logs.Enums;
     using YANFOE.net.live.search.api;
     using YANFOE.Scrapers.Movie.Models.Search;
+    using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
 
     /// <summary>
@@ -38,7 +39,7 @@ namespace YANFOE.Scrapers.Movie
         /// <param name="urlmatch">Only return URLs containing the following match</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <returns>First successful match.</returns>
-        public static BindingList<QueryResult> SearchBing(string query, string urlmatch, int threadID, string regexTitle, string regexYear, string regexID)
+        public static BindingList<QueryResult> SearchBing(string query, string urlmatch, int threadID, string regexTitle, string regexYear, string regexID, ScraperList scraperList)
         {
             var logCatagory = "Scrape > Bing Search > " + query;
 
@@ -79,8 +80,41 @@ namespace YANFOE.Scrapers.Movie
                                 {
                                     if (Regex.IsMatch(result.Url, regexID))
                                     {
-                                        queryResult.ImdbID =
-                                            Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                        switch (scraperList)
+                                        {
+                                            case ScraperList.Imdb:
+                                                queryResult.ImdbID = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.TheMovieDB:
+                                                queryResult.TmdbID = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.Allocine:
+                                                queryResult.AllocineId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.FilmAffinity:
+                                                queryResult.FilmAffinityId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.FilmDelta:
+                                                queryResult.FilmDeltaId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.FilmUp:
+                                                queryResult.FilmUpId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.FilmWeb:
+                                                queryResult.FilmWebId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.Impawards:
+                                                queryResult.ImpawardsId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                            case ScraperList.Kinopoisk:
+                                                queryResult.KinopoiskId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
+                                        }
+
+                                        if (scraperList == ScraperList.Imdb)
+                                        {
+                                            
+                                        }
                                     }
 
                                     queryResult.Title = Regex.Match(result.Title, regexTitle).Groups["title"].Value;

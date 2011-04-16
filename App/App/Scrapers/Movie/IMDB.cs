@@ -167,7 +167,8 @@ namespace YANFOE.Scrapers.Movie
                     threadID,
                     BingRegexMatchTitle,
                     BingRegexMatchYear,
-                    BingRegexMatchID);
+                    BingRegexMatchID,
+                    ScraperList.Imdb);
 
                 return query.Results.Count > 0;
             }

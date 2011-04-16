@@ -76,6 +76,7 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.Cast,
                                                    ScrapeFields.ReleaseDate,
                                                    ScrapeFields.Runtime,
+                                                   ScrapeFields.Poster
                                                });
 
             this.HtmlEncoding = Encoding.UTF8;
@@ -101,9 +102,11 @@ namespace YANFOE.Scrapers.Movie
                     string.Format(CultureInfo.CurrentCulture, "site:http://www.allocine.fr {0}%20{1}", query.Title, query.Year),
                     "http://www.allocine.fr/film/fichefilm_gen_cfilm=",
                     threadID,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty);
+                    BingRegexMatchTitle,
+                    BingRegexMatchYear,
+                    BingRegexMatchID,
+                    this.ScraperName
+                    );
 
                 return query.Results.Count > 0;
             }
@@ -539,12 +542,13 @@ namespace YANFOE.Scrapers.Movie
 
                     var regexImageUrl = Regex.Match(
                         imageWebPage,
-                        @"<img\ssrc=""(?<imageurl>http://images.allocine.fr/r_760_x.*.jpg?)",
+                        @"<img\ssrc=""(?<imageurl>http://images.allocine.fr/r_760_x.*?.jpg?)",
                         RegexOptions.IgnoreCase);
 
                     if (regexImageUrl.Success)
                     {
-                        output.Add(new ImageDetailsModel { UriFull = new Uri(regexImageUrl.Groups["imageurl"].Value) });
+                        var thumb = regexImageUrl.Groups["imageurl"].Value.Replace("r_760_x", "c_80_120");
+                        output.Add(new ImageDetailsModel { UriFull = new Uri(regexImageUrl.Groups["imageurl"].Value), UriThumb = new Uri(thumb) });
                     }
                 }
 

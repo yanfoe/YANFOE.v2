@@ -134,7 +134,8 @@ namespace YANFOE.Scrapers.Movie
                     threadID,
                     string.Empty,
                     string.Empty,
-                    string.Empty);
+                    string.Empty,
+                    ScraperList.TheMovieDB);
 
                 return query.Results.Count > 0;
             }

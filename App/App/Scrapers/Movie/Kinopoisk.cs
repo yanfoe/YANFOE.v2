@@ -98,7 +98,8 @@ namespace YANFOE.Scrapers.Movie
                     threadID,
                     string.Empty,
                     string.Empty,
-                    string.Empty);
+                    string.Empty,
+                    ScraperList.Kinopoisk);
 
                 return query.Results.Count > 0;
             }
