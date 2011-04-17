@@ -19,6 +19,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
     using System.IO;
     using System.Net;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
 
@@ -63,6 +64,12 @@ namespace YANFOE.InternalApps.DownloadManager.Download
 
                     return;
                 }
+            }
+
+            if (InternalHandlers.Check(downloadItem))
+            {
+                InternalHandlers.Process(downloadItem, cachePath);
+                return;
             }
 
             try

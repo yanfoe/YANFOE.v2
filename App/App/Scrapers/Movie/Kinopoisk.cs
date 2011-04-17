@@ -50,16 +50,12 @@ namespace YANFOE.Scrapers.Movie
                                 { "cast", "http://www.kinopoisk.ru/level/19/film/{0}" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
             this.AvailableSearchMethod.AddRange(new[]
                                                     {
                                                         ScrapeSearchMethod.Bing,
                                                         ScrapeSearchMethod.Site
                                                     });
 
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
                                                    ScrapeFields.Title,

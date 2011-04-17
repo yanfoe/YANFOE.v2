@@ -112,6 +112,9 @@ namespace YANFOE.Scrapers.Movie
                                             case ScraperList.OFDB:
                                                 queryResult.OfdbId = Regex.Match(result.Url, regexID).Groups["id"].Value;
                                                 break;
+                                            case ScraperList.MovieMeter:
+                                                queryResult.MovieMeterId = Regex.Match(result.Url, regexID).Groups["id"].Value;
+                                                break;
                                             case ScraperList.Sratim:
                                                 queryResult.SratimId = Regex.Match(result.Url, regexID).Groups["id"].Value;
                                                 break;

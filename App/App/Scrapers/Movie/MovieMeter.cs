@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Ofdb.cs" company="The YANFOE Project">
+// <copyright file="MovieMeter.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
@@ -17,75 +17,70 @@ namespace YANFOE.Scrapers.Movie
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Globalization;
     using System.Text;
 
     using BitFactory.Logging;
 
-    using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Scrapers.Movie.Interfaces;
-    using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.Xml;
 
-    public class Ofdb : ScraperMovieBase, IMovieScraper
+    public class MovieMeter : ScraperMovieBase, IMovieScraper
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ofdb"/> class.
+        /// Initializes a new instance of the <see cref="MovieMeter"/> class.
         /// </summary>
-        public Ofdb()
+        public MovieMeter()
         {
-            this.ScraperName = ScraperList.OFDB;
+            this.ScraperName = ScraperList.MovieMeter;
 
             this.Urls = new Dictionary<string, string>
-                {
-                    { "main", "http://www.ofdb.de/film/{0}" },
-                    { "cast", "http://www.ofdb.de/view.php?page=film_detail&fid={0}" }
-                };
+                            {
+                                { "main", "$$Internal_movieMeterHandler?moviemeterid={0}" },
+                            };
 
             this.AvailableSearchMethod.AddRange(new[]
                                                 {
                                                     ScrapeSearchMethod.Bing,
+                                                    ScrapeSearchMethod.Site
                                                 });
 
             this.AvailableScrapeMethods.AddRange(new[]
                                                 {
                                                     ScrapeFields.Title,
                                                     ScrapeFields.Year,
-                                                    ScrapeFields.OriginalTitle,
-                                                    ScrapeFields.Director,
-                                                    ScrapeFields.Country,
                                                     ScrapeFields.Cast,
+                                                    ScrapeFields.Genre,
                                                     ScrapeFields.Plot,
-                                                    ScrapeFields.Rating,
-                                                    ScrapeFields.Writers,
-                                                    ScrapeFields.Genre
+                                                    ScrapeFields.Director,
+                                                    ScrapeFields.ReleaseDate,
+                                                    ScrapeFields.Country,
+                                                    ScrapeFields.Rating
                                                 });
 
-            this.HtmlEncoding = Encoding.UTF8;
-            this.HtmlBaseUrl = "ofdb";
+            this.HtmlEncoding = Encoding.GetEncoding("iso-8859-1");
+            this.HtmlBaseUrl = "moviemeter";
 
-            this.BingMatchString = "http://www.ofdb.de/film/";
-            this.BingSearchQuery = "{0} {1} site:www.ofdb.de/film/";
-            this.BingRegexMatchTitle = @"OFDb - (?<title>.*) \((?<year>\d{4})\)";
-            this.BingRegexMatchYear = @"OFDb - (?<title>.*) \((?<year>\d{4})\)";
-            this.BingRegexMatchID = "http://www.ofdb.de/film/(?<id>.*)";
+            this.BingMatchString = "http://www.moviemeter.nl/film";
+            this.BingSearchQuery = "{0} {1} site:www.moviemeter.nl/film";
+            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
+            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
+            this.BingRegexMatchID = @"http://www\.moviemeter\.nl/film/(?<id>\d*?)$";
         }
 
         /// <summary>
         /// Scrapes the Title value
         /// </summary>
-        /// <param name="id">The Id for the scraper.</param>
+        /// <param name="id">The MovieUniqueId for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <param name="output">The scraped Title value.</param>
-        /// <param name="alternatives">Alternative namings found for a title.</param>
+        /// <param name="alternatives">The alternatives.</param>
         /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>
-        /// Scrape succeeded [true/false]
-        /// </returns>
+        /// <returns>Scrape succeeded [true/false]</returns>
         public new bool ScrapeTitle(string id, int threadID, out string output, out BindingList<string> alternatives, string logCatagory)
         {
             output = string.Empty;
@@ -93,14 +88,10 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                var html = this.GetHtml("main", threadID, id);
+                var xml = this.GetHtml("main", threadID, id);
+                output = XRead.GetString(XRead.OpenXml(xml), "title");
 
-                output = YRegex.Match(@"<title>OFDb\s-\s(?<title>.*?)\s\((?<year>\d{4})\)</title>", html, "title", true)
-                    .Trim();
-
-                output = Tools.Clean.Text.ValidizeResult(output);
-
-                return output.IsFilled();
+                return !string.IsNullOrEmpty(output);
             }
             catch (Exception ex)
             {
@@ -125,40 +116,8 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                var html = this.GetHtml("main", threadID, id);
-
-                output = YRegex.Match(@"<title>OFDb\s-\s(?<title>.*?)\s\((?<year>\d{4})\)</title>", html, "year", true)
-                    .ToInt();
-
-                return output.IsFilled();
-            }
-            catch (Exception ex)
-            {
-                Log.WriteToLog(LogSeverity.Error, threadID, logCatagory, ex.Message);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Scrapes the Original Title value
-        /// </summary>
-        /// <param name="id">The Id for the scraper.</param>
-        /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped Original Title value.</param>
-        /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>Scrape succeeded [true/false]</returns>
-        public new bool ScrapeOriginalTitle(string id, int threadID, out string output, string logCatagory)
-        {
-            output = string.Empty;
-
-            try
-            {
-                var html = this.GetHtml("main", threadID, id);
-
-                output = YRegex.Match(@"<title>OFDb\s-\s(?<title>.*?)\s\((?<year>\d{4})\)</title>", html, "title", true)
-                    .Trim();
-
-                output = Tools.Clean.Text.ValidizeResult(output);
+                var xml = this.GetHtml("main", threadID, id);
+                output = XRead.GetInt(XRead.OpenXml(xml), "year");
 
                 return output.IsFilled();
             }
@@ -176,24 +135,22 @@ namespace YANFOE.Scrapers.Movie
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <param name="output">The scraped Cast value.</param>
         /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>Scrape succeeded [true/false]</returns>
+        /// <returns>
+        /// Scrape succeeded [true/false]
+        /// </returns>
         public new bool ScrapeCast(string id, int threadID, out BindingList<PersonModel> output, string logCatagory)
         {
             output = new BindingList<PersonModel>();
 
             try
             {
-                var html = this.GetHtml("cast", threadID, id);
+                var xml = this.GetHtml("main", threadID, id);
+                var xmlDoc = XRead.OpenXml(xml);
 
-                var castBlockHtml = YRegex.Match(@"Darsteller(?<castblock>.*?)Drehbuchautor", html, "castblock");
-
-                output =
-                    YRegex.MatchesToPersonList(
-                        @"src=""thumbnail\.php\?cover=(?<image>.*?)&size=6"".*?<b>(?<name>.*?)</b>.*?\.\.\.(?<role>.*?)</font></td>",
-                        castBlockHtml,
-                        "name",
-                        "role",
-                        "image");
+                foreach (var actor in XRead.GetStrings(xmlDoc, "actor"))
+                {
+                    output.Add(new PersonModel(actor));
+                }
 
                 return output.IsFilled();
             }
@@ -205,22 +162,23 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// Scrapes the Country copllection
+        /// Scrapes the Genre collection
         /// </summary>
-        /// <param name="id">The MovieUniqueId for the scraper.</param>
+        /// <param name="id">The Id for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped Country collection.</param>
+        /// <param name="output">The scraped Year collection.</param>
         /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>Scrape succeeded [true/false]</returns>
-        public new bool ScrapeCountry(string id, int threadID, out BindingList<string> output, string logCatagory)
+        /// <returns>
+        /// Scrape succeeded [true/false]
+        /// </returns>
+        public new bool ScrapeGenre(string id, int threadID, out BindingList<string> output, string logCatagory)
         {
             output = new BindingList<string>();
 
             try
             {
-                var html = this.GetHtml("main", threadID, id);
-
-                output = YRegex.MatchesToList("Kat=Land&Text=(?<country>.*?)\"", html, "country", true);
+                var xmlDoc = XRead.OpenXml(this.GetHtml("main", threadID, id));
+                output = XRead.GetStrings(xmlDoc, "actor").ToBindingList();
 
                 return output.IsFilled();
             }
@@ -248,13 +206,8 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                var main = this.GetHtml("main", threadID, id);
-                var plotUrl = "http://www.ofdb.de/plot/" + YRegex.Match("plot/(?<ploturl>.*?)\"", main, "ploturl");
-                var plotHtml = InternalApps.DownloadManager.Downloader.ProcessDownload(plotUrl, DownloadType.Html, Section.Movies)
-                    .RemoveCharacterReturn()
-                    .RemoveExtraWhiteSpace();
-
-                output = YRegex.Match(@"</b><br><br>(?<plot>.*?)\.\.\.", plotHtml, "plot", true);
+                var xmlDoc = XRead.OpenXml(this.GetHtml("main", threadID, id));
+                output = XRead.GetString(xmlDoc, "plot");
 
                 return output.IsFilled();
             }
@@ -272,18 +225,22 @@ namespace YANFOE.Scrapers.Movie
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <param name="output">The scraped Director value.</param>
         /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>Scrape succeeded [true/false]</returns>
+        /// <returns>
+        /// Scrape succeeded [true/false]
+        /// </returns>
         public new bool ScrapeDirector(string id, int threadID, out BindingList<PersonModel> output, string logCatagory)
         {
             output = new BindingList<PersonModel>();
 
             try
             {
-                var html = this.GetHtml("cast", threadID, id);
+                var xml = this.GetHtml("main", threadID, id);
+                var xmlDoc = XRead.OpenXml(xml);
 
-                var directorBlockHtml = YRegex.Match(@"Produzent\(in\)(?<directorblock>.*?)Komponist\(in\)", html, "castblock");
-
-                output = YRegex.MatchesToPersonList(@"<a href=""view\.php\?page=person&id=\d*?""><b>(?<name>.*?)</b>", directorBlockHtml, "name", string.Empty);
+                foreach (var director in XRead.GetStrings(xmlDoc, "director"))
+                {
+                    output.Add(new PersonModel(director));
+                }
 
                 return output.IsFilled();
             }
@@ -295,27 +252,23 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// Scrapes the writers value
+        /// Scrapes the release date value
         /// </summary>
         /// <param name="id">The Id for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped runtime value.</param>
+        /// <param name="output">The scraped release date value.</param>
         /// <param name="logCatagory">The log catagory.</param>
         /// <returns>
         /// Scrape succeeded [true/false]
         /// </returns>
-        public new bool ScrapeWriters(string id, int threadID, out BindingList<PersonModel> output, string logCatagory)
+        public new bool ScrapeReleaseDate(string id, int threadID, out DateTime output, string logCatagory)
         {
-            output = new BindingList<PersonModel>();
+            output = new DateTime(1700, 1, 1);
 
             try
             {
-                var html = this.GetHtml("cast", threadID, id);
-
-                var directorBlockHtml = YRegex.Match(@"Drehbuchautor\(in\)(?<directorblock>.*?)Produzent\(in\)", html, "castblock");
-
-                output = YRegex.MatchesToPersonList(@"<a href=""view\.php\?page=person&id=\d*?""><b>(?<name>.*?)</b>", directorBlockHtml, "name", string.Empty);
-
+                var xmlDoc = XRead.OpenXml(this.GetHtml("main", threadID, id));
+                output = XRead.GetDateTime(xmlDoc, "releasedate", "yyyy-MM-dd");
                 return output.IsFilled();
             }
             catch (Exception ex)
@@ -326,26 +279,23 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// Scrapes the Genre collection
+        /// Scrapes the Country copllection
         /// </summary>
         /// <param name="id">The Id for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped Year collection.</param>
+        /// <param name="output">The scraped Country collection.</param>
         /// <param name="logCatagory">The log catagory.</param>
         /// <returns>
         /// Scrape succeeded [true/false]
         /// </returns>
-        public new bool ScrapeGenre(string id, int threadID, out BindingList<string> output, string logCatagory)
+        public new bool ScrapeCountry(string id, int threadID, out BindingList<string> output, string logCatagory)
         {
             output = new BindingList<string>();
 
             try
             {
-                output = YRegex.MatchesToList(
-                    @"view\.php\?page=genre&Genre=.*?"">(?<genre>.*?)</a",
-                    this.GetHtml("main", threadID, id),
-                    "genre",
-                    true);
+                var xmlDoc = XRead.OpenXml(this.GetHtml("main", threadID, id));
+                output = XRead.GetStrings(xmlDoc, "country").ToBindingList();
 
                 return output.IsFilled();
             }
@@ -372,12 +322,8 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                output = YRegex.Match(
-                        @"Note: (?<rating>\d.\d{1,2})",
-                        this.GetHtml("main", threadID, id),
-                        "rating",
-                        true)
-                    .ToDouble();
+                var xmlDoc = XRead.OpenXml(this.GetHtml("main", threadID, id));
+                output = XRead.GetDouble(xmlDoc, "rating");
 
                 return output.IsFilled();
             }

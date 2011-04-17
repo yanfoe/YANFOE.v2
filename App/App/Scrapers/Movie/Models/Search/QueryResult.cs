@@ -212,6 +212,14 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         /// <value>The movies year.</value>
         public int Year { get; set; }
 
+        /// <summary>
+        /// Gets or sets the movie meter id.
+        /// </summary>
+        /// <value>
+        /// The movie meter id.
+        /// </value>
+        public string MovieMeterId { get; set; }
+
         #endregion
     }
 }

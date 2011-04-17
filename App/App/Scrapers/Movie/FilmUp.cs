@@ -49,16 +49,12 @@ namespace YANFOE.Scrapers.Movie
                                 { "main", "http://filmup.leonardo.it/sc_{0}.htm" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
             this.AvailableSearchMethod.AddRange(new[]
                                                 {
                                                     ScrapeSearchMethod.Bing,
                                                     ScrapeSearchMethod.Site
                                                 });
 
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
                                                    ScrapeFields.Title,

@@ -118,6 +118,12 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
             url = url.Replace(@"galerievignette_gen_cfilm=", "[gv]");
             url = url.Replace(@"a69.g.akamai.net[f]n[f]69[f]10688[f]v1[f]img5.[al][f]acmedia[f]rsz[f]434[f]x[f]x[f]x[f]medias[f]nmedia", "[ai]");
 
+            // Ofdb
+            url = url.Replace(@"www.ofdb.com", "[ofdb]");
+
+            // Movie Meter
+            url = url.Replace(@"$$Internal_movieMeterHandler", "[mm]");
+
             // tvdb
             url = url.Replace(@"www.thetvdb.com", "[tv]");
 

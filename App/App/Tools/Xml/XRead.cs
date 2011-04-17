@@ -17,6 +17,7 @@ namespace YANFOE.Tools.Xml
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -95,6 +96,13 @@ namespace YANFOE.Tools.Xml
         {
             string value = GetString(doc, tag, 0);
             DateTime outValue;
+
+            if (!string.IsNullOrEmpty(format))
+            {
+                DateTime.TryParseExact(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out outValue);
+                return outValue;
+            }
+
             DateTime.TryParse(value, out outValue);
             return outValue;
         }

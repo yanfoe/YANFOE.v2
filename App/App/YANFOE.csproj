@@ -128,6 +128,7 @@
     <Compile Include="Factories\Scraper\MovieScraperGroupFactory.cs" />
     <Compile Include="Factories\Sets\MovieSetManager.cs" />
     <Compile Include="InternalApps\DownloadManager\Download\AppleBinary.cs" />
+    <Compile Include="InternalApps\DownloadManager\Download\InternalHandlers.cs" />
     <Compile Include="InternalApps\DownloadManager\Model\BackgroundQueObject.cs" />
     <Compile Include="IO\GenerateOutput.cs" />
     <Compile Include="IO\IoInterface.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Models\TvModels\SeriesListModel.cs" />
     <Compile Include="Scrapers\Movie\Apple.cs" />
     <Compile Include="Scrapers\Movie\Models\ScraperGroup\MovieScraperGroupModel.cs" />
+    <Compile Include="Scrapers\Movie\MovieMeter.cs" />
     <Compile Include="Scrapers\Movie\Ofdb.cs" />
     <Compile Include="Scrapers\Movie\TheMovieDb.cs" />
     <Compile Include="Settings\UserSettings\Countries.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Tools\IO\FileNaming.cs" />
     <Compile Include="Tools\Text\IO.cs" />
     <Compile Include="Tools\ThirdParty\FileLookup.cs" />
+    <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs">
       <SubType>UserControl</SubType>
@@ -705,13 +708,18 @@
       <DependentUpon>TvUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Movie\ScraperGroups\Dutch.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Movie\ScraperGroups\English.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Movie\ScraperGroups\French.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Movie\ScraperGroups\German.gz" />
+    <None Include="Movie\ScraperGroups\German.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

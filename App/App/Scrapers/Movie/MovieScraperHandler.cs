@@ -234,259 +234,47 @@ namespace YANFOE.Scrapers.Movie
 
             bool outResult = true;
 
-            if (!string.IsNullOrEmpty(scraperGroup.Title) && scraperGroup.Title != "<None>")
+            var noneValue = "<None>";
+
+            outResult = GetOutResult(ScrapeFields.Title, scraperGroup.Title, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.OriginalTitle, scraperGroup.OriginalTitle, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Year, scraperGroup.Year, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Top250, scraperGroup.Top250, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Cast, scraperGroup.Cast, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Certification, scraperGroup.Certification, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Mpaa, scraperGroup.Mpaa, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Country, scraperGroup.Country, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Director, scraperGroup.Director, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Fanart, scraperGroup.Fanart, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Genre, scraperGroup.Genre, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Language, scraperGroup.Language, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Outline, scraperGroup.Outline, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Plot, scraperGroup.Plot, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Rating, scraperGroup.Rating, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.ReleaseDate, scraperGroup.ReleaseDate, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Runtime, scraperGroup.Runtime, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Studio, scraperGroup.Studio, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Tagline, scraperGroup.Tagline, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Votes, scraperGroup.Votes, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Writers, scraperGroup.Writers, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Poster, scraperGroup.Poster, movie, noneValue, scraperGroup, outResult);
+            outResult = GetOutResult(ScrapeFields.Trailer, scraperGroup.Trailer, movie, noneValue, scraperGroup, outResult);
+
+            return outResult;
+        }
+
+        private static bool GetOutResult(ScrapeFields scrapeFields, string scrapeGroup, MovieModel movie, string noneValue, MovieScraperGroupModel scraperGroup, bool outResult)
+        {
+            if (!string.IsNullOrEmpty(scraperGroup.ReleaseDate) && scraperGroup.ReleaseDate != noneValue)
             {
                 bool result;
-                ScrapeValues(movie, scraperGroup.Title, ScrapeFields.Title, out result);
+                ScrapeValues(movie, scrapeGroup, scrapeFields, out result);
 
                 if (!result)
                 {
                     outResult = false;
                 }
             }
-
-            if (!string.IsNullOrEmpty(scraperGroup.OriginalTitle) && scraperGroup.OriginalTitle != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.OriginalTitle, ScrapeFields.OriginalTitle, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Year) && scraperGroup.Year != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Year, ScrapeFields.Year, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Top250) && scraperGroup.Top250 != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Top250, ScrapeFields.Top250, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Cast) && scraperGroup.Cast != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Cast, ScrapeFields.Cast, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Certification) && scraperGroup.Certification != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Certification, ScrapeFields.Certification, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Mpaa) && scraperGroup.Mpaa != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Mpaa, ScrapeFields.Mpaa, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Country) && scraperGroup.Country != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Country, ScrapeFields.Country, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Director) && scraperGroup.Director != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Director, ScrapeFields.Director, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Fanart) && scraperGroup.Fanart != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Fanart, ScrapeFields.Fanart, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Genre) && scraperGroup.Genre != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Genre, ScrapeFields.Genre, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Language) && scraperGroup.Language != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Language, ScrapeFields.Language, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Outline) && scraperGroup.Outline != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Outline, ScrapeFields.Outline, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Plot) && scraperGroup.Plot != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Plot, ScrapeFields.Plot, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Rating) && scraperGroup.Rating != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Rating, ScrapeFields.Rating, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.ReleaseDate) && scraperGroup.ReleaseDate != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.ReleaseDate, ScrapeFields.ReleaseDate, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Runtime) && scraperGroup.Runtime != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Runtime, ScrapeFields.Runtime, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Studio) && scraperGroup.Studio != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Studio, ScrapeFields.Studio, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Tagline) && scraperGroup.Tagline != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Tagline, ScrapeFields.Tagline, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Votes) && scraperGroup.Votes != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Votes, ScrapeFields.Votes, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Writers) && scraperGroup.Writers != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Writers, ScrapeFields.Writers, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Poster) && scraperGroup.Poster != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Poster, ScrapeFields.Poster, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(scraperGroup.Trailer) && scraperGroup.Trailer != "<None>")
-            {
-                bool result;
-                ScrapeValues(movie, scraperGroup.Trailer, ScrapeFields.Trailer, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
-
             return outResult;
         }
 
@@ -589,6 +377,22 @@ namespace YANFOE.Scrapers.Movie
                     return movie.FilmWebId;
                 case ScraperList.Impawards:
                     return movie.ImpawardsId;
+                case ScraperList.MovieMeter:
+
+                    if (string.IsNullOrEmpty(movie.MovieMeterId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.MovieMeter select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.MovieMeterId = query.Results[0].MovieMeterId;
+                        }
+                    }
+
+                    return movie.MovieMeterId;
                 case ScraperList.OFDB:
 
                     if (string.IsNullOrEmpty(movie.OfdbId))

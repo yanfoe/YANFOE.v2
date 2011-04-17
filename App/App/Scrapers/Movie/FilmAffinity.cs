@@ -49,16 +49,12 @@ namespace YANFOE.Scrapers.Movie
                                 { "main", "http://www.filmaffinity.com/es/film{0}.html" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
             this.AvailableSearchMethod.AddRange(new[]
                                                     {
                                                         ScrapeSearchMethod.Bing,
                                                         ScrapeSearchMethod.Site
                                                     });
 
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>(); 
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
                                                    ScrapeFields.Title,

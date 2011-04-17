@@ -42,12 +42,6 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.Apple;
 
-            this.Urls = new Dictionary<string, string>();
-
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
-
             this.AvailableSearchMethod.AddRange(new[]
                                                     {
                                                         ScrapeSearchMethod.Site

@@ -52,16 +52,10 @@ namespace YANFOE.Scrapers.Movie
                                 { "poster", "http://www.allocine.fr/film/fichefilm-{0}/affiches/" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
-
             this.AvailableSearchMethod.AddRange(new[]
                                                     {
                                                         ScrapeSearchMethod.Bing,
                                                     });
-
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
 
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
@@ -82,9 +76,12 @@ namespace YANFOE.Scrapers.Movie
             this.HtmlEncoding = Encoding.UTF8;
             this.HtmlBaseUrl = "allocine";
 
+            this.BingMatchString = "http://www.imdb.com/title/";
+            this.BingSearchQuery = "{0} {1} site:www.imdb.com";
             this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sAlloCiné";
             this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sAlloCiné";
             this.BingRegexMatchID = @"http://www\.allocine\.fr/film/fichefilm_gen_cfilm=(?<id>.*?)\.html";
+
         }
 
         /// <summary>
@@ -105,8 +102,7 @@ namespace YANFOE.Scrapers.Movie
                     BingRegexMatchTitle,
                     BingRegexMatchYear,
                     BingRegexMatchID,
-                    this.ScraperName
-                    );
+                    this.ScraperName);
 
                 return query.Results.Count > 0;
             }

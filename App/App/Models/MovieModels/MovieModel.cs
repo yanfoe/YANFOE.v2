@@ -885,6 +885,29 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        private string movieMeterId;
+
+        /// <summary>
+        /// Gets or sets the movie meter id.
+        /// </summary>
+        /// <value>
+        /// The movie meter id.
+        /// </value>
+        public string MovieMeterId
+        {
+            get
+            {
+                return this.movieMeterId;
+            }
+
+            set
+            {
+                this.movieMeterId = value;
+                this.OnPropertyChanged("MovieMeterId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
         /// <summary>
         /// Gets or sets the genre.
         /// </summary>

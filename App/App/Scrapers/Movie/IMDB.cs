@@ -56,17 +56,11 @@ namespace YANFOE.Scrapers.Movie
                                 { "releaseinfo", "http://www.imdb.com/title/{0}/releaseinfo" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
-
             this.AvailableSearchMethod.AddRange(new[]
                                                     {
                                                         ScrapeSearchMethod.Bing,
                                                         ScrapeSearchMethod.Site
                                                     });
-
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
 
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
@@ -94,8 +88,10 @@ namespace YANFOE.Scrapers.Movie
             this.HtmlEncoding = Encoding.GetEncoding("iso-8859-1");
             this.HtmlBaseUrl = "imdb";
 
-            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4}) - IMDb";
-            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4}) - IMDb";
+            this.BingMatchString = "http://www.imdb.com/title/";
+            this.BingSearchQuery = "{0} {1} site:www.imdb.com";
+            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
+            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
             this.BingRegexMatchID = @"(?<imdbid>tt\d{7})";
         }
 
@@ -136,39 +132,6 @@ namespace YANFOE.Scrapers.Movie
 
                     query.Results.Add(queryResult);
                 }
-
-                return query.Results.Count > 0;
-            }
-            catch (Exception ex)
-            {
-                Log.WriteToLog(LogSeverity.Error, threadID, logCatagory, ex.Message);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Searches bing for the scraper MovieUniqueId.
-        /// </summary>
-        /// <param name="query">The query.</param>
-        /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="logCatagory">The log catagory.</param>
-        /// <returns>
-        /// [true/false] if an error occurred.
-        /// </returns>
-        public new bool SearchViaBing(Query query, int threadID, string logCatagory)
-        {
-            query.Results = new BindingList<QueryResult>();
-
-            try
-            {
-                query.Results = Bing.SearchBing(
-                    string.Format(CultureInfo.CurrentCulture, "{0} {1} site:www.imdb.com", query.Title, query.Year),
-                    string.Empty,
-                    threadID,
-                    BingRegexMatchTitle,
-                    BingRegexMatchYear,
-                    BingRegexMatchID,
-                    ScraperName);
 
                 return query.Results.Count > 0;
             }

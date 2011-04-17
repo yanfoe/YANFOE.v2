@@ -17,6 +17,7 @@ namespace YANFOE.Scrapers.Movie
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Globalization;
     using System.Net;
     using System.Text;
 
@@ -36,6 +37,17 @@ namespace YANFOE.Scrapers.Movie
     /// </summary>
     public abstract class ScraperMovieBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScraperMovieBase"/> class.
+        /// </summary>
+        public ScraperMovieBase()
+        {
+            this.Urls = new Dictionary<string, string>();
+            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
+            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
+            this.UrlHtmlCache = new Dictionary<string, string>();
+        }
+
         /// <summary>
         /// Gets or sets the name of the scraper.
         /// </summary>
@@ -113,6 +125,22 @@ namespace YANFOE.Scrapers.Movie
         public string BingRegexMatchID { get; set; }
 
         /// <summary>
+        /// Gets or sets the bing search query.
+        /// </summary>
+        /// <value>
+        /// The bing search query.
+        /// </value>
+        public string BingSearchQuery { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bing match string.
+        /// </summary>
+        /// <value>
+        /// The bing match string.
+        /// </value>
+        public string BingMatchString { get; set; }
+
+        /// <summary>
         /// Searches bing for the scraper MovieUniqueId.
         /// </summary>
         /// <param name="query">The query.</param>
@@ -121,7 +149,31 @@ namespace YANFOE.Scrapers.Movie
         /// <returns>[true/false] if an error occurred.</returns>
         public bool SearchViaBing(Query query, int threadID, string logCatagory)
         {
-            throw new NotImplementedException();
+            query.Results = new BindingList<QueryResult>();
+
+            try
+            {
+                if (query.Year == "0")
+                {
+                    query.Year = string.Empty;
+                }
+
+                query.Results = Bing.SearchBing(
+                    string.Format(CultureInfo.CurrentCulture, BingSearchQuery, query.Title, query.Year),
+                    BingMatchString,
+                    threadID,
+                    BingRegexMatchTitle,
+                    BingRegexMatchYear,
+                    BingRegexMatchID,
+                    ScraperName);
+
+                return query.Results.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Error, threadID, logCatagory, ex.Message);
+                return false;
+            }
         }
 
         /// <summary>

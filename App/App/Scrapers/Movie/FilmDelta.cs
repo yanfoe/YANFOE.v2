@@ -49,15 +49,11 @@ namespace YANFOE.Scrapers.Movie
                                 { "main", "http://www.filmdelta.se/titles.php?movieId={0}" }
                             };
 
-            this.UrlHtmlCache = new Dictionary<string, string>();
-
-            this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
             this.AvailableSearchMethod.AddRange(new[]
                                         {
                                             ScrapeSearchMethod.Site
                                         });
 
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
             this.AvailableScrapeMethods.AddRange(new[]
                                                {
                                                    ScrapeFields.Title,
