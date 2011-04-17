@@ -944,8 +944,8 @@ namespace YANFOE.Factories
             bool taglineGroupIsSame = true;
             string taglineGroupBaseValue = string.Empty;
 
-            bool origionalTitleGroupIsSame;
-            string origionalTitleGroupBaseValue = string.Empty;
+            bool OriginalTitleGroupIsSame;
+            string OriginalTitleGroupBaseValue = string.Empty;
 
             bool studioGroupIsSame = true;
             string studioGroupBaseValue = string.Empty;
@@ -996,8 +996,8 @@ namespace YANFOE.Factories
                     outlineGroupBaseValue, movie.Outline, out outlineGroupIsSame);
                 taglineGroupBaseValue = CheckMultiSelectStringValue(
                     taglineGroupBaseValue, movie.Tagline, out taglineGroupIsSame);
-                origionalTitleGroupBaseValue = CheckMultiSelectStringValue(
-                    origionalTitleGroupBaseValue, movie.OrigionalTitle, out origionalTitleGroupIsSame);
+                OriginalTitleGroupBaseValue = CheckMultiSelectStringValue(
+                    OriginalTitleGroupBaseValue, movie.OriginalTitle, out OriginalTitleGroupIsSame);
                 studioGroupBaseValue = CheckMultiSelectStringValue(
                     studioGroupBaseValue, movie.SetStudio, out studioGroupIsSame);
                 releasedGroupBaseValue = CheckMultiSelectDateValue(

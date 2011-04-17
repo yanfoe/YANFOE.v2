@@ -69,9 +69,9 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
         private string mpaa;
 
         /// <summary>
-        /// The origional title.
+        /// The Original title.
         /// </summary>
-        private string origionalTitle;
+        private string originalTitle;
 
         /// <summary>
         /// The outline.
@@ -164,7 +164,7 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
         {
             this.title = string.Empty;
             this.year = string.Empty;
-            this.origionalTitle = string.Empty;
+            this.OriginalTitle = string.Empty;
             this.rating = string.Empty;
             this.tagline = string.Empty;
             this.plot = string.Empty;
@@ -354,26 +354,6 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
         }
 
         /// <summary>
-        /// Gets or sets OrigionalTitle.
-        /// </summary>
-        public string OrigionalTitle
-        {
-            get
-            {
-                return this.origionalTitle;
-            }
-
-            set
-            {
-                if (this.origionalTitle != value)
-                {
-                    this.origionalTitle = value;
-                    this.OnPropertyChanged("OrigionalTitle");
-                }
-            }
-        }
-
-        /// <summary>
         /// Gets or sets Outline.
         /// </summary>
         public string Outline
@@ -389,6 +369,23 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 {
                     this.outline = value;
                     this.OnPropertyChanged("Outline");
+                }
+            }
+        }
+
+        public string OriginalTitle
+        {
+            get
+            {
+                return this.originalTitle;
+            }
+
+            set
+            {
+                if (this.originalTitle != value)
+                {
+                    this.originalTitle = value;
+                    this.OnPropertyChanged("OriginalTitle");
                 }
             }
         }
@@ -703,7 +700,7 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
 
             this.Title = string.Empty;
             this.Year = string.Empty;
-            this.OrigionalTitle = string.Empty;
+            this.OriginalTitle = string.Empty;
             this.Rating = string.Empty;
             this.Tagline = string.Empty;
             this.Plot = string.Empty;

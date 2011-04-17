@@ -60,7 +60,7 @@
             this.txtScraperDescription = new DevExpress.XtraEditors.TextEdit();
             this.cmbCountry = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbTitle = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.cmbOrigionalTitle = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cmbOriginalTitle = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbRating = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbTagline = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbPlot = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -122,7 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtScraperDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCountry.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbTitle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbOrigionalTitle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbOriginalTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbRating.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbTagline.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbPlot.Properties)).BeginInit();
@@ -182,7 +182,7 @@
             this.layoutControl1.Controls.Add(this.txtScraperDescription);
             this.layoutControl1.Controls.Add(this.cmbCountry);
             this.layoutControl1.Controls.Add(this.cmbTitle);
-            this.layoutControl1.Controls.Add(this.cmbOrigionalTitle);
+            this.layoutControl1.Controls.Add(this.cmbOriginalTitle);
             this.layoutControl1.Controls.Add(this.cmbRating);
             this.layoutControl1.Controls.Add(this.cmbTagline);
             this.layoutControl1.Controls.Add(this.cmbPlot);
@@ -536,18 +536,18 @@
             this.cmbTitle.StyleController = this.layoutControl1;
             this.cmbTitle.TabIndex = 17;
             // 
-            // cmbOrigionalTitle
+            // cmbOriginalTitle
             // 
-            this.cmbOrigionalTitle.Location = new System.Drawing.Point(102, 235);
-            this.cmbOrigionalTitle.Name = "cmbOrigionalTitle";
-            this.cmbOrigionalTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cmbOriginalTitle.Location = new System.Drawing.Point(102, 235);
+            this.cmbOriginalTitle.Name = "cmbOriginalTitle";
+            this.cmbOriginalTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbOrigionalTitle.Properties.NullValuePrompt = "Choose A Scraper";
-            this.cmbOrigionalTitle.Properties.NullValuePromptShowForEmptyValue = true;
-            this.cmbOrigionalTitle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbOrigionalTitle.Size = new System.Drawing.Size(250, 20);
-            this.cmbOrigionalTitle.StyleController = this.layoutControl1;
-            this.cmbOrigionalTitle.TabIndex = 21;
+            this.cmbOriginalTitle.Properties.NullValuePrompt = "Choose A Scraper";
+            this.cmbOriginalTitle.Properties.NullValuePromptShowForEmptyValue = true;
+            this.cmbOriginalTitle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbOriginalTitle.Size = new System.Drawing.Size(250, 20);
+            this.cmbOriginalTitle.StyleController = this.layoutControl1;
+            this.cmbOriginalTitle.TabIndex = 21;
             // 
             // cmbRating
             // 
@@ -696,12 +696,12 @@
             // 
             this.layoutControlItem11.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem11.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem11.Control = this.cmbOrigionalTitle;
+            this.layoutControlItem11.Control = this.cmbOriginalTitle;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 233);
             this.layoutControlItem11.Name = "layoutControlItem11";
             this.layoutControlItem11.Size = new System.Drawing.Size(354, 24);
-            this.layoutControlItem11.Text = "Origional Title";
+            this.layoutControlItem11.Text = "Original Title";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(96, 13);
             // 
             // layoutControlItem12
@@ -1048,7 +1048,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtScraperDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCountry.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbTitle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbOrigionalTitle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbOriginalTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbRating.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbTagline.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbPlot.Properties)).EndInit();
@@ -1119,7 +1119,7 @@
         private System.Windows.Forms.Timer uiTimer;
         private DevExpress.XtraEditors.ComboBoxEdit cmbAutoPopulate;
         private DevExpress.XtraEditors.ComboBoxEdit cmbTitle;
-        private DevExpress.XtraEditors.ComboBoxEdit cmbOrigionalTitle;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbOriginalTitle;
         private DevExpress.XtraEditors.ComboBoxEdit cmbRating;
         private DevExpress.XtraEditors.ComboBoxEdit cmbTagline;
         private DevExpress.XtraEditors.ComboBoxEdit cmbPlot;

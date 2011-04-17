@@ -40,7 +40,7 @@ namespace YANFOE.Models.NFOModels
             this.FileLastChanged = new DateTime();
             this.Ids = new Dictionary<string, string>();
             this.Title = string.Empty;
-            this.OrigionalTitle = string.Empty;
+            this.OriginalTitle = string.Empty;
             this.Rating = -1;
             this.Top250 = -1;
             this.Votes = -1;
@@ -144,9 +144,9 @@ namespace YANFOE.Models.NFOModels
         public string Mpaa { get; set; }
 
         /// <summary>
-        /// Gets or sets OrigionalTitle.
+        /// Gets or sets OriginalTitle.
         /// </summary>
-        public string OrigionalTitle { get; set; }
+        public string OriginalTitle { get; set; }
 
         /// <summary>
         /// Gets or sets Outline.

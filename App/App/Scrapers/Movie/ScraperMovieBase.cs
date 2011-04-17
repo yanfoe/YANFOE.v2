@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieScraperHandler.cs" company="The YANFOE Project">
+// <copyright file="ScraperMovieBase.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
@@ -88,10 +88,28 @@ namespace YANFOE.Scrapers.Movie
         /// </value>
         public string HtmlBaseUrl { get; set; }
 
+        /// <summary>
+        /// Gets or sets the bing regex match title.
+        /// </summary>
+        /// <value>
+        /// The bing regex match title.
+        /// </value>
         public string BingRegexMatchTitle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the bing regex match year.
+        /// </summary>
+        /// <value>
+        /// The bing regex match year.
+        /// </value>
         public string BingRegexMatchYear { get; set; }
 
+        /// <summary>
+        /// Gets or sets the bing regex match ID.
+        /// </summary>
+        /// <value>
+        /// The bing regex match ID.
+        /// </value>
         public string BingRegexMatchID { get; set; }
 
         /// <summary>
@@ -145,14 +163,14 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// Scrapes the Origional Title value
+        /// Scrapes the Original Title value
         /// </summary>
         /// <param name="id">The Id for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped Origional Title value.</param>
+        /// <param name="output">The scraped Original Title value.</param>
         /// <param name="logCatagory">The log catagory.</param>
         /// <returns>Scrape succeeded [true/false]</returns>
-        public bool ScrapeOrigionalTitle(string id, int threadID, out string output, string logCatagory)
+        public bool ScrapeOriginalTitle(string id, int threadID, out string output, string logCatagory)
         {
             throw new NotImplementedException();
         }

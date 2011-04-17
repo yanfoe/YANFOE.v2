@@ -28,9 +28,9 @@ namespace YANFOE.Tools.Enums
         Title, 
 
         /// <summary>
-        /// The origional title scraper field.
+        /// The Original title scraper field.
         /// </summary>
-        OrigionalTitle, 
+        OriginalTitle, 
 
         /// <summary>
         /// The year scraper field.

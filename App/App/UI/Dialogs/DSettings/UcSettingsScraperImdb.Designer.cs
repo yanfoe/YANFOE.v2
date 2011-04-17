@@ -95,7 +95,7 @@
             // 
             this.checkEdit2.Location = new System.Drawing.Point(12, 35);
             this.checkEdit2.Name = "checkEdit2";
-            this.checkEdit2.Properties.Caption = "Use Origional Title";
+            this.checkEdit2.Properties.Caption = "Use Original Title";
             this.checkEdit2.Size = new System.Drawing.Size(536, 19);
             this.checkEdit2.StyleController = this.layoutControl1;
             this.checkEdit2.TabIndex = 5;

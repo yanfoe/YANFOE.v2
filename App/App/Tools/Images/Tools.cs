@@ -25,13 +25,13 @@ namespace YANFOE.Tools.Images
         /// <summary>
         /// Resizes the image.
         /// </summary>
-        /// <param name="origionalImage">The origional image.</param>
+        /// <param name="OriginalImage">The Original image.</param>
         /// <param name="newWidth">The new width.</param>
         /// <param name="newHeight">The new height.</param>
         /// <returns>Resized image</returns>
-        public static Image ResizeImage(Image origionalImage, int newWidth, int newHeight)
+        public static Image ResizeImage(Image OriginalImage, int newWidth, int newHeight)
         {
-            return origionalImage == null ? null : origionalImage.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero);
+            return OriginalImage == null ? null : OriginalImage.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero);
         }
     }
 }

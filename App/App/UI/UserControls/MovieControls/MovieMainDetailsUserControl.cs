@@ -111,7 +111,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             txtPlot.DataBindings.Clear();
             txtOutline.DataBindings.Clear();
             txtTagline.DataBindings.Clear();
-            txtOrigionalTitle.DataBindings.Clear();
+            txtOriginalTitle.DataBindings.Clear();
             cmbStudio.DataBindings.Clear();
             dateReleased.DataBindings.Clear();
             txtDirectors.DataBindings.Clear();
@@ -148,7 +148,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             txtPlot.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Plot", true);
             txtOutline.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Outline", true);
             txtTagline.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Tagline", true);
-            txtOrigionalTitle.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "OrigionalTitle", true);
+            txtOriginalTitle.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "OriginalTitle", true);
             cmbStudio.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "SetStudio", true);
             dateReleased.DataBindings.Add("DateTime", Factories.MovieDBFactory.GetCurrentMovie(), "ReleaseDate", true);
             txtDirectors.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "DirectorAsString", true);

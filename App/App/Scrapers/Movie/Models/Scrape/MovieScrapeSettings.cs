@@ -42,10 +42,10 @@ namespace YANFOE.Scrapers.Movie.Models.Scrape
         public ScraperList Year { get; set; }
 
         /// <summary>
-        /// Gets or sets what if any scraper should be used to aquire the origional title.
+        /// Gets or sets what if any scraper should be used to aquire the Original title.
         /// </summary>
         /// <value>A ScraperList enum.</value>
-        public ScraperList OrigionalTitle { get; set; }
+        public ScraperList OriginalTitle { get; set; }
 
         /// <summary>
         /// Gets or sets what if any scraper should be used to aquire the rating.
@@ -221,7 +221,7 @@ namespace YANFOE.Scrapers.Movie.Models.Scrape
                 return true;
             }
 
-            if (this.OrigionalTitle == scraper)
+            if (this.OriginalTitle == scraper)
             {
                 return true;
             }
@@ -363,7 +363,7 @@ namespace YANFOE.Scrapers.Movie.Models.Scrape
         {
             this.Title = ScraperList.None;
             this.Year = ScraperList.None;
-            this.OrigionalTitle = ScraperList.None;
+            this.OriginalTitle = ScraperList.None;
             this.Rating = ScraperList.None;
             this.Director = ScraperList.None;
             this.Tagline = ScraperList.None;

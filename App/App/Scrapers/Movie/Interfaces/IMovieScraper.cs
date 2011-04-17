@@ -118,14 +118,14 @@ namespace YANFOE.Scrapers.Movie.Interfaces
         bool ScrapeTitle(string id, int threadID, out string output, out BindingList<string> alternatives, string logCatagory);
 
         /// <summary>
-        /// Scrapes the Origional Title value
+        /// Scrapes the Original Title value
         /// </summary>
         /// <param name="id">The MovieUniqueId for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
-        /// <param name="output">The scraped Origional Title value.</param>
+        /// <param name="output">The scraped Original Title value.</param>
         /// <param name="logCatagory">The catagory sent to the log if an error occurs.</param>
         /// <returns>Scrape succeeded [true/false]</returns>
-        bool ScrapeOrigionalTitle(string id, int threadID, out string output, string logCatagory);
+        bool ScrapeOriginalTitle(string id, int threadID, out string output, string logCatagory);
 
         /// <summary>
         /// Scrapes the Year value

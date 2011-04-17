@@ -720,8 +720,8 @@ namespace YANFOE.Scrapers.Movie
             {
                 if (image.Attribute("size").Value == "mid" || image.Attribute("size").Value == "poster")
                 {
-                    var origional = new Uri(image.Attribute("url").Value);
-                    var thumb = new Uri(origional.ToString().Replace("-poster", "-thumb"));
+                    var Original = new Uri(image.Attribute("url").Value);
+                    var thumb = new Uri(Original.ToString().Replace("-poster", "-thumb"));
                     var width = image.Attribute("width").Value.ToInt();
                     var height = image.Attribute("height").Value.ToInt();
 
@@ -739,7 +739,7 @@ namespace YANFOE.Scrapers.Movie
                             {
                                 Height = height, 
                                 Width = width, 
-                                UriFull = origional, 
+                                UriFull = Original, 
                                 UriThumb = thumb
                             });
                 }

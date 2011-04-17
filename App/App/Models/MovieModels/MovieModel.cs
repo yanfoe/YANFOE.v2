@@ -52,6 +52,8 @@ namespace YANFOE.Models.MovieModels
     {
         #region Constants and Fields
 
+        private Dictionary<ScraperList, string> ScraperIds { get; set; }
+
         /// <summary>
         /// The change list.
         /// </summary>
@@ -178,9 +180,9 @@ namespace YANFOE.Models.MovieModels
         private string nfoPathOnDisk;
 
         /// <summary>
-        /// Origional Title backing field
+        /// Original Title backing field
         /// </summary>
-        private string origionalTitle;
+        private string originalTitle;
 
         /// <summary>
         /// Outline backing field
@@ -303,7 +305,7 @@ namespace YANFOE.Models.MovieModels
             this.changeList = new BindingList<string>();
 
             this.Title = string.Empty;
-            this.OrigionalTitle = string.Empty;
+            this.OriginalTitle = string.Empty;
             this.Year = null;
             this.Rating = null;
             this.Director = new BindingList<PersonModel>();
@@ -327,6 +329,19 @@ namespace YANFOE.Models.MovieModels
             this.AlternativeTrailers = new BindingList<TrailerDetailsModel>();
             this.FileInfo = new FileInfoModel();
             this.AssociatedFiles = new AssociatedFilesModel();
+
+            this.AllocineId = string.Empty;
+            this.FilmAffinityId = string.Empty;
+            this.FilmDeltaId = string.Empty;
+            this.FilmUpId = string.Empty;
+            this.FilmWebId = string.Empty;
+            this.ImdbId = string.Empty;
+            this.ImpawardsId = string.Empty;
+            this.KinopoiskId = string.Empty;
+            this.TmdbId = string.Empty;
+            this.OfdbId = string.Empty;
+            this.SratimId = string.Empty;
+            this.RottenTomatoId = string.Empty;
 
             this.NfoPathOnDisk = string.Empty;
             this.PosterPathOnDisk = string.Empty;
@@ -1175,22 +1190,22 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the origional title.
+        /// Gets or sets the Original title.
         /// </summary>
-        /// <value>The origional title.</value>
-        public string OrigionalTitle
+        /// <value>The Original title.</value>
+        public string OriginalTitle
         {
             get
             {
-                return this.origionalTitle;
+                return this.originalTitle;
             }
 
             set
             {
-                if (this.origionalTitle != value)
+                if (this.originalTitle != value)
                 {
-                    this.origionalTitle = value;
-                    this.OnPropertyChanged("OrigionalTitle");
+                    this.originalTitle = value;
+                    this.OnPropertyChanged("OriginalTitle");
                 }
             }
         }

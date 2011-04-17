@@ -57,7 +57,7 @@
             this.txtWriters = new DevExpress.XtraEditors.TextEdit();
             this.txtDirectors = new DevExpress.XtraEditors.TextEdit();
             this.cmbStudio = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txtOrigionalTitle = new DevExpress.XtraEditors.TextEdit();
+            this.txtOriginalTitle = new DevExpress.XtraEditors.TextEdit();
             this.txtTagline = new DevExpress.XtraEditors.TextEdit();
             this.txtOutline = new DevExpress.XtraEditors.MemoEdit();
             this.txtPlot = new DevExpress.XtraEditors.MemoEdit();
@@ -118,7 +118,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtWriters.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDirectors.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbStudio.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOrigionalTitle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOriginalTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTagline.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutline.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlot.Properties)).BeginInit();
@@ -182,7 +182,7 @@
             this.layoutControl1.Controls.Add(this.txtWriters);
             this.layoutControl1.Controls.Add(this.txtDirectors);
             this.layoutControl1.Controls.Add(this.cmbStudio);
-            this.layoutControl1.Controls.Add(this.txtOrigionalTitle);
+            this.layoutControl1.Controls.Add(this.txtOriginalTitle);
             this.layoutControl1.Controls.Add(this.txtTagline);
             this.layoutControl1.Controls.Add(this.txtOutline);
             this.layoutControl1.Controls.Add(this.txtPlot);
@@ -400,13 +400,13 @@
             this.cmbStudio.StyleController = this.layoutControl1;
             this.cmbStudio.TabIndex = 10;
             // 
-            // txtOrigionalTitle
+            // txtOriginalTitle
             // 
-            this.txtOrigionalTitle.Location = new System.Drawing.Point(353, 371);
-            this.txtOrigionalTitle.Name = "txtOrigionalTitle";
-            this.txtOrigionalTitle.Size = new System.Drawing.Size(179, 20);
-            this.txtOrigionalTitle.StyleController = this.layoutControl1;
-            this.txtOrigionalTitle.TabIndex = 9;
+            this.txtOriginalTitle.Location = new System.Drawing.Point(353, 371);
+            this.txtOriginalTitle.Name = "txtOriginalTitle";
+            this.txtOriginalTitle.Size = new System.Drawing.Size(179, 20);
+            this.txtOriginalTitle.StyleController = this.layoutControl1;
+            this.txtOriginalTitle.TabIndex = 9;
             // 
             // txtTagline
             // 
@@ -642,7 +642,7 @@
             // 
             this.layoutControlItem5.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem5.Control = this.txtOrigionalTitle;
+            this.layoutControlItem5.Control = this.txtOriginalTitle;
             this.layoutControlItem5.CustomizationFormText = "Original Title:";
             this.layoutControlItem5.Location = new System.Drawing.Point(288, 369);
             this.layoutControlItem5.Name = "layoutControlItem5";
@@ -983,7 +983,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtWriters.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDirectors.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbStudio.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOrigionalTitle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOriginalTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTagline.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutline.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlot.Properties)).EndInit();
@@ -1041,7 +1041,7 @@
         private DevExpress.XtraEditors.TextEdit txtWriters;
         private DevExpress.XtraEditors.TextEdit txtDirectors;
         private DevExpress.XtraEditors.ComboBoxEdit cmbStudio;
-        private DevExpress.XtraEditors.TextEdit txtOrigionalTitle;
+        private DevExpress.XtraEditors.TextEdit txtOriginalTitle;
         private DevExpress.XtraEditors.TextEdit txtTagline;
         private DevExpress.XtraEditors.MemoEdit txtOutline;
         private DevExpress.XtraEditors.MemoEdit txtPlot;

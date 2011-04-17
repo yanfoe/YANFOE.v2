@@ -174,7 +174,7 @@ namespace YANFOE.UI.Dialogs.Movies
         {
             PopulateComboWithValue(this.cmbTitle, this.cmbAutoPopulate.Text);
             PopulateComboWithValue(this.cmbYear, this.cmbAutoPopulate.Text);
-            PopulateComboWithValue(this.cmbOrigionalTitle, this.cmbAutoPopulate.Text);
+            PopulateComboWithValue(this.cmbOriginalTitle, this.cmbAutoPopulate.Text);
             PopulateComboWithValue(this.cmbRating, this.cmbAutoPopulate.Text);
             PopulateComboWithValue(this.cmbTagline, this.cmbAutoPopulate.Text);
             PopulateComboWithValue(this.cmbPlot, this.cmbAutoPopulate.Text);
@@ -378,7 +378,7 @@ namespace YANFOE.UI.Dialogs.Movies
 
             this.cmbTitle.DataBindings.Clear();
             this.cmbYear.DataBindings.Clear();
-            this.cmbOrigionalTitle.DataBindings.Clear();
+            this.cmbOriginalTitle.DataBindings.Clear();
             this.cmbRating.DataBindings.Clear();
             this.cmbTagline.DataBindings.Clear();
             this.cmbPlot.DataBindings.Clear();
@@ -408,8 +408,8 @@ namespace YANFOE.UI.Dialogs.Movies
 
             this.cmbYear.DataBindings.Add(
                 "Text", this.currentScraperGroup, "Year", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.cmbOrigionalTitle.DataBindings.Add(
-                "Text", this.currentScraperGroup, "OrigionalTitle", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.cmbOriginalTitle.DataBindings.Add(
+                "Text", this.currentScraperGroup, "OriginalTitle", true, DataSourceUpdateMode.OnPropertyChanged);
             this.cmbRating.DataBindings.Add(
                 "Text", this.currentScraperGroup, "Rating", true, DataSourceUpdateMode.OnPropertyChanged);
             this.cmbTagline.DataBindings.Add(
@@ -479,7 +479,7 @@ namespace YANFOE.UI.Dialogs.Movies
             PopulateCombo(this.cmbTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Title, true));
             PopulateCombo(this.cmbYear, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Year, true));
             PopulateCombo(
-                this.cmbOrigionalTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.OrigionalTitle, true));
+                this.cmbOriginalTitle, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.OriginalTitle, true));
             PopulateCombo(this.cmbRating, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Rating, true));
             PopulateCombo(this.cmbTagline, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Tagline, true));
             PopulateCombo(this.cmbPlot, MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Plot, true));

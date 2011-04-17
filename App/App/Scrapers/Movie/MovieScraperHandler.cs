@@ -245,6 +245,17 @@ namespace YANFOE.Scrapers.Movie
                 }
             }
 
+            if (!string.IsNullOrEmpty(scraperGroup.OriginalTitle) && scraperGroup.OriginalTitle != "<None>")
+            {
+                bool result;
+                ScrapeValues(movie, scraperGroup.OriginalTitle, ScrapeFields.OriginalTitle, out result);
+
+                if (!result)
+                {
+                    outResult = false;
+                }
+            }
+
             if (!string.IsNullOrEmpty(scraperGroup.Year) && scraperGroup.Year != "<None>")
             {
                 bool result;
@@ -552,6 +563,7 @@ namespace YANFOE.Scrapers.Movie
                 case ScraperList.Apple:
                     return movie.Title;
                 case ScraperList.Allocine:
+
                     if (string.IsNullOrEmpty(movie.AllocineId))
                     {
                         var scraper =
@@ -566,6 +578,7 @@ namespace YANFOE.Scrapers.Movie
                     }
 
                     return movie.AllocineId;
+
                 case ScraperList.FilmAffinity:
                     return movie.FilmAffinityId;
                 case ScraperList.FilmDelta:
@@ -577,15 +590,22 @@ namespace YANFOE.Scrapers.Movie
                 case ScraperList.Impawards:
                     return movie.ImpawardsId;
                 case ScraperList.OFDB:
+
                     if (string.IsNullOrEmpty(movie.OfdbId))
                     {
                         var scraper =
                             (from s in scrapers where s.ScraperName == ScraperList.OFDB select s).SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.OfdbId = query.Results[0].OfdbId;
+                        }
                     }
 
                     return movie.OfdbId;
+
                 case ScraperList.Kinopoisk:
                     return movie.KinopoiskId;
                 case ScraperList.Sratim:
@@ -1305,6 +1325,28 @@ namespace YANFOE.Scrapers.Movie
             return result;
         }
 
+        private static bool ScrapeOriginalTitle(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        {
+            bool result = true;
+            string output;
+            bool scrapeSuccess = scraper.ScrapeOriginalTitle(
+                GetScraperID(scraperName, movie),
+                0,
+                out output,
+                CreateLogCatagory(scraper.ScraperName.ToString(), type));
+
+            if (scrapeSuccess)
+            {
+                movie.OriginalTitle = output;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// The scrape trailer.
         /// </summary>
@@ -1485,6 +1527,12 @@ namespace YANFOE.Scrapers.Movie
                     if (type == ScrapeFields.Title)
                     {
                         result = ScrapeTitle(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.OriginalTitle)
+                    {
+                        result = ScrapeOriginalTitle(scraper, scraperName, type, movie);
                         break;
                     }
                     

@@ -35,7 +35,7 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         public QueryResult()
         {
             this.Title = string.Empty;
-            this.OrigionalTitle = string.Empty;
+            this.OriginalTitle = string.Empty;
             this.Year = -1;
             this.ReleaseDate = new DateTime();
             this.AdditionalInfo = string.Empty;
@@ -112,6 +112,22 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         public string FilmWebId { get; set; }
 
         /// <summary>
+        /// Gets or sets the ofdb id.
+        /// </summary>
+        /// <value>
+        /// The ofdb id.
+        /// </value>
+        public string OfdbId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sratim id.
+        /// </summary>
+        /// <value>
+        /// The sratim id.
+        /// </value>
+        public string SratimId { get; set; }
+
+        /// <summary>
         /// Gets or sets the impawards id.
         /// </summary>
         /// <value>
@@ -134,10 +150,10 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the origional title.
+        /// Gets or sets the Original title.
         /// </summary>
-        /// <value>The origional title.</value>
-        public string OrigionalTitle { get; set; }
+        /// <value>The Original title.</value>
+        public string OriginalTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the image URL.
