@@ -58,6 +58,11 @@ namespace YANFOE.Settings.ConstSettings
         /// The API Key for TVDb.
         /// </summary>
         public const string TvdbApi = "71F9C54F38B71B4F";
+
+        /// <summary>
+        /// The Api Key for MovieMeter.nl
+        /// </summary>
+        public const string MovieMeterApi = "8ga8k24yegyemdz7a148d2cy0xhrbxqa";
         #endregion
 
         /// <summary>
