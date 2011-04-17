@@ -1750,6 +1750,57 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        private string ofdbbId;
+
+        public string OfdbId
+        {
+            get
+            {
+                return this.ofdbbId;
+            }
+
+            set
+            {
+                this.ofdbbId = value;
+                this.OnPropertyChanged("OfdbId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        private string sratimId;
+
+        public string SratimId
+        {
+            get
+            {
+                return this.sratimId;
+            }
+
+            set
+            {
+                this.sratimId = value;
+                this.OnPropertyChanged("SratimId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
+        private string rottenTomatoId;
+
+        public string RottenTomatoId
+        {
+            get
+            {
+                return this.rottenTomatoId;
+            }
+
+            set
+            {
+                this.rottenTomatoId = value;
+                this.OnPropertyChanged("RottenTomatoId");
+                this.OnPropertyChanged("Status");
+            }
+        }
+
         #endregion
 
         #region Public Methods

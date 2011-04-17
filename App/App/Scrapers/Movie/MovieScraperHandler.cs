@@ -512,13 +512,17 @@ namespace YANFOE.Scrapers.Movie
         /// <returns>
         /// The scraper id
         /// </returns>
-        private static string GetScraperID(string scraperName, MovieModel movie)
+        private static string GetScraperID(string scraperNameString, MovieModel movie)
         {
             var results = new BindingList<QueryResult>();
             var query = new Query
-                        { Results = results, Title = movie.Title, Year = movie.Year.ToString(), ImdbId = movie.ImdbId };
+                {
+                    Results = results, Title = movie.Title, Year = movie.Year.ToString(), ImdbId = movie.ImdbId 
+                };
 
-            if (scraperName == "Imdb" || scraperName == "TheMovieDB")
+            var scraperName = (ScraperList)Enum.Parse(typeof(ScraperList), scraperNameString);
+
+            if (scraperName == ScraperList.Imdb || scraperName == ScraperList.TheMovieDB)
             {
                 if (string.IsNullOrEmpty(movie.ImdbId) || string.IsNullOrEmpty(movie.TmdbId))
                 {
@@ -541,13 +545,13 @@ namespace YANFOE.Scrapers.Movie
 
             switch (scraperName)
             {
-                case "Imdb":
+                case ScraperList.Imdb:
                     return "tt" + movie.ImdbId;
-                case "TheMovieDB":
+                case ScraperList.TheMovieDB:
                     return movie.TmdbId;
-                case "Apple":
+                case ScraperList.Apple:
                     return movie.Title;
-                case "Allocine":
+                case ScraperList.Allocine:
                     if (string.IsNullOrEmpty(movie.AllocineId))
                     {
                         var scraper =
@@ -562,18 +566,32 @@ namespace YANFOE.Scrapers.Movie
                     }
 
                     return movie.AllocineId;
-                case "FilmAffinity":
+                case ScraperList.FilmAffinity:
                     return movie.FilmAffinityId;
-                case "FilmDelta":
+                case ScraperList.FilmDelta:
                     return movie.FilmDeltaId;
-                case "FilmUp":
+                case ScraperList.FilmUp:
                     return movie.FilmUpId;
-                case "FilmWeb":
+                case ScraperList.FilmWeb:
                     return movie.FilmWebId;
-                case "Impawards":
+                case ScraperList.Impawards:
                     return movie.ImpawardsId;
-                case "Kinopoisk":
+                case ScraperList.OFDB:
+                    if (string.IsNullOrEmpty(movie.OfdbId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.OFDB select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+                    }
+
+                    return movie.OfdbId;
+                case ScraperList.Kinopoisk:
                     return movie.KinopoiskId;
+                case ScraperList.Sratim:
+                    return movie.SratimId;
+                case ScraperList.RottenTomato:
+                    return movie.RottenTomatoId;
             }
 
             return null;
@@ -1469,7 +1487,7 @@ namespace YANFOE.Scrapers.Movie
                         result = ScrapeTitle(scraper, scraperName, type, movie);
                         break;
                     }
-
+                    
                     if (type == ScrapeFields.Year)
                     {
                         result = ScrapeYear(scraper, scraperName, type, movie);
