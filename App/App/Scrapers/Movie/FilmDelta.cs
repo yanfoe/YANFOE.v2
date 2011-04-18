@@ -51,7 +51,8 @@ namespace YANFOE.Scrapers.Movie
 
             this.AvailableSearchMethod.AddRange(new[]
                                         {
-                                            ScrapeSearchMethod.Site
+                                            ScrapeSearchMethod.Site,
+                                            ScrapeSearchMethod.Bing
                                         });
 
             this.AvailableScrapeMethods.AddRange(new[]
@@ -107,6 +108,37 @@ namespace YANFOE.Scrapers.Movie
                 }
 
                 return true;
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Error, threadID, logCatagory, ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Searches bing for the scraper MovieUniqueId.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="threadID">The thread MovieUniqueId.</param>
+        /// <param name="logCatagory">The log catagory.</param>
+        /// <returns>
+        /// [true/false] if an error occurred.
+        /// </returns>
+        public new bool SearchViaBing(Query query, int threadID, string logCatagory)
+        {
+            try
+            {
+                query.Results = Bing.SearchBing(
+                    string.Format("{0} site:www.filmdelta.se/filmer/", query.Title),
+                    "http://www.filmdelta.se/filmer/",
+                    threadID,
+                    @"(?<title>.*?)\s-\sFilmdelta\s-\sFilmdatabas\spå\ssvenska",
+                    @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sFilmAffinity",
+                    @"http://www.filmdelta.se/filmer/(?<id>\d{2,9}/.*?)/",
+                    ScraperList.FilmAffinity);
+
+                return query.Results.Count > 0;
             }
             catch (Exception ex)
             {

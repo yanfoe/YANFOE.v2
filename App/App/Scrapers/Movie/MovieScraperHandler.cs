@@ -371,22 +371,33 @@ namespace YANFOE.Scrapers.Movie
 
                     if (string.IsNullOrEmpty(movie.FilmAffinityId))
                     {
-                        if (string.IsNullOrEmpty(movie.AllocineId))
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.FilmAffinity select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
                         {
-                            var scraper =
-                                (from s in scrapers where s.ScraperName == ScraperList.FilmAffinity select s).SingleOrDefault();
-
-                            scraper.SearchViaBing(query, 0, string.Empty);
-
-                            if (query.Results.Count > 0)
-                            {
-                                movie.FilmAffinityId = query.Results[0].FilmAffinityId;
-                            }
+                            movie.FilmAffinityId = query.Results[0].FilmAffinityId;
                         }
                     }
 
                     return movie.FilmAffinityId;
                 case ScraperList.FilmDelta:
+
+                    if (string.IsNullOrEmpty(movie.FilmDeltaId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.FilmDelta select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.FilmDeltaId = query.Results[0].FilmDeltaId;
+                        }
+                    }
+
                     return movie.FilmDeltaId;
                 case ScraperList.FilmUp:
                     return movie.FilmUpId;
