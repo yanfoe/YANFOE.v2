@@ -31,7 +31,6 @@ namespace YANFOE.Tools.ThirdParty
     public class MovieMeterApiHandler
     {
         private static IMMApi apiProxy;
-        private static string url = "http://www.moviemeter.nl/ws";
 
         private static string sessionKey = "";
         private static int sessionValidTill = 0;
