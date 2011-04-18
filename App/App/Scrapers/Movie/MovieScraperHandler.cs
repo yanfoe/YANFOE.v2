@@ -416,6 +416,20 @@ namespace YANFOE.Scrapers.Movie
 
                     return movie.FilmUpId;
                 case ScraperList.FilmWeb:
+
+                    if (string.IsNullOrEmpty(movie.FilmWebId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.FilmWeb select s).SingleOrDefault();
+
+                        scraper.SearchSite(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.FilmWebId = query.Results[0].FilmWebId;
+                        }
+                    }
+
                     return movie.FilmWebId;
                 case ScraperList.Impawards:
                     return movie.ImpawardsId;

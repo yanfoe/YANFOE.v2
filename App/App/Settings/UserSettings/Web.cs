@@ -120,7 +120,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void ContructDefaultValues()
         {
-            this.UserAgent = "Mozilla/5.25 Netscape/5.0 (Windows; I; Win95)";
+            this.UserAgent = "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)";
             this.QTUserAgent = "QuickTime/7.6.9 (qtver=7.6.9;os=Windows+NT+6.1)";
             this.ProxyIP = string.Empty;
             this.ProxyPort = null;

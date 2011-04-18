@@ -708,6 +708,13 @@
       <DependentUpon>TvUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Movie\ScraperGroups\Dutch.gz" />
+    <None Include="Movie\ScraperGroups\English.gz" />
+    <None Include="Movie\ScraperGroups\French.gz" />
+    <None Include="Movie\ScraperGroups\German.gz" />
+    <None Include="Movie\ScraperGroups\Italian.gz" />
+    <None Include="Movie\ScraperGroups\Spanish.gz" />
+    <None Include="Movie\ScraperGroups\Swedish.gz" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -871,7 +878,6 @@
   <ItemGroup>
     <Folder Include="Factories\Scraper\SupportClasses\" />
     <Folder Include="Movie\Cache\" />
-    <Folder Include="Movie\ScraperGroups\" />
     <Folder Include="Tools\Collections\" />
   </ItemGroup>
   <ItemGroup>
