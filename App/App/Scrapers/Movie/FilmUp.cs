@@ -67,6 +67,7 @@ namespace YANFOE.Scrapers.Movie
                                                    ScrapeFields.Cast,
                                                    ScrapeFields.Studio,
                                                    ScrapeFields.ReleaseDate,
+                                                   ScrapeFields.Runtime,
                                                    ScrapeFields.Poster
                                                });
 
@@ -85,14 +86,15 @@ namespace YANFOE.Scrapers.Movie
         {
             try
             {
-                query.Results = Bing.SearchBing(
-                    string.Format("{0} {1} site:filmup.leonardo.it/", query.Title, query.Year),
-                    "http://filmup.leonardo.it/sc_",
-                    threadID,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty,
-                    ScraperList.FilmUp);
+                query.Results =
+                    Bing.SearchBing(
+                        string.Format("{0} {1} site:filmup.leonardo.it/", query.Title, query.Year),
+                        "http://filmup.leonardo.it/sc_",
+                        threadID,
+                        @"FilmUP\s-\sScheda:\s(?<title>.*?)$",
+                        @"FilmUP\s-\sScheda:\s(?<title>.*?)$",
+                        @"http://filmup\.leonardo\.it/sc_(?<id>.*?)\.htm",
+                        ScraperList.FilmUp);
 
                 return query.Results.Count > 0;
             }
@@ -349,7 +351,7 @@ namespace YANFOE.Scrapers.Movie
             try
             {
                 output = YRegex.MatchesToList(
-                    @"Genere:.*?=""2"">(?<genre>.*?)</font",
+                    @"Genere:.*?=""2"">(?<genre>.{3,30}?)</font",
                     this.GetHtml("main", threadID, id),
                     "genre",
                     true);
@@ -528,13 +530,37 @@ namespace YANFOE.Scrapers.Movie
 
                     if (!string.IsNullOrEmpty(posterImg))
                     {
+                        var poster = string.Format("http://filmup.leonardo.it/posters/loc/500/{0}.jpg", posterImg);
+
                         output.Add(
                             new ImageDetailsModel
                                 {
-                                    UriFull = new Uri(string.Format("http://filmup.leonardo.it/posters/loc/500/{0}.jpg", posterImg))
+                                    UriFull = new Uri(poster),
+                                    UriThumb = new Uri(poster)
                                 });
                     }
                 }
+
+                return output.IsFilled();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Error, threadID, logCatagory, ex.Message);
+                return false;
+            }
+        }
+
+        public new bool ScrapeRuntime(string id, int threadID, out int output, string logCatagory)
+        {
+            output = -1;
+
+            try
+            {
+                output = YRegex.Match(
+                        @"Durata:&nbsp;</font></td><td valign=""top""><font face=""arial, helvetica"" size=""2"">(?<runtime>\d{2,3})'",
+                        this.GetHtml("main", threadID, id),
+                        "runtime")
+                    .ToInt();
 
                 return output.IsFilled();
             }

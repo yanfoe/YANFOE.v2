@@ -143,15 +143,6 @@ namespace YANFOE.Tools.Compression
                         fileStreamDest.Close();
 
                         f = File.ReadAllText(unpackedFilePath, Encoding.UTF8);
-
-                        foreach (var encoding in Settings.Get.Web.WebEncodings)
-                        {
-                            if (f.Contains(encoding.Key))
-                            {
-                                f = File.ReadAllText(unpackedFilePath, encoding.Value);
-                                break;
-                            }
-                        }
                     }
                 }
 

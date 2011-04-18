@@ -400,6 +400,20 @@ namespace YANFOE.Scrapers.Movie
 
                     return movie.FilmDeltaId;
                 case ScraperList.FilmUp:
+
+                    if (string.IsNullOrEmpty(movie.FilmUpId))
+                    {
+                        var scraper =
+                            (from s in scrapers where s.ScraperName == ScraperList.FilmUp select s).SingleOrDefault();
+
+                        scraper.SearchViaBing(query, 0, string.Empty);
+
+                        if (query.Results.Count > 0)
+                        {
+                            movie.FilmUpId = query.Results[0].FilmUpId;
+                        }
+                    }
+
                     return movie.FilmUpId;
                 case ScraperList.FilmWeb:
                     return movie.FilmWebId;
