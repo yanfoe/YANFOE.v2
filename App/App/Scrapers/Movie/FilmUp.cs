@@ -379,11 +379,14 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                output = YRegex.MatchesToPersonList(
+                var html = this.GetHtml("main", threadID, id);
+
+                output = YRegex.MatchDelimitedToList(
                     "Cast.*?=\"2\">(?<cast>.*?)</f",
-                    this.GetHtml("main", threadID, id),
-                    "genre",
-                    true);
+                    html,
+                    "cast",
+                    ',')
+                    .ToPersonList();
 
                 return output.IsFilled();
             }

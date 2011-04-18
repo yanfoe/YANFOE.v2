@@ -110,6 +110,14 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                     string.Format(CultureInfo.CurrentCulture, "Download Complete. Saving to Cache"),
                     string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
 
+                if (encode != Encoding.UTF8)
+                {
+                    var origBytes = encode.GetBytes(outputString);
+                    var newBytes = Encoding.Convert(encode, Encoding.UTF8, origBytes);
+                    outputString = Encoding.UTF8.GetString(newBytes);
+                    encode = Encoding.UTF8;
+                }
+
                 File.WriteAllText(cachePath + ".txt.tmp", outputString, encode);
 
                 Gzip.Compress(cachePath + ".txt.tmp", cachePath + ".txt.gz");
@@ -121,12 +129,6 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                     string.Format(CultureInfo.CurrentCulture, "Process Complete."),
                     string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
 
-                if (encode != Encoding.UTF8)
-                {
-                    var origBytes = encode.GetBytes(outputString);
-                    var newBytes = Encoding.Convert(encode, Encoding.UTF8, origBytes);
-                    outputString = Encoding.UTF8.GetString(newBytes);
-                }
 
                 downloadItem.Result.Result = outputString;
                 downloadItem.Result.Success = true;
