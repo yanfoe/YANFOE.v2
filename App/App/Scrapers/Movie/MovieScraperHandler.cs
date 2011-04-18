@@ -265,7 +265,7 @@ namespace YANFOE.Scrapers.Movie
 
         private static bool GetOutResult(ScrapeFields scrapeFields, string scrapeGroup, MovieModel movie, string noneValue, MovieScraperGroupModel scraperGroup, bool outResult)
         {
-            if (!string.IsNullOrEmpty(scraperGroup.ReleaseDate) && scraperGroup.ReleaseDate != noneValue)
+            if (!string.IsNullOrEmpty(scrapeGroup) && scrapeGroup != noneValue)
             {
                 bool result;
                 ScrapeValues(movie, scrapeGroup, scrapeFields, out result);
@@ -368,6 +368,23 @@ namespace YANFOE.Scrapers.Movie
                     return movie.AllocineId;
 
                 case ScraperList.FilmAffinity:
+
+                    if (string.IsNullOrEmpty(movie.FilmAffinityId))
+                    {
+                        if (string.IsNullOrEmpty(movie.AllocineId))
+                        {
+                            var scraper =
+                                (from s in scrapers where s.ScraperName == ScraperList.FilmAffinity select s).SingleOrDefault();
+
+                            scraper.SearchViaBing(query, 0, string.Empty);
+
+                            if (query.Results.Count > 0)
+                            {
+                                movie.FilmAffinityId = query.Results[0].FilmAffinityId;
+                            }
+                        }
+                    }
+
                     return movie.FilmAffinityId;
                 case ScraperList.FilmDelta:
                     return movie.FilmDeltaId;

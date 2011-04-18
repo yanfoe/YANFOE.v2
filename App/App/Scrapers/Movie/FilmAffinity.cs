@@ -88,12 +88,12 @@ namespace YANFOE.Scrapers.Movie
             try
             {
                 query.Results = Bing.SearchBing(
-                    string.Format("{0} site:http://www.filmaffinity.com/es", query.Title), 
-                    string.Empty, 
+                    string.Format("{0} {1} site:http://www.filmaffinity.com/es", query.Title, query.Year),
+                    "http://www.filmaffinity.com/es/film",
                     threadID,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty,
+                    @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sFilmAffinity",
+                    @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sFilmAffinity",
+                    @"http://www\.filmaffinity\.com/es/film(?<id>\d{6,9})\.html",
                     ScraperList.FilmAffinity);
 
                 return query.Results.Count > 0;
@@ -359,12 +359,12 @@ namespace YANFOE.Scrapers.Movie
 
             try
             {
-                output = YRegex.MatchDelimitedToList(
-                    @"GÉNERO(?<genre>.*?)</tr>",
-                    this.GetHtml("main", threadID, id),
-                    "main",
-                    ',',
-                    true);
+                var html = this.GetHtml("main", threadID, id);
+
+                output =
+                    YRegex.MatchesToList(
+                        "genre=.*?&attr=rat_count\" style=\"text-decoration:none\">(?<genre>.*?)</a>", html, "genre");
+
 
                 return output.IsFilled();
             }
@@ -513,7 +513,9 @@ namespace YANFOE.Scrapers.Movie
                     this.GetHtml("main", threadID, id),
                     "poster");
 
-                output.Add(new ImageDetailsModel { UriFull = new Uri(posterURL) });
+                var posterURLSmall = posterURL.Replace("large.jpg", "small.jpg");
+
+                output.Add(new ImageDetailsModel { UriFull = new Uri(posterURL), UriThumb = new Uri(posterURLSmall) });
 
                 return output.IsFilled();
             }

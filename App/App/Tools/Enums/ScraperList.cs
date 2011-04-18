@@ -85,7 +85,12 @@ namespace YANFOE.Tools.Enums
         /// <summary>
         /// Site: http://www.filmaffinity.com
         /// </summary>
-        FilmAffinity, 
+        FilmAffinity,
+
+        /// <summary>
+        /// Site: http://www.filmkatalogus.hu/
+        /// </summary>
+        FilmKatalogus,
 
         /// <summary>
         /// Site: http://trailers.apple.com
