@@ -183,6 +183,23 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
+        /// Checks existance of a set with a particular name
+        /// </summary>
+        /// <param name="response">The response.</param>
+        /// <returns></returns>
+        public static bool HasSetWithName(string response)
+        {
+            MovieSetModel find = (from s in database where s.SetName == response select s).SingleOrDefault();
+
+            if (find == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// The change current set fanart.
         /// </summary>
         /// <param name="path">The path to change fanart</param>

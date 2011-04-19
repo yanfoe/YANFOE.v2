@@ -245,7 +245,16 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             if (!string.IsNullOrEmpty(enterAValue.Response))
             {
-                MovieSetManager.AddNewSet(enterAValue.Response);
+                if (!MovieSetManager.HasSetWithName(enterAValue.Response))
+                {
+                    MovieSetManager.AddNewSet(enterAValue.Response);
+                }
+                else
+                {
+                    var notificationPanel = new FrmShowNotification("There is already a set with this name");
+                    notificationPanel.ShowDialog();
+                }
+
             }
         }
 
