@@ -33,7 +33,7 @@ namespace YANFOE.UI.Dialogs.General
 
             textEdit.Focus();
 
-            Question = question;
+            this.Question = question;
 
             if (question != null)
             {

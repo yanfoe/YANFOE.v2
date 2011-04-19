@@ -12,6 +12,7 @@
         private BackgroundWorker bgw = new BackgroundWorker();
 
         private Form frmMain;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FrmLoadingYANFOE"/> class.
         /// </summary>
@@ -28,7 +29,7 @@
 
             // The MediaPathDB must be created prior to creating the main form.
             // However, the main form must be created prior to loading the rest of the databases.
-            frmMain = new FrmMain();
+            this.frmMain = new FrmMain();
             
             this.bgw.DoWork += this.bgw_DoWork;
             this.bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;

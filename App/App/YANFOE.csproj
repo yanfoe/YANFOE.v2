@@ -708,13 +708,30 @@
       <DependentUpon>TvUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Movie\ScraperGroups\Dutch.gz" />
-    <None Include="Movie\ScraperGroups\English.gz" />
-    <None Include="Movie\ScraperGroups\French.gz" />
-    <None Include="Movie\ScraperGroups\German.gz" />
-    <None Include="Movie\ScraperGroups\Italian.gz" />
-    <None Include="Movie\ScraperGroups\Spanish.gz" />
-    <None Include="Movie\ScraperGroups\Swedish.gz" />
+    <None Include="Movie\ScraperGroups\Dutch.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\English.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\French.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\German.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Italian.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Polish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Spanish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Swedish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

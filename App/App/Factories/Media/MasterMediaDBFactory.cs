@@ -100,7 +100,7 @@ namespace YANFOE.Factories.Media
         /// </returns>
         public static bool MovieDatabaseContains(string path)
         {
-            MediaModel result = (from m in masterMovieMediaDatabase where m.FilePath == path select m).SingleOrDefault();
+            MediaModel result = (from m in masterMovieMediaDatabase.AsParallel() where m.FilePath == path select m).SingleOrDefault();
 
             return result != null;
         }
@@ -152,12 +152,9 @@ namespace YANFOE.Factories.Media
         {
             masterMovieMediaDatabase = new BindingList<MediaModel>();
 
-            foreach (MovieModel m in MovieDBFactory.MovieDatabase)
+            foreach (var f in MovieDBFactory.MovieDatabase.SelectMany(m => m.AssociatedFiles.Media).AsParallel())
             {
-                foreach (MediaModel f in m.AssociatedFiles.Media)
-                {
-                    masterMovieMediaDatabase.Add(f);
-                }
+                masterMovieMediaDatabase.Add(f);
             }
         }
 
@@ -170,24 +167,14 @@ namespace YANFOE.Factories.Media
         {
             masterTvMediaDatabase = new BindingList<string>();
 
-            foreach (var series in TvDBFactory.TvDatabase)
+            foreach (string filePath in from series in TvDBFactory.TvDatabase.AsParallel()
+                                        from season in series.Value.Seasons.AsParallel()
+                                        from episode in season.Value.Episodes.AsParallel()
+                                        select episode.CurrentFilenameAndPath
+                                        into filePath where !string.IsNullOrEmpty(filePath)
+                                        where !masterTvMediaDatabase.Contains(filePath) select filePath)
             {
-                foreach (var season in series.Value.Seasons)
-                {
-                    foreach (Episode episode in season.Value.Episodes)
-                    {
-                        string filePath = episode.CurrentFilenameAndPath;
-
-                        if (!string.IsNullOrEmpty(filePath))
-                        {
-                            // var check = (from m in masterTvMediaDatabase where m == filePath select m).SingleOrDefault();
-                            if (!masterTvMediaDatabase.Contains(filePath))
-                            {
-                                masterTvMediaDatabase.Add(filePath);
-                            }
-                        }
-                    }
-                }
+                masterTvMediaDatabase.Add(filePath);
             }
         }
 

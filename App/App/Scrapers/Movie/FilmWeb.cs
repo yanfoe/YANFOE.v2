@@ -18,7 +18,6 @@ namespace YANFOE.Scrapers.Movie
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Text;
-    using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
 

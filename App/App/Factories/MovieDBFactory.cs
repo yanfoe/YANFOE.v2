@@ -287,7 +287,7 @@ namespace YANFOE.Factories
         {
             try
             {
-                return (from m in MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
+                return (from m in MovieDatabase.AsParallel() where m.MovieUniqueId == id select m).SingleOrDefault();
             }
             catch
             {
@@ -577,7 +577,7 @@ namespace YANFOE.Factories
         public static void ReplaceMovie(MovieModel movieModel)
         {
             MovieModel getMovieInDatabase =
-                (from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m).SingleOrDefault();
+                (from m in MovieDatabase.AsParallel() where m.MovieUniqueId == movieModel.MovieUniqueId select m).SingleOrDefault();
 
             int index = MovieDatabase.IndexOf(getMovieInDatabase);
             movieModel.IsBusy = false;
@@ -622,7 +622,7 @@ namespace YANFOE.Factories
             }
             else
             {
-                MovieModel movie = (from m in MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
+                MovieModel movie = (from m in MovieDatabase.AsParallel() where m.MovieUniqueId == id select m).SingleOrDefault();
 
                 if (movie != null)
                 {

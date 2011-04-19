@@ -123,7 +123,7 @@ namespace YANFOE.Factories.Import
                 if (file.Path != currentGetPathFiles)
                 {
                     var files = FileHelper.GetFilesRecursive(file.Path, "*.*").ToArray();
-                    getFiles = (from f in files select f).ToArray();
+                    getFiles = (from f in files.AsParallel() select f).ToArray();
 
                     currentGetPathFiles = file.Path;
                 }
@@ -139,7 +139,7 @@ namespace YANFOE.Factories.Import
                         FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, file.Path, getFiles)
                     };
 
-                var result = (from m in ImportDatabase where m.Title == movieModel.Title select m).ToList();
+                var result = (from m in ImportDatabase.AsParallel().AsOrdered() where m.Title == movieModel.Title select m).ToList();
 
                 if (result.Count == 0)
                 {

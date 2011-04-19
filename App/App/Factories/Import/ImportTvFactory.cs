@@ -88,14 +88,14 @@ namespace YANFOE.Factories.Import
             var seriesName = episodeDetails.SeriesName;
 
             var name = seriesName;
-            var check1 = (from s in Scan where s.Key.ToLower() == name.ToLower() select s.Key).SingleOrDefault();
+            var check1 = (from s in Scan.AsParallel() where s.Key.ToLower() == name.ToLower() select s.Key).SingleOrDefault();
 
             // Process Series
             if (check1 == null)
             {
                 Scan.Add(seriesName, new ScanSeries());
 
-                var check2 = (from s in SeriesNameList where s.SeriesName.ToLower() == seriesName.ToLower() select s.SeriesName.ToLower()).ToList();
+                var check2 = (from s in SeriesNameList.AsParallel() where s.SeriesName.ToLower() == seriesName.ToLower() select s.SeriesName.ToLower()).ToList();
 
                 if (!check2.Contains(seriesName.ToLower()))
                 {
@@ -147,7 +147,7 @@ namespace YANFOE.Factories.Import
             }
 
             var findList =
-                (from s in MediaPathDBFactory.GetMediaPathTvUnsorted()
+                (from s in MediaPathDBFactory.GetMediaPathTvUnsorted().AsParallel().AsOrdered()
                  where s.PathAndFileName == episodeDetails.FilePath
                  select s).ToList();
 
@@ -169,7 +169,7 @@ namespace YANFOE.Factories.Import
 
             var paths = MediaPathDBFactory.GetMediaPathTvUnsorted();
 
-            var filteredFiles = (from file in paths
+            var filteredFiles = (from file in paths.AsParallel().AsOrdered()
                                  let pathAndFileName = Path.GetExtension(file.PathAndFileName).ToLower()
                                  where filters.Any(filter => pathAndFileName.ToLower() == "." + filter.ToLower())
                                  select file.PathAndFileName).ToList();
@@ -228,7 +228,7 @@ namespace YANFOE.Factories.Import
             {
                 var rawSeriesName = regex.Groups["seriesName"].Value.Trim();
 
-                var result = (from r in ScanSeriesPicks where r.SearchString == rawSeriesName select r)
+                var result = (from r in ScanSeriesPicks.AsParallel() where r.SearchString == rawSeriesName select r)
                     .SingleOrDefault();
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
@@ -272,7 +272,7 @@ namespace YANFOE.Factories.Import
             }
 
             var check =
-                (from s in ScanSeriesPicks where s.SearchString == episodeDetails.SeriesName select s).SingleOrDefault();
+                (from s in ScanSeriesPicks.AsParallel() where s.SearchString == episodeDetails.SeriesName select s).SingleOrDefault();
 
             if (check != null)
             {
