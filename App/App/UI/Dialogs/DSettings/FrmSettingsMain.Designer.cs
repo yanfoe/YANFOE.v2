@@ -182,6 +182,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::YANFOE.Properties.Resources.delete32;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnCancel.Location = new System.Drawing.Point(92, 454);
@@ -287,7 +288,7 @@
             this.tabGeneralWeb.Controls.Add(this.ucSettingsGeneralWeb1);
             this.tabGeneralWeb.Controls.Add(this.panelControl2);
             this.tabGeneralWeb.Name = "tabGeneralWeb";
-            this.tabGeneralWeb.Size = new System.Drawing.Size(614, 432);
+            this.tabGeneralWeb.Size = new System.Drawing.Size(612, 430);
             this.tabGeneralWeb.Text = "Web";
             // 
             // ucSettingsGeneralWeb1
@@ -895,6 +896,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(805, 504);
             this.Controls.Add(this.layoutControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -75,6 +75,7 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Settings.Get.LoadAll();
+            this.Close();
         }
 
         /// <summary>
