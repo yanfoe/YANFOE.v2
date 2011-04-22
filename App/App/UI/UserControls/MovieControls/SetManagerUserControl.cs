@@ -252,8 +252,8 @@ namespace YANFOE.UI.UserControls.MovieControls
                 else
                 {
                     XtraMessageBox.Show(
-                        "There is already a set with this name",
-                        "Set already exists",
+                        string.Format("There is already a set called {0}", enterAValue.Response),
+                        string.Format("Set '{0}' already exists", enterAValue.Response),
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Stop);
                 }
