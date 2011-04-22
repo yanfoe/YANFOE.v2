@@ -71,6 +71,11 @@ namespace YANFOE.Models.TvModels.Scan
         {
             get
             {
+                if (this.seriesName == null)
+                {
+                    this.seriesName = "";
+                    return this.seriesName;
+                }
                 return this.seriesName.Replace(".", " ");
             }
 
