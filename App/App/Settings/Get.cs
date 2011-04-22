@@ -93,7 +93,7 @@ namespace YANFOE.Settings
         /// <summary>
         /// The web settings
         /// </summary>
-        private static Web web;
+        private static WebSettings web;
 
         #endregion
 
@@ -296,11 +296,11 @@ namespace YANFOE.Settings
         /// Gets or sets settings related to web.
         /// </summary>
         /// <value>The web settings object</value>
-        public static Web Web
+        public static WebSettings Web
         {
             get
             {
-                return web ?? (web = new Web());
+                return web ?? (web = new WebSettings());
             }
 
             set
@@ -639,11 +639,11 @@ namespace YANFOE.Settings
 
                 string json = IO.ReadTextFromFile(path);
 
-                web = JsonConvert.DeserializeObject(json, typeof(Web)) as Web;
+                web = JsonConvert.DeserializeObject(json, typeof(WebSettings)) as WebSettings;
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load UiSettings settings. Please check log for more info.");
+                XtraMessageBox.Show("Failed to load Web settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }

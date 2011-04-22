@@ -25,14 +25,14 @@ namespace YANFOE.Settings.UserSettings
     /// Contains all web related settings.
     /// </summary>
     [Serializable]
-    public class Web : ModelBase
+    public class WebSettings
     {
         #region Constructors and Destructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Web"/> class.
         /// </summary>
-        public Web()
+        public WebSettings()
         {
             this.ContructDefaultValues();
             this.WebEncodings = new Dictionary<string, Encoding>();
