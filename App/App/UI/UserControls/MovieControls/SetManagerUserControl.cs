@@ -251,8 +251,11 @@ namespace YANFOE.UI.UserControls.MovieControls
                 }
                 else
                 {
-                    var notificationPanel = new FrmShowNotification("There is already a set with this name");
-                    notificationPanel.ShowDialog();
+                    XtraMessageBox.Show(
+                        "There is already a set with this name",
+                        "Set already exists",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
                 }
 
             }
