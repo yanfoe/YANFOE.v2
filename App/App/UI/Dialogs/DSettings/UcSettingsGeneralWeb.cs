@@ -22,6 +22,9 @@ namespace YANFOE.UI.Dialogs.DSettings
         public UcSettingsGeneralWeb()
         {
             InitializeComponent();
+
+            chkProcessBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableBackgroundQueProcessing");
+            chkAddtoBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableAddToBackgroundQue");
         }
     }
 }

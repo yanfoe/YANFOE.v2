@@ -221,7 +221,7 @@
             // 
             this.tabGeneral.Controls.Add(this.tabControlGeneral);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Size = new System.Drawing.Size(618, 456);
+            this.tabGeneral.Size = new System.Drawing.Size(616, 454);
             this.tabGeneral.Text = "General";
             // 
             // tabControlGeneral
@@ -230,7 +230,7 @@
             this.tabControlGeneral.Location = new System.Drawing.Point(0, 0);
             this.tabControlGeneral.Name = "tabControlGeneral";
             this.tabControlGeneral.SelectedTabPage = this.tabGeneralUi;
-            this.tabControlGeneral.Size = new System.Drawing.Size(618, 456);
+            this.tabControlGeneral.Size = new System.Drawing.Size(616, 454);
             this.tabControlGeneral.TabIndex = 0;
             this.tabControlGeneral.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneralUi,
@@ -241,7 +241,7 @@
             this.tabGeneralUi.Controls.Add(this.ucSettingsGeneralUi2);
             this.tabGeneralUi.Controls.Add(this.panelControl1);
             this.tabGeneralUi.Name = "tabGeneralUi";
-            this.tabGeneralUi.Size = new System.Drawing.Size(614, 432);
+            this.tabGeneralUi.Size = new System.Drawing.Size(610, 428);
             this.tabGeneralUi.Text = "Ui";
             // 
             // ucSettingsGeneralUi2
@@ -249,7 +249,7 @@
             this.ucSettingsGeneralUi2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsGeneralUi2.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsGeneralUi2.Name = "ucSettingsGeneralUi2";
-            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(614, 380);
+            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(610, 376);
             this.ucSettingsGeneralUi2.TabIndex = 1;
             // 
             // panelControl1
@@ -259,7 +259,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(614, 52);
+            this.panelControl1.Size = new System.Drawing.Size(610, 52);
             this.panelControl1.TabIndex = 2;
             // 
             // labelControl1
@@ -335,7 +335,7 @@
             // 
             this.tabMovies.Controls.Add(this.tabControlMovies);
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(618, 456);
+            this.tabMovies.Size = new System.Drawing.Size(616, 454);
             this.tabMovies.Text = "Movies";
             // 
             // tabControlMovies
@@ -355,7 +355,7 @@
             this.tabMovieOut.Controls.Add(this.ucSettingsMoviesIO1);
             this.tabMovieOut.Controls.Add(this.panelControl6);
             this.tabMovieOut.Name = "tabMovieOut";
-            this.tabMovieOut.Size = new System.Drawing.Size(614, 432);
+            this.tabMovieOut.Size = new System.Drawing.Size(612, 430);
             this.tabMovieOut.Text = "File Out";
             // 
             // ucSettingsMoviesIO1
@@ -402,7 +402,7 @@
             this.tabMovieIn.Controls.Add(this.ucSettingsMovieIn1);
             this.tabMovieIn.Controls.Add(this.panelControl9);
             this.tabMovieIn.Name = "tabMovieIn";
-            this.tabMovieIn.Size = new System.Drawing.Size(614, 432);
+            this.tabMovieIn.Size = new System.Drawing.Size(612, 430);
             this.tabMovieIn.Text = "File In";
             // 
             // ucSettingsMovieIn1
@@ -448,7 +448,7 @@
             // 
             this.tabTv.Controls.Add(this.tabTvControl);
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(618, 456);
+            this.tabTv.Size = new System.Drawing.Size(616, 454);
             this.tabTv.Text = "TV";
             // 
             // tabTvControl
@@ -468,7 +468,7 @@
             this.tabTvFileOut.Controls.Add(this.ucSettingsTvIO1);
             this.tabTvFileOut.Controls.Add(this.panelControl7);
             this.tabTvFileOut.Name = "tabTvFileOut";
-            this.tabTvFileOut.Size = new System.Drawing.Size(614, 432);
+            this.tabTvFileOut.Size = new System.Drawing.Size(612, 430);
             this.tabTvFileOut.Text = "File Out";
             // 
             // ucSettingsTvIO1
@@ -515,7 +515,7 @@
             this.tabTvRename.Controls.Add(this.ucSettingsTvRename1);
             this.tabTvRename.Controls.Add(this.panelControl8);
             this.tabTvRename.Name = "tabTvRename";
-            this.tabTvRename.Size = new System.Drawing.Size(614, 432);
+            this.tabTvRename.Size = new System.Drawing.Size(612, 430);
             this.tabTvRename.Text = "Rename";
             // 
             // ucSettingsTvRename1
@@ -561,7 +561,7 @@
             // 
             this.tabScrapers.Controls.Add(this.xtraTabControl1);
             this.tabScrapers.Name = "tabScrapers";
-            this.tabScrapers.Size = new System.Drawing.Size(618, 456);
+            this.tabScrapers.Size = new System.Drawing.Size(616, 454);
             this.tabScrapers.Text = "Scrapers";
             // 
             // xtraTabControl1
@@ -581,7 +581,7 @@
             // 
             this.tabIMDB.Controls.Add(this.panelControl3);
             this.tabIMDB.Name = "tabIMDB";
-            this.tabIMDB.Size = new System.Drawing.Size(614, 432);
+            this.tabIMDB.Size = new System.Drawing.Size(612, 430);
             this.tabIMDB.Text = "IMDB";
             // 
             // panelControl3
@@ -619,7 +619,7 @@
             // 
             this.tabTMDB.Controls.Add(this.panelControl4);
             this.tabTMDB.Name = "tabTMDB";
-            this.tabTMDB.Size = new System.Drawing.Size(614, 432);
+            this.tabTMDB.Size = new System.Drawing.Size(612, 430);
             this.tabTMDB.Text = "The Movie DB";
             // 
             // panelControl4
@@ -657,7 +657,7 @@
             // 
             this.tabTVDB.Controls.Add(this.panelControl5);
             this.tabTVDB.Name = "tabTVDB";
-            this.tabTVDB.Size = new System.Drawing.Size(614, 432);
+            this.tabTVDB.Size = new System.Drawing.Size(612, 430);
             this.tabTVDB.Text = "The TvDB";
             // 
             // panelControl5
