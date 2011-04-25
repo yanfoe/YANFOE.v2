@@ -24,7 +24,6 @@ namespace YANFOE.UI.UserControls.TvControls
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
     using YANFOE.Factories;
-    using YANFOE.Models.MovieModels;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Properties;
@@ -229,11 +228,11 @@ namespace YANFOE.UI.UserControls.TvControls
 
             if (series.ChangedText || series.ChangedPoster || series.ChangedFanart || series.ChangedBanner)
             {
-                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextChanged;
+                e.Appearance.Font = Get.LookAndFeel.TextChanged;
             }
             else
             {
-                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextNormal;
+                e.Appearance.Font = Get.LookAndFeel.TextNormal;
             }
         }
 
@@ -281,7 +280,7 @@ namespace YANFOE.UI.UserControls.TvControls
             }
             else
             {
-                e.Appearance.Font = YANFOE.Settings.Get.LookAndFeel.TextNormal;
+                e.Appearance.Font = Get.LookAndFeel.TextNormal;
             }
         }
 
@@ -372,7 +371,7 @@ namespace YANFOE.UI.UserControls.TvControls
         private void popupSeries_BeforePopup(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var rows = gridViewTvTitleList.GetSelectedRows();           
-            var seriesList = rows.Select(row => this.gridViewTvTitleList.GetRow(row) as MasterSeriesListModel).ToList();
+            rows.Select(row => this.gridViewTvTitleList.GetRow(row) as MasterSeriesListModel).ToList();
 
             popupSeries.ClearLinks();
 

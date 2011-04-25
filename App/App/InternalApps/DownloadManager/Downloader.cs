@@ -270,8 +270,9 @@ namespace YANFOE.InternalApps.DownloadManager
                     {
                         try
                         {
-                            item.ThreadID = i+1;
+                            item.ThreadID = i + 1;
                             item.Progress = Progress[i];
+
                             BackgroundWorkers[i].RunWorkerAsync(item);
                             found = true;
 

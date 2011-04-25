@@ -69,6 +69,8 @@
             this.panelControl8 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit8 = new DevExpress.XtraEditors.PictureEdit();
+            this.tabTvUpdating = new DevExpress.XtraTab.XtraTabPage();
+            this.tabTvMisc = new DevExpress.XtraTab.XtraTabPage();
             this.tabScrapers = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabIMDB = new DevExpress.XtraTab.XtraTabPage();
@@ -94,6 +96,7 @@
             this.navItemTvFileOut = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemTvRename = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.navGroupScrapers = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItem3 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem4 = new DevExpress.XtraNavBar.NavBarItem();
@@ -104,6 +107,12 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
+            this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.pictureEdit10 = new DevExpress.XtraEditors.PictureEdit();
+            this.panelControl11 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
+            this.pictureEdit11 = new DevExpress.XtraEditors.PictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
@@ -141,6 +150,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).BeginInit();
             this.panelControl8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit8.Properties)).BeginInit();
+            this.tabTvUpdating.SuspendLayout();
+            this.tabTvMisc.SuspendLayout();
             this.tabScrapers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -163,6 +174,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.simpleSeparator1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).BeginInit();
+            this.panelControl10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit10.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).BeginInit();
+            this.panelControl11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit11.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -221,7 +238,7 @@
             // 
             this.tabGeneral.Controls.Add(this.tabControlGeneral);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Size = new System.Drawing.Size(616, 454);
+            this.tabGeneral.Size = new System.Drawing.Size(618, 456);
             this.tabGeneral.Text = "General";
             // 
             // tabControlGeneral
@@ -230,7 +247,7 @@
             this.tabControlGeneral.Location = new System.Drawing.Point(0, 0);
             this.tabControlGeneral.Name = "tabControlGeneral";
             this.tabControlGeneral.SelectedTabPage = this.tabGeneralUi;
-            this.tabControlGeneral.Size = new System.Drawing.Size(616, 454);
+            this.tabControlGeneral.Size = new System.Drawing.Size(618, 456);
             this.tabControlGeneral.TabIndex = 0;
             this.tabControlGeneral.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneralUi,
@@ -241,7 +258,7 @@
             this.tabGeneralUi.Controls.Add(this.ucSettingsGeneralUi2);
             this.tabGeneralUi.Controls.Add(this.panelControl1);
             this.tabGeneralUi.Name = "tabGeneralUi";
-            this.tabGeneralUi.Size = new System.Drawing.Size(610, 428);
+            this.tabGeneralUi.Size = new System.Drawing.Size(614, 432);
             this.tabGeneralUi.Text = "Ui";
             // 
             // ucSettingsGeneralUi2
@@ -249,8 +266,9 @@
             this.ucSettingsGeneralUi2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsGeneralUi2.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsGeneralUi2.Name = "ucSettingsGeneralUi2";
-            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(610, 376);
+            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(614, 380);
             this.ucSettingsGeneralUi2.TabIndex = 1;
+            this.ucSettingsGeneralUi2.Load += new System.EventHandler(this.ucSettingsGeneralUi2_Load);
             // 
             // panelControl1
             // 
@@ -259,7 +277,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(610, 52);
+            this.panelControl1.Size = new System.Drawing.Size(614, 52);
             this.panelControl1.TabIndex = 2;
             // 
             // labelControl1
@@ -288,7 +306,7 @@
             this.tabGeneralWeb.Controls.Add(this.ucSettingsGeneralWeb1);
             this.tabGeneralWeb.Controls.Add(this.panelControl2);
             this.tabGeneralWeb.Name = "tabGeneralWeb";
-            this.tabGeneralWeb.Size = new System.Drawing.Size(612, 430);
+            this.tabGeneralWeb.Size = new System.Drawing.Size(614, 432);
             this.tabGeneralWeb.Text = "Web";
             // 
             // ucSettingsGeneralWeb1
@@ -335,7 +353,7 @@
             // 
             this.tabMovies.Controls.Add(this.tabControlMovies);
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(616, 454);
+            this.tabMovies.Size = new System.Drawing.Size(618, 456);
             this.tabMovies.Text = "Movies";
             // 
             // tabControlMovies
@@ -355,7 +373,7 @@
             this.tabMovieOut.Controls.Add(this.ucSettingsMoviesIO1);
             this.tabMovieOut.Controls.Add(this.panelControl6);
             this.tabMovieOut.Name = "tabMovieOut";
-            this.tabMovieOut.Size = new System.Drawing.Size(612, 430);
+            this.tabMovieOut.Size = new System.Drawing.Size(614, 432);
             this.tabMovieOut.Text = "File Out";
             // 
             // ucSettingsMoviesIO1
@@ -402,7 +420,7 @@
             this.tabMovieIn.Controls.Add(this.ucSettingsMovieIn1);
             this.tabMovieIn.Controls.Add(this.panelControl9);
             this.tabMovieIn.Name = "tabMovieIn";
-            this.tabMovieIn.Size = new System.Drawing.Size(612, 430);
+            this.tabMovieIn.Size = new System.Drawing.Size(614, 432);
             this.tabMovieIn.Text = "File In";
             // 
             // ucSettingsMovieIn1
@@ -448,7 +466,7 @@
             // 
             this.tabTv.Controls.Add(this.tabTvControl);
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(616, 454);
+            this.tabTv.Size = new System.Drawing.Size(618, 456);
             this.tabTv.Text = "TV";
             // 
             // tabTvControl
@@ -461,14 +479,16 @@
             this.tabTvControl.TabIndex = 0;
             this.tabTvControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabTvFileOut,
-            this.tabTvRename});
+            this.tabTvRename,
+            this.tabTvUpdating,
+            this.tabTvMisc});
             // 
             // tabTvFileOut
             // 
             this.tabTvFileOut.Controls.Add(this.ucSettingsTvIO1);
             this.tabTvFileOut.Controls.Add(this.panelControl7);
             this.tabTvFileOut.Name = "tabTvFileOut";
-            this.tabTvFileOut.Size = new System.Drawing.Size(612, 430);
+            this.tabTvFileOut.Size = new System.Drawing.Size(614, 432);
             this.tabTvFileOut.Text = "File Out";
             // 
             // ucSettingsTvIO1
@@ -501,7 +521,7 @@
             // pictureEdit7
             // 
             this.pictureEdit7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureEdit7.EditValue = global::YANFOE.Properties.Resources.saveio1;
+            this.pictureEdit7.EditValue = global::YANFOE.Properties.Resources.television;
             this.pictureEdit7.Location = new System.Drawing.Point(2, 2);
             this.pictureEdit7.Name = "pictureEdit7";
             this.pictureEdit7.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -515,7 +535,7 @@
             this.tabTvRename.Controls.Add(this.ucSettingsTvRename1);
             this.tabTvRename.Controls.Add(this.panelControl8);
             this.tabTvRename.Name = "tabTvRename";
-            this.tabTvRename.Size = new System.Drawing.Size(612, 430);
+            this.tabTvRename.Size = new System.Drawing.Size(614, 432);
             this.tabTvRename.Text = "Rename";
             // 
             // ucSettingsTvRename1
@@ -548,7 +568,7 @@
             // pictureEdit8
             // 
             this.pictureEdit8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureEdit8.EditValue = global::YANFOE.Properties.Resources.saveio1;
+            this.pictureEdit8.EditValue = global::YANFOE.Properties.Resources.television;
             this.pictureEdit8.Location = new System.Drawing.Point(2, 2);
             this.pictureEdit8.Name = "pictureEdit8";
             this.pictureEdit8.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -557,11 +577,25 @@
             this.pictureEdit8.Size = new System.Drawing.Size(58, 48);
             this.pictureEdit8.TabIndex = 0;
             // 
+            // tabTvUpdating
+            // 
+            this.tabTvUpdating.Controls.Add(this.panelControl10);
+            this.tabTvUpdating.Name = "tabTvUpdating";
+            this.tabTvUpdating.Size = new System.Drawing.Size(614, 432);
+            this.tabTvUpdating.Text = "Updating";
+            // 
+            // tabTvMisc
+            // 
+            this.tabTvMisc.Controls.Add(this.panelControl11);
+            this.tabTvMisc.Name = "tabTvMisc";
+            this.tabTvMisc.Size = new System.Drawing.Size(614, 432);
+            this.tabTvMisc.Text = "Misc";
+            // 
             // tabScrapers
             // 
             this.tabScrapers.Controls.Add(this.xtraTabControl1);
             this.tabScrapers.Name = "tabScrapers";
-            this.tabScrapers.Size = new System.Drawing.Size(616, 454);
+            this.tabScrapers.Size = new System.Drawing.Size(618, 456);
             this.tabScrapers.Text = "Scrapers";
             // 
             // xtraTabControl1
@@ -581,7 +615,7 @@
             // 
             this.tabIMDB.Controls.Add(this.panelControl3);
             this.tabIMDB.Name = "tabIMDB";
-            this.tabIMDB.Size = new System.Drawing.Size(612, 430);
+            this.tabIMDB.Size = new System.Drawing.Size(614, 432);
             this.tabIMDB.Text = "IMDB";
             // 
             // panelControl3
@@ -619,7 +653,7 @@
             // 
             this.tabTMDB.Controls.Add(this.panelControl4);
             this.tabTMDB.Name = "tabTMDB";
-            this.tabTMDB.Size = new System.Drawing.Size(612, 430);
+            this.tabTMDB.Size = new System.Drawing.Size(614, 432);
             this.tabTMDB.Text = "The Movie DB";
             // 
             // panelControl4
@@ -657,7 +691,7 @@
             // 
             this.tabTVDB.Controls.Add(this.panelControl5);
             this.tabTVDB.Name = "tabTVDB";
-            this.tabTVDB.Size = new System.Drawing.Size(612, 430);
+            this.tabTVDB.Size = new System.Drawing.Size(614, 432);
             this.tabTVDB.Text = "The TvDB";
             // 
             // panelControl5
@@ -709,7 +743,8 @@
             this.navItemTvFileOut,
             this.navItemTvRename,
             this.navBarItem1,
-            this.navItemMovieIn});
+            this.navItemMovieIn,
+            this.navBarItem2});
             this.navBarControl1.Location = new System.Drawing.Point(12, 12);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 177;
@@ -771,7 +806,8 @@
             this.navGroupTv.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemTvFileOut),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemTvRename),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2)});
             this.navGroupTv.LargeImage = global::YANFOE.Properties.Resources.television;
             this.navGroupTv.Name = "navGroupTv";
             // 
@@ -791,6 +827,11 @@
             // 
             this.navBarItem1.Caption = "Updating";
             this.navBarItem1.Name = "navBarItem1";
+            // 
+            // navBarItem2
+            // 
+            this.navBarItem2.Caption = "Misc";
+            this.navBarItem2.Name = "navBarItem2";
             // 
             // navGroupScrapers
             // 
@@ -892,6 +933,68 @@
             this.simpleSeparator1.Size = new System.Drawing.Size(2, 484);
             this.simpleSeparator1.Text = "simpleSeparator1";
             // 
+            // panelControl10
+            // 
+            this.panelControl10.Controls.Add(this.labelControl10);
+            this.panelControl10.Controls.Add(this.pictureEdit10);
+            this.panelControl10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl10.Location = new System.Drawing.Point(0, 0);
+            this.panelControl10.Name = "panelControl10";
+            this.panelControl10.Size = new System.Drawing.Size(614, 52);
+            this.panelControl10.TabIndex = 5;
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl10.Location = new System.Drawing.Point(65, 9);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(175, 33);
+            this.labelControl10.TabIndex = 1;
+            this.labelControl10.Text = "TV > Updating";
+            // 
+            // pictureEdit10
+            // 
+            this.pictureEdit10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureEdit10.EditValue = global::YANFOE.Properties.Resources.television;
+            this.pictureEdit10.Location = new System.Drawing.Point(2, 2);
+            this.pictureEdit10.Name = "pictureEdit10";
+            this.pictureEdit10.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEdit10.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit10.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit10.Size = new System.Drawing.Size(58, 48);
+            this.pictureEdit10.TabIndex = 0;
+            // 
+            // panelControl11
+            // 
+            this.panelControl11.Controls.Add(this.labelControl11);
+            this.panelControl11.Controls.Add(this.pictureEdit11);
+            this.panelControl11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl11.Location = new System.Drawing.Point(0, 0);
+            this.panelControl11.Name = "panelControl11";
+            this.panelControl11.Size = new System.Drawing.Size(614, 52);
+            this.panelControl11.TabIndex = 5;
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl11.Location = new System.Drawing.Point(65, 9);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(127, 33);
+            this.labelControl11.TabIndex = 1;
+            this.labelControl11.Text = "TV > Misc.";
+            // 
+            // pictureEdit11
+            // 
+            this.pictureEdit11.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureEdit11.EditValue = global::YANFOE.Properties.Resources.television;
+            this.pictureEdit11.Location = new System.Drawing.Point(2, 2);
+            this.pictureEdit11.Name = "pictureEdit11";
+            this.pictureEdit11.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEdit11.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit11.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit11.Size = new System.Drawing.Size(58, 48);
+            this.pictureEdit11.TabIndex = 0;
+            // 
             // FrmSettingsMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -946,6 +1049,8 @@
             this.panelControl8.ResumeLayout(false);
             this.panelControl8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit8.Properties)).EndInit();
+            this.tabTvUpdating.ResumeLayout(false);
+            this.tabTvMisc.ResumeLayout(false);
             this.tabScrapers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
@@ -971,6 +1076,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.simpleSeparator1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).EndInit();
+            this.panelControl10.ResumeLayout(false);
+            this.panelControl10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit10.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).EndInit();
+            this.panelControl11.ResumeLayout(false);
+            this.panelControl11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit11.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1052,6 +1165,15 @@
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.PictureEdit pictureEdit9;
         private UcSettingsMovieIn ucSettingsMovieIn1;
+        private DevExpress.XtraNavBar.NavBarItem navBarItem2;
+        private DevExpress.XtraTab.XtraTabPage tabTvUpdating;
+        private DevExpress.XtraTab.XtraTabPage tabTvMisc;
+        private DevExpress.XtraEditors.PanelControl panelControl10;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit10;
+        private DevExpress.XtraEditors.PanelControl panelControl11;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit11;
 
     }
 }

@@ -301,7 +301,15 @@ namespace YANFOE.Factories
         {
             get
             {
-                return (from s in CurrentSeries.Seasons.AsParallel().AsOrdered() select s.Value).ToList();
+                if (!Settings.Get.Ui.HideSeasonZero)
+                {
+                    return (from s in CurrentSeries.Seasons.AsParallel().AsOrdered() where s.Value.SeasonNumber != 0 select s.Value).ToList();
+                }
+                else
+                {
+                    return (from s in CurrentSeries.Seasons.AsParallel().AsOrdered() select s.Value).ToList();
+                }
+
             }
         }
 

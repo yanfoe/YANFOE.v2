@@ -219,6 +219,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.Designer.cs">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.Designer.cs">
+      <DependentUpon>UcSettingsTVMisc.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmEditMediaPath.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -588,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvRename.resx">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTVMisc.resx">
+      <DependentUpon>UcSettingsTVMisc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmEditMediaPath.resx">
       <DependentUpon>FrmEditMediaPath.cs</DependentUpon>

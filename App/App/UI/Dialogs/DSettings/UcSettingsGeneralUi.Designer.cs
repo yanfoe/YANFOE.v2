@@ -34,10 +34,15 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.cmbSkinList = new DevExpress.XtraEditors.ComboBoxEdit();
             this.chkEnableTVPathColumn = new DevExpress.XtraEditors.CheckEdit();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.chkShowTVSeries0 = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSkinList.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkEnableTVPathColumn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkShowTVSeries0.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -67,18 +72,37 @@
             // 
             // chkEnableTVPathColumn
             // 
-            this.chkEnableTVPathColumn.Location = new System.Drawing.Point(8, 90);
+            this.chkEnableTVPathColumn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkEnableTVPathColumn.Location = new System.Drawing.Point(2, 22);
             this.chkEnableTVPathColumn.Name = "chkEnableTVPathColumn";
             this.chkEnableTVPathColumn.Properties.Caption = "Enable TV Episode Path && File Column";
-            this.chkEnableTVPathColumn.Size = new System.Drawing.Size(740, 19);
+            this.chkEnableTVPathColumn.Size = new System.Drawing.Size(228, 19);
             this.chkEnableTVPathColumn.TabIndex = 5;
-            this.chkEnableTVPathColumn.CheckedChanged += new System.EventHandler(this.chkEnableTVPathColumn_CheckedChanged);
+            // 
+            // groupControl2
+            // 
+            this.groupControl2.Controls.Add(this.chkShowTVSeries0);
+            this.groupControl2.Controls.Add(this.chkEnableTVPathColumn);
+            this.groupControl2.Location = new System.Drawing.Point(3, 80);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(232, 100);
+            this.groupControl2.TabIndex = 6;
+            this.groupControl2.Text = "Visability";
+            // 
+            // chkShowTVSeries0
+            // 
+            this.chkShowTVSeries0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkShowTVSeries0.Location = new System.Drawing.Point(2, 41);
+            this.chkShowTVSeries0.Name = "chkShowTVSeries0";
+            this.chkShowTVSeries0.Properties.Caption = "Show TV Series 0";
+            this.chkShowTVSeries0.Size = new System.Drawing.Size(228, 19);
+            this.chkShowTVSeries0.TabIndex = 6;
             // 
             // UcSettingsGeneralUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.chkEnableTVPathColumn);
+            this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Name = "UcSettingsGeneralUi";
             this.Size = new System.Drawing.Size(751, 570);
@@ -86,6 +110,9 @@
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbSkinList.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkEnableTVPathColumn.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkShowTVSeries0.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -95,6 +122,8 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.ComboBoxEdit cmbSkinList;
         private DevExpress.XtraEditors.CheckEdit chkEnableTVPathColumn;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraEditors.CheckEdit chkShowTVSeries0;
 
     }
 }

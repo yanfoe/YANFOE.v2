@@ -29,6 +29,7 @@ namespace YANFOE.Settings.UserSettings
         {
             this.Skin = "Foggy";
             this.EnableTVPathColumn = true;
+            this.HideSeasonZero = false;
         }
 
         /// <summary>

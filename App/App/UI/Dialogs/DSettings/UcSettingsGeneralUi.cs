@@ -31,7 +31,9 @@ namespace YANFOE.UI.Dialogs.DSettings
             InitializeComponent();
 
             this.PopulateSkinList();
-            this.chkEnableTVPathColumn.Checked = Get.Ui.EnableTVPathColumn;
+
+            this.chkEnableTVPathColumn.DataBindings.Add("Checked", Get.Ui, "EnableTVPathColumn");
+            this.chkShowTVSeries0.DataBindings.Add("Checked", Get.Ui, "HideSeasonZero");
         }
 
         /// <summary>
@@ -40,11 +42,6 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void PopulateSkinList()
         {
             Tools.UI.Skin.PopulateSkinListCombo(cmbSkinList);
-        }
-
-        private void chkEnableTVPathColumn_CheckedChanged(object sender, System.EventArgs e)
-        {
-            Get.Ui.EnableTVPathColumn = chkEnableTVPathColumn.Checked;
         }
     }
 }

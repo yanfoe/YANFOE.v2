@@ -121,5 +121,10 @@ namespace YANFOE.UI.Dialogs.DSettings
             tabMain.SelectedTabPage = tabMovies;
             tabControlMovies.SelectedTabPage = this.tabMovieIn;
         }
+
+        private void ucSettingsGeneralUi2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
