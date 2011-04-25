@@ -17,6 +17,8 @@ namespace YANFOE.Models.TvModels
     using System;
     using System.IO;
 
+    using Newtonsoft.Json;
+
     /// <summary>
     /// The file path.
     /// </summary>
@@ -40,6 +42,7 @@ namespace YANFOE.Models.TvModels
         /// <summary>
         /// Gets Current FileName.
         /// </summary>
+        [JsonIgnore]
         public string CurrentFileName
         {
             get
@@ -51,6 +54,7 @@ namespace YANFOE.Models.TvModels
         /// <summary>
         /// Gets CurrentFileNameWithoutExt.
         /// </summary>
+        [JsonIgnore]
         public string CurrentFileNameWithoutExt
         {
             get
@@ -62,6 +66,7 @@ namespace YANFOE.Models.TvModels
         /// <summary>
         /// Gets CurrentPath.
         /// </summary>
+        [JsonIgnore]
         public string CurrentPath
         {
             get
