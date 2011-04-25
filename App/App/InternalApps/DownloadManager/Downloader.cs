@@ -15,10 +15,8 @@
 namespace YANFOE.InternalApps.DownloadManager
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
-    using System.Linq;
     using System.Net;
     using System.Threading;
     using System.Windows.Forms;
@@ -31,7 +29,6 @@ namespace YANFOE.InternalApps.DownloadManager
     using YANFOE.InternalApps.Logs;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
-    using YANFOE.Tools.Extentions;
 
     using Timer = System.Windows.Forms.Timer;
 

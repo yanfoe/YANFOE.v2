@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.txtMovieIsSets = new DevExpress.XtraEditors.MemoEdit();
@@ -187,8 +187,8 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.labelControl1.Location = new System.Drawing.Point(16, 12);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(188, 26);
@@ -202,9 +202,9 @@
             this.btnTrash.Location = new System.Drawing.Point(286, 2);
             this.btnTrash.Name = "btnTrash";
             this.btnTrash.Size = new System.Drawing.Size(42, 46);
-            toolTipTitleItem4.Text = "Remove movie from set.";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.btnTrash.SuperTip = superToolTip4;
+            toolTipTitleItem1.Text = "Remove movie from set.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.btnTrash.SuperTip = superToolTip1;
             this.btnTrash.TabIndex = 2;
             this.btnTrash.Click += new System.EventHandler(this.btnTrash_Click);
             // 
@@ -215,9 +215,9 @@
             this.btnMoveUp.Location = new System.Drawing.Point(328, 2);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(41, 46);
-            toolTipTitleItem5.Text = "Move movie up in set";
-            superToolTip5.Items.Add(toolTipTitleItem5);
-            this.btnMoveUp.SuperTip = superToolTip5;
+            toolTipTitleItem2.Text = "Move movie up in set";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.btnMoveUp.SuperTip = superToolTip2;
             this.btnMoveUp.TabIndex = 0;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
@@ -228,9 +228,9 @@
             this.btnMoveDown.Location = new System.Drawing.Point(369, 2);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(42, 46);
-            toolTipTitleItem6.Text = "Move movie down in set";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            this.btnMoveDown.SuperTip = superToolTip6;
+            toolTipTitleItem3.Text = "Move movie down in set";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.btnMoveDown.SuperTip = superToolTip3;
             this.btnMoveDown.TabIndex = 1;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
@@ -737,6 +737,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "SetManagerUserControl";
             this.Size = new System.Drawing.Size(718, 471);
+            this.VisibleChanged += new System.EventHandler(this.SetManagerUserControl_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();

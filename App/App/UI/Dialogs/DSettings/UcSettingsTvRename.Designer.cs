@@ -173,6 +173,8 @@
             // 
             // checkEdit1
             // 
+            this.checkEdit1.EditValue = true;
+            this.checkEdit1.Enabled = false;
             this.checkEdit1.Location = new System.Drawing.Point(12, 12);
             this.checkEdit1.Name = "checkEdit1";
             this.checkEdit1.Properties.Caption = "Enable Auto Episode Renaming";

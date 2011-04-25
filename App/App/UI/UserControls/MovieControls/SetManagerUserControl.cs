@@ -115,7 +115,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </summary>
         private void BindToMoviesInSetList()
         {
-            this.gridControl.DataSource = MovieSetManager.GetCurrentSet.Movies;
+            this.PopulateSetList();
         }
 
         /// <summary>
@@ -624,6 +624,14 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             Poster,
             Fanart
+        }
+
+        private void SetManagerUserControl_VisibleChanged(object sender, EventArgs e)
+        {
+            if (cmbSetsList.Properties.Items.Count == 0)
+            {
+                this.PopulateSetList();
+            }
         }
     }
 }
