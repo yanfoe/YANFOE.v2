@@ -26,6 +26,7 @@ namespace YANFOE.Tools.IO
     using YANFOE.InternalApps.Logs.Enums;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
+    using YANFOE.Tools.Importing;
     using YANFOE.Tools.ThirdParty;
 
     /// <summary>
@@ -291,6 +292,20 @@ namespace YANFOE.Tools.IO
         private static string FindCore(
             string name, string path, List<string> types, List<string> extentions, string[] fileList = null)
         {
+            if (path.Contains("BDMV\\STREAM\\"))
+            {
+                name = MovieNaming.GetBluRayName(path + "name");
+                path = path.Replace("BDMV\\STREAM\\", string.Empty);
+                fileList = null;
+            }
+
+            if (path.Contains("VIDEO_TS\\"))
+            {
+                name = MovieNaming.GetDvdName(path + "name");
+                path = path.Replace("VIDEO_TS\\", string.Empty);
+                fileList = null;
+            }
+
             if (fileList == null)
             {
                 fileList = FindAll(path, SearchOption.TopDirectoryOnly);
