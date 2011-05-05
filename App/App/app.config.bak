@@ -1,3 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0"?>
 <configuration>
+<configSections>
+    <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+        <section name="YANFOE.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    </sectionGroup>
+</configSections>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/></startup><applicationSettings>
+        <YANFOE.Properties.Settings>
+            <setting name="YANFOE_Scrapers_net_live_search_api_LiveSearchService"
+                serializeAs="String">
+                <value>http://api.search.live.net:80/soap.asmx</value>
+            </setting>
+            <setting name="YANFOE_net_live_search_api_BingService" serializeAs="String">
+                <value>http://api.search.live.net:80/soap.asmx</value>
+            </setting>
+        </YANFOE.Properties.Settings>
+    </applicationSettings>
 </configuration>

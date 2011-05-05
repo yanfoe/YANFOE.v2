@@ -11,8 +11,24 @@
     <RootNamespace>YANFOE</RootNamespace>
     <AssemblyName>YANFOE</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -47,38 +63,43 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BitFactory.Logging">
-      <HintPath>..\..\..\Shared\BitFactory.Logging.dll</HintPath>
+      <HintPath>.\Dlls\BitFactory.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.BonusSkins.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>.\Dlls\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=95fc6c5621878f0a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Data.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DiscUtils">
-      <HintPath>..\..\..\Shared\DiscUtils.dll</HintPath>
+      <HintPath>.\Dlls\DiscUtils.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\..\..\Shared\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>.\Dlls\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Shared\Newtonsoft.Json.dll</HintPath>
+      <HintPath>.\Dlls\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -98,15 +119,20 @@
     <Compile Include="Factories\InOut\Model\SaveProgressModel.cs" />
     <Compile Include="Factories\InOut\OutFactory.cs" />
     <Compile Include="Factories\Internal\DatabaseIOFactory.cs" />
+    <Compile Include="Factories\Renamer\CopyProgressEventArgs.cs" />
+    <Compile Include="Factories\Renamer\FileCopyCompletedEventArgs.cs" />
     <Compile Include="Factories\Renamer\FileSystem.cs" />
     <Compile Include="Factories\Renamer\MoveCopy.cs" />
     <Compile Include="Factories\Renamer\TvRenamerFactory.cs" />
     <Compile Include="Factories\Scraper\MovieScrapeFactory.cs" />
     <Compile Include="Factories\Scraper\MovieScraperGroupFactory.cs" />
     <Compile Include="Factories\Sets\MovieSetManager.cs" />
+    <Compile Include="InternalApps\DownloadManager\Download\AppleBinary.cs" />
+    <Compile Include="InternalApps\DownloadManager\Download\InternalHandlers.cs" />
     <Compile Include="InternalApps\DownloadManager\Model\BackgroundQueObject.cs" />
     <Compile Include="IO\GenerateOutput.cs" />
     <Compile Include="IO\IoInterface.cs" />
+    <Compile Include="IO\StringWriterWithEncoding.cs" />
     <Compile Include="IO\YAMJ.cs" />
     <Compile Include="Language.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -115,13 +141,19 @@
     </Compile>
     <Compile Include="Models\IOModels\MovieSaveSettings.cs" />
     <Compile Include="Models\IOModels\TvSaveSettings.cs" />
+    <Compile Include="Models\TvModels\Scan\EpisodeDetails.cs" />
+    <Compile Include="Scrapers\Movie\Models\AppleTrailers\AppleTrailerResultsModel.cs" />
+    <Compile Include="Scrapers\Movie\Models\AppleTrailers\AppleTrailerSearchModel.cs" />
     <Compile Include="Models\SetsModels\MovieSetModel.cs" />
     <Compile Include="Models\SetsModels\MovieSetObjectModel.cs" />
     <Compile Include="Models\SetsModels\SetReturnModel.cs" />
     <Compile Include="Models\TvModels\MasterSeriesListModel.cs" />
     <Compile Include="Models\TvModels\Scan\ScanSeriesPick.cs" />
     <Compile Include="Models\TvModels\SeriesListModel.cs" />
+    <Compile Include="Scrapers\Movie\Apple.cs" />
     <Compile Include="Scrapers\Movie\Models\ScraperGroup\MovieScraperGroupModel.cs" />
+    <Compile Include="Scrapers\Movie\MovieMeter.cs" />
+    <Compile Include="Scrapers\Movie\Ofdb.cs" />
     <Compile Include="Scrapers\Movie\TheMovieDb.cs" />
     <Compile Include="Settings\UserSettings\Countries.cs" />
     <Compile Include="Settings\UserSettings\Genres.cs" />
@@ -129,13 +161,15 @@
     <Compile Include="Settings\UserSettings\Scraper.cs" />
     <Compile Include="Settings\UserSettings\ScraperSettings\Generic.cs" />
     <Compile Include="IO\IoBase.cs" />
-    <Compile Include="Settings\UserSettings\ScraperSettings\YAMJ.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
+    <Compile Include="Tools\Models\TrailerDetailsModel.cs" />
+    <Compile Include="Tools\IO\Delete.cs" />
     <Compile Include="Tools\Restructure\FileSystemCharChange.cs" />
-    <Compile Include="Tools\ThirdParty\FastDirectoryEnumerator.cs" />
     <Compile Include="Tools\IO\FileNaming.cs" />
     <Compile Include="Tools\Text\IO.cs" />
+    <Compile Include="Tools\ThirdParty\FileLookup.cs" />
+    <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs">
       <SubType>UserControl</SubType>
@@ -148,6 +182,12 @@
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.Designer.cs">
       <DependentUpon>UcSettingsGeneralWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.Designer.cs">
+      <DependentUpon>UcSettingsMovieIn.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.cs">
       <SubType>UserControl</SubType>
@@ -179,6 +219,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.Designer.cs">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.Designer.cs">
+      <DependentUpon>UcSettingsTVMisc.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmEditMediaPath.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +237,12 @@
     <Compile Include="UI\Dialogs\General\FrmEnterAValue.Designer.cs">
       <DependentUpon>FrmEnterAValue.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.Designer.cs">
+      <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmMoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +254,12 @@
     </Compile>
     <Compile Include="UI\Dialogs\General\FrmProcessingMoviesStatus.Designer.cs">
       <DependentUpon>FrmProcessingMoviesStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmSavingDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmSavingDB.Designer.cs">
+      <DependentUpon>FrmSavingDB.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\General\FrmSavingDialog.cs">
       <SubType>Form</SubType>
@@ -238,12 +296,6 @@
     </Compile>
     <Compile Include="UI\Dialogs\TV\FrmNotCatagorized2.Designer.cs">
       <DependentUpon>FrmNotCatagorized2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmRestructureConfirm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmRestructureConfirm.designer.cs">
-      <DependentUpon>FrmRestructureConfirm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\TV\FrmSelectSeries.cs">
       <SubType>Form</SubType>
@@ -299,7 +351,6 @@
     <Compile Include="Scrapers\Movie\Models\Search\QueryResult.cs" />
     <Compile Include="Scrapers\Movie\MovieScraperHandler.cs" />
     <Compile Include="Scrapers\Movie\ScraperMovieBase.cs" />
-    <Compile Include="Scrapers\Movie\YQuickSearch.cs" />
     <Compile Include="Scrapers\TV\TheTVDB.cs" />
     <Compile Include="Settings\UserSettings\InOut.cs" />
     <Compile Include="Settings\ConstSettings\Application.cs" />
@@ -319,7 +370,6 @@
     <Compile Include="Tools\Importing\Naming.cs" />
     <Compile Include="Tools\IO\DetectType.cs" />
     <Compile Include="Tools\IO\ImportFiles.cs" />
-    <Compile Include="Tools\Localization\Translate.cs" />
     <Compile Include="InternalApps\Logs\Enums\LoggerName.cs" />
     <Compile Include="InternalApps\Logs\Enums\LogState.cs" />
     <Compile Include="InternalApps\Logs\Enums\LogType.cs" />
@@ -369,20 +419,15 @@
     <Compile Include="Tools\Extentions\Extensions.cs" />
     <Compile Include="Tools\IO\Find.cs" />
     <Compile Include="Tools\IO\Folders.cs" />
-    <Compile Include="Tools\IO\Grouping.cs" />
     <Compile Include="Tools\IO\Info.cs" />
     <Compile Include="Tools\Lists\Countries.cs" />
     <Compile Include="Tools\Lists\Genres.cs" />
     <Compile Include="Tools\Lists\NameBy.cs" />
-    <Compile Include="Tools\Lists\Numbers.cs" />
     <Compile Include="Tools\Lists\VideoSource.cs" />
     <Compile Include="Tools\Maths.cs" />
     <Compile Include="Tools\Models\ImageDetailsModel.cs" />
     <Compile Include="Tools\Models\ModelBase.cs" />
     <Compile Include="Tools\Models\PersonModel.cs" />
-    <Compile Include="Tools\Restructure\Tv.cs" />
-    <Compile Include="Tools\Scrape\Scrape.cs" />
-    <Compile Include="Tools\TreeView\TreeViewHandler.cs" />
     <Compile Include="Tools\UI\Dialogs.cs" />
     <Compile Include="Tools\WrappedTools\DiskUtils.cs" />
     <Compile Include="Tools\Xml\XRead.cs" />
@@ -401,6 +446,7 @@
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Popups\MovieListPopup.cs" />
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -442,6 +488,18 @@
     </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\MediaPathManager.Designer.cs">
       <DependentUpon>MediaPathManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\MovieControls\MovieTrailerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\MovieControls\MovieTrailerUserControl.Designer.cs">
+      <DependentUpon>MovieTrailerUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.Designer.cs">
+      <DependentUpon>MovieFileInfoUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\MovieControls\MovieIdentierUserControl1.cs">
       <SubType>UserControl</SubType>
@@ -519,6 +577,9 @@
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.resx">
       <DependentUpon>UcSettingsGeneralWeb.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMovieIN.resx">
+      <DependentUpon>UcSettingsMovieIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.resx">
       <DependentUpon>UcSettingsMoviesIO.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,17 +595,26 @@
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvRename.resx">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTVMisc.resx">
+      <DependentUpon>UcSettingsTVMisc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmEditMediaPath.resx">
       <DependentUpon>FrmEditMediaPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmEnterAValue.resx">
       <DependentUpon>FrmEnterAValue.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\FrmLoadingYANFOE.resx">
+      <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmMoveDialog.resx">
       <DependentUpon>FrmMoveDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmProcessingMoviesStatus.resx">
       <DependentUpon>FrmProcessingMoviesStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\FrmSavingDB.resx">
+      <DependentUpon>FrmSavingDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmSavingDialog.resx">
       <DependentUpon>FrmSavingDialog.cs</DependentUpon>
@@ -560,12 +630,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmImportTv.resx">
       <DependentUpon>FrmImportTv.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmNotCatagorized2.resx">
       <DependentUpon>FrmNotCatagorized2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Dialogs\TV\FrmRestructureConfirm.resx">
-      <DependentUpon>FrmRestructureConfirm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmSelectSeries.resx">
       <DependentUpon>FrmSelectSeries.cs</DependentUpon>
@@ -576,7 +644,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -612,6 +680,12 @@
     <EmbeddedResource Include="UI\UserControls\MediaManagerControls\MediaPathManager.resx">
       <DependentUpon>MediaPathManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\MovieControls\MovieTrailerUserControl.resx">
+      <DependentUpon>MovieTrailerUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.resx">
+      <DependentUpon>MovieFileInfoUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\MovieControls\MovieIdentierUserControl1.resx">
       <DependentUpon>MovieIdentierUserControl1.cs</DependentUpon>
     </EmbeddedResource>
@@ -643,6 +717,30 @@
       <DependentUpon>TvUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Movie\ScraperGroups\Dutch.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\English.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\French.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\German.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Italian.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Polish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Spanish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Movie\ScraperGroups\Swedish.gz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -825,11 +923,21 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\up.png" />
-    <Content Include="Movie\ScraperGroups\English.xml">
+    <Content Include="Licences\DotNetZip.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Licences\JSON.NET.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Licences\YANFOE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Licences\.NET-DiscUtils.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
+    <None Include="Resources\yanfoe.jpg" />
     <Content Include="y.ico" />
     <Content Include="y2.ico" />
     <None Include="Resources\LoadingGlobe.gif" />
@@ -862,9 +970,41 @@
     <None Include="Resources\bluray.png" />
     <None Include="Resources\bluray1.png" />
     <None Include="Resources\bluray2.png" />
-    <Content Include="Resources\_47.gif" />
     <None Include="Resources\promo_green.png" />
     <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
