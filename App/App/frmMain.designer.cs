@@ -106,6 +106,8 @@ namespace YANFOE
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.picUpdateStatus = new DevExpress.XtraEditors.PictureEdit();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.picThread8 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
@@ -115,7 +117,6 @@ namespace YANFOE
             this.picThread3 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.uiTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
@@ -159,6 +160,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUpdateStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).BeginInit();
@@ -167,7 +169,6 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -843,6 +844,7 @@ namespace YANFOE
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.picUpdateStatus);
             this.panelControl1.Controls.Add(this.picThread8);
             this.panelControl1.Controls.Add(this.picThread7);
             this.panelControl1.Controls.Add(this.picThread6);
@@ -852,13 +854,32 @@ namespace YANFOE
             this.panelControl1.Controls.Add(this.picThread3);
             this.panelControl1.Controls.Add(this.picThread2);
             this.panelControl1.Controls.Add(this.picThread1);
-            this.panelControl1.Controls.Add(this.pictureBox1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 520);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.panelControl1.Size = new System.Drawing.Size(992, 27);
             this.panelControl1.TabIndex = 9;
+            // 
+            // picUpdateStatus
+            // 
+            this.picUpdateStatus.Dock = System.Windows.Forms.DockStyle.Right;
+            this.picUpdateStatus.Location = new System.Drawing.Point(960, 3);
+            this.picUpdateStatus.MenuManager = this.barManager1;
+            this.picUpdateStatus.Name = "picUpdateStatus";
+            this.picUpdateStatus.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.picUpdateStatus.Properties.Appearance.Options.UseBackColor = true;
+            this.picUpdateStatus.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.picUpdateStatus.Properties.ShowMenu = false;
+            this.picUpdateStatus.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.picUpdateStatus.Size = new System.Drawing.Size(32, 24);
+            this.picUpdateStatus.TabIndex = 12;
+            this.picUpdateStatus.ToolTipController = this.toolTipController1;
+            this.picUpdateStatus.DoubleClick += new System.EventHandler(this.picUpdateStatus_DoubleClick);
+            // 
+            // toolTipController1
+            // 
+            this.toolTipController1.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController1_GetActiveObjectInfo);
             // 
             // picThread8
             // 
@@ -972,16 +993,6 @@ namespace YANFOE
             this.picThread1.Size = new System.Drawing.Size(24, 24);
             this.picThread1.TabIndex = 3;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::YANFOE.Properties.Resources.accept24;
-            this.pictureBox1.Location = new System.Drawing.Point(964, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 24);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // uiTimer
             // 
             this.uiTimer.Enabled = true;
@@ -1049,6 +1060,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUpdateStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread8.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread7.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread6.Properties)).EndInit();
@@ -1057,7 +1069,6 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1101,7 +1112,6 @@ namespace YANFOE
         private DevExpress.XtraTab.XtraTabPage tabAbout;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem mnuToolsMovieScraperGroupManager;
         private DevExpress.XtraBars.BarButtonItem mnuFileSaveDatabase;
@@ -1144,5 +1154,7 @@ namespace YANFOE
         private DevExpress.XtraEditors.PictureEdit picThread7;
         private DevExpress.XtraEditors.PictureEdit picThread6;
         private DevExpress.XtraEditors.PictureEdit picThread5;
+        private DevExpress.XtraEditors.PictureEdit picUpdateStatus;
+        private DevExpress.Utils.ToolTipController toolTipController1;
     }
 }

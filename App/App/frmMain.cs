@@ -16,15 +16,18 @@ namespace YANFOE
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Windows.Forms;
 
     using DevExpress.LookAndFeel;
     using DevExpress.Skins;
+    using DevExpress.Utils;
     using DevExpress.XtraBars;
     using DevExpress.XtraEditors;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Internal;
+    using YANFOE.Factories.Versioning;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Properties;
@@ -62,6 +65,14 @@ namespace YANFOE
             Settings.Get.InOutCollection.SetCurrentSettings(NFOType.YAMJ);
 
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
+            VersionUpdateFactory.VersionUpdateChanged += this.VersionUpdateFactory_VersionUpdateChanged;
+            VersionUpdateFactory.CheckForUpdate();
+
+        }
+
+        private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
+        {
+            picUpdateStatus.Image = VersionUpdateFactory.ImageStatus;
         }
 
         #endregion
@@ -293,6 +304,26 @@ namespace YANFOE
         {
             DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
             Application.Exit();
+        }
+
+        private void toolTipController1_GetActiveObjectInfo(object sender, DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs e)
+        {
+            if (e.SelectedControl == picUpdateStatus)
+            {
+                e.Info = new ToolTipControlInfo();
+                e.Info.Object = picUpdateStatus;
+                e.Info.ToolTipType = ToolTipType.SuperTip;
+                e.Info.SuperTip = VersionUpdateFactory.UpdateTip;
+
+            }
+        }
+
+        private void picUpdateStatus_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(VersionUpdateFactory.UpdateLink))
+            {
+                Process.Start(VersionUpdateFactory.UpdateLink);
+            }
         }
     }
 }

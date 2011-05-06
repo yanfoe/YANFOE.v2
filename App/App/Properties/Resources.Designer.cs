@@ -781,6 +781,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap warning24 {
+            get {
+                object obj = ResourceManager.GetObject("warning24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap yanfoe {
             get {
                 object obj = ResourceManager.GetObject("yanfoe", resourceCulture);

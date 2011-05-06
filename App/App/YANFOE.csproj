@@ -127,6 +127,7 @@
     <Compile Include="Factories\Scraper\MovieScrapeFactory.cs" />
     <Compile Include="Factories\Scraper\MovieScraperGroupFactory.cs" />
     <Compile Include="Factories\Sets\MovieSetManager.cs" />
+    <Compile Include="Factories\Versioning\VersionUpdateFactory.cs" />
     <Compile Include="InternalApps\DownloadManager\Download\AppleBinary.cs" />
     <Compile Include="InternalApps\DownloadManager\Download\InternalHandlers.cs" />
     <Compile Include="InternalApps\DownloadManager\Model\BackgroundQueObject.cs" />
@@ -938,6 +939,7 @@
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
+    <None Include="Resources\warning24.png" />
     <Content Include="y.ico" />
     <Content Include="y2.ico" />
     <None Include="Resources\LoadingGlobe.gif" />
