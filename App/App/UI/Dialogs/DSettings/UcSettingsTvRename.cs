@@ -43,6 +43,8 @@ namespace YANFOE.UI.Dialogs.DSettings
             this.txtSeasonNumber2Template.Text = TvRenamerFactory.SeasonNumber2Template;
             this.txtEpisodeNumber1Template.Text = TvRenamerFactory.EpisodeNumber1Template;
             this.txtEpisodeNumber2Template.Text = TvRenamerFactory.EpisodeNumber2Template;
+
+            this.chkEnableRename.DataBindings.Add("Checked", Get.InOutCollection, "RenameTV");
         }
 
         #endregion

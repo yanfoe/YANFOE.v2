@@ -37,7 +37,7 @@
             this.txtSeasonNumber1Template = new DevExpress.XtraEditors.TextEdit();
             this.txtSeriesNameTemplate = new DevExpress.XtraEditors.TextEdit();
             this.txtRenameTemplate = new DevExpress.XtraEditors.TextEdit();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.chkEnableRename = new DevExpress.XtraEditors.CheckEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -59,7 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSeasonNumber1Template.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSeriesNameTemplate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRenameTemplate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkEnableRename.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -83,7 +83,7 @@
             this.layoutControl1.Controls.Add(this.txtSeasonNumber1Template);
             this.layoutControl1.Controls.Add(this.txtSeriesNameTemplate);
             this.layoutControl1.Controls.Add(this.txtRenameTemplate);
-            this.layoutControl1.Controls.Add(this.checkEdit1);
+            this.layoutControl1.Controls.Add(this.chkEnableRename);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -171,16 +171,15 @@
             this.txtRenameTemplate.TabIndex = 5;
             this.txtRenameTemplate.TextChanged += new System.EventHandler(this.TxtRenameTemplate_TextChanged);
             // 
-            // checkEdit1
+            // chkEnableRename
             // 
-            this.checkEdit1.EditValue = true;
-            this.checkEdit1.Enabled = false;
-            this.checkEdit1.Location = new System.Drawing.Point(12, 12);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "Enable Auto Episode Renaming";
-            this.checkEdit1.Size = new System.Drawing.Size(758, 19);
-            this.checkEdit1.StyleController = this.layoutControl1;
-            this.checkEdit1.TabIndex = 4;
+            this.chkEnableRename.EditValue = true;
+            this.chkEnableRename.Location = new System.Drawing.Point(12, 12);
+            this.chkEnableRename.Name = "chkEnableRename";
+            this.chkEnableRename.Properties.Caption = "Enable Auto Episode Renaming";
+            this.chkEnableRename.Size = new System.Drawing.Size(758, 19);
+            this.chkEnableRename.StyleController = this.layoutControl1;
+            this.chkEnableRename.TabIndex = 4;
             // 
             // layoutControlGroup1
             // 
@@ -195,7 +194,6 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(782, 596);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -286,7 +284,7 @@
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.checkEdit1;
+            this.layoutControlItem1.Control = this.chkEnableRename;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
@@ -323,7 +321,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtSeasonNumber1Template.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSeriesNameTemplate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRenameTemplate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkEnableRename.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -344,7 +342,7 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit txtRenameTemplate;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.CheckEdit chkEnableRename;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.TextEdit txtEpisodeNumber2Template;

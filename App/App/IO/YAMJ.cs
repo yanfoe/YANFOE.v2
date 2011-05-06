@@ -970,7 +970,10 @@ namespace YANFOE.IO
 
             string firstEpisodePath = series.GetFirstEpisode();
 
-            TvRenamerFactory.RenameSeries(series);
+            if (Get.InOutCollection.RenameTV)
+            {
+                TvRenamerFactory.RenameSeries(series);
+            }
 
             if (MovieNaming.IsBluRay(firstEpisodePath))
             {
