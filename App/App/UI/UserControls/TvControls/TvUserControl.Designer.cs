@@ -342,6 +342,7 @@
             // 
             // grdEpisodes
             // 
+            this.grdEpisodes.AllowDrop = true;
             this.grdEpisodes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdEpisodes.Location = new System.Drawing.Point(2, 22);
             this.grdEpisodes.MainView = this.gridViewEpisodes;
@@ -354,6 +355,8 @@
             this.grdEpisodes.ToolTipController = this.toolTipController1;
             this.grdEpisodes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewEpisodes});
+            this.grdEpisodes.DragDrop += new System.Windows.Forms.DragEventHandler(this.grdEpisodes_DragDrop);
+            this.grdEpisodes.DragOver += new System.Windows.Forms.DragEventHandler(this.grdEpisodes_DragOver);
             this.grdEpisodes.Paint += new System.Windows.Forms.PaintEventHandler(this.grdEpisodes_Paint);
             // 
             // gridViewEpisodes
@@ -516,7 +519,6 @@
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Size = new System.Drawing.Size(601, 592);
-            this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Text = "Root";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -685,7 +687,6 @@
             this.layoutControlGroup3.Name = "Root";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup3.Size = new System.Drawing.Size(601, 593);
-            this.layoutControlGroup3.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup3.Text = "Root";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -752,7 +753,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(890, 622);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 

@@ -16,15 +16,20 @@ namespace YANFOE.UI.UserControls.TvControls
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
     using System.Linq;
+    using System.Windows.Forms;
 
     using DevExpress.Utils;
     using DevExpress.XtraBars;
+    using DevExpress.XtraEditors;
     using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
     using YANFOE.Factories;
     using YANFOE.Models.TvModels;
+    using YANFOE.Models.TvModels.Scan;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Properties;
     using YANFOE.Settings;
@@ -387,6 +392,82 @@ namespace YANFOE.UI.UserControls.TvControls
             popupSeries.AddItem(updateBarItem);
 
             updateBarItem.AddItem(new BarButtonItem(barManager1, "From TvDB"));
+        }
+
+        /// <summary>
+        /// Handles the DragOver event of the grdEpisodes control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
+        private void grdEpisodes_DragOver(object sender, System.Windows.Forms.DragEventArgs e)
+        {
+            object fileNameW = e.Data.GetData("FileNameW");
+            if (fileNameW != null)
+            {
+                string[] fileNames = (string[])fileNameW;
+                if (fileNames.Length == 1)
+                {
+                    string fileName = fileNames[0];
+
+                    if (Get.InOutCollection.VideoExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the DragDrop event of the grdEpisodes control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
+        private void grdEpisodes_DragDrop(object sender, DragEventArgs e)
+        {
+            GridHitInfo hitTest = this.gridViewEpisodes.CalcHitInfo(this.grdEpisodes.PointToClient(new Point(e.X, e.Y)));
+
+            var episode = this.gridViewEpisodes.GetRow(hitTest.RowHandle) as Episode;
+
+            if (hitTest.InRow)
+            {
+                var fileNameW = e.Data.GetData("FileNameW");
+
+                if (fileNameW != null)
+                {
+                    string[] fileNames = (string[])fileNameW;
+                    if (fileNames.Length == 1)
+                    {
+                        string fileName = fileNames[0];
+
+                        if (Get.InOutCollection.VideoExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                        {
+                            if (string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                            {
+                                episode.FilePath.FileNameAndPath = fileName;
+                            }
+                            else
+                            {
+                                var result =
+                                    XtraMessageBox.Show(
+                                        string.Format(
+                                            "Do you want to replace\n{0}\nwith\n{1}",
+                                            episode.FilePath.FileNameAndPath,
+                                            fileName),
+                                        "Are you sure to want to replace?",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question);
+
+                                if (result == DialogResult.Yes)
+                                {
+                                    episode.FilePath.FileNameAndPath = fileName;
+                                }
+                            }
+
+                            gridViewEpisodes.RefreshData();
+                        }
+                    }
+                }
+            }
         }
     }
 }

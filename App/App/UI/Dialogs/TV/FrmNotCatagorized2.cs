@@ -173,9 +173,25 @@ namespace YANFOE.UI.Dialogs.TV
             {
                 var notCatagorized = e.Data.GetData(typeof(ScanNotCatagorized)) as ScanNotCatagorized;
                 var episode = this.grdViewEpisodes.GetRow(hitTest.RowHandle) as Episode;
+                var fileNameW = e.Data.GetData("FileNameW");
 
-                if (episode != null && notCatagorized != null)
+                if (episode != null && notCatagorized != null || fileNameW != null)
                 {
+                    if (fileNameW != null)
+                    {
+                        string[] fileNames = (string[])fileNameW;
+                        if (fileNames.Length == 1)
+                        {
+                            string fileName = fileNames[0];
+
+                            if (Settings.Get.InOutCollection.VideoExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                            {
+                                notCatagorized = new ScanNotCatagorized();
+                                notCatagorized.FilePath = fileName;
+                            }
+                        }
+                    }
+
                     if (string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
                     {
                         this.ReplaceShow(episode, notCatagorized);
@@ -212,7 +228,28 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
         private void grdEpisode_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = e.Data.GetDataPresent(typeof(ScanNotCatagorized)) ? DragDropEffects.Move : DragDropEffects.None;
+            object fileNameW = e.Data.GetData("FileNameW");
+            if (fileNameW != null)
+            {
+                string[] fileNames = (string[])fileNameW;
+                if (fileNames.Length == 1)
+                {
+                    string fileName = fileNames[0];
+
+                    if (Settings.Get.InOutCollection.VideoExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
+
+            }
+            else
+            {
+
+                e.Effect = e.Data.GetDataPresent(typeof(ScanNotCatagorized))
+                               ? DragDropEffects.Move
+                               : DragDropEffects.None;
+            }
         }
 
         /// <summary>
