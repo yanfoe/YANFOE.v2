@@ -58,6 +58,17 @@ namespace YANFOE.UI.UserControls.TvControls
 
             TvDBFactory.CurrentSeriesChanged += this.TvDBFactory_CurrentSeriesChanged;
             TvDBFactory.CurrentSeasonChanged += this.TvDBFactory_CurrentSeasonChanged;
+            TvDBFactory.MasterSeriesNameListChanged += new EventHandler(TvDBFactory_MasterSeriesNameListChanged);
+        }
+
+        /// <summary>
+        /// Handles the MasterSeriesNameListChanged event of the TvDBFactory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        void TvDBFactory_MasterSeriesNameListChanged(object sender, EventArgs e)
+        {
+            gridViewTvTitleList.RefreshData();
         }
 
         /// <summary>

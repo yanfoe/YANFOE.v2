@@ -983,6 +983,20 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (this.seriesName != value)
                 {
+                    if (this.seriesName != null)
+                    {
+                        var seriesIndex =
+                            (from s in TvDBFactory.MasterSeriesNameList.AsParallel()
+                             where s.SeriesGuid == this.guid
+                             select s).SingleOrDefault();
+
+                        if (seriesIndex != null)
+                        {
+                            seriesIndex.SeriesName = value;
+                            TvDBFactory.InvokeMasterSeriesNameListChanged(new EventArgs());
+                        }
+                    }
+
                     this.seriesName = value;
                     this.OnPropertyChanged("SeriesName");
                     this.ChangedText = true;

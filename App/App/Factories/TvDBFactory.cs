@@ -117,6 +117,9 @@ namespace YANFOE.Factories
 
         #region Events
 
+        [field: NonSerialized]
+        public static event EventHandler MasterSeriesNameListChanged = delegate { };
+
         /// <summary>
         /// Occurs when [current episode changed].
         /// </summary>
@@ -875,6 +878,15 @@ namespace YANFOE.Factories
             }
 
             return count;
+        }
+
+        public static void InvokeMasterSeriesNameListChanged(EventArgs e)
+        {
+            EventHandler handler = MasterSeriesNameListChanged;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
         }
 
         /// <summary>
