@@ -613,6 +613,11 @@ namespace YANFOE.Factories
                 return string.Empty;
             }
 
+            if (value.ToLower().Contains("http://"))
+            {
+                return value;
+            }
+
             return "http://cache.thetvdb.com/banners/" + value;
         }
 
@@ -1441,6 +1446,7 @@ namespace YANFOE.Factories
             }
 
             string url = GetImageUrl(CurrentSeries.PosterUrl);
+
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1452,6 +1458,11 @@ namespace YANFOE.Factories
 
             try
             {
+                if (!File.Exists(urlCache))
+                {
+                    Downloader.ProcessDownload(url, DownloadType.Binary, Section.Tv);
+                }
+
                 image = ImageHandler.LoadImage(urlCache);
             }
             catch (Exception ex)

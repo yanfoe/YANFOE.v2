@@ -831,45 +831,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                switch (this.galleryType)
-                {
-                    case GalleryType.MovieFanart:
-                        MovieDBFactory.GetCurrentMovie().FanartPathOnDisk = dialog.FileName;
-                        MovieDBFactory.InvokeFanartLoaded(new EventArgs());
-                        break;
-                    case GalleryType.MoviePoster:
-                        MovieDBFactory.GetCurrentMovie().PosterPathOnDisk = dialog.FileName;
-                        MovieDBFactory.InvokePosterLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeriesBanner:
-                        TvDBFactory.CurrentSeries.SeriesBannerUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeriesBannerLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeriesPoster:
-                        TvDBFactory.CurrentSeries.PosterUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeriesPosterLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeriesFanart:
-                        TvDBFactory.CurrentSeries.FanartUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeriesFanartLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeasonBanner:
-                        TvDBFactory.CurrentSeason.BannerUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeasonBannerLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeasonFanart:
-                        TvDBFactory.CurrentSeason.FanartUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeasonFanartLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvSeasonPoster:
-                        TvDBFactory.CurrentSeason.PosterUrl = dialog.FileName;
-                        TvDBFactory.InvokeSeasonPosterLoaded(new EventArgs());
-                        break;
-                    case GalleryType.TvEpisodeScreenshot:
-                        TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = dialog.FileName;
-                        TvDBFactory.InvokeEpisodeLoaded(new EventArgs());
-                        break;
-                }
+                this.UpdateImagePath(dialog.FileName);
             }
         }
 
@@ -898,31 +860,38 @@ namespace YANFOE.UI.UserControls.CommonControls
                         this.ProcessMoviePosterDownload();
                         break;
                     case GalleryType.TvSeriesBanner:
+                        TvDBFactory.CurrentSeries.SeriesBannerPath = string.Empty;
                         TvDBFactory.CurrentSeries.SeriesBannerUrl = enterUrl.Response;
                         this.ProcessSeriesBannerDownload();
                         break;
                     case GalleryType.TvSeriesPoster:
-                        TvDBFactory.CurrentSeries.PosterUrl = string.Empty;
+                        TvDBFactory.CurrentSeries.PosterPath = string.Empty;
+                        TvDBFactory.CurrentSeries.PosterUrl = enterUrl.Response;
                         this.ProcessSeriesPosterDownload();
                         break;
                     case GalleryType.TvSeriesFanart:
-                        TvDBFactory.CurrentSeries.FanartUrl = string.Empty;
+                        TvDBFactory.CurrentSeries.FanartPath = string.Empty;
+                        TvDBFactory.CurrentSeries.FanartUrl = enterUrl.Response;
                         this.ProcessSeriesFanartDownload();
                         break;
                     case GalleryType.TvSeasonBanner:
-                        TvDBFactory.CurrentSeason.BannerUrl = string.Empty;
+                        TvDBFactory.CurrentSeason.BannerPath = string.Empty;
+                        TvDBFactory.CurrentSeason.BannerUrl = enterUrl.Response;
                         this.ProcessSeasonBannerDownload();
                         break;
                     case GalleryType.TvSeasonFanart:
-                        TvDBFactory.CurrentSeason.FanartUrl = string.Empty;
+                        TvDBFactory.CurrentSeason.FanartPath = string.Empty;
+                        TvDBFactory.CurrentSeason.FanartUrl = enterUrl.Response;
                         this.ProcessSeasonFanartDownload();
                         break;
                     case GalleryType.TvSeasonPoster:
-                        TvDBFactory.CurrentSeason.PosterUrl = string.Empty;
+                        TvDBFactory.CurrentSeason.PosterPath = string.Empty;
+                        TvDBFactory.CurrentSeason.PosterUrl = enterUrl.Response;
                         this.ProcessSeasonPosterDownload();
                         break;
                     case GalleryType.TvEpisodeScreenshot:
-                        TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = string.Empty;
+                        TvDBFactory.CurrentEpisode.EpisodeScreenshotPath = string.Empty;
+                        TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = enterUrl.Response;
                         this.ProcessEpisodeScreenshotDownload();
                         break;
                 }
@@ -986,64 +955,69 @@ namespace YANFOE.UI.UserControls.CommonControls
 
                     if (Get.InOutCollection.ImageExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
                     {
-                        switch (this.galleryType)
-                        {
-                            case GalleryType.MoviePoster:
-                                MovieDBFactory.GetCurrentMovie().PosterPathOnDisk = fileName;
-                                MovieDBFactory.GetCurrentMovie().CurrentPosterImageUrl = string.Empty;
-                                this.MovieDBFactory_PosterLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.MovieFanart:
-                                MovieDBFactory.GetCurrentMovie().FanartPathOnDisk = fileName;
-                                MovieDBFactory.GetCurrentMovie().CurrentFanartImageUrl = string.Empty;
-                                this.MovieDBFactory_FanartLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvSeriesPoster:
-                                TvDBFactory.CurrentSeries.PosterPath = fileName;
-                                TvDBFactory.CurrentSeries.PosterUrl = string.Empty;
-                                this.TvDbFactory_SeriesPosterLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvSeriesFanart:
-                                TvDBFactory.CurrentSeries.FanartPath = fileName;
-                                TvDBFactory.CurrentSeries.FanartUrl = string.Empty;
-                                this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvSeriesBanner:
-                                TvDBFactory.CurrentSeries.SeriesBannerPath = fileName;
-                                TvDBFactory.CurrentSeries.SeriesBannerUrl = string.Empty;
-                                this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
-                                break;
-          
-                            case GalleryType.TvSeasonPoster:
-                                TvDBFactory.CurrentSeason.PosterPath = fileName;
-                                TvDBFactory.CurrentSeason.PosterUrl = string.Empty;
-                                this.TvDBFactory_SeasonPosterLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvSeasonFanart:
-                                TvDBFactory.CurrentSeason.FanartPath = fileName;
-                                TvDBFactory.CurrentSeason.FanartUrl = string.Empty;
-                                this.TvDBFactory_SeasonFanartLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvSeasonBanner:
-                                TvDBFactory.CurrentSeason.BannerPath = fileName;
-                                TvDBFactory.CurrentSeason.BannerUrl = string.Empty;
-                                this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
-                                break;
-
-                            case GalleryType.TvEpisodeScreenshot:
-                                TvDBFactory.CurrentEpisode.EpisodeScreenshotPath = fileName;
-                                TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = string.Empty;
-                                this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
-                                break;
-                        }
+                        this.UpdateImagePath(fileName);
                     }
                 }
+            }
+        }
+
+        private void UpdateImagePath(string fileName)
+        {
+            switch (this.galleryType)
+            {
+                case GalleryType.MoviePoster:
+                    MovieDBFactory.GetCurrentMovie().PosterPathOnDisk = fileName;
+                    MovieDBFactory.GetCurrentMovie().CurrentPosterImageUrl = string.Empty;
+                    this.MovieDBFactory_PosterLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.MovieFanart:
+                    MovieDBFactory.GetCurrentMovie().FanartPathOnDisk = fileName;
+                    MovieDBFactory.GetCurrentMovie().CurrentFanartImageUrl = string.Empty;
+                    this.MovieDBFactory_FanartLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvSeriesPoster:
+                    TvDBFactory.CurrentSeries.PosterPath = fileName;
+                    TvDBFactory.CurrentSeries.PosterUrl = string.Empty;
+                    this.TvDbFactory_SeriesPosterLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvSeriesFanart:
+                    TvDBFactory.CurrentSeries.FanartPath = fileName;
+                    TvDBFactory.CurrentSeries.FanartUrl = string.Empty;
+                    this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvSeriesBanner:
+                    TvDBFactory.CurrentSeries.SeriesBannerPath = fileName;
+                    TvDBFactory.CurrentSeries.SeriesBannerUrl = string.Empty;
+                    this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
+                    break;
+          
+                case GalleryType.TvSeasonPoster:
+                    TvDBFactory.CurrentSeason.PosterPath = fileName;
+                    TvDBFactory.CurrentSeason.PosterUrl = string.Empty;
+                    this.TvDBFactory_SeasonPosterLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvSeasonFanart:
+                    TvDBFactory.CurrentSeason.FanartPath = fileName;
+                    TvDBFactory.CurrentSeason.FanartUrl = string.Empty;
+                    this.TvDBFactory_SeasonFanartLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvSeasonBanner:
+                    TvDBFactory.CurrentSeason.BannerPath = fileName;
+                    TvDBFactory.CurrentSeason.BannerUrl = string.Empty;
+                    this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
+                    break;
+
+                case GalleryType.TvEpisodeScreenshot:
+                    TvDBFactory.CurrentEpisode.EpisodeScreenshotPath = fileName;
+                    TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = string.Empty;
+                    this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
+                    break;
             }
         }
 

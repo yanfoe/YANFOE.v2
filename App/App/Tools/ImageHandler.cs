@@ -68,7 +68,7 @@ namespace YANFOE.Tools
 
                 return returnImage;
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup2 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -227,11 +227,11 @@
             // 
             // galleryControlGallery1
             // 
-            galleryItemGroup2.Caption = "Group6";
-            galleryItemGroup2.CaptionAlignment = DevExpress.XtraBars.Ribbon.GalleryItemGroupCaptionAlignment.Center;
-            galleryItemGroup2.CaptionControlSize = new System.Drawing.Size(1, 1);
+            galleryItemGroup1.Caption = "Group6";
+            galleryItemGroup1.CaptionAlignment = DevExpress.XtraBars.Ribbon.GalleryItemGroupCaptionAlignment.Center;
+            galleryItemGroup1.CaptionControlSize = new System.Drawing.Size(1, 1);
             this.galleryControl.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup2});
+            galleryItemGroup1});
             this.galleryControl.Gallery.ImageSize = new System.Drawing.Size(45, 60);
             this.galleryControl.Gallery.ScrollMode = DevExpress.XtraBars.Ribbon.Gallery.GalleryScrollMode.Smooth;
             this.galleryControl.Gallery.ShowGroupCaption = false;

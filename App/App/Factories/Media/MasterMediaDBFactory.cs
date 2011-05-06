@@ -174,7 +174,14 @@ namespace YANFOE.Factories.Media
                                         into filePath where !string.IsNullOrEmpty(filePath)
                                         where !masterTvMediaDatabase.Contains(filePath) select filePath)
             {
-                masterTvMediaDatabase.Add(filePath);
+                try
+                {
+                    masterTvMediaDatabase.Add(filePath);
+                }
+                catch
+                {
+                    masterTvMediaDatabase.Add(filePath);
+                }
             }
         }
 
