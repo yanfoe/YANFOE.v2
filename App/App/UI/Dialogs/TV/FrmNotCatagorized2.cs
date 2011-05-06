@@ -138,6 +138,7 @@ namespace YANFOE.UI.Dialogs.TV
         private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.tmr.Stop();
+            TvDBFactory.InvokeCurrentEpisodeChanged(new EventArgs());
             this.Close();
         }
 
