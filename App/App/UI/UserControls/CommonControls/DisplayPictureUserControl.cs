@@ -16,6 +16,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
 
     using DevExpress.XtraBars;
@@ -25,6 +26,7 @@ namespace YANFOE.UI.UserControls.CommonControls
     using YANFOE.Factories;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.Properties;
+    using YANFOE.Settings;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.General;
@@ -965,5 +967,108 @@ namespace YANFOE.UI.UserControls.CommonControls
         }
 
         #endregion
+
+        /// <summary>
+        /// Handles the DragDrop event of the imageMain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
+        private void imageMain_DragDrop(object sender, DragEventArgs e)
+        {
+            var fileNameW = e.Data.GetData("FileNameW");
+
+            if (fileNameW != null)
+            {
+                string[] fileNames = (string[])fileNameW;
+                if (fileNames.Length == 1)
+                {
+                    string fileName = fileNames[0];
+
+                    if (Get.InOutCollection.ImageExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                    {
+                        switch (this.galleryType)
+                        {
+                            case GalleryType.MoviePoster:
+                                MovieDBFactory.GetCurrentMovie().PosterPathOnDisk = fileName;
+                                MovieDBFactory.GetCurrentMovie().CurrentPosterImageUrl = string.Empty;
+                                this.MovieDBFactory_PosterLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.MovieFanart:
+                                MovieDBFactory.GetCurrentMovie().FanartPathOnDisk = fileName;
+                                MovieDBFactory.GetCurrentMovie().CurrentFanartImageUrl = string.Empty;
+                                this.MovieDBFactory_FanartLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvSeriesPoster:
+                                TvDBFactory.CurrentSeries.PosterPath = fileName;
+                                TvDBFactory.CurrentSeries.PosterUrl = string.Empty;
+                                this.TvDbFactory_SeriesPosterLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvSeriesFanart:
+                                TvDBFactory.CurrentSeries.FanartPath = fileName;
+                                TvDBFactory.CurrentSeries.FanartUrl = string.Empty;
+                                this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvSeriesBanner:
+                                TvDBFactory.CurrentSeries.SeriesBannerPath = fileName;
+                                TvDBFactory.CurrentSeries.SeriesBannerUrl = string.Empty;
+                                this.TvDbFactory_SeriesFanartLoaded(this, new EventArgs());
+                                break;
+          
+                            case GalleryType.TvSeasonPoster:
+                                TvDBFactory.CurrentSeason.PosterPath = fileName;
+                                TvDBFactory.CurrentSeason.PosterUrl = string.Empty;
+                                this.TvDBFactory_SeasonPosterLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvSeasonFanart:
+                                TvDBFactory.CurrentSeason.FanartPath = fileName;
+                                TvDBFactory.CurrentSeason.FanartUrl = string.Empty;
+                                this.TvDBFactory_SeasonFanartLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvSeasonBanner:
+                                TvDBFactory.CurrentSeason.BannerPath = fileName;
+                                TvDBFactory.CurrentSeason.BannerUrl = string.Empty;
+                                this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
+                                break;
+
+                            case GalleryType.TvEpisodeScreenshot:
+                                TvDBFactory.CurrentEpisode.EpisodeScreenshotPath = fileName;
+                                TvDBFactory.CurrentEpisode.EpisodeScreenshotUrl = string.Empty;
+                                this.TvDBFactory_SeasonBannerLoaded(this, new EventArgs());
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the DragOver event of the imageMain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
+        private void imageMain_DragOver(object sender, DragEventArgs e)
+        {
+            object fileNameW = e.Data.GetData("FileNameW");
+            if (fileNameW != null)
+            {
+                string[] fileNames = (string[])fileNameW;
+                if (fileNames.Length == 1)
+                {
+                    string fileName = fileNames[0];
+
+                    if (Get.InOutCollection.ImageExtentions.Contains(Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
+
+            }
+        }
     }
 }

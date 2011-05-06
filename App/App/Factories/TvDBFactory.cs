@@ -1225,6 +1225,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadEpisode()
         {
+            if (!string.IsNullOrEmpty(CurrentEpisode.EpisodeScreenshotPath) && File.Exists(CurrentEpisode.EpisodeScreenshotPath))
+            {
+                return ImageHandler.LoadImage(CurrentEpisode.EpisodeScreenshotPath);
+            }
+
             string url = GetImageUrl(CurrentEpisode.EpisodeScreenshotUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1249,6 +1254,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeasonBanner()
         {
+            if (!string.IsNullOrEmpty(CurrentSeason.BannerPath) && File.Exists(CurrentSeason.BannerPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeason.BannerPath);
+            }
+
             string url = GetImageUrl(CurrentSeason.BannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1275,6 +1285,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeasonFanart()
         {
+            if (!string.IsNullOrEmpty(CurrentSeason.FanartPath) && File.Exists(CurrentSeason.FanartPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeason.FanartPath);
+            }
+
             string url = GetImageUrl(CurrentSeason.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1310,6 +1325,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeasonPoster()
         {
+            if (!string.IsNullOrEmpty(CurrentSeason.PosterPath) && File.Exists(CurrentSeason.PosterPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeason.PosterPath);
+            }
+
             string url = GetImageUrl(CurrentSeason.PosterUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1340,6 +1360,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeriesBanner()
         {
+            if (!string.IsNullOrEmpty(CurrentSeries.SeriesBannerPath) && File.Exists(CurrentSeries.SeriesBannerPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeries.SeriesBannerPath);
+            }
+
             string url = GetImageUrl(CurrentSeries.SeriesBannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1370,6 +1395,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeriesFanart()
         {
+            if (!string.IsNullOrEmpty(CurrentSeries.FanartPath) && File.Exists(CurrentSeries.FanartPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeries.FanartPath);
+            }
+
             string url = GetImageUrl(CurrentSeries.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1405,6 +1435,11 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadSeriesPoster()
         {
+            if (!string.IsNullOrEmpty(CurrentSeries.PosterPath) && File.Exists(CurrentSeries.PosterPath))
+            {
+                return ImageHandler.LoadImage(CurrentSeries.PosterPath);
+            }
+
             string url = GetImageUrl(CurrentSeries.PosterUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 

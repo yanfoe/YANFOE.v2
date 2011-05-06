@@ -223,11 +223,19 @@ namespace YANFOE.IO
                                  ? actualFilePath
                                  : movieSaveSettings.NfoPath;
 
-            string posterPath = Downloader.ProcessDownload(
-                movieModel.CurrentPosterImageUrl, DownloadType.Binary, Section.Movies);
+            var posterPathFrom = string.Empty;
 
-            string fanartPathFrom = Downloader.ProcessDownload(
-                movieModel.CurrentFanartImageUrl, DownloadType.Binary, Section.Movies);
+            posterPathFrom = string.IsNullOrEmpty(movieModel.PosterPathOnDisk)
+                             ? Downloader.ProcessDownload(
+                                 movieModel.CurrentPosterImageUrl, DownloadType.Binary, Section.Movies)
+                             : movieModel.PosterPathOnDisk;
+
+            string fanartPathFrom = string.Empty;
+
+            fanartPathFrom = string.IsNullOrEmpty(movieModel.FanartPathOnDisk)
+                                 ? Downloader.ProcessDownload(
+                                     movieModel.CurrentFanartImageUrl, DownloadType.Binary, Section.Movies)
+                                 : movieModel.FanartPathOnDisk;
 
             string trailerPathFrom = Downloader.ProcessDownload(
                 movieModel.CurrentTrailerUrl, DownloadType.AppleBinary, Section.Movies);
@@ -277,10 +285,13 @@ namespace YANFOE.IO
 
             if (!string.IsNullOrEmpty(currentTrailerUrl))
             {
-                actualTrailerFileName = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('/')+1, currentTrailerUrl.LastIndexOf('.') - currentTrailerUrl.LastIndexOf('/')-1);
-                actualTrailerFileNameExt = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('.')+1);
+                actualTrailerFileName = currentTrailerUrl.Substring(
+                    currentTrailerUrl.LastIndexOf('/') + 1,
+                    currentTrailerUrl.LastIndexOf('.') - currentTrailerUrl.LastIndexOf('/') - 1);
+
+                actualTrailerFileNameExt = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('.') + 1);
             }
-            
+
             string nfoOutputName = nfoTemplate.Replace("<path>", actualFilePath).Replace("<filename>", actualFileName);
 
             string posterOutputName =
@@ -367,15 +378,15 @@ namespace YANFOE.IO
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(movieModel.CurrentPosterImageUrl))
+                    if (!string.IsNullOrEmpty(posterPathFrom))
                     {
-                        this.CopyFile(posterPath, posterOutputName);
+                        this.CopyFile(posterPathFrom, posterOutputName);
                         movieModel.ChangedPoster = false;
                         Log.WriteToLog(
                             LogSeverity.Info, 
                             0, 
                             "Poster Saved To Disk for " + movieModel.Title, 
-                            posterPath + " -> " + posterOutputName);
+                            posterPathFrom + " -> " + posterOutputName);
                     }
                 }
                 catch (Exception ex)
@@ -389,7 +400,7 @@ namespace YANFOE.IO
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(movieModel.CurrentFanartImageUrl))
+                    if (!string.IsNullOrEmpty(fanartPathFrom))
                     {
                         this.CopyFile(fanartPathFrom, fanartOutputName);
                         movieModel.ChangedFanart = false;

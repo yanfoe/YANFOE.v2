@@ -50,13 +50,13 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.btnGetImageFromDisk = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGetImageFromUrl = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.btnGetImageFromDisk = new DevExpress.XtraBars.BarButtonItem();
-            this.btnGetImageFromUrl = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageMain.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
@@ -99,6 +99,7 @@
             // 
             // imageMain
             // 
+            this.imageMain.AllowDrop = true;
             this.imageMain.EditValue = global::YANFOE.Properties.Resources.picturefaded128;
             this.imageMain.Location = new System.Drawing.Point(2, 26);
             this.imageMain.Name = "imageMain";
@@ -109,6 +110,8 @@
             this.imageMain.StyleController = this.layoutControl2;
             this.imageMain.TabIndex = 5;
             this.imageMain.ImageChanged += new System.EventHandler(this.ImageMain_ImageChanged);
+            this.imageMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.imageMain_DragDrop);
+            this.imageMain.DragOver += new System.Windows.Forms.DragEventHandler(this.imageMain_DragOver);
             // 
             // layoutControl2
             // 
@@ -188,7 +191,6 @@
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Size = new System.Drawing.Size(1110, 711);
-            this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -308,6 +310,30 @@
             this.btnGetImageFromUrl});
             this.barManager1.MaxItemId = 2;
             // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnGetImageFromDisk),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnGetImageFromUrl)});
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // btnGetImageFromDisk
+            // 
+            this.btnGetImageFromDisk.Caption = "Get Image From Disk";
+            this.btnGetImageFromDisk.Glyph = global::YANFOE.Properties.Resources.folder32;
+            this.btnGetImageFromDisk.Id = 0;
+            this.btnGetImageFromDisk.Name = "btnGetImageFromDisk";
+            this.btnGetImageFromDisk.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnGetImageFromDisk_ItemClick);
+            // 
+            // btnGetImageFromUrl
+            // 
+            this.btnGetImageFromUrl.Caption = "Get Image From URL";
+            this.btnGetImageFromUrl.Glyph = global::YANFOE.Properties.Resources.globe32;
+            this.btnGetImageFromUrl.Id = 1;
+            this.btnGetImageFromUrl.Name = "btnGetImageFromUrl";
+            this.btnGetImageFromUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnGetImageFromUrl_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -335,30 +361,6 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1129, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 711);
-            // 
-            // popupMenu1
-            // 
-            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnGetImageFromDisk),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnGetImageFromUrl)});
-            this.popupMenu1.Manager = this.barManager1;
-            this.popupMenu1.Name = "popupMenu1";
-            // 
-            // btnGetImageFromDisk
-            // 
-            this.btnGetImageFromDisk.Caption = "Get Image From Disk";
-            this.btnGetImageFromDisk.Glyph = global::YANFOE.Properties.Resources.folder32;
-            this.btnGetImageFromDisk.Id = 0;
-            this.btnGetImageFromDisk.Name = "btnGetImageFromDisk";
-            this.btnGetImageFromDisk.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnGetImageFromDisk_ItemClick);
-            // 
-            // btnGetImageFromUrl
-            // 
-            this.btnGetImageFromUrl.Caption = "Get Image From URL";
-            this.btnGetImageFromUrl.Glyph = global::YANFOE.Properties.Resources.globe32;
-            this.btnGetImageFromUrl.Id = 1;
-            this.btnGetImageFromUrl.Name = "btnGetImageFromUrl";
-            this.btnGetImageFromUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnGetImageFromUrl_ItemClick);
             // 
             // DisplayPictureUserControl
             // 

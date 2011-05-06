@@ -882,7 +882,7 @@ namespace YANFOE.IO
                 // Poster
                 if (type == SeasonIOType.All || type == SeasonIOType.Poster)
                 {
-                    if (!string.IsNullOrEmpty(season.PosterUrl))
+                    if (!string.IsNullOrEmpty(season.PosterUrl) || string.IsNullOrEmpty(season.PosterPath))
                     {
                         string posterPathFrom;
 
@@ -905,11 +905,11 @@ namespace YANFOE.IO
                 // Fanart
                 if (type == SeasonIOType.All || type == SeasonIOType.Fanart)
                 {
-                    if (!string.IsNullOrEmpty(season.FanartUrl))
+                    if (!string.IsNullOrEmpty(season.FanartUrl) || !string.IsNullOrEmpty(season.FanartPath))
                     {
                         string fanartPathFrom;
 
-                        if (!string.IsNullOrEmpty(season.PosterPath) && File.Exists(season.PosterPath))
+                        if (!string.IsNullOrEmpty(season.FanartPath) && File.Exists(season.FanartPath))
                         {
                             fanartPathFrom = season.FanartPath;
                         }
@@ -928,7 +928,7 @@ namespace YANFOE.IO
                 // Banner
                 if (type == SeasonIOType.All || type == SeasonIOType.Banner)
                 {
-                    if (!string.IsNullOrEmpty(season.BannerUrl))
+                    if (!string.IsNullOrEmpty(season.BannerUrl) || !string.IsNullOrEmpty(season.BannerPath))
                     {
                         string bannerPathFrom;
 
@@ -1006,7 +1006,7 @@ namespace YANFOE.IO
             // Poster
             if (type == SeriesIOType.All || type == SeriesIOType.Images || type == SeriesIOType.Poster)
             {
-                if (!string.IsNullOrEmpty(series.PosterUrl))
+                if (!string.IsNullOrEmpty(series.PosterUrl) || !string.IsNullOrEmpty(series.PosterPath))
                 {
                     string posterPathFrom;
 
@@ -1029,7 +1029,7 @@ namespace YANFOE.IO
             // Fanart
             if (type == SeriesIOType.All || type == SeriesIOType.Images || type == SeriesIOType.Fanart)
             {
-                if (!string.IsNullOrEmpty(series.FanartUrl))
+                if (!string.IsNullOrEmpty(series.FanartUrl) || !string.IsNullOrEmpty(series.FanartPath))
                 {
                     string fanartPathFrom;
 
@@ -1052,7 +1052,7 @@ namespace YANFOE.IO
             // Banner
             if (type == SeriesIOType.All || type == SeriesIOType.Images || type == SeriesIOType.Banner)
             {
-                if (!string.IsNullOrEmpty(series.SeriesBannerUrl))
+                if (!string.IsNullOrEmpty(series.SeriesBannerUrl) || !string.IsNullOrEmpty(series.SeriesBannerPath))
                 {
                     string bannerPathFrom;
 
