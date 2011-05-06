@@ -286,6 +286,7 @@ namespace YANFOE
 
         private void FrmMain_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
+            Factories.Internal.DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
             Application.Exit();
         }
     }
