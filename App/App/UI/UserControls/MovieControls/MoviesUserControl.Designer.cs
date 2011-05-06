@@ -515,7 +515,7 @@
             superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem1.Text = "Open Movie";
             toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Clicking this link will open the movie files <fileName>\r\n";
+            toolTipItem1.Text = "Clicking this link will open the movie folder.";
             superToolTip1.Items.Add(toolTipTitleItem1);
             superToolTip1.Items.Add(toolTipItem1);
             this.btnOpenFolder.SuperTip = superToolTip1;
@@ -533,7 +533,7 @@
             superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem2.Text = "Open Movie";
             toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Clicking this link will open the movie files <fileName>\r\n";
+            toolTipItem2.Text = "Clicking this link will open the current movie file.\r\n";
             superToolTip2.Items.Add(toolTipTitleItem2);
             superToolTip2.Items.Add(toolTipItem2);
             this.btnOpenFile.SuperTip = superToolTip2;
