@@ -89,8 +89,8 @@
             this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             this.picPoster = new YANFOE.UI.UserControls.CommonControls.DisplayPictureUserControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btnNew = new DevExpress.XtraEditors.SimpleButton();
             this.btnMarked = new DevExpress.XtraEditors.SimpleButton();
@@ -489,8 +489,8 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.simpleButton4);
-            this.panelControl1.Controls.Add(this.simpleButton3);
+            this.panelControl1.Controls.Add(this.btnOpenFolder);
+            this.panelControl1.Controls.Add(this.btnOpenFile);
             this.panelControl1.Controls.Add(this.panelControl2);
             this.panelControl1.Controls.Add(this.btnNew);
             this.panelControl1.Controls.Add(this.btnMarked);
@@ -504,41 +504,41 @@
             this.panelControl1.Size = new System.Drawing.Size(777, 45);
             this.panelControl1.TabIndex = 1;
             // 
-            // simpleButton4
+            // btnOpenFolder
             // 
-            this.simpleButton4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simpleButton4.Enabled = false;
-            this.simpleButton4.Image = global::YANFOE.Properties.Resources.folder32;
-            this.simpleButton4.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton4.Location = new System.Drawing.Point(156, 2);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(48, 41);
+            this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenFolder.Image = global::YANFOE.Properties.Resources.folder32;
+            this.btnOpenFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnOpenFolder.Location = new System.Drawing.Point(156, 2);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(48, 41);
             superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem1.Text = "Open Movie";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "Clicking this link will open the movie files <fileName>\r\n";
             superToolTip1.Items.Add(toolTipTitleItem1);
             superToolTip1.Items.Add(toolTipItem1);
-            this.simpleButton4.SuperTip = superToolTip1;
-            this.simpleButton4.TabIndex = 11;
+            this.btnOpenFolder.SuperTip = superToolTip1;
+            this.btnOpenFolder.TabIndex = 11;
+            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
-            // simpleButton3
+            // btnOpenFile
             // 
-            this.simpleButton3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simpleButton3.Enabled = false;
-            this.simpleButton3.Image = global::YANFOE.Properties.Resources.monitor;
-            this.simpleButton3.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton3.Location = new System.Drawing.Point(108, 2);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(48, 41);
+            this.btnOpenFile.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenFile.Image = global::YANFOE.Properties.Resources.monitor;
+            this.btnOpenFile.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnOpenFile.Location = new System.Drawing.Point(108, 2);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(48, 41);
             superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem2.Text = "Open Movie";
             toolTipItem2.LeftIndent = 6;
             toolTipItem2.Text = "Clicking this link will open the movie files <fileName>\r\n";
             superToolTip2.Items.Add(toolTipTitleItem2);
             superToolTip2.Items.Add(toolTipItem2);
-            this.simpleButton3.SuperTip = superToolTip2;
-            this.simpleButton3.TabIndex = 10;
+            this.btnOpenFile.SuperTip = superToolTip2;
+            this.btnOpenFile.TabIndex = 10;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
             // panelControl2
             // 
@@ -1035,8 +1035,8 @@
         private DevExpress.XtraEditors.SimpleButton btnNew;
         private DevExpress.XtraEditors.SimpleButton btnLock;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton btnOpenFile;
+        private DevExpress.XtraEditors.SimpleButton btnOpenFolder;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;

@@ -17,7 +17,9 @@ namespace YANFOE.UI.UserControls.MovieControls
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -465,6 +467,26 @@ namespace YANFOE.UI.UserControls.MovieControls
             var movieList = rows.Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).ToList();
 
             Popups.MovieListPopup.Generate(this.barManager1, popupMovieList, movieList);
+        }
+
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath))
+            {
+                Process.Start(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath);
+            }
+        }
+
+        private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            var argument = string.Empty;
+            argument = string.Format(
+                @"/select,""{0}""",
+                File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath)
+                    ? MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath
+                    : MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePathFolder);
+
+            Process.Start("explorer.exe", argument);
         }
     }
 }
