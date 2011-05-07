@@ -18,16 +18,25 @@ namespace YANFOE.UI.Dialogs.General
     using System.Windows.Forms;
 
     using DevExpress.XtraEditors;
+    using DevExpress.XtraEditors.Mask;
+
+    public enum EnterValueType
+    {
+        Text,
+        Integer
+    }
 
     public partial class FrmEnterAValue : XtraForm
     {
+        
+
         public string Question { private get; set; }
 
         public string Response { get; private set; }
 
         public bool Cancelled { get; set; }
 
-        public FrmEnterAValue(string question = null)
+        public FrmEnterAValue(string question = null, EnterValueType type = EnterValueType.Text)
         {
             InitializeComponent();
 
@@ -39,6 +48,12 @@ namespace YANFOE.UI.Dialogs.General
             {
                 groupControl.Text = this.Question;
                 Text = string.Empty;
+            }
+
+            if (type == EnterValueType.Integer)
+            {
+                textEdit.Properties.Mask.MaskType = MaskType.RegEx;
+                textEdit.Properties.Mask.EditMask = @"\d+";
             }
         }
 

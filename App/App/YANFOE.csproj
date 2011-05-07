@@ -115,6 +115,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\AddCustomSeries\AddCustomSeriesFactory.cs" />
+    <Compile Include="Factories\AddCustomSeries\AddCustomSeriesFilesModel.cs" />
+    <Compile Include="Factories\AddCustomSeries\AddCustomSeriesModel.cs" />
     <Compile Include="Factories\InOut\Enum\IoType.cs" />
     <Compile Include="Factories\InOut\Model\SaveProgressModel.cs" />
     <Compile Include="Factories\InOut\OutFactory.cs" />
@@ -285,6 +288,12 @@
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\FrmSettingsMain.Designer.cs">
       <DependentUpon>FrmSettingsMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\TV\FrmAddCustomSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\TV\FrmAddCustomSeries.Designer.cs">
+      <DependentUpon>FrmAddCustomSeries.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\TV\FrmImportTv.cs">
       <SubType>Form</SubType>
@@ -629,6 +638,9 @@
     <EmbeddedResource Include="UI\Dialogs\DSettings\FrmSettingsMain.resx">
       <DependentUpon>FrmSettingsMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\TV\FrmAddCustomSeries.resx">
+      <DependentUpon>FrmAddCustomSeries.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmImportTv.resx">
       <DependentUpon>FrmImportTv.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -936,6 +948,7 @@
     <Content Include="Licences\.NET-DiscUtils.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\pencil1.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />

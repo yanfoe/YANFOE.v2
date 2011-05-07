@@ -33,6 +33,7 @@ namespace YANFOE.UI.UserControls.TvControls
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Properties;
     using YANFOE.Settings;
+    using YANFOE.UI.Dialogs.General;
 
     public partial class TvUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -479,6 +480,11 @@ namespace YANFOE.UI.UserControls.TvControls
                     }
                 }
             }
+        }
+
+        private void btnAddCustomSeries_Click(object sender, EventArgs e)
+        {
+            TvDBFactory.CreateCustomSeries();
         }
     }
 }

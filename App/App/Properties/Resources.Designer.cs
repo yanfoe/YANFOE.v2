@@ -389,6 +389,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap pencil {
+            get {
+                object obj = ResourceManager.GetObject("pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap pencil32 {
             get {
                 object obj = ResourceManager.GetObject("pencil32", resourceCulture);

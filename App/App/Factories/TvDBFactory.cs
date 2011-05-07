@@ -43,6 +43,8 @@ namespace YANFOE.Factories
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
+    using YANFOE.UI.Dialogs.General;
+    using YANFOE.UI.Dialogs.TV;
 
     #endregion
 
@@ -2237,5 +2239,21 @@ namespace YANFOE.Factories
         }
 
         #endregion
+
+        /// <summary>
+        /// Show the "Add Custom Series" dialog.
+        /// </summary>
+        public static void CreateCustomSeries()
+        {
+            var addCustomSeries = new FrmAddCustomSeries();
+            addCustomSeries.ShowDialog();
+        }
+
+        public static void AddCustomSeries(Series series)
+        {
+            tvDatabase.Add(series.SeriesName, series);
+            GenerateMasterSeriesList();
+            InvokeMasterSeriesNameListChanged(new EventArgs());
+        }
     }
 }
