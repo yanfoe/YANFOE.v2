@@ -21,6 +21,7 @@ namespace YANFOE.Factories.Import
     using YANFOE.Factories.Media;
     using YANFOE.Factories.Sets;
     using YANFOE.Models.MovieModels;
+    using YANFOE.Tools.Importing;
     using YANFOE.Tools.ThirdParty;
 
     /// <summary>
@@ -128,12 +129,32 @@ namespace YANFOE.Factories.Import
                     currentGetPathFiles = file.Path;
                 }
 
+                var videoSource = file.DefaultVideoSource;
+
+                if (MovieNaming.IsBluRay(file.PathAndFileName))
+                {
+                    videoSource = "Bluray";
+                }
+                else if (MovieNaming.IsDVD(file.PathAndFileName))
+                {
+                    videoSource = "DVD";
+                }
+                else
+                {
+                    var detect = Tools.IO.DetectType.FindVideoSource(file.PathAndFileName);
+
+                    if (!string.IsNullOrEmpty(detect))
+                    {
+                        videoSource = detect;
+                    }
+                }
+
                 var movieModel = new MovieModel
                     {
-                        Title = Tools.Importing.MovieNaming.GetMovieName(file.PathAndFileName, file.MediaPathType),
-                        Year = Tools.Importing.MovieNaming.GetMovieYear(file.PathAndFileName),
+                        Title = MovieNaming.GetMovieName(file.PathAndFileName, file.MediaPathType),
+                        Year = MovieNaming.GetMovieYear(file.PathAndFileName),
                         ScraperGroup = file.ScraperGroup,
-                        VideoSource = file.DefaultVideoSource,
+                        VideoSource = videoSource,
                         NfoPathOnDisk = FindNFO(file.FilenameWithOutExt, file.Path, getFiles),
                         PosterPathOnDisk = FindPoster(file.FilenameWithOutExt, file.Path, getFiles),
                         FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, file.Path, getFiles)

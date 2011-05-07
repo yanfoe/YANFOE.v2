@@ -678,7 +678,12 @@ namespace YANFOE.IO
                 movieModel.Cast.Add(new PersonModel(name, thumb, role));
             }
 
-            movieModel.VideoSource = XRead.GetString(xmlReader, "videosource");
+            var source = XRead.GetString(xmlReader, "videosource");
+
+            if (!string.IsNullOrEmpty(source))
+            {
+                movieModel.VideoSource = source;
+            }
 
             // Watched
             movieModel.Watched = XRead.GetBool(xmlReader, "watched");

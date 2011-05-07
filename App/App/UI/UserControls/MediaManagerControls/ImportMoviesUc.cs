@@ -23,8 +23,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Models.Search;
 
-    using System.Windows.Forms;
-
     using Timer = System.Windows.Forms.Timer;
 
     public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraUserControl
@@ -96,10 +94,10 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             this.grdMovies.DataSource = ImportMoviesFactory.ImportDatabase;
 
-            bgw = new BackgroundWorker();
-            bgw.DoWork += this.bgw_DoWork;
-            bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
-            bgw.RunWorkerAsync();
+            this.bgw = new BackgroundWorker();
+            this.bgw.DoWork += this.bgw_DoWork;
+            this.bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
+            this.bgw.RunWorkerAsync();
 
             this.ClearBindings();
             this.SetBindings();

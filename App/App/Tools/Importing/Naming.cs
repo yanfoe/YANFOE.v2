@@ -376,7 +376,7 @@ namespace YANFOE.Tools.Importing
                 return false;
             }
 
-            return path.ToLower().Contains("video_ts//");
+            return path.ToLower().Contains("video_ts\\");
         }
 
         /// <summary>

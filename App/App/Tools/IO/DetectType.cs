@@ -106,6 +106,27 @@ namespace YANFOE.Tools.IO
             return MediaPathFileModel.MediaPathFileType.Unknown;
         }
 
+        public static string FindVideoSource(string filePath)
+        {
+            var videoSourceTypes = Get.Keywords.GetSourcesAsList();
+            var fileName = Path.GetFileNameWithoutExtension(filePath);
+
+            fileName = fileName.Replace(".", " ");
+            fileName = fileName.Replace("(", " ");
+            fileName = fileName.Replace(")", " ");
+
+            foreach (var source in videoSourceTypes)
+            {
+                if (fileName.ToLower().Contains(" " + source.ToLower() + " ") ||
+                    fileName.ToLower().Contains(" " + source.ToLower()))
+                {
+                    return source;
+                }
+            }
+
+            return string.Empty;
+        }
+
         #endregion
     }
 }
