@@ -18,6 +18,9 @@ namespace YANFOE.Factories.Renamer
     using System.IO;
     using System.Linq;
 
+    using BitFactory.Logging;
+
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Settings;
     using YANFOE.Tools.Importing;
@@ -110,6 +113,10 @@ namespace YANFOE.Factories.Renamer
         {
             renameTo = FileSystemCharChange.To(renameTo);
 
+            var fileName = Path.GetFileNameWithoutExtension(pathFrom);
+            var filePath = Path.GetDirectoryName(pathFrom);
+
+            // Bluray))
             if (MovieNaming.IsBluRay(pathFrom))
             {
                 string folderPathFrom = MovieNaming.GetBluRayPath(pathFrom) + MovieNaming.GetBluRayName(pathFrom);
@@ -131,6 +138,7 @@ namespace YANFOE.Factories.Renamer
                 return folderPathFrom;
             }
 
+            // DVD
             if (MovieNaming.IsDVD(pathFrom))
             {
                 string folderPathFrom = MovieNaming.GetDvdPath(pathFrom) + MovieNaming.GetDvdName(pathFrom);
@@ -152,8 +160,27 @@ namespace YANFOE.Factories.Renamer
                 return folderPathFrom;
             }
 
+
+            // File
             string pathTo = Path.GetDirectoryName(pathFrom) + Path.DirectorySeparatorChar + renameTo +
                             Path.GetExtension(pathFrom);
+
+            foreach (var subExt in Get.InOutCollection.SubtitleExtentions)
+            {
+                var possibleFileName = filePath + Path.DirectorySeparatorChar + fileName + "." + subExt;
+
+                if (File.Exists(possibleFileName))
+                {
+                    try
+                    {
+                        File.Move(possibleFileName, filePath + Path.DirectorySeparatorChar + renameTo + "." + subExt);
+                    }
+                    catch
+                    {
+                        Log.WriteToLog(LogSeverity.Error, 0, "Could not rename", possibleFileName + " -> " + filePath + Path.DirectorySeparatorChar + renameTo + subExt);
+                    }
+                }
+            }
 
             try
             {
