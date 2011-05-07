@@ -91,6 +91,7 @@ namespace YANFOE.Settings.UserSettings
             this.FillNfoExtentions();
             this.FillImageExtentions();
             this.FillMusicExtentions();
+            this.FillSubtitleExtentions();
 
             this.FillNfoTypes();
             this.FillPosterType();
@@ -166,6 +167,11 @@ namespace YANFOE.Settings.UserSettings
         /// Gets or sets ImageExtentions.
         /// </summary>
         public List<string> ImageExtentions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the subtitle extentions.
+        /// </summary>
+        public List<string> SubtitleExtentions { get; set; }
 
         /// <summary>
         /// Gets or sets IoType.
@@ -557,11 +563,19 @@ namespace YANFOE.Settings.UserSettings
         }
 
         /// <summary>
-        /// The fill nfo extentions.
+        /// Fill nfo extentions.
         /// </summary>
         private void FillNfoExtentions()
         {
             this.NfoExtentions = new List<string> { "nfo", "xml" };
+        }
+
+        /// <summary>
+        /// Fill subtitle extentions.
+        /// </summary>
+        private void FillSubtitleExtentions()
+        {
+            this.SubtitleExtentions = new List<string> { "idx", "srr", "sub" };
         }
 
         /// <summary>
