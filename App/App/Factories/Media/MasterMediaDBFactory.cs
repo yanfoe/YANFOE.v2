@@ -167,12 +167,12 @@ namespace YANFOE.Factories.Media
         {
             masterTvMediaDatabase = new BindingList<string>();
 
-            foreach (string filePath in from series in TvDBFactory.TvDatabase.AsParallel()
-                                        from season in series.Value.Seasons.AsParallel()
-                                        from episode in season.Value.Episodes.AsParallel()
-                                        select episode.CurrentFilenameAndPath
-                                        into filePath where !string.IsNullOrEmpty(filePath)
-                                        where !masterTvMediaDatabase.Contains(filePath) select filePath)
+            foreach (var filePath in
+                TvDBFactory.TvDatabase.AsParallel().SelectMany(
+                    series => series.Value.Seasons.AsParallel(), (series, season) => new { series, season }).SelectMany(
+                        @t => @t.season.Value.Episodes.AsParallel(), (@t, episode) => episode.CurrentFilenameAndPath).
+                    Where(filePath => !string.IsNullOrEmpty(filePath)).Where(
+                        filePath => !masterTvMediaDatabase.Contains(filePath)))
             {
                 try
                 {

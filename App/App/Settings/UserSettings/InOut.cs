@@ -109,7 +109,7 @@ namespace YANFOE.Settings.UserSettings
             this.AddYAMJMoviesToDefault();
             this.AddYAMJTvToDefault();
 
-            this.EpisodeNamingTemplate = "<seriesname> <season2><episode2> <episodename>";
+            this.EpisodeNamingTemplate = "<seriesname> s<season2>e<episode2> <episodename>";
 
             this.RenameTV = true;
 
@@ -575,7 +575,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillSubtitleExtentions()
         {
-            this.SubtitleExtentions = new List<string> { "idx", "srr", "sub" };
+            this.SubtitleExtentions = new List<string> { "idx", "srr", "sub", "srt", "ssa", "ass" };
         }
 
         /// <summary>

@@ -194,10 +194,10 @@ namespace YANFOE.Factories.Renamer
             {
                 seriesName = "Star Trek: Deep Space Nine";
 
-                season1 = "S2";
-                season2 = "S02";
-                episode1 = "E5";
-                episode2 = "E05";
+                season1 = "2";
+                season2 = "02";
+                episode1 = "5";
+                episode2 = "05";
 
                 episodeName = "Cardassians";
                 doRename = false;
@@ -212,15 +212,15 @@ namespace YANFOE.Factories.Renamer
 
                 List<Episode> episodesContaining = GetEpisodesContainingFile(episode);
 
-                season1 = "S" + seasonNumber;
-                season2 = string.Format("S{0:00}", seasonNumber);
+                season1 = seasonNumber.ToString();
+                season2 = string.Format("{0:00}", seasonNumber);
 
                 doRename = false;
 
                 if (episodesContaining.Count == 1)
                 {
-                    episode1 = "E" + episode.EpisodeNumber;
-                    episode2 = "E" + string.Format("{0:00}", episode.EpisodeNumber);
+                    episode1 = episode.EpisodeNumber.ToString();
+                    episode2 = string.Format("{0:00}", episode.EpisodeNumber);
                     doRename = true;
                     episodeName = episode.EpisodeName;
                 }
@@ -235,8 +235,8 @@ namespace YANFOE.Factories.Renamer
                             doRename = true;
                         }
 
-                        episode1 += "E" + ep.EpisodeNumber;
-                        episode2 += "E" + string.Format("{0:00}", ep.EpisodeNumber);
+                        episode1 += ep.EpisodeNumber;
+                        episode2 += string.Format("{0:00}", ep.EpisodeNumber);
 
                         episodeName += string.Format("{0} ", ep.EpisodeName);
                         count++;
