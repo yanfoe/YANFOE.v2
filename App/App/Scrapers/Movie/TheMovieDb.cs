@@ -698,13 +698,50 @@ namespace YANFOE.Scrapers.Movie
 
             var tmdbType = string.Empty;
 
+            var posterSize = string.Empty;
+            var fanartSize = string.Empty;
+
             switch (type)
             {
                 case ImageUsageType.Poster:
                     tmdbType = "poster";
+
+                    switch (Settings.Get.Scraper.TmDBDownloadPosterSize)
+                    {
+                        case 0:
+                            posterSize = "original";
+                            break;
+                        case 1:
+                            posterSize = "mid";
+                            break;
+                        case 2:
+                            posterSize = "cover";
+                            break;
+                        case 3:
+                            posterSize = "thumb";
+                            break;
+                    }
+
                     break;
                 case ImageUsageType.Fanart:
                     tmdbType = "backdrop";
+
+                    switch (Settings.Get.Scraper.TmDBDownloadFanartSize)
+                    {
+                        case 0:
+                            fanartSize = "original";
+                            break;
+                        case 1:
+                            fanartSize = "poster";
+                            break;
+                        case 2:
+                            fanartSize = "w1280";
+                            break;
+                        case 3:
+                            fanartSize = "thumb";
+                            break;
+                    }
+
                     break;
             }
 
@@ -712,7 +749,7 @@ namespace YANFOE.Scrapers.Movie
 
             foreach (var image in images)
             {
-                if (image.Attribute("size").Value == "mid" || image.Attribute("size").Value == "original")
+                if (image.Attribute("size").Value == fanartSize || image.Attribute("size").Value == posterSize)
                 {
                     var Original = new Uri(image.Attribute("url").Value);
                     var thumb = new Uri(Original.ToString().Replace("-poster", "-thumb"));

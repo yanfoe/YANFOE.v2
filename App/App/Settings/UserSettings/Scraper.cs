@@ -34,7 +34,8 @@ namespace YANFOE.Settings.UserSettings
             this.TvDbTime = string.Empty;
             this.Generic = new Generic();
 
-
+            this.TmDBDownloadPosterSize = 1;
+            this.TmDBDownloadFanartSize = 0;
         }
 
         #endregion
@@ -56,6 +57,14 @@ namespace YANFOE.Settings.UserSettings
         /// The tv db time.
         /// </value>
         public string TvDbTime { get; set; }
+
+        #endregion
+
+        #region TheMovieDB
+
+        public int TmDBDownloadPosterSize { get; set; }
+
+        public int TmDBDownloadFanartSize { get; set; }
 
         #endregion
     }

@@ -78,7 +78,7 @@
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit11 = new DevExpress.XtraEditors.PictureEdit();
             this.tabScrapers = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.tabControlScrapers = new DevExpress.XtraTab.XtraTabControl();
             this.tabIMDB = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -104,15 +104,16 @@
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
             this.navGroupScrapers = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarItem3 = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem4 = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem5 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navItemScraperImdb = new DevExpress.XtraNavBar.NavBarItem();
+            this.navItemScraperTmdb = new DevExpress.XtraNavBar.NavBarItem();
+            this.navItemScraperTvDB = new DevExpress.XtraNavBar.NavBarItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
+            this.ucSettingsScraperTmdb1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTmdb();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
@@ -159,8 +160,8 @@
             this.panelControl11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit11.Properties)).BeginInit();
             this.tabScrapers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlScrapers)).BeginInit();
+            this.tabControlScrapers.SuspendLayout();
             this.tabIMDB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
@@ -238,7 +239,7 @@
             // 
             this.tabGeneral.Controls.Add(this.tabControlGeneral);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Size = new System.Drawing.Size(616, 454);
+            this.tabGeneral.Size = new System.Drawing.Size(618, 456);
             this.tabGeneral.Text = "General";
             // 
             // tabControlGeneral
@@ -247,7 +248,7 @@
             this.tabControlGeneral.Location = new System.Drawing.Point(0, 0);
             this.tabControlGeneral.Name = "tabControlGeneral";
             this.tabControlGeneral.SelectedTabPage = this.tabGeneralUi;
-            this.tabControlGeneral.Size = new System.Drawing.Size(616, 454);
+            this.tabControlGeneral.Size = new System.Drawing.Size(618, 456);
             this.tabControlGeneral.TabIndex = 0;
             this.tabControlGeneral.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneralUi,
@@ -258,7 +259,7 @@
             this.tabGeneralUi.Controls.Add(this.ucSettingsGeneralUi2);
             this.tabGeneralUi.Controls.Add(this.panelControl1);
             this.tabGeneralUi.Name = "tabGeneralUi";
-            this.tabGeneralUi.Size = new System.Drawing.Size(610, 428);
+            this.tabGeneralUi.Size = new System.Drawing.Size(614, 432);
             this.tabGeneralUi.Text = "Ui";
             // 
             // ucSettingsGeneralUi2
@@ -266,9 +267,8 @@
             this.ucSettingsGeneralUi2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsGeneralUi2.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsGeneralUi2.Name = "ucSettingsGeneralUi2";
-            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(610, 376);
+            this.ucSettingsGeneralUi2.Size = new System.Drawing.Size(614, 380);
             this.ucSettingsGeneralUi2.TabIndex = 1;
-            this.ucSettingsGeneralUi2.Load += new System.EventHandler(this.ucSettingsGeneralUi2_Load);
             // 
             // panelControl1
             // 
@@ -277,7 +277,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(610, 52);
+            this.panelControl1.Size = new System.Drawing.Size(614, 52);
             this.panelControl1.TabIndex = 2;
             // 
             // labelControl1
@@ -306,7 +306,7 @@
             this.tabGeneralWeb.Controls.Add(this.ucSettingsGeneralWeb1);
             this.tabGeneralWeb.Controls.Add(this.panelControl2);
             this.tabGeneralWeb.Name = "tabGeneralWeb";
-            this.tabGeneralWeb.Size = new System.Drawing.Size(612, 430);
+            this.tabGeneralWeb.Size = new System.Drawing.Size(614, 432);
             this.tabGeneralWeb.Text = "Web";
             // 
             // ucSettingsGeneralWeb1
@@ -353,7 +353,7 @@
             // 
             this.tabMovies.Controls.Add(this.tabControlMovies);
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(616, 454);
+            this.tabMovies.Size = new System.Drawing.Size(618, 456);
             this.tabMovies.Text = "Movies";
             // 
             // tabControlMovies
@@ -373,7 +373,7 @@
             this.tabMovieOut.Controls.Add(this.ucSettingsMoviesIO1);
             this.tabMovieOut.Controls.Add(this.panelControl6);
             this.tabMovieOut.Name = "tabMovieOut";
-            this.tabMovieOut.Size = new System.Drawing.Size(612, 430);
+            this.tabMovieOut.Size = new System.Drawing.Size(614, 432);
             this.tabMovieOut.Text = "File Out";
             // 
             // ucSettingsMoviesIO1
@@ -420,7 +420,7 @@
             this.tabMovieIn.Controls.Add(this.ucSettingsMovieIn1);
             this.tabMovieIn.Controls.Add(this.panelControl9);
             this.tabMovieIn.Name = "tabMovieIn";
-            this.tabMovieIn.Size = new System.Drawing.Size(612, 430);
+            this.tabMovieIn.Size = new System.Drawing.Size(614, 432);
             this.tabMovieIn.Text = "File In";
             // 
             // ucSettingsMovieIn1
@@ -466,7 +466,7 @@
             // 
             this.tabTv.Controls.Add(this.tabTvControl);
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(616, 454);
+            this.tabTv.Size = new System.Drawing.Size(618, 456);
             this.tabTv.Text = "TV";
             // 
             // tabTvControl
@@ -488,7 +488,7 @@
             this.tabTvFileOut.Controls.Add(this.ucSettingsTvIO1);
             this.tabTvFileOut.Controls.Add(this.panelControl7);
             this.tabTvFileOut.Name = "tabTvFileOut";
-            this.tabTvFileOut.Size = new System.Drawing.Size(612, 430);
+            this.tabTvFileOut.Size = new System.Drawing.Size(614, 432);
             this.tabTvFileOut.Text = "File Out";
             // 
             // ucSettingsTvIO1
@@ -535,7 +535,7 @@
             this.tabTvRename.Controls.Add(this.ucSettingsTvRename1);
             this.tabTvRename.Controls.Add(this.panelControl8);
             this.tabTvRename.Name = "tabTvRename";
-            this.tabTvRename.Size = new System.Drawing.Size(612, 430);
+            this.tabTvRename.Size = new System.Drawing.Size(614, 432);
             this.tabTvRename.Text = "Rename";
             // 
             // ucSettingsTvRename1
@@ -581,7 +581,7 @@
             // 
             this.tabTvUpdating.Controls.Add(this.panelControl10);
             this.tabTvUpdating.Name = "tabTvUpdating";
-            this.tabTvUpdating.Size = new System.Drawing.Size(612, 430);
+            this.tabTvUpdating.Size = new System.Drawing.Size(614, 432);
             this.tabTvUpdating.Text = "Updating";
             // 
             // panelControl10
@@ -619,7 +619,7 @@
             // 
             this.tabTvMisc.Controls.Add(this.panelControl11);
             this.tabTvMisc.Name = "tabTvMisc";
-            this.tabTvMisc.Size = new System.Drawing.Size(612, 430);
+            this.tabTvMisc.Size = new System.Drawing.Size(614, 432);
             this.tabTvMisc.Text = "Misc";
             // 
             // panelControl11
@@ -655,20 +655,20 @@
             // 
             // tabScrapers
             // 
-            this.tabScrapers.Controls.Add(this.xtraTabControl1);
+            this.tabScrapers.Controls.Add(this.tabControlScrapers);
             this.tabScrapers.Name = "tabScrapers";
-            this.tabScrapers.Size = new System.Drawing.Size(616, 454);
+            this.tabScrapers.Size = new System.Drawing.Size(618, 456);
             this.tabScrapers.Text = "Scrapers";
             // 
-            // xtraTabControl1
+            // tabControlScrapers
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.tabIMDB;
-            this.xtraTabControl1.Size = new System.Drawing.Size(618, 456);
-            this.xtraTabControl1.TabIndex = 0;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabControlScrapers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlScrapers.Location = new System.Drawing.Point(0, 0);
+            this.tabControlScrapers.Name = "tabControlScrapers";
+            this.tabControlScrapers.SelectedTabPage = this.tabIMDB;
+            this.tabControlScrapers.Size = new System.Drawing.Size(618, 456);
+            this.tabControlScrapers.TabIndex = 0;
+            this.tabControlScrapers.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabIMDB,
             this.tabTMDB,
             this.tabTVDB});
@@ -677,7 +677,7 @@
             // 
             this.tabIMDB.Controls.Add(this.panelControl3);
             this.tabIMDB.Name = "tabIMDB";
-            this.tabIMDB.Size = new System.Drawing.Size(612, 430);
+            this.tabIMDB.Size = new System.Drawing.Size(614, 432);
             this.tabIMDB.Text = "IMDB";
             // 
             // panelControl3
@@ -713,9 +713,10 @@
             // 
             // tabTMDB
             // 
+            this.tabTMDB.Controls.Add(this.ucSettingsScraperTmdb1);
             this.tabTMDB.Controls.Add(this.panelControl4);
             this.tabTMDB.Name = "tabTMDB";
-            this.tabTMDB.Size = new System.Drawing.Size(612, 430);
+            this.tabTMDB.Size = new System.Drawing.Size(614, 432);
             this.tabTMDB.Text = "The Movie DB";
             // 
             // panelControl4
@@ -753,7 +754,7 @@
             // 
             this.tabTVDB.Controls.Add(this.panelControl5);
             this.tabTVDB.Name = "tabTVDB";
-            this.tabTVDB.Size = new System.Drawing.Size(612, 430);
+            this.tabTVDB.Size = new System.Drawing.Size(614, 432);
             this.tabTVDB.Text = "The TvDB";
             // 
             // panelControl5
@@ -798,9 +799,9 @@
             this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navItemGeneralUI,
             this.navItemGeneralWeb,
-            this.navBarItem3,
-            this.navBarItem4,
-            this.navBarItem5,
+            this.navItemScraperImdb,
+            this.navItemScraperTmdb,
+            this.navItemScraperTvDB,
             this.navItemMoviesOut,
             this.navItemTvFileOut,
             this.navItemTvRename,
@@ -900,26 +901,29 @@
             this.navGroupScrapers.Caption = "Scrapers";
             this.navGroupScrapers.Expanded = true;
             this.navGroupScrapers.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem3),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem4),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem5)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemScraperImdb),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemScraperTmdb),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemScraperTvDB)});
             this.navGroupScrapers.LargeImage = global::YANFOE.Properties.Resources.scraper1;
             this.navGroupScrapers.Name = "navGroupScrapers";
             // 
-            // navBarItem3
+            // navItemScraperImdb
             // 
-            this.navBarItem3.Caption = "IMDB";
-            this.navBarItem3.Name = "navBarItem3";
+            this.navItemScraperImdb.Caption = "IMDB";
+            this.navItemScraperImdb.Name = "navItemScraperImdb";
+            this.navItemScraperImdb.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemScraperImdb_LinkClicked);
             // 
-            // navBarItem4
+            // navItemScraperTmdb
             // 
-            this.navBarItem4.Caption = "The Movie DB";
-            this.navBarItem4.Name = "navBarItem4";
+            this.navItemScraperTmdb.Caption = "The Movie DB";
+            this.navItemScraperTmdb.Name = "navItemScraperTmdb";
+            this.navItemScraperTmdb.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemScraperTmdb_LinkClicked);
             // 
-            // navBarItem5
+            // navItemScraperTvDB
             // 
-            this.navBarItem5.Caption = "The TvDB";
-            this.navBarItem5.Name = "navBarItem5";
+            this.navItemScraperTvDB.Caption = "The TvDB";
+            this.navItemScraperTvDB.Name = "navItemScraperTvDB";
+            this.navItemScraperTvDB.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemScraperTvDB_LinkClicked);
             // 
             // layoutControlGroup1
             // 
@@ -935,7 +939,6 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(805, 504);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -994,6 +997,14 @@
             this.simpleSeparator1.Name = "simpleSeparator1";
             this.simpleSeparator1.Size = new System.Drawing.Size(2, 484);
             this.simpleSeparator1.Text = "simpleSeparator1";
+            // 
+            // ucSettingsScraperTmdb1
+            // 
+            this.ucSettingsScraperTmdb1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSettingsScraperTmdb1.Location = new System.Drawing.Point(0, 52);
+            this.ucSettingsScraperTmdb1.Name = "ucSettingsScraperTmdb1";
+            this.ucSettingsScraperTmdb1.Size = new System.Drawing.Size(614, 380);
+            this.ucSettingsScraperTmdb1.TabIndex = 6;
             // 
             // FrmSettingsMain
             // 
@@ -1060,8 +1071,8 @@
             this.panelControl11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit11.Properties)).EndInit();
             this.tabScrapers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tabControlScrapers)).EndInit();
+            this.tabControlScrapers.ResumeLayout(false);
             this.tabIMDB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
@@ -1121,13 +1132,13 @@
         private DevExpress.XtraEditors.PictureEdit pictureEdit2;
         private DevExpress.XtraNavBar.NavBarGroup navGroupScrapers;
         private DevExpress.XtraTab.XtraTabPage tabScrapers;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabControl tabControlScrapers;
         private DevExpress.XtraTab.XtraTabPage tabIMDB;
         private DevExpress.XtraTab.XtraTabPage tabTMDB;
         private DevExpress.XtraTab.XtraTabPage tabTVDB;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem3;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem4;
-        private DevExpress.XtraNavBar.NavBarItem navBarItem5;
+        private DevExpress.XtraNavBar.NavBarItem navItemScraperImdb;
+        private DevExpress.XtraNavBar.NavBarItem navItemScraperTmdb;
+        private DevExpress.XtraNavBar.NavBarItem navItemScraperTvDB;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.PictureEdit pictureEdit3;
@@ -1174,6 +1185,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl11;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.PictureEdit pictureEdit11;
+        private UcSettingsScraperTmdb ucSettingsScraperTmdb1;
 
     }
 }

@@ -32,6 +32,8 @@ namespace YANFOE.UI.Dialogs.DSettings
 
             tabMain.ShowTabHeader = DefaultBoolean.False;
             tabControlGeneral.ShowTabHeader = DefaultBoolean.False;
+            tabControlMovies.ShowTabHeader = DefaultBoolean.False;
+            tabControlScrapers.ShowTabHeader = DefaultBoolean.False;
         }
 
         /// <summary>
@@ -122,9 +124,37 @@ namespace YANFOE.UI.Dialogs.DSettings
             tabControlMovies.SelectedTabPage = this.tabMovieIn;
         }
 
-        private void ucSettingsGeneralUi2_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the LinkClicked event of the navItemScraperImdb control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraNavBar.NavBarLinkEventArgs"/> instance containing the event data.</param>
+        private void navItemScraperImdb_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
+            tabMain.SelectedTabPage = tabScrapers;
+            tabControlScrapers.SelectedTabPage = this.tabIMDB;
+        }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the navItemScraperTmdb control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraNavBar.NavBarLinkEventArgs"/> instance containing the event data.</param>
+        private void navItemScraperTmdb_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            tabMain.SelectedTabPage = tabScrapers;
+            tabControlScrapers.SelectedTabPage = this.tabTMDB;
+        }
+
+        /// <summary>
+        /// Handles the LinkClicked event of the navItemScraperTvDB control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraNavBar.NavBarLinkEventArgs"/> instance containing the event data.</param>
+        private void navItemScraperTvDB_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            tabMain.SelectedTabPage = tabScrapers;
+            tabControlScrapers.SelectedTabPage = this.tabTVDB;
         }
     }
 }

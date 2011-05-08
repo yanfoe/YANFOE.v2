@@ -205,6 +205,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperImdb.Designer.cs">
       <DependentUpon>UcSettingsScraperImdb.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.Designer.cs">
+      <DependentUpon>UcSettingsScraperTmdb.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIO.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -601,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperImdb.resx">
       <DependentUpon>UcSettingsScraperImdb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.resx">
+      <DependentUpon>UcSettingsScraperTmdb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvIO.resx">
       <DependentUpon>UcSettingsTvIO.cs</DependentUpon>
