@@ -968,6 +968,8 @@
     </Content>
     <None Include="Resources\pencil1.png" />
     <None Include="Resources\info.png" />
+    <None Include="Resources\btn_donate_SM.gif" />
+    <None Include="Resources\dollar_currency_sign.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />

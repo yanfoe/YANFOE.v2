@@ -36,6 +36,9 @@ namespace YANFOE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -51,6 +54,7 @@ namespace YANFOE
             this.mnuHelpSourceCode = new DevExpress.XtraBars.BarButtonItem();
             this.mnuHelpWiki = new DevExpress.XtraBars.BarButtonItem();
             this.mnuHelpHomepage = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuDonate = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -204,9 +208,10 @@ namespace YANFOE
             this.mnuHelpReportIssues,
             this.mnuHelpHomepage,
             this.mnuHelpSourceCode,
-            this.mnuHelpWiki});
+            this.mnuHelpWiki,
+            this.mnuDonate});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 34;
+            this.barManager1.MaxItemId = 35;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             // 
@@ -220,7 +225,12 @@ namespace YANFOE
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubItem5, DevExpress.XtraBars.BarItemPaintStyle.Standard),
             new DevExpress.XtraBars.LinkPersistInfo(this.mnuEdit),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem7),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem9)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem9),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuDonate)});
+            this.bar2.OptionsBar.AllowQuickCustomization = false;
+            this.bar2.OptionsBar.DisableClose = true;
+            this.bar2.OptionsBar.DisableCustomization = true;
+            this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Custom 5";
@@ -319,12 +329,30 @@ namespace YANFOE
             this.mnuHelpHomepage.Name = "mnuHelpHomepage";
             this.mnuHelpHomepage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuHelpHomepage_ItemClick);
             // 
+            // mnuDonate
+            // 
+            this.mnuDonate.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.mnuDonate.Caption = "Donate";
+            this.mnuDonate.Glyph = global::YANFOE.Properties.Resources.btn_donate_SM;
+            this.mnuDonate.Id = 34;
+            this.mnuDonate.Name = "mnuDonate";
+            toolTipTitleItem1.Text = "Donate to the YANFOE project.";
+            toolTipItem1.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.Appearance.Options.UseImage = true;
+            toolTipItem1.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.mnuDonate.SuperTip = superToolTip1;
+            this.mnuDonate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuDonate_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(992, 22);
+            this.barDockControlTop.Size = new System.Drawing.Size(992, 29);
             // 
             // barDockControlBottom
             // 
@@ -337,15 +365,15 @@ namespace YANFOE
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 22);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 525);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 29);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 518);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(992, 22);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 525);
+            this.barDockControlRight.Location = new System.Drawing.Point(992, 29);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 518);
             // 
             // barSubItem1
             // 
@@ -412,11 +440,11 @@ namespace YANFOE
             // tabControlMain
             // 
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 22);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 29);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.Padding = new System.Windows.Forms.Padding(5);
             this.tabControlMain.SelectedTabPage = this.tabMediaManager;
-            this.tabControlMain.Size = new System.Drawing.Size(992, 498);
+            this.tabControlMain.Size = new System.Drawing.Size(992, 491);
             this.tabControlMain.TabIndex = 4;
             this.tabControlMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabMediaManager,
@@ -431,7 +459,7 @@ namespace YANFOE
             this.tabMediaManager.Controls.Add(this.mediaManagerUc1);
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
-            this.tabMediaManager.Size = new System.Drawing.Size(986, 461);
+            this.tabMediaManager.Size = new System.Drawing.Size(988, 456);
             this.tabMediaManager.Text = "Media Manager";
             // 
             // mediaManagerUc1
@@ -439,7 +467,7 @@ namespace YANFOE
             this.mediaManagerUc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaManagerUc1.Location = new System.Drawing.Point(0, 0);
             this.mediaManagerUc1.Name = "mediaManagerUc1";
-            this.mediaManagerUc1.Size = new System.Drawing.Size(986, 461);
+            this.mediaManagerUc1.Size = new System.Drawing.Size(988, 456);
             this.mediaManagerUc1.TabIndex = 0;
             // 
             // tabMovies
@@ -447,7 +475,7 @@ namespace YANFOE
             this.tabMovies.Controls.Add(this.moviesUserControl1);
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(986, 461);
+            this.tabMovies.Size = new System.Drawing.Size(988, 456);
             this.tabMovies.Text = "Movies";
             // 
             // moviesUserControl1
@@ -467,7 +495,7 @@ namespace YANFOE
             this.tabTv.Controls.Add(this.tvUserControl1);
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(986, 461);
+            this.tabTv.Size = new System.Drawing.Size(988, 456);
             this.tabTv.Text = "TV";
             // 
             // tvUserControl1
@@ -483,7 +511,7 @@ namespace YANFOE
             this.tabDownloads.Controls.Add(this.downloadsUserControl1);
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
-            this.tabDownloads.Size = new System.Drawing.Size(986, 461);
+            this.tabDownloads.Size = new System.Drawing.Size(988, 456);
             this.tabDownloads.Text = "Downloads";
             // 
             // downloadsUserControl1
@@ -499,7 +527,7 @@ namespace YANFOE
             this.tabLogs.Controls.Add(this.logsUserControl1);
             this.tabLogs.Image = global::YANFOE.Properties.Resources.books24;
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Size = new System.Drawing.Size(986, 461);
+            this.tabLogs.Size = new System.Drawing.Size(988, 456);
             this.tabLogs.Text = "Logs";
             // 
             // logsUserControl1
@@ -514,7 +542,7 @@ namespace YANFOE
             // 
             this.tabAbout.Controls.Add(this.layoutControl1);
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(986, 461);
+            this.tabAbout.Size = new System.Drawing.Size(988, 456);
             this.tabAbout.Text = "About";
             // 
             // layoutControl1
@@ -1190,5 +1218,6 @@ namespace YANFOE
         private DevExpress.XtraBars.BarButtonItem mnuHelpHomepage;
         private DevExpress.XtraBars.BarButtonItem mnuHelpSourceCode;
         private DevExpress.XtraBars.BarButtonItem mnuHelpWiki;
+        private DevExpress.XtraBars.BarButtonItem mnuDonate;
     }
 }

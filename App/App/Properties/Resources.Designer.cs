@@ -151,6 +151,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap btn_donate_SM {
+            get {
+                object obj = ResourceManager.GetObject("btn_donate_SM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap chart {
             get {
                 object obj = ResourceManager.GetObject("chart", resourceCulture);
@@ -196,6 +203,13 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap delete32 {
             get {
                 object obj = ResourceManager.GetObject("delete32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap dollar_currency_sign {
+            get {
+                object obj = ResourceManager.GetObject("dollar_currency_sign", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
