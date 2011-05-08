@@ -712,7 +712,7 @@ namespace YANFOE.Scrapers.Movie
 
             foreach (var image in images)
             {
-                if (image.Attribute("size").Value == "mid" || image.Attribute("size").Value == "poster")
+                if (image.Attribute("size").Value == "mid" || image.Attribute("size").Value == "original")
                 {
                     var Original = new Uri(image.Attribute("url").Value);
                     var thumb = new Uri(Original.ToString().Replace("-poster", "-thumb"));
