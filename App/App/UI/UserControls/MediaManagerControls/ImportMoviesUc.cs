@@ -19,6 +19,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using System.Diagnostics;
     using System.Threading;
 
+    using YANFOE.Factories;
     using YANFOE.Factories.Import;
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Models.Search;
@@ -278,8 +279,9 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void BtnOkClick(object sender, EventArgs e)
         {
+            MovieDBFactory.RemoveMissingMovies();
             ImportMoviesFactory.MergeImportDatabaseWithMain();
-            InvokeOkClicked(new EventArgs());
+            this.InvokeOkClicked(new EventArgs());
         }
 
         /// <summary>

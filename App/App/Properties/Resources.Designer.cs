@@ -305,6 +305,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap info {
+            get {
+                object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap LoadingGlobe {
             get {
                 object obj = ResourceManager.GetObject("LoadingGlobe", resourceCulture);

@@ -16,6 +16,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
     using System;
     using System.ComponentModel;
+    using System.Linq;
 
     using YANFOE.Tools.Models;
 
@@ -61,6 +62,11 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         public void AddToMediaCollection(MediaPathFileModel fileModel, int order = 1)
         {
             this.Media.Add(new MediaModel { FileModel = fileModel, Order = 1 });
+        }
+
+        public string FilesAsList()
+        {
+            return string.Join(", ", (from f in this.Media select f.FilePath).ToArray());
         }
 
         /// <summary>

@@ -15,12 +15,14 @@
 namespace YANFOE.Factories
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
     using System.Linq;
 
     using DevExpress.XtraBars.Ribbon;
+    using DevExpress.XtraEditors;
 
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;
@@ -30,6 +32,7 @@ namespace YANFOE.Factories
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Images;
+    using YANFOE.UI.Dialogs.General;
 
     /// <summary>
     /// Data access layer for all movie related data.
@@ -1117,5 +1120,30 @@ namespace YANFOE.Factories
         }
 
         #endregion
+
+        public static void RemoveMissingMovies()
+        {
+            var toDelete = new List<MovieModel>();
+
+            for (int index = 0; index < MovieDatabase.Count; index++)
+            {
+                var movie = MovieDatabase[index];
+
+                foreach (var file in movie.AssociatedFiles.Media)
+                {
+                    if (!File.Exists(file.FilePath))
+                    {
+                        toDelete.Add(movie);
+                        break;
+                    }
+                }
+            }
+
+            if (toDelete.Count > 0)
+            {
+                var frmMissingFilesMovies = new FrmMissingFilesMovies(toDelete);
+                frmMissingFilesMovies.ShowDialog();
+            }
+        }
     }
 }

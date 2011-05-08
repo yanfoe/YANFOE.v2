@@ -642,6 +642,11 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
+                if (!File.Exists(this.nfoPathOnDisk))
+                {
+                    return string.Empty;
+                }
+
                 return File.ReadAllText(this.nfoPathOnDisk);
             }
         }

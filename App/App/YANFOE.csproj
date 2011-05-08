@@ -247,6 +247,12 @@
     <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.Designer.cs">
       <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\General\FrmMissingFilesMovies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\FrmMissingFilesMovies.Designer.cs">
+      <DependentUpon>FrmMissingFilesMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmMoveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -617,6 +623,9 @@
     <EmbeddedResource Include="UI\Dialogs\General\FrmLoadingYANFOE.resx">
       <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\FrmMissingFilesMovies.resx">
+      <DependentUpon>FrmMissingFilesMovies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\General\FrmMoveDialog.resx">
       <DependentUpon>FrmMoveDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -949,6 +958,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\pencil1.png" />
+    <None Include="Resources\info.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
