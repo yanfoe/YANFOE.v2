@@ -306,6 +306,11 @@ namespace YANFOE
             Application.Exit();
         }
 
+        /// <summary>
+        /// Handles the GetActiveObjectInfo event of the toolTipController1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs"/> instance containing the event data.</param>
         private void toolTipController1_GetActiveObjectInfo(object sender, DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs e)
         {
             if (e.SelectedControl == picUpdateStatus)
@@ -318,12 +323,57 @@ namespace YANFOE
             }
         }
 
+        /// <summary>
+        /// Handles the DoubleClick event of the picUpdateStatus control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void picUpdateStatus_DoubleClick(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(VersionUpdateFactory.UpdateLink))
             {
                 Process.Start(VersionUpdateFactory.UpdateLink);
             }
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpReportIssues control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        private void mnuHelpReportIssues_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/issues/");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpWiki control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        private void mnuHelpWiki_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/wiki");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpSourceCode control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        private void mnuHelpSourceCode_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpHomepage control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        private void mnuHelpHomepage_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("http://www.yanfoe.com");
         }
     }
 }

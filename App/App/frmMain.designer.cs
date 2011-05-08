@@ -47,7 +47,10 @@ namespace YANFOE
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mnuToolsMovieScraperGroupManager = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem9 = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuHelpReportIssues = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuHelpSourceCode = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuHelpWiki = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuHelpHomepage = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -195,12 +198,15 @@ namespace YANFOE
             this.barStaticItem3,
             this.barSubItem9,
             this.mnuFileExit,
-            this.barButtonItem6,
             this.mnuToolsMovieScraperGroupManager,
             this.mnuFileSaveDatabase,
-            this.mnuEditSettings});
+            this.mnuEditSettings,
+            this.mnuHelpReportIssues,
+            this.mnuHelpHomepage,
+            this.mnuHelpSourceCode,
+            this.mnuHelpWiki});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 30;
+            this.barManager1.MaxItemId = 34;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             // 
@@ -279,14 +285,39 @@ namespace YANFOE
             this.barSubItem9.Caption = "Help";
             this.barSubItem9.Id = 19;
             this.barSubItem9.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem6, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuHelpReportIssues, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuHelpSourceCode),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuHelpWiki),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuHelpHomepage, true)});
             this.barSubItem9.Name = "barSubItem9";
             // 
-            // barButtonItem6
+            // mnuHelpReportIssues
             // 
-            this.barButtonItem6.Caption = "Check For Updates";
-            this.barButtonItem6.Id = 24;
-            this.barButtonItem6.Name = "barButtonItem6";
+            this.mnuHelpReportIssues.Caption = "Report Issues";
+            this.mnuHelpReportIssues.Id = 30;
+            this.mnuHelpReportIssues.Name = "mnuHelpReportIssues";
+            this.mnuHelpReportIssues.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuHelpReportIssues_ItemClick);
+            // 
+            // mnuHelpSourceCode
+            // 
+            this.mnuHelpSourceCode.Caption = "Source Code";
+            this.mnuHelpSourceCode.Id = 32;
+            this.mnuHelpSourceCode.Name = "mnuHelpSourceCode";
+            this.mnuHelpSourceCode.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuHelpSourceCode_ItemClick);
+            // 
+            // mnuHelpWiki
+            // 
+            this.mnuHelpWiki.Caption = "Wiki";
+            this.mnuHelpWiki.Id = 33;
+            this.mnuHelpWiki.Name = "mnuHelpWiki";
+            this.mnuHelpWiki.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuHelpWiki_ItemClick);
+            // 
+            // mnuHelpHomepage
+            // 
+            this.mnuHelpHomepage.Caption = "Homepage";
+            this.mnuHelpHomepage.Id = 31;
+            this.mnuHelpHomepage.Name = "mnuHelpHomepage";
+            this.mnuHelpHomepage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuHelpHomepage_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -1112,7 +1143,6 @@ namespace YANFOE
         private DevExpress.XtraTab.XtraTabPage tabAbout;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem mnuToolsMovieScraperGroupManager;
         private DevExpress.XtraBars.BarButtonItem mnuFileSaveDatabase;
         private System.Windows.Forms.Timer uiTimer;
@@ -1156,5 +1186,9 @@ namespace YANFOE
         private DevExpress.XtraEditors.PictureEdit picThread5;
         private DevExpress.XtraEditors.PictureEdit picUpdateStatus;
         private DevExpress.Utils.ToolTipController toolTipController1;
+        private DevExpress.XtraBars.BarButtonItem mnuHelpReportIssues;
+        private DevExpress.XtraBars.BarButtonItem mnuHelpHomepage;
+        private DevExpress.XtraBars.BarButtonItem mnuHelpSourceCode;
+        private DevExpress.XtraBars.BarButtonItem mnuHelpWiki;
     }
 }
