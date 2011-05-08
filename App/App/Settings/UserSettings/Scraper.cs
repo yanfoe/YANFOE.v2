@@ -15,6 +15,7 @@
 namespace YANFOE.Settings.UserSettings
 {
     using System;
+    using System.Text.RegularExpressions;
 
     using YANFOE.Settings.UserSettings.ScraperSettings;
 
@@ -36,6 +37,7 @@ namespace YANFOE.Settings.UserSettings
 
             this.TmDBDownloadPosterSize = 1;
             this.TmDBDownloadFanartSize = 0;
+            this.TvDBLanguage = "English (en)";
         }
 
         #endregion
@@ -65,6 +67,20 @@ namespace YANFOE.Settings.UserSettings
         public int TmDBDownloadPosterSize { get; set; }
 
         public int TmDBDownloadFanartSize { get; set; }
+
+        #endregion
+
+        #region TvDB
+
+        public string TvDBLanguage { get; set; }
+
+        public string TvDBLanguageAbbr
+        {
+            get
+            {
+                return Regex.Match(this.TvDBLanguage, @"\((?<abbr>.{2})\)").Groups["abbr"].Value;
+            }
+        }
 
         #endregion
     }

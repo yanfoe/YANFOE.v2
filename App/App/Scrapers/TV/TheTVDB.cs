@@ -234,17 +234,21 @@ namespace YANFOE.Scrapers.TV
 
                 e.Extract(temp, ExtractExistingFileAction.OverwriteSilently);
 
-                switch (e.FileName)
+                if (e.FileName == Get.Scraper.TvDBLanguageAbbr + ".xml")
                 {
-                    case "en.xml":
-                        output.En = File.ReadAllText(temp + "en.xml", Encoding.UTF8);
-                        break;
-                    case "banners.xml":
-                        output.Banners = File.ReadAllText(temp + "banners.xml", Encoding.UTF8);
-                        break;
-                    case "actors.xml":
-                        output.Actors = File.ReadAllText(temp + "actors.xml", Encoding.UTF8);
-                        break;
+                    output.En = File.ReadAllText(temp + string.Format("{0}.xml", Get.Scraper.TvDBLanguageAbbr), Encoding.UTF8);
+                }
+                else
+                {
+                    switch (e.FileName)
+                    {
+                        case "banners.xml":
+                            output.Banners = File.ReadAllText(temp + "banners.xml", Encoding.UTF8);
+                            break;
+                        case "actors.xml":
+                            output.Actors = File.ReadAllText(temp + "actors.xml", Encoding.UTF8);
+                            break;
+                    }
                 }
             }
 
@@ -363,7 +367,7 @@ namespace YANFOE.Scrapers.TV
         private static string DownloadSeriesZip(string seriesId, string language, bool skipCache = false)
         {
             string prePath = string.Format(
-                "http://cache.thetvdb.com/api/{0}/series/{1}/all/{2}.zip", TvdbApi, seriesId, language);
+                "http://cache.thetvdb.com/api/{0}/series/{1}/all/{2}.zip", TvdbApi, seriesId, Get.Scraper.TvDBLanguageAbbr);
 
             return Downloader.ProcessDownload(prePath, DownloadType.Binary, Section.Tv, skipCache);
         }

@@ -66,6 +66,8 @@ namespace YANFOE.UI.Dialogs.TV
             this.Setup(searchDetails, searchTerm);
 
             this.CmbSearchResults_SelectedValueChanged(null, null);
+
+            lblLanguage.Text = Settings.Get.Scraper.TvDBLanguageAbbr;
         }
 
         #endregion

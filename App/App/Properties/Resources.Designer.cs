@@ -179,6 +179,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap cloud_comment {
+            get {
+                object obj = ResourceManager.GetObject("cloud_comment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap copy_paste {
             get {
                 object obj = ResourceManager.GetObject("copy_paste", resourceCulture);
@@ -322,6 +329,20 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap info1 {
+            get {
+                object obj = ResourceManager.GetObject("info1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap keyboard {
+            get {
+                object obj = ResourceManager.GetObject("keyboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -634,6 +655,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap school_board1 {
+            get {
+                object obj = ResourceManager.GetObject("school_board1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap school_board32 {
             get {
                 object obj = ResourceManager.GetObject("school_board32", resourceCulture);
@@ -651,6 +679,20 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap scraper1 {
             get {
                 object obj = ResourceManager.GetObject("scraper1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap scrapergroupmanager {
+            get {
+                object obj = ResourceManager.GetObject("scrapergroupmanager", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap scrapergroupmanager1 {
+            get {
+                object obj = ResourceManager.GetObject("scrapergroupmanager1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -742,6 +784,20 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap tools {
             get {
                 object obj = ResourceManager.GetObject("tools", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap tools1 {
+            get {
+                object obj = ResourceManager.GetObject("tools1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap tools2 {
+            get {
+                object obj = ResourceManager.GetObject("tools2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

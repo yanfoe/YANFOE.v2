@@ -92,6 +92,7 @@
     <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraWizard.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DiscUtils">
       <HintPath>.\Dlls\DiscUtils.dll</HintPath>
     </Reference>
@@ -175,6 +176,12 @@
     <Compile Include="Tools\ThirdParty\FileLookup.cs" />
     <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.Designer.cs">
+      <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -593,6 +600,9 @@
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.resx">
+      <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.resx">
       <DependentUpon>UcSettingsGeneralUi.cs</DependentUpon>
     </EmbeddedResource>
@@ -970,7 +980,15 @@
     <None Include="Resources\info.png" />
     <None Include="Resources\btn_donate_SM.gif" />
     <None Include="Resources\dollar_currency_sign.png" />
+    <None Include="Resources\keyboard.png" />
+    <None Include="Resources\cloud_comment.png" />
+    <None Include="Resources\info1.png" />
     <Content Include="Resources\refresh.png" />
+    <None Include="Resources\tools1.png" />
+    <None Include="Resources\tools2.png" />
+    <None Include="Resources\school_board2.png" />
+    <None Include="Resources\scrapergroupmanager.png" />
+    <None Include="Resources\scrapergroupmanager1.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />

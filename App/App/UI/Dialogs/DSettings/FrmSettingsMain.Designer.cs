@@ -84,6 +84,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit3 = new DevExpress.XtraEditors.PictureEdit();
             this.tabTMDB = new DevExpress.XtraTab.XtraTabPage();
+            this.ucSettingsScraperTmdb1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTmdb();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit4 = new DevExpress.XtraEditors.PictureEdit();
@@ -113,7 +114,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
-            this.ucSettingsScraperTmdb1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTmdb();
+            this.UcSettingsScraperTvDB1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTvDB();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
@@ -719,6 +720,14 @@
             this.tabTMDB.Size = new System.Drawing.Size(614, 432);
             this.tabTMDB.Text = "The Movie DB";
             // 
+            // ucSettingsScraperTmdb1
+            // 
+            this.ucSettingsScraperTmdb1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSettingsScraperTmdb1.Location = new System.Drawing.Point(0, 52);
+            this.ucSettingsScraperTmdb1.Name = "ucSettingsScraperTmdb1";
+            this.ucSettingsScraperTmdb1.Size = new System.Drawing.Size(614, 380);
+            this.ucSettingsScraperTmdb1.TabIndex = 6;
+            // 
             // panelControl4
             // 
             this.panelControl4.Controls.Add(this.labelControl4);
@@ -752,6 +761,7 @@
             // 
             // tabTVDB
             // 
+            this.tabTVDB.Controls.Add(this.UcSettingsScraperTvDB1);
             this.tabTVDB.Controls.Add(this.panelControl5);
             this.tabTVDB.Name = "tabTVDB";
             this.tabTVDB.Size = new System.Drawing.Size(614, 432);
@@ -998,13 +1008,13 @@
             this.simpleSeparator1.Size = new System.Drawing.Size(2, 484);
             this.simpleSeparator1.Text = "simpleSeparator1";
             // 
-            // ucSettingsScraperTmdb1
+            // UcSettingsScraperTvDB1
             // 
-            this.ucSettingsScraperTmdb1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucSettingsScraperTmdb1.Location = new System.Drawing.Point(0, 52);
-            this.ucSettingsScraperTmdb1.Name = "ucSettingsScraperTmdb1";
-            this.ucSettingsScraperTmdb1.Size = new System.Drawing.Size(614, 380);
-            this.ucSettingsScraperTmdb1.TabIndex = 6;
+            this.UcSettingsScraperTvDB1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcSettingsScraperTvDB1.Location = new System.Drawing.Point(0, 52);
+            this.UcSettingsScraperTvDB1.Name = "UcSettingsScraperTvDB1";
+            this.UcSettingsScraperTvDB1.Size = new System.Drawing.Size(614, 380);
+            this.UcSettingsScraperTvDB1.TabIndex = 6;
             // 
             // FrmSettingsMain
             // 
@@ -1186,6 +1196,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.PictureEdit pictureEdit11;
         private UcSettingsScraperTmdb ucSettingsScraperTmdb1;
+        private UcSettingsScraperTvDB UcSettingsScraperTvDB1;
 
     }
 }

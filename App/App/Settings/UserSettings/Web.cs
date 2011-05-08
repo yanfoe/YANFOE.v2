@@ -44,6 +44,10 @@ namespace YANFOE.Settings.UserSettings
         {
             var scrapers = MovieScraperHandler.ReturnAllScrapers();
 
+            this.WebEncodings.Clear();
+
+            this.WebEncodings.Add("thetvdb", Encoding.UTF8);
+
             foreach (var scraper in scrapers)
             {
                 if (scraper.HtmlBaseUrl != null && scraper.HtmlEncoding != null)
