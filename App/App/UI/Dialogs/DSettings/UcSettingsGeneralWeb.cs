@@ -14,8 +14,6 @@
 
 namespace YANFOE.UI.Dialogs.DSettings
 {
-    using YANFOE.Tools.Extentions;
-
     public partial class UcSettingsGeneralWeb : DevExpress.XtraEditors.XtraUserControl
     {
         /// <summary>
@@ -25,20 +23,16 @@ namespace YANFOE.UI.Dialogs.DSettings
         {
             InitializeComponent();
 
-            chkProcessBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableBackgroundQueProcessing");
-            chkAddtoBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableAddToBackgroundQue");
+            this.chkProcessBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableBackgroundQueProcessing");
+            this.chkAddtoBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableAddToBackgroundQue");
 
-            txtDownloadThreads.Value = Settings.Get.Web.DownloadThreads;
-        }
+            this.txtDownloadThreads.DataBindings.Add("Value", Settings.Get.Web, "DownloadThreads");
 
-        /// <summary>
-        /// Handles the TextChanged event of the txtDownloadThreads control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void txtDownloadThreads_TextChanged(object sender, System.EventArgs e)
-        {
-            Settings.Get.Web.DownloadThreads = txtDownloadThreads.Value.ToString().ToInt();
+            this.chkUseAProxyServer.DataBindings.Add("Checked", Settings.Get.Web, "EnableProxy");
+            this.txtProxyAddress.DataBindings.Add("Text", Settings.Get.Web, "ProxyIP");
+            this.txtProxyPort.DataBindings.Add("Text", Settings.Get.Web, "ProxyPort", true);
+            this.txtProxyUsername.DataBindings.Add("Text", Settings.Get.Web, "ProxyUserName");
+            this.txtProxyPassword.DataBindings.Add("Text", Settings.Get.Web, "ProxyPassword");
         }
     }
 }

@@ -87,6 +87,11 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                         Proxy = null
                     };
 
+                if (Settings.Get.Web.EnableProxy)
+                {
+                    webClient.Proxy = new WebProxy(Settings.Get.Web.ProxyUserName, (int)Settings.Get.Web.ProxyPort);
+                }
+
                 webClient.Headers.Add("user-agent", Settings.Get.Web.UserAgent);
 
                 var encode = Encoding.GetEncoding(1252);

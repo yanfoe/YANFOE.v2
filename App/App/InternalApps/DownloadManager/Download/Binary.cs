@@ -99,7 +99,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                     request.Proxy = null;
                     request.KeepAlive = false;
 
-                    if (Settings.Get.Web.ProxyUse)
+                    if (Settings.Get.Web.EnableProxy)
                     {
                         var proxy = new WebProxy(string.Format("{0}:{1}", Settings.Get.Web.ProxyIP, Settings.Get.Web.ProxyPort));
 

@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txtDownloadThreads = new DevExpress.XtraEditors.SpinEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.checkEdit3 = new DevExpress.XtraEditors.CheckEdit();
+            this.txtProxyPassword = new DevExpress.XtraEditors.TextEdit();
+            this.txtProxyUsername = new DevExpress.XtraEditors.TextEdit();
+            this.txtProxyPort = new DevExpress.XtraEditors.TextEdit();
+            this.txtProxyAddress = new DevExpress.XtraEditors.TextEdit();
+            this.chkUseAProxyServer = new DevExpress.XtraEditors.CheckEdit();
             this.chkAddtoBackgroundDownloader = new DevExpress.XtraEditors.CheckEdit();
             this.chkProcessBackgroundDownloader = new DevExpress.XtraEditors.CheckEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -60,11 +60,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDownloadThreads.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyPassword.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyUsername.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUseAProxyServer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkAddtoBackgroundDownloader.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProcessBackgroundDownloader.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -86,11 +86,11 @@
             // 
             this.layoutControl1.Controls.Add(this.txtDownloadThreads);
             this.layoutControl1.Controls.Add(this.simpleButton1);
-            this.layoutControl1.Controls.Add(this.textEdit4);
-            this.layoutControl1.Controls.Add(this.textEdit3);
-            this.layoutControl1.Controls.Add(this.textEdit2);
-            this.layoutControl1.Controls.Add(this.textEdit1);
-            this.layoutControl1.Controls.Add(this.checkEdit3);
+            this.layoutControl1.Controls.Add(this.txtProxyPassword);
+            this.layoutControl1.Controls.Add(this.txtProxyUsername);
+            this.layoutControl1.Controls.Add(this.txtProxyPort);
+            this.layoutControl1.Controls.Add(this.txtProxyAddress);
+            this.layoutControl1.Controls.Add(this.chkUseAProxyServer);
             this.layoutControl1.Controls.Add(this.chkAddtoBackgroundDownloader);
             this.layoutControl1.Controls.Add(this.chkProcessBackgroundDownloader);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -128,10 +128,10 @@
             this.txtDownloadThreads.Size = new System.Drawing.Size(531, 20);
             this.txtDownloadThreads.StyleController = this.layoutControl1;
             this.txtDownloadThreads.TabIndex = 11;
-            this.txtDownloadThreads.TextChanged += new System.EventHandler(this.txtDownloadThreads_TextChanged);
             // 
             // simpleButton1
             // 
+            this.simpleButton1.Enabled = false;
             this.simpleButton1.Location = new System.Drawing.Point(527, 130);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(112, 22);
@@ -139,46 +139,48 @@
             this.simpleButton1.TabIndex = 10;
             this.simpleButton1.Text = "Test Proxy";
             // 
-            // textEdit4
+            // txtProxyPassword
             // 
-            this.textEdit4.Location = new System.Drawing.Point(422, 156);
-            this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Size = new System.Drawing.Size(217, 20);
-            this.textEdit4.StyleController = this.layoutControl1;
-            this.textEdit4.TabIndex = 9;
+            this.txtProxyPassword.Location = new System.Drawing.Point(422, 156);
+            this.txtProxyPassword.Name = "txtProxyPassword";
+            this.txtProxyPassword.Size = new System.Drawing.Size(217, 20);
+            this.txtProxyPassword.StyleController = this.layoutControl1;
+            this.txtProxyPassword.TabIndex = 9;
             // 
-            // textEdit3
+            // txtProxyUsername
             // 
-            this.textEdit3.Location = new System.Drawing.Point(108, 156);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(217, 20);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 8;
+            this.txtProxyUsername.Location = new System.Drawing.Point(108, 156);
+            this.txtProxyUsername.Name = "txtProxyUsername";
+            this.txtProxyUsername.Size = new System.Drawing.Size(217, 20);
+            this.txtProxyUsername.StyleController = this.layoutControl1;
+            this.txtProxyUsername.TabIndex = 8;
             // 
-            // textEdit2
+            // txtProxyPort
             // 
-            this.textEdit2.Location = new System.Drawing.Point(422, 130);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(101, 20);
-            this.textEdit2.StyleController = this.layoutControl1;
-            this.textEdit2.TabIndex = 7;
+            this.txtProxyPort.Location = new System.Drawing.Point(422, 130);
+            this.txtProxyPort.Name = "txtProxyPort";
+            this.txtProxyPort.Properties.Mask.EditMask = "\\d+";
+            this.txtProxyPort.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtProxyPort.Size = new System.Drawing.Size(101, 20);
+            this.txtProxyPort.StyleController = this.layoutControl1;
+            this.txtProxyPort.TabIndex = 7;
             // 
-            // textEdit1
+            // txtProxyAddress
             // 
-            this.textEdit1.Location = new System.Drawing.Point(108, 130);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(217, 20);
-            this.textEdit1.StyleController = this.layoutControl1;
-            this.textEdit1.TabIndex = 6;
+            this.txtProxyAddress.Location = new System.Drawing.Point(108, 130);
+            this.txtProxyAddress.Name = "txtProxyAddress";
+            this.txtProxyAddress.Size = new System.Drawing.Size(217, 20);
+            this.txtProxyAddress.StyleController = this.layoutControl1;
+            this.txtProxyAddress.TabIndex = 6;
             // 
-            // checkEdit3
+            // chkUseAProxyServer
             // 
-            this.checkEdit3.Location = new System.Drawing.Point(15, 107);
-            this.checkEdit3.Name = "checkEdit3";
-            this.checkEdit3.Properties.Caption = "Use a proxy server";
-            this.checkEdit3.Size = new System.Drawing.Size(624, 19);
-            this.checkEdit3.StyleController = this.layoutControl1;
-            this.checkEdit3.TabIndex = 5;
+            this.chkUseAProxyServer.Location = new System.Drawing.Point(15, 107);
+            this.chkUseAProxyServer.Name = "chkUseAProxyServer";
+            this.chkUseAProxyServer.Properties.Caption = "Use a proxy server";
+            this.chkUseAProxyServer.Size = new System.Drawing.Size(624, 19);
+            this.chkUseAProxyServer.StyleController = this.layoutControl1;
+            this.chkUseAProxyServer.TabIndex = 5;
             // 
             // chkAddtoBackgroundDownloader
             // 
@@ -187,12 +189,12 @@
             this.chkAddtoBackgroundDownloader.Properties.Caption = "Add to Background Downloader";
             this.chkAddtoBackgroundDownloader.Size = new System.Drawing.Size(624, 19);
             this.chkAddtoBackgroundDownloader.StyleController = this.layoutControl1;
-            toolTipTitleItem3.Text = "Add to Background Downloader";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "Allows items to be added to the background download list.";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.chkAddtoBackgroundDownloader.SuperTip = superToolTip3;
+            toolTipTitleItem1.Text = "Add to Background Downloader";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Allows items to be added to the background download list.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.chkAddtoBackgroundDownloader.SuperTip = superToolTip1;
             this.chkAddtoBackgroundDownloader.TabIndex = 2;
             // 
             // chkProcessBackgroundDownloader
@@ -202,12 +204,12 @@
             this.chkProcessBackgroundDownloader.Properties.Caption = "Process Background Downloader";
             this.chkProcessBackgroundDownloader.Size = new System.Drawing.Size(624, 19);
             this.chkProcessBackgroundDownloader.StyleController = this.layoutControl1;
-            toolTipTitleItem1.Text = "Process Background Downloader";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Will enable the background download manager.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.chkProcessBackgroundDownloader.SuperTip = superToolTip1;
+            toolTipTitleItem2.Text = "Process Background Downloader";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Will enable the background download manager.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.chkProcessBackgroundDownloader.SuperTip = superToolTip2;
             this.chkProcessBackgroundDownloader.TabIndex = 4;
             // 
             // layoutControlGroup1
@@ -285,7 +287,7 @@
             // 
             this.layoutControlItem4.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem4.Control = this.textEdit1;
+            this.layoutControlItem4.Control = this.txtProxyAddress;
             this.layoutControlItem4.CustomizationFormText = "Proxy Address";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 23);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -295,7 +297,7 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.checkEdit3;
+            this.layoutControlItem3.Control = this.chkUseAProxyServer;
             this.layoutControlItem3.CustomizationFormText = "Use a proxy server";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -321,7 +323,7 @@
             // 
             this.layoutControlItem5.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem5.Control = this.textEdit2;
+            this.layoutControlItem5.Control = this.txtProxyPort;
             this.layoutControlItem5.CustomizationFormText = "Port";
             this.layoutControlItem5.Location = new System.Drawing.Point(314, 23);
             this.layoutControlItem5.Name = "layoutControlItem5";
@@ -333,7 +335,7 @@
             // 
             this.layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem6.Control = this.textEdit3;
+            this.layoutControlItem6.Control = this.txtProxyUsername;
             this.layoutControlItem6.CustomizationFormText = "Username";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 49);
             this.layoutControlItem6.Name = "layoutControlItem6";
@@ -345,7 +347,7 @@
             // 
             this.layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem7.Control = this.textEdit4;
+            this.layoutControlItem7.Control = this.txtProxyPassword;
             this.layoutControlItem7.CustomizationFormText = "Password";
             this.layoutControlItem7.Location = new System.Drawing.Point(314, 49);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -387,11 +389,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtDownloadThreads.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyPassword.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyUsername.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProxyAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkUseAProxyServer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkAddtoBackgroundDownloader.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProcessBackgroundDownloader.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -415,11 +417,11 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.CheckEdit checkEdit3;
+        private DevExpress.XtraEditors.TextEdit txtProxyPassword;
+        private DevExpress.XtraEditors.TextEdit txtProxyUsername;
+        private DevExpress.XtraEditors.TextEdit txtProxyPort;
+        private DevExpress.XtraEditors.TextEdit txtProxyAddress;
+        private DevExpress.XtraEditors.CheckEdit chkUseAProxyServer;
         private DevExpress.XtraEditors.CheckEdit chkAddtoBackgroundDownloader;
         private DevExpress.XtraEditors.CheckEdit chkProcessBackgroundDownloader;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;

@@ -76,6 +76,14 @@ namespace YANFOE.Settings.UserSettings
         public bool EnableBackgroundQueProcessing { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [enable proxy].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [enable proxy]; otherwise, <c>false</c>.
+        /// </value>
+        public bool EnableProxy { get; set; }
+
+        /// <summary>
         /// Gets or sets the proxy ip.
         /// </summary>
         /// <value>The proxy ip.</value>
