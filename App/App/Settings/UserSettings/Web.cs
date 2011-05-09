@@ -38,6 +38,8 @@ namespace YANFOE.Settings.UserSettings
             this.WebEncodings = new Dictionary<string, Encoding>();
 
             this.BuildWebEncodings();
+
+            DownloadThreads = 8;
         }
 
         private void BuildWebEncodings()
@@ -114,6 +116,8 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         /// <value>The user agent.</value>
         public string QTUserAgent { get; set; }
+
+        public int DownloadThreads { get; set; }
 
         #endregion
 

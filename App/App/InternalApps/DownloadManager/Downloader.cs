@@ -45,11 +45,6 @@ namespace YANFOE.InternalApps.DownloadManager
         private static readonly BindingList<BackgroundWorker> BackgroundWorkers;
 
         /// <summary>
-        /// The thread count.
-        /// </summary>
-        private static readonly int numThreads;
-
-        /// <summary>
         /// The current queue count.
         /// </summary>
         private static Object currentQueueLock;
@@ -75,11 +70,10 @@ namespace YANFOE.InternalApps.DownloadManager
         {
             currentQueueLock = new Object();
             CurrentQue = 0;
-            numThreads = 8;
             Progress = new BindingList<Progress>();
             BackgroundWorkers = new BindingList<BackgroundWorker>();
 
-            for (int i = 0; i < numThreads; i++)
+            for (int i = 0; i < Get.Web.DownloadThreads; i++)
             {
                 Progress.Add(new Progress());
                 BackgroundWorkers.Add(new BackgroundWorker());
@@ -264,7 +258,7 @@ namespace YANFOE.InternalApps.DownloadManager
 
             do
             {
-                for (int i = 0; i < numThreads; i++)
+                for (int i = 0; i < Get.Web.DownloadThreads; i++)
                 {
                     if (!BackgroundWorkers[i].IsBusy)
                     {
@@ -387,7 +381,7 @@ namespace YANFOE.InternalApps.DownloadManager
         {
             do
             {
-                if (CurrentQue < numThreads && Get.Web.EnableBackgroundQueProcessing)
+                if (CurrentQue < Get.Web.DownloadThreads && Get.Web.EnableBackgroundQueProcessing)
                 {
                     lock (BackgroundDownloadQue)
                     {
@@ -475,7 +469,7 @@ namespace YANFOE.InternalApps.DownloadManager
         /// </param>
         private static void UITimer_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < numThreads; i++)
+            for (int i = 0; i < Get.Web.DownloadThreads; i++)
             {
                 ProgressManage(Progress[i], i);
             }

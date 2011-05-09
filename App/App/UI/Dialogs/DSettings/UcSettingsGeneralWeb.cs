@@ -14,6 +14,8 @@
 
 namespace YANFOE.UI.Dialogs.DSettings
 {
+    using YANFOE.Tools.Extentions;
+
     public partial class UcSettingsGeneralWeb : DevExpress.XtraEditors.XtraUserControl
     {
         /// <summary>
@@ -25,6 +27,18 @@ namespace YANFOE.UI.Dialogs.DSettings
 
             chkProcessBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableBackgroundQueProcessing");
             chkAddtoBackgroundDownloader.DataBindings.Add("Checked", Settings.Get.Web, "EnableAddToBackgroundQue");
+
+            txtDownloadThreads.Value = Settings.Get.Web.DownloadThreads;
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the txtDownloadThreads control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void txtDownloadThreads_TextChanged(object sender, System.EventArgs e)
+        {
+            Settings.Get.Web.DownloadThreads = txtDownloadThreads.Value.ToString().ToInt();
         }
     }
 }

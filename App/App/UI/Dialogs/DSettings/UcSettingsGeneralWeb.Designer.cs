@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
+            this.txtDownloadThreads = new DevExpress.XtraEditors.SpinEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
             this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
@@ -59,7 +59,7 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDownloadThreads.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -84,7 +84,7 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.spinEdit1);
+            this.layoutControl1.Controls.Add(this.txtDownloadThreads);
             this.layoutControl1.Controls.Add(this.simpleButton1);
             this.layoutControl1.Controls.Add(this.textEdit4);
             this.layoutControl1.Controls.Add(this.textEdit3);
@@ -102,32 +102,33 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // spinEdit1
+            // txtDownloadThreads
             // 
-            this.spinEdit1.EditValue = new decimal(new int[] {
+            this.txtDownloadThreads.EditValue = new decimal(new int[] {
             3,
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(108, 206);
-            this.spinEdit1.Name = "spinEdit1";
-            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDownloadThreads.Location = new System.Drawing.Point(108, 206);
+            this.txtDownloadThreads.Name = "txtDownloadThreads";
+            this.txtDownloadThreads.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.spinEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.spinEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
-            3,
+            this.txtDownloadThreads.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtDownloadThreads.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txtDownloadThreads.Properties.MaxValue = new decimal(new int[] {
+            8,
             0,
             0,
             0});
-            this.spinEdit1.Properties.MinValue = new decimal(new int[] {
+            this.txtDownloadThreads.Properties.MinValue = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.spinEdit1.Size = new System.Drawing.Size(531, 20);
-            this.spinEdit1.StyleController = this.layoutControl1;
-            this.spinEdit1.TabIndex = 11;
+            this.txtDownloadThreads.Size = new System.Drawing.Size(531, 20);
+            this.txtDownloadThreads.StyleController = this.layoutControl1;
+            this.txtDownloadThreads.TabIndex = 11;
+            this.txtDownloadThreads.TextChanged += new System.EventHandler(this.txtDownloadThreads_TextChanged);
             // 
             // simpleButton1
             // 
@@ -186,12 +187,12 @@
             this.chkAddtoBackgroundDownloader.Properties.Caption = "Add to Background Downloader";
             this.chkAddtoBackgroundDownloader.Size = new System.Drawing.Size(624, 19);
             this.chkAddtoBackgroundDownloader.StyleController = this.layoutControl1;
-            toolTipTitleItem1.Text = "Add to Background Downloader";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Allows items to be added to the background download list.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.chkAddtoBackgroundDownloader.SuperTip = superToolTip1;
+            toolTipTitleItem3.Text = "Add to Background Downloader";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "Allows items to be added to the background download list.";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.chkAddtoBackgroundDownloader.SuperTip = superToolTip3;
             this.chkAddtoBackgroundDownloader.TabIndex = 2;
             // 
             // chkProcessBackgroundDownloader
@@ -201,12 +202,12 @@
             this.chkProcessBackgroundDownloader.Properties.Caption = "Process Background Downloader";
             this.chkProcessBackgroundDownloader.Size = new System.Drawing.Size(624, 19);
             this.chkProcessBackgroundDownloader.StyleController = this.layoutControl1;
-            toolTipTitleItem2.Text = "Process Background Downloader";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Will enable the background download manager.";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.chkProcessBackgroundDownloader.SuperTip = superToolTip2;
+            toolTipTitleItem1.Text = "Process Background Downloader";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Will enable the background download manager.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.chkProcessBackgroundDownloader.SuperTip = superToolTip1;
             this.chkProcessBackgroundDownloader.TabIndex = 4;
             // 
             // layoutControlGroup1
@@ -367,7 +368,7 @@
             // 
             // layoutControlItem9
             // 
-            this.layoutControlItem9.Control = this.spinEdit1;
+            this.layoutControlItem9.Control = this.txtDownloadThreads;
             this.layoutControlItem9.CustomizationFormText = "Download Threads";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
@@ -385,7 +386,7 @@
             this.Size = new System.Drawing.Size(654, 476);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDownloadThreads.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
@@ -432,7 +433,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.SpinEdit spinEdit1;
+        private DevExpress.XtraEditors.SpinEdit txtDownloadThreads;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
 
