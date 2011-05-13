@@ -43,7 +43,6 @@ namespace YANFOE.Factories
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
-    using YANFOE.UI.Dialogs.General;
     using YANFOE.UI.Dialogs.TV;
 
     #endregion

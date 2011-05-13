@@ -465,7 +465,7 @@ namespace YANFOE
             this.tabMediaManager.Controls.Add(this.mediaManagerUc1);
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
-            this.tabMediaManager.Size = new System.Drawing.Size(988, 456);
+            this.tabMediaManager.Size = new System.Drawing.Size(986, 454);
             this.tabMediaManager.Text = "Media Manager";
             // 
             // mediaManagerUc1
@@ -473,7 +473,7 @@ namespace YANFOE
             this.mediaManagerUc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaManagerUc1.Location = new System.Drawing.Point(0, 0);
             this.mediaManagerUc1.Name = "mediaManagerUc1";
-            this.mediaManagerUc1.Size = new System.Drawing.Size(988, 456);
+            this.mediaManagerUc1.Size = new System.Drawing.Size(986, 454);
             this.mediaManagerUc1.TabIndex = 0;
             // 
             // tabMovies
@@ -481,7 +481,7 @@ namespace YANFOE
             this.tabMovies.Controls.Add(this.moviesUserControl1);
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(988, 456);
+            this.tabMovies.Size = new System.Drawing.Size(986, 454);
             this.tabMovies.Text = "Movies";
             // 
             // moviesUserControl1
@@ -501,7 +501,7 @@ namespace YANFOE
             this.tabTv.Controls.Add(this.tvUserControl1);
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(988, 456);
+            this.tabTv.Size = new System.Drawing.Size(986, 454);
             this.tabTv.Text = "TV";
             // 
             // tvUserControl1
@@ -517,7 +517,7 @@ namespace YANFOE
             this.tabDownloads.Controls.Add(this.downloadsUserControl1);
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
-            this.tabDownloads.Size = new System.Drawing.Size(988, 456);
+            this.tabDownloads.Size = new System.Drawing.Size(986, 454);
             this.tabDownloads.Text = "Downloads";
             // 
             // downloadsUserControl1
@@ -533,7 +533,7 @@ namespace YANFOE
             this.tabLogs.Controls.Add(this.logsUserControl1);
             this.tabLogs.Image = global::YANFOE.Properties.Resources.books24;
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Size = new System.Drawing.Size(988, 456);
+            this.tabLogs.Size = new System.Drawing.Size(986, 454);
             this.tabLogs.Text = "Logs";
             // 
             // logsUserControl1
@@ -549,7 +549,7 @@ namespace YANFOE
             this.tabAbout.Controls.Add(this.layoutControl1);
             this.tabAbout.Image = global::YANFOE.Properties.Resources.info1;
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(988, 456);
+            this.tabAbout.Size = new System.Drawing.Size(986, 454);
             this.tabAbout.Text = "About";
             // 
             // layoutControl1
@@ -1069,6 +1069,7 @@ namespace YANFOE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(992, 547);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.panelControl1);
@@ -1082,6 +1083,7 @@ namespace YANFOE
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YANFOE 2";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();

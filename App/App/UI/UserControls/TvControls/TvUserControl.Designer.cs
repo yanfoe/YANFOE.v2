@@ -30,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
             this.btnAddCustomSeries = new DevExpress.XtraEditors.SimpleButton();
@@ -39,7 +40,7 @@
             this.grdTvTitleList = new DevExpress.XtraGrid.GridControl();
             this.gridViewTvTitleList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmSeriesName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.tabBanner = new DevExpress.XtraTab.XtraTabPage();
             this.galleryBanners = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
@@ -99,15 +100,15 @@
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
-            this.timer1 = new System.Windows.Forms.Timer();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.columnVisibility = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.popupSeries = new DevExpress.XtraBars.PopupMenu();
+            this.popupSeries = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -204,6 +205,8 @@
             this.btnAddCustomSeries.Image = global::YANFOE.Properties.Resources.pencil;
             this.btnAddCustomSeries.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnAddCustomSeries.Location = new System.Drawing.Point(2, 2);
+            this.btnAddCustomSeries.MaximumSize = new System.Drawing.Size(32, 31);
+            this.btnAddCustomSeries.MinimumSize = new System.Drawing.Size(32, 31);
             this.btnAddCustomSeries.Name = "btnAddCustomSeries";
             this.btnAddCustomSeries.Size = new System.Drawing.Size(32, 31);
             this.btnAddCustomSeries.TabIndex = 0;
@@ -308,10 +311,10 @@
             // 
             this.groupControl3.Controls.Add(this.grdSeasons);
             this.groupControl3.Location = new System.Drawing.Point(25, 380);
-            this.groupControl3.MaximumSize = new System.Drawing.Size(70, 0);
-            this.groupControl3.MinimumSize = new System.Drawing.Size(70, 0);
+            this.groupControl3.MaximumSize = new System.Drawing.Size(80, 0);
+            this.groupControl3.MinimumSize = new System.Drawing.Size(80, 0);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(70, 237);
+            this.groupControl3.Size = new System.Drawing.Size(80, 237);
             this.groupControl3.TabIndex = 7;
             this.groupControl3.Text = "Season";
             // 
@@ -320,12 +323,10 @@
             this.grdSeasons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdSeasons.Location = new System.Drawing.Point(2, 22);
             this.grdSeasons.MainView = this.gridViewSeasons;
-            this.grdSeasons.MaximumSize = new System.Drawing.Size(70, 0);
-            this.grdSeasons.MinimumSize = new System.Drawing.Size(70, 0);
             this.grdSeasons.Name = "grdSeasons";
             this.grdSeasons.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit2});
-            this.grdSeasons.Size = new System.Drawing.Size(70, 213);
+            this.grdSeasons.Size = new System.Drawing.Size(76, 213);
             this.grdSeasons.TabIndex = 0;
             this.grdSeasons.ToolTipController = this.toolTipController1;
             this.grdSeasons.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -374,9 +375,9 @@
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.grdEpisodes);
-            this.groupControl2.Location = new System.Drawing.Point(99, 380);
+            this.groupControl2.Location = new System.Drawing.Point(109, 380);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(170, 237);
+            this.groupControl2.Size = new System.Drawing.Size(160, 237);
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "Episode";
             // 
@@ -390,7 +391,7 @@
             this.grdEpisodes.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1,
             this.repositoryItemPictureEdit1});
-            this.grdEpisodes.Size = new System.Drawing.Size(166, 213);
+            this.grdEpisodes.Size = new System.Drawing.Size(156, 213);
             this.grdEpisodes.TabIndex = 0;
             this.grdEpisodes.ToolTipController = this.toolTipController1;
             this.grdEpisodes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -841,9 +842,9 @@
             // 
             this.layoutControlItem3.Control = this.groupControl2;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(74, 375);
+            this.layoutControlItem3.Location = new System.Drawing.Point(84, 375);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(174, 241);
+            this.layoutControlItem3.Size = new System.Drawing.Size(164, 241);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -855,7 +856,7 @@
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 375);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(74, 241);
+            this.layoutControlItem4.Size = new System.Drawing.Size(84, 241);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;

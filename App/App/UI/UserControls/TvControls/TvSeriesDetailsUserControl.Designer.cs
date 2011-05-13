@@ -132,7 +132,7 @@
             // 
             // txtRuntime
             // 
-            this.txtRuntime.Location = new System.Drawing.Point(544, 596);
+            this.txtRuntime.Location = new System.Drawing.Point(546, 596);
             this.txtRuntime.Name = "txtRuntime";
             this.txtRuntime.Size = new System.Drawing.Size(105, 20);
             this.txtRuntime.StyleController = this.layoutControl1;
@@ -140,9 +140,9 @@
             // 
             // txtRating
             // 
-            this.txtRating.Location = new System.Drawing.Point(372, 596);
+            this.txtRating.Location = new System.Drawing.Point(373, 596);
             this.txtRating.Name = "txtRating";
-            this.txtRating.Size = new System.Drawing.Size(106, 20);
+            this.txtRating.Size = new System.Drawing.Size(107, 20);
             this.txtRating.StyleController = this.layoutControl1;
             this.txtRating.TabIndex = 19;
             // 
@@ -150,16 +150,16 @@
             // 
             this.txtStatus.Location = new System.Drawing.Point(64, 596);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(242, 20);
+            this.txtStatus.Size = new System.Drawing.Size(243, 20);
             this.txtStatus.StyleController = this.layoutControl1;
             this.txtStatus.TabIndex = 17;
             // 
             // txtNetworkID
             // 
             this.txtNetworkID.EditValue = "";
-            this.txtNetworkID.Location = new System.Drawing.Point(372, 572);
+            this.txtNetworkID.Location = new System.Drawing.Point(373, 572);
             this.txtNetworkID.Name = "txtNetworkID";
-            this.txtNetworkID.Size = new System.Drawing.Size(277, 20);
+            this.txtNetworkID.Size = new System.Drawing.Size(278, 20);
             this.txtNetworkID.StyleController = this.layoutControl1;
             this.txtNetworkID.TabIndex = 16;
             // 
@@ -167,7 +167,7 @@
             // 
             this.txtNetwork.Location = new System.Drawing.Point(64, 572);
             this.txtNetwork.Name = "txtNetwork";
-            this.txtNetwork.Size = new System.Drawing.Size(242, 20);
+            this.txtNetwork.Size = new System.Drawing.Size(243, 20);
             this.txtNetwork.StyleController = this.layoutControl1;
             this.txtNetwork.TabIndex = 15;
             // 
@@ -210,9 +210,9 @@
             // 
             // txtCert
             // 
-            this.txtCert.Location = new System.Drawing.Point(372, 524);
+            this.txtCert.Location = new System.Drawing.Point(373, 524);
             this.txtCert.Name = "txtCert";
-            this.txtCert.Size = new System.Drawing.Size(277, 20);
+            this.txtCert.Size = new System.Drawing.Size(278, 20);
             this.txtCert.StyleController = this.layoutControl1;
             this.txtCert.TabIndex = 7;
             // 
@@ -220,7 +220,7 @@
             // 
             this.txtLanguage.Location = new System.Drawing.Point(64, 524);
             this.txtLanguage.Name = "txtLanguage";
-            this.txtLanguage.Size = new System.Drawing.Size(242, 20);
+            this.txtLanguage.Size = new System.Drawing.Size(243, 20);
             this.txtLanguage.StyleController = this.layoutControl1;
             this.txtLanguage.TabIndex = 6;
             // 
@@ -228,7 +228,7 @@
             // 
             this.txtOverview.Location = new System.Drawing.Point(64, 78);
             this.txtOverview.Name = "txtOverview";
-            this.txtOverview.Size = new System.Drawing.Size(585, 442);
+            this.txtOverview.Size = new System.Drawing.Size(587, 442);
             this.txtOverview.StyleController = this.layoutControl1;
             this.txtOverview.TabIndex = 5;
             // 
@@ -236,14 +236,14 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(64, 54);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(585, 20);
+            this.txtTitle.Size = new System.Drawing.Size(587, 20);
             this.txtTitle.StyleController = this.layoutControl1;
             this.txtTitle.TabIndex = 4;
             // 
             // txtFirstAired
             // 
             this.txtFirstAired.EditValue = new System.DateTime(2011, 2, 15, 0, 0, 0, 0);
-            this.txtFirstAired.Location = new System.Drawing.Point(372, 548);
+            this.txtFirstAired.Location = new System.Drawing.Point(373, 548);
             this.txtFirstAired.Name = "txtFirstAired";
             this.txtFirstAired.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -256,7 +256,7 @@
             this.txtFirstAired.Properties.VistaEditTime = DevExpress.Utils.DefaultBoolean.False;
             this.txtFirstAired.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtFirstAired.Size = new System.Drawing.Size(277, 20);
+            this.txtFirstAired.Size = new System.Drawing.Size(278, 20);
             this.txtFirstAired.StyleController = this.layoutControl1;
             this.txtFirstAired.TabIndex = 12;
             // 
@@ -287,7 +287,7 @@
             new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "Talk Show"),
             new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "Western")});
             this.cmbGenre.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.cmbGenre.Size = new System.Drawing.Size(242, 20);
+            this.cmbGenre.Size = new System.Drawing.Size(243, 20);
             this.cmbGenre.StyleController = this.layoutControl1;
             this.cmbGenre.TabIndex = 11;
             // 
@@ -315,7 +315,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(923, 618);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -327,7 +326,7 @@
             this.layoutControlItem1.CustomizationFormText = "Title";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(651, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(653, 24);
             this.layoutControlItem1.Text = "Title";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -340,7 +339,7 @@
             this.layoutControlItem2.CustomizationFormText = "Plot";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 76);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(651, 446);
+            this.layoutControlItem2.Size = new System.Drawing.Size(653, 446);
             this.layoutControlItem2.Text = "Overview";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -352,7 +351,7 @@
             this.layoutControlItem3.CustomizationFormText = "MPAA";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 522);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(308, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(309, 24);
             this.layoutControlItem3.Text = "Language";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -362,9 +361,9 @@
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem4.Control = this.txtCert;
             this.layoutControlItem4.CustomizationFormText = "Certification";
-            this.layoutControlItem4.Location = new System.Drawing.Point(308, 522);
+            this.layoutControlItem4.Location = new System.Drawing.Point(309, 522);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(343, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(344, 24);
             this.layoutControlItem4.Text = "Certification";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -372,9 +371,9 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(651, 52);
+            this.splitterItem1.Location = new System.Drawing.Point(653, 52);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(7, 566);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 566);
             // 
             // layoutControlItem5
             // 
@@ -384,7 +383,7 @@
             this.layoutControlItem5.CustomizationFormText = "Genre";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 546);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(308, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(309, 24);
             this.layoutControlItem5.Text = "Genre";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -394,9 +393,9 @@
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem7.Control = this.txtFirstAired;
             this.layoutControlItem7.CustomizationFormText = "Premiered";
-            this.layoutControlItem7.Location = new System.Drawing.Point(308, 546);
+            this.layoutControlItem7.Location = new System.Drawing.Point(309, 546);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(343, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(344, 24);
             this.layoutControlItem7.Text = "First Aired";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -408,7 +407,7 @@
             this.layoutControlItem11.CustomizationFormText = "Network";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 570);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(308, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(309, 24);
             this.layoutControlItem11.Text = "Network";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -418,9 +417,9 @@
             this.layoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem12.Control = this.txtNetworkID;
             this.layoutControlItem12.CustomizationFormText = "Network MovieUniqueId";
-            this.layoutControlItem12.Location = new System.Drawing.Point(308, 570);
+            this.layoutControlItem12.Location = new System.Drawing.Point(309, 570);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(343, 24);
+            this.layoutControlItem12.Size = new System.Drawing.Size(344, 24);
             this.layoutControlItem12.Text = "Network Id";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -432,7 +431,7 @@
             this.layoutControlItem13.CustomizationFormText = "Status";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 594);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(308, 24);
+            this.layoutControlItem13.Size = new System.Drawing.Size(309, 24);
             this.layoutControlItem13.Text = "Status";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -442,9 +441,9 @@
             this.layoutControlItem15.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem15.Control = this.txtRating;
             this.layoutControlItem15.CustomizationFormText = "Rating";
-            this.layoutControlItem15.Location = new System.Drawing.Point(308, 594);
+            this.layoutControlItem15.Location = new System.Drawing.Point(309, 594);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(172, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(173, 24);
             this.layoutControlItem15.Text = "Rating";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(58, 13);
             // 
@@ -477,7 +476,7 @@
             this.layoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem9.Control = this.txtRuntime;
             this.layoutControlItem9.CustomizationFormText = "Runtime";
-            this.layoutControlItem9.Location = new System.Drawing.Point(480, 594);
+            this.layoutControlItem9.Location = new System.Drawing.Point(482, 594);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(171, 24);
             this.layoutControlItem9.Text = "Runtime";

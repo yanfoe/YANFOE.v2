@@ -35,14 +35,12 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.imageMain = new DevExpress.XtraEditors.PictureEdit();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.pnlTopMenu = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.lblPicTitle = new DevExpress.XtraEditors.LabelControl();
             this.lblPicAreaName = new DevExpress.XtraEditors.LabelControl();
-            this.butLeft = new DevExpress.XtraEditors.SimpleButton();
+            this.lblPicTitle = new DevExpress.XtraEditors.LabelControl();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.galleryControl = new DevExpress.XtraBars.Ribbon.GalleryControl();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
@@ -61,11 +59,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageMain.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
             this.layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlTopMenu)).BeginInit();
-            this.pnlTopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.galleryControl)).BeginInit();
             this.galleryControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
@@ -101,12 +98,12 @@
             // 
             this.imageMain.AllowDrop = true;
             this.imageMain.EditValue = global::YANFOE.Properties.Resources.picturefaded128;
-            this.imageMain.Location = new System.Drawing.Point(2, 26);
+            this.imageMain.Location = new System.Drawing.Point(2, 2);
             this.imageMain.Name = "imageMain";
             this.barManager1.SetPopupContextMenu(this.imageMain, this.popupMenu1);
             this.imageMain.Properties.ShowMenu = false;
             this.imageMain.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-            this.imageMain.Size = new System.Drawing.Size(1106, 683);
+            this.imageMain.Size = new System.Drawing.Size(775, 443);
             this.imageMain.StyleController = this.layoutControl2;
             this.imageMain.TabIndex = 5;
             this.imageMain.ImageChanged += new System.EventHandler(this.ImageMain_ImageChanged);
@@ -115,69 +112,36 @@
             // 
             // layoutControl2
             // 
-            this.layoutControl2.Controls.Add(this.pnlTopMenu);
+            this.layoutControl2.Controls.Add(this.lblPicAreaName);
+            this.layoutControl2.Controls.Add(this.lblPicTitle);
             this.layoutControl2.Controls.Add(this.imageMain);
             this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl2.Location = new System.Drawing.Point(19, 0);
             this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.OptionsView.AllowHotTrack = true;
+            this.layoutControl2.OptionsView.UseDefaultDragAndDropRendering = false;
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(1110, 711);
+            this.layoutControl2.Size = new System.Drawing.Size(779, 464);
             this.layoutControl2.TabIndex = 2;
             this.layoutControl2.Text = "layoutControl2";
             // 
-            // pnlTopMenu
+            // lblPicAreaName
             // 
-            this.pnlTopMenu.Controls.Add(this.simpleButton3);
-            this.pnlTopMenu.Controls.Add(this.lblPicTitle);
-            this.pnlTopMenu.Controls.Add(this.lblPicAreaName);
-            this.pnlTopMenu.Controls.Add(this.butLeft);
-            this.pnlTopMenu.Location = new System.Drawing.Point(2, 2);
-            this.pnlTopMenu.MaximumSize = new System.Drawing.Size(0, 20);
-            this.pnlTopMenu.Name = "pnlTopMenu";
-            this.pnlTopMenu.Size = new System.Drawing.Size(1106, 20);
-            this.pnlTopMenu.TabIndex = 4;
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.simpleButton3.Enabled = false;
-            this.simpleButton3.Image = global::YANFOE.Properties.Resources.next24;
-            this.simpleButton3.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton3.Location = new System.Drawing.Point(1066, 2);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(38, 16);
-            this.simpleButton3.TabIndex = 4;
+            this.lblPicAreaName.Location = new System.Drawing.Point(2, 449);
+            this.lblPicAreaName.Name = "lblPicAreaName";
+            this.lblPicAreaName.Size = new System.Drawing.Size(23, 13);
+            this.lblPicAreaName.StyleController = this.layoutControl2;
+            this.lblPicAreaName.TabIndex = 8;
+            this.lblPicAreaName.Text = "Area";
             // 
             // lblPicTitle
             // 
-            this.lblPicTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPicTitle.Location = new System.Drawing.Point(98, 2);
+            this.lblPicTitle.Location = new System.Drawing.Point(29, 449);
             this.lblPicTitle.Name = "lblPicTitle";
-            this.lblPicTitle.Size = new System.Drawing.Size(62, 13);
-            this.lblPicTitle.TabIndex = 2;
-            this.lblPicTitle.Text = "<No Image>";
-            // 
-            // lblPicAreaName
-            // 
-            this.lblPicAreaName.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.lblPicAreaName.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblPicAreaName.Location = new System.Drawing.Point(40, 2);
-            this.lblPicAreaName.Name = "lblPicAreaName";
-            this.lblPicAreaName.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
-            this.lblPicAreaName.Size = new System.Drawing.Size(58, 13);
-            this.lblPicAreaName.TabIndex = 3;
-            this.lblPicAreaName.Text = "Poster :";
-            // 
-            // butLeft
-            // 
-            this.butLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.butLeft.Enabled = false;
-            this.butLeft.Image = global::YANFOE.Properties.Resources.back24;
-            this.butLeft.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.butLeft.Location = new System.Drawing.Point(2, 2);
-            this.butLeft.Name = "butLeft";
-            this.butLeft.Size = new System.Drawing.Size(38, 16);
-            this.butLeft.TabIndex = 1;
+            this.lblPicTitle.Size = new System.Drawing.Size(50, 13);
+            this.lblPicTitle.StyleController = this.layoutControl2;
+            this.lblPicTitle.TabIndex = 7;
+            this.lblPicTitle.Text = "Resolution";
             // 
             // layoutControlGroup2
             // 
@@ -185,38 +149,51 @@
             this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup2.GroupBordersVisible = false;
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem2,
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem3});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1110, 711);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(779, 464);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.pnlTopMenu;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1110, 24);
-            this.layoutControlItem1.Text = "layoutControlItem1";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.imageMain;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1110, 687);
+            this.layoutControlItem2.Size = new System.Drawing.Size(779, 447);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.lblPicTitle;
+            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem1.Location = new System.Drawing.Point(27, 447);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(752, 17);
+            this.layoutControlItem1.Text = "layoutControlItem1";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.lblPicAreaName;
+            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 447);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(27, 17);
+            this.layoutControlItem3.Text = "Area";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextToControlDistance = 0;
+            this.layoutControlItem3.TextVisible = false;
             // 
             // galleryControl
             // 
@@ -272,7 +249,7 @@
             this.hideContainerLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.hideContainerLeft.Location = new System.Drawing.Point(0, 0);
             this.hideContainerLeft.Name = "hideContainerLeft";
-            this.hideContainerLeft.Size = new System.Drawing.Size(19, 711);
+            this.hideContainerLeft.Size = new System.Drawing.Size(19, 464);
             // 
             // dockPanel1
             // 
@@ -339,28 +316,28 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1129, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(798, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 711);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1129, 0);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 464);
+            this.barDockControlBottom.Size = new System.Drawing.Size(798, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 711);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 464);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1129, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 711);
+            this.barDockControlRight.Location = new System.Drawing.Point(798, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 464);
             // 
             // DisplayPictureUserControl
             // 
@@ -374,17 +351,15 @@
             this.Controls.Add(this.barDockControlTop);
             this.DoubleBuffered = true;
             this.Name = "DisplayPictureUserControl";
-            this.Size = new System.Drawing.Size(1129, 711);
+            this.Size = new System.Drawing.Size(798, 464);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageMain.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
             this.layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlTopMenu)).EndInit();
-            this.pnlTopMenu.ResumeLayout(false);
-            this.pnlTopMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.galleryControl)).EndInit();
             this.galleryControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
@@ -403,20 +378,14 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.PictureEdit imageMain;
-        private DevExpress.XtraEditors.PanelControl pnlTopMenu;
         private DevExpress.XtraBars.Ribbon.GalleryControl galleryControl;
         private DevExpress.XtraBars.Ribbon.GalleryControlClient galleryControlClient1;
-        private DevExpress.XtraEditors.LabelControl lblPicTitle;
-        private DevExpress.XtraEditors.SimpleButton butLeft;
-        private DevExpress.XtraEditors.LabelControl lblPicAreaName;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraBars.Docking.DockManager dockManager1;
         private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         private DevExpress.XtraBars.Docking.AutoHideContainer hideContainerLeft;
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -426,6 +395,10 @@
         private DevExpress.XtraBars.BarButtonItem btnGetImageFromDisk;
         private DevExpress.XtraBars.BarButtonItem btnGetImageFromUrl;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraEditors.LabelControl lblPicTitle;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.LabelControl lblPicAreaName;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
 
     }
 }

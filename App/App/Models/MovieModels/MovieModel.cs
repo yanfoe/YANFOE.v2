@@ -1281,7 +1281,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets PosterAltGallery.
+        /// Gets SeriesPosterAltGallery.
         /// </summary>
         public GalleryItemGroup PosterAltGallery
         {

@@ -529,6 +529,12 @@ namespace YANFOE.UI.UserControls.CommonControls
             {
                 case GalleryType.TvSeriesPoster:
 
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = new Size(100, 160);
+                        this.galleryControl.Gallery.Groups.Clear();
+                    }
+                    
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeries.PosterPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeries.PosterPath);
@@ -539,6 +545,12 @@ namespace YANFOE.UI.UserControls.CommonControls
                     break;
 
                 case GalleryType.TvSeriesFanart:
+
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = new Size(100, 60);
+                        this.galleryControl.Gallery.Groups.Clear();
+                    }
 
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeries.FanartPath))
                     {
@@ -598,6 +610,7 @@ namespace YANFOE.UI.UserControls.CommonControls
         private void TvDBFactory_CurrentEpisodeChanged(object sender, EventArgs e)
         {
             this.SetTvEpisodeBinding();
+            this.populateGallery = true;
         }
 
         /// <summary>
@@ -612,6 +625,7 @@ namespace YANFOE.UI.UserControls.CommonControls
         private void TvDBFactory_CurrentSeasonChanged(object sender, EventArgs e)
         {
             this.SetTvSeasonBinding();
+            this.populateGallery = true;
         }
 
         /// <summary>
@@ -622,6 +636,7 @@ namespace YANFOE.UI.UserControls.CommonControls
         private void TvDBFactory_CurrentSeriesChanged(object sender, EventArgs e)
         {
             this.SetTvSeriesBinding();
+            this.populateGallery = true;
         }
 
         /// <summary>
@@ -635,6 +650,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
@@ -653,6 +669,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
@@ -671,6 +688,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
@@ -689,6 +707,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
@@ -707,6 +726,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
@@ -725,11 +745,18 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
             this.StopLoading();
             this.imageMain.Image = image;
+
+            if (this.populateGallery)
+            {
+                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesFanartAltGallery);
+                this.populateGallery = false;
+            }
         }
 
         /// <summary>
@@ -743,11 +770,18 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             if (image == null)
             {
+                this.populateGallery = false;
                 return;
             }
 
             this.StopLoading();
             this.imageMain.Image = image;
+
+            if (this.populateGallery)
+            {
+                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesPosterAltGallery);
+                this.populateGallery = false;
+            }
         }
 
         /// <summary>
@@ -921,6 +955,18 @@ namespace YANFOE.UI.UserControls.CommonControls
                     MovieDBFactory.GetCurrentMovie().CurrentFanartImageUrl = url;
                     this.SetMovieBinding();
                     break;
+
+                case "tvSeriesFanart":
+                    TvDBFactory.CurrentSeries.FanartPath = string.Empty;
+                    TvDBFactory.CurrentSeries.FanartUrl = url;
+                    this.SetTvSeriesBinding();
+                    break;
+
+                case "tvSeriesPoster":
+                    TvDBFactory.CurrentSeries.PosterPath = string.Empty;
+                    TvDBFactory.CurrentSeries.PosterUrl = url;
+                    this.SetTvSeriesBinding();
+                    break;
             }
         }
 
@@ -932,7 +978,10 @@ namespace YANFOE.UI.UserControls.CommonControls
         private void ImageMain_ImageChanged(object sender, EventArgs e)
         {
             if (this.imageMain != null && this.imageMain.Image != null)
-                this.lblPicTitle.Text = string.Format("{0}x{1}", this.imageMain.Image.Width, this.imageMain.Image.Height);
+            {
+                this.lblPicTitle.Text = string.Format(
+                    "{0}x{1}", this.imageMain.Image.Width, this.imageMain.Image.Height);
+            }
         }
 
         #endregion
@@ -1043,6 +1092,11 @@ namespace YANFOE.UI.UserControls.CommonControls
                 }
 
             }
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

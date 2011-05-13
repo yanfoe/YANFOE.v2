@@ -25,10 +25,14 @@ namespace YANFOE.Models.TvModels.Show
     using System.Xml;
     using System.Xml.Linq;
 
+    using DevExpress.XtraBars.Ribbon;
+
     using Newtonsoft.Json;
 
     using YANFOE.Factories;
+    using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Cache;
+    using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Properties;
     using YANFOE.Tools;
@@ -1343,6 +1347,62 @@ namespace YANFOE.Models.TvModels.Show
             }
 
             return string.Empty;
+        }
+
+        public GalleryItemGroup SeriesPosterAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                foreach (var image in this.Banner.Poster)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TvDBFactory.GetImageUrl(image.BannerPath), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, 100, 160);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                        {
+                            Tag = "tvSeriesPoster|" + image.BannerPath
+                        };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        public GalleryItemGroup SeriesFanartAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                foreach (var image in this.Banner.Fanart)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TvDBFactory.GetImageUrl(image.BannerPath), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, 100, 60);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                        {
+                            Tag = "tvSeriesFanart|" + image.BannerPath
+                        };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
         }
 
         #endregion
