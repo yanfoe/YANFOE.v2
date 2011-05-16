@@ -118,6 +118,15 @@ namespace YANFOE.Factories
 
         #region Events
 
+        /// <summary>
+        /// Occurs when [redraw layout].
+        /// </summary>
+        [field: NonSerialized]
+        public static event EventHandler RedrawLayout = delegate { };
+
+        /// <summary>
+        /// Occurs when [master series name list changed].
+        /// </summary>
         [field: NonSerialized]
         public static event EventHandler MasterSeriesNameListChanged = delegate { };
 
@@ -881,6 +890,23 @@ namespace YANFOE.Factories
             return count;
         }
 
+        /// <summary>
+        /// Invokes the redraw layout.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        public static void InvokeRedrawLayout(EventArgs e)
+        {
+            EventHandler handler = RedrawLayout;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the master series name list changed.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         public static void InvokeMasterSeriesNameListChanged(EventArgs e)
         {
             EventHandler handler = MasterSeriesNameListChanged;

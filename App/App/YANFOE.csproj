@@ -99,6 +99,15 @@
     <Reference Include="Ionic.Zip.Reduced">
       <HintPath>.\Dlls\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>.\Dlls\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>.\Dlls\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" >
+      <HintPath>.\Dlls\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>.\Dlls\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -131,6 +140,7 @@
     <Compile Include="Factories\Scraper\MovieScrapeFactory.cs" />
     <Compile Include="Factories\Scraper\MovieScraperGroupFactory.cs" />
     <Compile Include="Factories\Sets\MovieSetManager.cs" />
+    <Compile Include="Factories\UI\Windows7UIFactory.cs" />
     <Compile Include="Factories\Versioning\VersionUpdateFactory.cs" />
     <Compile Include="InternalApps\DownloadManager\Download\AppleBinary.cs" />
     <Compile Include="InternalApps\DownloadManager\Download\InternalHandlers.cs" />
@@ -964,6 +974,9 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dlls\Microsoft.WindowsAPICodePack.dll" />
+    <Content Include="Dlls\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <Content Include="Dlls\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
     <Content Include="Licences\DotNetZip.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

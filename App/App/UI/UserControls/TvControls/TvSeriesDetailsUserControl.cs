@@ -15,6 +15,9 @@
 namespace YANFOE.UI.UserControls.TvControls
 {
     using System;
+    using System.ComponentModel;
+
+    using DevExpress.XtraLayout;
 
     public partial class TvSeriesDetailsUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -30,6 +33,11 @@ namespace YANFOE.UI.UserControls.TvControls
             tvTopMenuUserControl1.Type = SaveType.SaveSeries;
 
             Factories.TvDBFactory.CurrentSeriesChanged += this.TvDBFactory_CurrentSeriesChanged;
+            Factories.TvDBFactory.RedrawLayout += new EventHandler(TvDBFactory_RedrawLayout);
+        }
+
+        void TvDBFactory_RedrawLayout(object sender, EventArgs e)
+        {
         }
 
         /// <summary>

@@ -385,5 +385,13 @@ namespace YANFOE
         {
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3HFMBVFJE8XGA");
         }
+
+        private void FrmMain_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                TvDBFactory.InvokeRedrawLayout(new EventArgs());
+            }
+        }
     }
 }
