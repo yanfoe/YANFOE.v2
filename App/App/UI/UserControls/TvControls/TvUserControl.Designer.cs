@@ -195,8 +195,10 @@
             // 
             this.panelControl4.Controls.Add(this.btnAddCustomSeries);
             this.panelControl4.Location = new System.Drawing.Point(25, 5);
+            this.panelControl4.MaximumSize = new System.Drawing.Size(0, 33);
+            this.panelControl4.MinimumSize = new System.Drawing.Size(0, 33);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(244, 35);
+            this.panelControl4.Size = new System.Drawing.Size(244, 33);
             this.panelControl4.TabIndex = 9;
             // 
             // btnAddCustomSeries
@@ -221,10 +223,10 @@
             // 
             // xtraTabControl2
             // 
-            this.xtraTabControl2.Location = new System.Drawing.Point(25, 44);
+            this.xtraTabControl2.Location = new System.Drawing.Point(25, 40);
             this.xtraTabControl2.Name = "xtraTabControl2";
             this.xtraTabControl2.SelectedTabPage = this.tabTitle;
-            this.xtraTabControl2.Size = new System.Drawing.Size(244, 332);
+            this.xtraTabControl2.Size = new System.Drawing.Size(244, 334);
             this.xtraTabControl2.TabIndex = 1;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabTitle,
@@ -234,7 +236,7 @@
             // 
             this.tabTitle.Controls.Add(this.grdTvTitleList);
             this.tabTitle.Name = "tabTitle";
-            this.tabTitle.Size = new System.Drawing.Size(238, 306);
+            this.tabTitle.Size = new System.Drawing.Size(238, 308);
             this.tabTitle.Text = "Title";
             // 
             // grdTvTitleList
@@ -243,7 +245,7 @@
             this.grdTvTitleList.Location = new System.Drawing.Point(0, 0);
             this.grdTvTitleList.MainView = this.gridViewTvTitleList;
             this.grdTvTitleList.Name = "grdTvTitleList";
-            this.grdTvTitleList.Size = new System.Drawing.Size(238, 306);
+            this.grdTvTitleList.Size = new System.Drawing.Size(238, 308);
             this.grdTvTitleList.TabIndex = 0;
             this.grdTvTitleList.ToolTipController = this.toolTipController1;
             this.grdTvTitleList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -282,7 +284,7 @@
             // 
             this.tabBanner.Controls.Add(this.galleryBanners);
             this.tabBanner.Name = "tabBanner";
-            this.tabBanner.Size = new System.Drawing.Size(238, 306);
+            this.tabBanner.Size = new System.Drawing.Size(238, 308);
             this.tabBanner.Text = "Banners";
             // 
             // galleryBanners
@@ -310,11 +312,11 @@
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.grdSeasons);
-            this.groupControl3.Location = new System.Drawing.Point(25, 380);
+            this.groupControl3.Location = new System.Drawing.Point(25, 378);
             this.groupControl3.MaximumSize = new System.Drawing.Size(80, 0);
             this.groupControl3.MinimumSize = new System.Drawing.Size(80, 0);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(80, 237);
+            this.groupControl3.Size = new System.Drawing.Size(80, 239);
             this.groupControl3.TabIndex = 7;
             this.groupControl3.Text = "Season";
             // 
@@ -326,7 +328,7 @@
             this.grdSeasons.Name = "grdSeasons";
             this.grdSeasons.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit2});
-            this.grdSeasons.Size = new System.Drawing.Size(76, 213);
+            this.grdSeasons.Size = new System.Drawing.Size(76, 215);
             this.grdSeasons.TabIndex = 0;
             this.grdSeasons.ToolTipController = this.toolTipController1;
             this.grdSeasons.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -375,9 +377,9 @@
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.grdEpisodes);
-            this.groupControl2.Location = new System.Drawing.Point(109, 380);
+            this.groupControl2.Location = new System.Drawing.Point(109, 378);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(160, 237);
+            this.groupControl2.Size = new System.Drawing.Size(160, 239);
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "Episode";
             // 
@@ -391,7 +393,7 @@
             this.grdEpisodes.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1,
             this.repositoryItemPictureEdit1});
-            this.grdEpisodes.Size = new System.Drawing.Size(156, 213);
+            this.grdEpisodes.Size = new System.Drawing.Size(156, 215);
             this.grdEpisodes.TabIndex = 0;
             this.grdEpisodes.ToolTipController = this.toolTipController1;
             this.grdEpisodes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -842,9 +844,9 @@
             // 
             this.layoutControlItem3.Control = this.groupControl2;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(84, 375);
+            this.layoutControlItem3.Location = new System.Drawing.Point(84, 373);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(164, 241);
+            this.layoutControlItem3.Size = new System.Drawing.Size(164, 243);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -854,9 +856,9 @@
             // 
             this.layoutControlItem4.Control = this.groupControl3;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 375);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 373);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(84, 241);
+            this.layoutControlItem4.Size = new System.Drawing.Size(84, 243);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -866,9 +868,9 @@
             // 
             this.layoutControlItem1.Control = this.xtraTabControl2;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 39);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 35);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(248, 336);
+            this.layoutControlItem1.Size = new System.Drawing.Size(248, 338);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -880,7 +882,7 @@
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(248, 39);
+            this.layoutControlItem12.Size = new System.Drawing.Size(248, 35);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;
