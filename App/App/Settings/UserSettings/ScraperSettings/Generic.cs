@@ -49,8 +49,6 @@ namespace YANFOE.Settings.UserSettings.ScraperSettings
 
             this.MaximumActors = 10;
 
-            this.NumberDecimalSeperator = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
-
             this.NfoEncoding = "utf-8";
         }
 
@@ -86,7 +84,18 @@ namespace YANFOE.Settings.UserSettings.ScraperSettings
         /// <summary>
         /// Gets or sets NumberDecimalSeperator.
         /// </summary>
-        public string NumberDecimalSeperator { get; set; }
+        public string NumberDecimalSeperator
+        {
+            get
+            {
+                return NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
+            }
+
+            set
+            {
+                
+            }
+        }
 
         #endregion
     }
