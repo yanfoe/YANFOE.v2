@@ -75,7 +75,7 @@ namespace YANFOE.IO
                         xmlWriter, "releasedate", this.ProcessReleaseDate(movieModel.ReleaseDate));
 
                     // Rating
-                    XWrite.WriteEnclosedElement(xmlWriter, "rating", this.ProcessRating(movieModel.Rating));
+                    XWrite.WriteEnclosedElement(xmlWriter, "rating", this.ProcessRating(movieModel.Rating).Replace(",", "."));
 
                     // Votes
                     XWrite.WriteEnclosedElement(xmlWriter, "votes", movieModel.Votes);
