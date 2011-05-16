@@ -86,8 +86,14 @@ namespace YANFOE.UI.Dialogs.TV
             var toAdd = new Dictionary<string, ScanSeries>();
             var toRemove = new List<string>();
 
+            Factories.UI.Windows7UIFactory.StartProgressState(ImportTvFactory.Scan.Count);
+
+            var count = 0;
+
             foreach (var s in ImportTvFactory.Scan)
             {
+                Factories.UI.Windows7UIFactory.SetProgressValue(count);
+
                 if (
                     (from series in ImportTvFactory.SeriesNameList
                      where series.SeriesName == s.Key && series.WaitingForScan
@@ -148,6 +154,8 @@ namespace YANFOE.UI.Dialogs.TV
                 {
                     return;
                 }
+
+                count++;
             }
 
             foreach (var s in toRemove)
@@ -161,6 +169,8 @@ namespace YANFOE.UI.Dialogs.TV
             }
 
             this.theTvdb.ApplyScan();
+
+            Factories.UI.Windows7UIFactory.StopProgressState();
         }
 
         private void Set(Series series, List<string> toRemove, Dictionary<string, ScanSeries> toAdd, string key, ScanSeries value)

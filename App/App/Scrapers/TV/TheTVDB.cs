@@ -295,8 +295,12 @@ namespace YANFOE.Scrapers.TV
         {
             if (seriesResults.Count > 1 || seriesResults.Count == 0)
             {
+                Factories.UI.Windows7UIFactory.PauseProgressState();
+
                 var frmSelectSeriesName = new FrmSelectSeries(seriesResults, searchTerm);
                 frmSelectSeriesName.ShowDialog();
+
+                Factories.UI.Windows7UIFactory.PauseProgressState();
 
                 return frmSelectSeriesName.SelectedSeries;
             }
@@ -336,7 +340,7 @@ namespace YANFOE.Scrapers.TV
 
             XmlNodeList results = document.GetElementsByTagName("Series");
 
-            // Itterate through series
+            // Iterate through series
             foreach (XmlNode result in results)
             {
                 var singleDocument = new XmlDocument();

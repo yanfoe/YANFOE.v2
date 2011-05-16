@@ -115,6 +115,8 @@ namespace YANFOE.Factories.Import
             var getFiles = new string[1];
             var currentGetPathFiles = string.Empty;
 
+            UI.Windows7UIFactory.StartProgressState(db.Count);
+
             foreach (var file in db)
             {
                 MovieDBFactory.ImportProgressCurrent = count;
@@ -192,7 +194,10 @@ namespace YANFOE.Factories.Import
                 }
 
                 count++;
+                UI.Windows7UIFactory.SetProgressValue(count);
             }
+
+            UI.Windows7UIFactory.StopProgressState();
         }
 
         /// <summary>

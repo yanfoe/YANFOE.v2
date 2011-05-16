@@ -267,10 +267,11 @@ namespace YANFOE.Factories.InOut
             var bgwSaveRecursiveSelectedSeriesDetails = new BackgroundWorker();
 
             bgwSaveRecursiveSelectedSeriesDetails.DoWork += BgwSaveRecursiveSelectedSeriesDetails_DoWork;
-            bgwSaveRecursiveSelectedSeriesDetails.RunWorkerCompleted +=
-                BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted;
+            bgwSaveRecursiveSelectedSeriesDetails.RunWorkerCompleted += BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted;
 
             bgwSaveRecursiveSelectedSeriesDetails.RunWorkerAsync();
+
+
 
             dialog.SeriesMax = TvDBFactory.CurrentSelectedSeries.Count;
 
@@ -287,6 +288,8 @@ namespace YANFOE.Factories.InOut
                     dialog.EpisodeMax += season.Value.Episodes.Count;
                 }
             }
+
+            UI.Windows7UIFactory.StartProgressState(dialog.EpisodeMax);
 
             dialog.ShowDialog();
         }
@@ -416,6 +419,8 @@ namespace YANFOE.Factories.InOut
 
                             ProgressModel.EpisodeCurrent++;
 
+                            UI.Windows7UIFactory.SetProgressValue(ProgressModel.EpisodeCurrent);
+
                             if (Cancel)
                             {
                                 Cancel = false;
@@ -448,6 +453,7 @@ namespace YANFOE.Factories.InOut
         {
             dialog.Close();
             RefreshGrids = true;
+            UI.Windows7UIFactory.StopProgressState();
         }
 
         #endregion
