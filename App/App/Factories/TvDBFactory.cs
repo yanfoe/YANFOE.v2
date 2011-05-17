@@ -619,7 +619,7 @@ namespace YANFOE.Factories
         /// <returns>
         /// The get image url.
         /// </returns>
-        public static string GetImageUrl(string value)
+        public static string GetImageUrl(string value, bool smallVersion = false)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -631,7 +631,11 @@ namespace YANFOE.Factories
                 return value;
             }
 
-            return "http://cache.thetvdb.com/banners/" + value;
+            var startPath = string.Empty;
+
+            startPath = smallVersion ? "http://cache.thetvdb.com/banners/_cache/" : "http://cache.thetvdb.com/banners/";
+
+            return startPath + value;
         }
 
         /// <summary>

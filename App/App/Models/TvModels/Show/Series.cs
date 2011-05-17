@@ -1358,7 +1358,7 @@ namespace YANFOE.Models.TvModels.Show
                 foreach (var image in this.Banner.Poster)
                 {
                     string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath), DownloadType.Binary, Section.Tv);
+                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
@@ -1386,7 +1386,7 @@ namespace YANFOE.Models.TvModels.Show
                 foreach (var image in this.Banner.Fanart)
                 {
                     string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath), DownloadType.Binary, Section.Tv);
+                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
