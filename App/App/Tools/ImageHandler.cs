@@ -83,9 +83,23 @@ namespace YANFOE.Tools
                 return null;
             }
 
-            var image = LoadImage(filePath);
+            var basePath = Path.GetDirectoryName(filePath) + Path.DirectorySeparatorChar;
+            var fileWithoutExt = Path.GetFileNameWithoutExtension(filePath);
+            var ext = Path.GetExtension(filePath);
 
-            return ResizeImage(image, width, height);
+            var thumbPath = basePath + fileWithoutExt + "." + width + "x" + height + ext;
+
+            if (File.Exists(thumbPath))
+            {
+                return LoadImage(thumbPath);
+            }
+            else
+            {
+                var image = LoadImage(filePath);
+                var resizedImage = ResizeImage(image, width, height);
+                resizedImage.Save(thumbPath);
+                return resizedImage;
+            }
         }
 
         public static void ResizeImage(string OriginalFile, string NewFile, int newWidth, int MaxHeight, bool OnlyResizeIfWider, int quality)
