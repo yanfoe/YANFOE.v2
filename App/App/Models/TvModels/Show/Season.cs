@@ -20,10 +20,17 @@ namespace YANFOE.Models.TvModels.Show
     using System.IO;
     using System.Linq;
 
+    using DevExpress.XtraBars.Ribbon;
+
     using Newtonsoft.Json;
 
     using YANFOE.Factories;
+    using YANFOE.InternalApps.DownloadManager;
+    using YANFOE.InternalApps.DownloadManager.Model;
+    using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Properties;
+    using YANFOE.Tools;
+    using YANFOE.Tools.Enums;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.Models;
 
@@ -539,11 +546,13 @@ namespace YANFOE.Models.TvModels.Show
         /// </returns>
         public Series GetSeries()
         {
-            return
-                (from series in TvDBFactory.TvDatabase
+            var foundSeries = (from series in TvDBFactory.TvDatabase
                  from season in series.Value.Seasons
                  where season.Value == this
                  select series.Value).FirstOrDefault();
+
+            return foundSeries;
+
         }
 
         /// <summary>
@@ -581,6 +590,98 @@ namespace YANFOE.Models.TvModels.Show
             }
 
             return missingEpisodes;
+        }
+
+        public GalleryItemGroup SeasonBannerAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                foreach (var image in this.GetSeries().Banner.Season)
+                {
+                    if (image.BannerType2 == BannerType2.seasonwide && image.Season == this.SeasonNumber.ToString())
+                    {
+                        string path = Downloader.ProcessDownload(
+                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                        {
+                            Image resizedimage = ImageHandler.LoadImage(path, 100, 30);
+
+                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                                Tag = "tvSeasonBanner|" + image.BannerPath
+                            };
+
+                            gallery.Items.Add(galleryItem);
+                        }
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        public GalleryItemGroup SeasonPosterAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                var season = (from s in GetSeries().Banner.Season where s.BannerType2 == BannerType2.season && s.Season == this.SeasonNumber.ToString() select s);
+
+                foreach (var image in season)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, 100, 160);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                        {
+                            Tag = "tvSeasonBanner|" + image.BannerPath
+                        };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        public GalleryItemGroup SeasonFanartAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                foreach (var image in this.GetSeries().Banner.Season)
+                {
+                    if (image.BannerType2 == BannerType2.graphical)
+                    {
+                        string path = Downloader.ProcessDownload(
+                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                        {
+                            Image resizedimage = ImageHandler.LoadImage(path, 100, 60);
+
+                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                                Tag = "tvSeasonBanner|" + image.BannerPath
+                            };
+
+                            gallery.Items.Add(galleryItem);
+                        }
+                    }
+                }
+
+                return gallery;
+            }
         }
 
         #endregion

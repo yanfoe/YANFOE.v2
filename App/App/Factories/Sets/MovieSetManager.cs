@@ -123,7 +123,7 @@ namespace YANFOE.Factories.Sets
         public static void AddMovieToCurrentSet(MovieModel movie)
         {
             MovieSetObjectModel check =
-                (from m in currentSet.Movies.AsParallel() where m.MovieUniqueId == movie.MovieUniqueId select m).SingleOrDefault();
+                (from m in currentSet.Movies where m.MovieUniqueId == movie.MovieUniqueId select m).SingleOrDefault();
 
             if (check != null)
             {
@@ -143,7 +143,7 @@ namespace YANFOE.Factories.Sets
         /// <param name="order">The order.</param>
         public static void AddMovieToSet(MovieModel movie, string setName, int? order = null)
         {
-            MovieSetModel check = (from m in database.AsParallel() where m.SetName == setName select m).SingleOrDefault();
+            MovieSetModel check = (from m in database where m.SetName == setName select m).SingleOrDefault();
 
             var movieSetObjectModel = new MovieSetObjectModel { MovieUniqueId = movie.MovieUniqueId };
 
@@ -279,14 +279,14 @@ namespace YANFOE.Factories.Sets
         /// </returns>
         public static int? GetOrderOfMovieInSet(string setName, MovieModel movieModel)
         {
-            MovieSetModel movieSetModel = (from s in database.AsParallel() where s.SetName == setName select s).SingleOrDefault();
+            MovieSetModel movieSetModel = (from s in database where s.SetName == setName select s).SingleOrDefault();
 
             if (movieSetModel == null)
             {
                 return null;
             }
 
-            var check = (from m in movieSetModel.Movies.AsParallel().AsOrdered() where m.MovieUniqueId == movieModel.MovieUniqueId select m.Order).ToList();
+            var check = (from m in movieSetModel.Movies where m.MovieUniqueId == movieModel.MovieUniqueId select m.Order).ToList();
 
             if (check.Count() > 0)
             {
@@ -303,7 +303,7 @@ namespace YANFOE.Factories.Sets
         /// <returns>A MovieSetModel object</returns>
         public static MovieSetModel GetSet(string setName)
         {
-            return (from s in database.AsParallel() where s.SetName == setName select s).SingleOrDefault();
+            return (from s in database where s.SetName == setName select s).SingleOrDefault();
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace YANFOE.Factories.Sets
         /// <returns>Collection of set names.</returns>
         public static List<string> GetSetsContainingMovie(string id)
         {
-            return (from m in database.AsParallel().AsOrdered() where m.ContainsMovie(id) select m.SetName).ToList();
+            return (from m in database where m.ContainsMovie(id) select m.SetName).ToList();
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace YANFOE.Factories.Sets
         public static void RemoveFromSet(string id)
         {
             MovieSetObjectModel setObj =
-                (from m in currentSet.Movies.AsParallel() where m.MovieUniqueId == id select m).SingleOrDefault();
+                (from m in currentSet.Movies where m.MovieUniqueId == id select m).SingleOrDefault();
 
             if (setObj != null)
             {
@@ -398,7 +398,7 @@ namespace YANFOE.Factories.Sets
         /// <param name="setName">The Set Name.</param>
         public static void RemoveSet(string setName)
         {
-            MovieSetModel find = (from s in database.AsParallel() where s.SetName == setName select s).SingleOrDefault();
+            MovieSetModel find = (from s in database where s.SetName == setName select s).SingleOrDefault();
 
             if (find == null)
             {
@@ -486,7 +486,7 @@ namespace YANFOE.Factories.Sets
         /// <param name="setName">Name of the set.</param>
         public static void SetCurrentSet(string setName)
         {
-            var movieSetModel = (from s in database.AsParallel() where s.SetName == setName select s).SingleOrDefault();
+            var movieSetModel = (from s in database where s.SetName == setName select s).SingleOrDefault();
 
             if (movieSetModel != null)
             {

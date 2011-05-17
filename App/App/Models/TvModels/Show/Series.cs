@@ -990,7 +990,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (this.seriesName != null)
                     {
                         var seriesIndex =
-                            (from s in TvDBFactory.MasterSeriesNameList.AsParallel()
+                            (from s in TvDBFactory.MasterSeriesNameList
                              where s.SeriesGuid == this.guid
                              select s).SingleOrDefault();
 

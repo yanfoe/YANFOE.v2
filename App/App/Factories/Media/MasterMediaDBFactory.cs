@@ -100,7 +100,7 @@ namespace YANFOE.Factories.Media
         /// </returns>
         public static bool MovieDatabaseContains(string path)
         {
-            MediaModel result = (from m in masterMovieMediaDatabase.AsParallel() where m.FilePath == path select m).SingleOrDefault();
+            MediaModel result = (from m in masterMovieMediaDatabase where m.FilePath == path select m).SingleOrDefault();
 
             return result != null;
         }
@@ -152,7 +152,7 @@ namespace YANFOE.Factories.Media
         {
             masterMovieMediaDatabase = new BindingList<MediaModel>();
 
-            foreach (var f in MovieDBFactory.MovieDatabase.SelectMany(m => m.AssociatedFiles.Media).AsParallel())
+            foreach (var f in MovieDBFactory.MovieDatabase.SelectMany(m => m.AssociatedFiles.Media))
             {
                 masterMovieMediaDatabase.Add(f);
             }
@@ -168,9 +168,9 @@ namespace YANFOE.Factories.Media
             masterTvMediaDatabase = new BindingList<string>();
 
             foreach (var filePath in
-                TvDBFactory.TvDatabase.AsParallel().SelectMany(
-                    series => series.Value.Seasons.AsParallel(), (series, season) => new { series, season }).SelectMany(
-                        @t => @t.season.Value.Episodes.AsParallel(), (@t, episode) => episode.CurrentFilenameAndPath).
+                TvDBFactory.TvDatabase.SelectMany(
+                    series => series.Value.Seasons, (series, season) => new { series, season }).SelectMany(
+                        @t => @t.season.Value.Episodes, (@t, episode) => episode.CurrentFilenameAndPath).
                     Where(filePath => !string.IsNullOrEmpty(filePath)).Where(
                         filePath => !masterTvMediaDatabase.Contains(filePath)))
             {

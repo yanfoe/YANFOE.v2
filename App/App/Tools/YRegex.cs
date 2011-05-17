@@ -243,7 +243,7 @@ namespace YANFOE.Tools
         public static BindingList<string> MatchFilteredByList(string regex, string value, string group, IEnumerable<string> filters, bool clean = false)
         {
             var match = Match(regex, value, group, clean);
-            return (from f in filters.AsParallel().AsOrdered() where match.Contains(f) select match).ToBindingList();
+            return (from f in filters where match.Contains(f) select match).ToBindingList();
         }
 
         public static BindingList<string> MatchDelimitedToList(string regex, string html, string group, char delimiter, bool clean = false)

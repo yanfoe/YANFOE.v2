@@ -316,11 +316,11 @@ namespace YANFOE.Factories
             {
                 if (!Settings.Get.Ui.HideSeasonZero)
                 {
-                    return (from s in CurrentSeries.Seasons.AsParallel().AsOrdered() where s.Value.SeasonNumber != 0 select s.Value).ToList();
+                    return (from s in CurrentSeries.Seasons where s.Value.SeasonNumber != 0 select s.Value).ToList();
                 }
                 else
                 {
-                    return (from s in CurrentSeries.Seasons.AsParallel().AsOrdered() select s.Value).ToList();
+                    return (from s in CurrentSeries.Seasons select s.Value).ToList();
                 }
 
             }
@@ -469,7 +469,7 @@ namespace YANFOE.Factories
         /// </summary>
         public static void GenerateMasterSeriesList()
         {
-            BindingList<MasterSeriesListModel> list = (from s in tvDatabase.AsParallel().AsOrdered()
+            BindingList<MasterSeriesListModel> list = (from s in tvDatabase
                                                        select
                                                            new MasterSeriesListModel
                                                                {
@@ -529,7 +529,7 @@ namespace YANFOE.Factories
         /// </returns>
         public static List<Episode> GetCurrentEpisodeList()
         {
-            return (from s in CurrentSeason.Episodes.AsParallel().AsOrdered() select s).ToList();
+            return (from s in CurrentSeason.Episodes select s).ToList();
         }
 
         /// <summary>
@@ -791,7 +791,7 @@ namespace YANFOE.Factories
         /// </returns>
         public static Series GetSeriesFromGuid(string guid)
         {
-            return (from e in tvDatabase.AsParallel() where e.Value.Guid == guid select e.Value).SingleOrDefault();
+            return (from e in tvDatabase where e.Value.Guid == guid select e.Value).SingleOrDefault();
         }
 
         /// <summary>
@@ -805,7 +805,7 @@ namespace YANFOE.Factories
         /// </returns>
         public static Series GetSeriesFromName(string seriesName)
         {
-            return (from s in tvDatabase.AsParallel() where s.Key == seriesName select s.Value).SingleOrDefault();
+            return (from s in tvDatabase where s.Key == seriesName select s.Value).SingleOrDefault();
         }
 
         /// <summary>
@@ -1596,7 +1596,7 @@ namespace YANFOE.Factories
         /// </param>
         public static void SetCurrentEpisode(string guid)
         {
-            Episode episode = (from e in CurrentSeason.Episodes.AsParallel() where e.Guid == guid select e).SingleOrDefault();
+            Episode episode = (from e in CurrentSeason.Episodes where e.Guid == guid select e).SingleOrDefault();
 
             if (episode != null)
             {
@@ -1614,7 +1614,7 @@ namespace YANFOE.Factories
         public static void SetCurrentSeason(string guid)
         {
             Season season =
-                (from e in CurrentSeries.Seasons.AsParallel() where e.Value.Guid == guid select e.Value).SingleOrDefault();
+                (from e in CurrentSeries.Seasons where e.Value.Guid == guid select e.Value).SingleOrDefault();
 
             if (season != null)
             {
@@ -1653,7 +1653,7 @@ namespace YANFOE.Factories
         public static void UpdateEpisode(Season season, Episode newEpisode)
         {
             Episode episode =
-                (from e in season.Episodes.AsParallel() where e.EpisodeNumber == newEpisode.EpisodeNumber select e).SingleOrDefault();
+                (from e in season.Episodes where e.EpisodeNumber == newEpisode.EpisodeNumber select e).SingleOrDefault();
 
             if (episode == null)
             {
@@ -2107,7 +2107,7 @@ namespace YANFOE.Factories
         /// </returns>
         private static Series GetSeriesFromSeriesId(uint? seriesId)
         {
-            return (from s in tvDatabase.AsParallel() where s.Value.SeriesID == seriesId select s.Value).SingleOrDefault();
+            return (from s in tvDatabase where s.Value.SeriesID == seriesId select s.Value).SingleOrDefault();
         }
 
         /// <summary>

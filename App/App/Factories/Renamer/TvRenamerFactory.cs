@@ -357,7 +357,7 @@ namespace YANFOE.Factories.Renamer
         /// <returns>List of epides</returns>
         private static List<Episode> GetEpisodesContainingFile(Episode episode)
         {
-            return (from e in episode.GetSeason().Episodes.AsParallel().AsOrdered()
+            return (from e in episode.GetSeason().Episodes
                     where e.FilePath.FileNameAndPath == episode.FilePath.FileNameAndPath
                     orderby e.EpisodeNumber
                     select e).ToList();

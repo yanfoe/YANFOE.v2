@@ -175,7 +175,7 @@ namespace YANFOE.Scrapers.Movie
                     "details",
                     true);
 
-                alternatives.AddRange(from s in altTitles.AsParallel() where !s.Value.ToLower().Contains(new[] { "imax ", "working ", "fake " }) select s.Key);
+                alternatives.AddRange(from s in altTitles where !s.Value.ToLower().Contains(new[] { "imax ", "working ", "fake " }) select s.Key);
 
                 if (html.Contains("title-extra"))
                 {
