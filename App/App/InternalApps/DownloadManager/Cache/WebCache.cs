@@ -14,6 +14,7 @@
 
 namespace YANFOE.InternalApps.DownloadManager.Cache
 {
+    using System;
     using System.IO;
 
     using YANFOE.Settings;
@@ -126,6 +127,12 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
 
             // tvdb
             url = url.Replace(@"www.thetvdb.com", "[tv]");
+            url = url.Replace(@"cache.thetvdb.com", "[ctv]");
+            url = url.Replace(@"banners", "[bn]");
+            url = url.Replace(@"cache", "[_c]");
+            url = url.Replace(@"original", "[or]");
+            url = url.Replace(@"original", "[or]");
+            url = url.Replace(@"GetSeries.php", "[gs]");
 
             return url;
         }

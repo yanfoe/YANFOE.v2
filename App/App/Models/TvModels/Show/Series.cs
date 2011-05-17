@@ -1349,6 +1349,37 @@ namespace YANFOE.Models.TvModels.Show
             return string.Empty;
         }
 
+        public GalleryItemGroup SeriesBannerAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                foreach (var image in this.Banner.Series)
+                {
+                    if (image.BannerType2 == BannerType2.graphical)
+                    {
+                        string path = Downloader.ProcessDownload(
+                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                        {
+                            Image resizedimage = ImageHandler.LoadImage(path, 100, 30);
+
+                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                                Tag = "tvSeriesBanner|" + image.BannerPath
+                            };
+
+                            gallery.Items.Add(galleryItem);
+                        }
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
         public GalleryItemGroup SeriesPosterAltGallery
         {
             get
