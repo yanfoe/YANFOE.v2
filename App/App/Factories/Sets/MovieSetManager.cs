@@ -183,13 +183,13 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// Checks existance of a set with a particular name
+        /// Checks existence of a set with a particular name
         /// </summary>
         /// <param name="response">The response.</param>
         /// <returns></returns>
         public static bool HasSetWithName(string response)
         {
-            MovieSetModel find = (from s in database where s.SetName == response select s).SingleOrDefault();
+            MovieSetModel find = (from s in database where s.SetName.ToLower() == response.ToLower() select s).SingleOrDefault();
 
             if (find == null)
             {

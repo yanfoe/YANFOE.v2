@@ -17,6 +17,7 @@ namespace YANFOE
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.IO;
     using System.Windows.Forms;
 
     using DevExpress.LookAndFeel;
@@ -24,6 +25,9 @@ namespace YANFOE
     using DevExpress.Utils;
     using DevExpress.XtraBars;
     using DevExpress.XtraEditors;
+
+    using Microsoft.WindowsAPICodePack.Shell;
+    using Microsoft.WindowsAPICodePack.Taskbar;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Internal;
@@ -67,7 +71,6 @@ namespace YANFOE
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
             VersionUpdateFactory.VersionUpdateChanged += this.VersionUpdateFactory_VersionUpdateChanged;
             VersionUpdateFactory.CheckForUpdate();
-
         }
 
         private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
@@ -392,6 +395,10 @@ namespace YANFOE
             {
                 TvDBFactory.InvokeRedrawLayout(new EventArgs());
             }
+        }
+
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
         }
     }
 }
