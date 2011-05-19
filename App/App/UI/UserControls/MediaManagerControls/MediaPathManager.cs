@@ -15,6 +15,7 @@
 namespace YANFOE.UI.UserControls.MediaManagerControls
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Forms;
 
@@ -189,12 +190,20 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             if (result == DialogResult.Yes)
             {
+                var removeModels = new List<MediaPathModel>();
+
                 foreach (int v in this.grdViewMain.GetSelectedRows())
                 {
                     var row = this.grdViewMain.GetRow(v) as MediaPathModel;
-
-                    MediaPathDBFactory.RemoveFromDatabase(row);
+                    removeModels.Add(row);
                 }
+
+                foreach (var model in removeModels)
+                {
+                    MediaPathDBFactory.RemoveFromDatabase(model);
+                }
+
+                grdViewMain.RefreshData();
             }
         }
 

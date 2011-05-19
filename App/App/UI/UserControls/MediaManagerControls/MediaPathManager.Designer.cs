@@ -118,9 +118,9 @@
             // 
             this.btnProcessMovies.Image = global::YANFOE.Properties.Resources.next24;
             this.btnProcessMovies.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnProcessMovies.Location = new System.Drawing.Point(385, 248);
+            this.btnProcessMovies.Location = new System.Drawing.Point(383, 248);
             this.btnProcessMovies.Name = "btnProcessMovies";
-            this.btnProcessMovies.Size = new System.Drawing.Size(234, 30);
+            this.btnProcessMovies.Size = new System.Drawing.Size(236, 30);
             this.btnProcessMovies.StyleController = this.layoutControl1;
             this.btnProcessMovies.TabIndex = 12;
             this.btnProcessMovies.Click += new System.EventHandler(this.BtnProcessMovies_Click);
@@ -129,19 +129,19 @@
             // 
             this.btnProcessTv.Image = global::YANFOE.Properties.Resources.next24;
             this.btnProcessTv.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnProcessTv.Location = new System.Drawing.Point(385, 602);
+            this.btnProcessTv.Location = new System.Drawing.Point(383, 602);
             this.btnProcessTv.Name = "btnProcessTv";
-            this.btnProcessTv.Size = new System.Drawing.Size(234, 30);
+            this.btnProcessTv.Size = new System.Drawing.Size(236, 30);
             this.btnProcessTv.StyleController = this.layoutControl1;
             this.btnProcessTv.TabIndex = 11;
             this.btnProcessTv.Click += new System.EventHandler(this.BtnProcessTv_Click);
             // 
             // grdMediaPathUnsortedTv
             // 
-            this.grdMediaPathUnsortedTv.Location = new System.Drawing.Point(385, 315);
+            this.grdMediaPathUnsortedTv.Location = new System.Drawing.Point(383, 313);
             this.grdMediaPathUnsortedTv.MainView = this.grdViewUnsortedTv;
             this.grdMediaPathUnsortedTv.Name = "grdMediaPathUnsortedTv";
-            this.grdMediaPathUnsortedTv.Size = new System.Drawing.Size(234, 283);
+            this.grdMediaPathUnsortedTv.Size = new System.Drawing.Size(236, 285);
             this.grdMediaPathUnsortedTv.TabIndex = 3;
             this.grdMediaPathUnsortedTv.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewUnsortedTv});
@@ -181,10 +181,10 @@
             // 
             // grdMediaPathUnsortedMovies
             // 
-            this.grdMediaPathUnsortedMovies.Location = new System.Drawing.Point(385, 35);
+            this.grdMediaPathUnsortedMovies.Location = new System.Drawing.Point(383, 35);
             this.grdMediaPathUnsortedMovies.MainView = this.grdViewUnsortedMovies;
             this.grdMediaPathUnsortedMovies.Name = "grdMediaPathUnsortedMovies";
-            this.grdMediaPathUnsortedMovies.Size = new System.Drawing.Size(234, 209);
+            this.grdMediaPathUnsortedMovies.Size = new System.Drawing.Size(236, 209);
             this.grdMediaPathUnsortedMovies.TabIndex = 2;
             this.grdMediaPathUnsortedMovies.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewUnsortedMovies});
@@ -292,6 +292,7 @@
             this.gridColumn2});
             this.grdViewMain.GridControl = this.grdMediaPathList;
             this.grdViewMain.Name = "grdViewMain";
+            this.grdViewMain.OptionsSelection.MultiSelect = true;
             this.grdViewMain.OptionsView.ShowGroupPanel = false;
             this.grdViewMain.DoubleClick += new System.EventHandler(this.grdViewMain_DoubleClick);
             // 
@@ -333,7 +334,6 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(634, 664);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -419,10 +419,10 @@
             this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem10,
             this.layoutControlItem7});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(370, 0);
+            this.layoutControlGroup4.Location = new System.Drawing.Point(368, 0);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
             this.layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup4.Size = new System.Drawing.Size(244, 273);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(246, 273);
             this.layoutControlGroup4.Text = "Unsorted Movies";
             // 
             // layoutControlItem10
@@ -431,7 +431,7 @@
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 213);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(238, 34);
+            this.layoutControlItem10.Size = new System.Drawing.Size(240, 34);
             this.layoutControlItem10.Text = "layoutControlItem10";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
@@ -443,7 +443,7 @@
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(238, 213);
+            this.layoutControlItem7.Size = new System.Drawing.Size(240, 213);
             this.layoutControlItem7.Text = "layoutControlItem7";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextToControlDistance = 0;
@@ -455,10 +455,10 @@
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem8,
             this.layoutControlItem9});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(370, 280);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(368, 278);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(244, 347);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(246, 349);
             this.layoutControlGroup3.Text = "Unsorted TV";
             // 
             // layoutControlItem8
@@ -467,7 +467,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(238, 287);
+            this.layoutControlItem8.Size = new System.Drawing.Size(240, 289);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -478,9 +478,9 @@
             this.layoutControlItem9.Control = this.btnProcessTv;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem9.Image = global::YANFOE.Properties.Resources.next24;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 287);
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 289);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(238, 34);
+            this.layoutControlItem9.Size = new System.Drawing.Size(240, 34);
             this.layoutControlItem9.Text = "layoutControlItem9";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
@@ -490,9 +490,9 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(370, 273);
+            this.splitterItem1.Location = new System.Drawing.Point(368, 273);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(244, 7);
+            this.splitterItem1.Size = new System.Drawing.Size(246, 5);
             // 
             // splitterItem2
             // 
@@ -500,7 +500,7 @@
             this.splitterItem2.CustomizationFormText = "splitterItem2";
             this.splitterItem2.Location = new System.Drawing.Point(363, 0);
             this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(7, 627);
+            this.splitterItem2.Size = new System.Drawing.Size(5, 627);
             // 
             // layoutControlItem2
             // 
