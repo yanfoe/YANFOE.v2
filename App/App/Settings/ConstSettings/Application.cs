@@ -15,12 +15,14 @@
 namespace YANFOE.Settings.ConstSettings
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Application specific settings.
     /// </summary>
     public static class Application
     {
+        
         static Application()
         {
             ApplicationBuild = String.Format("{0:yyMMddhh}", RetrieveLinkerTimestamp());
@@ -35,7 +37,7 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// The current version of YANFOE.
         /// </summary>
-        public const string ApplicationVersion = "2.0 Alpha 2";
+        public const string ApplicationVersion = "2.0 Alpha 3";
 
         /// <summary>
         /// The current version of YANFOE.
@@ -45,7 +47,10 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// Type (AKA Donor)
         /// </summary>
-        public const string ApplicationMessage = "Early Alpha";
+        public const string ApplicationMessage = "Alpha";
+
+        public const string DonateUrl = @"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3HFMBVFJE8XGA";
+
         #endregion
 
         #region ApiKeys

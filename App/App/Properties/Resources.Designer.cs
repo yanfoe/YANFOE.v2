@@ -823,6 +823,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap Untitled_3 {
+            get {
+                object obj = ResourceManager.GetObject("Untitled-3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap up {
             get {
                 object obj = ResourceManager.GetObject("up", resourceCulture);

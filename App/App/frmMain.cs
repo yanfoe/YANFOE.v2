@@ -32,6 +32,7 @@ namespace YANFOE
     using YANFOE.Properties;
     using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.DSettings;
+    using YANFOE.UI.Dialogs.General;
     using YANFOE.UI.Dialogs.Movies;
 
     using Skin = YANFOE.Tools.UI.Skin;
@@ -83,9 +84,10 @@ namespace YANFOE
             }
 
             this.Text = string.Format(
-                "{0} {1} {2}",
+                "{0} {1} Build: {2} {3}",
                 Settings.ConstSettings.Application.ApplicationName,
                 Settings.ConstSettings.Application.ApplicationVersion,
+                Settings.ConstSettings.Application.ApplicationBuild,
                 dirtyString);
         }
 
@@ -419,12 +421,19 @@ namespace YANFOE
         /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
         private void mnuDonate_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3HFMBVFJE8XGA");
+            Process.Start(Settings.ConstSettings.Application.DonateUrl);
         }
 
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             DatabaseIOFactory.DatabaseDirty = false;
+
+            if (Settings.Get.Ui.ShowWelcomeMessage)
+            {
+                frmWelcomePage frmWelcomePage = new frmWelcomePage();
+                frmWelcomePage.ShowDialog();
+                //Settings.Get.Ui.ShowWelcomeMessage = false;
+            }
         }
     }
 }

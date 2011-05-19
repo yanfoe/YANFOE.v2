@@ -28,6 +28,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         public UiSettings()
         {
+            this.ShowWelcomeMessage = true;
             this.Skin = "Foggy";
             this.EnableTVPathColumn = false;
             this.HideSeasonZero = false;
@@ -38,6 +39,8 @@ namespace YANFOE.Settings.UserSettings
 
             this.PictureThumbnailPoster = new Size(100, 160);
         }
+
+        public bool ShowWelcomeMessage { get; set; }
 
         /// <summary>
         /// Gets or sets Skin.

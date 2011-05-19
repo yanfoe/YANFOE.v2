@@ -300,6 +300,12 @@
     <Compile Include="UI\Dialogs\General\FrmSavingDialog.Designer.cs">
       <DependentUpon>FrmSavingDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\General\frmWelcomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\General\frmWelcomePage.Designer.cs">
+      <DependentUpon>frmWelcomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\Movies\FrmMovieRename.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -667,6 +673,9 @@
     <EmbeddedResource Include="UI\Dialogs\General\FrmSavingDialog.resx">
       <DependentUpon>FrmSavingDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\General\frmWelcomePage.resx">
+      <DependentUpon>frmWelcomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\Movies\FrmMovieRename.resx">
       <DependentUpon>FrmMovieRename.cs</DependentUpon>
     </EmbeddedResource>
@@ -1010,6 +1019,7 @@
     <None Include="Resources\scrapergroupmanager.png" />
     <None Include="Resources\scrapergroupmanager1.png" />
     <None Include="Resources\sharp.gif" />
+    <None Include="Resources\Untitled-3.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />
