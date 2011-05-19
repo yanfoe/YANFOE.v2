@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNotCatagorized2));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.marqueeProgressBar = new DevExpress.XtraEditors.MarqueeProgressBarControl();
@@ -65,9 +65,9 @@
             this.grdUnsorted = new DevExpress.XtraGrid.GridControl();
             this.grdViewUnsorted = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlGroupUnsorted = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlSortedEpisodes = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -97,9 +97,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdUnsorted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewUnsorted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupUnsorted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlSortedEpisodes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -214,13 +214,13 @@
             this.barButtonItem2.Caption = "Reassign Series";
             this.barButtonItem2.Id = 3;
             this.barButtonItem2.Name = "barButtonItem2";
-            toolTipTitleItem2.Text = "Reassign Series";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Allows you to change the series but keep the files. Handy if you\'ve chosen the wr" +
+            toolTipTitleItem1.Text = "Reassign Series";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Allows you to change the series but keep the files. Handy if you\'ve chosen the wr" +
     "ong series.";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.barButtonItem2.SuperTip = superToolTip2;
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.barButtonItem2.SuperTip = superToolTip1;
             // 
             // barButtonItem3
             // 
@@ -424,8 +424,8 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlGroup2,
-            this.layoutControlGroup3,
+            this.layoutControlGroupUnsorted,
+            this.layoutControlSortedEpisodes,
             this.splitterItem1,
             this.emptySpaceItem1,
             this.layoutControlItem5,
@@ -437,15 +437,15 @@
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // layoutControlGroup2
+            // layoutControlGroupUnsorted
             // 
-            this.layoutControlGroup2.CustomizationFormText = "Unsorted Files";
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroupUnsorted.CustomizationFormText = "Unsorted Files";
+            this.layoutControlGroupUnsorted.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(281, 484);
-            this.layoutControlGroup2.Text = "Unsorted Files";
+            this.layoutControlGroupUnsorted.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroupUnsorted.Name = "layoutControlGroupUnsorted";
+            this.layoutControlGroupUnsorted.Size = new System.Drawing.Size(281, 484);
+            this.layoutControlGroupUnsorted.Text = "Unsorted Files";
             // 
             // layoutControlItem1
             // 
@@ -459,10 +459,10 @@
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
             // 
-            // layoutControlGroup3
+            // layoutControlSortedEpisodes
             // 
-            this.layoutControlGroup3.CustomizationFormText = "Sorted Episodes";
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlSortedEpisodes.CustomizationFormText = "Sorted Episodes";
+            this.layoutControlSortedEpisodes.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem4,
             this.layoutControlItem2,
             this.layoutControlItem3,
@@ -470,10 +470,10 @@
             this.layoutControlItem7,
             this.layoutControlItem9,
             this.splitterItem2});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(286, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(482, 484);
-            this.layoutControlGroup3.Text = "Sorted Episodes";
+            this.layoutControlSortedEpisodes.Location = new System.Drawing.Point(286, 0);
+            this.layoutControlSortedEpisodes.Name = "layoutControlSortedEpisodes";
+            this.layoutControlSortedEpisodes.Size = new System.Drawing.Size(482, 484);
+            this.layoutControlSortedEpisodes.Text = "Sorted Episodes";
             // 
             // layoutControlItem4
             // 
@@ -646,9 +646,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdUnsorted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewUnsorted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupUnsorted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlSortedEpisodes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -679,9 +679,9 @@
         private DevExpress.XtraGrid.Views.Grid.GridView grdViewEpisodes;
         private DevExpress.XtraGrid.GridControl grdUnsorted;
         private DevExpress.XtraGrid.Views.Grid.GridView grdViewUnsorted;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupUnsorted;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlSortedEpisodes;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;

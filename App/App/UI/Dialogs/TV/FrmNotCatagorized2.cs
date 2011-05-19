@@ -104,6 +104,8 @@ namespace YANFOE.UI.Dialogs.TV
         private void btnOk_Click(object sender, EventArgs e)
         {
             layoutControlProgress.Visibility = LayoutVisibility.Always;
+            layoutControlSortedEpisodes.Enabled = false;
+            layoutControlGroupUnsorted.Enabled = false;
 
             var bgw = new BackgroundWorker();
             bgw.DoWork += this.bgw_DoWork;
