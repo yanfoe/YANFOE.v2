@@ -329,6 +329,7 @@ namespace YANFOE.Models.TvModels.Show
         /// <summary>
         /// Gets the locked image.
         /// </summary>
+        [JsonIgnore]
         public Image LockedImage
         {
             get
@@ -593,6 +594,7 @@ namespace YANFOE.Models.TvModels.Show
             return missingEpisodes;
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeasonBannerAltGallery
         {
             get
@@ -631,6 +633,7 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeasonPosterAltGallery
         {
             get
@@ -676,6 +679,7 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeasonFanartAltGallery
         {
             get

@@ -1349,6 +1349,7 @@ namespace YANFOE.Models.TvModels.Show
             return string.Empty;
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeriesBannerAltGallery
         {
             get
@@ -1387,6 +1388,7 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeriesPosterAltGallery
         {
             get
@@ -1423,6 +1425,7 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        [JsonIgnore]
         public GalleryItemGroup SeriesFanartAltGallery
         {
             get
