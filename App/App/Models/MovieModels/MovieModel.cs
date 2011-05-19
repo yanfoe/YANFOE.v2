@@ -463,7 +463,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.certification != value)
                 {
                     this.certification = value;
-                    this.OnPropertyChanged("Certification");
+                    this.OnPropertyChanged("Certification", true);
                 }
             }
         }
@@ -484,7 +484,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.DatabaseSaved = false;
                     this.changedFanart = value;
-                    this.OnPropertyChanged("ChangedFanart");
+                    this.OnPropertyChanged("ChangedFanart", true);
                 }
             }
         }
@@ -506,7 +506,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.DatabaseSaved = false;
                     this.changedPoster = value;
-                    this.OnPropertyChanged("ChangedPoster");
+                    this.OnPropertyChanged("ChangedPoster", true);
                 }
             }
         }
@@ -528,7 +528,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.DatabaseSaved = false;
                     this.changedText = value;
-                    this.OnPropertyChanged("ChangedText");
+                    this.OnPropertyChanged("ChangedText", true);
                 }
             }
         }
@@ -550,7 +550,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.DatabaseSaved = false;
                     this.changedTrailer = value;
-                    this.OnPropertyChanged("ChangedTrailer");
+                    this.OnPropertyChanged("ChangedTrailer", true);
                 }
             }
         }
@@ -576,7 +576,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.Country != value.ToBindingStringList())
                 {
                     this.Country = value.ToBindingStringList();
-                    this.OnPropertyChanged("CountryAsString");
+                    this.OnPropertyChanged("CountryAsString", true);
                 }
             }
         }
@@ -628,8 +628,8 @@ namespace YANFOE.Models.MovieModels
 
                     this.GenerateSmallFanart();
 
-                    this.OnPropertyChanged("CurrentFanartImageUrl");
-                    this.OnPropertyChanged("CurrentFanartImage");
+                    this.OnPropertyChanged("CurrentFanartImageUrl", true);
+                    this.OnPropertyChanged("CurrentFanartImage", true);
                     this.ChangedFanart = true;
                 }
             }
@@ -699,8 +699,8 @@ namespace YANFOE.Models.MovieModels
 
                     this.GenerateSmallPoster();
 
-                    this.OnPropertyChanged("CurrentPosterImageUrl");
-                    this.OnPropertyChanged("CurrentPosterImage");
+                    this.OnPropertyChanged("CurrentPosterImageUrl", true);
+                    this.OnPropertyChanged("CurrentPosterImage", true);
                     this.ChangedPoster = true;
                 }
             }
@@ -722,7 +722,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.currentTrailerUrl = value;
 
-                    this.OnPropertyChanged("CurrentTrailerUrl");
+                    this.OnPropertyChanged("CurrentTrailerUrl", true);
                     this.ChangedTrailer = true;
                 }
             }
@@ -757,7 +757,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.Director != value.ToPersonList())
                 {
                     this.Director = value.ToPersonList();
-                    this.OnPropertyChanged("DirectorAsString");
+                    this.OnPropertyChanged("DirectorAsString", true);
                 }
             }
         }
@@ -823,7 +823,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.fanartPathOnDisk != value)
                 {
                     this.fanartPathOnDisk = value;
-                    this.OnPropertyChanged("FanartPathOnDisk");
+                    this.OnPropertyChanged("FanartPathOnDisk", true);
                 }
             }
         }
@@ -847,7 +847,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.filmAffinityId = value;
-                this.OnPropertyChanged("FilmAffinityId");
+                this.OnPropertyChanged("FilmAffinityId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -865,7 +865,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.filmDeltaId = value;
-                this.OnPropertyChanged("FilmDeltaId");
+                this.OnPropertyChanged("FilmDeltaId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -883,7 +883,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.filmUpId = value;
-                this.OnPropertyChanged("FilmUpId");
+                this.OnPropertyChanged("FilmUpId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -901,7 +901,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.filmWebId = value;
-                this.OnPropertyChanged("FilmWebId");
+                this.OnPropertyChanged("FilmWebId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -924,7 +924,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.movieMeterId = value;
-                this.OnPropertyChanged("MovieMeterId");
+                this.OnPropertyChanged("MovieMeterId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -950,7 +950,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.Genre != value.ToBindingStringList())
                 {
                     this.Genre = value.ToBindingStringList();
-                    this.OnPropertyChanged("GenreAsString");
+                    this.OnPropertyChanged("GenreAsString", true);
                 }
             }
         }
@@ -983,7 +983,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.imdbId != value)
                 {
                     this.imdbId = value;
-                    this.OnPropertyChanged("ImdbId");
+                    this.OnPropertyChanged("ImdbId", true);
                     this.OnPropertyChanged("Status");
                 }
             }
@@ -1002,7 +1002,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.impawardsId = value;
-                this.OnPropertyChanged("ImpawardsId");
+                this.OnPropertyChanged("ImpawardsId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -1043,7 +1043,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.isNew != value)
                 {
                     this.isNew = value;
-                    this.OnPropertyChanged("IsNew");
+                    this.OnPropertyChanged("IsNew", true);
                 }
             }
         }
@@ -1061,7 +1061,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.kinopoiskId = value;
-                this.OnPropertyChanged("KinopoiskId");
+                this.OnPropertyChanged("KinopoiskId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -1087,7 +1087,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.Language != value.ToBindingStringList())
                 {
                     this.Language = value.ToBindingStringList();
-                    this.OnPropertyChanged("LanguageAsString");
+                    this.OnPropertyChanged("LanguageAsString", true);
                 }
             }
         }
@@ -1107,7 +1107,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.locked != value)
                 {
                     this.locked = value;
-                    this.OnPropertyChanged("Locked");
+                    this.OnPropertyChanged("Locked", true);
                     this.OnPropertyChanged("LockedImage");
                 }
             }
@@ -1145,7 +1145,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.marked != value)
                 {
                     this.marked = value;
-                    this.OnPropertyChanged("Marked");
+                    this.OnPropertyChanged("Marked", true);
                     this.OnPropertyChanged("MarkedImage");
                 }
             }
@@ -1188,7 +1188,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.mpaa != value)
                 {
                     this.mpaa = value;
-                    this.OnPropertyChanged("Runtime");
+                    this.OnPropertyChanged("Runtime", true);
                 }
             }
         }
@@ -1249,7 +1249,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.originalTitle != value)
                 {
                     this.originalTitle = value;
-                    this.OnPropertyChanged("OriginalTitle");
+                    this.OnPropertyChanged("OriginalTitle", true);
                 }
             }
         }
@@ -1270,7 +1270,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.outline != value)
                 {
                     this.outline = value;
-                    this.OnPropertyChanged("Outline");
+                    this.OnPropertyChanged("Outline", true);
                 }
             }
         }
@@ -1291,7 +1291,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.plot != value)
                 {
                     this.plot = value;
-                    this.OnPropertyChanged("Plot");
+                    this.OnPropertyChanged("Plot", true);
                 }
             }
         }
@@ -1340,7 +1340,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.posterPathOnDisk = value;
-                this.OnPropertyChanged("PosterPathOnDisk");
+                this.OnPropertyChanged("PosterPathOnDisk", true);
             }
         }
 
@@ -1360,7 +1360,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.rating != value)
                 {
                     this.rating = value;
-                    this.OnPropertyChanged("Rating");
+                    this.OnPropertyChanged("Rating", true);
                 }
             }
         }
@@ -1381,7 +1381,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.releaseDate != value)
                 {
                     this.releaseDate = value;
-                    this.OnPropertyChanged("ReleaseDate");
+                    this.OnPropertyChanged("ReleaseDate", true);
                 }
             }
         }
@@ -1402,7 +1402,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.runtime != value)
                 {
                     this.runtime = value;
-                    this.OnPropertyChanged("Runtime");
+                    this.OnPropertyChanged("Runtime", true);
                     this.OnPropertyChanged("RuntimeInHourMin");
                 }
             }
@@ -1487,7 +1487,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.setStudio != value)
                 {
                     this.setStudio = value;
-                    this.OnPropertyChanged("SetStudio");
+                    this.OnPropertyChanged("SetStudio", true);
                 }
             }
         }
@@ -1573,7 +1573,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.tagline != value)
                 {
                     this.tagline = value;
-                    this.OnPropertyChanged("Tagline");
+                    this.OnPropertyChanged("Tagline", true);
                 }
             }
         }
@@ -1595,7 +1595,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.title = value;
                     this.ChangedText = true;
-                    this.OnPropertyChanged("Title");
+                    this.OnPropertyChanged("Title", true);
                 }
             }
         }
@@ -1626,7 +1626,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.tmdbId != value)
                 {
                     this.tmdbId = value;
-                    this.OnPropertyChanged("TmdbId");
+                    this.OnPropertyChanged("TmdbId", true);
                     this.OnPropertyChanged("Status");
                 }
             }
@@ -1648,7 +1648,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.top250 != value)
                 {
                     this.top250 = value;
-                    this.OnPropertyChanged("Top250");
+                    this.OnPropertyChanged("Top250", true);
                 }
             }
         }
@@ -1668,7 +1668,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.trailerPathOnDisk != value)
                 {
                     this.trailerPathOnDisk = value;
-                    this.OnPropertyChanged("TrailerPathOnDisk");
+                    this.OnPropertyChanged("TrailerPathOnDisk", true);
                 }
             }
         }
@@ -1688,7 +1688,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.videoSource != value)
                 {
                     this.videoSource = value;
-                    this.OnPropertyChanged("VideoSource");
+                    this.OnPropertyChanged("VideoSource", true);
                 }
             }
         }
@@ -1709,7 +1709,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.votes != value)
                 {
                     this.votes = value;
-                    this.OnPropertyChanged("Votes");
+                    this.OnPropertyChanged("Votes", true);
                 }
             }
         }
@@ -1751,7 +1751,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.Writers != value.ToPersonList())
                 {
                     this.Writers = value.ToPersonList();
-                    this.OnPropertyChanged("WritersAsString");
+                    this.OnPropertyChanged("WritersAsString", true);
                 }
             }
         }
@@ -1804,7 +1804,7 @@ namespace YANFOE.Models.MovieModels
                 if (this.year != value)
                 {
                     this.year = value;
-                    this.OnPropertyChanged("Year");
+                    this.OnPropertyChanged("Year", true);
                 }
             }
         }
@@ -1821,7 +1821,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.ofdbbId = value;
-                this.OnPropertyChanged("OfdbId");
+                this.OnPropertyChanged("OfdbId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -1838,7 +1838,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.sratimId = value;
-                this.OnPropertyChanged("SratimId");
+                this.OnPropertyChanged("SratimId", true);
                 this.OnPropertyChanged("Status");
             }
         }
@@ -1855,7 +1855,7 @@ namespace YANFOE.Models.MovieModels
             set
             {
                 this.rottenTomatoId = value;
-                this.OnPropertyChanged("RottenTomatoId");
+                this.OnPropertyChanged("RottenTomatoId", true);
                 this.OnPropertyChanged("Status");
             }
         }

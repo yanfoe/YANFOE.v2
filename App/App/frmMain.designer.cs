@@ -36,9 +36,9 @@ namespace YANFOE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -82,6 +82,7 @@ namespace YANFOE
             this.logsUserControl1 = new YANFOE.UI.UserControls.LogControls.LogsUserControl();
             this.tabAbout = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.hyperLinkEdit5 = new DevExpress.XtraEditors.HyperLinkEdit();
             this.memoEdit2 = new DevExpress.XtraEditors.MemoEdit();
             this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
             this.hyperLinkEdit4 = new DevExpress.XtraEditors.HyperLinkEdit();
@@ -98,6 +99,7 @@ namespace YANFOE
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -125,8 +127,6 @@ namespace YANFOE
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.uiTimer = new System.Windows.Forms.Timer(this.components);
-            this.hyperLinkEdit5 = new DevExpress.XtraEditors.HyperLinkEdit();
-            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -139,6 +139,7 @@ namespace YANFOE
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).BeginInit();
@@ -155,6 +156,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -178,8 +180,6 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -346,15 +346,15 @@ namespace YANFOE
             this.mnuDonate.Glyph = global::YANFOE.Properties.Resources.btn_donate_SM;
             this.mnuDonate.Id = 34;
             this.mnuDonate.Name = "mnuDonate";
-            toolTipTitleItem2.Text = "Donate to the YANFOE project.";
-            toolTipItem2.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem2.Appearance.Options.UseImage = true;
-            toolTipItem2.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.mnuDonate.SuperTip = superToolTip2;
+            toolTipTitleItem1.Text = "Donate to the YANFOE project.";
+            toolTipItem1.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.Appearance.Options.UseImage = true;
+            toolTipItem1.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.mnuDonate.SuperTip = superToolTip1;
             this.mnuDonate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuDonate_ItemClick);
             // 
             // barDockControlTop
@@ -579,6 +579,16 @@ namespace YANFOE
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // hyperLinkEdit5
+            // 
+            this.hyperLinkEdit5.EditValue = "http://dryicons.com";
+            this.hyperLinkEdit5.Location = new System.Drawing.Point(117, 208);
+            this.hyperLinkEdit5.MenuManager = this.barManager1;
+            this.hyperLinkEdit5.Name = "hyperLinkEdit5";
+            this.hyperLinkEdit5.Size = new System.Drawing.Size(378, 20);
+            this.hyperLinkEdit5.StyleController = this.layoutControl1;
+            this.hyperLinkEdit5.TabIndex = 15;
+            // 
             // memoEdit2
             // 
             this.memoEdit2.EditValue = resources.GetString("memoEdit2.EditValue");
@@ -758,6 +768,18 @@ namespace YANFOE
             this.layoutControlItem10.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem10.Text = "QA Team";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(89, 13);
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem12.Control = this.hyperLinkEdit5;
+            this.layoutControlItem12.CustomizationFormText = "Icons";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(475, 24);
+            this.layoutControlItem12.Text = "Icons";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(89, 13);
             // 
             // layoutControlGroup3
             // 
@@ -1071,28 +1093,6 @@ namespace YANFOE
             this.uiTimer.Interval = 50;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
             // 
-            // hyperLinkEdit5
-            // 
-            this.hyperLinkEdit5.EditValue = "http://dryicons.com";
-            this.hyperLinkEdit5.Location = new System.Drawing.Point(117, 208);
-            this.hyperLinkEdit5.MenuManager = this.barManager1;
-            this.hyperLinkEdit5.Name = "hyperLinkEdit5";
-            this.hyperLinkEdit5.Size = new System.Drawing.Size(378, 20);
-            this.hyperLinkEdit5.StyleController = this.layoutControl1;
-            this.hyperLinkEdit5.TabIndex = 15;
-            // 
-            // layoutControlItem12
-            // 
-            this.layoutControlItem12.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem12.Control = this.hyperLinkEdit5;
-            this.layoutControlItem12.CustomizationFormText = "Icons";
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 72);
-            this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(475, 24);
-            this.layoutControlItem12.Text = "Icons";
-            this.layoutControlItem12.TextSize = new System.Drawing.Size(89, 13);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1113,6 +1113,7 @@ namespace YANFOE
             this.Text = "YANFOE 2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
@@ -1125,6 +1126,7 @@ namespace YANFOE
             this.tabAbout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit4.Properties)).EndInit();
@@ -1141,6 +1143,7 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -1165,8 +1168,6 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             this.ResumeLayout(false);
 
         }

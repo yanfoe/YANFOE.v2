@@ -18,7 +18,6 @@ namespace YANFOE.Models.TvModels.Show
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Linq;
@@ -287,7 +286,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.added != value)
                 {
                     this.added = value;
-                    this.OnPropertyChanged("Added");
+                    this.OnPropertyChanged("Added", true);
                     this.ChangedText = true;
                 }
             }
@@ -308,7 +307,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.addedBy != value)
                 {
                     this.addedBy = value;
-                    this.OnPropertyChanged("AddedBy");
+                    this.OnPropertyChanged("AddedBy", true);
                     this.ChangedText = true;
                 }
             }
@@ -329,7 +328,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.addedBy != value)
                 {
                     this.addedBy = value;
-                    this.OnPropertyChanged("AddedBy");
+                    this.OnPropertyChanged("AddedBy", true);
                     this.ChangedText = true;
                 }
             }
@@ -350,7 +349,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.airsTime != value)
                 {
                     this.airsTime = value;
-                    this.OnPropertyChanged("AirsTime");
+                    this.OnPropertyChanged("AirsTime", true);
                     this.ChangedText = true;
                 }
             }
@@ -484,7 +483,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.country != value)
                 {
                     this.country = value;
-                    this.OnPropertyChanged("Country");
+                    this.OnPropertyChanged("Country", true);
                     this.ChangedText = true;
                 }
             }
@@ -506,7 +505,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallFanart = null;
                     this.fanartPath = value;
-                    this.OnPropertyChanged("FanartPath");
+                    this.OnPropertyChanged("FanartPath", true);
                     this.ChangedFanart = true;
 
                     if (!string.IsNullOrEmpty(this.FanartUrl))
@@ -534,7 +533,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallFanart = null;
                     this.fanartUrl = value;
-                    this.OnPropertyChanged("FanartUrl");
+                    this.OnPropertyChanged("FanartUrl", true);
                     this.ChangedFanart = true;
 
                     if (!string.IsNullOrEmpty(this.fanartUrl))
@@ -563,7 +562,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.firstAired != value)
                 {
                     this.firstAired = value;
-                    this.OnPropertyChanged("FirstAired");
+                    this.OnPropertyChanged("FirstAired", true);
                     this.ChangedText = true;
                 }
             }
@@ -589,7 +588,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.Genre != value.ToBindingStringList())
                 {
                     this.Genre = value.ToBindingStringList();
-                    this.OnPropertyChanged("GenreAsString");
+                    this.OnPropertyChanged("GenreAsString", true);
                     this.ChangedText = true;
                 }
             }
@@ -621,7 +620,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.id != value)
                 {
                     this.id = value;
-                    this.OnPropertyChanged("Id");
+                    this.OnPropertyChanged("Id", true);
                 }
             }
         }
@@ -641,7 +640,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.imdbId != value)
                 {
                     this.imdbId = value;
-                    this.OnPropertyChanged("ImdbId");
+                    this.OnPropertyChanged("ImdbId", true);
                     this.ChangedText = true;
                 }
             }
@@ -662,7 +661,7 @@ namespace YANFOE.Models.TvModels.Show
             set
             {
                 this.isLocked = value;
-                this.OnPropertyChanged("IsLocked");
+                this.OnPropertyChanged("IsLocked", true);
                 this.OnPropertyChanged("LockedImage");
             }
         }
@@ -693,7 +692,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.language != value)
                 {
                     this.language = value;
-                    this.OnPropertyChanged("Language");
+                    this.OnPropertyChanged("Language", true);
                     this.ChangedText = true;
                 }
             }
@@ -714,7 +713,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.lastupdated != value)
                 {
                     this.lastupdated = value;
-                    this.OnPropertyChanged("Lastupdated");
+                    this.OnPropertyChanged("Lastupdated", true);
                     this.ChangedText = true;
                 }
             }
@@ -740,7 +739,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.network != value)
                 {
                     this.network = value;
-                    this.OnPropertyChanged("Network");
+                    this.OnPropertyChanged("Network", true);
                     this.ChangedText = true;
                 }
             }
@@ -761,7 +760,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.networkID != value)
                 {
                     this.networkID = value;
-                    this.OnPropertyChanged("NetworkID");
+                    this.OnPropertyChanged("NetworkID", true);
                     this.ChangedText = true;
                 }
             }
@@ -782,7 +781,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.overview != value)
                 {
                     this.overview = value;
-                    this.OnPropertyChanged("Overview");
+                    this.OnPropertyChanged("Overview", true);
                     this.ChangedText = true;
                 }
             }
@@ -804,7 +803,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallPoster = null;
                     this.posterPath = value;
-                    this.OnPropertyChanged("PosterPath");
+                    this.OnPropertyChanged("PosterPath", true);
                     this.ChangedPoster = true;
 
                     if (!string.IsNullOrEmpty(this.posterPath))
@@ -832,7 +831,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallPoster = null;
                     this.posterUrl = value;
-                    this.OnPropertyChanged("PosterUrl");
+                    this.OnPropertyChanged("PosterUrl", true);
                     this.ChangedPoster = true;
 
                     if (!string.IsNullOrEmpty(this.posterUrl))
@@ -861,7 +860,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.rating != value)
                 {
                     this.rating = value;
-                    this.OnPropertyChanged("Rating");
+                    this.OnPropertyChanged("Rating", true);
                     this.ChangedText = true;
                 }
             }
@@ -882,7 +881,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.runtime != value)
                 {
                     this.runtime = value;
-                    this.OnPropertyChanged("Runtime");
+                    this.OnPropertyChanged("Runtime", true);
                     this.ChangedText = true;
                 }
             }
@@ -912,7 +911,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallBanner = null;
                     this.seriesBannerPath = value;
-                    this.OnPropertyChanged("SeriesBannerPath");
+                    this.OnPropertyChanged("SeriesBannerPath", true);
                     this.ChangedText = true;
 
                     if (!string.IsNullOrEmpty(this.seriesBannerPath))
@@ -939,7 +938,7 @@ namespace YANFOE.Models.TvModels.Show
                 {
                     this.SmallBanner = null;
                     this.seriesBannerUrl = value;
-                    this.OnPropertyChanged("SeriesBannerUrl");
+                    this.OnPropertyChanged("SeriesBannerUrl", true);
                     this.ChangedText = true;
 
                     if (!string.IsNullOrEmpty(this.seriesBannerUrl))
@@ -968,7 +967,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.seriesID != value)
                 {
                     this.seriesID = value;
-                    this.OnPropertyChanged("SeriesID");
+                    this.OnPropertyChanged("SeriesID", true);
                     this.ChangedText = true;
                 }
             }
@@ -1003,7 +1002,7 @@ namespace YANFOE.Models.TvModels.Show
                     }
 
                     this.seriesName = value;
-                    this.OnPropertyChanged("SeriesName");
+                    this.OnPropertyChanged("SeriesName", true);
                     this.ChangedText = true;
                 }
             }
@@ -1058,7 +1057,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.status != value)
                 {
                     this.status = value;
-                    this.OnPropertyChanged("Status");
+                    this.OnPropertyChanged("Status", true);
                     this.ChangedText = true;
                 }
             }
@@ -1079,7 +1078,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.zap2ItID != value)
                 {
                     this.zap2ItID = value;
-                    this.OnPropertyChanged("Zap2It_Id");
+                    this.OnPropertyChanged("Zap2It_Id", true);
                     this.ChangedText = true;
                 }
             }

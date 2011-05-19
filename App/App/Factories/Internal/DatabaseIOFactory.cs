@@ -58,6 +58,8 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static FrmSavingDB frmSavingDB = new FrmSavingDB();
 
+        public static bool AppLoading { get; set; }
+
         #endregion
 
         #region Constructors and Destructors
@@ -69,6 +71,16 @@ namespace YANFOE.Factories.Internal
         {
             tmr.Tick += tmr_Tick;
         }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// The database dirty changed.
+        /// </summary>
+        [field: NonSerialized]
+        public static event EventHandler DatabaseDirtyChanged = delegate { };
 
         #endregion
 
@@ -119,6 +131,24 @@ namespace YANFOE.Factories.Internal
 
         #region Properties
 
+        private static bool databaseDirty;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether DatabaseDirty.
+        /// </summary>
+        public static bool DatabaseDirty
+        {
+            get
+            {
+                return databaseDirty;
+            }
+            set
+            {
+                databaseDirty = value;
+                InvokeDatabaseDirtyChanged(new EventArgs());
+            }
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether SavingMovieDB.
         /// </summary>
@@ -152,6 +182,21 @@ namespace YANFOE.Factories.Internal
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// The invoke database dirty changed.
+        /// </summary>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        public static void InvokeDatabaseDirtyChanged(EventArgs e)
+        {
+            EventHandler handler = DatabaseDirtyChanged;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
 
         /// <summary>
         /// Loads the specified output name.
@@ -222,8 +267,16 @@ namespace YANFOE.Factories.Internal
                     SaveMovieSets();
                     SaveTvDB();
                     SaveScanSeriesPick();
+                    DatabaseDirty = false;
                     break;
             }
+        }
+
+        /// <summary>
+        /// The set database dirty.
+        /// </summary>
+        public static void SetDatabaseDirty()
+        {
         }
 
         #endregion
@@ -236,7 +289,9 @@ namespace YANFOE.Factories.Internal
         private static void LoadMediaPathDb()
         {
             if (MediaPathDBFactory.MediaPathDB == null)
+            {
                 MediaPathDBFactory.MediaPathDB = new BindingList<MediaPathModel>();
+            }
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
@@ -258,11 +313,11 @@ namespace YANFOE.Factories.Internal
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            var files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
+            string[] files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
 
             MovieDBFactory.MovieDatabase.Clear();
 
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 string json = Gzip.Decompress(file);
 
@@ -312,11 +367,11 @@ namespace YANFOE.Factories.Internal
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
-            var files = FileHelper.GetFilesRecursive(path, "*.MovieSet.gz").ToArray();
+            string[] files = FileHelper.GetFilesRecursive(path, "*.MovieSet.gz").ToArray();
 
             MovieSetManager.CurrentDatabase.Clear();
 
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 string json = Gzip.Decompress(file);
                 var set = JsonConvert.DeserializeObject(json, typeof(MovieSetModel)) as MovieSetModel;
@@ -351,11 +406,11 @@ namespace YANFOE.Factories.Internal
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
-            var files = FileHelper.GetFilesRecursive(path, "*.Series.gz");
+            List<string> files = FileHelper.GetFilesRecursive(path, "*.Series.gz");
 
             TvDBFactory.TvDatabase.Clear();
 
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 string json = Gzip.Decompress(file);
 
@@ -518,10 +573,67 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
+        /// Handles the DoWork event of the bgw control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
+        private static void bgwSaveMovieDBWork_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+
+            var movieModel = e.Argument as MovieModel;
+
+            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+
+            string writePath = path + title + ".movie";
+
+            bool writeText = false;
+            bool writeImages = false;
+
+            if (!movieModel.DatabaseSaved)
+            {
+                writeImages = true;
+            }
+
+            if (!movieModel.DatabaseSaved || movieModel.ChangedText)
+            {
+                writeText = true;
+            }
+
+            if (writeText)
+            {
+                movieModel.DatabaseSaved = true;
+                string json = JsonConvert.SerializeObject(movieModel);
+                Gzip.CompressString(json, writePath + ".gz");
+            }
+
+            string posterPath = path + title + ".poster.jpg";
+            string fanartPath = path + title + ".fanart.jpg";
+
+            if (movieModel.SmallPoster != null && (movieModel.ChangedPoster || writeImages))
+            {
+                movieModel.SmallPoster.Save(posterPath);
+            }
+
+            if (movieModel.SmallFanart != null && (movieModel.ChangedFanart || writeImages))
+            {
+                movieModel.SmallFanart.Save(fanartPath);
+            }
+        }
+
+        /// <summary>
         /// Handles the DoWork event of the bgwSaveMovieDB control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// </param>
         private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
         {
             SavingMovieDB = true;
@@ -747,59 +859,6 @@ namespace YANFOE.Factories.Internal
         private static void bgwSaveTvDB_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             frmSavingDB.TvDBFinished();
-        }
-
-        /// <summary>
-        /// Handles the DoWork event of the bgw control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveMovieDBWork_DoWork(object sender, DoWorkEventArgs e)
-        {
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
-
-            var movieModel = e.Argument as MovieModel;
-
-            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
-
-            string writePath = path + title + ".movie";
-
-            bool writeText = false;
-            bool writeImages = false;
-
-            if (!movieModel.DatabaseSaved)
-            {
-                writeImages = true;
-            }
-
-            if (!movieModel.DatabaseSaved || movieModel.ChangedText)
-            {
-                writeText = true;
-            }
-
-            if (writeText)
-            {
-                movieModel.DatabaseSaved = true;
-                string json = JsonConvert.SerializeObject(movieModel);
-                Gzip.CompressString(json, writePath + ".gz");
-            }
-
-            var posterPath = path + title + ".poster.jpg";
-            var fanartPath = path + title + ".fanart.jpg";
-
-            if (movieModel.SmallPoster != null && (movieModel.ChangedPoster || writeImages))
-            {
-                movieModel.SmallPoster.Save(posterPath);
-            }
-
-            if (movieModel.SmallFanart != null && (movieModel.ChangedFanart || writeImages))
-            {
-                movieModel.SmallFanart.Save(fanartPath);
-            }
         }
 
         /// <summary>

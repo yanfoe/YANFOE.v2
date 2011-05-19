@@ -17,7 +17,6 @@ namespace YANFOE
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.IO;
     using System.Windows.Forms;
 
     using DevExpress.LookAndFeel;
@@ -26,14 +25,10 @@ namespace YANFOE
     using DevExpress.XtraBars;
     using DevExpress.XtraEditors;
 
-    using Microsoft.WindowsAPICodePack.Shell;
-    using Microsoft.WindowsAPICodePack.Taskbar;
-
     using YANFOE.Factories;
     using YANFOE.Factories.Internal;
     using YANFOE.Factories.Versioning;
     using YANFOE.InternalApps.DownloadManager;
-    using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Properties;
     using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.DSettings;
@@ -48,6 +43,10 @@ namespace YANFOE
     {
         #region Constructors and Destructors
 
+        public delegate void ChangeText(bool isDirty);
+
+        public ChangeText changeText;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FrmMain"/> class.
         /// </summary>
@@ -55,10 +54,9 @@ namespace YANFOE
         {
             this.InitializeComponent();
 
-            this.Text = string.Format(
-                "{0} {1}", 
-                Settings.ConstSettings.Application.ApplicationName,
-                Settings.ConstSettings.Application.ApplicationVersion);
+            this.SetTitle(false);
+
+            changeText = new ChangeText(SetTitle);
 
             txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
             txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
@@ -70,7 +68,37 @@ namespace YANFOE
 
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
             VersionUpdateFactory.VersionUpdateChanged += this.VersionUpdateFactory_VersionUpdateChanged;
+            DatabaseIOFactory.DatabaseDirtyChanged += this.DatabaseIOFactory_DatabaseDirtyChanged;
+
             VersionUpdateFactory.CheckForUpdate();
+        }
+
+        private void SetTitle(bool databaseDirty)
+        {
+            var dirtyString = string.Empty;
+
+            if (DatabaseIOFactory.DatabaseDirty)
+            {
+                dirtyString = "(Database Changed)";
+            }
+
+            this.Text = string.Format(
+                "{0} {1} {2}",
+                Settings.ConstSettings.Application.ApplicationName,
+                Settings.ConstSettings.Application.ApplicationVersion,
+                dirtyString);
+        }
+
+        private void DatabaseIOFactory_DatabaseDirtyChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
+            }
+            catch
+            {
+                // ignore
+            }
         }
 
         private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
@@ -305,7 +333,12 @@ namespace YANFOE
         /// <param name="e">The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.</param>
         private void FrmMain_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
         {
-            DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
+            if (DatabaseIOFactory.DatabaseDirty)
+            {
+                DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
+            };
+
+            Settings.Get.SaveAll();
             Application.Exit();
         }
 
@@ -387,6 +420,11 @@ namespace YANFOE
         private void mnuDonate_ItemClick(object sender, ItemClickEventArgs e)
         {
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3HFMBVFJE8XGA");
+        }
+
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
+            DatabaseIOFactory.DatabaseDirty = false;
         }
     }
 }

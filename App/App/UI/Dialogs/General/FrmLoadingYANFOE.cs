@@ -21,6 +21,8 @@
         {
             InitializeComponent();
 
+            DatabaseIOFactory.AppLoading = true;
+
             lblYANFOETitle.Text = Settings.ConstSettings.Application.ApplicationName + " " +
                                   Settings.ConstSettings.Application.ApplicationVersion;
 
@@ -92,7 +94,8 @@
         /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
         private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            frmMain.Show();
+            this.frmMain.Show();
+            DatabaseIOFactory.AppLoading = false;
             this.Hide();
         }
     }

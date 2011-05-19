@@ -19,6 +19,8 @@ namespace YANFOE.Tools.Models
     using System.Diagnostics;
     using System.Runtime.InteropServices;
 
+    using YANFOE.Factories.Internal;
+
     /// <summary>
     /// The Model Base Class
     /// </summary>
@@ -128,9 +130,19 @@ namespace YANFOE.Tools.Models
         /// <param name="name">
         /// The name of the changed variable
         /// </param>
-        protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string name, bool databaseDirty = false)
         {
+            if (DatabaseIOFactory.AppLoading)
+            {
+                return;
+            }
+
             PropertyChangedEventHandler handler = this.PropertyChanged;
+
+            if (databaseDirty)
+            {
+                DatabaseIOFactory.DatabaseDirty = true;
+            }
 
             if (handler != null)
             {

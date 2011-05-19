@@ -127,7 +127,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.bannerPath != value)
                 {
                     this.bannerPath = value;
-                    this.OnPropertyChanged("BannerPath");
+                    this.OnPropertyChanged("BannerPath", true);
                     this.ChangedBanner = true;
 
                     if (!string.IsNullOrEmpty(this.bannerPath))
@@ -153,7 +153,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.bannerUrl != value)
                 {
                     this.bannerUrl = value;
-                    this.OnPropertyChanged("BannerUrl");
+                    this.OnPropertyChanged("BannerUrl", true);
                     this.ChangedBanner = true;
 
                     if (!string.IsNullOrEmpty(this.bannerUrl))
@@ -247,7 +247,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.fanartPath != value)
                 {
                     this.fanartPath = value;
-                    this.OnPropertyChanged("FanartPath");
+                    this.OnPropertyChanged("FanartPath", true);
                     this.ChangedFanart = true;
 
                     if (!string.IsNullOrEmpty(this.fanartPath))
@@ -273,7 +273,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.fanartUrl != value)
                 {
                     this.fanartUrl = value;
-                    this.OnPropertyChanged("FanartUrl");
+                    this.OnPropertyChanged("FanartUrl", true);
                     this.ChangedFanart = true;
 
                     if (!string.IsNullOrEmpty(this.fanartUrl))
@@ -321,7 +321,7 @@ namespace YANFOE.Models.TvModels.Show
             set
             {
                 this.isLocked = value;
-                this.OnPropertyChanged("IsLocked");
+                this.OnPropertyChanged("IsLocked", true);
                 this.OnPropertyChanged("LockedImage");
             }
         }
@@ -352,7 +352,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.posterPath != value)
                 {
                     this.posterPath = value;
-                    this.OnPropertyChanged("PosterPath");
+                    this.OnPropertyChanged("PosterPath", true);
                     this.ChangedPoster = true;
 
                     if (!string.IsNullOrEmpty(this.PosterPath))
@@ -378,7 +378,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.posterUrl != value)
                 {
                     this.posterUrl = value;
-                    this.OnPropertyChanged("PosterUrl");
+                    this.OnPropertyChanged("PosterUrl", true);
                     this.ChangedPoster = true;
 
                     if (!string.IsNullOrEmpty(this.posterUrl))
