@@ -17,6 +17,7 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
     using System;
     using System.IO;
 
+    using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
 
@@ -58,6 +59,27 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
         public static bool CheckIfCachePathExists(string cachePath)
         {
             return File.Exists(cachePath);
+        }
+
+        public static bool CheckIfDownloadItemExistsInCache(DownloadItem downloadItem, bool populateReturn)
+        {
+            var path = GetPathFromUrl(downloadItem.Url, downloadItem.Section);
+            var checkExists = File.Exists(path);
+
+            if (checkExists)
+            {
+                switch (downloadItem.Type)
+                {
+                    case DownloadType.Html:
+                        downloadItem.Result = new HtmlResult { Success = true, Result = File.ReadAllText(path) };
+                        break;
+                    case DownloadType.Binary:
+                        downloadItem.Result = new BinaryResult { Success = true, Result = path };
+                        break;
+                }
+            }
+
+            return checkExists;
         }
 
         /// <summary>

@@ -237,6 +237,11 @@ namespace YANFOE.InternalApps.DownloadManager
                 CookieContainer = cookieContainer
             };
 
+            if (WebCache.CheckIfDownloadItemExistsInCache(item, true))
+            {
+                return item.Result.Result;
+            }
+
             try
             {
                 lock (currentQueueLock)
