@@ -164,6 +164,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </summary>
         private void PopulateSetList()
         {
+            this.gridControl.DataSource = MovieSetManager.GetCurrentSet.Movies;
             this.cmbSetsList.Properties.Items.Clear();
 
             foreach (MovieSetModel value in MovieSetManager.CurrentDatabase)
@@ -396,6 +397,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         private void cmbSetsList_TextChanged(object sender, EventArgs e)
         {
             MovieSetManager.SetCurrentSet(this.cmbSetsList.Text);
+            gridControl.DataSource = MovieSetManager.GetCurrentSet;
         }
 
         /// <summary>
@@ -446,7 +448,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             this.GenerateMoviesInSet();
 
-            this.gridView.Columns["Order"].SortOrder = ColumnSortOrder.Ascending;
+            // this.gridView.Columns["Order"].SortOrder = ColumnSortOrder.Ascending;
 
             this.EnableForm(MovieSetManager.GetCurrentSet != null);
         }

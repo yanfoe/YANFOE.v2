@@ -241,7 +241,7 @@ namespace YANFOE.Scrapers.Movie
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <param name="output">The scraped Title value.</param>
         /// <param name="alternatives">Alternative namings found for a title.</param>
-        /// <param name="logCatagory">The log catagory.</param>
+        /// <param name="logCatagory">The log category.</param>
         /// <returns>Scrape succeeded [true/false]</returns>
         public new bool ScrapeTitle(string id, int threadID, out string output, out BindingList<string> alternatives, string logCatagory)
         {
@@ -271,7 +271,7 @@ namespace YANFOE.Scrapers.Movie
         /// <param name="id">The MovieUniqueId for the scraper.</param>
         /// <param name="threadID">The thread MovieUniqueId.</param>
         /// <param name="output">The scraped Year value.</param>
-        /// <param name="logCatagory">The log catagory.</param>
+        /// <param name="logCatagory">The log category.</param>
         /// <returns>Scrape succeeded [true/false]</returns>
         public new bool ScrapeYear(string id, int threadID, out int output, string logCatagory)
         {

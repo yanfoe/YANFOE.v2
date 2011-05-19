@@ -46,8 +46,6 @@
             this.btnAddNewSet = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.clmMovieName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmOrder = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmbSetsList = new DevExpress.XtraEditors.ComboBoxEdit();
             this.grpPoster = new DevExpress.XtraEditors.GroupControl();
             this.picPoster = new DevExpress.XtraEditors.PictureEdit();
@@ -88,6 +86,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
@@ -258,35 +258,12 @@
             // gridView
             // 
             this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.clmMovieName,
-            this.clmOrder});
+            this.gridColumn1,
+            this.gridColumn2});
             this.gridView.GridControl = this.gridControl;
             this.gridView.Name = "gridView";
             this.gridView.OptionsView.ShowGroupPanel = false;
             this.gridView.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
-            // 
-            // clmMovieName
-            // 
-            this.clmMovieName.Caption = "Movie Name";
-            this.clmMovieName.FieldName = "MovieName";
-            this.clmMovieName.Name = "clmMovieName";
-            this.clmMovieName.OptionsColumn.AllowEdit = false;
-            this.clmMovieName.Visible = true;
-            this.clmMovieName.VisibleIndex = 0;
-            // 
-            // clmOrder
-            // 
-            this.clmOrder.Caption = "Order";
-            this.clmOrder.FieldName = "Order";
-            this.clmOrder.MaxWidth = 40;
-            this.clmOrder.MinWidth = 40;
-            this.clmOrder.Name = "clmOrder";
-            this.clmOrder.OptionsColumn.AllowEdit = false;
-            this.clmOrder.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
-            this.clmOrder.OptionsColumn.AllowIncrementalSearch = false;
-            this.clmOrder.Visible = true;
-            this.clmOrder.VisibleIndex = 1;
-            this.clmOrder.Width = 40;
             // 
             // cmbSetsList
             // 
@@ -378,7 +355,6 @@
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Size = new System.Drawing.Size(54, 242);
-            this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -493,7 +469,6 @@
             this.layoutControlGroup3.Name = "layoutControlGroup2";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup3.Size = new System.Drawing.Size(54, 160);
-            this.layoutControlGroup3.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup3.Text = "layoutControlGroup2";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -538,7 +513,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(718, 471);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -726,6 +700,25 @@
             this.barDockControlRight.Location = new System.Drawing.Point(718, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 471);
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Movie Name";
+            this.gridColumn1.FieldName = "MovieName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Order";
+            this.gridColumn2.FieldName = "Order";
+            this.gridColumn2.MaxWidth = 40;
+            this.gridColumn2.MinWidth = 40;
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 40;
+            // 
             // SetManagerUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -828,8 +821,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraEditors.SimpleButton btnTrash;
-        private DevExpress.XtraGrid.Columns.GridColumn clmMovieName;
-        private DevExpress.XtraGrid.Columns.GridColumn clmOrder;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.MemoEdit txtMovieIsSets;
@@ -843,5 +834,7 @@
         private DevExpress.XtraBars.PopupMenu popupFanart;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }

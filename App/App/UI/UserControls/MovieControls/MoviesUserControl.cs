@@ -289,12 +289,12 @@ namespace YANFOE.UI.UserControls.MovieControls
             {
                 MovieDBFactory.IsMultiSelected = true;
                 MovieDBFactory.SetCurrentMovie(
-                    new MovieModel { Title = "Mutiple Movies Selected", MultiSelectModel = true });
+                    new MovieModel { Title = "Multiple Movies Selected", MultiSelectModel = true });
             }
         }
 
         /// <summary>
-        /// Updateds the selected movies in factory.
+        /// Updated the selected movies in factory.
         /// </summary>
         /// <param name="rows">The rows.</param>
         private void UpdatedSelectedMoviesInFactory(int[] rows)
