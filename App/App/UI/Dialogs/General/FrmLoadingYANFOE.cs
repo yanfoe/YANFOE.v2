@@ -5,6 +5,7 @@
 
     using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
+    using YANFOE.Factories.Sets;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
 
     public partial class FrmLoadingYANFOE : DevExpress.XtraEditors.XtraForm
@@ -66,6 +67,9 @@
 
             this.bgw.ReportProgress(96, "Populating TV Media Database");
             MasterMediaDBFactory.PopulateMasterTvMediaDatabase();
+
+            this.bgw.ReportProgress(97, "Validating Sets");
+            MovieSetManager.ValidateSets();
 
             this.bgw.ReportProgress(100, "Done.");
         }

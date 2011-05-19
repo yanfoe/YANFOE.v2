@@ -494,6 +494,34 @@ namespace YANFOE.Factories.Sets
             }
         }
 
+
+        /// <summary>
+        /// Validates the sets to ensure all movies are in database.
+        /// </summary>
+        public static void ValidateSets()
+        {
+            foreach (var set in CurrentDatabase)
+            {
+                var removeIndex = new List<string>();
+
+                for (int index = 0; index < set.Movies.Count; index++)
+                {
+                    var movie = set.Movies[index];
+                    var check = MovieDBFactory.GetMovie(movie.MovieUniqueId);
+
+                    if (check == null)
+                    {
+                        removeIndex.Add(movie.MovieUniqueId);
+                    }
+                }
+
+                foreach (var i in removeIndex)
+                {
+                    set.Movies.Remove((from m in set.Movies where m.MovieUniqueId == i select m).SingleOrDefault());
+                }
+            }
+        }
+
         #endregion
 
         #region Methods

@@ -1170,7 +1170,7 @@ namespace YANFOE.Models.MovieModels
         /// <summary>
         /// Gets unique id for the movie object.
         /// </summary>
-        public string MovieUniqueId { get; private set; }
+        public string MovieUniqueId { get; set; }
 
         /// <summary>
         /// Gets or sets Mpaa.
