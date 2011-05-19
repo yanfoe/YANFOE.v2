@@ -424,15 +424,17 @@ namespace YANFOE.Factories
         {
             foreach (var season in CurrentSeries.Seasons)
             {
-                SetCurrentSeason(season.Value.Guid);
-
-                foreach (Episode episode in season.Value.Episodes)
+                if (YANFOE.Settings.Get.Ui.HideSeasonZero && season.Value.SeasonNumber != 0)
                 {
-                    SetCurrentEpisode(episode.Guid);
+                    SetCurrentSeason(season.Value.Guid);
+
+                    foreach (Episode episode in season.Value.Episodes)
+                    {
+                        SetCurrentEpisode(episode.Guid);
+                        break;
+                    }
                     break;
                 }
-
-                break;
             }
         }
 
