@@ -223,10 +223,10 @@
             // 
             // xtraTabControl2
             // 
-            this.xtraTabControl2.Location = new System.Drawing.Point(25, 40);
+            this.xtraTabControl2.Location = new System.Drawing.Point(25, 42);
             this.xtraTabControl2.Name = "xtraTabControl2";
             this.xtraTabControl2.SelectedTabPage = this.tabTitle;
-            this.xtraTabControl2.Size = new System.Drawing.Size(244, 334);
+            this.xtraTabControl2.Size = new System.Drawing.Size(244, 332);
             this.xtraTabControl2.TabIndex = 1;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabTitle,
@@ -236,7 +236,7 @@
             // 
             this.tabTitle.Controls.Add(this.grdTvTitleList);
             this.tabTitle.Name = "tabTitle";
-            this.tabTitle.Size = new System.Drawing.Size(238, 308);
+            this.tabTitle.Size = new System.Drawing.Size(238, 306);
             this.tabTitle.Text = "Title";
             // 
             // grdTvTitleList
@@ -245,7 +245,7 @@
             this.grdTvTitleList.Location = new System.Drawing.Point(0, 0);
             this.grdTvTitleList.MainView = this.gridViewTvTitleList;
             this.grdTvTitleList.Name = "grdTvTitleList";
-            this.grdTvTitleList.Size = new System.Drawing.Size(238, 308);
+            this.grdTvTitleList.Size = new System.Drawing.Size(238, 306);
             this.grdTvTitleList.TabIndex = 0;
             this.grdTvTitleList.ToolTipController = this.toolTipController1;
             this.grdTvTitleList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -284,7 +284,7 @@
             // 
             this.tabBanner.Controls.Add(this.galleryBanners);
             this.tabBanner.Name = "tabBanner";
-            this.tabBanner.Size = new System.Drawing.Size(238, 308);
+            this.tabBanner.Size = new System.Drawing.Size(238, 306);
             this.tabBanner.Text = "Banners";
             // 
             // galleryBanners
@@ -868,9 +868,9 @@
             // 
             this.layoutControlItem1.Control = this.xtraTabControl2;
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 35);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 37);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(248, 338);
+            this.layoutControlItem1.Size = new System.Drawing.Size(248, 336);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -882,7 +882,7 @@
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(248, 35);
+            this.layoutControlItem12.Size = new System.Drawing.Size(248, 37);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;

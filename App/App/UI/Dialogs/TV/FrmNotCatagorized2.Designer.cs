@@ -29,18 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNotCatagorized2));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
+            this.marqueeProgressBar = new DevExpress.XtraEditors.MarqueeProgressBarControl();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuAssignTo = new DevExpress.XtraBars.BarSubItem();
+            this.mnuSmartRename = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.txtSearch = new DevExpress.XtraEditors.TextEdit();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.grdSeries = new DevExpress.XtraGrid.GridControl();
             this.grdViewSeries = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lblStatus = new DevExpress.XtraEditors.LabelControl();
             this.grdSeasons = new DevExpress.XtraGrid.GridControl();
             this.grdViewSeasons = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmSeasonNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -68,20 +79,13 @@
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.mnuAssignTo = new DevExpress.XtraBars.BarSubItem();
-            this.mnuSmartRename = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.layoutControlProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.popupUnsortedList = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupSortedEpisodes = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.marqueeProgressBar.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearch.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewSeries)).BeginInit();
@@ -107,7 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupUnsortedList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSortedEpisodes)).BeginInit();
             this.SuspendLayout();
@@ -115,11 +119,12 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowDrop = true;
-            this.layoutControl1.Controls.Add(this.lblStatus);
+            this.layoutControl1.Controls.Add(this.marqueeProgressBar);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.txtSearch);
             this.layoutControl1.Controls.Add(this.btnOk);
             this.layoutControl1.Controls.Add(this.grdSeries);
+            this.layoutControl1.Controls.Add(this.lblStatus);
             this.layoutControl1.Controls.Add(this.grdSeasons);
             this.layoutControl1.Controls.Add(this.grdEpisode);
             this.layoutControl1.Controls.Add(this.grdUnsorted);
@@ -131,13 +136,97 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl";
             // 
-            // lblStatus
+            // marqueeProgressBar
             // 
-            this.lblStatus.Location = new System.Drawing.Point(12, 496);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(63, 13);
-            this.lblStatus.StyleController = this.layoutControl1;
-            this.lblStatus.TabIndex = 13;
+            this.marqueeProgressBar.EditValue = 0;
+            this.marqueeProgressBar.Location = new System.Drawing.Point(12, 513);
+            this.marqueeProgressBar.MenuManager = this.barManager1;
+            this.marqueeProgressBar.Name = "marqueeProgressBar";
+            this.marqueeProgressBar.Size = new System.Drawing.Size(63, 18);
+            this.marqueeProgressBar.StyleController = this.layoutControl1;
+            this.marqueeProgressBar.TabIndex = 14;
+            this.marqueeProgressBar.Visible = false;
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barButtonItem1,
+            this.mnuAssignTo,
+            this.mnuSmartRename,
+            this.barButtonItem2,
+            this.barButtonItem3});
+            this.barManager1.MaxItemId = 5;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(788, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 546);
+            this.barDockControlBottom.Size = new System.Drawing.Size(788, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 546);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(788, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 546);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 0;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // mnuAssignTo
+            // 
+            this.mnuAssignTo.Caption = "Assign To";
+            this.mnuAssignTo.Glyph = global::YANFOE.Properties.Resources.target1;
+            this.mnuAssignTo.Id = 1;
+            this.mnuAssignTo.Name = "mnuAssignTo";
+            // 
+            // mnuSmartRename
+            // 
+            this.mnuSmartRename.Caption = "Smart Rename";
+            this.mnuSmartRename.Id = 2;
+            this.mnuSmartRename.Name = "mnuSmartRename";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Reassign Series";
+            this.barButtonItem2.Id = 3;
+            this.barButtonItem2.Name = "barButtonItem2";
+            toolTipTitleItem2.Text = "Reassign Series";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Allows you to change the series but keep the files. Handy if you\'ve chosen the wr" +
+    "ong series.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.barButtonItem2.SuperTip = superToolTip2;
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "barButtonItem3";
+            this.barButtonItem3.Id = 4;
+            this.barButtonItem3.Name = "barButtonItem3";
             // 
             // btnSearch
             // 
@@ -152,9 +241,9 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(391, 232);
+            this.txtSearch.Location = new System.Drawing.Point(389, 232);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(343, 20);
+            this.txtSearch.Size = new System.Drawing.Size(345, 20);
             this.txtSearch.StyleController = this.layoutControl1;
             this.txtSearch.TabIndex = 10;
             this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
@@ -173,10 +262,10 @@
             // 
             // grdSeries
             // 
-            this.grdSeries.Location = new System.Drawing.Point(312, 44);
+            this.grdSeries.Location = new System.Drawing.Point(310, 44);
             this.grdSeries.MainView = this.grdViewSeries;
             this.grdSeries.Name = "grdSeries";
-            this.grdSeries.Size = new System.Drawing.Size(452, 184);
+            this.grdSeries.Size = new System.Drawing.Size(454, 184);
             this.grdSeries.TabIndex = 7;
             this.grdSeries.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewSeries});
@@ -201,12 +290,20 @@
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Location = new System.Drawing.Point(12, 496);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblStatus.StyleController = this.layoutControl1;
+            this.lblStatus.TabIndex = 13;
+            // 
             // grdSeasons
             // 
-            this.grdSeasons.Location = new System.Drawing.Point(664, 265);
+            this.grdSeasons.Location = new System.Drawing.Point(662, 263);
             this.grdSeasons.MainView = this.grdViewSeasons;
             this.grdSeasons.Name = "grdSeasons";
-            this.grdSeasons.Size = new System.Drawing.Size(100, 215);
+            this.grdSeasons.Size = new System.Drawing.Size(102, 217);
             this.grdSeasons.TabIndex = 6;
             this.grdSeasons.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewSeasons});
@@ -234,12 +331,12 @@
             // grdEpisode
             // 
             this.grdEpisode.AllowDrop = true;
-            this.grdEpisode.Location = new System.Drawing.Point(312, 265);
+            this.grdEpisode.Location = new System.Drawing.Point(310, 263);
             this.grdEpisode.MainView = this.grdViewEpisodes;
             this.grdEpisode.Name = "grdEpisode";
             this.grdEpisode.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
-            this.grdEpisode.Size = new System.Drawing.Size(341, 215);
+            this.grdEpisode.Size = new System.Drawing.Size(343, 217);
             this.grdEpisode.TabIndex = 5;
             this.grdEpisode.ToolTipController = this.toolTipController1;
             this.grdEpisode.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -332,11 +429,11 @@
             this.splitterItem1,
             this.emptySpaceItem1,
             this.layoutControlItem5,
-            this.layoutControlItem6});
+            this.layoutControlItem6,
+            this.layoutControlProgress});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(788, 546);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -373,9 +470,9 @@
             this.layoutControlItem7,
             this.layoutControlItem9,
             this.splitterItem2});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(288, 0);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(286, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(480, 484);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(482, 484);
             this.layoutControlGroup3.Text = "Sorted Episodes";
             // 
             // layoutControlItem4
@@ -384,7 +481,7 @@
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(456, 188);
+            this.layoutControlItem4.Size = new System.Drawing.Size(458, 188);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -394,9 +491,9 @@
             // 
             this.layoutControlItem2.Control = this.grdEpisode;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 221);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 219);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(345, 219);
+            this.layoutControlItem2.Size = new System.Drawing.Size(347, 221);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -406,9 +503,9 @@
             // 
             this.layoutControlItem3.Control = this.grdSeasons;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(352, 221);
+            this.layoutControlItem3.Location = new System.Drawing.Point(352, 219);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(104, 219);
+            this.layoutControlItem3.Size = new System.Drawing.Size(106, 221);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -418,9 +515,9 @@
             // 
             this.splitterItem3.AllowHotTrack = true;
             this.splitterItem3.CustomizationFormText = "splitterItem3";
-            this.splitterItem3.Location = new System.Drawing.Point(345, 221);
+            this.splitterItem3.Location = new System.Drawing.Point(347, 219);
             this.splitterItem3.Name = "splitterItem3";
-            this.splitterItem3.Size = new System.Drawing.Size(7, 219);
+            this.splitterItem3.Size = new System.Drawing.Size(5, 221);
             // 
             // layoutControlItem7
             // 
@@ -428,7 +525,7 @@
             this.layoutControlItem7.CustomizationFormText = "Add New Series";
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 188);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(426, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(428, 26);
             this.layoutControlItem7.Text = "Add New Series";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(75, 13);
             // 
@@ -436,7 +533,7 @@
             // 
             this.layoutControlItem9.Control = this.btnSearch;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(426, 188);
+            this.layoutControlItem9.Location = new System.Drawing.Point(428, 188);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(30, 26);
             this.layoutControlItem9.Text = "layoutControlItem9";
@@ -450,7 +547,7 @@
             this.splitterItem2.CustomizationFormText = "splitterItem2";
             this.splitterItem2.Location = new System.Drawing.Point(0, 214);
             this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(456, 7);
+            this.splitterItem2.Size = new System.Drawing.Size(458, 5);
             // 
             // splitterItem1
             // 
@@ -458,7 +555,7 @@
             this.splitterItem1.CustomizationFormText = "splitterItem1";
             this.splitterItem1.Location = new System.Drawing.Point(281, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(7, 484);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 484);
             // 
             // emptySpaceItem1
             // 
@@ -487,92 +584,23 @@
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 484);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(67, 42);
+            this.layoutControlItem6.Size = new System.Drawing.Size(67, 17);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
             this.layoutControlItem6.TextVisible = false;
             // 
-            // barManager1
+            // layoutControlProgress
             // 
-            this.barManager1.DockControls.Add(this.barDockControlTop);
-            this.barManager1.DockControls.Add(this.barDockControlBottom);
-            this.barManager1.DockControls.Add(this.barDockControlLeft);
-            this.barManager1.DockControls.Add(this.barDockControlRight);
-            this.barManager1.Form = this;
-            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem1,
-            this.mnuAssignTo,
-            this.mnuSmartRename,
-            this.barButtonItem2,
-            this.barButtonItem3});
-            this.barManager1.MaxItemId = 5;
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(788, 0);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 546);
-            this.barDockControlBottom.Size = new System.Drawing.Size(788, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 546);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(788, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 546);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 0;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // mnuAssignTo
-            // 
-            this.mnuAssignTo.Caption = "Assign To";
-            this.mnuAssignTo.Glyph = global::YANFOE.Properties.Resources.target1;
-            this.mnuAssignTo.Id = 1;
-            this.mnuAssignTo.Name = "mnuAssignTo";
-            // 
-            // mnuSmartRename
-            // 
-            this.mnuSmartRename.Caption = "Smart Rename";
-            this.mnuSmartRename.Id = 2;
-            this.mnuSmartRename.Name = "mnuSmartRename";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Reassign Series";
-            this.barButtonItem2.Id = 3;
-            this.barButtonItem2.Name = "barButtonItem2";
-            toolTipTitleItem1.Text = "Reassign Series";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Allows you to change the series but keep the files. Handy if you\'ve chosen the wr" +
-                "ong series.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.barButtonItem2.SuperTip = superToolTip1;
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "barButtonItem3";
-            this.barButtonItem3.Id = 4;
-            this.barButtonItem3.Name = "barButtonItem3";
+            this.layoutControlProgress.Control = this.marqueeProgressBar;
+            this.layoutControlProgress.CustomizationFormText = "layoutControlItem8";
+            this.layoutControlProgress.Location = new System.Drawing.Point(0, 501);
+            this.layoutControlProgress.Name = "layoutControlProgress";
+            this.layoutControlProgress.Size = new System.Drawing.Size(67, 25);
+            this.layoutControlProgress.Text = "layoutControlProgress";
+            this.layoutControlProgress.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlProgress.TextToControlDistance = 0;
+            this.layoutControlProgress.TextVisible = false;
             // 
             // popupUnsortedList
             // 
@@ -605,6 +633,8 @@
             this.Text = "Import Unsorted Files. Drag and drop to Episode grid.";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.marqueeProgressBar.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSearch.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdSeries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewSeries)).EndInit();
@@ -630,7 +660,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupUnsortedList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSortedEpisodes)).EndInit();
             this.ResumeLayout(false);
@@ -686,5 +716,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.PopupMenu popupSortedEpisodes;
+        private DevExpress.XtraEditors.MarqueeProgressBarControl marqueeProgressBar;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlProgress;
     }
 }

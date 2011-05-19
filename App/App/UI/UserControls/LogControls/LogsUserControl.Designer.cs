@@ -112,9 +112,9 @@
             // 
             // groupControl2
             // 
-            this.groupControl2.Location = new System.Drawing.Point(781, 2);
+            this.groupControl2.Location = new System.Drawing.Point(779, 2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(212, 526);
+            this.groupControl2.Size = new System.Drawing.Size(214, 526);
             this.groupControl2.TabIndex = 5;
             this.groupControl2.Text = "Log Settings";
             // 
@@ -147,7 +147,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(995, 589);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -167,9 +166,9 @@
             // 
             this.layoutControlItem2.Control = this.groupControl2;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(779, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(777, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(216, 530);
+            this.layoutControlItem2.Size = new System.Drawing.Size(218, 530);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -181,7 +180,7 @@
             this.splitterItem1.CustomizationFormText = "splitterItem1";
             this.splitterItem1.Location = new System.Drawing.Point(772, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(7, 530);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 530);
             // 
             // layoutControlItem3
             // 

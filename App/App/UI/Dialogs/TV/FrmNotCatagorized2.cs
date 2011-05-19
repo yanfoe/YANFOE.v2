@@ -29,6 +29,7 @@ namespace YANFOE.UI.Dialogs.TV
     using DevExpress.XtraGrid.Views.Base;
     using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+    using DevExpress.XtraLayout.Utils;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Import;
@@ -66,6 +67,8 @@ namespace YANFOE.UI.Dialogs.TV
             this.UpdateDataBindings();
 
             this.tmr = new Timer();
+            marqueeProgressBar.Enabled = false;
+            layoutControlProgress.Visibility = LayoutVisibility.Never;
         }
 
         #endregion
@@ -100,10 +103,12 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnOk_Click(object sender, EventArgs e)
         {
+            layoutControlProgress.Visibility = LayoutVisibility.Always;
+
             var bgw = new BackgroundWorker();
             bgw.DoWork += this.bgw_DoWork;
             bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
-
+            marqueeProgressBar.Enabled = true;
 
             this.tmr.Tick += this.tmr_Tick;
             this.tmr.Interval = 100;
