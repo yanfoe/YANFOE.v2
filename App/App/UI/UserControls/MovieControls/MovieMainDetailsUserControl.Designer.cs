@@ -64,7 +64,6 @@
             this.txtTitle = new DevExpress.XtraEditors.TextEdit();
             this.dateReleased = new DevExpress.XtraEditors.DateEdit();
             this.cmbGenre = new DevExpress.XtraEditors.CheckedComboBoxEdit();
-            this.cmbLanguage = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.cmbCountry = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.txtRuntime = new DevExpress.XtraEditors.TextEdit();
             this.cmbSource = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -103,6 +102,7 @@
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layMultiEditKey = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cmbLanguage = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -126,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateReleased.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateReleased.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGenre.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCountry.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRuntime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSource.Properties)).BeginInit();
@@ -165,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -189,13 +189,13 @@
             this.layoutControl1.Controls.Add(this.txtTitle);
             this.layoutControl1.Controls.Add(this.dateReleased);
             this.layoutControl1.Controls.Add(this.cmbGenre);
-            this.layoutControl1.Controls.Add(this.cmbLanguage);
             this.layoutControl1.Controls.Add(this.cmbCountry);
             this.layoutControl1.Controls.Add(this.txtRuntime);
             this.layoutControl1.Controls.Add(this.cmbSource);
             this.layoutControl1.Controls.Add(this.txtCert);
             this.layoutControl1.Controls.Add(this.cmbScraperGroup);
             this.layoutControl1.Controls.Add(this.cmbMpaa);
+            this.layoutControl1.Controls.Add(this.cmbLanguage);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -472,17 +472,6 @@
             this.cmbGenre.Size = new System.Drawing.Size(221, 20);
             this.cmbGenre.StyleController = this.layoutControl1;
             this.cmbGenre.TabIndex = 14;
-            // 
-            // cmbLanguage
-            // 
-            this.cmbLanguage.Location = new System.Drawing.Point(353, 443);
-            this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbLanguage.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.cmbLanguage.Size = new System.Drawing.Size(179, 20);
-            this.cmbLanguage.StyleController = this.layoutControl1;
-            this.cmbLanguage.TabIndex = 31;
             // 
             // cmbCountry
             // 
@@ -961,6 +950,14 @@
             this.layMultiEditKey.TextToControlDistance = 0;
             this.layMultiEditKey.TextVisible = false;
             // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.Location = new System.Drawing.Point(353, 443);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(179, 20);
+            this.cmbLanguage.StyleController = this.layoutControl1;
+            this.cmbLanguage.TabIndex = 31;
+            // 
             // MovieMainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -992,7 +989,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateReleased.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateReleased.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGenre.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCountry.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRuntime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSource.Properties)).EndInit();
@@ -1031,6 +1027,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1081,7 +1078,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraEditors.DateEdit dateReleased;
         private DevExpress.XtraEditors.CheckedComboBoxEdit cmbGenre;
-        private DevExpress.XtraEditors.CheckedComboBoxEdit cmbLanguage;
         private DevExpress.XtraLayout.LayoutControlItem layoutLanguage;
         private DevExpress.XtraEditors.CheckedComboBoxEdit cmbCountry;
         private DevExpress.XtraEditors.TextEdit txtRuntime;
@@ -1102,5 +1098,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlGroup layMultiGroup;
+        private DevExpress.XtraEditors.TextEdit cmbLanguage;
     }
 }

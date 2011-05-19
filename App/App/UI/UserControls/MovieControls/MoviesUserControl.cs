@@ -518,5 +518,10 @@ namespace YANFOE.UI.UserControls.MovieControls
             MovieDBFactory.TempScraperGroup = e.Item.Tag.ToString();
             this.BtnLoadFromWeb_Click(this, new EventArgs());
         }
+
+        private void nfoPreviewUserControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

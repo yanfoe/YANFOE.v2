@@ -39,8 +39,6 @@ namespace YANFOE.UI.UserControls.CommonControls
     {
         #region Constants and Fields
 
-        private BackgroundWorker bgw;
-
         /// <summary>
         /// The gallery type.
         /// </summary>

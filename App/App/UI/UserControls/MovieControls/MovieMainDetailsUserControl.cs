@@ -221,7 +221,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             for (int i = 0; i < currentGenres.Count; i++)
             {
                 var genre = this.cmbGenre.Properties.Items[i];
-                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre.Value select g).SingleOrDefault();
+                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre.Value.ToString() select g).SingleOrDefault();
 
                 if (check == null)
                 {

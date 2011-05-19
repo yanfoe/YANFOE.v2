@@ -444,7 +444,7 @@
             this.setManagerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.setManagerUserControl1.Location = new System.Drawing.Point(0, 0);
             this.setManagerUserControl1.Name = "setManagerUserControl1";
-            this.setManagerUserControl1.Size = new System.Drawing.Size(771, 316);
+            this.setManagerUserControl1.Size = new System.Drawing.Size(771, 305);
             this.setManagerUserControl1.TabIndex = 0;
             // 
             // tabTrailers
@@ -459,7 +459,7 @@
             this.movieTrailerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.movieTrailerUserControl1.Location = new System.Drawing.Point(0, 0);
             this.movieTrailerUserControl1.Name = "movieTrailerUserControl1";
-            this.movieTrailerUserControl1.Size = new System.Drawing.Size(771, 316);
+            this.movieTrailerUserControl1.Size = new System.Drawing.Size(771, 305);
             this.movieTrailerUserControl1.TabIndex = 0;
             // 
             // tabPreview
@@ -475,8 +475,9 @@
             this.nfoPreviewUserControl1.Location = new System.Drawing.Point(0, 0);
             this.nfoPreviewUserControl1.Name = "nfoPreviewUserControl1";
             this.nfoPreviewUserControl1.PreviewArea = YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl.TvOrMovies.Movies;
-            this.nfoPreviewUserControl1.Size = new System.Drawing.Size(771, 316);
+            this.nfoPreviewUserControl1.Size = new System.Drawing.Size(771, 305);
             this.nfoPreviewUserControl1.TabIndex = 0;
+            this.nfoPreviewUserControl1.Load += new System.EventHandler(this.nfoPreviewUserControl1_Load);
             // 
             // picPoster
             // 
