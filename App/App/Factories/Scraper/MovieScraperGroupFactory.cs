@@ -112,6 +112,11 @@ namespace YANFOE.Factories.Scraper
             return new MovieScraperGroupModel();
         }
 
+        public static BindingList<string> GetScraperGroupsOnDisk()
+        {
+            return GetScraperGroupsOnDisk(null);
+        }
+
         /// <summary>
         /// Populates a combobox with scraper groups
         /// </summary>
@@ -125,7 +130,10 @@ namespace YANFOE.Factories.Scraper
 
             try
             {
-                cmbScraperGroupList.Properties.Items.Clear();
+                if (cmbScraperGroupList != null)
+                {
+                    cmbScraperGroupList.Properties.Items.Clear();
+                }
 
                 string[] scraperGroupList =
                     FileHelper.GetFilesRecursive(
@@ -133,7 +141,11 @@ namespace YANFOE.Factories.Scraper
 
                 foreach (string f in scraperGroupList)
                 {
-                    cmbScraperGroupList.Properties.Items.Add(Path.GetFileNameWithoutExtension(f));
+                    if (cmbScraperGroupList != null)
+                    {
+                        cmbScraperGroupList.Properties.Items.Add(Path.GetFileNameWithoutExtension(f));
+                    }
+
                     list.Add(Path.GetFileNameWithoutExtension(f));
                 }
             }

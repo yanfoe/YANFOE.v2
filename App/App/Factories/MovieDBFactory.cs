@@ -71,6 +71,8 @@ namespace YANFOE.Factories
         /// </summary>
         private static BindingList<MovieModel> multiSelectedMovies;
 
+        public static string TempScraperGroup { get; set; }
+
         #endregion
 
         #region Constructors and Destructors
@@ -84,6 +86,7 @@ namespace YANFOE.Factories
             currentMovie = new MovieModel();
             galleryGroup = new GalleryItemGroup();
             multiSelectedMovies = new BindingList<MovieModel>();
+            TempScraperGroup = string.Empty;
 
             inGallery = new BindingList<string>();
 

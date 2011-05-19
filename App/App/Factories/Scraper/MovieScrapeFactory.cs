@@ -215,6 +215,7 @@ namespace YANFOE.Factories.Scraper
             }
 
             postProcess.Clear();
+            MovieDBFactory.TempScraperGroup = string.Empty;
         }
 
         /// <summary>

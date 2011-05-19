@@ -25,6 +25,7 @@ namespace YANFOE.Scrapers.Movie
 
     using DevExpress.XtraEditors;
 
+    using YANFOE.Factories;
     using YANFOE.Factories.Scraper;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.MovieModels;
@@ -188,7 +189,7 @@ namespace YANFOE.Scrapers.Movie
             scrapers.Clear();
             scrapers = ReturnAllScrapers();
 
-            if (string.IsNullOrEmpty(movie.ScraperGroup))
+            if (string.IsNullOrEmpty(movie.ScraperGroup) && string.IsNullOrEmpty(MovieDBFactory.TempScraperGroup))
             {
                 XtraMessageBox.Show(
                     "No Scraper Group Selected", "Select a Scraper Group", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -229,7 +230,14 @@ namespace YANFOE.Scrapers.Movie
             }
             else
             {
-                scraperGroup = MovieScraperGroupFactory.GetScaperGroupModel(movie.ScraperGroup);
+                if (!string.IsNullOrEmpty(MovieDBFactory.TempScraperGroup))
+                {
+                    scraperGroup = MovieScraperGroupFactory.GetScaperGroupModel(MovieDBFactory.TempScraperGroup);
+                }
+                else
+                {
+                    scraperGroup = MovieScraperGroupFactory.GetScaperGroupModel(movie.ScraperGroup);
+                }
             }
 
             bool outResult = true;

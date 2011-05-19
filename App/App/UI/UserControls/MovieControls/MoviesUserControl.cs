@@ -34,6 +34,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
     using YANFOE.Factories;
     using YANFOE.Factories.InOut.Enum;
+    using YANFOE.Factories.Scraper;
     using YANFOE.Models.MovieModels;
 
     /// <summary>
@@ -487,6 +488,35 @@ namespace YANFOE.UI.UserControls.MovieControls
                     : MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePathFolder);
 
             Process.Start("explorer.exe", argument);
+        }
+
+        private void popupLoadFromWeb_BeforePopup(object sender, CancelEventArgs e)
+        {
+            popupLoadFromWeb.ClearLinks();
+
+            var barItemLink = new BarButtonItem(barManager1, "Scrape using " + MovieDBFactory.GetCurrentMovie().ScraperGroup);
+            barItemLink.Tag = MovieDBFactory.GetCurrentMovie().ScraperGroup;
+            barItemLink.ItemClick += this.barItemLink_ItemClick;
+            popupLoadFromWeb.AddItem(barItemLink);
+
+            foreach (var scraper in MovieScraperGroupFactory.GetScraperGroupsOnDisk())
+            {
+                barItemLink = new BarButtonItem(barManager1, "Use " + scraper);
+                barItemLink.Tag = MovieDBFactory.GetCurrentMovie().ScraperGroup;
+                barItemLink.ItemClick += this.barItemLink_ItemClick;
+                popupLoadFromWeb.AddItem(barItemLink);
+            }
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the barItemLink control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        void barItemLink_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            MovieDBFactory.TempScraperGroup = e.Item.Tag.ToString();
+            this.BtnLoadFromWeb_Click(this, new EventArgs());
         }
     }
 }
