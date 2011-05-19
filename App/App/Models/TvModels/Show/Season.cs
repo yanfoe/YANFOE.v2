@@ -20,6 +20,7 @@ namespace YANFOE.Models.TvModels.Show
     using System.IO;
     using System.Linq;
 
+    using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
 
     using Newtonsoft.Json;
@@ -598,8 +599,9 @@ namespace YANFOE.Models.TvModels.Show
             {
                 var gallery = new GalleryItemGroup();
                 var series = this.GetSeries();
+                var images = from i in series.Banner.Season orderby i.Rating descending select i;
 
-                foreach (var image in series.Banner.Season)
+                foreach (var image in images)
                 {
                     if (image.BannerType2 == BannerType2.seasonwide && image.Season == this.SeasonNumber.ToString())
                     {
@@ -610,9 +612,14 @@ namespace YANFOE.Models.TvModels.Show
                         {
                             Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
 
+                            var superTip = new SuperToolTip();
+                            superTip.AllowHtmlText = DefaultBoolean.True;
+                            superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                            superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
                             var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                             {
-                                Tag = "tvSeasonBanner|" + image.BannerPath
+                                Tag = "tvSeasonBanner|" + image.BannerPath, SuperTip = superTip
                             };
 
                             gallery.Items.Add(galleryItem);
@@ -633,20 +640,28 @@ namespace YANFOE.Models.TvModels.Show
                     var gallery = new GalleryItemGroup();
                     var series = this.GetSeries();
 
-                    var season = from s in series.Banner.Season
+                    var images = from s in series.Banner.Season
                                  where s.BannerType2 == BannerType2.season && s.Season == this.SeasonNumber.ToString()
+                                 orderby s.Rating descending 
                                  select s;
 
-                    foreach (var image in season)
+                    foreach (var image in images)
                     {
                         var path = Downloader.ProcessDownload(
                             TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
 
                         if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                         {
-                            Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
+                            var resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
+                            var superTip = new SuperToolTip();
+                            superTip.AllowHtmlText = DefaultBoolean.True;
+                            superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                            superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
 
-                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString()) { Tag = "tvSeasonBanner|" + image.BannerPath };
+                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                                {
+                                    Tag = "tvSeasonBanner|" + image.BannerPath, SuperTip = superTip
+                                };
 
                             gallery.Items.Add(galleryItem);
                         }
@@ -667,7 +682,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 var gallery = new GalleryItemGroup();
                 var series = this.GetSeries();
-                var images = from i in series.Banner.Fanart orderby series.Rating select i;
+                var images = from i in series.Banner.Fanart orderby series.Rating descending select i;
 
                 foreach (var image in images)
                 {
@@ -678,9 +693,14 @@ namespace YANFOE.Models.TvModels.Show
                     {
                         Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
 
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = DefaultBoolean.True;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
-                            Tag = "tvSeasonBanner|" + image.BannerPath
+                            Tag = "tvSeasonBanner|" + image.BannerPath, SuperTip = superTip
                         };
 
                         gallery.Items.Add(galleryItem);

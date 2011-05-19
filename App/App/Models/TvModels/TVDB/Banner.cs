@@ -174,7 +174,9 @@ namespace YANFOE.Models.TvModels.TVDB
                         SeriesName = XRead.GetString(doc, "SeriesName"), 
                         ThumbnailPath = XRead.GetString(doc, "ThumbnailPath"), 
                         VignettePath = XRead.GetString(doc, "VignettePath"), 
-                        Season = XRead.GetString(doc, "Season")
+                        Season = XRead.GetString(doc, "Season"),
+                        Rating = XRead.GetString(doc, "Rating"),
+                        RatingCount = XRead.GetString(doc, "RatingCount")
                     };
 
                 switch (XRead.GetString(doc, "BannerType2"))

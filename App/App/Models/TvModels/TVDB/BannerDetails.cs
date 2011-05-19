@@ -44,6 +44,10 @@ namespace YANFOE.Models.TvModels.TVDB
             this.SeriesName = string.Empty;
 
             this.ThumbnailPath = string.Empty;
+
+            this.Rating = string.Empty;
+
+            this.RatingCount = string.Empty;
         }
 
         #endregion
@@ -99,6 +103,10 @@ namespace YANFOE.Models.TvModels.TVDB
         /// Gets or sets VignettePath.
         /// </summary>
         public string VignettePath { get; set; }
+
+        public string Rating { get; set; }
+
+        public string RatingCount { get; set; }
 
         #endregion
     }

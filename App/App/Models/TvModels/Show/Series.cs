@@ -25,6 +25,7 @@ namespace YANFOE.Models.TvModels.Show
     using System.Xml;
     using System.Xml.Linq;
 
+    using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
 
     using Newtonsoft.Json;
@@ -1355,24 +1356,31 @@ namespace YANFOE.Models.TvModels.Show
             {
                 var gallery = new GalleryItemGroup();
 
-                foreach (var image in this.Banner.Series)
+                var images = from i in this.Banner.Series
+                             where i.BannerType2 == BannerType2.graphical
+                             orderby i.Rating descending
+                             select i;
+
+                foreach (var image in images)
                 {
-                    if (image.BannerType2 == BannerType2.graphical)
+                    string path = Downloader.ProcessDownload(
+                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        string path = Downloader.ProcessDownload(
-                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
 
-                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = DefaultBoolean.True;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
-                            Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
+                            Tag = "tvSeriesBanner|" + image.BannerPath, SuperTip = superTip
+                        };
 
-                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                            {
-                                Tag = "tvSeriesBanner|" + image.BannerPath
-                            };
-
-                            gallery.Items.Add(galleryItem);
-                        }
+                        gallery.Items.Add(galleryItem);
                     }
                 }
 
@@ -1385,8 +1393,11 @@ namespace YANFOE.Models.TvModels.Show
             get
             {
                 var gallery = new GalleryItemGroup();
+                var images = from i in this.Banner.Poster 
+                             orderby i.Rating descending 
+                             select i;
 
-                foreach (var image in this.Banner.Poster)
+                foreach (var image in images)
                 {
                     string path = Downloader.ProcessDownload(
                         TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
@@ -1395,9 +1406,14 @@ namespace YANFOE.Models.TvModels.Show
                     {
                         Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
 
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = DefaultBoolean.True;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
-                            Tag = "tvSeriesPoster|" + image.BannerPath
+                            Tag = "tvSeriesPoster|" + image.BannerPath, SuperTip = superTip
                         };
 
                         gallery.Items.Add(galleryItem);
@@ -1413,8 +1429,11 @@ namespace YANFOE.Models.TvModels.Show
             get
             {
                 var gallery = new GalleryItemGroup();
+                var images = from i in this.Banner.Fanart 
+                             orderby i.Rating descending 
+                             select i;
 
-                foreach (var image in this.Banner.Fanart)
+                foreach (var image in images)
                 {
                     string path = Downloader.ProcessDownload(
                         TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
@@ -1423,10 +1442,15 @@ namespace YANFOE.Models.TvModels.Show
                     {
                         Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
 
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = DefaultBoolean.True;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                        {
-                            Tag = "tvSeriesFanart|" + image.BannerPath
-                        };
+                            {
+                                Tag = "tvSeriesFanart|" + image.BannerPath, SuperTip = superTip 
+                            };
 
                         gallery.Items.Add(galleryItem);
                     }
