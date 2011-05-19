@@ -118,14 +118,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(600, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 48);
-            this.barDockControlBottom.Size = new System.Drawing.Size(600, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlLeft
             // 
@@ -138,7 +138,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(600, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(0, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 48);
             // 
             // btnSaveFullTvSeries
@@ -249,7 +249,7 @@
             this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = global::YANFOE.Properties.Resources.save32;
             this.btnSaveAll.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(49, 2);
+            this.btnSaveAll.Location = new System.Drawing.Point(48, 2);
             this.btnSaveAll.MinimumSize = new System.Drawing.Size(0, 44);
             this.btnSaveAll.Name = "btnSaveAll";
             this.barManager1.SetPopupContextMenu(this.btnSaveAll, this.popupSave);
@@ -284,7 +284,7 @@
             this.btnSaveSelectedSeries.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveSelectedSeries.Image = global::YANFOE.Properties.Resources.saveseries;
             this.btnSaveSelectedSeries.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnSaveSelectedSeries.Location = new System.Drawing.Point(96, 2);
+            this.btnSaveSelectedSeries.Location = new System.Drawing.Point(95, 2);
             this.btnSaveSelectedSeries.Name = "btnSaveSelectedSeries";
             this.barManager1.SetPopupContextMenu(this.btnSaveSelectedSeries, this.popupSeries);
             this.btnSaveSelectedSeries.Size = new System.Drawing.Size(47, 44);
@@ -316,7 +316,7 @@
             this.btnSaveSelectedSeason.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveSelectedSeason.Image = global::YANFOE.Properties.Resources.saveseason;
             this.btnSaveSelectedSeason.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnSaveSelectedSeason.Location = new System.Drawing.Point(143, 2);
+            this.btnSaveSelectedSeason.Location = new System.Drawing.Point(142, 2);
             this.btnSaveSelectedSeason.Name = "btnSaveSelectedSeason";
             this.barManager1.SetPopupContextMenu(this.btnSaveSelectedSeason, this.popupSeason);
             this.btnSaveSelectedSeason.Size = new System.Drawing.Size(47, 44);
@@ -347,7 +347,7 @@
             this.btnSaveSelectedEpisode.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveSelectedEpisode.Image = global::YANFOE.Properties.Resources.saveepisode;
             this.btnSaveSelectedEpisode.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnSaveSelectedEpisode.Location = new System.Drawing.Point(190, 2);
+            this.btnSaveSelectedEpisode.Location = new System.Drawing.Point(189, 2);
             this.btnSaveSelectedEpisode.Name = "btnSaveSelectedEpisode";
             this.barManager1.SetPopupContextMenu(this.btnSaveSelectedEpisode, this.popupEpisode);
             this.btnSaveSelectedEpisode.Size = new System.Drawing.Size(47, 44);
@@ -377,7 +377,7 @@
             this.btnAssignFileToEpisode.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAssignFileToEpisode.Image = global::YANFOE.Properties.Resources.reddrive;
             this.btnAssignFileToEpisode.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnAssignFileToEpisode.Location = new System.Drawing.Point(551, 2);
+            this.btnAssignFileToEpisode.Location = new System.Drawing.Point(-48, 2);
             this.btnAssignFileToEpisode.Name = "btnAssignFileToEpisode";
             this.barManager1.SetPopupContextMenu(this.btnAssignFileToEpisode, this.popupEpisode);
             this.btnAssignFileToEpisode.Size = new System.Drawing.Size(47, 44);
@@ -388,8 +388,8 @@
             toolTipTitleItem1.Text = "Assign File to Episode";
             toolTipItem2.LeftIndent = 6;
             toolTipItem2.Text = "Allows you to assign a TV file to an episode.\r\n\r\n<b>Click</b>: Rename file to mat" +
-                "ch episode\r\n<b>Shift-Click</b>: Rename file to match episode and move to season " +
-                "folder.";
+    "ch episode\r\n<b>Shift-Click</b>: Rename file to match episode and move to season " +
+    "folder.";
             superToolTip2.Items.Add(toolTipTitleItem1);
             superToolTip2.Items.Add(toolTipItem2);
             this.btnAssignFileToEpisode.SuperTip = superToolTip2;
@@ -401,7 +401,7 @@
             this.btnLock.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnLock.Image = global::YANFOE.Properties.Resources.unlock32;
             this.btnLock.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnLock.Location = new System.Drawing.Point(504, 2);
+            this.btnLock.Location = new System.Drawing.Point(-95, 2);
             this.btnLock.Name = "btnLock";
             this.barManager1.SetPopupContextMenu(this.btnLock, this.popupEpisode);
             this.btnLock.Size = new System.Drawing.Size(47, 44);
@@ -416,7 +416,7 @@
             this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUpdate.Image = global::YANFOE.Properties.Resources.globe32;
             this.btnUpdate.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnUpdate.Location = new System.Drawing.Point(2, 2);
+            this.btnUpdate.Location = new System.Drawing.Point(1, 2);
             this.btnUpdate.MinimumSize = new System.Drawing.Size(0, 44);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(47, 44);
@@ -447,7 +447,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(600, 48);
+            this.panelControl1.Size = new System.Drawing.Size(0, 48);
             this.panelControl1.TabIndex = 5;
             // 
             // TvTopMenuUserControl
@@ -459,9 +459,10 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.MaximumSize = new System.Drawing.Size(0, 48);
             this.MinimumSize = new System.Drawing.Size(0, 48);
             this.Name = "TvTopMenuUserControl";
-            this.Size = new System.Drawing.Size(600, 48);
+            this.Size = new System.Drawing.Size(0, 48);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSeries)).EndInit();
