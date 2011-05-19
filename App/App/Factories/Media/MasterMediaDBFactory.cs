@@ -14,9 +14,13 @@
 
 namespace YANFOE.Factories.Media
 {
+    using System;
     using System.ComponentModel;
     using System.Linq;
 
+    using BitFactory.Logging;
+
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.TvModels.Show;
@@ -182,6 +186,19 @@ namespace YANFOE.Factories.Media
                 {
                     masterTvMediaDatabase.Add(filePath);
                 }
+            }
+        }
+
+        public static void ChangeTvFileName(string oldPath, string newPath)
+        {
+            try
+            {
+                masterTvMediaDatabase.Remove(oldPath);
+                masterTvMediaDatabase.Add(newPath);
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Error, 0, "Failed to change path in MasterMediaDB/TV", ex.Message);
             }
         }
 

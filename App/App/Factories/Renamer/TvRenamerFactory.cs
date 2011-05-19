@@ -20,6 +20,7 @@ namespace YANFOE.Factories.Renamer
 
     using BitFactory.Logging;
 
+    using YANFOE.Factories.Media;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Settings;
@@ -127,6 +128,7 @@ namespace YANFOE.Factories.Renamer
                     try
                     {
                         Directory.Move(folderPathFrom, folderPathTo);
+                        MasterMediaDBFactory.ChangeTvFileName(folderPathFrom, folderPathTo);
                         return folderPathTo;
                     }
                     catch
@@ -149,6 +151,7 @@ namespace YANFOE.Factories.Renamer
                     try
                     {
                         Directory.Move(folderPathFrom, folderPathTo);
+                        MasterMediaDBFactory.ChangeTvFileName(folderPathFrom, folderPathTo);
                         return folderPathTo;
                     }
                     catch
@@ -185,6 +188,7 @@ namespace YANFOE.Factories.Renamer
             try
             {
                 File.Move(pathFrom, pathTo);
+                MasterMediaDBFactory.ChangeTvFileName(pathFrom, pathTo);
             }
             catch
             {
