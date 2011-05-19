@@ -16,6 +16,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using DevExpress.XtraEditors;
@@ -188,6 +189,8 @@ namespace YANFOE.UI.UserControls.MovieControls
             ScraperList type;
 
             Enum.TryParse(Factories.MovieDBFactory.GetCurrentMovie().ScraperGroup, out type);
+            var genreList = new List<string>();
+
 
             if (this.currentGenre == type.ToString())
             {
@@ -197,38 +200,40 @@ namespace YANFOE.UI.UserControls.MovieControls
                 }
             }
 
-            if (this.currentGenre != type.ToString())
+            cmbGenre.Properties.Items.Clear();
+
+            this.currentGenre = type.ToString();
+
+            if (!Settings.Get.Genres.GenreDictionary.ContainsKey(type))
             {
+                cmbGenre.Properties.Items.Add("No Scraper Group Selected");
+            }
 
-                cmbGenre.Properties.Items.Clear();
+            genreList = Settings.Get.Genres.GenreDictionary[type];
 
-                this.currentGenre = type.ToString();
-
-                if (!Settings.Get.Genres.GenreDictionary.ContainsKey(type))
-                {
-                    cmbGenre.Properties.Items.Add("No Scraper Group Selected");
-                }
-
-                var genreList = Settings.Get.Genres.GenreDictionary[type];
-
-                foreach (var genre in genreList)
-                {
-                    cmbGenre.Properties.Items.Add(genre);
-                }
+            foreach (var genre in genreList)
+            {
+                cmbGenre.Properties.Items.Add(genre);
             }
 
             var currentGenres = Factories.MovieDBFactory.GetCurrentMovie().Genre;
 
-            foreach (var genre in currentGenres)
+            for (int i = 0; i < currentGenres.Count; i++)
             {
-                if (cmbGenre.Properties.Items.Contains(genre))
+                var genre = this.cmbGenre.Properties.Items[i];
+                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre.Value select g).SingleOrDefault();
+
+                if (check == null)
                 {
-                    cmbGenre.Properties.Items[genre].CheckState = CheckState.Checked;
+                    this.cmbGenre.Properties.Items.Add(genre);
+                    genreList.Add(genre.Value.ToString());
                 }
-                else
+
+                var index = this.cmbGenre.Properties.Items.IndexOf(genre);
+
+                if (genreList.Contains(genre.Value))
                 {
-                    cmbGenre.Properties.Items.Add(genre);
-                    cmbGenre.Properties.Items[genre].CheckState = CheckState.Checked;
+                    this.cmbGenre.Properties.Items[index].CheckState = CheckState.Checked;
                 }
             }
         }
