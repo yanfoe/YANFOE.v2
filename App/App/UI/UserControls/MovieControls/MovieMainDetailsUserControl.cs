@@ -15,6 +15,7 @@
 namespace YANFOE.UI.UserControls.MovieControls
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using DevExpress.XtraEditors;
@@ -280,12 +281,23 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             var selectIndexes = gridViewActors.GetSelectedRows();
 
+            var actorsToRemove = new List<PersonModel>();
+
             foreach (var index in selectIndexes)
             {
                 var personModel = gridViewActors.GetRow(index) as PersonModel;
-
-                Factories.MovieDBFactory.GetCurrentMovie().Cast.Remove(personModel);
+                actorsToRemove.Add(personModel);
             }
+
+            foreach (var actor in actorsToRemove)
+            {
+                Factories.MovieDBFactory.GetCurrentMovie().Cast.Remove(actor);
+            }
+        }
+
+        private void gridViewActors_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            btnActorTrash.Enabled = gridViewActors.GetSelectedRows().Length > 0;
         }
     }
 }

@@ -263,6 +263,7 @@
             // 
             // btnActorTrash
             // 
+            this.btnActorTrash.Enabled = false;
             this.btnActorTrash.Image = global::YANFOE.Properties.Resources.trash32;
             this.btnActorTrash.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnActorTrash.Location = new System.Drawing.Point(641, 470);
@@ -357,6 +358,7 @@
             this.gridViewActors.OptionsDetail.EnableMasterViewMode = false;
             this.gridViewActors.OptionsSelection.MultiSelect = true;
             this.gridViewActors.OptionsView.ShowGroupPanel = false;
+            this.gridViewActors.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewActors_SelectionChanged);
             // 
             // clmName
             // 
@@ -584,7 +586,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(762, 513);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextLocation = DevExpress.Utils.Locations.Left;
             this.layoutControlGroup1.TextVisible = false;
