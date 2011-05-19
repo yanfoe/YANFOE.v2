@@ -479,57 +479,68 @@ namespace YANFOE.UI.UserControls.CommonControls
             this.imageMain.DataBindings.Clear();
             this.imageMain.Image = Resources.picturefaded128;
 
-            switch (this.galleryType)
+           switch (this.galleryType)
             {
                 case GalleryType.TvSeasonPoster:
-
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 160);
-                        
-                    }
 
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeason.PosterPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeason.PosterPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeasonPosterDownload();
                     }
 
-                    this.ProcessSeasonPosterDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailPoster;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonPosterAltGallery);
+                        this.populateGallery = false;
+                    }
+
                     break;
 
                 case GalleryType.TvSeasonFanart:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 60);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeason.FanartPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeason.FanartPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeasonFanartDownload();
                     }
 
-                    this.ProcessSeasonFanartDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailFanart;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonFanartAltGallery);
+                        this.populateGallery = false;
+                    }
+
                     break;
 
                 case GalleryType.TvSeasonBanner:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 30);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeason.BannerPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeason.BannerPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeasonBannerDownload();
                     }
 
-                    this.ProcessSeasonBannerDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailBanner;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonBannerAltGallery);
+                        this.populateGallery = false;
+                    }
 
                     break;
             }
@@ -553,53 +564,65 @@ namespace YANFOE.UI.UserControls.CommonControls
             {
                 case GalleryType.TvSeriesPoster:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 160);
-                        
-                    }
-                    
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeries.PosterPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeries.PosterPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeriesPosterDownload();
+                    }
+                    
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailPoster;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesPosterAltGallery);
+                        this.populateGallery = false;
                     }
 
-                    this.ProcessSeriesPosterDownload();
                     break;
 
                 case GalleryType.TvSeriesFanart:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 60);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeries.FanartPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeries.FanartPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeriesFanartDownload();
                     }
 
-                    this.ProcessSeriesFanartDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailFanart;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesFanartAltGallery);
+                        this.populateGallery = false;
+                    }
+
                     break;
 
                 case GalleryType.TvSeriesBanner:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 30);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(TvDBFactory.CurrentSeries.SeriesBannerPath))
                     {
                         imageMain.Image = ImageHandler.LoadImage(TvDBFactory.CurrentSeries.SeriesBannerPath);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessSeriesBannerDownload();
                     }
 
-                    this.ProcessSeriesBannerDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailBanner;
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesBannerAltGallery);
+                        this.populateGallery = false;
+                    }
+
                     break;
             }
         }
@@ -712,13 +735,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonBannerAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -738,13 +754,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonFanartAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -764,13 +773,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonPosterAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -790,13 +792,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesBannerAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -816,13 +811,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesFanartAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -842,13 +830,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Clear();
-                this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesPosterAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>

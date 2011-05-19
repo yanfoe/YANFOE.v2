@@ -76,6 +76,11 @@ namespace YANFOE.Tools
 
         }
 
+        public static Image LoadImage(string filePath, Size size)
+        {
+            return LoadImage(filePath, size.Width, size.Height);
+        }
+
         public static Image LoadImage(string filePath, int width, int height)
         {
             if (!File.Exists(filePath))

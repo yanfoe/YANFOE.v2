@@ -597,17 +597,18 @@ namespace YANFOE.Models.TvModels.Show
             get
             {
                 var gallery = new GalleryItemGroup();
+                var series = this.GetSeries();
 
-                foreach (var image in this.GetSeries().Banner.Season)
+                foreach (var image in series.Banner.Season)
                 {
                     if (image.BannerType2 == BannerType2.seasonwide && image.Season == this.SeasonNumber.ToString())
                     {
-                        string path = Downloader.ProcessDownload(
+                        var path = Downloader.ProcessDownload(
                             TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
 
                         if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                         {
-                            Image resizedimage = ImageHandler.LoadImage(path, 100, 30);
+                            Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
 
                             var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                             {
@@ -627,29 +628,36 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                var gallery = new GalleryItemGroup();
-
-                var season = (from s in GetSeries().Banner.Season where s.BannerType2 == BannerType2.season && s.Season == this.SeasonNumber.ToString() select s);
-
-                foreach (var image in season)
+                try
                 {
-                    string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+                    var gallery = new GalleryItemGroup();
+                    var series = this.GetSeries();
 
-                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    var season = from s in series.Banner.Season
+                                 where s.BannerType2 == BannerType2.season && s.Season == this.SeasonNumber.ToString()
+                                 select s;
+
+                    foreach (var image in season)
                     {
-                        Image resizedimage = ImageHandler.LoadImage(path, 100, 160);
+                        var path = Downloader.ProcessDownload(
+                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
 
-                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                         {
-                            Tag = "tvSeasonBanner|" + image.BannerPath
-                        };
+                            Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
 
-                        gallery.Items.Add(galleryItem);
+                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString()) { Tag = "tvSeasonBanner|" + image.BannerPath };
+
+                            gallery.Items.Add(galleryItem);
+                        }
                     }
-                }
 
-                return gallery;
+                    return gallery;
+                }
+                catch
+                {
+                    return new GalleryItemGroup();
+                }
             }
         }
 
@@ -658,25 +666,24 @@ namespace YANFOE.Models.TvModels.Show
             get
             {
                 var gallery = new GalleryItemGroup();
+                var series = this.GetSeries();
+                var images = from i in series.Banner.Fanart orderby series.Rating select i;
 
-                foreach (var image in this.GetSeries().Banner.Season)
+                foreach (var image in images)
                 {
-                    if (image.BannerType2 == BannerType2.graphical)
+                    var path = Downloader.ProcessDownload(
+                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        string path = Downloader.ProcessDownload(
-                            TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
 
-                        if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
-                            Image resizedimage = ImageHandler.LoadImage(path, 100, 60);
+                            Tag = "tvSeasonBanner|" + image.BannerPath
+                        };
 
-                            var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                            {
-                                Tag = "tvSeasonBanner|" + image.BannerPath
-                            };
-
-                            gallery.Items.Add(galleryItem);
-                        }
+                        gallery.Items.Add(galleryItem);
                     }
                 }
 

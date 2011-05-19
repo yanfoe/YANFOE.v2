@@ -15,6 +15,7 @@
 namespace YANFOE.Settings.UserSettings
 {
     using System;
+    using System.Drawing;
 
     /// <summary>
     /// UI settings
@@ -30,6 +31,12 @@ namespace YANFOE.Settings.UserSettings
             this.Skin = "Foggy";
             this.EnableTVPathColumn = false;
             this.HideSeasonZero = false;
+
+            this.PictureThumbnailFanart = new Size(100, 60);
+
+            this.PictureThumbnailBanner = new Size(100, 30);
+
+            this.PictureThumbnailPoster = new Size(100, 160);
         }
 
         /// <summary>
@@ -43,5 +50,11 @@ namespace YANFOE.Settings.UserSettings
         public bool EnableTVPathColumn { get; set; }
 
         public bool HideSeasonZero { get; set; }
+
+        public Size PictureThumbnailFanart { get; set; }
+
+        public Size PictureThumbnailBanner { get; set; }
+
+        public Size PictureThumbnailPoster { get; set; }
     }
 }

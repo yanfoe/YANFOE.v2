@@ -1364,7 +1364,7 @@ namespace YANFOE.Models.TvModels.Show
 
                         if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                         {
-                            Image resizedimage = ImageHandler.LoadImage(path, 100, 30);
+                            Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
 
                             var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                             {
@@ -1393,7 +1393,7 @@ namespace YANFOE.Models.TvModels.Show
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        Image resizedimage = ImageHandler.LoadImage(path, 100, 160);
+                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
@@ -1421,7 +1421,7 @@ namespace YANFOE.Models.TvModels.Show
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        Image resizedimage = ImageHandler.LoadImage(path, 100, 60);
+                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
