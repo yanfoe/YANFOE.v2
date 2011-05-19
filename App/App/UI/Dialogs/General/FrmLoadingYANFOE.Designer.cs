@@ -41,6 +41,7 @@
             // lblYANFOETitle
             // 
             this.lblYANFOETitle.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYANFOETitle.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblYANFOETitle.Location = new System.Drawing.Point(41, 375);
             this.lblYANFOETitle.Name = "lblYANFOETitle";
             this.lblYANFOETitle.Size = new System.Drawing.Size(145, 18);
@@ -50,6 +51,7 @@
             // lblProgress1
             // 
             this.lblProgress1.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProgress1.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblProgress1.Location = new System.Drawing.Point(41, 428);
             this.lblProgress1.Name = "lblProgress1";
             this.lblProgress1.Size = new System.Drawing.Size(0, 18);
@@ -57,6 +59,7 @@
             // 
             // labelControl2
             // 
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl2.Location = new System.Drawing.Point(41, 393);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(147, 13);
@@ -74,6 +77,7 @@
             // labelControl3
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl3.Location = new System.Drawing.Point(361, 375);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(98, 18);
@@ -82,6 +86,7 @@
             // 
             // labelControl4
             // 
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl4.Location = new System.Drawing.Point(361, 393);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(98, 13);
@@ -90,6 +95,7 @@
             // 
             // lblVersion
             // 
+            this.lblVersion.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblVersion.Location = new System.Drawing.Point(41, 407);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(147, 13);
