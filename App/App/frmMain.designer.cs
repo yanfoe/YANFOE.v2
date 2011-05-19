@@ -36,9 +36,9 @@ namespace YANFOE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -125,6 +125,8 @@ namespace YANFOE
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.uiTimer = new System.Windows.Forms.Timer(this.components);
+            this.hyperLinkEdit5 = new DevExpress.XtraEditors.HyperLinkEdit();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -176,6 +178,8 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -342,15 +346,15 @@ namespace YANFOE
             this.mnuDonate.Glyph = global::YANFOE.Properties.Resources.btn_donate_SM;
             this.mnuDonate.Id = 34;
             this.mnuDonate.Name = "mnuDonate";
-            toolTipTitleItem1.Text = "Donate to the YANFOE project.";
-            toolTipItem1.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem1.Appearance.Options.UseImage = true;
-            toolTipItem1.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.mnuDonate.SuperTip = superToolTip1;
+            toolTipTitleItem2.Text = "Donate to the YANFOE project.";
+            toolTipItem2.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem2.Appearance.Options.UseImage = true;
+            toolTipItem2.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.mnuDonate.SuperTip = superToolTip2;
             this.mnuDonate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuDonate_ItemClick);
             // 
             // barDockControlTop
@@ -554,6 +558,7 @@ namespace YANFOE
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.hyperLinkEdit5);
             this.layoutControl1.Controls.Add(this.memoEdit2);
             this.layoutControl1.Controls.Add(this.textEdit5);
             this.layoutControl1.Controls.Add(this.hyperLinkEdit4);
@@ -570,18 +575,18 @@ namespace YANFOE
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1338, 361, 492, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(988, 456);
+            this.layoutControl1.Size = new System.Drawing.Size(986, 454);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // memoEdit2
             // 
             this.memoEdit2.EditValue = resources.GetString("memoEdit2.EditValue");
-            this.memoEdit2.Location = new System.Drawing.Point(524, 333);
+            this.memoEdit2.Location = new System.Drawing.Point(523, 332);
             this.memoEdit2.MenuManager = this.barManager1;
             this.memoEdit2.Name = "memoEdit2";
             this.memoEdit2.Properties.ReadOnly = true;
-            this.memoEdit2.Size = new System.Drawing.Size(440, 99);
+            this.memoEdit2.Size = new System.Drawing.Size(439, 98);
             this.memoEdit2.StyleController = this.layoutControl1;
             this.memoEdit2.TabIndex = 14;
             // 
@@ -592,58 +597,58 @@ namespace YANFOE
             this.textEdit5.MenuManager = this.barManager1;
             this.textEdit5.Name = "textEdit5";
             this.textEdit5.Properties.ReadOnly = true;
-            this.textEdit5.Size = new System.Drawing.Size(379, 20);
+            this.textEdit5.Size = new System.Drawing.Size(378, 20);
             this.textEdit5.StyleController = this.layoutControl1;
             this.textEdit5.TabIndex = 13;
             // 
             // hyperLinkEdit4
             // 
             this.hyperLinkEdit4.EditValue = "http://www.yanfoe.com/forum/";
-            this.hyperLinkEdit4.Location = new System.Drawing.Point(117, 300);
+            this.hyperLinkEdit4.Location = new System.Drawing.Point(117, 324);
             this.hyperLinkEdit4.MenuManager = this.barManager1;
             this.hyperLinkEdit4.Name = "hyperLinkEdit4";
-            this.hyperLinkEdit4.Size = new System.Drawing.Size(379, 20);
+            this.hyperLinkEdit4.Size = new System.Drawing.Size(378, 20);
             this.hyperLinkEdit4.StyleController = this.layoutControl1;
             this.hyperLinkEdit4.TabIndex = 12;
             // 
             // hyperLinkEdit3
             // 
             this.hyperLinkEdit3.EditValue = "https://github.com/yanfoe/YANFOE.v2";
-            this.hyperLinkEdit3.Location = new System.Drawing.Point(117, 324);
+            this.hyperLinkEdit3.Location = new System.Drawing.Point(117, 348);
             this.hyperLinkEdit3.MenuManager = this.barManager1;
             this.hyperLinkEdit3.Name = "hyperLinkEdit3";
-            this.hyperLinkEdit3.Size = new System.Drawing.Size(379, 20);
+            this.hyperLinkEdit3.Size = new System.Drawing.Size(378, 20);
             this.hyperLinkEdit3.StyleController = this.layoutControl1;
             this.hyperLinkEdit3.TabIndex = 11;
             // 
             // hyperLinkEdit2
             // 
             this.hyperLinkEdit2.EditValue = "https://github.com/yanfoe/YANFOE.v2/issues";
-            this.hyperLinkEdit2.Location = new System.Drawing.Point(117, 276);
+            this.hyperLinkEdit2.Location = new System.Drawing.Point(117, 300);
             this.hyperLinkEdit2.MenuManager = this.barManager1;
             this.hyperLinkEdit2.Name = "hyperLinkEdit2";
-            this.hyperLinkEdit2.Size = new System.Drawing.Size(379, 20);
+            this.hyperLinkEdit2.Size = new System.Drawing.Size(378, 20);
             this.hyperLinkEdit2.StyleController = this.layoutControl1;
             this.hyperLinkEdit2.TabIndex = 10;
             // 
             // hyperLinkEdit1
             // 
             this.hyperLinkEdit1.EditValue = "http://www.yanfoe.com";
-            this.hyperLinkEdit1.Location = new System.Drawing.Point(117, 252);
+            this.hyperLinkEdit1.Location = new System.Drawing.Point(117, 276);
             this.hyperLinkEdit1.MenuManager = this.barManager1;
             this.hyperLinkEdit1.Name = "hyperLinkEdit1";
-            this.hyperLinkEdit1.Size = new System.Drawing.Size(379, 20);
+            this.hyperLinkEdit1.Size = new System.Drawing.Size(378, 20);
             this.hyperLinkEdit1.StyleController = this.layoutControl1;
             this.hyperLinkEdit1.TabIndex = 9;
             // 
             // memoEdit1
             // 
             this.memoEdit1.EditValue = resources.GetString("memoEdit1.EditValue");
-            this.memoEdit1.Location = new System.Drawing.Point(524, 136);
+            this.memoEdit1.Location = new System.Drawing.Point(523, 136);
             this.memoEdit1.MenuManager = this.barManager1;
             this.memoEdit1.Name = "memoEdit1";
             this.memoEdit1.Properties.ReadOnly = true;
-            this.memoEdit1.Size = new System.Drawing.Size(440, 149);
+            this.memoEdit1.Size = new System.Drawing.Size(439, 148);
             this.memoEdit1.StyleController = this.layoutControl1;
             this.memoEdit1.TabIndex = 8;
             // 
@@ -653,7 +658,7 @@ namespace YANFOE
             this.txtBuild.MenuManager = this.barManager1;
             this.txtBuild.Name = "txtBuild";
             this.txtBuild.Properties.ReadOnly = true;
-            this.txtBuild.Size = new System.Drawing.Size(847, 20);
+            this.txtBuild.Size = new System.Drawing.Size(845, 20);
             this.txtBuild.StyleController = this.layoutControl1;
             this.txtBuild.TabIndex = 7;
             // 
@@ -664,7 +669,7 @@ namespace YANFOE
             this.txtVersion.MenuManager = this.barManager1;
             this.txtVersion.Name = "txtVersion";
             this.txtVersion.Properties.ReadOnly = true;
-            this.txtVersion.Size = new System.Drawing.Size(847, 20);
+            this.txtVersion.Size = new System.Drawing.Size(845, 20);
             this.txtVersion.StyleController = this.layoutControl1;
             this.txtVersion.TabIndex = 6;
             // 
@@ -675,7 +680,7 @@ namespace YANFOE
             this.textEdit2.MenuManager = this.barManager1;
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Properties.ReadOnly = true;
-            this.textEdit2.Size = new System.Drawing.Size(379, 20);
+            this.textEdit2.Size = new System.Drawing.Size(378, 20);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 5;
             // 
@@ -686,7 +691,7 @@ namespace YANFOE
             this.textEdit1.MenuManager = this.barManager1;
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.ReadOnly = true;
-            this.textEdit1.Size = new System.Drawing.Size(379, 20);
+            this.textEdit1.Size = new System.Drawing.Size(378, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 4;
             // 
@@ -703,7 +708,7 @@ namespace YANFOE
             this.layoutControlGroup6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(988, 456);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(986, 454);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -713,10 +718,11 @@ namespace YANFOE
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layoutControlItem10});
+            this.layoutControlItem10,
+            this.layoutControlItem12});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 92);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(500, 116);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(499, 140);
             this.layoutControlGroup2.Text = "Credits";
             // 
             // layoutControlItem1
@@ -725,7 +731,7 @@ namespace YANFOE
             this.layoutControlItem1.CustomizationFormText = "Programming Lead";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem1.Text = "Development Lead";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -737,7 +743,7 @@ namespace YANFOE
             this.layoutControlItem2.CustomizationFormText = "Developer";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem2.Text = "Contributers";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -749,7 +755,7 @@ namespace YANFOE
             this.layoutControlItem10.CustomizationFormText = "QA Team";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem10.Text = "QA Team";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -761,7 +767,7 @@ namespace YANFOE
             this.layoutControlItem4});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(968, 92);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(966, 92);
             this.layoutControlGroup3.Text = "Version Info";
             // 
             // layoutControlItem3
@@ -772,7 +778,7 @@ namespace YANFOE
             this.layoutControlItem3.CustomizationFormText = "Current Version";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(944, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(942, 24);
             this.layoutControlItem3.Text = "Current Version";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -784,7 +790,7 @@ namespace YANFOE
             this.layoutControlItem4.CustomizationFormText = "Build";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(944, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(942, 24);
             this.layoutControlItem4.Text = "Build";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -793,9 +799,9 @@ namespace YANFOE
             this.layoutControlGroup4.CustomizationFormText = "License";
             this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem5});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(500, 92);
+            this.layoutControlGroup4.Location = new System.Drawing.Point(499, 92);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(468, 197);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(467, 196);
             this.layoutControlGroup4.Text = "License";
             // 
             // layoutControlItem5
@@ -804,7 +810,7 @@ namespace YANFOE
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(444, 153);
+            this.layoutControlItem5.Size = new System.Drawing.Size(443, 152);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -818,9 +824,9 @@ namespace YANFOE
             this.layoutControlItem7,
             this.layoutControlItem8,
             this.layoutControlItem9});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 208);
+            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 232);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
-            this.layoutControlGroup5.Size = new System.Drawing.Size(500, 228);
+            this.layoutControlGroup5.Size = new System.Drawing.Size(499, 202);
             this.layoutControlGroup5.Text = "Links";
             // 
             // layoutControlItem6
@@ -831,7 +837,7 @@ namespace YANFOE
             this.layoutControlItem6.CustomizationFormText = "Homepage";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem6.Text = "Homepage";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -843,7 +849,7 @@ namespace YANFOE
             this.layoutControlItem7.CustomizationFormText = "Issues";
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem7.Text = "Issues";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -855,7 +861,7 @@ namespace YANFOE
             this.layoutControlItem8.CustomizationFormText = "Source Code";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(476, 112);
+            this.layoutControlItem8.Size = new System.Drawing.Size(475, 86);
             this.layoutControlItem8.Text = "Source Code";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -867,7 +873,7 @@ namespace YANFOE
             this.layoutControlItem9.CustomizationFormText = "Forum";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(476, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(475, 24);
             this.layoutControlItem9.Text = "Forum";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(89, 13);
             // 
@@ -876,9 +882,9 @@ namespace YANFOE
             this.layoutControlGroup6.CustomizationFormText = "Thanks";
             this.layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem11});
-            this.layoutControlGroup6.Location = new System.Drawing.Point(500, 289);
+            this.layoutControlGroup6.Location = new System.Drawing.Point(499, 288);
             this.layoutControlGroup6.Name = "layoutControlGroup6";
-            this.layoutControlGroup6.Size = new System.Drawing.Size(468, 147);
+            this.layoutControlGroup6.Size = new System.Drawing.Size(467, 146);
             this.layoutControlGroup6.Text = "Thanks";
             // 
             // layoutControlItem11
@@ -887,7 +893,7 @@ namespace YANFOE
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(444, 103);
+            this.layoutControlItem11.Size = new System.Drawing.Size(443, 102);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -1065,6 +1071,28 @@ namespace YANFOE
             this.uiTimer.Interval = 50;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
             // 
+            // hyperLinkEdit5
+            // 
+            this.hyperLinkEdit5.EditValue = "http://dryicons.com";
+            this.hyperLinkEdit5.Location = new System.Drawing.Point(117, 208);
+            this.hyperLinkEdit5.MenuManager = this.barManager1;
+            this.hyperLinkEdit5.Name = "hyperLinkEdit5";
+            this.hyperLinkEdit5.Size = new System.Drawing.Size(378, 20);
+            this.hyperLinkEdit5.StyleController = this.layoutControl1;
+            this.hyperLinkEdit5.TabIndex = 15;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem12.Control = this.hyperLinkEdit5;
+            this.layoutControlItem12.CustomizationFormText = "Icons";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(475, 24);
+            this.layoutControlItem12.Text = "Icons";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(89, 13);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1085,8 +1113,6 @@ namespace YANFOE
             this.Text = "YANFOE 2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
-            this.Shown += new System.EventHandler(this.FrmMain_Shown);
-            this.SizeChanged += new System.EventHandler(this.FrmMain_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
@@ -1139,6 +1165,8 @@ namespace YANFOE
             ((System.ComponentModel.ISupportInitialize)(this.picThread3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picThread1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hyperLinkEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1230,5 +1258,7 @@ namespace YANFOE
         private DevExpress.XtraBars.BarButtonItem mnuHelpSourceCode;
         private DevExpress.XtraBars.BarButtonItem mnuHelpWiki;
         private DevExpress.XtraBars.BarButtonItem mnuDonate;
+        private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEdit5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
     }
 }

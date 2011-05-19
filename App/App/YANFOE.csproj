@@ -980,6 +980,9 @@
     <Content Include="Licences\DotNetZip.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Licences\DryIcons.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Licences\JSON.NET.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
