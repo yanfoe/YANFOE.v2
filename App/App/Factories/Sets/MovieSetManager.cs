@@ -519,6 +519,14 @@ namespace YANFOE.Factories.Sets
                 {
                     set.Movies.Remove((from m in set.Movies where m.MovieUniqueId == i select m).SingleOrDefault());
                 }
+
+                var count = 1;
+
+                foreach (var movieInSet in set.Movies)
+                {
+                    movieInSet.Order = count;
+                    count++;
+                }
             }
         }
 
