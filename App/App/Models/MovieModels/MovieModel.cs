@@ -22,6 +22,7 @@ namespace YANFOE.Models.MovieModels
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using DevExpress.LookAndFeel;
     using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
     using DevExpress.XtraEditors.DXErrorProvider;
@@ -436,7 +437,7 @@ namespace YANFOE.Models.MovieModels
                     return Resources.blank;
                 }
 
-                return Resources.smallanim;
+                return Resources.scraping;
             }
         }
 

@@ -605,12 +605,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="XtraForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="XtraForm1.Designer.cs">
-      <DependentUpon>XtraForm1.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
@@ -772,9 +766,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\TvControls\TvUserControl.resx">
       <DependentUpon>TvUserControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="XtraForm1.resx">
-      <DependentUpon>XtraForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Movie\ScraperGroups\Dutch.gz">
@@ -1005,12 +996,17 @@
     <None Include="Resources\keyboard.png" />
     <None Include="Resources\cloud_comment.png" />
     <None Include="Resources\info1.png" />
+    <None Include="Resources\blueprint.gif" />
+    <None Include="Resources\loading_white.gif" />
+    <None Include="Resources\loading_black.gif" />
+    <None Include="Resources\loading.gif" />
     <Content Include="Resources\refresh.png" />
     <None Include="Resources\tools1.png" />
     <None Include="Resources\tools2.png" />
     <None Include="Resources\school_board2.png" />
     <None Include="Resources\scrapergroupmanager.png" />
     <None Include="Resources\scrapergroupmanager1.png" />
+    <None Include="Resources\sharp.gif" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />

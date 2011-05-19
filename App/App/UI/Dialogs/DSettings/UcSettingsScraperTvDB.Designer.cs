@@ -49,7 +49,7 @@
             // 
             // picLoading
             // 
-            this.picLoading.EditValue = global::YANFOE.Properties.Resources.smallanim;
+            this.picLoading.EditValue = global::YANFOE.Properties.Resources.scraping;
             this.picLoading.Location = new System.Drawing.Point(245, 24);
             this.picLoading.Name = "picLoading";
             this.picLoading.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;

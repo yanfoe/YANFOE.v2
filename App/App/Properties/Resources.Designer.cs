@@ -697,6 +697,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap scraping {
+            get {
+                object obj = ResourceManager.GetObject("scraping", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap season {
             get {
                 object obj = ResourceManager.GetObject("season", resourceCulture);
@@ -714,13 +721,6 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap shut_down {
             get {
                 object obj = ResourceManager.GetObject("shut_down", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap smallanim {
-            get {
-                object obj = ResourceManager.GetObject("smallanim", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
