@@ -185,12 +185,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Add(MovieDBFactory.GetCurrentMovie().FanartAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -211,12 +205,6 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.StopLoading();
             this.imageMain.Image = image;
-
-            if (this.populateGallery)
-            {
-                this.galleryControl.Gallery.Groups.Add(MovieDBFactory.GetCurrentMovie().PosterAltGallery);
-                this.populateGallery = false;
-            }
         }
 
         /// <summary>
@@ -413,37 +401,47 @@ namespace YANFOE.UI.UserControls.CommonControls
             {
                 case GalleryType.MoviePoster:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 160);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(MovieDBFactory.GetCurrentMovie().PosterPathOnDisk))
                     {
                         this.MovieDBFactory_PosterLoaded(null, null);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessMoviePosterDownload();
                     }
 
-                    this.ProcessMoviePosterDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.ImageSize = new Size(100, 160);
+                        this.galleryControl.Gallery.Groups.Add(MovieDBFactory.GetCurrentMovie().PosterAltGallery);
+                        this.populateGallery = false;
+                    }
+
+                    
 
                     break;
 
                 case GalleryType.MovieFanart:
 
-                    if (this.populateGallery)
-                    {
-                        this.galleryControl.Gallery.ImageSize = new Size(100, 60);
-                        
-                    }
-
                     if (!string.IsNullOrEmpty(MovieDBFactory.GetCurrentMovie().FanartPathOnDisk))
                     {
                         this.MovieDBFactory_FanartLoaded(null, null);
-                        return;
+                    }
+                    else
+                    {
+                        this.ProcessMovieFanartDownload();
                     }
 
-                    this.ProcessMovieFanartDownload();
+                    if (this.populateGallery)
+                    {
+                        this.galleryControl.Gallery.Groups.Clear();
+                        this.galleryControl.Gallery.Groups.Add(MovieDBFactory.GetCurrentMovie().FanartAltGallery);
+                        this.populateGallery = false;
+                        this.galleryControl.Gallery.ImageSize = new Size(100, 60);
+                    }
+
+                    
 
                     break;
             }

@@ -777,7 +777,22 @@ namespace YANFOE.Models.MovieModels
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        Image resizedimage = ImageHandler.LoadImage(path, 100, 60);
+                        var thumbPath = path;
+
+                        if (path.Contains("-original"))
+                        {
+                            thumbPath = path.Replace("-original", "-thumb");
+                        }
+                        else if (path.Contains("-mid.jpg"))
+                        {
+                            thumbPath = path.Replace("-mid", "-thumb");
+                        }
+                        else if (path.Contains("-poster.jpg"))
+                        {
+                            thumbPath = path.Replace("-poster", "-thumb");
+                        }
+
+                        Image resizedimage = ImageHandler.LoadImage(thumbPath, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.Width + "x" + image.Height)
                             {

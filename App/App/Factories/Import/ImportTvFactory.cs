@@ -163,6 +163,7 @@ namespace YANFOE.Factories.Import
         public static void DoImportScan()
         {
             SeriesNameList = new BindingList<SeriesListModel>();
+            Scan = new SortedDictionary<string, ScanSeries>();
 
             // Get file list
             var filters = Get.InOutCollection.VideoExtentions;

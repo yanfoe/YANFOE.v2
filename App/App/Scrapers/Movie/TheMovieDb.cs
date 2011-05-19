@@ -752,15 +752,27 @@ namespace YANFOE.Scrapers.Movie
                 if (image.Attribute("size").Value == fanartSize || image.Attribute("size").Value == posterSize)
                 {
                     var Original = new Uri(image.Attribute("url").Value);
-                    var thumb = new Uri(Original.ToString().Replace("-poster", "-thumb"));
+                    var thumb = Original.ToString();
+
+                    if (thumb.Contains("-original"))
+                    {
+                        thumb = thumb.Replace("-original", "-thumb");
+                    }
+                    else if (thumb.Contains("-mid.jpg"))
+                    {
+                        thumb = thumb.Replace("-mid", "-thumb");
+                    }
+                    else if (thumb.Contains("-poster.jpg"))
+                    {
+                        thumb = thumb.Replace("-poster", "-thumb");
+                    }
+
                     var width = image.Attribute("width").Value.ToInt();
                     var height = image.Attribute("height").Value.ToInt();
 
                     var downloadItem = new DownloadItem
                         {
-                            Type = DownloadType.Binary, 
-                            Url = thumb.ToString(), 
-                            Section = Section.Movies
+                            Type = DownloadType.Binary, Url = thumb.ToString(), Section = Section.Movies 
                         };
 
                     Downloader.AddToBackgroundQue(downloadItem);
@@ -768,10 +780,7 @@ namespace YANFOE.Scrapers.Movie
                     output.Add(
                         new ImageDetailsModel
                             {
-                                Height = height, 
-                                Width = width, 
-                                UriFull = Original, 
-                                UriThumb = thumb
+                                Height = height, Width = width, UriFull = Original, UriThumb = new Uri(thumb) 
                             });
                 }
             }
