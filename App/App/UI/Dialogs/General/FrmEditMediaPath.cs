@@ -150,14 +150,25 @@ namespace YANFOE.UI.Dialogs.General
 
         #endregion
 
+        /// <summary>
+        /// Handles the TextChanged event of the txtMediaPath control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void txtMediaPath_TextChanged(object sender, EventArgs e)
         {
             btnOK.Enabled = Directory.Exists(txtMediaPath.Text);
         }
 
-        private void chkImportUsingFileName_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the CheckedChanged event of the chkFolderContainsMovies control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void chkFolderContainsMovies_CheckedChanged(object sender, EventArgs e)
         {
-
+            groupMovieNaming.Enabled = chkFolderContainsMovies.Checked;
+            groupMovieDefaults.Enabled = chkFolderContainsMovies.Checked;
         }
     }
 }
