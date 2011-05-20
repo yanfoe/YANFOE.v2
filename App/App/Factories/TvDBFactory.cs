@@ -635,7 +635,7 @@ namespace YANFOE.Factories
 
             var startPath = string.Empty;
 
-            startPath = smallVersion ? "http://cache.thetvdb.com/banners/_cache/" : "http://cache.thetvdb.com/banners/";
+            startPath = smallVersion ? "http://www.thetvdb.com/banners/_cache/" : "http://www.thetvdb.com/banners/";
 
             return startPath + value;
         }

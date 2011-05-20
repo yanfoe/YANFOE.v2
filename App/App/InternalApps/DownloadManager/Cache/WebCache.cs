@@ -149,7 +149,7 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
 
             // tvdb
             url = url.Replace(@"www.thetvdb.com", "[tv]");
-            url = url.Replace(@"cache.thetvdb.com", "[ctv]");
+            url = url.Replace(@"www.thetvdb.com", "[ctv]");
             url = url.Replace(@"banners", "[bn]");
             url = url.Replace(@"cache", "[_c]");
             url = url.Replace(@"original", "[or]");

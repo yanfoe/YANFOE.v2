@@ -17,6 +17,7 @@ namespace YANFOE.InternalApps.DownloadManager
     using System;
     using System.ComponentModel;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Threading;
     using System.Windows.Forms;
@@ -147,7 +148,7 @@ namespace YANFOE.InternalApps.DownloadManager
         /// <param name="downloadItem">
         /// The download item.
         /// </param>
-        public static void AddToBackgroundQue(DownloadItem downloadItem)
+        public static void AddToBackgroundQue(DownloadItem downloadItem, DownloadPriority downloadPriority = DownloadPriority.Normal)
         {
             if (Get.Web.EnableAddToBackgroundQue == false)
             {
@@ -160,6 +161,7 @@ namespace YANFOE.InternalApps.DownloadManager
             {
                 lock (BackgroundDownloadQue)
                 {
+                    downloadItem.Priority = downloadPriority;
                     BackgroundDownloadQue.Add(downloadItem);
                 }
             }
@@ -392,7 +394,9 @@ namespace YANFOE.InternalApps.DownloadManager
                     {
                         if (BackgroundDownloadQue.Count > 0)
                         {
-                            DownloadItem item = BackgroundDownloadQue[0];
+                            var orderedQue = (from q in BackgroundDownloadQue orderby q.Priority descending select q).ToList();
+
+                            DownloadItem item = orderedQue[0];
                             BackgroundDownloadQue.Remove(item);
 
                             var bgw = new BackgroundWorker();

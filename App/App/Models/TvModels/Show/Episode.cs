@@ -1013,7 +1013,7 @@ namespace YANFOE.Models.TvModels.Show
             this.EpisodeName = title;
             this.EpisodeNumber = XRead.GetInt(doc, "EpisodeNumber");
             this.FirstAired = XRead.GetDateTime(doc, "FirstAired", "yyyy-MM-dd");
-            this.GuestStars = XRead.GetString(doc, "GuestStars").ToPersonList('|', "http://cache.thetvdb.com/banners/");
+            this.GuestStars = XRead.GetString(doc, "GuestStars").ToPersonList('|', "http://www.thetvdb.com/banners/");
             this.IMDBID = XRead.GetString(doc, "IMDB_ID");
             this.Language = XRead.GetString(doc, "Language");
             this.Overview = XRead.GetString(doc, "Overview");

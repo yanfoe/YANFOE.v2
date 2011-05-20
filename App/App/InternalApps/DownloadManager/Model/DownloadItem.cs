@@ -41,6 +41,13 @@ namespace YANFOE.InternalApps.DownloadManager.Model
         AppleBinary
     }
 
+    public enum DownloadPriority
+    {
+        High = 2,
+        Normal = 1,
+        Low = 0
+    }
+
     /// <summary>
     /// The download item.
     /// </summary>
@@ -61,6 +68,8 @@ namespace YANFOE.InternalApps.DownloadManager.Model
             this.Progress = new Progress();
 
             this.CookieContainer = new CookieContainer();
+
+            this.Priority = DownloadPriority.Normal;
         }
 
         #endregion
@@ -106,6 +115,8 @@ namespace YANFOE.InternalApps.DownloadManager.Model
         /// Gets or sets Url.
         /// </summary>
         public string Url { get; set; }
+
+        public DownloadPriority Priority { get; set; }
 
         #endregion
 

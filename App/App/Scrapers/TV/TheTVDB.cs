@@ -100,10 +100,10 @@ namespace YANFOE.Scrapers.TV
         {
             if (useCache)
             {
-                return string.Format(@"http://cache.thetvdb.com/banners/_cache/{0}", filename); 
+                return string.Format(@"http://www.thetvdb.com/banners/_cache/{0}", filename); 
             }
 
-            return string.Format(@"http://cache.thetvdb.com/banners/{0}", filename);
+            return string.Format(@"http://www.thetvdb.com/banners/{0}", filename);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace YANFOE.Scrapers.TV
 
             if (!string.IsNullOrEmpty(details.SeriesBannerUrl))
             {
-                string url = "http://cache.thetvdb.com/banners/_cache/" + details.SeriesBannerUrl;
+                string url = "http://www.thetvdb.com/banners/_cache/" + details.SeriesBannerUrl;
 
                 string imagePath = Downloader.ProcessDownload(url, DownloadType.Binary, Section.Tv);
 
@@ -326,7 +326,7 @@ namespace YANFOE.Scrapers.TV
 
             string searchXml =
                 Downloader.ProcessDownload(
-                    string.Format("http://cache.thetvdb.com/api/GetSeries.php?seriesname={0}", value), 
+                    string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}", value), 
                     DownloadType.Html, 
                     Section.Tv);
 
@@ -371,7 +371,7 @@ namespace YANFOE.Scrapers.TV
         private static string DownloadSeriesZip(string seriesId, string language, bool skipCache = false)
         {
             string prePath = string.Format(
-                "http://cache.thetvdb.com/api/{0}/series/{1}/all/{2}.zip", TvdbApi, seriesId, Get.Scraper.TvDBLanguageAbbr);
+                "http://www.thetvdb.com/api/{0}/series/{1}/all/{2}.zip", TvdbApi, seriesId, Get.Scraper.TvDBLanguageAbbr);
 
             return Downloader.ProcessDownload(prePath, DownloadType.Binary, Section.Tv, skipCache);
         }
@@ -386,7 +386,7 @@ namespace YANFOE.Scrapers.TV
         {
             var downloadItem = new DownloadItem
                 {
-                    Url = "http://cache.thetvdb.com/api/Updates.php?type=none",
+                    Url = "http://www.thetvdb.com/api/Updates.php?type=none",
                     Type = DownloadType.Html 
                 };
 
@@ -396,9 +396,14 @@ namespace YANFOE.Scrapers.TV
 
             string serverTimeXml =
                 Downloader.ProcessDownload(
-                    string.Format(string.Format("http://cache.thetvdb.com/api/Updates.php?type=none")), 
+                    string.Format(string.Format("http://www.thetvdb.com/api/Updates.php?type=none")), 
                     DownloadType.Html, 
                     Section.Tv);
+
+            if (string.IsNullOrEmpty(serverTimeXml))
+            {
+                return string.Empty;
+            }
 
             var doc = new XmlDocument();
             doc.LoadXml(serverTimeXml);
