@@ -356,7 +356,6 @@ namespace YANFOE.InternalApps.DownloadManager
             var downloadItem = e.Argument as DownloadItem;
 
             downloadItem.Progress.Message = "Downloading " + downloadItem.Url;
-
             ProcessDownload(downloadItem);
 
             e.Result = downloadItem;
@@ -388,7 +387,7 @@ namespace YANFOE.InternalApps.DownloadManager
         {
             do
             {
-                if (CurrentQue < Get.Web.DownloadThreads && Get.Web.EnableBackgroundQueProcessing)
+                if (CurrentQue < 4 && Get.Web.EnableBackgroundQueProcessing)
                 {
                     lock (BackgroundDownloadQue)
                     {
@@ -406,7 +405,7 @@ namespace YANFOE.InternalApps.DownloadManager
                     }
                 }
 
-                Thread.Sleep(200);
+                Thread.Sleep(100);
             }
             while (true);
         }

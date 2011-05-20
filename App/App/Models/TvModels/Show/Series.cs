@@ -539,7 +539,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (!string.IsNullOrEmpty(this.fanartUrl))
                     {
                         string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.fanartUrl), Section.Tv);
+                            TvDBFactory.GetImageUrl(this.fanartUrl, true), Section.Tv);
                         this.SmallFanart = ImageHandler.LoadImage(url, 100, 60);
                         this.fanartPath = string.Empty;
                     }
@@ -837,7 +837,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (!string.IsNullOrEmpty(this.posterUrl))
                     {
                         string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.posterUrl), Section.Tv);
+                            TvDBFactory.GetImageUrl(this.posterUrl, true), Section.Tv);
                         this.SmallPoster = ImageHandler.LoadImage(url, 100, 150);
                         this.posterPath = string.Empty;
                     }
@@ -944,7 +944,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (!string.IsNullOrEmpty(this.seriesBannerUrl))
                     {
                         string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.seriesBannerUrl), Section.Tv);
+                            TvDBFactory.GetImageUrl(this.seriesBannerUrl, true), Section.Tv);
                         this.SmallFanart = ImageHandler.LoadImage(url, 100, 30);
                         this.seriesBannerPath = string.Empty;
                     }
@@ -1202,7 +1202,6 @@ namespace YANFOE.Models.TvModels.Show
             this.FanartUrl = XRead.GetString(doc, "fanart");
             this.Lastupdated = XRead.GetString(doc, "lastupdated");
             this.Zap2It_Id = XRead.GetString(doc, "zap2it_id");
-
             this.PosterUrl = XRead.GetString(doc, "poster");
 
             nodes = docList.GetElementsByTagName("Episode");
@@ -1261,6 +1260,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (seasonBanner.Count > 0)
                 {
                     season.BannerUrl = seasonBanner[0];
+                    //this.AddHighPriorityToBackgroundQueueWithCache(season.BannerUrl);
                 }
 
                 List<string> seasonPoster =
@@ -1270,6 +1270,7 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.posterUrl != null && seasonPoster.Count > 0)
                 {
                     season.PosterUrl = seasonPoster[0];
+                    //this.AddHighPriorityToBackgroundQueueWithCache(season.PosterUrl);
                 }
 
                 List<BannerDetails> seasonFanart = (from p in this.Banner.Fanart select p).ToList();
@@ -1281,6 +1282,11 @@ namespace YANFOE.Models.TvModels.Show
                 else if (seasonFanart.Count > 0)
                 {
                     season.FanartUrl = seasonFanart[0].BannerPath;
+                }
+
+                if (!string.IsNullOrEmpty(season.FanartUrl))
+                {
+                    //this.AddHighPriorityToBackgroundQueueWithCache(season.FanartUrl);
                 }
 
                 this.Seasons.Add(i, season);
@@ -1299,6 +1305,38 @@ namespace YANFOE.Models.TvModels.Show
                     this.Seasons[episodeNumber].Episodes.Add(episode);
                 }
             }
+
+            this.PreCacheSeriesThumbs();
+        }
+
+        public void AddHighPriorityToBackgroundQueue(string url)
+        {
+            Downloader.AddToBackgroundQue(
+                new DownloadItem
+                {
+                    Priority = DownloadPriority.High,
+                    Section = Section.Tv,
+                    Type = DownloadType.Binary,
+                    Url = TvDBFactory.GetImageUrl(url)
+                });
+        }
+
+        public void AddHighPriorityToBackgroundQueueCacheOnly(string url)
+        {
+            Downloader.AddToBackgroundQue(
+                new DownloadItem
+                    {
+                        Priority = DownloadPriority.High,
+                        Section = Section.Tv,
+                        Type = DownloadType.Binary,
+                        Url = TvDBFactory.GetImageUrl(url, true)
+                    });
+        }
+
+        public void AddHighPriorityToBackgroundQueueWithCache(string url)
+        {
+            AddHighPriorityToBackgroundQueue(url);
+            AddHighPriorityToBackgroundQueueCacheOnly(url);
         }
 
         #endregion
@@ -1423,6 +1461,46 @@ namespace YANFOE.Models.TvModels.Show
 
                 return gallery;
             }
+        }
+
+        public void PreCacheSeriesThumbs()
+        {
+            var imagesFanart = from i in this.Banner.Fanart
+                               select i;
+
+            foreach (var image in imagesFanart)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesPoster = from i in this.Banner.Poster
+                         orderby i.Rating descending
+                         select i;
+
+            foreach (var image in imagesPoster)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesSeries = from i in this.Banner.Series
+                                orderby i.Rating descending
+                                select i;
+
+            foreach (var image in imagesSeries)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesSeason = from i in this.Banner.Season
+                               orderby i.Rating descending
+                               select i;
+
+            foreach (var image in imagesSeason)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+
         }
 
         [JsonIgnore]
