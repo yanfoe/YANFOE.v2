@@ -89,7 +89,6 @@
     <Compile Include="ManagerTest.cs" />
     <Compile Include="MediaPathFileModelTest.cs" />
     <Compile Include="MovieScrapeFactoryTest.cs" />
-    <Compile Include="MovieScraperHandlerTest.cs" />
     <Compile Include="ScraperHandlerTest.cs" />
     <Compile Include="TheMovieDbTest.cs" />
     <Compile Include="TheTvdbTest.cs" />
