@@ -30,8 +30,6 @@ namespace YANFOE.UI.UserControls.MovieControls
     {
         private string currentGenre;
 
-        private string currentCountries;
-
         public MovieMainDetailsUserControl()
         {
             InitializeComponent();
@@ -39,7 +37,6 @@ namespace YANFOE.UI.UserControls.MovieControls
             Factories.MovieDBFactory.CurrentMovieChanged += this.MovieDBFactoryCurrentMovieChanged;
 
             this.currentGenre = string.Empty;
-            this.currentCountries = string.Empty;
 
             this.GenerateSources();
         }
@@ -71,6 +68,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             this.CreateBindings();
 
             Factories.Scraper.MovieScraperGroupFactory.GetScraperGroupsOnDisk(cmbScraperGroup);
+
         }
 
         private void SetupForm()
@@ -128,6 +126,8 @@ namespace YANFOE.UI.UserControls.MovieControls
             txtCert.DataBindings.Clear();
             txtTop250.DataBindings.Clear();
 
+            layoutControl1.DataBindings.Clear();
+
             grdActors.DataSource = null;
         }
 
@@ -163,6 +163,8 @@ namespace YANFOE.UI.UserControls.MovieControls
             cmbSource.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "VideoSource");
             txtCert.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Certification", true);
             txtTop250.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Top250", true);
+
+            layoutControl1.DataBindings.Add("Enabled", Factories.MovieDBFactory.GetCurrentMovie(), "Unlocked");
 
             this.PopulateStudios();
             this.PopulateGenres();
@@ -245,8 +247,6 @@ namespace YANFOE.UI.UserControls.MovieControls
             Enum.TryParse(Factories.MovieDBFactory.GetCurrentMovie().ScraperGroup, out type);
 
             cmbCountry.Properties.Items.Clear();
-
-            this.currentCountries = type.ToString();
 
             if (!Settings.Get.Countries.CountryDictionary.ContainsKey(type))
             {

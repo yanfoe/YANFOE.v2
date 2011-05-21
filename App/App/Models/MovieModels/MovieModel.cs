@@ -1113,6 +1113,14 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        public bool Unlocked
+        {
+            get
+            {
+                return !this.locked;
+            }
+        }
+
         /// <summary>
         /// Gets LockedImage.
         /// </summary>

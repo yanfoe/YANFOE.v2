@@ -125,9 +125,7 @@ namespace YANFOE.Factories.Import
 
                 if (file.Path != currentGetPathFiles)
                 {
-                    var files = FileHelper.GetFilesRecursive(file.Path, "*.*").ToArray();
-                    getFiles = (from f in files select f).ToArray();
-
+                    getFiles = FileHelper.GetFilesRecursive(file.Path, "*.*").ToArray();
                     currentGetPathFiles = file.Path;
                 }
 
@@ -162,16 +160,16 @@ namespace YANFOE.Factories.Import
                         FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, file.Path, getFiles)
                     };
 
-                var result = (from m in ImportDatabase where m.Title == movieModel.Title select m).ToList();
+                if (!string.IsNullOrEmpty(movieModel.NfoPathOnDisk))
+                {
+                    InOut.OutFactory.LoadMovie(movieModel);
+                    movieModel.ChangedText = false;
+                }
+
+                var result = (from m in ImportDatabase where m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim() select m).ToList();
 
                 if (result.Count == 0)
                 {
-                    if (!string.IsNullOrEmpty(movieModel.NfoPathOnDisk))
-                    {
-                        InOut.OutFactory.LoadMovie(movieModel);
-                        movieModel.ChangedText = false;
-                    }
-
                     if (!string.IsNullOrEmpty(movieModel.PosterPathOnDisk))
                     {
                         movieModel.GenerateSmallPoster(movieModel.PosterPathOnDisk);
