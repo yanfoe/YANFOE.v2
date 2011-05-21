@@ -121,7 +121,6 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void UpdateBlurayDemos()
         {
             string demoPath = MovieNaming.GetBluRayPath(Get.InOutCollection.MovieBlurayTestPath) +
-                              MovieNaming.GetBluRayName(Get.InOutCollection.MovieBlurayTestPath) +
                               Path.DirectorySeparatorChar;
             string demoFileName = MovieNaming.GetBluRayName(Get.InOutCollection.MovieBlurayTestPath);
             const string DemoExtention = "jpg";
@@ -157,8 +156,7 @@ namespace YANFOE.UI.Dialogs.DSettings
         /// </summary>
         private void UpdateDVDDemos()
         {
-            string demoPath = MovieNaming.GetDvdPath(Get.InOutCollection.MovieDVDTestPath) +
-                              MovieNaming.GetDvdName(Get.InOutCollection.MovieDVDTestPath) + Path.DirectorySeparatorChar;
+            string demoPath = MovieNaming.GetDvdPath(Get.InOutCollection.MovieDVDTestPath) + Path.DirectorySeparatorChar;
             string demoFileName = MovieNaming.GetDvdName(Get.InOutCollection.MovieDVDTestPath);
             const string DemoExtention = "jpg";
             const string DemoSetName = "DemoSetName";

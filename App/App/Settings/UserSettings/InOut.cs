@@ -32,7 +32,7 @@ namespace YANFOE.Settings.UserSettings
         /// <summary>
         /// The movie blu ray test path.
         /// </summary>
-        private string movieBluRayTestPath = @"c:\DVD\The Dark Knight (2008)\bdmv\stream\00000.m2ts";
+        private string movieBluRayTestPath = @"c:\Bluray\The Dark Knight (2008)\bdmv\stream\00000.m2ts";
 
         /// <summary>
         /// The movie dvd test path.
@@ -424,17 +424,17 @@ namespace YANFOE.Settings.UserSettings
             this.MovieSaveSettings[NFOType.YAMJ].NormalSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].NormalSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
 
-            this.MovieSaveSettings[NFOType.YAMJ].DvdPosterNameTemplate = "<path><filename>.<ext>";
-            this.MovieSaveSettings[NFOType.YAMJ].DvdFanartNameTemplate = "<path><filename>.fanart.<ext>";
-            this.MovieSaveSettings[NFOType.YAMJ].DvdTrailerNameTemplate = "<path><filename>.[TRAILER-<trailername>].<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].DvdPosterNameTemplate = "<path><filename>\\<filename>.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].DvdFanartNameTemplate = "<path><filename>\\<filename>.fanart.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].DvdTrailerNameTemplate = "<path><filename>\\<filename>.[TRAILER-<trailername>].<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].DvdNfoNameTemplate = "<path><filename>.nfo";
             this.MovieSaveSettings[NFOType.YAMJ].DvdSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].DvdSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
 
-            this.MovieSaveSettings[NFOType.YAMJ].BlurayPosterNameTemplate = "<path><filename>.<ext>";
-            this.MovieSaveSettings[NFOType.YAMJ].BlurayFanartNameTemplate = "<path><filename>.fanart.<ext>";
-            this.MovieSaveSettings[NFOType.YAMJ].BlurayTrailerNameTemplate = "<path><filename>.[TRAILER-<trailername>].<ext>";
-            this.MovieSaveSettings[NFOType.YAMJ].BlurayNfoNameTemplate = "<path><filename>.nfo";
+            this.MovieSaveSettings[NFOType.YAMJ].BlurayPosterNameTemplate = "<path><filename>\\<filename>.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].BlurayFanartNameTemplate = "<path><filename>\\<filename>.fanart.<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].BlurayTrailerNameTemplate = "<path><filename>\\<filename>.[TRAILER-<trailername>].<ext>";
+            this.MovieSaveSettings[NFOType.YAMJ].BlurayNfoNameTemplate = "<path><filename>\\<filename>.nfo";
             this.MovieSaveSettings[NFOType.YAMJ].BluraySetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
             this.MovieSaveSettings[NFOType.YAMJ].BluraySetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
         }
