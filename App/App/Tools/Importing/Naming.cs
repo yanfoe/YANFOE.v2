@@ -357,7 +357,9 @@ namespace YANFOE.Tools.Importing
                 return false;
             }
 
-            return path.ToLower().Contains("bdmv\\stream");
+            var check = path.ToLower().Contains("bdmv") && path.ToLower().Contains("stream");
+
+            return check;
         }
 
         /// <summary>
