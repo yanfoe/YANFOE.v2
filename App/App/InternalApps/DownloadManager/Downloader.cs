@@ -161,8 +161,13 @@ namespace YANFOE.InternalApps.DownloadManager
             {
                 lock (BackgroundDownloadQue)
                 {
-                    downloadItem.Priority = downloadPriority;
-                    BackgroundDownloadQue.Add(downloadItem);
+                    var check = (from d in BackgroundDownloadQue where d.Url == downloadItem.Url select d).SingleOrDefault();
+
+                    if (check == null)
+                    {
+                        downloadItem.Priority = downloadPriority;
+                        BackgroundDownloadQue.Add(downloadItem);
+                    }
                 }
             }
         }
