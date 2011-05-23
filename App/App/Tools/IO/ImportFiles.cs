@@ -54,8 +54,8 @@ namespace YANFOE.Tools.IO
         {
             var bgw = new BackgroundWorker();
 
-            bgw.DoWork += BgwDoWork;
-            bgw.RunWorkerCompleted += BgwRunWorkerCompleted;
+            bgw.DoWork += Bgw_DoWork;
+            bgw.RunWorkerCompleted += Bgw_RunWorkerCompleted;
 
             importInProgress = true;
 
@@ -126,20 +126,16 @@ namespace YANFOE.Tools.IO
             }
         }
 
+
         /// <summary>
-        /// BGWs the do work.
+        /// Handles the DoWork event of the Bgw control.
         /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void BgwDoWork(object sender, DoWorkEventArgs e)
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private static void Bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             var mediaPathModel = e.Argument as MediaPathModel;
             var files = FileHelper.GetFilesRecursive(mediaPathModel.MediaPath).ToArray();
-
             var returnCollection = new List<object>(2) { mediaPathModel, files };
 
             e.Result = returnCollection;
@@ -148,15 +144,11 @@ namespace YANFOE.Tools.IO
         }
 
         /// <summary>
-        /// BGWs the run worker completed.
+        /// Handles the RunWorkerCompleted event of the Bgw control.
         /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void BgwRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private static void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             var returnCollection = e.Result as List<object>;
 
@@ -172,26 +164,5 @@ namespace YANFOE.Tools.IO
 
         #endregion
 
-        ///// <summary>
-        ///// Removes the missing entries.
-        ///// </summary>
-        ///// <param name="mediaPathModel">The media path model.</param>
-        // private static void RemoveMissingEntries(MediaPathModel mediaPathModel)
-        // {
-        // var removeCollection = new List<MediaPathFileModel>();
-
-        // foreach (var file in mediaPathModel.FileCollection)
-        // {
-        // if (!File.Exists(file.Path))
-        // {
-        // removeCollection.Add(file);
-        // }
-        // }
-
-        // foreach (var file in removeCollection)
-        // {
-        // mediaPathModel.FileCollection.Remove(file);
-        // }
-        // }
     }
 }

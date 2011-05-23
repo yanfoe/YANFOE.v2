@@ -20,7 +20,9 @@ namespace YANFOE.UI.Dialogs.General
 
     using DevExpress.XtraEditors;
 
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Tools.IO;
 
     /// <summary>
@@ -29,6 +31,8 @@ namespace YANFOE.UI.Dialogs.General
     public partial class FrmEditMediaPath : XtraForm
     {
         public bool Confirmed;
+        private MediaPathModel editingMediaPathModel = new MediaPathModel();
+
         private MediaPathActionType actionType;
 
         #region Constructors and Destructors
@@ -42,11 +46,12 @@ namespace YANFOE.UI.Dialogs.General
         /// <summary>
         /// Initializes a new instance of the <see cref="FrmEditMediaPath"/> class.
         /// </summary>
-        public FrmEditMediaPath(MediaPathActionType type)
+        public FrmEditMediaPath(MediaPathActionType type, MediaPathModel mediaPathModel)
         {
             this.InitializeComponent();
 
             this.actionType = type;
+            this.editingMediaPathModel = mediaPathModel;
 
             this.SetupBindings();
         }
@@ -60,21 +65,16 @@ namespace YANFOE.UI.Dialogs.General
         /// </summary>
         public void SetupBindings()
         {
-            dxErrorProvider1.DataSource = MediaPathDBFactory.CurrentMediaPathEdit;
+            dxErrorProvider1.DataSource = this.editingMediaPathModel;
 
-            this.txtMediaPath.DataBindings.Add("Text", MediaPathDBFactory.CurrentMediaPathEdit, "MediaPath", true);
+            this.txtMediaPath.DataBindings.Add("Text", this.editingMediaPathModel, "MediaPath", true);
+            this.chkImportUsingFileName.DataBindings.Add("Checked", this.editingMediaPathModel, "ImportUsingFileName", true);
+            this.chkImportUsingParentFolderName.DataBindings.Add("Checked", this.editingMediaPathModel, "ImportUsingParentFolderName", true);
+            this.chkFolderContainsMovies.DataBindings.Add("Checked", this.editingMediaPathModel, "ContainsMovies", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.chkFolderContainsTvShows.DataBindings.Add("Checked", this.editingMediaPathModel, "ContainsTv", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.chkImportUsingFileName.DataBindings.Add("Checked", MediaPathDBFactory.CurrentMediaPathEdit, "ImportUsingFileName");
-
-            this.chkImportUsingParentFolderName.DataBindings.Add("Checked", MediaPathDBFactory.CurrentMediaPathEdit, "ImportUsingParentFolderName");
-
-            this.chkFolderContainsMovies.DataBindings.Add("Checked", MediaPathDBFactory.CurrentMediaPathEdit, "ContainsMovies");
-
-            this.chkFolderContainsTvShows.DataBindings.Add("Checked", MediaPathDBFactory.CurrentMediaPathEdit, "ContainsTv");
-
-            cmbScraperGroup.DataBindings.Add("Text", MediaPathDBFactory.CurrentMediaPathEdit, "ScraperGroup");
-
-            cmbSource.DataBindings.Add("Text", MediaPathDBFactory.CurrentMediaPathEdit, "DefaultSource");
+            cmbScraperGroup.DataBindings.Add("Text", this.editingMediaPathModel, "ScraperGroup", true);
+            cmbSource.DataBindings.Add("Text", this.editingMediaPathModel, "DefaultSource", true);
 
             Factories.Scraper.MovieScraperGroupFactory.GetScraperGroupsOnDisk(cmbScraperGroup);
 
@@ -116,7 +116,7 @@ namespace YANFOE.UI.Dialogs.General
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                MediaPathDBFactory.CurrentMediaPathEdit.MediaPath = dialog.SelectedPath;
+                this.editingMediaPathModel.MediaPath = dialog.SelectedPath;
             }
         }
 
@@ -133,16 +133,18 @@ namespace YANFOE.UI.Dialogs.General
                 return;
             }
 
+            switch (actionType)
+            {
+                case MediaPathActionType.Add:
+                    MediaPathDBFactory.MediaPathDB.Add(this.editingMediaPathModel);
+                    break;
+            }
+
+            MediaPathDBFactory.CurrentMediaPath = this.editingMediaPathModel;
+
             this.Close();
 
-            if (actionType == MediaPathActionType.Add)
-            {
-                MediaPathDBFactory.CommitNewRecord();
-            }
-            else if (actionType == MediaPathActionType.Edit)
-            {
-                MediaPathDBFactory.CommitChangedRecord();    
-            }
+            DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.MediaPathDb);
 
             ImportFiles.ScanMediaPath(MediaPathDBFactory.CurrentMediaPath);
 
@@ -169,6 +171,32 @@ namespace YANFOE.UI.Dialogs.General
         {
             groupMovieNaming.Enabled = chkFolderContainsMovies.Checked;
             groupMovieDefaults.Enabled = chkFolderContainsMovies.Checked;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the chkFolderContainsMovies control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void chkFolderContainsMovies_Click(object sender, EventArgs e)
+        {
+            chkFolderContainsMovies.Checked = true;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the chkFolderContainsTvShows control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void chkFolderContainsTvShows_Click(object sender, EventArgs e)
+        {
+            chkFolderContainsTvShows.Checked = true;
+
+            chkImportUsingFileName.Checked = false;
+            chkImportUsingParentFolderName.Checked = false;
+
+            cmbSource.Text = string.Empty;
+            cmbScraperGroup.Text = string.Empty;
         }
     }
 }

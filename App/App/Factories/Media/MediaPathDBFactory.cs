@@ -24,6 +24,7 @@ namespace YANFOE.Factories.Media
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Settings;
+    using YANFOE.Tools.Extentions;
     using YANFOE.Tools.IO;
 
     /// <summary>
@@ -82,60 +83,6 @@ namespace YANFOE.Factories.Media
 
         #region Public Methods
 
-        /// <summary>
-        /// Create new record at CurrentMediaPathEdit
-        /// </summary>
-        public static void AddNewRecord()
-        {
-            CurrentMediaPathEdit = new MediaPathModel();
-        }
-
-        /// <summary>
-        /// Add a MediaPathModel to the MediaPathDB Collection
-        /// </summary>
-        /// <param name="mediaPathModel">The MediaPathModel to add.</param>
-        public static void AddToDatabase(MediaPathModel mediaPathModel)
-        {
-            EnsureMediaPathDatabaseExists();
-            MediaPathDB.Add(mediaPathModel);
-        }
-
-        /// <summary>
-        /// Clears the MediaPathDB database.
-        /// </summary>
-        public static void ClearDatabase()
-        {
-            EnsureMediaPathDatabaseExists();
-            MediaPathDB.Clear();
-        }
-
-        /// <summary>
-        /// Commits CurrentMediaPathEdit to CurrentMediaPath
-        /// </summary>
-        public static void CommitChangedRecord()
-        {
-            CurrentMediaPath = CurrentMediaPathEdit;
-            SaveMediaPathDB();
-        }
-
-        /// <summary>
-        /// Adds a new record to MediaPathDB
-        /// </summary>
-        public static void CommitNewRecord()
-        {
-            MediaPathDB.Add(CurrentMediaPathEdit);
-            CurrentMediaPath = CurrentMediaPathEdit;
-        }
-
-        /// <summary>
-        /// Get a MediaPathModel ready to edit.
-        /// </summary>
-        /// <param name="mediaPathModel">The media path model.</param>
-        public static void EditRecord(MediaPathModel mediaPathModel)
-        {
-            CurrentMediaPathEdit = mediaPathModel;
-            SaveMediaPathDB();
-        }
 
         /// <summary>
         /// Ensure media path database exists.

@@ -163,9 +163,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-            MediaPathDBFactory.AddNewRecord();
-
-            var frmEditMediaPath = new FrmEditMediaPath(FrmEditMediaPath.MediaPathActionType.Add);
+            var frmEditMediaPath = new FrmEditMediaPath(FrmEditMediaPath.MediaPathActionType.Add, new MediaPathModel());
             frmEditMediaPath.ShowDialog(this);
 
             grdViewMain.RefreshData();
@@ -253,16 +251,17 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// </summary>
         private void EditCurrentRow()
         {
-            int[] selectedRows = this.grdViewMain.GetSelectedRows();
+            var selectedRows = this.grdViewMain.GetSelectedRows();
 
             if (selectedRows.Length == 0)
             {
                 return;
             }
 
-            MediaPathDBFactory.EditRecord(this.grdViewMain.GetRow(selectedRows[0]) as MediaPathModel);
+            var frmEditMediaPath = new FrmEditMediaPath(
+                FrmEditMediaPath.MediaPathActionType.Edit, 
+                this.grdViewMain.GetRow(selectedRows[0]) as MediaPathModel);
 
-            var frmEditMediaPath = new FrmEditMediaPath(FrmEditMediaPath.MediaPathActionType.Edit);
             frmEditMediaPath.ShowDialog(this);
         }
 

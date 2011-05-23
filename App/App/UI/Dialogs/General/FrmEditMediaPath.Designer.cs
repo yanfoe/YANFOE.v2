@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOK = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.chkFolderContainsMovies = new DevExpress.XtraEditors.CheckEdit();
             this.chkFolderContainsTvShows = new DevExpress.XtraEditors.CheckEdit();
@@ -45,8 +47,6 @@
             this.btnMediaPathBrowse = new DevExpress.XtraEditors.SimpleButton();
             this.txtMediaPath = new DevExpress.XtraEditors.TextEdit();
             this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.btnOK = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
@@ -82,6 +82,27 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Import Details";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Image = global::YANFOE.Properties.Resources.delete32;
+            this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnCancel.Location = new System.Drawing.Point(420, 177);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(68, 50);
+            this.btnCancel.TabIndex = 9;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
+            // 
+            // btnOK
+            // 
+            this.btnOK.Image = global::YANFOE.Properties.Resources.accept32;
+            this.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnOK.Location = new System.Drawing.Point(421, 121);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(67, 49);
+            this.btnOK.TabIndex = 8;
+            this.btnOK.Click += new System.EventHandler(this.BtnOkClick);
+            // 
             // groupControl4
             // 
             this.groupControl4.Controls.Add(this.chkFolderContainsMovies);
@@ -103,6 +124,7 @@
             this.chkFolderContainsMovies.TabIndex = 2;
             this.chkFolderContainsMovies.TabStop = false;
             this.chkFolderContainsMovies.CheckedChanged += new System.EventHandler(this.chkFolderContainsMovies_CheckedChanged);
+            this.chkFolderContainsMovies.Click += new System.EventHandler(this.chkFolderContainsMovies_Click);
             // 
             // chkFolderContainsTvShows
             // 
@@ -114,6 +136,7 @@
             this.chkFolderContainsTvShows.Size = new System.Drawing.Size(157, 19);
             this.chkFolderContainsTvShows.TabIndex = 1;
             this.chkFolderContainsTvShows.TabStop = false;
+            this.chkFolderContainsTvShows.Click += new System.EventHandler(this.chkFolderContainsTvShows_Click);
             // 
             // groupMovieDefaults
             // 
@@ -227,27 +250,6 @@
             // dxErrorProvider1
             // 
             this.dxErrorProvider1.ContainerControl = this;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Image = global::YANFOE.Properties.Resources.accept32;
-            this.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnOK.Location = new System.Drawing.Point(421, 121);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(67, 49);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Click += new System.EventHandler(this.BtnOkClick);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Image = global::YANFOE.Properties.Resources.delete32;
-            this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnCancel.Location = new System.Drawing.Point(420, 177);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(68, 50);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // FrmEditMediaPath
             // 

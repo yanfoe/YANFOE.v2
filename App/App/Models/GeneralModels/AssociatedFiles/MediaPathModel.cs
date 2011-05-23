@@ -98,6 +98,8 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             this.mediaPath = string.Empty;
 
             this.fileCollection = new BindingList<MediaPathFileModel>();
+            this.defaultSource = string.Empty;
+            this.scraperGroup = string.Empty;
         }
 
         #endregion
@@ -116,8 +118,10 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
             set
             {
-                this.containsMovies = value;
-                this.OnPropertyChanged("ContainsMovies");
+                if (this.containsMovies != value)
+                {
+                    this.containsMovies = value;
+                }
             }
         }
 
@@ -133,8 +137,10 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
             set
             {
-                this.containsTv = value;
-                this.OnPropertyChanged("ContainsTv");
+                if (this.containsTv != value)
+                {
+                    this.containsTv = value;
+                }
             }
         }
 
@@ -325,55 +331,6 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                 this.scraperGroup = value;
                 this.OnPropertyChanged("ScraperGroup");
             }
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// Create clone of MediaPathModel
-        /// </summary>
-        /// <returns>
-        /// Clone of MediaPathModel
-        /// </returns>
-        public MediaPathModel Copy()
-        {
-            var newMediaPath = new MediaPathModel
-                {
-                    MediaPath = this.mediaPath, 
-                    LastScannedTime = this.lastScannedTime, 
-                    FoundFiles = this.foundFiles, 
-                    RecursiveScan = this.recursiveScan, 
-                    ScraperGroup = this.scraperGroup, 
-                    DefaultSource = this.defaultSource, 
-                    ContainsMovies = this.containsMovies, 
-                    ContainsTv = this.containsTv, 
-                    ImportUsingFileName = this.importUsingFileName, 
-                    importUsingParentFolderName = this.importUsingParentFolderName
-                };
-
-            return newMediaPath;
-        }
-
-        /// <summary>
-        /// The copy to.
-        /// </summary>
-        /// <param name="currentMediaPath">
-        /// The current media path.
-        /// </param>
-        public void CopyTo(MediaPathModel currentMediaPath)
-        {
-            currentMediaPath.MediaPath = this.mediaPath;
-            currentMediaPath.LastScannedTime = this.lastScannedTime;
-            currentMediaPath.FoundFiles = this.foundFiles;
-            currentMediaPath.RecursiveScan = this.recursiveScan;
-            currentMediaPath.ScraperGroup = this.scraperGroup;
-            currentMediaPath.DefaultSource = this.defaultSource;
-            currentMediaPath.ContainsTv = this.containsTv;
-            currentMediaPath.ContainsMovies = this.containsMovies;
-            currentMediaPath.ImportUsingFileName = this.importUsingFileName;
-            currentMediaPath.ImportUsingParentFolderName = this.importUsingParentFolderName;
         }
 
         #endregion
