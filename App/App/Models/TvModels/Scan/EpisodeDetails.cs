@@ -37,6 +37,7 @@ namespace YANFOE.Models.TvModels.Scan
         /// </summary>
         public EpisodeDetails()
         {
+            this.seriesName = string.Empty;
             this.SecondaryNumbers = new List<int>();
         }
 
