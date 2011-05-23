@@ -19,6 +19,8 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using System.Diagnostics;
     using System.Threading;
 
+    using DevExpress.XtraLayout.Utils;
+
     using YANFOE.Factories;
     using YANFOE.Factories.Import;
     using YANFOE.Models.MovieModels;
@@ -29,8 +31,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraForm
     {
         #region Fields
-
-        private Timer tmr = new Timer();
 
         private BackgroundWorker bgw = new BackgroundWorker();
 
@@ -61,7 +61,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             InitializeComponent();
 
             this.bgwCollection = new BindingList<BackgroundWorker>();
-            SetupDataBindings();
+            this.SetupDataBindings();
         }
 
         #endregion
@@ -83,6 +83,13 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             this.grdMovies.DataSource = ImportMoviesFactory.ImportDatabase;
 
+            btnOK.Enabled = false;
+            this.layoutControlItemScrape.Visibility = LayoutVisibility.Never;
+            this.layoutControlItemProgress.Visibility = LayoutVisibility.Always;
+            grpMain.Enabled = false;
+
+            Factories.UI.Windows7UIFactory.ProgressChanged += this.Windows7UIFactory_ProgressChanged;
+
             this.bgw = new BackgroundWorker();
             this.bgw.DoWork += this.bgw_DoWork;
             this.bgw.RunWorkerCompleted += this.bgw_RunWorkerCompleted;
@@ -90,6 +97,33 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             this.ClearBindings();
             this.SetBindings();
+        }
+
+        delegate void Progress(int value, int max);
+
+        /// <summary>
+        /// Handles the ProgressChanged event of the Windows7UIFactory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void Windows7UIFactory_ProgressChanged(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                BeginInvoke(
+                    new Progress(UpdateProgress),
+                    new object[]
+                        {
+                            Factories.UI.Windows7UIFactory.ProgressValue, 
+                            Factories.UI.Windows7UIFactory.ProgressMax 
+                        });
+            }
+        }
+
+        public void UpdateProgress(int value, int max)
+        {
+            progressBarControl1.EditValue = value;
+            progressBarControl1.Properties.Maximum = max;
         }
 
         /// <summary>
@@ -110,6 +144,10 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.initializing = false;
+            this.btnOK.Enabled = true;
+            this.layoutControlItemScrape.Visibility = LayoutVisibility.Always;
+            this.layoutControlItemProgress.Visibility = LayoutVisibility.Never;
+            grpMain.Enabled = true;
         }
 
         #endregion
@@ -257,6 +295,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void BtnCancelClick(object sender, EventArgs e)
         {
+            ImportMoviesFactory.CancelMovieImport();
             this.Close();
         }
 

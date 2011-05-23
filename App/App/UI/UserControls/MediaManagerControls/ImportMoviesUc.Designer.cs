@@ -79,7 +79,7 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItemGrid = new DevExpress.XtraLayout.LayoutControlItem();
             this.grdMovies = new DevExpress.XtraGrid.GridControl();
             this.grdViewMoviesList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmStatus = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -87,12 +87,14 @@
             this.clmTitle = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmYear = new DevExpress.XtraGrid.Columns.GridColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItemMainDetails = new DevExpress.XtraLayout.LayoutControlItem();
             this.grpMain = new DevExpress.XtraEditors.GroupControl();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItemScrape = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnBulkScan = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
+            this.layoutControlItemProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOK = new DevExpress.XtraEditors.SimpleButton();
             this.lblCurrentActivity = new DevExpress.XtraEditors.LabelControl();
@@ -131,17 +133,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMovies)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewMoviesList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMainDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpMain)).BeginInit();
             this.grpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemScrape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -153,7 +157,7 @@
             // 
             this.txtPoster.Location = new System.Drawing.Point(46, 28);
             this.txtPoster.Name = "txtPoster";
-            this.txtPoster.Size = new System.Drawing.Size(360, 20);
+            this.txtPoster.Size = new System.Drawing.Size(416, 20);
             this.txtPoster.StyleController = this.layoutControl3;
             this.txtPoster.TabIndex = 5;
             // 
@@ -170,7 +174,7 @@
             this.layoutControl3.MaximumSize = new System.Drawing.Size(0, 80);
             this.layoutControl3.Name = "layoutControl3";
             this.layoutControl3.Root = this.layoutControlGroup3;
-            this.layoutControl3.Size = new System.Drawing.Size(447, 80);
+            this.layoutControl3.Size = new System.Drawing.Size(508, 80);
             this.layoutControl3.TabIndex = 0;
             this.layoutControl3.Text = "layoutControl3";
             // 
@@ -178,9 +182,9 @@
             // 
             this.btnChangeFanart.Image = ((System.Drawing.Image)(resources.GetObject("btnChangeFanart.Image")));
             this.btnChangeFanart.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnChangeFanart.Location = new System.Drawing.Point(410, 54);
+            this.btnChangeFanart.Location = new System.Drawing.Point(466, 54);
             this.btnChangeFanart.Name = "btnChangeFanart";
-            this.btnChangeFanart.Size = new System.Drawing.Size(35, 22);
+            this.btnChangeFanart.Size = new System.Drawing.Size(40, 22);
             this.btnChangeFanart.StyleController = this.layoutControl3;
             toolTipTitleItem1.Text = "Select a new Fanart image";
             superToolTip1.Items.Add(toolTipTitleItem1);
@@ -191,9 +195,9 @@
             // 
             this.btnChangePoster.Image = ((System.Drawing.Image)(resources.GetObject("btnChangePoster.Image")));
             this.btnChangePoster.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnChangePoster.Location = new System.Drawing.Point(410, 28);
+            this.btnChangePoster.Location = new System.Drawing.Point(466, 28);
             this.btnChangePoster.Name = "btnChangePoster";
-            this.btnChangePoster.Size = new System.Drawing.Size(35, 22);
+            this.btnChangePoster.Size = new System.Drawing.Size(40, 22);
             this.btnChangePoster.StyleController = this.layoutControl3;
             toolTipTitleItem2.Text = "Select a new poster image.";
             superToolTip2.Items.Add(toolTipTitleItem2);
@@ -204,9 +208,9 @@
             // 
             this.btnChangeNfo.Image = global::YANFOE.Properties.Resources.folder16;
             this.btnChangeNfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnChangeNfo.Location = new System.Drawing.Point(410, 2);
+            this.btnChangeNfo.Location = new System.Drawing.Point(466, 2);
             this.btnChangeNfo.Name = "btnChangeNfo";
-            this.btnChangeNfo.Size = new System.Drawing.Size(35, 22);
+            this.btnChangeNfo.Size = new System.Drawing.Size(40, 22);
             this.btnChangeNfo.StyleController = this.layoutControl3;
             toolTipTitleItem3.Text = "Select a new NFO file";
             superToolTip3.Items.Add(toolTipTitleItem3);
@@ -217,7 +221,7 @@
             // 
             this.txtFanart.Location = new System.Drawing.Point(46, 54);
             this.txtFanart.Name = "txtFanart";
-            this.txtFanart.Size = new System.Drawing.Size(360, 20);
+            this.txtFanart.Size = new System.Drawing.Size(416, 20);
             this.txtFanart.StyleController = this.layoutControl3;
             this.txtFanart.TabIndex = 6;
             // 
@@ -225,7 +229,7 @@
             // 
             this.txtNfo.Location = new System.Drawing.Point(46, 2);
             this.txtNfo.Name = "txtNfo";
-            this.txtNfo.Size = new System.Drawing.Size(360, 20);
+            this.txtNfo.Size = new System.Drawing.Size(416, 20);
             this.txtNfo.StyleController = this.layoutControl3;
             this.txtNfo.TabIndex = 4;
             // 
@@ -244,7 +248,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(447, 80);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(508, 80);
             this.layoutControlGroup3.Text = "layoutControlGroup3";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -257,7 +261,7 @@
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem15.Name = "layoutControlItem15";
             this.layoutControlItem15.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.layoutControlItem15.Size = new System.Drawing.Size(408, 26);
+            this.layoutControlItem15.Size = new System.Drawing.Size(464, 26);
             this.layoutControlItem15.Text = "NFO";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(32, 13);
             // 
@@ -270,7 +274,7 @@
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem16.Name = "layoutControlItem16";
             this.layoutControlItem16.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.layoutControlItem16.Size = new System.Drawing.Size(408, 26);
+            this.layoutControlItem16.Size = new System.Drawing.Size(464, 26);
             this.layoutControlItem16.Text = "Poster";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(32, 13);
             // 
@@ -283,7 +287,7 @@
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 52);
             this.layoutControlItem17.Name = "layoutControlItem17";
             this.layoutControlItem17.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.layoutControlItem17.Size = new System.Drawing.Size(408, 28);
+            this.layoutControlItem17.Size = new System.Drawing.Size(464, 28);
             this.layoutControlItem17.Text = "Fanart";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(32, 13);
             // 
@@ -291,9 +295,9 @@
             // 
             this.layoutControlItem18.Control = this.btnChangeNfo;
             this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
-            this.layoutControlItem18.Location = new System.Drawing.Point(408, 0);
+            this.layoutControlItem18.Location = new System.Drawing.Point(464, 0);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(39, 26);
+            this.layoutControlItem18.Size = new System.Drawing.Size(44, 26);
             this.layoutControlItem18.Text = "layoutControlItem18";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem18.TextToControlDistance = 0;
@@ -303,9 +307,9 @@
             // 
             this.layoutControlItem19.Control = this.btnChangePoster;
             this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
-            this.layoutControlItem19.Location = new System.Drawing.Point(408, 26);
+            this.layoutControlItem19.Location = new System.Drawing.Point(464, 26);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(39, 26);
+            this.layoutControlItem19.Size = new System.Drawing.Size(44, 26);
             this.layoutControlItem19.Text = "layoutControlItem19";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem19.TextToControlDistance = 0;
@@ -315,9 +319,9 @@
             // 
             this.layoutControlItem20.Control = this.btnChangeFanart;
             this.layoutControlItem20.CustomizationFormText = "layoutControlItem20";
-            this.layoutControlItem20.Location = new System.Drawing.Point(408, 52);
+            this.layoutControlItem20.Location = new System.Drawing.Point(464, 52);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(39, 28);
+            this.layoutControlItem20.Size = new System.Drawing.Size(44, 28);
             this.layoutControlItem20.Text = "layoutControlItem20";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem20.TextToControlDistance = 0;
@@ -329,21 +333,21 @@
             this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem3.Control = this.txtYear;
             this.layoutControlItem3.CustomizationFormText = "Year";
-            this.layoutControlItem3.Location = new System.Drawing.Point(335, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(380, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(114, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(129, 24);
             this.layoutControlItem3.Text = "Year";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(38, 13);
             // 
             // txtYear
             // 
-            this.txtYear.Location = new System.Drawing.Point(379, 2);
+            this.txtYear.Location = new System.Drawing.Point(424, 2);
             this.txtYear.Name = "txtYear";
             this.txtYear.Properties.Mask.AutoComplete = DevExpress.XtraEditors.Mask.AutoCompleteType.None;
             this.txtYear.Properties.Mask.BeepOnError = true;
             this.txtYear.Properties.Mask.EditMask = "([1][9]\\d\\d|20[0-9][0-9])|0";
             this.txtYear.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtYear.Size = new System.Drawing.Size(68, 20);
+            this.txtYear.Size = new System.Drawing.Size(83, 20);
             this.txtYear.StyleController = this.layoutControl2;
             this.txtYear.TabIndex = 4;
             // 
@@ -360,7 +364,7 @@
             this.layoutControl2.Location = new System.Drawing.Point(2, 22);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(774, 378);
+            this.layoutControl2.Size = new System.Drawing.Size(877, 378);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -371,36 +375,36 @@
             this.panelControl3.MaximumSize = new System.Drawing.Size(0, 90);
             this.panelControl3.MinimumSize = new System.Drawing.Size(0, 90);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(451, 90);
+            this.panelControl3.Size = new System.Drawing.Size(512, 90);
             this.panelControl3.TabIndex = 14;
             // 
             // picBox
             // 
-            this.picBox.Location = new System.Drawing.Point(457, 26);
+            this.picBox.Location = new System.Drawing.Point(518, 26);
             this.picBox.Name = "picBox";
             this.picBox.Properties.ShowMenu = false;
             this.picBox.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
-            this.picBox.Size = new System.Drawing.Size(315, 350);
+            this.picBox.Size = new System.Drawing.Size(357, 350);
             this.picBox.StyleController = this.layoutControl2;
             this.picBox.TabIndex = 11;
             // 
             // txtTmdbId
             // 
-            this.txtTmdbId.Location = new System.Drawing.Point(493, 2);
+            this.txtTmdbId.Location = new System.Drawing.Point(553, 2);
             this.txtTmdbId.Name = "txtTmdbId";
             this.txtTmdbId.Properties.Mask.EditMask = "\\d*";
             this.txtTmdbId.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtTmdbId.Size = new System.Drawing.Size(128, 20);
+            this.txtTmdbId.Size = new System.Drawing.Size(151, 20);
             this.txtTmdbId.StyleController = this.layoutControl2;
             this.txtTmdbId.TabIndex = 10;
             // 
             // txtImdbID
             // 
-            this.txtImdbID.Location = new System.Drawing.Point(667, 2);
+            this.txtImdbID.Location = new System.Drawing.Point(750, 2);
             this.txtImdbID.Name = "txtImdbID";
             this.txtImdbID.Properties.Mask.EditMask = "\\d{7}";
             this.txtImdbID.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtImdbID.Size = new System.Drawing.Size(105, 20);
+            this.txtImdbID.Size = new System.Drawing.Size(125, 20);
             this.txtImdbID.StyleController = this.layoutControl2;
             superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem4.Text = "IMDB MovieUniqueId #";
@@ -417,7 +421,7 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(44, 2);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(289, 20);
+            this.txtTitle.Size = new System.Drawing.Size(334, 20);
             this.txtTitle.StyleController = this.layoutControl2;
             this.txtTitle.TabIndex = 5;
             // 
@@ -426,7 +430,7 @@
             this.grdAssociatedFiles.Location = new System.Drawing.Point(2, 26);
             this.grdAssociatedFiles.MainView = this.grdViewMovieFiles;
             this.grdAssociatedFiles.Name = "grdAssociatedFiles";
-            this.grdAssociatedFiles.Size = new System.Drawing.Size(451, 256);
+            this.grdAssociatedFiles.Size = new System.Drawing.Size(512, 256);
             this.grdAssociatedFiles.TabIndex = 6;
             this.grdAssociatedFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewMovieFiles});
@@ -463,7 +467,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(774, 378);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(877, 378);
             this.layoutControlGroup2.Text = "Root";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -475,7 +479,7 @@
             this.layoutControlItem4.CustomizationFormText = "Title";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(335, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(380, 24);
             this.layoutControlItem4.Text = "Title";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(38, 13);
             // 
@@ -485,7 +489,7 @@
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(455, 260);
+            this.layoutControlItem5.Size = new System.Drawing.Size(516, 260);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -495,9 +499,9 @@
             // 
             this.layoutControlItem11.Control = this.picBox;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(455, 24);
+            this.layoutControlItem11.Location = new System.Drawing.Point(516, 24);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(319, 354);
+            this.layoutControlItem11.Size = new System.Drawing.Size(361, 354);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -509,7 +513,7 @@
             this.layoutControlItem14.CustomizationFormText = "layoutControlItem14";
             this.layoutControlItem14.Location = new System.Drawing.Point(0, 284);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(455, 94);
+            this.layoutControlItem14.Size = new System.Drawing.Size(516, 94);
             this.layoutControlItem14.Text = "layoutControlItem14";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem14.TextToControlDistance = 0;
@@ -521,9 +525,9 @@
             this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem10.Control = this.txtTmdbId;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(449, 0);
+            this.layoutControlItem10.Location = new System.Drawing.Point(509, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(174, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(197, 24);
             this.layoutControlItem10.Text = "tMDb Id";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(38, 13);
             // 
@@ -533,9 +537,9 @@
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem7.Control = this.txtImdbID;
             this.layoutControlItem7.CustomizationFormText = "IMDB Id";
-            this.layoutControlItem7.Location = new System.Drawing.Point(623, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(706, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(151, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(171, 24);
             this.layoutControlItem7.Text = "IMDB Id";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(38, 13);
             // 
@@ -543,21 +547,21 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(406, 0);
+            this.splitterItem1.Location = new System.Drawing.Point(303, 0);
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(5, 406);
             // 
-            // layoutControlItem1
+            // layoutControlItemGrid
             // 
-            this.layoutControlItem1.Control = this.grdMovies;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(406, 356);
-            this.layoutControlItem1.Text = "layoutControlItem1";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
+            this.layoutControlItemGrid.Control = this.grdMovies;
+            this.layoutControlItemGrid.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItemGrid.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItemGrid.Name = "layoutControlItemGrid";
+            this.layoutControlItemGrid.Size = new System.Drawing.Size(303, 334);
+            this.layoutControlItemGrid.Text = "layoutControlItemGrid";
+            this.layoutControlItemGrid.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItemGrid.TextToControlDistance = 0;
+            this.layoutControlItemGrid.TextVisible = false;
             // 
             // grdMovies
             // 
@@ -567,7 +571,7 @@
             this.grdMovies.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             this.grdMovies.ShowOnlyPredefinedDetails = true;
-            this.grdMovies.Size = new System.Drawing.Size(402, 352);
+            this.grdMovies.Size = new System.Drawing.Size(299, 330);
             this.grdMovies.TabIndex = 6;
             this.grdMovies.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewMoviesList});
@@ -622,24 +626,24 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.TimerTick);
             // 
-            // layoutControlItem2
+            // layoutControlItemMainDetails
             // 
-            this.layoutControlItem2.Control = this.grpMain;
-            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(411, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(782, 406);
-            this.layoutControlItem2.Text = "layoutControlItem2";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextToControlDistance = 0;
-            this.layoutControlItem2.TextVisible = false;
+            this.layoutControlItemMainDetails.Control = this.grpMain;
+            this.layoutControlItemMainDetails.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItemMainDetails.Location = new System.Drawing.Point(308, 0);
+            this.layoutControlItemMainDetails.Name = "layoutControlItemMainDetails";
+            this.layoutControlItemMainDetails.Size = new System.Drawing.Size(885, 406);
+            this.layoutControlItemMainDetails.Text = "layoutControlItemMainDetails";
+            this.layoutControlItemMainDetails.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItemMainDetails.TextToControlDistance = 0;
+            this.layoutControlItemMainDetails.TextVisible = false;
             // 
             // grpMain
             // 
             this.grpMain.Controls.Add(this.layoutControl2);
-            this.grpMain.Location = new System.Drawing.Point(413, 2);
+            this.grpMain.Location = new System.Drawing.Point(310, 2);
             this.grpMain.Name = "grpMain";
-            this.grpMain.Size = new System.Drawing.Size(778, 402);
+            this.grpMain.Size = new System.Drawing.Size(881, 402);
             this.grpMain.TabIndex = 5;
             this.grpMain.Text = "Edit Default Scan Settings";
             // 
@@ -649,10 +653,11 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2,
             this.splitterItem1,
-            this.layoutControlItem1,
-            this.layoutControlItem6});
+            this.layoutControlItemGrid,
+            this.layoutControlItemScrape,
+            this.layoutControlItemMainDetails,
+            this.layoutControlItemProgress});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -660,17 +665,17 @@
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
-            // layoutControlItem6
+            // layoutControlItemScrape
             // 
-            this.layoutControlItem6.Control = this.btnBulkScan;
-            this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 356);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(406, 50);
-            this.layoutControlItem6.Text = "layoutControlItem6";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextToControlDistance = 0;
-            this.layoutControlItem6.TextVisible = false;
+            this.layoutControlItemScrape.Control = this.btnBulkScan;
+            this.layoutControlItemScrape.CustomizationFormText = "layoutControlItem6";
+            this.layoutControlItemScrape.Location = new System.Drawing.Point(0, 356);
+            this.layoutControlItemScrape.Name = "layoutControlItemScrape";
+            this.layoutControlItemScrape.Size = new System.Drawing.Size(303, 50);
+            this.layoutControlItemScrape.Text = "layoutControlItemScrape";
+            this.layoutControlItemScrape.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItemScrape.TextToControlDistance = 0;
+            this.layoutControlItemScrape.TextVisible = false;
             // 
             // btnBulkScan
             // 
@@ -680,7 +685,7 @@
             this.btnBulkScan.MaximumSize = new System.Drawing.Size(0, 46);
             this.btnBulkScan.MinimumSize = new System.Drawing.Size(0, 46);
             this.btnBulkScan.Name = "btnBulkScan";
-            this.btnBulkScan.Size = new System.Drawing.Size(402, 46);
+            this.btnBulkScan.Size = new System.Drawing.Size(299, 46);
             this.btnBulkScan.StyleController = this.layoutControl1;
             toolTipTitleItem5.Text = "Quick Scan Selected Movies";
             toolTipItem2.LeftIndent = 6;
@@ -692,16 +697,38 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.progressBarControl1);
             this.layoutControl1.Controls.Add(this.btnBulkScan);
             this.layoutControl1.Controls.Add(this.grdMovies);
             this.layoutControl1.Controls.Add(this.grpMain);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(727, 227, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(1193, 406);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // progressBarControl1
+            // 
+            this.progressBarControl1.Location = new System.Drawing.Point(2, 336);
+            this.progressBarControl1.Name = "progressBarControl1";
+            this.progressBarControl1.Size = new System.Drawing.Size(299, 18);
+            this.progressBarControl1.StyleController = this.layoutControl1;
+            this.progressBarControl1.TabIndex = 7;
+            // 
+            // layoutControlItemProgress
+            // 
+            this.layoutControlItemProgress.Control = this.progressBarControl1;
+            this.layoutControlItemProgress.CustomizationFormText = "layoutControlItemProgress";
+            this.layoutControlItemProgress.Location = new System.Drawing.Point(0, 334);
+            this.layoutControlItemProgress.Name = "layoutControlItemProgress";
+            this.layoutControlItemProgress.Size = new System.Drawing.Size(303, 22);
+            this.layoutControlItemProgress.Text = "layoutControlItemProgress";
+            this.layoutControlItemProgress.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItemProgress.TextToControlDistance = 0;
+            this.layoutControlItemProgress.TextVisible = false;
             // 
             // btnCancel
             // 
@@ -809,17 +836,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMovies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewMoviesList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemMainDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpMain)).EndInit();
             this.grpMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemScrape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItemProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
@@ -865,13 +894,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItemGrid;
         private DevExpress.XtraGrid.GridControl grdMovies;
         private DevExpress.XtraGrid.Views.Grid.GridView grdViewMoviesList;
         private DevExpress.XtraGrid.Columns.GridColumn clmTitle;
         private DevExpress.XtraGrid.Columns.GridColumn clmYear;
         private System.Windows.Forms.Timer timer1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItemMainDetails;
         private DevExpress.XtraEditors.GroupControl grpMain;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
@@ -883,7 +912,9 @@
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
         private DevExpress.XtraGrid.Columns.GridColumn clmStatus;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItemScrape;
         private DevExpress.XtraEditors.SimpleButton btnBulkScan;
+        private DevExpress.XtraEditors.ProgressBarControl progressBarControl1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItemProgress;
     }
 }

@@ -29,6 +29,8 @@ namespace YANFOE.Factories.Import
     /// </summary>
     public static class ImportMoviesFactory
     {
+        
+
         /// <summary>
         /// Initializes static members of the <see cref="ImportMoviesFactory"/> class. 
         /// </summary>
@@ -37,6 +39,8 @@ namespace YANFOE.Factories.Import
             ImportDatabase = new BindingList<MovieModel>();
             CurrentRecord = new MovieModel();
         }
+
+        private static bool cancelImport;
 
         /// <summary>
         /// Gets or sets the current record.
@@ -61,6 +65,11 @@ namespace YANFOE.Factories.Import
         public static BindingList<MovieModel> GetImportMovieDatabase()
         {
             return ImportDatabase;
+        }
+
+        public static void CancelMovieImport()
+        {
+            cancelImport = true;
         }
 
         /// <summary>
@@ -104,6 +113,8 @@ namespace YANFOE.Factories.Import
         /// </summary>
         public static void ConvertMediaPathImportToDB()
         {
+            cancelImport = false;
+
             var db = MediaPathDBFactory.GetMediaPathMoviesUnsorted();
 
             var count = 0;
@@ -119,6 +130,11 @@ namespace YANFOE.Factories.Import
 
             foreach (var file in db)
             {
+                if (cancelImport)
+                {
+                    break;
+                }
+
                 MovieDBFactory.ImportProgressCurrent = count;
 
                 MovieDBFactory.ImportProgressStatus = string.Format("Processing: " + file.PathAndFileName);
