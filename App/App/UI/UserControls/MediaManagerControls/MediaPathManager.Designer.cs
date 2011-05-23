@@ -47,8 +47,10 @@
             this.lblCurrentStatus = new DevExpress.XtraEditors.LabelControl();
             this.grdMediaPathList = new DevExpress.XtraGrid.GridControl();
             this.grdViewMain = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -288,13 +290,25 @@
             // grdViewMain
             // 
             this.grdViewMain.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn5});
             this.grdViewMain.GridControl = this.grdMediaPathList;
             this.grdViewMain.Name = "grdViewMain";
+            this.grdViewMain.OptionsDetail.EnableMasterViewMode = false;
             this.grdViewMain.OptionsSelection.MultiSelect = true;
             this.grdViewMain.OptionsView.ShowGroupPanel = false;
             this.grdViewMain.DoubleClick += new System.EventHandler(this.grdViewMain_DoubleClick);
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Name By";
+            this.gridColumn3.FieldName = "NameFileBy";
+            this.gridColumn3.MaxWidth = 100;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
             // 
             // gridColumn1
             // 
@@ -318,6 +332,15 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
             this.gridColumn2.Width = 40;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Contains";
+            this.gridColumn5.FieldName = "Contains";
+            this.gridColumn5.MaxWidth = 100;
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 3;
             // 
             // layoutControlGroup1
             // 
@@ -594,5 +617,7 @@
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private System.Windows.Forms.Timer timer;
         private DevExpress.XtraLayout.SplitterItem splitterItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

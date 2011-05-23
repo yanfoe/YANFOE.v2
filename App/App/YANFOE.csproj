@@ -517,16 +517,10 @@
       <DependentUpon>LogsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.Designer.cs">
       <DependentUpon>ImportMoviesUc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\UserControls\MediaManagerControls\MediaManagerUc.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\UserControls\MediaManagerControls\MediaManagerUc.Designer.cs">
-      <DependentUpon>MediaManagerUc.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\MediaPathManager.cs">
       <SubType>UserControl</SubType>
@@ -733,9 +727,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.resx">
       <DependentUpon>ImportMoviesUc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserControls\MediaManagerControls\MediaManagerUc.resx">
-      <DependentUpon>MediaManagerUc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\MediaManagerControls\MediaPathManager.resx">
       <DependentUpon>MediaPathManager.cs</DependentUpon>

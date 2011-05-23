@@ -254,6 +254,27 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
+        /// Gets or sets Contains.
+        /// </summary>
+        public string Contains
+        {
+            get
+            {
+                if (this.ContainsMovies)
+                {
+                    return "Movies";
+                }
+
+                if (this.ContainsTv)
+                {
+                    return "TV";
+                }
+
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets LastScannedTime.
         /// </summary>
         public DateTime LastScannedTime

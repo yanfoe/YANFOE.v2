@@ -26,7 +26,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
     using Timer = System.Windows.Forms.Timer;
 
-    public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraUserControl
+    public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraForm
     {
         #region Fields
 
@@ -60,20 +60,8 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             InitializeComponent();
 
-            bgwCollection = new BindingList<BackgroundWorker>();
-
-            tmr.Start();
-            tmr.Tick += new EventHandler(tmr_Tick);
-        }
-
-        /// <summary>
-        /// Handles the Tick event of the tmr control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void tmr_Tick(object sender, EventArgs e)
-        {
-            //FormElementsEnabled(!this.initializing);
+            this.bgwCollection = new BindingList<BackgroundWorker>();
+            SetupDataBindings();
         }
 
         #endregion
@@ -269,7 +257,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void BtnCancelClick(object sender, EventArgs e)
         {
-            InvokeCancelClicked(new EventArgs());
+            this.Close();
         }
 
         /// <summary>
@@ -281,24 +269,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             MovieDBFactory.RemoveMissingMovies();
             ImportMoviesFactory.MergeImportDatabaseWithMain();
-            this.InvokeOkClicked(new EventArgs());
-        }
-
-        /// <summary>
-        /// Event handler for the BtnBulkScan Click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnBulkScanClick(object sender, EventArgs e)
-        {
-            this.ClearBindings();
-
-            var bgw = new BackgroundWorker();
-            bgw.DoWork += this.BgwMultiDoWork;
-            bgw.RunWorkerCompleted += this.BgwMultiRunWorkerCompleted;
-            bgw.RunWorkerAsync();
-
-            this.FormElementsEnabled(false);
+            this.Close();
         }
 
         /// <summary>
