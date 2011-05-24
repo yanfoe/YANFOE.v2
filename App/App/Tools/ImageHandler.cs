@@ -22,6 +22,8 @@ namespace YANFOE.Tools
     using System.IO;
     using System.Linq;
 
+    using YANFOE.Properties;
+
     public class ImageHandler
     {
         /// <summary>
@@ -70,10 +72,8 @@ namespace YANFOE.Tools
             }
             catch (Exception)
             {
-                return null;
+                return Resources.picture;
             }
-
-
         }
 
         public static Image LoadImage(string filePath, Size size)
@@ -98,13 +98,11 @@ namespace YANFOE.Tools
             {
                 return LoadImage(thumbPath);
             }
-            else
-            {
-                var image = LoadImage(filePath);
-                var resizedImage = ResizeImage(image, width, height);
-                resizedImage.Save(thumbPath);
-                return resizedImage;
-            }
+
+            var image = LoadImage(filePath);
+            var resizedImage = ResizeImage(image, width, height);
+            resizedImage.Save(thumbPath);
+            return resizedImage;
         }
 
         public static void ResizeImage(string OriginalFile, string NewFile, int newWidth, int MaxHeight, bool OnlyResizeIfWider, int quality)
