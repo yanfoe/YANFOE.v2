@@ -136,6 +136,12 @@ namespace YANFOE.IO
                     // Company
                     XWrite.WriteEnclosedElement(xmlWriter, "company", movieModel.SetStudio);
 
+                    // Country
+                    foreach (var country in movieModel.Country)
+                    {
+                        XWrite.WriteEnclosedElement(xmlWriter, "country", country);
+                    }
+
                     // Actor
                     int count = 1;
                     foreach (PersonModel actor in movieModel.Cast)
