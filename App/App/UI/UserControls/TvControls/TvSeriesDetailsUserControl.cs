@@ -49,6 +49,9 @@ namespace YANFOE.UI.UserControls.TvControls
 
         private void SetupBindings()
         {
+            layoutControlGroup.DataBindings.Clear();
+            layoutControlGroup.DataBindings.Add("Enabled", Factories.TvDBFactory.CurrentSeries, "NotLocked");
+
             txtTitle.DataBindings.Clear();
             txtTitle.DataBindings.Add("Text", Factories.TvDBFactory.CurrentSeries, "SeriesName");
 

@@ -663,7 +663,16 @@ namespace YANFOE.Models.TvModels.Show
             {
                 this.isLocked = value;
                 this.OnPropertyChanged("IsLocked", true);
+                this.OnPropertyChanged("NotLocked", true);
                 this.OnPropertyChanged("LockedImage");
+            }
+        }
+
+        public bool NotLocked
+        {
+            get
+            {
+                return !this.isLocked;
             }
         }
 

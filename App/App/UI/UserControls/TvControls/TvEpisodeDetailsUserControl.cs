@@ -49,6 +49,12 @@ namespace YANFOE.UI.UserControls.TvControls
         /// </summary>
         private void RefreshBindings()
         {
+            layoutControlGroupDetails.DataBindings.Clear();
+            layoutControlGroupDetails.DataBindings.Add("Enabled", TvDBFactory.CurrentEpisode, "NotLocked");
+
+            layoutControlGroupGuestStars.DataBindings.Clear();
+            layoutControlGroupGuestStars.DataBindings.Add("Enabled", TvDBFactory.CurrentEpisode, "NotLocked");
+
             txtTitle.DataBindings.Clear();
             txtTitle.DataBindings.Add("Text", TvDBFactory.CurrentEpisode, "EpisodeName");
 

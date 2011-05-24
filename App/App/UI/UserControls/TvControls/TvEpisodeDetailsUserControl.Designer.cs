@@ -44,20 +44,21 @@
             this.txtPlot = new DevExpress.XtraEditors.MemoEdit();
             this.txtTitle = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlGroupGuestStars = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroupDetails = new DevExpress.XtraLayout.LayoutControlGroup();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdActors)).BeginInit();
@@ -74,20 +75,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPlot.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupGuestStars)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -116,6 +118,7 @@
             // tvTopMenuUserControl1
             // 
             this.tvTopMenuUserControl1.Location = new System.Drawing.Point(2, 2);
+            this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
             this.tvTopMenuUserControl1.Size = new System.Drawing.Size(797, 48);
@@ -124,10 +127,10 @@
             // 
             // grdActors
             // 
-            this.grdActors.Location = new System.Drawing.Point(552, 101);
+            this.grdActors.Location = new System.Drawing.Point(552, 77);
             this.grdActors.MainView = this.gridViewActors;
             this.grdActors.Name = "grdActors";
-            this.grdActors.Size = new System.Drawing.Size(244, 355);
+            this.grdActors.Size = new System.Drawing.Size(244, 427);
             this.grdActors.TabIndex = 15;
             this.grdActors.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewActors});
@@ -151,57 +154,57 @@
             // 
             // txtProductionCode
             // 
-            this.txtProductionCode.Location = new System.Drawing.Point(308, 487);
+            this.txtProductionCode.Location = new System.Drawing.Point(308, 460);
             this.txtProductionCode.Name = "txtProductionCode";
             this.txtProductionCode.Properties.NullValuePrompt = "No Production Code";
             this.txtProductionCode.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtProductionCode.Size = new System.Drawing.Size(232, 20);
+            this.txtProductionCode.Size = new System.Drawing.Size(229, 20);
             this.txtProductionCode.StyleController = this.layoutControl1;
             this.txtProductionCode.TabIndex = 14;
             // 
             // txtEpisodeNumber
             // 
             this.txtEpisodeNumber.Enabled = false;
-            this.txtEpisodeNumber.Location = new System.Drawing.Point(615, 54);
+            this.txtEpisodeNumber.Location = new System.Drawing.Point(339, 81);
             this.txtEpisodeNumber.Name = "txtEpisodeNumber";
-            this.txtEpisodeNumber.Size = new System.Drawing.Size(184, 20);
+            this.txtEpisodeNumber.Size = new System.Drawing.Size(198, 20);
             this.txtEpisodeNumber.StyleController = this.layoutControl1;
             this.txtEpisodeNumber.TabIndex = 12;
             // 
             // txtRating
             // 
-            this.txtRating.Location = new System.Drawing.Point(68, 487);
+            this.txtRating.Location = new System.Drawing.Point(71, 460);
             this.txtRating.Name = "txtRating";
             this.txtRating.Properties.NullValuePrompt = "No Rating";
             this.txtRating.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtRating.Size = new System.Drawing.Size(170, 20);
+            this.txtRating.Size = new System.Drawing.Size(167, 20);
             this.txtRating.StyleController = this.layoutControl1;
             this.txtRating.TabIndex = 9;
             // 
             // txtLanguage
             // 
-            this.txtLanguage.Location = new System.Drawing.Point(615, 487);
+            this.txtLanguage.Location = new System.Drawing.Point(308, 484);
             this.txtLanguage.Name = "txtLanguage";
             this.txtLanguage.Properties.NullValuePrompt = "No Language";
             this.txtLanguage.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtLanguage.Size = new System.Drawing.Size(184, 20);
+            this.txtLanguage.Size = new System.Drawing.Size(229, 20);
             this.txtLanguage.StyleController = this.layoutControl1;
             this.txtLanguage.TabIndex = 8;
             // 
             // txtWriter
             // 
-            this.txtWriter.Location = new System.Drawing.Point(618, 460);
+            this.txtWriter.Location = new System.Drawing.Point(71, 484);
             this.txtWriter.Name = "txtWriter";
             this.txtWriter.Properties.NullValuePrompt = "No Writers";
             this.txtWriter.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtWriter.Size = new System.Drawing.Size(178, 20);
+            this.txtWriter.Size = new System.Drawing.Size(167, 20);
             this.txtWriter.StyleController = this.layoutControl1;
             this.txtWriter.TabIndex = 7;
             // 
             // txtAired
             // 
             this.txtAired.EditValue = null;
-            this.txtAired.Location = new System.Drawing.Point(68, 78);
+            this.txtAired.Location = new System.Drawing.Point(71, 81);
             this.txtAired.MinimumSize = new System.Drawing.Size(100, 0);
             this.txtAired.Name = "txtAired";
             this.txtAired.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -211,47 +214,47 @@
             this.txtAired.Properties.NullValuePromptShowForEmptyValue = true;
             this.txtAired.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.txtAired.Size = new System.Drawing.Size(472, 20);
+            this.txtAired.Size = new System.Drawing.Size(198, 20);
             this.txtAired.StyleController = this.layoutControl1;
             this.txtAired.TabIndex = 13;
             // 
             // txtImdb
             // 
-            this.txtImdb.Location = new System.Drawing.Point(309, 463);
+            this.txtImdb.Location = new System.Drawing.Point(309, 436);
             this.txtImdb.Name = "txtImdb";
             this.txtImdb.Properties.NullValuePrompt = "No IMDB Id";
             this.txtImdb.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtImdb.Size = new System.Drawing.Size(231, 20);
+            this.txtImdb.Size = new System.Drawing.Size(228, 20);
             this.txtImdb.StyleController = this.layoutControl1;
             this.txtImdb.TabIndex = 11;
             // 
             // txtDirector
             // 
-            this.txtDirector.Location = new System.Drawing.Point(68, 463);
+            this.txtDirector.Location = new System.Drawing.Point(71, 436);
             this.txtDirector.Name = "txtDirector";
             this.txtDirector.Properties.NullValuePrompt = "No Director";
             this.txtDirector.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtDirector.Size = new System.Drawing.Size(171, 20);
+            this.txtDirector.Size = new System.Drawing.Size(168, 20);
             this.txtDirector.StyleController = this.layoutControl1;
             this.txtDirector.TabIndex = 6;
             // 
             // txtPlot
             // 
-            this.txtPlot.Location = new System.Drawing.Point(68, 102);
+            this.txtPlot.Location = new System.Drawing.Point(71, 105);
             this.txtPlot.Name = "txtPlot";
             this.txtPlot.Properties.NullValuePrompt = "No Plot";
             this.txtPlot.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtPlot.Size = new System.Drawing.Size(472, 357);
+            this.txtPlot.Size = new System.Drawing.Size(466, 327);
             this.txtPlot.StyleController = this.layoutControl1;
             this.txtPlot.TabIndex = 5;
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(68, 54);
+            this.txtTitle.Location = new System.Drawing.Point(71, 57);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Properties.NullValuePrompt = "No Title";
             this.txtTitle.Properties.NullValuePromptShowForEmptyValue = true;
-            this.txtTitle.Size = new System.Drawing.Size(472, 20);
+            this.txtTitle.Size = new System.Drawing.Size(466, 20);
             this.txtTitle.StyleController = this.layoutControl1;
             this.txtTitle.TabIndex = 4;
             // 
@@ -261,61 +264,16 @@
             this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup1.GroupBordersVisible = false;
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem5,
-            this.layoutControlItem6,
-            this.layoutControlItem9,
-            this.layoutControlItem7,
             this.splitterItem1,
-            this.layoutControlItem10,
-            this.layoutControlItem8,
-            this.layoutControlGroup2,
-            this.layoutControlItem12});
+            this.layoutControlGroupGuestStars,
+            this.layoutControlItem12,
+            this.layoutControlGroupDetails});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(801, 509);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem1.Control = this.txtTitle;
-            this.layoutControlItem1.CustomizationFormText = "Title";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 52);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(542, 24);
-            this.layoutControlItem1.Text = "Title";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem2.Control = this.txtPlot;
-            this.layoutControlItem2.CustomizationFormText = "Plot";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 100);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(542, 361);
-            this.layoutControlItem2.Text = "Plot";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem3.Control = this.txtDirector;
-            this.layoutControlItem3.CustomizationFormText = "Director";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 461);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(241, 24);
-            this.layoutControlItem3.Text = "Director";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(62, 13);
             // 
             // layoutControlItem5
             // 
@@ -323,23 +281,11 @@
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem5.Control = this.txtLanguage;
             this.layoutControlItem5.CustomizationFormText = "Language";
-            this.layoutControlItem5.Location = new System.Drawing.Point(547, 485);
+            this.layoutControlItem5.Location = new System.Drawing.Point(237, 427);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(254, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(299, 24);
             this.layoutControlItem5.Text = "Language";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem6.Control = this.txtRating;
-            this.layoutControlItem6.CustomizationFormText = "Rating";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 485);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(240, 24);
-            this.layoutControlItem6.Text = "Rating";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(62, 13);
             // 
             // layoutControlItem9
             // 
@@ -347,23 +293,11 @@
             this.layoutControlItem9.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem9.Control = this.txtEpisodeNumber;
             this.layoutControlItem9.CustomizationFormText = "Episode #";
-            this.layoutControlItem9.Location = new System.Drawing.Point(547, 52);
+            this.layoutControlItem9.Location = new System.Drawing.Point(268, 24);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(254, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(268, 24);
             this.layoutControlItem9.Text = "Episode #";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem7.Control = this.txtProductionCode;
-            this.layoutControlItem7.CustomizationFormText = "Production Code";
-            this.layoutControlItem7.Location = new System.Drawing.Point(240, 485);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(302, 24);
-            this.layoutControlItem7.Text = "Production #";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(62, 13);
             // 
             // splitterItem1
             // 
@@ -373,41 +307,16 @@
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(5, 457);
             // 
-            // layoutControlItem10
+            // layoutControlGroupGuestStars
             // 
-            this.layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem10.Control = this.txtAired;
-            this.layoutControlItem10.CustomizationFormText = "Aired";
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 76);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(542, 24);
-            this.layoutControlItem10.Text = "Aired";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem8.Control = this.txtImdb;
-            this.layoutControlItem8.CustomizationFormText = "IMDB Id";
-            this.layoutControlItem8.Location = new System.Drawing.Point(241, 461);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(301, 24);
-            this.layoutControlItem8.Text = "IMDB Id";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(62, 13);
-            // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.CustomizationFormText = "Guest Stars";
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem11,
-            this.layoutControlItem4});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(547, 76);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(254, 409);
-            this.layoutControlGroup2.Text = "Guest Stars";
+            this.layoutControlGroupGuestStars.CustomizationFormText = "Guest Stars";
+            this.layoutControlGroupGuestStars.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem11});
+            this.layoutControlGroupGuestStars.Location = new System.Drawing.Point(547, 52);
+            this.layoutControlGroupGuestStars.Name = "layoutControlGroupGuestStars";
+            this.layoutControlGroupGuestStars.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroupGuestStars.Size = new System.Drawing.Size(254, 457);
+            this.layoutControlGroupGuestStars.Text = "Guest Stars";
             // 
             // layoutControlItem11
             // 
@@ -415,7 +324,7 @@
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(248, 359);
+            this.layoutControlItem11.Size = new System.Drawing.Size(248, 431);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -427,9 +336,9 @@
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem4.Control = this.txtWriter;
             this.layoutControlItem4.CustomizationFormText = "Writer";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 359);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 427);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(248, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(237, 24);
             this.layoutControlItem4.Text = "Writer";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(62, 13);
             // 
@@ -444,6 +353,111 @@
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;
             this.layoutControlItem12.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem8.Control = this.txtImdb;
+            this.layoutControlItem8.CustomizationFormText = "IMDB Id";
+            this.layoutControlItem8.Location = new System.Drawing.Point(238, 379);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(298, 24);
+            this.layoutControlItem8.Text = "IMDB Id";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem10.Control = this.txtAired;
+            this.layoutControlItem10.CustomizationFormText = "Aired";
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(268, 24);
+            this.layoutControlItem10.Text = "Aired";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem7.Control = this.txtProductionCode;
+            this.layoutControlItem7.CustomizationFormText = "Production Code";
+            this.layoutControlItem7.Location = new System.Drawing.Point(237, 403);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(299, 24);
+            this.layoutControlItem7.Text = "Production #";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem6.Control = this.txtRating;
+            this.layoutControlItem6.CustomizationFormText = "Rating";
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 403);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(237, 24);
+            this.layoutControlItem6.Text = "Rating";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem3.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem3.Control = this.txtDirector;
+            this.layoutControlItem3.CustomizationFormText = "Director";
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 379);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(238, 24);
+            this.layoutControlItem3.Text = "Director";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem2.Control = this.txtPlot;
+            this.layoutControlItem2.CustomizationFormText = "Plot";
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(536, 331);
+            this.layoutControlItem2.Text = "Plot";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem1.Control = this.txtTitle;
+            this.layoutControlItem1.CustomizationFormText = "Title";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(536, 24);
+            this.layoutControlItem1.Text = "Title";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(62, 13);
+            // 
+            // layoutControlGroupDetails
+            // 
+            this.layoutControlGroupDetails.CustomizationFormText = "layoutControlGroupDetails";
+            this.layoutControlGroupDetails.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem10,
+            this.layoutControlItem9,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem8,
+            this.layoutControlItem7,
+            this.layoutControlItem5,
+            this.layoutControlItem4,
+            this.layoutControlItem6});
+            this.layoutControlGroupDetails.Location = new System.Drawing.Point(0, 52);
+            this.layoutControlGroupDetails.Name = "layoutControlGroupDetails";
+            this.layoutControlGroupDetails.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroupDetails.Size = new System.Drawing.Size(542, 457);
+            this.layoutControlGroupDetails.Text = "layoutControlGroupDetails";
+            this.layoutControlGroupDetails.TextVisible = false;
             // 
             // TvEpisodeDetailsUserControl
             // 
@@ -468,20 +482,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPlot.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupGuestStars)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupDetails)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,8 +507,6 @@
         private DevExpress.XtraEditors.MemoEdit txtPlot;
         private DevExpress.XtraEditors.TextEdit txtTitle;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraGrid.GridControl grdActors;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewActors;
         private DevExpress.XtraEditors.TextEdit txtProductionCode;
@@ -504,19 +517,22 @@
         private DevExpress.XtraEditors.TextEdit txtWriter;
         private DevExpress.XtraEditors.TextEdit txtImdb;
         private DevExpress.XtraEditors.TextEdit txtDirector;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupGuestStars;
         private TvTopMenuUserControl tvTopMenuUserControl1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupDetails;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
     }
 }

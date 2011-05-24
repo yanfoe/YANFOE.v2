@@ -667,6 +667,20 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
+        /// Gets a value indicating whether [not locked].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [not locked]; otherwise, <c>false</c>.
+        /// </value>
+        public bool NotLocked
+        {
+            get
+            {
+                return !this.isLocked;
+            }
+        }
+
+        /// <summary>
         /// Gets the locked image.
         /// </summary>
         public Image LockedImage
