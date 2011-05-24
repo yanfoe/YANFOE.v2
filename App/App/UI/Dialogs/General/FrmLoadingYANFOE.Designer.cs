@@ -46,7 +46,7 @@
             this.lblYANFOETitle.Name = "lblYANFOETitle";
             this.lblYANFOETitle.Size = new System.Drawing.Size(145, 18);
             this.lblYANFOETitle.TabIndex = 0;
-            this.lblYANFOETitle.Text = "YANFOE 2.0 - Alpha 2";
+            this.lblYANFOETitle.Text = "YANFOE 2.0 - Alpha 3";
             // 
             // lblProgress1
             // 
@@ -71,7 +71,7 @@
             this.progress.Location = new System.Drawing.Point(41, 453);
             this.progress.Name = "progress";
             this.progress.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progress.Size = new System.Drawing.Size(418, 18);
+            this.progress.Size = new System.Drawing.Size(418, 16);
             this.progress.TabIndex = 3;
             // 
             // labelControl3

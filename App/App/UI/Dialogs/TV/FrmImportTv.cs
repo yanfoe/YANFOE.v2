@@ -276,13 +276,19 @@ namespace YANFOE.UI.Dialogs.TV
 
                     if (frmSelectSeries.SelectedSeries != null)
                     {
-                        ImportTvFactory.ScanSeriesPicks.Add(
-                        new ScanSeriesPick
-                            {
-                                SearchString = s1, 
-                                SeriesID = frmSelectSeries.SelectedSeries.SeriesID, 
-                                SeriesName = frmSelectSeries.SelectedSeries.SeriesName
-                            });
+                        var check =
+                            (from s in ImportTvFactory.ScanSeriesPicks where s.SearchString == s1 select s).Count() > 0;
+
+                        if (!check)
+                        {
+                            ImportTvFactory.ScanSeriesPicks.Add(
+                                new ScanSeriesPick
+                                    {
+                                        SearchString = s1,
+                                        SeriesID = frmSelectSeries.SelectedSeries.SeriesID,
+                                        SeriesName = frmSelectSeries.SelectedSeries.SeriesName
+                                    });
+                        }
                     }
 
                     var series = this.theTvdb.OpenNewSeries(frmSelectSeries.SelectedSeries);
