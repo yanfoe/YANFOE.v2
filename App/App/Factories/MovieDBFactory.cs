@@ -587,16 +587,19 @@ namespace YANFOE.Factories
             Debug.Write(tempList.Count());
 
             var getMovieInDatabase =
-                (from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m).SingleOrDefault();
+                (from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m).ToList();
 
-            int index = MovieDatabase.IndexOf(getMovieInDatabase);
-            movieModel.IsBusy = false;
-            MovieDatabase[index] = movieModel;
-
-            if (movieModel.MovieUniqueId == currentMovie.MovieUniqueId)
+            foreach (var movie in getMovieInDatabase)
             {
-                SetCurrentMovie(movieModel);
-                InvokeCurrentMovieChanged(new EventArgs());
+                int index = MovieDatabase.IndexOf(movie);
+                movieModel.IsBusy = false;
+                MovieDatabase[index] = movieModel;
+
+                if (movieModel.MovieUniqueId == currentMovie.MovieUniqueId)
+                {
+                    SetCurrentMovie(movieModel);
+                    InvokeCurrentMovieChanged(new EventArgs());
+                }
             }
         }
 

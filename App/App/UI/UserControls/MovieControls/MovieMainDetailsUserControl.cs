@@ -248,25 +248,29 @@ namespace YANFOE.UI.UserControls.MovieControls
             }
 
             var countryList = Settings.Get.Countries.CountryDictionary[type];
+            var currentCountries = Factories.MovieDBFactory.GetCurrentMovie().Country;
 
             foreach (var country in countryList)
             {
                 cmbCountry.Properties.Items.Add(country);
             }
 
-
-            var currentCountries = Factories.MovieDBFactory.GetCurrentMovie().Country;
-
-            foreach (var country in currentCountries)
+            for (int i = 0; i < cmbCountry.Properties.Items.Count; i++)
             {
-                if (cmbCountry.Properties.Items.Contains(country))
+                var country = this.cmbCountry.Properties.Items[i];
+                var check = (from g in countryList where g == country.Value.ToString() select g).SingleOrDefault();
+
+                if (check == null)
                 {
-                    cmbGenre.Properties.Items[country].CheckState = CheckState.Checked;
+                    this.cmbCountry.Properties.Items.Add(country);
+                    countryList.Add(country.Value.ToString());
                 }
-                else
+
+                var index = this.cmbCountry.Properties.Items.IndexOf(country);
+
+                if (currentCountries.Contains(country.Value))
                 {
-                    cmbCountry.Properties.Items.Add(country);
-                    cmbCountry.Properties.Items[country].CheckState = CheckState.Checked;
+                    this.cmbCountry.Properties.Items[index].CheckState = CheckState.Checked;
                 }
             }
         }

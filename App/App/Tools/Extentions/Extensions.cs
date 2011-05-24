@@ -472,7 +472,7 @@ namespace YANFOE.Tools.Extentions
         /// </returns>
         public static BindingList<string> ToBindingStringList(this IEnumerable<string> value)
         {
-            return value.Select(s => s.Trim()).ToBindingList();
+            return value.Select(s => s.Trim()).Distinct().ToBindingList();
         }
 
         /// <summary>
@@ -489,7 +489,7 @@ namespace YANFOE.Tools.Extentions
         /// </returns>
         public static BindingList<string> ToBindingStringList(this string value, char delimiter = ',')
         {
-            var f = from s in value.Split(delimiter) where s != string.Empty select s;
+            var f = (from s in value.Split(delimiter) where s != string.Empty select s).Distinct();
             return f.ToBindingStringList();
         }
 
