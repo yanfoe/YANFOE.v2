@@ -19,6 +19,8 @@ namespace YANFOE
     using System.Diagnostics;
     using System.Windows.Forms;
 
+    using BitFactory.Logging;
+
     using DevExpress.LookAndFeel;
     using DevExpress.Skins;
     using DevExpress.Utils;
@@ -333,7 +335,7 @@ namespace YANFOE
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.</param>
-        private void FrmMain_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (DatabaseIOFactory.DatabaseDirty)
             {
@@ -341,6 +343,7 @@ namespace YANFOE
             };
 
             Settings.Get.SaveAll();
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
             Application.Exit();
         }
 
@@ -430,10 +433,11 @@ namespace YANFOE
 
             if (Settings.Get.Ui.ShowWelcomeMessage)
             {
-                frmWelcomePage frmWelcomePage = new frmWelcomePage();
+                var frmWelcomePage = new frmWelcomePage();
                 frmWelcomePage.ShowDialog();
-                //Settings.Get.Ui.ShowWelcomeMessage = false;
             }
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Started.", string.Empty);
         }
     }
 }

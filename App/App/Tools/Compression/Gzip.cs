@@ -39,8 +39,6 @@ namespace YANFOE.Tools.Compression
         {
             const string LogCatagory = "Gzip Compression";
 
-            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, LogCatagory, string.Format(CultureInfo.CurrentCulture, "{0} -> {1}", sourceFileName, destinationFileName));
-
             try
             {
                 using (var sourceStream = new FileStream(sourceFileName, FileMode.Open))
@@ -68,8 +66,6 @@ namespace YANFOE.Tools.Compression
         public static void CompressString(string value, string destinationFileName)
         {
             const string LogCatagory = "Gzip String Compression";
-
-            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, LogCatagory, string.Format(CultureInfo.CurrentCulture, "{0}", destinationFileName));
 
             try
             {
@@ -99,8 +95,6 @@ namespace YANFOE.Tools.Compression
         public static string Decompress(string filePath)
         {
             const string LogCatagory = "Gzip Decompression";
-
-            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, LogCatagory, string.Format(CultureInfo.CurrentCulture, "Decompressing {0}", filePath));
 
             try
             {

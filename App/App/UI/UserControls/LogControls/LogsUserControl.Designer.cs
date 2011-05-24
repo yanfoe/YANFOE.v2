@@ -160,7 +160,7 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "gridColumnType";
+            this.gridColumn4.Caption = "Type";
             this.gridColumn4.CustomizationCaption = "Type";
             this.gridColumn4.FieldName = "Type";
             this.gridColumn4.MaxWidth = 120;
@@ -171,7 +171,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "gridColumnHeader";
+            this.gridColumn1.Caption = "Title";
             this.gridColumn1.CustomizationCaption = "Header";
             this.gridColumn1.FieldName = "Header";
             this.gridColumn1.Name = "gridColumn1";
@@ -181,8 +181,9 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "gridColumnMessage";
+            this.gridColumn2.Caption = "Message";
             this.gridColumn2.CustomizationCaption = "Message";
+            this.gridColumn2.FieldName = "Message";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -190,7 +191,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "gridColumnTimeStamp";
+            this.gridColumn3.Caption = "Time Stamp";
             this.gridColumn3.CustomizationCaption = "Time Stamp";
             this.gridColumn3.FieldName = "TimeStamp";
             this.gridColumn3.MaxWidth = 150;

@@ -137,6 +137,8 @@ namespace YANFOE.Scrapers.Movie
                         }
                     }
 
+                    Log.WriteToLog(LogSeverity.Info, 0, string.Format("Bing search complete ({0} results)", queryResults.Count), query);
+
                     return queryResults;
                 }
             }

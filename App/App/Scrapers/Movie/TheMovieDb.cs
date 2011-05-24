@@ -155,6 +155,8 @@ namespace YANFOE.Scrapers.Movie
 
                 if (!string.IsNullOrEmpty(query.ImdbId))
                 {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Doing TheMovieDB search (IMDB ID)", query.ImdbId);
+
                     xml =
                         Downloader.ProcessDownload(
                             string.Format(
@@ -166,6 +168,8 @@ namespace YANFOE.Scrapers.Movie
                 }
                 else if (!string.IsNullOrEmpty(query.TmdbId))
                 {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Doing TheMovieDB search (Tmdb ID)", query.TmdbId);
+
                     xml =
                         Downloader.ProcessDownload(
                             string.Format(
@@ -177,6 +181,8 @@ namespace YANFOE.Scrapers.Movie
                 }
                 else
                 {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Doing TheMovieDB search (Title)", query.Title);
+
                     xml =
                         Downloader.ProcessDownload(
                             string.Format(
@@ -234,6 +240,11 @@ namespace YANFOE.Scrapers.Movie
                     }
 
                     query.Results.Add(queryResult);
+                }
+
+                if (query.Results.Count == 0)
+                {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Doing quick failed", query.Title);
                 }
 
                 return query.Results.Count > 0;

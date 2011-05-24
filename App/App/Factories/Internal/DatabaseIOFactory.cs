@@ -262,11 +262,11 @@ namespace YANFOE.Factories.Internal
                     break;
                 case OutputName.All:
                     StartSaveDialog();
-                    //SaveMovieDB();
-                    //SaveMediaPathDb();
-                    //SaveMovieSets();
+                    SaveMovieDB();
+                    SaveMediaPathDb();
+                    SaveMovieSets();
                     SaveTvDB();
-                    //SaveScanSeriesPick();
+                    SaveScanSeriesPick();
                     DatabaseDirty = false;
                     break;
             }

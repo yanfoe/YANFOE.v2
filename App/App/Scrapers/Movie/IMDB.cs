@@ -133,6 +133,8 @@ namespace YANFOE.Scrapers.Movie
                     query.Results.Add(queryResult);
                 }
 
+                Log.WriteToLog(LogSeverity.Info, 0, string.Format("IMDB site search complete ({0} results)", query.Results.Count), query.Title);
+
                 return query.Results.Count > 0;
             }
             catch (Exception ex)
