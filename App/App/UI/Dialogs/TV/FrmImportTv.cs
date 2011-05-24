@@ -27,7 +27,6 @@ namespace YANFOE.UI.Dialogs.TV
     using YANFOE.Factories.Import;
     using YANFOE.Factories.Internal;
     using YANFOE.InternalApps.Logs;
-    using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Scan;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Models.TvModels.TVDB;
@@ -43,6 +42,9 @@ namespace YANFOE.UI.Dialogs.TV
 
         private string currentStatus;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrmImportTv"/> class.
+        /// </summary>
         public FrmImportTv()
         {
             InitializeComponent();
@@ -66,11 +68,11 @@ namespace YANFOE.UI.Dialogs.TV
 
             this.bgw = new BackgroundWorker();
             
-            this.bgw.DoWork += this.BgwDoWork;
-            this.bgw.ProgressChanged += this.BgwProgressChanged;
+            this.bgw.DoWork += this.Bgw_DoWork;
+            this.bgw.ProgressChanged += this.Bgw_ProgressChanged;
             this.bgw.WorkerReportsProgress = true;
             this.bgw.WorkerSupportsCancellation = true;
-            this.bgw.RunWorkerCompleted += this.BgwRunWorkerCompleted;
+            this.bgw.RunWorkerCompleted += this.Bgw_RunWorkerCompleted;
 
             progressBar.Properties.Minimum = 0;
             progressBar.Properties.Maximum = ImportTvFactory.Scan.Count;
@@ -79,7 +81,12 @@ namespace YANFOE.UI.Dialogs.TV
             this.bgw.RunWorkerAsync();
         }
 
-        private void BgwDoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Handles the DoWork event of the Bgw control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private void Bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             this.theTvdb = new TheTvdb();
 
@@ -150,7 +157,7 @@ namespace YANFOE.UI.Dialogs.TV
                 this.count++;
                 this.bgw.ReportProgress(this.count);
 
-                if (bgw.CancellationPending)
+                if (this.bgw.CancellationPending)
                 {
                     return;
                 }
@@ -194,6 +201,23 @@ namespace YANFOE.UI.Dialogs.TV
                 {
                     toAdd.Add(series.SeriesName, changedValue);
                 }
+                else if (toAdd.ContainsKey(series.SeriesName))
+                {
+                    foreach (var season in changedValue.Seasons)
+                    {
+                        if (!toAdd[series.SeriesName].Seasons.ContainsKey(season.Key))
+                        {
+                            toAdd[series.SeriesName].Seasons.Add(season.Key, season.Value);
+                        }
+                        else
+                        {
+                            foreach (var episode in season.Value.Episodes)
+                            {
+                                toAdd[series.SeriesName].Seasons[season.Key].Episodes.Add(episode.Key, episode.Value);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception exception)
             {
@@ -201,12 +225,22 @@ namespace YANFOE.UI.Dialogs.TV
             }
         }
 
-        private void BgwProgressChanged(object sender, ProgressChangedEventArgs e)
+        /// <summary>
+        /// Handles the ProgressChanged event of the Bgw control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.ProgressChangedEventArgs"/> instance containing the event data.</param>
+        private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Position = this.count;
         }
 
-        private void BgwRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// Handles the RunWorkerCompleted event of the Bgw control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result != null)
             {
@@ -263,13 +297,23 @@ namespace YANFOE.UI.Dialogs.TV
             DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.ScanSeriesPick);
         }
 
-        private void TmrUiTick(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the Tick event of the TmrUi control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void TmrUi_Tick(object sender, EventArgs e)
         {
             lblStatus.Text = this.currentStatus;
 
             this.butNext.Enabled = !this.bgw.IsBusy;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnCancel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.bgw.CancelAsync();

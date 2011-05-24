@@ -201,7 +201,7 @@
             // tmrUi
             // 
             this.tmrUi.Enabled = true;
-            this.tmrUi.Tick += new System.EventHandler(this.TmrUiTick);
+            this.tmrUi.Tick += new System.EventHandler(this.TmrUi_Tick);
             // 
             // FrmImportTv
             // 
