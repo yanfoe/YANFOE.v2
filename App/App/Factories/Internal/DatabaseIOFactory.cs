@@ -650,8 +650,9 @@ namespace YANFOE.Factories.Internal
 
             SavingMovieDB = true;
 
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
+            Delete.DeleteFilesInFolder(path);
 
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
@@ -807,8 +808,9 @@ namespace YANFOE.Factories.Internal
             SavingTVDBMax = TvDBFactory.TvDatabase.Count;
             SavingTVDBValue = 0;
 
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
+            var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
+            Delete.DeleteFilesInFolder(path);
 
             foreach (var series in TvDBFactory.TvDatabase)
             {

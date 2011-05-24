@@ -39,25 +39,30 @@ namespace YANFOE.Tools.IO
         {
             try
             {
-                var files = FileHelper.GetFilesRecursive(target_dir);
-                string[] dirs = Directory.GetDirectories(target_dir);
-
-                foreach (string file in files)
-                {
-                    File.SetAttributes(file, FileAttributes.Normal);
-                    File.Delete(file);
-                }
-
-                foreach (string dir in dirs)
-                {
-                    DeleteDirectory(dir);
-                }
+                DeleteFilesInFolder(target_dir);
 
                 Directory.Delete(target_dir, false);
             }
             catch (Exception ex)
             {
                 Log.WriteToLog(LogSeverity.Warning, 0, "Could not remove " + target_dir, ex.Message);
+            }
+        }
+
+        public static void DeleteFilesInFolder(string target_dir)
+        {
+            var files = FileHelper.GetFilesRecursive(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
             }
         }
 

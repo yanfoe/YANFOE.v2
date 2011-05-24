@@ -20,6 +20,8 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using System.Threading;
     using System.Windows.Forms;
 
+    using BitFactory.Logging;
+
     using DevExpress.XtraGrid.Views.Base;
     using DevExpress.XtraLayout.Utils;
 
@@ -191,25 +193,32 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// </summary>
         private void SetBindings()
         {
-            this.txtTitle.Text = ImportMoviesFactory.CurrentRecord.Title;
-            this.txtYear.Text = ImportMoviesFactory.CurrentRecord.Year.ToString();
-            this.txtImdbID.Text = ImportMoviesFactory.CurrentRecord.ImdbId;
-            this.txtTmdbId.Text = ImportMoviesFactory.CurrentRecord.TmdbId;
-
-            dxErrorProvider1.DataSource = ImportMoviesFactory.CurrentRecord;
-
-            if (ImportMoviesFactory.CurrentRecord.SmallPoster != null)
+            try
             {
-                this.picBox.DataBindings.Add("Image", ImportMoviesFactory.CurrentRecord, "SmallPoster");
-            }
-            else
-            {
-                this.picBox.Image = null;
-            }
+                this.txtTitle.Text = ImportMoviesFactory.CurrentRecord.Title;
+                this.txtYear.Text = ImportMoviesFactory.CurrentRecord.Year.ToString();
+                this.txtImdbID.Text = ImportMoviesFactory.CurrentRecord.ImdbId;
+                this.txtTmdbId.Text = ImportMoviesFactory.CurrentRecord.TmdbId;
 
-            this.txtNfo.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "NfoPathOnDisk");
-            this.txtPoster.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "PosterPathOnDisk");
-            this.txtFanart.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "FanartPathOnDisk");
+                dxErrorProvider1.DataSource = ImportMoviesFactory.CurrentRecord;
+
+                if (ImportMoviesFactory.CurrentRecord.SmallPoster != null)
+                {
+                    this.picBox.DataBindings.Add("Image", ImportMoviesFactory.CurrentRecord, "SmallPoster");
+                }
+                else
+                {
+                    this.picBox.Image = null;
+                }
+
+                this.txtNfo.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "NfoPathOnDisk");
+                this.txtPoster.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "PosterPathOnDisk");
+                this.txtFanart.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "FanartPathOnDisk");
+            }
+            catch (Exception ex)
+            {
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, ex.Message, "ImportMoviesUC > SetBindings");
+            }
         }
 
         /// <summary>
