@@ -18,15 +18,16 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Threading;
+    using System.Windows.Forms;
 
+    using DevExpress.XtraGrid.Views.Base;
     using DevExpress.XtraLayout.Utils;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Import;
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Models.Search;
-
-    using Timer = System.Windows.Forms.Timer;
+    using YANFOE.Tools.Extentions;
 
     public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraForm
     {
@@ -190,13 +191,10 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// </summary>
         private void SetBindings()
         {
-            this.txtTitle.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "Title");
-
-            this.txtYear.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "Year");
-
-            this.txtImdbID.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "ImdbId");
-
-            this.txtTmdbId.DataBindings.Add("Text", ImportMoviesFactory.CurrentRecord, "TmdbId", true);
+            this.txtTitle.Text = ImportMoviesFactory.CurrentRecord.Title;
+            this.txtYear.Text = ImportMoviesFactory.CurrentRecord.Year.ToString();
+            this.txtImdbID.Text = ImportMoviesFactory.CurrentRecord.ImdbId;
+            this.txtTmdbId.Text = ImportMoviesFactory.CurrentRecord.TmdbId;
 
             dxErrorProvider1.DataSource = ImportMoviesFactory.CurrentRecord;
 
@@ -217,18 +215,19 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <summary>
         /// Starts the search process.
         /// </summary>
-        /// <param name="yanfoeid">The yanfoe id.</param>
         /// <param name="title">The title value.</param>
         /// <param name="year">The year value.</param>
         /// <returns>A query object.</returns>
-        private Query DoSearch(string yanfoeid, string title, string year)
+        private Query DoSearch(string title, string year, string imdbid, string tmdbid)
         {
             var results = new BindingList<QueryResult>();
             var query = new Query
                 {
                     Results = results, 
                     Title = title, 
-                    Year = year
+                    Year = year,
+                    ImdbId = imdbid,
+                    TmdbId = tmdbid
                 };
 
             Factories.Scraper.MovieScrapeFactory.QuickSearchTmdb(query);
@@ -345,40 +344,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         #region Code Initiations
 
         /// <summary>
-        /// Background worker is initialized.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
-        private void BgwMultiDoWork(object sender, DoWorkEventArgs e)
-        {
-            foreach (var movieIndex in grdViewMoviesList.GetSelectedRows())
-            {
-                do
-                {
-                    Thread.Sleep(50);
-                }
-                while (this.bgwCollection.Count > 2);
-                
-                var bgw = new BackgroundWorker();
-
-                bgw.DoWork += this.BgwMultiElementDoWork;
-                bgw.RunWorkerCompleted += this.BgwMultiElementRunWorkerCompleted;
-
-                this.bgwCollection.Add(bgw);
-
-                bgw.RunWorkerAsync(movieIndex);
-
-                Thread.Sleep(50);
-            }
-
-            do
-            {
-                Thread.Sleep(50);
-            }
-            while (this.bgwCollection.Count > 0);
-        }
-
-        /// <summary>
         /// Background worker is complete
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -386,6 +351,12 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         private void BgwMultiElementRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.bgwCollection.Remove(sender as BackgroundWorker);
+            this.FormElementsEnabled(true);
+            this.ResetStatus();
+            dxErrorProvider1.UpdateBinding();
+            this.ClearBindings();
+
+            this.SetBindings();
         }
 
         /// <summary>
@@ -399,26 +370,14 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
             var movie = grdViewMoviesList.GetRow(movieIndex) as MovieModel;
 
-            var query = this.DoSearch(movie.YanfoeID, movie.Title, movie.Year.ToString());
+            var query = this.DoSearch(movie.Title, movie.Year.ToString(), movie.ImdbId, movie.TmdbId);
+
+            e.Result = movieIndex;
 
             if (query.Results.Count > 0)
             {
                 this.UpdateMovieModel(movie, query.Results[0]);
             }
-        }
-
-        /// <summary>
-        /// Background worker is complete
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
-        private void BgwMultiRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            this.ClearBindings();
-            this.SetBindings();
-            this.FormElementsEnabled(true);
-            this.ResetStatus();
-            dxErrorProvider1.UpdateBinding();
         }
 
         /// <summary>
@@ -433,6 +392,72 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
         #endregion
 
+        private BackgroundWorker bgw1 = new BackgroundWorker();
+        private BackgroundWorker bgw2 = new BackgroundWorker();
+        private BackgroundWorker bgw3 = new BackgroundWorker();
+
+        private void btnBulkScan_Click(object sender, EventArgs e)
+        {
+            this.bgw1.DoWork += this.BgwMultiElementDoWork;
+            this.bgw1.RunWorkerCompleted += this.BgwMultiElementRunWorkerCompleted;
+
+            this.bgw2.DoWork += this.BgwMultiElementDoWork;
+            this.bgw2.RunWorkerCompleted += this.BgwMultiElementRunWorkerCompleted;
+
+            this.bgw3.DoWork += this.BgwMultiElementDoWork;
+            this.bgw3.RunWorkerCompleted += this.BgwMultiElementRunWorkerCompleted;
+
+            for (int index = 0; index < this.grdViewMoviesList.GetSelectedRows().Length; index++)
+            {
+                var movieIndex = this.grdViewMoviesList.GetSelectedRows()[index];
+
+                this.lblCurrentActivity.Text = string.Format("Looking up {0}", (this.grdViewMoviesList.GetRow(movieIndex) as MovieModel).Title);
+
+                if (!this.bgw1.IsBusy)
+                {
+                    this.bgw1.RunWorkerAsync(movieIndex);
+                }
+                else if (!this.bgw2.IsBusy)
+                {
+                    this.bgw2.RunWorkerAsync(movieIndex);
+                }
+                else if (!this.bgw3.IsBusy)
+                {
+                    this.bgw3.RunWorkerAsync(movieIndex);
+                }
+                else
+                {
+                    index--;
+                    Thread.Sleep(50);
+                    Application.DoEvents();
+                }
+            }
+
+            var row = this.grdViewMoviesList.GetSelectedRows()[0];
+            grdViewMoviesList.ClearSelection();
+            grdViewMoviesList.SelectRow(row);
+        }
+
         #endregion
+
+        private void txtTitle_EditValueChanged(object sender, EventArgs e)
+        {
+            ImportMoviesFactory.CurrentRecord.Title = this.txtTitle.Text;
+        }
+
+        private void txtYear_EditValueChanged(object sender, EventArgs e)
+        {
+            ImportMoviesFactory.CurrentRecord.Year = this.txtYear.Text.ToInt();
+        }
+
+        private void txtTmdbId_EditValueChanged(object sender, EventArgs e)
+        {
+            ImportMoviesFactory.CurrentRecord.TmdbId = this.txtTmdbId.Text;
+        }
+
+        private void txtImdbID_EditValueChanged(object sender, EventArgs e)
+        {
+            ImportMoviesFactory.CurrentRecord.ImdbId = this.txtImdbID.Text;
+        }
     }
 }

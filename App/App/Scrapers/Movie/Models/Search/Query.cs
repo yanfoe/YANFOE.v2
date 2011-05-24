@@ -30,6 +30,8 @@ namespace YANFOE.Scrapers.Movie.Models.Search
             this.Title = string.Empty;
             this.Year = string.Empty;
             this.Results = new BindingList<QueryResult>();
+            this.ImdbId = string.Empty;
+            this.TmdbId = string.Empty;
         }
 
         /// <summary>
@@ -51,5 +53,7 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         public BindingList<QueryResult> Results { get; set; }
 
         public string ImdbId { get; set; }
+
+        public string TmdbId { get; set; }
     }
 }

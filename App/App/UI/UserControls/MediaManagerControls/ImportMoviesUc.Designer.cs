@@ -350,6 +350,7 @@
             this.txtYear.Size = new System.Drawing.Size(83, 20);
             this.txtYear.StyleController = this.layoutControl2;
             this.txtYear.TabIndex = 4;
+            this.txtYear.EditValueChanged += new System.EventHandler(this.txtYear_EditValueChanged);
             // 
             // layoutControl2
             // 
@@ -397,6 +398,7 @@
             this.txtTmdbId.Size = new System.Drawing.Size(151, 20);
             this.txtTmdbId.StyleController = this.layoutControl2;
             this.txtTmdbId.TabIndex = 10;
+            this.txtTmdbId.EditValueChanged += new System.EventHandler(this.txtTmdbId_EditValueChanged);
             // 
             // txtImdbID
             // 
@@ -416,6 +418,7 @@
             superToolTip4.Items.Add(toolTipItem1);
             this.txtImdbID.SuperTip = superToolTip4;
             this.txtImdbID.TabIndex = 8;
+            this.txtImdbID.EditValueChanged += new System.EventHandler(this.txtImdbID_EditValueChanged);
             // 
             // txtTitle
             // 
@@ -424,6 +427,7 @@
             this.txtTitle.Size = new System.Drawing.Size(334, 20);
             this.txtTitle.StyleController = this.layoutControl2;
             this.txtTitle.TabIndex = 5;
+            this.txtTitle.EditValueChanged += new System.EventHandler(this.txtTitle_EditValueChanged);
             // 
             // grdAssociatedFiles
             // 
@@ -694,6 +698,7 @@
             superToolTip5.Items.Add(toolTipItem2);
             this.btnBulkScan.SuperTip = superToolTip5;
             this.btnBulkScan.TabIndex = 5;
+            this.btnBulkScan.Click += new System.EventHandler(this.btnBulkScan_Click);
             // 
             // layoutControl1
             // 

@@ -164,6 +164,17 @@ namespace YANFOE.Scrapers.Movie
                             DownloadType.Html,
                             Section.Movies);
                 }
+                else if (!string.IsNullOrEmpty(query.TmdbId))
+                {
+                    xml =
+                        Downloader.ProcessDownload(
+                            string.Format(
+                                "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/{0}/{1}",
+                                Settings.ConstSettings.Application.TheMovieDBApi,
+                                query.TmdbId),
+                            DownloadType.Html,
+                            Section.Movies);
+                }
                 else
                 {
                     xml =
