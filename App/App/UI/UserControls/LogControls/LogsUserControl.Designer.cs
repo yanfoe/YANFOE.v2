@@ -36,6 +36,10 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.grdLog = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -86,6 +90,8 @@
             this.panelControl1.Controls.Add(this.simpleButton2);
             this.panelControl1.Controls.Add(this.simpleButton1);
             this.panelControl1.Location = new System.Drawing.Point(2, 532);
+            this.panelControl1.MaximumSize = new System.Drawing.Size(0, 55);
+            this.panelControl1.MinimumSize = new System.Drawing.Size(0, 55);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(991, 55);
             this.panelControl1.TabIndex = 6;
@@ -130,8 +136,55 @@
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3});
             this.gridView1.GridControl = this.grdLog;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsDetail.EnableMasterViewMode = false;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "gridColumnType";
+            this.gridColumn4.CustomizationCaption = "Type";
+            this.gridColumn4.FieldName = "Type";
+            this.gridColumn4.MaxWidth = 120;
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.Width = 120;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "gridColumnHeader";
+            this.gridColumn1.CustomizationCaption = "Header";
+            this.gridColumn1.FieldName = "Header";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 210;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "gridColumnMessage";
+            this.gridColumn2.CustomizationCaption = "Message";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 210;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "gridColumnTimeStamp";
+            this.gridColumn3.CustomizationCaption = "Time Stamp";
+            this.gridColumn3.FieldName = "TimeStamp";
+            this.gridColumn3.MaxWidth = 150;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 150;
             // 
             // layoutControlGroup1
             // 
@@ -234,5 +287,9 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }
