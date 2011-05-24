@@ -180,7 +180,6 @@
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
     <Compile Include="Tools\Models\TrailerDetailsModel.cs" />
-    <Compile Include="Tools\IO\Delete.cs" />
     <Compile Include="Tools\Restructure\FileSystemCharChange.cs" />
     <Compile Include="Tools\IO\FileNaming.cs" />
     <Compile Include="Tools\Text\IO.cs" />

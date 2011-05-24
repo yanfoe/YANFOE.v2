@@ -563,7 +563,7 @@ namespace YANFOE.Factories.Internal
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Folders.RemoveAllFilesInFolder(path);
+            Folders.DeleteFilesInFolder(path);
 
             int count = 0;
 
@@ -652,7 +652,7 @@ namespace YANFOE.Factories.Internal
 
             var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Delete.DeleteFilesInFolder(path);
+            Folders.DeleteFilesInFolder(path);
 
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
@@ -747,6 +747,7 @@ namespace YANFOE.Factories.Internal
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
+            Folders.DeleteFilesInFolder(path);
 
             foreach (MovieSetModel set in MovieSetManager.CurrentDatabase)
             {
@@ -810,7 +811,7 @@ namespace YANFOE.Factories.Internal
 
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            Delete.DeleteFilesInFolder(path);
+            Folders.DeleteFilesInFolder(path);
 
             foreach (var series in TvDBFactory.TvDatabase)
             {

@@ -252,7 +252,7 @@ namespace YANFOE.Scrapers.TV
                 }
             }
 
-            Delete.DeleteDirectory(temp);
+            Folders.DeleteDirectory(temp);
 
             return output;
         }

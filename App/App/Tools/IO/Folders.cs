@@ -14,8 +14,12 @@
 
 namespace YANFOE.Tools.IO
 {
+    using System;
     using System.IO;
 
+    using BitFactory.Logging;
+
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Tools.ThirdParty;
 
     /// <summary>
@@ -48,18 +52,39 @@ namespace YANFOE.Tools.IO
         }
 
         /// <summary>
-        /// Removes all files in folder.
+        /// Deletes the directory.
         /// </summary>
-        /// <param name="path">
-        /// The path of which to remove all files
+        /// <param name="target_dir">
+        /// The target_dir.
         /// </param>
-        public static void RemoveAllFilesInFolder(string path)
+        public static void DeleteDirectory(string target_dir)
         {
-            string[] files = FileHelper.GetFilesRecursive(path).ToArray();
+            try
+            {
+                DeleteFilesInFolder(target_dir);
+
+                Directory.Delete(target_dir, false);
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(LogSeverity.Warning, 0, "Could not remove " + target_dir, ex.Message);
+            }
+        }
+
+        public static void DeleteFilesInFolder(string target_dir)
+        {
+            var files = FileHelper.GetFilesRecursive(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
 
             foreach (string file in files)
             {
+                File.SetAttributes(file, FileAttributes.Normal);
                 File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
             }
         }
 
