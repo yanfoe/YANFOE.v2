@@ -64,9 +64,10 @@ namespace YANFOE.Tools
         {
             try
             {
-                var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                 var returnImage = Image.FromStream(fs);
                 fs.Close();
+                fs.Dispose();
 
                 return returnImage;
             }
