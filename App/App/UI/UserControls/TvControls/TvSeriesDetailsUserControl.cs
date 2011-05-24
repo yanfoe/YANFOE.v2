@@ -15,9 +15,11 @@
 namespace YANFOE.UI.UserControls.TvControls
 {
     using System;
-    using System.ComponentModel;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+    using System.Linq;
 
-    using DevExpress.XtraLayout;
+    using DevExpress.XtraEditors.Controls;
 
     public partial class TvSeriesDetailsUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -33,11 +35,6 @@ namespace YANFOE.UI.UserControls.TvControls
             tvTopMenuUserControl1.Type = SaveType.SaveSeries;
 
             Factories.TvDBFactory.CurrentSeriesChanged += this.TvDBFactory_CurrentSeriesChanged;
-            Factories.TvDBFactory.RedrawLayout += new EventHandler(TvDBFactory_RedrawLayout);
-        }
-
-        void TvDBFactory_RedrawLayout(object sender, EventArgs e)
-        {
         }
 
         /// <summary>
@@ -47,7 +44,7 @@ namespace YANFOE.UI.UserControls.TvControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         void TvDBFactory_CurrentSeriesChanged(object sender, EventArgs e)
         {
-            SetupBindings();
+            this.SetupBindings();
         }
 
         private void SetupBindings()
@@ -86,6 +83,40 @@ namespace YANFOE.UI.UserControls.TvControls
             txtRating.DataBindings.Add("Text", Factories.TvDBFactory.CurrentSeries, "Rating");
 
             grdActors.DataSource = Factories.TvDBFactory.CurrentSeries.Actors;
+
+            this.PopulateGenres();
+        }
+
+        private void PopulateGenres()
+        {
+            var genreList = new List<string>();
+
+            foreach (CheckedListBoxItem item in cmbGenre.Properties.Items)
+            {
+                item.CheckState = CheckState.Unchecked;
+                genreList.Add(item.Description);
+            }
+
+            var currentGenres = Factories.TvDBFactory.CurrentSeries.Genre;
+
+            for (int i = 0; i < currentGenres.Count; i++)
+            {
+                var genre = this.cmbGenre.Properties.Items[i];
+                var check = (from g in genreList where g == genre.Description.ToString() select g).SingleOrDefault();
+
+                if (check == null)
+                {
+                    this.cmbGenre.Properties.Items.Add(genre);
+                    genreList.Add(genre.Value.ToString());
+                }
+
+                var index = this.cmbGenre.Properties.Items.IndexOf(genre);
+
+                if (genreList.Contains(genre.Description))
+                {
+                    this.cmbGenre.Properties.Items[index].CheckState = CheckState.Checked;
+                }
+            }
         }
     }
 }

@@ -396,6 +396,11 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         private BackgroundWorker bgw2 = new BackgroundWorker();
         private BackgroundWorker bgw3 = new BackgroundWorker();
 
+        /// <summary>
+        /// Handles the Click event of the btnBulkScan control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnBulkScan_Click(object sender, EventArgs e)
         {
             this.bgw1.DoWork += this.BgwMultiElementDoWork;
@@ -440,21 +445,41 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
         #endregion
 
+        /// <summary>
+        /// Handles the EditValueChanged event of the txtTitle control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void txtTitle_EditValueChanged(object sender, EventArgs e)
         {
             ImportMoviesFactory.CurrentRecord.Title = this.txtTitle.Text;
         }
 
+        /// <summary>
+        /// Handles the EditValueChanged event of the txtYear control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void txtYear_EditValueChanged(object sender, EventArgs e)
         {
             ImportMoviesFactory.CurrentRecord.Year = this.txtYear.Text.ToInt();
         }
 
+        /// <summary>
+        /// Handles the EditValueChanged event of the txtTmdbId control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void txtTmdbId_EditValueChanged(object sender, EventArgs e)
         {
             ImportMoviesFactory.CurrentRecord.TmdbId = this.txtTmdbId.Text;
         }
 
+        /// <summary>
+        /// Handles the EditValueChanged event of the txtImdbID control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void txtImdbID_EditValueChanged(object sender, EventArgs e)
         {
             ImportMoviesFactory.CurrentRecord.ImdbId = this.txtImdbID.Text;
