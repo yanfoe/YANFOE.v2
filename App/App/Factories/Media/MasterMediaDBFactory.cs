@@ -104,9 +104,9 @@ namespace YANFOE.Factories.Media
         /// </returns>
         public static bool MovieDatabaseContains(string path)
         {
-            MediaModel result = (from m in masterMovieMediaDatabase where m.FilePath == path select m).SingleOrDefault();
+            var result = from m in masterMovieMediaDatabase where m.FilePath == path select m;
 
-            return result != null;
+            return result.Count() > 0;
         }
 
         /// <summary>
