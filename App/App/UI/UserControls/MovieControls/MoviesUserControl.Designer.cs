@@ -348,6 +348,7 @@
             // galleryControlGallery2
             // 
             this.galleryControl1.Gallery.ImageSize = new System.Drawing.Size(100, 150);
+            this.galleryControl1.Gallery.ScrollMode = DevExpress.XtraBars.Ribbon.Gallery.GalleryScrollMode.Smooth;
             this.galleryControl1.Gallery.ItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.GalleryItem_Click);
             this.galleryControl1.Location = new System.Drawing.Point(0, 0);
             this.galleryControl1.Name = "galleryControl1";

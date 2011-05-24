@@ -495,6 +495,8 @@ namespace YANFOE.Factories
         /// </summary>
         public static void GeneratePictureGallery()
         {
+            galleryGroup.Items.Clear();
+
             foreach (var series in tvDatabase)
             {
                 if (series.Value.SmallBanner == null && !string.IsNullOrEmpty(series.Value.SeriesBannerPath))
@@ -1529,7 +1531,6 @@ namespace YANFOE.Factories
         public static void ProcessDatabaseUpdate()
         {
             GenerateMasterSeriesList();
-            GeneratePictureGallery();
             AddImagesToBackgroundDownload();
             LoadSeriesNFOs();
         }
