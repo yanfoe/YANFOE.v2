@@ -17,6 +17,7 @@ namespace YANFOE
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Threading;
     using System.Windows.Forms;
 
     using BitFactory.Logging;
@@ -340,9 +341,17 @@ namespace YANFOE
             if (DatabaseIOFactory.DatabaseDirty)
             {
                 DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
-            };
+
+                do
+                {
+                    Thread.Sleep(50);
+                    Application.DoEvents();
+                }
+                while (DatabaseIOFactory.SavingCount > 0);
+            }
 
             Settings.Get.SaveAll();
+
             InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
             Application.Exit();
         }

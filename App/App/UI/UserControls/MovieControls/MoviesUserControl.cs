@@ -209,7 +209,14 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// <param name="e">The <see cref="DevExpress.XtraBars.Ribbon.GalleryItemClickEventArgs"/> instance containing the event data.</param>
         private void GalleryItem_Click(object sender, GalleryItemClickEventArgs e)
         {
-            MovieDBFactory.SetCurrentMovie(e.Item.Tag.ToString());
+            grdViewByTitle.ClearSelection();
+
+            var selectedMovie = MovieDBFactory.MovieDatabase.IndexOf(MovieDBFactory.GetMovie(e.Item.Tag.ToString()));
+            var handle = grdViewByTitle.GetRowHandle(selectedMovie);
+            grdViewByTitle.FocusedRowHandle = handle;
+            grdViewByTitle.SelectRow(handle);
+            this.UpdateMovieFromGrid();
+            //MovieDBFactory.SetCurrentMovie(e.Item.Tag.ToString());
         }
 
         /// <summary>
@@ -247,32 +254,18 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
-        /// Determines whether [is ready for scrape].
-        /// </summary>
-        /// <returns>
-        ///   <c>true</c> if [is ready for scrape]; otherwise, <c>false</c>.
-        /// </returns>
-        private bool IsReadyForScrape()
-        {
-            if (string.IsNullOrEmpty(MovieDBFactory.GetCurrentMovie().ImdbId))
-            {
-                InternalApps.Logs.Log.WriteToLog(LogSeverity.Warning, 0, "Scrape fail", "No IMDB ID found for " + MovieDBFactory.GetCurrentMovie().Title);
-                XtraMessageBox.Show("No IMDB ID Found for this movie");
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Handles the SelectionChanged event of the grdViewByTitle control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="DevExpress.Data.SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void GrdViewByTitle_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
-            var rows = grdViewByTitle.GetSelectedRows();
+            this.UpdateMovieFromGrid();
+        }
+
+        private void UpdateMovieFromGrid()
+        {
+            var rows = this.grdViewByTitle.GetSelectedRows();
 
             this.UpdatedSelectedMoviesInFactory(rows);
 
@@ -280,7 +273,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             {
                 MovieDBFactory.IsMultiSelected = false;
 
-                var selectedRow = grdViewByTitle.GetRow(rows[0]) as MovieModel;
+                var selectedRow = this.grdViewByTitle.GetRow(rows[0]) as MovieModel;
 
                 if (MovieDBFactory.IsSameAsCurrentMovie(selectedRow))
                 {

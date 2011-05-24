@@ -103,8 +103,6 @@
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layMultiEditKey = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txtID = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -167,13 +165,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.txtID);
             this.layoutControl1.Controls.Add(this.btnRejectMultiChanges);
             this.layoutControl1.Controls.Add(this.btnAcceptMultiChanges);
             this.layoutControl1.Controls.Add(this.panelControl1);
@@ -434,10 +429,10 @@
             // 
             // txtPlot
             // 
-            this.txtPlot.Location = new System.Drawing.Point(65, 50);
+            this.txtPlot.Location = new System.Drawing.Point(65, 26);
             this.txtPlot.MinimumSize = new System.Drawing.Size(0, 30);
             this.txtPlot.Name = "txtPlot";
-            this.txtPlot.Size = new System.Drawing.Size(467, 154);
+            this.txtPlot.Size = new System.Drawing.Size(467, 178);
             this.txtPlot.StyleController = this.layoutControl1;
             this.txtPlot.TabIndex = 5;
             // 
@@ -583,8 +578,7 @@
             this.layoutLanguage,
             this.layoutControlItem11,
             this.layActorsGroup,
-            this.layMultiGroup,
-            this.layoutControlItem18});
+            this.layMultiGroup});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -599,9 +593,9 @@
             this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem2.Control = this.txtPlot;
             this.layoutControlItem2.CustomizationFormText = "Plot:";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 48);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(534, 158);
+            this.layoutControlItem2.Size = new System.Drawing.Size(534, 182);
             this.layoutControlItem2.Text = "Plot";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(59, 13);
             // 
@@ -964,26 +958,6 @@
             this.layMultiEditKey.TextToControlDistance = 0;
             this.layMultiEditKey.TextVisible = false;
             // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(65, 26);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(467, 20);
-            this.txtID.StyleController = this.layoutControl1;
-            this.txtID.TabIndex = 36;
-            // 
-            // layoutControlItem18
-            // 
-            this.layoutControlItem18.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem18.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem18.Control = this.txtID;
-            this.layoutControlItem18.CustomizationFormText = "ID";
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 24);
-            this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(534, 24);
-            this.layoutControlItem18.Text = "ID";
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(59, 13);
-            // 
             // MovieMainDetailsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1054,8 +1028,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1127,7 +1099,5 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlGroup layMultiGroup;
         private DevExpress.XtraEditors.TextEdit cmbLanguage;
-        private DevExpress.XtraEditors.TextEdit txtID;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
     }
 }

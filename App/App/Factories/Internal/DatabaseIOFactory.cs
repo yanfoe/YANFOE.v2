@@ -52,6 +52,8 @@ namespace YANFOE.Factories.Internal
         /// Timer for the Start save dialog
         /// </summary>
         private static readonly Timer tmr = new Timer();
+        
+        public static int SavingCount;
 
         /// <summary>
         /// The start save dialog
@@ -557,6 +559,8 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveMediaPathDb_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.RemoveAllFilesInFolder(path);
@@ -570,6 +574,8 @@ namespace YANFOE.Factories.Internal
 
                 count++;
             }
+
+            SavingCount--;
         }
 
         /// <summary>
@@ -583,6 +589,8 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveMovieDBWork_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
 
             var movieModel = e.Argument as MovieModel;
@@ -623,6 +631,8 @@ namespace YANFOE.Factories.Internal
             {
                 movieModel.SmallFanart.Save(fanartPath);
             }
+
+            SavingCount--;
         }
 
         /// <summary>
@@ -636,6 +646,8 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             SavingMovieDB = true;
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
@@ -716,6 +728,7 @@ namespace YANFOE.Factories.Internal
             while (count < max);
 
             SavingMovieDB = false;
+            SavingCount--;
         }
 
         /// <summary>
@@ -729,6 +742,8 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveMovieSets_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
@@ -737,6 +752,8 @@ namespace YANFOE.Factories.Internal
                 string json = JsonConvert.SerializeObject(set);
                 Gzip.CompressString(json, path + FileNaming.RemoveIllegalChars(set.SetName) + ".MovieSet.gz");
             }
+
+            SavingCount--;
         }
 
         /// <summary>
@@ -750,12 +767,16 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveScanSeriesPick_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
             const string WritePath = "SeriesPick";
             string json = JsonConvert.SerializeObject(ImportTvFactory.ScanSeriesPicks);
             Gzip.CompressString(json, path + WritePath + "SeriesPick.gz");
+
+            SavingCount--;
         }
 
         /// <summary>
