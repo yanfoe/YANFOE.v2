@@ -78,7 +78,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </summary>
         private void SetupEventBindings()
         {
-            Factories.MovieDBFactory.CurrentMovieChanged += this.MovieDBFactory_CurrentMovieChanged;
+            MovieDBFactory.CurrentMovieChanged += this.MovieDBFactory_CurrentMovieChanged;
         }
 
         #endregion

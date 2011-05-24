@@ -297,9 +297,10 @@
             // galleryControlGallery2
             // 
             this.galleryBanners.Gallery.ImageSize = new System.Drawing.Size(300, 55);
+            this.galleryBanners.Gallery.ScrollMode = DevExpress.XtraBars.Ribbon.Gallery.GalleryScrollMode.Smooth;
             this.galleryBanners.Location = new System.Drawing.Point(0, 0);
             this.galleryBanners.Name = "galleryBanners";
-            this.galleryBanners.Size = new System.Drawing.Size(238, 342);
+            this.galleryBanners.Size = new System.Drawing.Size(238, 306);
             this.galleryBanners.TabIndex = 0;
             this.galleryBanners.Text = "galleryControl1";
             // 
@@ -307,7 +308,7 @@
             // 
             this.galleryControlClient1.GalleryControl = this.galleryBanners;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 2);
-            this.galleryControlClient1.Size = new System.Drawing.Size(217, 338);
+            this.galleryControlClient1.Size = new System.Drawing.Size(217, 302);
             // 
             // groupControl3
             // 

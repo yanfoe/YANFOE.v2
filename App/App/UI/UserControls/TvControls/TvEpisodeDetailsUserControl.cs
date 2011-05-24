@@ -18,6 +18,9 @@ namespace YANFOE.UI.UserControls.TvControls
 
     using YANFOE.Factories;
 
+    /// <summary>
+    /// TvEpisodeDetailsUserControl user control
+    /// </summary>
     public partial class TvEpisodeDetailsUserControl : DevExpress.XtraEditors.XtraUserControl
     {
         /// <summary>
@@ -39,7 +42,7 @@ namespace YANFOE.UI.UserControls.TvControls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void TvDBFactory_CurrentEpisodeChanged(object sender, EventArgs e)
+        private void TvDBFactory_CurrentEpisodeChanged(object sender, EventArgs e)
         {
             this.RefreshBindings();
         }

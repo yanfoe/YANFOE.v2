@@ -277,11 +277,6 @@ namespace YANFOE.UI.Dialogs.TV
             /// </summary>
             public string NewTime
             {
-                get
-                {
-                    return this.newTime;
-                }
-
                 set
                 {
                     this.newTime = value;
@@ -294,7 +289,7 @@ namespace YANFOE.UI.Dialogs.TV
             /// <summary>
             /// Gets or sets PreviousTime.
             /// </summary>
-            public string PreviousTime { get; set; }
+            public string PreviousTime { private get; set; }
 
             /// <summary>
             /// Gets or sets SeriesId.

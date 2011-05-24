@@ -65,7 +65,8 @@ namespace YANFOE.UI.Popups
         /// Generates the lock item
         /// </summary>
         /// <param name="barManager">The bar manager.</param>
-        /// <param name="movieModel">The movie model.</param>
+        /// <param name="popupMenu">The popup Menu.</param>
+        /// <param name="movieModels">The movie Models.</param>
         private static void GenerateLock(BarManager barManager, PopupMenu popupMenu, List<MovieModel> movieModels)
         {
             if (movieModels.Count == 1 && movieModels[0].Locked)

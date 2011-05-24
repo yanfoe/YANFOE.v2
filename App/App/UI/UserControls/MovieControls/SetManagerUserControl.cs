@@ -145,8 +145,6 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// <summary>
         /// The get current row.
         /// </summary>
-        /// <returns>
-        /// </returns>
         private MovieSetObjectModel GetCurrentRow()
         {
             int[] currentRows = this.gridView.GetSelectedRows();

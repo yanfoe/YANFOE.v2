@@ -2,29 +2,21 @@
 // <copyright file="MoviesUserControl.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <license>
-//   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
-//   http://creativecommons.org/licenses/by-nc-sa/3.0/
-//   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
-// </license>
+// <summary>
+//   The main movie user control.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace YANFOE.UI.UserControls.MovieControls
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
-    using BitFactory.Logging;
-
+    using DevExpress.Data;
     using DevExpress.Utils;
     using DevExpress.XtraBars;
     using DevExpress.XtraBars.Ribbon;
@@ -42,18 +34,351 @@ namespace YANFOE.UI.UserControls.MovieControls
     /// </summary>
     public partial class MoviesUserControl : XtraUserControl
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoviesUserControl"/> class.
+        ///   Initializes a new instance of the <see cref = "MoviesUserControl" /> class.
         /// </summary>
         public MoviesUserControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.SetupDatabindings();
             this.SetupEventHandlers();
         }
 
-        #region Setup
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Handles the Click event of the btnLoadFromWeb control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnLoadFromWeb_Click(object sender, EventArgs e)
+        {
+            this.grdViewByTitle.RefreshData();
+
+            var count = this.grdViewByTitle.SelectedRowsCount;
+
+            if (count == 1)
+            {
+                MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
+            }
+            else if (count > 1)
+            {
+                MovieScrapeFactory.RunMultiScrape(MovieDBFactory.MultiSelectedMovies);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the BtnLock control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnLock_Click(object sender, EventArgs e)
+        {
+            MovieDBFactory.GetCurrentMovie().Locked = !MovieDBFactory.GetCurrentMovie().Locked;
+            this.grdViewByTitle.RefreshData();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the BtnMarked control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnMarked_Click(object sender, EventArgs e)
+        {
+            MovieDBFactory.GetCurrentMovie().Marked = !MovieDBFactory.GetCurrentMovie().Marked;
+            this.grdViewByTitle.RefreshData();
+        }
+
+        /// <summary>
+        /// Handles the DoubleClick event of the BtnNew control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnNew_DoubleClick(object sender, EventArgs e)
+        {
+            var button = sender as SimpleButton;
+
+            MovieDBFactory.GetCurrentMovie().IsNew = false;
+
+            button.Visible = false;
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the btnSaveAllImages control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSaveAllImages_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.StartSaveMovie(MovieIOType.Images);
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the btnSaveFanart control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSaveFanart_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.StartSaveMovie(MovieIOType.Fanart);
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the btnSaveNfo control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSaveNfo_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.StartSaveMovie(MovieIOType.Nfo);
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the btnSavePoster control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSavePoster_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.StartSaveMovie(MovieIOType.Poster);
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnSave control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            this.StartSaveMovie();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnSave control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void BtnSave_Click(object sender, ItemClickEventArgs e)
+        {
+            this.StartSaveMovie();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the GalleryItem control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.Ribbon.GalleryItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void GalleryItem_Click(object sender, GalleryItemClickEventArgs e)
+        {
+            this.grdViewByTitle.ClearSelection();
+
+            var selectedMovie = MovieDBFactory.MovieDatabase.IndexOf(MovieDBFactory.GetMovie(e.Item.Tag.ToString()));
+            var handle = this.grdViewByTitle.GetRowHandle(selectedMovie);
+            this.grdViewByTitle.FocusedRowHandle = handle;
+            this.grdViewByTitle.SelectRow(handle);
+            this.UpdateMovieFromGrid();
+
+            // MovieDBFactory.SetCurrentMovie(e.Item.Tag.ToString());
+        }
+
+        /// <summary>
+        /// Handles the DoubleClick event of the grdViewByTitle control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void GrdViewByTitle_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.tabSets.Visible)
+            {
+                var pt = this.grdViewByTitle.GridControl.PointToClient(MousePosition);
+                var info = this.grdViewByTitle.CalcHitInfo(pt);
+
+                if (info.InRow || info.InRowCell)
+                {
+                    var movie = this.grdViewByTitle.GetRow(info.RowHandle) as MovieModel;
+
+                    this.setManagerUserControl1.AddMovieToSet(movie);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the RowCellStyle event of the grdViewByTitle control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs"/> instance containing the event data.
+        /// </param>
+        private void GrdViewByTitle_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            var row = this.grdViewByTitle.GetRow(e.RowHandle) as MovieModel;
+
+            if (row == null)
+            {
+                return;
+            }
+
+            if (row.ChangedText || row.ChangedPoster)
+            {
+                e.Appearance.Font = Settings.Get.LookAndFeel.TextChanged;
+            }
+            else
+            {
+                e.Appearance.Font = Settings.Get.LookAndFeel.TextNormal;
+            }
+        }
+
+        /// <summary>
+        /// Handles the SelectionChanged event of the grdViewByTitle control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.Data.SelectionChangedEventArgs"/> instance containing the event data.
+        /// </param>
+        private void GrdViewByTitle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateMovieFromGrid();
+        }
+
+        /// <summary>
+        /// Handles the CurrentMovieChanged event of the MovieDBFactory control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void MovieDBFactory_CurrentMovieChanged(object sender, EventArgs e)
+        {
+            this.btnLock.DataBindings.Clear();
+            this.btnMarked.DataBindings.Clear();
+
+            this.btnLoadFromWeb.DataBindings.Clear();
+            this.btnLoadFromWeb.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
+
+            this.btnLock.DataBindings.Add(
+                "Image", MovieDBFactory.GetCurrentMovie(), "LockedImage", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.btnMarked.DataBindings.Add(
+                "Image", MovieDBFactory.GetCurrentMovie(), "MarkedImage", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            this.btnNew.Visible = MovieDBFactory.GetCurrentMovie().IsNew;
+        }
+
+        /// <summary>
+        /// Handles the DatabaseChanged event of the MovieDBFactory control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void MovieDBFactory_DatabaseChanged(object sender, EventArgs e)
+        {
+            this.SetupDatabindings();
+        }
+
+        /// <summary>
+        /// Handles the DatabaseValuesRefreshRequired event of the MovieDBFactory control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void MovieDBFactory_DatabaseValuesRefreshRequired(object sender, EventArgs e)
+        {
+            this.grdViewByTitle.RefreshData();
+        }
+
+        /// <summary>
+        /// Handles the GalleryChanged event of the MovieDBFactory control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void MovieDBFactory_GalleryChanged(object sender, EventArgs e)
+        {
+            this.UpdatePosterCount();
+
+            this.UpdateGallery();
+        }
+
+        /// <summary>
+        /// Handles the ListChanged event of the MoviesUserControl control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
+        /// </param>
+        private void MoviesUserControl_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.UpdateTitleCount();
+        }
 
         /// <summary>
         /// Setups the form databindings.
@@ -80,28 +405,40 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
-        /// Handles the DatabaseValuesRefreshRequired event of the MovieDBFactory control.
+        /// Starts the save movie process.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_DatabaseValuesRefreshRequired(object sender, EventArgs e)
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        private void StartSaveMovie(MovieIOType type = MovieIOType.All)
         {
-            grdViewByTitle.RefreshData();
+            this.UpdatedSelectedMoviesInFactory(this.grdViewByTitle.GetSelectedRows());
+            Factories.InOut.OutFactory.SaveMovie(type);
+            this.grdViewByTitle.RefreshData();
         }
 
         /// <summary>
-        /// Handles the DatabaseChanged event of the MovieDBFactory control.
+        /// Handles the GetActiveObjectInfo event of the toolTipController1 control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_DatabaseChanged(object sender, EventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs"/> instance containing the event data.
+        /// </param>
+        private void ToolTipController1_GetActiveObjectInfo(
+            object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
         {
-            this.SetupDatabindings();
+            GridHitInfo hi = this.grdViewByTitle.CalcHitInfo(e.ControlMousePosition);
+            if (hi.InRowCell)
+            {
+                var movieModel = this.grdViewByTitle.GetRow(hi.RowHandle) as MovieModel;
+                e.Info = new ToolTipControlInfo(hi + " " + hi.Column.Name + " " + hi.RowHandle, string.Empty)
+                    {
+                       SuperTip = movieModel.GetMovieSuperTip() 
+                    };
+            }
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Updates the gallery.
@@ -113,156 +450,8 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
-        /// Updates the poster count.
+        /// The update movie from grid.
         /// </summary>
-        private void UpdatePosterCount()
-        {
-            this.tabByPoster.Text = string.Format("Poster ({0})", MovieDBFactory.GetGalleryGroup().Items.Count);
-        }
-
-        /// <summary>
-        /// Updates the title count.
-        /// </summary>
-        private void UpdateTitleCount()
-        {
-            this.tabByTitle.Text = string.Format("Title ({0})", MovieDBFactory.MovieDatabase.Count);
-        }
-
-        /// <summary>
-        /// Handles the ListChanged event of the MoviesUserControl control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private void MoviesUserControl_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            this.UpdateTitleCount();
-        }
-
-        #endregion
-
-        #region Event Handlers
-
-        /// <summary>
-        /// Handles the CurrentMovieChanged event of the MovieDBFactory control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_CurrentMovieChanged(object sender, EventArgs e)
-        {
-            this.btnLock.DataBindings.Clear();
-            this.btnMarked.DataBindings.Clear();
-
-            this.btnLoadFromWeb.DataBindings.Clear();
-            this.btnLoadFromWeb.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
-
-            this.btnLock.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "LockedImage", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.btnMarked.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "MarkedImage", true, DataSourceUpdateMode.OnPropertyChanged);
-
-            this.btnNew.Visible = MovieDBFactory.GetCurrentMovie().IsNew;
-        }
-
-        /// <summary>
-        /// Handles the GalleryChanged event of the MovieDBFactory control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_GalleryChanged(object sender, EventArgs e)
-        {
-            this.UpdatePosterCount();
-
-            this.UpdateGallery();
-        }
-
-        #endregion
-
-        #region UI Events
-
-        /// <summary>
-        /// Handles the DoubleClick event of the BtnNew control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnNew_DoubleClick(object sender, EventArgs e)
-        {
-            var button = sender as SimpleButton;
-
-            MovieDBFactory.GetCurrentMovie().IsNew = false;
-
-            button.Visible = false;
-        }
-
-        /// <summary>
-        /// Handles the Click event of the BtnMarked control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnMarked_Click(object sender, EventArgs e)
-        {
-            MovieDBFactory.GetCurrentMovie().Marked = !MovieDBFactory.GetCurrentMovie().Marked;
-            grdViewByTitle.RefreshData();
-        }
-
-        /// <summary>
-        /// Handles the Click event of the GalleryItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.Ribbon.GalleryItemClickEventArgs"/> instance containing the event data.</param>
-        private void GalleryItem_Click(object sender, GalleryItemClickEventArgs e)
-        {
-            grdViewByTitle.ClearSelection();
-
-            var selectedMovie = MovieDBFactory.MovieDatabase.IndexOf(MovieDBFactory.GetMovie(e.Item.Tag.ToString()));
-            var handle = grdViewByTitle.GetRowHandle(selectedMovie);
-            grdViewByTitle.FocusedRowHandle = handle;
-            grdViewByTitle.SelectRow(handle);
-            this.UpdateMovieFromGrid();
-            //MovieDBFactory.SetCurrentMovie(e.Item.Tag.ToString());
-        }
-
-        /// <summary>
-        /// Handles the Click event of the BtnLock control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnLock_Click(object sender, EventArgs e)
-        {
-            MovieDBFactory.GetCurrentMovie().Locked = !MovieDBFactory.GetCurrentMovie().Locked;
-            grdViewByTitle.RefreshData();
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Handles the Click event of the btnLoadFromWeb control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnLoadFromWeb_Click(object sender, EventArgs e)
-        {
-            grdViewByTitle.RefreshData();
-
-            var count = grdViewByTitle.SelectedRowsCount;
-
-            if (count == 1)
-            {
-                MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
-            }
-            else if (count > 1)
-            {
-                MovieScrapeFactory.RunMultiScrape(MovieDBFactory.MultiSelectedMovies);
-            }
-        }
-
-        /// <summary>
-        /// Handles the SelectionChanged event of the grdViewByTitle control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.Data.SelectionChangedEventArgs"/> instance containing the event data.</param>
-        private void GrdViewByTitle_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
-        {
-            this.UpdateMovieFromGrid();
-        }
-
         private void UpdateMovieFromGrid()
         {
             var rows = this.grdViewByTitle.GetSelectedRows();
@@ -291,9 +480,27 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
+        /// Updates the poster count.
+        /// </summary>
+        private void UpdatePosterCount()
+        {
+            this.tabByPoster.Text = string.Format("Poster ({0})", MovieDBFactory.GetGalleryGroup().Items.Count);
+        }
+
+        /// <summary>
+        /// Updates the title count.
+        /// </summary>
+        private void UpdateTitleCount()
+        {
+            this.tabByTitle.Text = string.Format("Title ({0})", MovieDBFactory.MovieDatabase.Count);
+        }
+
+        /// <summary>
         /// Updated the selected movies in factory.
         /// </summary>
-        /// <param name="rows">The rows.</param>
+        /// <param name="rows">
+        /// The rows.
+        /// </param>
         private void UpdatedSelectedMoviesInFactory(int[] rows)
         {
             MovieDBFactory.MultiSelectedMovies.Clear();
@@ -306,171 +513,29 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
-        /// Handles the RowCellStyle event of the grdViewByTitle control.
+        /// Handles the ItemClick event of the barItemLink control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs"/> instance containing the event data.</param>
-        private void GrdViewByTitle_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void barItemLink_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var row = grdViewByTitle.GetRow(e.RowHandle) as MovieModel;
-
-            if (row == null)
-            {
-                return;
-            }
-
-            if (row.ChangedText || row.ChangedPoster)
-            {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextChanged;
-            }
-            else
-            {
-                e.Appearance.Font = Settings.Get.LookAndFeel.TextNormal;
-            }
-        }
-
-        /// <summary>
-        /// Handles the GetActiveObjectInfo event of the toolTipController1 control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs"/> instance containing the event data.</param>
-        private void ToolTipController1_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
-        {
-            GridHitInfo hi = grdViewByTitle.CalcHitInfo(e.ControlMousePosition);
-            if (hi.InRowCell)
-            {
-                var movieModel = grdViewByTitle.GetRow(hi.RowHandle) as MovieModel;
-                e.Info = new ToolTipControlInfo(hi + " " + hi.Column.Name + " " + hi.RowHandle, string.Empty)
-                    {
-                        SuperTip = movieModel.GetMovieSuperTip()
-                    };
-            }
-        }
-
-        /// <summary>
-        /// Handles the DoubleClick event of the grdViewByTitle control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void GrdViewByTitle_DoubleClick(object sender, EventArgs e)
-        {
-            if (this.tabSets.Visible)
-            {
-                var pt = grdViewByTitle.GridControl.PointToClient(MousePosition);
-                var info = grdViewByTitle.CalcHitInfo(pt);
-
-                if (info.InRow || info.InRowCell)
-                {
-                    var movie = grdViewByTitle.GetRow(info.RowHandle) as MovieModel;
-
-                    setManagerUserControl1.AddMovieToSet(movie);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the Click event of the btnSave control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            this.StartSaveMovie();
-        }
-
-        /// <summary>
-        /// Handles the Click event of the btnSave control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void BtnSave_Click(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.StartSaveMovie();
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the btnSaveFanart control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void BtnSaveFanart_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.StartSaveMovie(MovieIOType.Fanart);
-        }
-
-        /// <summary>
-        /// Starts the save movie process.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        private void StartSaveMovie(MovieIOType type = MovieIOType.All)
-        {
-            this.UpdatedSelectedMoviesInFactory(this.grdViewByTitle.GetSelectedRows());
-            Factories.InOut.OutFactory.SaveMovie(type);
-            grdViewByTitle.RefreshData();
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the btnSavePoster control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void BtnSavePoster_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.StartSaveMovie(MovieIOType.Poster);
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the btnSaveAllImages control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void BtnSaveAllImages_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.StartSaveMovie(MovieIOType.Images);
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the btnSaveNfo control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void BtnSaveNfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.StartSaveMovie(MovieIOType.Nfo);
-        }
-
-        /// <summary>
-        /// Handles the PopupMenuShowing event of the grdViewByTitle control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs"/> instance containing the event data.</param>
-        private void grdViewByTitle_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
-        {
-            var view = sender as GridView;
-
-            e.Allow = false;
-
-            this.popupMovieList.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
-        }
-
-        /// <summary>
-        /// Handles the BeforePopup event of the popupMovieList control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void popupMovieList_BeforePopup(object sender, CancelEventArgs e)
-        {
-            var rows = grdViewByTitle.GetSelectedRows();
-            var movieList = rows.Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).ToList();
-
-            Popups.MovieListPopup.Generate(this.barManager1, popupMovieList, movieList);
+            MovieDBFactory.TempScraperGroup = e.Item.Tag.ToString();
+            this.BtnLoadFromWeb_Click(this, new EventArgs());
         }
 
         /// <summary>
         /// Handles the Click event of the btnOpenFile control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath))
@@ -482,12 +547,15 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// <summary>
         /// Handles the Click event of the btnOpenFolder control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
         private void btnOpenFolder_Click(object sender, EventArgs e)
         {
-            var argument = string.Empty;
-            argument = string.Format(
+            string argument = string.Format(
                 @"/select,""{0}""",
                 File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath)
                     ? MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath
@@ -497,37 +565,68 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
+        /// Handles the PopupMenuShowing event of the grdViewByTitle control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs"/> instance containing the event data.
+        /// </param>
+        private void grdViewByTitle_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            var view = sender as GridView;
+
+            e.Allow = false;
+
+            this.popupMovieList.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
+        }
+
+        /// <summary>
         /// Handles the BeforePopup event of the popupLoadFromWeb control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.
+        /// </param>
         private void popupLoadFromWeb_BeforePopup(object sender, CancelEventArgs e)
         {
-            popupLoadFromWeb.ClearLinks();
+            this.popupLoadFromWeb.ClearLinks();
 
-            var barItemLink = new BarButtonItem(barManager1, "Scrape using " + MovieDBFactory.GetCurrentMovie().ScraperGroup);
+            var barItemLink = new BarButtonItem(
+                this.barManager1, "Scrape using " + MovieDBFactory.GetCurrentMovie().ScraperGroup);
             barItemLink.Tag = MovieDBFactory.GetCurrentMovie().ScraperGroup;
             barItemLink.ItemClick += this.barItemLink_ItemClick;
-            popupLoadFromWeb.AddItem(barItemLink);
+            this.popupLoadFromWeb.AddItem(barItemLink);
 
             foreach (var scraper in MovieScraperGroupFactory.GetScraperGroupsOnDisk())
             {
-                barItemLink = new BarButtonItem(barManager1, "Use " + scraper);
+                barItemLink = new BarButtonItem(this.barManager1, "Use " + scraper);
                 barItemLink.Tag = MovieDBFactory.GetCurrentMovie().ScraperGroup;
                 barItemLink.ItemClick += this.barItemLink_ItemClick;
-                popupLoadFromWeb.AddItem(barItemLink);
+                this.popupLoadFromWeb.AddItem(barItemLink);
             }
         }
 
         /// <summary>
-        /// Handles the ItemClick event of the barItemLink control.
+        /// Handles the BeforePopup event of the popupMovieList control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        void barItemLink_ItemClick(object sender, ItemClickEventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.
+        /// </param>
+        private void popupMovieList_BeforePopup(object sender, CancelEventArgs e)
         {
-            MovieDBFactory.TempScraperGroup = e.Item.Tag.ToString();
-            this.BtnLoadFromWeb_Click(this, new EventArgs());
+            var rows = this.grdViewByTitle.GetSelectedRows();
+            var movieList = rows.Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).ToList();
+
+            Popups.MovieListPopup.Generate(this.barManager1, this.popupMovieList, movieList);
         }
+
+        #endregion
     }
 }

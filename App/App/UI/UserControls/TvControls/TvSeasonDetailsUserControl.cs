@@ -14,6 +14,9 @@
 
 namespace YANFOE.UI.UserControls.TvControls
 {
+    /// <summary>
+    /// TvSeasonDetailsUserControl user control
+    /// </summary>
     public partial class TvSeasonDetailsUserControl : DevExpress.XtraEditors.XtraUserControl
     {
         /// <summary>

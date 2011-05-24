@@ -526,7 +526,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
                     if (this.populateGallery)
                     {
-                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailFanart;
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailFanart;
                         this.galleryControl.Gallery.Groups.Clear();
                         this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonFanartAltGallery);
                         this.populateGallery = false;
@@ -547,7 +547,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
                     if (this.populateGallery)
                     {
-                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailBanner;
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailBanner;
                         this.galleryControl.Gallery.Groups.Clear();
                         this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeason.SeasonBannerAltGallery);
                         this.populateGallery = false;
@@ -592,7 +592,7 @@ namespace YANFOE.UI.UserControls.CommonControls
                     
                     if (this.populateGallery)
                     {
-                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailPoster;
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailPoster;
                         this.galleryControl.Gallery.Groups.Clear();
                         this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesPosterAltGallery);
                         this.populateGallery = false;
@@ -613,7 +613,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
                     if (this.populateGallery)
                     {
-                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailFanart;
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailFanart;
                         this.galleryControl.Gallery.Groups.Clear();
                         this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesFanartAltGallery);
                         this.populateGallery = false;
@@ -634,7 +634,7 @@ namespace YANFOE.UI.UserControls.CommonControls
 
                     if (this.populateGallery)
                     {
-                        this.galleryControl.Gallery.ImageSize = YANFOE.Settings.Get.Ui.PictureThumbnailBanner;
+                        this.galleryControl.Gallery.ImageSize = Get.Ui.PictureThumbnailBanner;
                         this.galleryControl.Gallery.Groups.Clear();
                         this.galleryControl.Gallery.Groups.Add(TvDBFactory.CurrentSeries.SeriesBannerAltGallery);
                         this.populateGallery = false;

@@ -56,7 +56,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_CurrentMovieChanged(object sender, System.EventArgs e)
+        private void MovieDBFactory_CurrentMovieChanged(object sender, EventArgs e)
         {
             this.SetupForm();
             this.ClearBindings();
@@ -68,8 +68,8 @@ namespace YANFOE.UI.UserControls.MovieControls
 
         private void SetupForm()
         {
-            var noValue = "No Value";
-            var noChange = "Mixed Values";
+            const string noValue = "No Value";
+            const string noChange = "Mixed Values";
 
             string valueToSet;
 
@@ -185,8 +185,6 @@ namespace YANFOE.UI.UserControls.MovieControls
             ScraperList type;
 
             Enum.TryParse(Factories.MovieDBFactory.GetCurrentMovie().ScraperGroup, out type);
-            var genreList = new List<string>();
-
 
             if (this.currentGenre == type.ToString())
             {
@@ -205,7 +203,7 @@ namespace YANFOE.UI.UserControls.MovieControls
                 cmbGenre.Properties.Items.Add("No Scraper Group Selected");
             }
 
-            genreList = Settings.Get.Genres.GenreDictionary[type];
+            var genreList = Settings.Get.Genres.GenreDictionary[type];
 
             foreach (var genre in genreList)
             {

@@ -22,7 +22,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
     using BitFactory.Logging;
 
-    using DevExpress.XtraGrid.Views.Base;
     using DevExpress.XtraLayout.Utils;
 
     using YANFOE.Factories;
@@ -226,6 +225,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// </summary>
         /// <param name="title">The title value.</param>
         /// <param name="year">The year value.</param>
+        /// <param name="imdbid"></param>
         /// <returns>A query object.</returns>
         private Query DoSearch(string title, string year, string imdbid, string tmdbid)
         {
