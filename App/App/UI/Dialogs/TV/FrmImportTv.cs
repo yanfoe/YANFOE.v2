@@ -148,6 +148,14 @@ namespace YANFOE.UI.Dialogs.TV
                         else
                         {
                             series = this.theTvdb.OpenNewSeries(searchResults[0]); // download series details
+
+                            ImportTvFactory.ScanSeriesPicks.Add(
+                                new ScanSeriesPick
+                                {
+                                    SearchString = s.Key,
+                                    SeriesID = series.SeriesID.ToString(),
+                                    SeriesName = series.SeriesName
+                                });
                         }
 
                         this.Set(series, toRemove, toAdd, s.Key, s.Value);
