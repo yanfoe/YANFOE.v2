@@ -140,7 +140,6 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             txtTitle.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Title");
             txtTitle.DataBindings.Add("Enabled", Factories.MovieDBFactory.GetCurrentMovie(), "TitleEnabled", true);
-
             txtYear.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Year", true);
             txtPlot.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Plot", true);
             txtOutline.DataBindings.Add("Text", Factories.MovieDBFactory.GetCurrentMovie(), "Outline", true);

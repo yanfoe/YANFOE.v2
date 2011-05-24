@@ -327,11 +327,24 @@ namespace YANFOE.Tools.IO
                         {
                             return f;
                         }
+
+                        var a = RemovePart(replacedType).ToLower();
+                        var b = RemovePart(fileMatch).ToLower();
+
+                        if (a == b)
+                        {
+                            return f;
+                        }
                     }
                 }
             }
 
             return string.Empty;
+        }
+
+        private static string RemovePart(string path)
+        {
+            return Regex.Replace(path, "(?:(?:CD[0-9]+)|(?:DISC[0-9]+)|(?:DISK[0-9]+)|(?:PART[0-9]+))", "", RegexOptions.IgnoreCase);
         }
 
         #endregion

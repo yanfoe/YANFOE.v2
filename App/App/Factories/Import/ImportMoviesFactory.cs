@@ -182,7 +182,7 @@ namespace YANFOE.Factories.Import
                     movieModel.ChangedText = false;
                 }
 
-                var result = (from m in ImportDatabase where m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim() select m).ToList();
+                var result = (from m in ImportDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
 
                 if (result.Count == 0)
                 {

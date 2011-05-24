@@ -70,6 +70,7 @@
             this.txtCert = new DevExpress.XtraEditors.MemoExEdit();
             this.cmbScraperGroup = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbMpaa = new DevExpress.XtraEditors.MemoExEdit();
+            this.cmbLanguage = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -102,7 +103,8 @@
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layMultiEditKey = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cmbLanguage = new DevExpress.XtraEditors.TextEdit();
+            this.txtID = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -132,6 +134,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCert.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbScraperGroup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbMpaa.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -164,11 +167,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtID);
             this.layoutControl1.Controls.Add(this.btnRejectMultiChanges);
             this.layoutControl1.Controls.Add(this.btnAcceptMultiChanges);
             this.layoutControl1.Controls.Add(this.panelControl1);
@@ -420,19 +425,19 @@
             // 
             // txtOutline
             // 
-            this.txtOutline.Location = new System.Drawing.Point(65, 198);
+            this.txtOutline.Location = new System.Drawing.Point(65, 213);
             this.txtOutline.MinimumSize = new System.Drawing.Size(0, 30);
             this.txtOutline.Name = "txtOutline";
-            this.txtOutline.Size = new System.Drawing.Size(467, 169);
+            this.txtOutline.Size = new System.Drawing.Size(467, 154);
             this.txtOutline.StyleController = this.layoutControl1;
             this.txtOutline.TabIndex = 7;
             // 
             // txtPlot
             // 
-            this.txtPlot.Location = new System.Drawing.Point(65, 26);
+            this.txtPlot.Location = new System.Drawing.Point(65, 50);
             this.txtPlot.MinimumSize = new System.Drawing.Size(0, 30);
             this.txtPlot.Name = "txtPlot";
-            this.txtPlot.Size = new System.Drawing.Size(467, 163);
+            this.txtPlot.Size = new System.Drawing.Size(467, 154);
             this.txtPlot.StyleController = this.layoutControl1;
             this.txtPlot.TabIndex = 5;
             // 
@@ -541,6 +546,14 @@
             this.cmbMpaa.StyleController = this.layoutControl1;
             this.cmbMpaa.TabIndex = 19;
             // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.Location = new System.Drawing.Point(353, 443);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(179, 20);
+            this.cmbLanguage.StyleController = this.layoutControl1;
+            this.cmbLanguage.TabIndex = 31;
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
@@ -570,7 +583,8 @@
             this.layoutLanguage,
             this.layoutControlItem11,
             this.layActorsGroup,
-            this.layMultiGroup});
+            this.layMultiGroup,
+            this.layoutControlItem18});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -585,9 +599,9 @@
             this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem2.Control = this.txtPlot;
             this.layoutControlItem2.CustomizationFormText = "Plot:";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(534, 167);
+            this.layoutControlItem2.Size = new System.Drawing.Size(534, 158);
             this.layoutControlItem2.Text = "Plot";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(59, 13);
             // 
@@ -609,9 +623,9 @@
             this.layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem4.Control = this.txtOutline;
             this.layoutControlItem4.CustomizationFormText = "Outline:";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 196);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 211);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(534, 173);
+            this.layoutControlItem4.Size = new System.Drawing.Size(534, 158);
             this.layoutControlItem4.Text = "Outline";
             this.layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Default;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(59, 13);
@@ -808,7 +822,7 @@
             // 
             this.splitterItem2.AllowHotTrack = true;
             this.splitterItem2.CustomizationFormText = "splitterItem2";
-            this.splitterItem2.Location = new System.Drawing.Point(0, 191);
+            this.splitterItem2.Location = new System.Drawing.Point(0, 206);
             this.splitterItem2.Name = "splitterItem2";
             this.splitterItem2.Size = new System.Drawing.Size(534, 5);
             // 
@@ -950,13 +964,25 @@
             this.layMultiEditKey.TextToControlDistance = 0;
             this.layMultiEditKey.TextVisible = false;
             // 
-            // cmbLanguage
+            // txtID
             // 
-            this.cmbLanguage.Location = new System.Drawing.Point(353, 443);
-            this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(179, 20);
-            this.cmbLanguage.StyleController = this.layoutControl1;
-            this.cmbLanguage.TabIndex = 31;
+            this.txtID.Location = new System.Drawing.Point(65, 26);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(467, 20);
+            this.txtID.StyleController = this.layoutControl1;
+            this.txtID.TabIndex = 36;
+            // 
+            // layoutControlItem18
+            // 
+            this.layoutControlItem18.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem18.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.layoutControlItem18.Control = this.txtID;
+            this.layoutControlItem18.CustomizationFormText = "ID";
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem18.Name = "layoutControlItem18";
+            this.layoutControlItem18.Size = new System.Drawing.Size(534, 24);
+            this.layoutControlItem18.Text = "ID";
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(59, 13);
             // 
             // MovieMainDetailsUserControl
             // 
@@ -995,6 +1021,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCert.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbScraperGroup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbMpaa.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -1027,7 +1054,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layMultiEditKey)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbLanguage.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1099,5 +1127,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlGroup layMultiGroup;
         private DevExpress.XtraEditors.TextEdit cmbLanguage;
+        private DevExpress.XtraEditors.TextEdit txtID;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
     }
 }

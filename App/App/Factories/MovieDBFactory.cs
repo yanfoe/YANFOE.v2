@@ -17,6 +17,7 @@ namespace YANFOE.Factories
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Linq;
@@ -582,7 +583,10 @@ namespace YANFOE.Factories
         /// </param>
         public static void ReplaceMovie(MovieModel movieModel)
         {
-            MovieModel getMovieInDatabase =
+            var tempList = from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m;
+            Debug.Write(tempList.Count());
+
+            var getMovieInDatabase =
                 (from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m).SingleOrDefault();
 
             int index = MovieDatabase.IndexOf(getMovieInDatabase);
