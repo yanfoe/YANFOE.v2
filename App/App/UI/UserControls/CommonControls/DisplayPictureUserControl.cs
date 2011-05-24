@@ -395,6 +395,9 @@ namespace YANFOE.UI.UserControls.CommonControls
             this.imageMain.DataBindings.Clear();
             this.imageMain.Image = Resources.picturefaded128;
 
+            layoutControl2.DataBindings.Clear();
+            layoutControl2.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
+
             switch (this.galleryType)
             {
                 case GalleryType.MoviePoster:
@@ -415,8 +418,6 @@ namespace YANFOE.UI.UserControls.CommonControls
                         this.galleryControl.Gallery.Groups.Add(MovieDBFactory.GetCurrentMovie().PosterAltGallery);
                         this.populateGallery = false;
                     }
-
-                    
 
                     break;
 

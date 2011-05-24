@@ -477,7 +477,6 @@
             this.nfoPreviewUserControl1.PreviewArea = YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl.TvOrMovies.Movies;
             this.nfoPreviewUserControl1.Size = new System.Drawing.Size(771, 305);
             this.nfoPreviewUserControl1.TabIndex = 0;
-            this.nfoPreviewUserControl1.Load += new System.EventHandler(this.nfoPreviewUserControl1_Load);
             // 
             // picPoster
             // 

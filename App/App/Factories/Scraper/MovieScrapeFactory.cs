@@ -18,6 +18,9 @@ namespace YANFOE.Factories.Scraper
     using System.ComponentModel;
     using System.Threading;
 
+    using BitFactory.Logging;
+
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie;
     using YANFOE.Scrapers.Movie.Models.Search;
@@ -94,11 +97,6 @@ namespace YANFOE.Factories.Scraper
         /// <param name="movieModelList">The movie model list.</param>
         public static void RunMultiScrape(BindingList<MovieModel> movieModelList)
         {
-            foreach (MovieModel movie in movieModelList)
-            {
-                movie.IsBusy = true;
-            }
-
             var bgwMulti = new BackgroundWorker();
             bgwMulti.DoWork += BgwMulti_DoWork;
             bgwMulti.RunWorkerCompleted += BgwMulti_RunWorkerCompleted;
@@ -178,7 +176,7 @@ namespace YANFOE.Factories.Scraper
 
             foreach (MovieModel movie in movieModelList)
             {
-                movie.IsBusy = true;
+
 
                 do
                 {
@@ -187,8 +185,17 @@ namespace YANFOE.Factories.Scraper
                 while (scrapeCount > 4);
 
                 scrapeCount++;
-
-                ScrapeMovie(movie);
+                if (movie.Locked)
+                {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Skipping Locked Movie", movie.Title);
+                    movie.IsBusy = false;
+                }
+                else
+                {
+                    Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Scraping Movie", movie.Title);
+                    movie.IsBusy = true;
+                    ScrapeMovie(movie);
+                }
             }
 
             do

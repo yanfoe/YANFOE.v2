@@ -34,7 +34,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             InitializeComponent();
 
-            Factories.MovieDBFactory.CurrentMovieChanged += this.MovieDBFactoryCurrentMovieChanged;
+            Factories.MovieDBFactory.CurrentMovieChanged += this.MovieDBFactory_CurrentMovieChanged;
 
             this.currentGenre = string.Empty;
 
@@ -52,16 +52,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         /// <summary>
-        /// Handles the ListChanged event of the scraperGroup control.
+        /// Handles the CurrentMovieChanged event of the MovieDBFactory control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        public void ScraperGroupListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
-        {
-            
-        }
-
-        private void MovieDBFactoryCurrentMovieChanged(object sender, System.EventArgs e)
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void MovieDBFactory_CurrentMovieChanged(object sender, System.EventArgs e)
         {
             this.SetupForm();
             this.ClearBindings();
@@ -300,6 +295,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the gridViewActors control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.Data.SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void gridViewActors_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
         {
             btnActorTrash.Enabled = gridViewActors.GetSelectedRows().Length > 0;

@@ -152,6 +152,9 @@ namespace YANFOE.UI.UserControls.MovieControls
             this.btnLock.DataBindings.Clear();
             this.btnMarked.DataBindings.Clear();
 
+            this.btnLoadFromWeb.DataBindings.Clear();
+            this.btnLoadFromWeb.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
+
             this.btnLock.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "LockedImage", true, DataSourceUpdateMode.OnPropertyChanged);
             this.btnMarked.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "MarkedImage", true, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -235,11 +238,11 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             if (count == 1)
             {
-                Factories.Scraper.MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
+                MovieScrapeFactory.RunSingleScrape(MovieDBFactory.GetCurrentMovie());
             }
             else if (count > 1)
             {
-                Factories.Scraper.MovieScrapeFactory.RunMultiScrape(MovieDBFactory.MultiSelectedMovies);
+                MovieScrapeFactory.RunMultiScrape(MovieDBFactory.MultiSelectedMovies);
             }
         }
 
@@ -470,6 +473,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             Popups.MovieListPopup.Generate(this.barManager1, popupMovieList, movieList);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnOpenFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
             if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath))
@@ -478,6 +486,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnOpenFolder control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnOpenFolder_Click(object sender, EventArgs e)
         {
             var argument = string.Empty;
@@ -490,6 +503,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             Process.Start("explorer.exe", argument);
         }
 
+        /// <summary>
+        /// Handles the BeforePopup event of the popupLoadFromWeb control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void popupLoadFromWeb_BeforePopup(object sender, CancelEventArgs e)
         {
             popupLoadFromWeb.ClearLinks();
@@ -517,11 +535,6 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             MovieDBFactory.TempScraperGroup = e.Item.Tag.ToString();
             this.BtnLoadFromWeb_Click(this, new EventArgs());
-        }
-
-        private void nfoPreviewUserControl1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
