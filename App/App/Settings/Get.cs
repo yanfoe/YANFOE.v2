@@ -71,6 +71,11 @@ namespace YANFOE.Settings
         private static Localization localization;
 
         /// <summary>
+        /// The log settings
+        /// </summary>
+        private static LogSettings logSettings;
+
+        /// <summary>
         /// The look and feel settings
         /// </summary>
         private static LookAndFeel lookAndFeel;
@@ -228,6 +233,19 @@ namespace YANFOE.Settings
             }
         }
 
+        public static LogSettings LogSettings
+        {
+            get
+            {
+                return logSettings ?? (logSettings = new LogSettings());
+            }
+
+            set
+            {
+                logSettings = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets LookAndFeel.
         /// </summary>
@@ -325,6 +343,7 @@ namespace YANFOE.Settings
             LoadInOutCollectionSettings();
             LoadKeywordsSettings();
             LoadLocalizationSettings();
+            LoadLogSettings();
             LoadLookAndFeelSettings();
             LoadMediaSettings();
             LoadScraperSettings();
@@ -340,7 +359,7 @@ namespace YANFOE.Settings
             SaveSettings(
                 new dynamic[]
                     {
-                        Countries, FileSystemPaths, Genres, Image, InOutCollection, Keywords, Localization, LookAndFeel, 
+                        Countries, FileSystemPaths, Genres, Image, InOutCollection, Keywords, Localization, LogSettings, LookAndFeel, 
                         Media, Scraper, Ui, Web
                     });
         }
@@ -519,6 +538,28 @@ namespace YANFOE.Settings
             catch (Exception exception)
             {
                 XtraMessageBox.Show("Failed to load Localization settings. Please check log for more info.");
+                Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
+            }
+        }
+
+        private static void LoadLogSettings()
+        {
+            try
+            {
+                string path = FileSystemPaths.PathSettings + "LogSettings.txt";
+
+                if (!File.Exists(path))
+                {
+                    return;
+                }
+
+                string json = IO.ReadTextFromFile(path);
+
+                logSettings = JsonConvert.DeserializeObject(json, typeof(LogSettings)) as LogSettings;
+            }
+            catch (Exception exception)
+            {
+                XtraMessageBox.Show("Failed to load log settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }

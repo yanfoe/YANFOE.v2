@@ -34,6 +34,7 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.chbEnableLog = new DevExpress.XtraEditors.CheckButton();
             this.grdLog = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -118,11 +120,22 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.chbEnableLog);
             this.groupControl2.Location = new System.Drawing.Point(779, 2);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(214, 526);
             this.groupControl2.TabIndex = 5;
             this.groupControl2.Text = "Log Settings";
+            // 
+            // chbEnableLog
+            // 
+            this.chbEnableLog.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chbEnableLog.Location = new System.Drawing.Point(2, 22);
+            this.chbEnableLog.Name = "chbEnableLog";
+            this.chbEnableLog.Size = new System.Drawing.Size(210, 23);
+            this.chbEnableLog.TabIndex = 0;
+            this.chbEnableLog.Text = "Enable Log";
+            this.chbEnableLog.CheckedChanged += new System.EventHandler(this.chbEnableLog_CheckedChanged);
             // 
             // grdLog
             // 
@@ -261,6 +274,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -291,5 +305,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraEditors.CheckButton chbEnableLog;
     }
 }

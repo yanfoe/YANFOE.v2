@@ -176,6 +176,7 @@
     <Compile Include="Settings\UserSettings\Scraper.cs" />
     <Compile Include="Settings\UserSettings\ScraperSettings\Generic.cs" />
     <Compile Include="IO\IoBase.cs" />
+    <Compile Include="Settings\UserSettings\LogSettings.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
     <Compile Include="Tools\Models\TrailerDetailsModel.cs" />

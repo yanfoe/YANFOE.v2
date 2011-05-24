@@ -97,6 +97,14 @@ namespace YANFOE.Factories.Scraper
         /// <param name="movieModelList">The movie model list.</param>
         public static void RunMultiScrape(BindingList<MovieModel> movieModelList)
         {
+            foreach (var movieModel in movieModelList)
+            {
+                if (!movieModel.Locked)
+                {
+                    movieModel.IsBusy = true;
+                }
+            }
+
             var bgwMulti = new BackgroundWorker();
             bgwMulti.DoWork += BgwMulti_DoWork;
             bgwMulti.RunWorkerCompleted += BgwMulti_RunWorkerCompleted;
@@ -114,6 +122,11 @@ namespace YANFOE.Factories.Scraper
                 {
                     movieModel
                 };
+
+            if (!movieModel.Locked)
+            {
+                movieModel.IsBusy = true;
+            }
 
             RunMultiScrape(movieModelList);
         }
@@ -158,9 +171,18 @@ namespace YANFOE.Factories.Scraper
             bgw.DoWork += BgwSingle_DoWork;
             bgw.RunWorkerCompleted += BgwSingle_RunWorkerCompleted;
 
-            MovieModel scrape = movieModel.Clone();
-
-            bgw.RunWorkerAsync(scrape);
+            if (movieModel.Locked)
+            {
+                Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Skipping Locked Movie", movieModel.Title);
+                movieModel.IsBusy = false;
+            }
+            else
+            {
+                Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Scraping Movie", movieModel.Title);
+                movieModel.IsBusy = true;
+                var scrape = movieModel.Clone();
+                bgw.RunWorkerAsync(scrape);
+            }
         }
 
         /// <summary>
@@ -176,8 +198,6 @@ namespace YANFOE.Factories.Scraper
 
             foreach (MovieModel movie in movieModelList)
             {
-
-
                 do
                 {
                     Thread.Sleep(50);
@@ -185,17 +205,7 @@ namespace YANFOE.Factories.Scraper
                 while (scrapeCount > 4);
 
                 scrapeCount++;
-                if (movie.Locked)
-                {
-                    Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Skipping Locked Movie", movie.Title);
-                    movie.IsBusy = false;
-                }
-                else
-                {
-                    Log.WriteToLog(LogSeverity.Info, 0, "Scraping -> Scraping Movie", movie.Title);
-                    movie.IsBusy = true;
-                    ScrapeMovie(movie);
-                }
+                ScrapeMovie(movie);
             }
 
             do

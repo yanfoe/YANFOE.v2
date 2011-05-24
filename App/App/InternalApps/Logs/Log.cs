@@ -356,6 +356,11 @@ namespace YANFOE.InternalApps.Logs
         /// </param>
         public static void WriteToLog(LogSeverity logSeverity, LoggerName loggerName, string catagory, string message)
         {
+            if (!Settings.Get.LogSettings.EnableLog)
+            {
+                return;
+            }
+
             if (logState[loggerName] == LogState.Stopped)
             {
                 return;
