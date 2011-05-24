@@ -15,7 +15,6 @@
 namespace YANFOE.UI.UserControls.CommonControls
 {
     using System;
-    using System.ComponentModel;
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
@@ -398,6 +397,9 @@ namespace YANFOE.UI.UserControls.CommonControls
             layoutControl2.DataBindings.Clear();
             layoutControl2.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
 
+            hideContainerLeft.DataBindings.Clear();
+            hideContainerLeft.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
+
             switch (this.galleryType)
             {
                 case GalleryType.MoviePoster:
@@ -459,6 +461,12 @@ namespace YANFOE.UI.UserControls.CommonControls
             this.imageMain.DataBindings.Clear();
             this.imageMain.Image = Resources.picturefaded128;
 
+            layoutControl2.DataBindings.Clear();
+            layoutControl2.DataBindings.Add("Enabled", TvDBFactory.CurrentEpisode, "NotLocked");
+
+            hideContainerLeft.DataBindings.Clear();
+            hideContainerLeft.DataBindings.Add("Enabled", TvDBFactory.CurrentEpisode, "NotLocked");
+
             this.ProcessEpisodeScreenshotDownload();
         }
 
@@ -476,7 +484,13 @@ namespace YANFOE.UI.UserControls.CommonControls
             this.imageMain.DataBindings.Clear();
             this.imageMain.Image = Resources.picturefaded128;
 
-           switch (this.galleryType)
+            layoutControl2.DataBindings.Clear();
+            layoutControl2.DataBindings.Add("Enabled", TvDBFactory.CurrentSeason, "NotLocked");
+
+            hideContainerLeft.DataBindings.Clear();
+            hideContainerLeft.DataBindings.Add("Enabled", TvDBFactory.CurrentSeason, "NotLocked");
+
+            switch (this.galleryType)
             {
                 case GalleryType.TvSeasonPoster:
 
@@ -556,6 +570,12 @@ namespace YANFOE.UI.UserControls.CommonControls
 
             this.imageMain.DataBindings.Clear();
             this.imageMain.Image = Resources.picturefaded128;
+
+            layoutControl2.DataBindings.Clear();
+            layoutControl2.DataBindings.Add("Enabled", TvDBFactory.CurrentSeries, "NotLocked");
+
+            hideContainerLeft.DataBindings.Clear();
+            hideContainerLeft.DataBindings.Add("Enabled", TvDBFactory.CurrentSeries, "NotLocked");
 
             switch (this.galleryType)
             {
