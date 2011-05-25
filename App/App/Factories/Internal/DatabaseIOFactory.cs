@@ -599,35 +599,19 @@ namespace YANFOE.Factories.Internal
 
             string writePath = path + title + ".movie";
 
-            bool writeText = false;
-            bool writeImages = false;
-
-            if (!movieModel.DatabaseSaved)
-            {
-                writeImages = true;
-            }
-
-            if (!movieModel.DatabaseSaved || movieModel.ChangedText)
-            {
-                writeText = true;
-            }
-
-            if (writeText)
-            {
-                movieModel.DatabaseSaved = true;
-                string json = JsonConvert.SerializeObject(movieModel);
-                Gzip.CompressString(json, writePath + ".gz");
-            }
+            movieModel.DatabaseSaved = true;
+            string json = JsonConvert.SerializeObject(movieModel);
+            Gzip.CompressString(json, writePath + ".gz");
 
             string posterPath = path + title + ".poster.jpg";
             string fanartPath = path + title + ".fanart.jpg";
 
-            if (movieModel.SmallPoster != null && (movieModel.ChangedPoster || writeImages))
+            if (movieModel.SmallPoster != null)
             {
                 movieModel.SmallPoster.Save(posterPath);
             }
 
-            if (movieModel.SmallFanart != null && (movieModel.ChangedFanart || writeImages))
+            if (movieModel.SmallFanart != null)
             {
                 movieModel.SmallFanart.Save(fanartPath);
             }
