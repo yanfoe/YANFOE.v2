@@ -146,7 +146,6 @@
             // layoutControlGroup2
             // 
             this.layoutControlGroup2.CustomizationFormText = "layoutControlGroup2";
-            this.layoutControlGroup2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.layoutControlGroup2.GroupBordersVisible = false;
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2,

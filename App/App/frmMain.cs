@@ -36,6 +36,7 @@ namespace YANFOE
     using YANFOE.UI.Dialogs.Movies;
 
     using Skin = YANFOE.Tools.UI.Skin;
+    using Timer = System.Windows.Forms.Timer;
 
     /// <summary>
     /// The frm main.
@@ -48,6 +49,20 @@ namespace YANFOE
         /// The change text.
         /// </summary>
         public ChangeText changeText;
+
+        private Timer tmr = new Timer();
+
+        private int MediaPathCount = 0;
+
+        private int MovieCount = 0;
+
+        private int TvCount = 0;
+
+        private int DownloadCount1 = 0;
+
+        private int DownloadCount2 = 0;
+
+        private int LogCount = 0;
 
         #endregion
 
@@ -82,6 +97,47 @@ namespace YANFOE
             InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged += this.Log_ListChanged;
 
             VersionUpdateFactory.CheckForUpdate();
+
+            this.tmr.Interval = 500;
+            this.tmr.Tick += new EventHandler(this.tmr_Tick);
+            this.tmr.Start();
+        }
+
+        private delegate void UpdateTabHeadersDelegate();
+
+        /// <summary>
+        /// Handles the Tick event of the tmr control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void tmr_Tick(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new UpdateTabHeadersDelegate(this.UpdateTabHeaders));
+            }
+            else
+            {
+                this.UpdateTabHeaders();
+            }
+        }
+
+        /// <summary>
+        /// Updates the tab headers.
+        /// </summary>
+        private void UpdateTabHeaders()
+        {
+            try
+            {
+                this.tabMediaManager.Text = string.Format("Media Manager ({0})", this.MediaPathCount);
+                this.tabTv.Text = string.Format("TV ({0})", this.TvCount);
+                this.tabLogs.Text = string.Format("Log ({0})", this.LogCount);
+                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", this.DownloadCount1, this.DownloadCount2);
+            }
+            catch (Exception) 
+            { 
+
+            }
         }
 
         /// <summary>
@@ -91,10 +147,7 @@ namespace YANFOE
         /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
         private void Log_ListChanged(object sender, ListChangedEventArgs e)
         {
-            lock (InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog))
-            {
-                this.tabLogs.Text = string.Format("Log ({0})", InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count);
-            }
+            this.LogCount = InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count;
         }
 
         /// <summary>
@@ -122,14 +175,8 @@ namespace YANFOE
         /// </summary>
         private void UpdateDownloaderTabHeader()
         {
-            try
-            {
-                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", Downloader.Downloading.Count, Downloader.BackgroundDownloadQue.Count);
-            }
-            catch (Exception)
-            {
-                // Do thing
-            }
+            this.DownloadCount1 = Downloader.Downloading.Count;
+            this.DownloadCount2 = Downloader.BackgroundDownloadQue.Count;
         }
 
         /// <summary>
@@ -139,14 +186,7 @@ namespace YANFOE
         /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
         private void MediaPathDB_ListChanged(object sender, ListChangedEventArgs e)
         {
-            try
-            {
-                this.tabMediaManager.Text = string.Format("Media Manager ({0})", MediaPathDBFactory.MediaPathDB.Count);
-            }
-            catch (Exception)
-            {
-                // Do thing
-            }
+            this.MediaPathCount = MediaPathDBFactory.MediaPathDB.Count;
         }
 
         /// <summary>
@@ -156,14 +196,7 @@ namespace YANFOE
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void TvDBFactory_TvDbChanged(object sender, EventArgs e)
         {
-            try
-            {
-                this.tabTv.Text = string.Format("TV ({0})", TvDBFactory.MasterSeriesNameList.Count);
-            }
-            catch (Exception)
-            {
-                // Do thing
-            }
+            this.TvCount = TvDBFactory.MasterSeriesNameList.Count;
         }
 
         #endregion
