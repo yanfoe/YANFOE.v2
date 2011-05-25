@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClearLog = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.chbEnableLog = new DevExpress.XtraEditors.CheckButton();
             this.grdLog = new DevExpress.XtraGrid.GridControl();
@@ -89,8 +90,7 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.simpleButton2);
-            this.panelControl1.Controls.Add(this.simpleButton1);
+            this.panelControl1.Controls.Add(this.btnClearLog);
             this.panelControl1.Location = new System.Drawing.Point(2, 532);
             this.panelControl1.MaximumSize = new System.Drawing.Size(0, 55);
             this.panelControl1.MinimumSize = new System.Drawing.Size(0, 55);
@@ -98,25 +98,19 @@
             this.panelControl1.Size = new System.Drawing.Size(991, 55);
             this.panelControl1.TabIndex = 6;
             // 
-            // simpleButton2
+            // btnClearLog
             // 
-            this.simpleButton2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simpleButton2.Image = global::YANFOE.Properties.Resources.trash32;
-            this.simpleButton2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.Location = new System.Drawing.Point(66, 2);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(64, 51);
-            this.simpleButton2.TabIndex = 1;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simpleButton1.Image = global::YANFOE.Properties.Resources.save32;
-            this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(2, 2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(64, 51);
-            this.simpleButton1.TabIndex = 0;
+            this.btnClearLog.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnClearLog.Image = global::YANFOE.Properties.Resources.trash32;
+            this.btnClearLog.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnClearLog.Location = new System.Drawing.Point(2, 2);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(64, 51);
+            toolTipTitleItem1.Text = "Clear Log";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.btnClearLog.SuperTip = superToolTip1;
+            this.btnClearLog.TabIndex = 1;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
             // groupControl2
             // 
@@ -297,8 +291,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnClearLog;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;

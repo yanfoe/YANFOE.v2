@@ -42,5 +42,15 @@ namespace YANFOE.UI.UserControls.LogControls
         {
             this.chbEnableLog.Text = this.chbEnableLog.Checked ? "Disable Log" : "Enable Log";
         }
+
+        /// <summary>
+        /// Handles the Click event of the btnClearLog control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnClearLog_Click(object sender, System.EventArgs e)
+        {
+            InternalApps.Logs.Log.ClearInternalLogger(LoggerName.GeneralLog);
+        }
     }
 }
