@@ -59,7 +59,8 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>y2.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BitFactory.Logging">
@@ -1015,7 +1016,6 @@
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />
     <Content Include="y.ico" />
-    <Content Include="y2.ico" />
     <None Include="Resources\LoadingGlobe.gif" />
     <None Include="Resources\promo_red_faded.png" />
     <None Include="Resources\promo_green_fadad.png" />
