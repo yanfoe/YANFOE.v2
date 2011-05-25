@@ -1,15 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FrmMain.cs" company="The YANFOE Project">
+// <copyright file="frmMain.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <license>
-//   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
-//   http://creativecommons.org/licenses/by-nc-sa/3.0/
-//   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
-// </license>
+// <summary>
+//   The frm main.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace YANFOE
@@ -30,8 +25,10 @@ namespace YANFOE
 
     using YANFOE.Factories;
     using YANFOE.Factories.Internal;
+    using YANFOE.Factories.Media;
     using YANFOE.Factories.Versioning;
     using YANFOE.InternalApps.DownloadManager;
+    using YANFOE.InternalApps.Logs.Enums;
     using YANFOE.Properties;
     using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.DSettings;
@@ -45,14 +42,19 @@ namespace YANFOE
     /// </summary>
     public partial class FrmMain : XtraForm
     {
-        #region Constructors and Destructors
-
-        public delegate void ChangeText(bool isDirty);
-
-        public ChangeText changeText;
+        #region Constants and Fields
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrmMain"/> class.
+        /// The change text.
+        /// </summary>
+        public ChangeText changeText;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///   Initializes a new instance of the <see cref = "FrmMain" /> class.
         /// </summary>
         public FrmMain()
         {
@@ -60,10 +62,10 @@ namespace YANFOE
 
             this.SetTitle(false);
 
-            changeText = new ChangeText(SetTitle);
+            this.changeText = new ChangeText(this.SetTitle);
 
-            txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
-            txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
+            this.txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
+            this.txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
 
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SkinName = Skin.SetCurrentSkin();
@@ -71,52 +73,117 @@ namespace YANFOE
             Settings.Get.InOutCollection.SetCurrentSettings(NFOType.YAMJ);
 
             MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
+            TvDBFactory.TvDbChanged += this.TvDBFactory_TvDbChanged;
             VersionUpdateFactory.VersionUpdateChanged += this.VersionUpdateFactory_VersionUpdateChanged;
             DatabaseIOFactory.DatabaseDirtyChanged += this.DatabaseIOFactory_DatabaseDirtyChanged;
+            MediaPathDBFactory.MediaPathDB.ListChanged += this.MediaPathDB_ListChanged;
+            Downloader.Downloading.ListChanged += this.Downloading_ListChanged;
+            Downloader.BackgroundDownloadQue.ListChanged += this.BackgroundDownloadQue_ListChanged;
+            InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged += this.Log_ListChanged;
 
             VersionUpdateFactory.CheckForUpdate();
         }
 
-        private void SetTitle(bool databaseDirty)
+        /// <summary>
+        /// Handles the ListChanged event of the Log control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
+        private void Log_ListChanged(object sender, ListChangedEventArgs e)
         {
-            var dirtyString = string.Empty;
-
-            if (DatabaseIOFactory.DatabaseDirty)
+            lock (InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog))
             {
-                dirtyString = "(Database Changed)";
+                this.tabLogs.Text = string.Format("Log ({0})", InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count);
             }
-
-            this.Text = string.Format(
-                "{0} {1} Build: {2} {3}",
-                Settings.ConstSettings.Application.ApplicationName,
-                Settings.ConstSettings.Application.ApplicationVersion,
-                Settings.ConstSettings.Application.ApplicationBuild,
-                dirtyString);
         }
 
-        private void DatabaseIOFactory_DatabaseDirtyChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the ListChanged event of the BackgroundDownloadQue control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
+        private void BackgroundDownloadQue_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.UpdateDownloaderTabHeader();
+        }
+
+        /// <summary>
+        /// Handles the ListChanged event of the Downloading control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
+        private void Downloading_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.UpdateDownloaderTabHeader();
+        }
+
+        /// <summary>
+        /// Updates the downloader tab header.
+        /// </summary>
+        private void UpdateDownloaderTabHeader()
         {
             try
             {
-                this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
+                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", Downloader.Downloading.Count, Downloader.BackgroundDownloadQue.Count);
             }
-            catch
+            catch (Exception)
             {
-                // ignore
+                // Do thing
             }
         }
 
-        private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the ListChanged event of the MediaPathDB control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
+        private void MediaPathDB_ListChanged(object sender, ListChangedEventArgs e)
         {
-            picUpdateStatus.Image = VersionUpdateFactory.ImageStatus;
+            try
+            {
+                this.tabMediaManager.Text = string.Format("Media Manager ({0})", MediaPathDBFactory.MediaPathDB.Count);
+            }
+            catch (Exception)
+            {
+                // Do thing
+            }
         }
+
+        /// <summary>
+        /// Handles the TvDbChanged event of the TvDBFactory control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void TvDBFactory_TvDbChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.tabTv.Text = string.Format("TV ({0})", TvDBFactory.MasterSeriesNameList.Count);
+            }
+            catch (Exception)
+            {
+                // Do thing
+            }
+        }
+
+        #endregion
+
+        #region Delegates
+
+        /// <summary>
+        /// The change text.
+        /// </summary>
+        /// <param name="isDirty">
+        /// The is dirty.
+        /// </param>
+        public delegate void ChangeText(bool isDirty);
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets or sets Text.
+        ///   Gets or sets Text.
         /// </summary>
         public override sealed string Text
         {
@@ -136,20 +203,107 @@ namespace YANFOE
         #region Methods
 
         /// <summary>
+        /// The database io factory_ database dirty changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void DatabaseIOFactory_DatabaseDirtyChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+
+        /// <summary>
+        /// Handles the FormClosed event of the FrmMain control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.
+        /// </param>
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (DatabaseIOFactory.DatabaseDirty)
+            {
+                DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
+
+                do
+                {
+                    Thread.Sleep(50);
+                    Application.DoEvents();
+                }
+                while (DatabaseIOFactory.SavingCount > 0);
+            }
+
+            Settings.Get.SaveAll();
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
+            Application.Exit();
+        }
+
+        /// <summary>
         /// Handles the ListChanged event of the FrmMain control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
+        /// </param>
         private void FrmMain_ListChanged(object sender, ListChangedEventArgs e)
         {
-            this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
+            try
+            {
+                this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
+            }
+            catch (Exception)
+            {
+                // Do nothing
+            }
+        }
+
+        /// <summary>
+        /// The frm main_ shown.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
+            DatabaseIOFactory.DatabaseDirty = false;
+
+            if (Settings.Get.Ui.ShowWelcomeMessage)
+            {
+                var frmWelcomePage = new frmWelcomePage();
+                frmWelcomePage.ShowDialog();
+            }
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Started.", string.Empty);
         }
 
         /// <summary>
         /// Handles the ItemClick event of the mnuEditSettings control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
         private void MnuEditSettings_ItemClick(object sender, ItemClickEventArgs e)
         {
             var settings = new FrmSettingsMain();
@@ -160,18 +314,26 @@ namespace YANFOE
         /// <summary>
         /// Handles the ItemClick event of the MnuFileExit control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
         private void MnuFileExit_ItemClick(object sender, ItemClickEventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            Application.Exit();
         }
 
         /// <summary>
         /// Handles the ItemClick event of the MnuFileSaveDatabase control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
         private void MnuFileSaveDatabase_ItemClick(object sender, ItemClickEventArgs e)
         {
             DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
@@ -180,8 +342,12 @@ namespace YANFOE
         /// <summary>
         /// Handles the ItemClick event of the mnuToolsMovieScraperGroupManager control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
         private void MnuToolsMovieScraperGroupManager_ItemClick(object sender, ItemClickEventArgs e)
         {
             var frm = new FrmScraperGroupManager();
@@ -189,10 +355,37 @@ namespace YANFOE
         }
 
         /// <summary>
+        /// The set title.
+        /// </summary>
+        /// <param name="databaseDirty">
+        /// The database dirty.
+        /// </param>
+        private void SetTitle(bool databaseDirty)
+        {
+            var dirtyString = string.Empty;
+
+            if (DatabaseIOFactory.DatabaseDirty)
+            {
+                dirtyString = "(Database Changed)";
+            }
+
+            this.Text = string.Format(
+                "{0} {1} Build: {2} {3}", 
+                Settings.ConstSettings.Application.ApplicationName, 
+                Settings.ConstSettings.Application.ApplicationVersion, 
+                Settings.ConstSettings.Application.ApplicationBuild, 
+                dirtyString);
+        }
+
+        /// <summary>
         /// Handles the Tick event of the uiTimer control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
         private void UiTimer_Tick(object sender, EventArgs e)
         {
             if (Downloader.Progress[0].Message.Contains("Idle."))
@@ -329,55 +522,99 @@ namespace YANFOE
                 "Queue: {0} / Background Que {1}", Downloader.CurrentQue, Downloader.BackgroundDownloadQue.Count);
         }
 
-        #endregion
-
         /// <summary>
-        /// Handles the FormClosed event of the FrmMain control.
+        /// The version update factory_ version update changed.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.</param>
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
         {
-            if (DatabaseIOFactory.DatabaseDirty)
-            {
-                DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
-
-                do
-                {
-                    Thread.Sleep(50);
-                    Application.DoEvents();
-                }
-                while (DatabaseIOFactory.SavingCount > 0);
-            }
-
-            Settings.Get.SaveAll();
-
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
-            Application.Exit();
+            this.picUpdateStatus.Image = VersionUpdateFactory.ImageStatus;
         }
 
         /// <summary>
-        /// Handles the GetActiveObjectInfo event of the toolTipController1 control.
+        /// Handles the ItemClick event of the mnuDonate control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs"/> instance containing the event data.</param>
-        private void toolTipController1_GetActiveObjectInfo(object sender, DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuDonate_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.SelectedControl == picUpdateStatus)
-            {
-                e.Info = new ToolTipControlInfo();
-                e.Info.Object = picUpdateStatus;
-                e.Info.ToolTipType = ToolTipType.SuperTip;
-                e.Info.SuperTip = VersionUpdateFactory.UpdateTip;
+            Process.Start(Settings.ConstSettings.Application.DonateUrl);
+        }
 
-            }
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpHomepage control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuHelpHomepage_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("http://www.yanfoe.com");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpReportIssues control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuHelpReportIssues_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/issues/");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpSourceCode control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuHelpSourceCode_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/");
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuHelpWiki control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuHelpWiki_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Process.Start("https://github.com/yanfoe/YANFOE.v2/wiki");
         }
 
         /// <summary>
         /// Handles the DoubleClick event of the picUpdateStatus control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
         private void picUpdateStatus_DoubleClick(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(VersionUpdateFactory.UpdateLink))
@@ -387,66 +624,26 @@ namespace YANFOE
         }
 
         /// <summary>
-        /// Handles the ItemClick event of the mnuHelpReportIssues control.
+        /// Handles the GetActiveObjectInfo event of the toolTipController1 control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void mnuHelpReportIssues_ItemClick(object sender, ItemClickEventArgs e)
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs"/> instance containing the event data.
+        /// </param>
+        private void toolTipController1_GetActiveObjectInfo(
+            object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
         {
-            Process.Start("https://github.com/yanfoe/YANFOE.v2/issues/");
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuHelpWiki control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void mnuHelpWiki_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Process.Start("https://github.com/yanfoe/YANFOE.v2/wiki");
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuHelpSourceCode control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void mnuHelpSourceCode_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Process.Start("https://github.com/yanfoe/YANFOE.v2/");
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuHelpHomepage control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void mnuHelpHomepage_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Process.Start("http://www.yanfoe.com");
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuDonate control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.</param>
-        private void mnuDonate_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Process.Start(Settings.ConstSettings.Application.DonateUrl);
-        }
-
-        private void FrmMain_Shown(object sender, EventArgs e)
-        {
-            DatabaseIOFactory.DatabaseDirty = false;
-
-            if (Settings.Get.Ui.ShowWelcomeMessage)
+            if (e.SelectedControl == this.picUpdateStatus)
             {
-                var frmWelcomePage = new frmWelcomePage();
-                frmWelcomePage.ShowDialog();
+                e.Info = new ToolTipControlInfo();
+                e.Info.Object = this.picUpdateStatus;
+                e.Info.ToolTipType = ToolTipType.SuperTip;
+                e.Info.SuperTip = VersionUpdateFactory.UpdateTip;
             }
-
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Started.", string.Empty);
         }
+
+        #endregion
     }
 }

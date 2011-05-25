@@ -42,6 +42,15 @@ namespace YANFOE
             DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -124,12 +133,12 @@ namespace YANFOE
             this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread5 = new DevExpress.XtraEditors.PictureEdit();
-            this.lblDownloadStatus = new DevExpress.XtraEditors.LabelControl();
             this.picThread4 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread3 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.uiTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblDownloadStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -479,7 +488,7 @@ namespace YANFOE
             toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.database24;
             toolTipTitleItem2.Text = "Media Manager";
             toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Manage and import TV and Movie media.";
+            toolTipItem2.Text = "Manage and import TV and Movie media.\r\n\r\n(#) - Total Media Paths";
             superToolTip2.Items.Add(toolTipTitleItem2);
             superToolTip2.Items.Add(toolTipItem2);
             this.tabMediaManager.SuperTip = superToolTip2;
@@ -499,6 +508,12 @@ namespace YANFOE
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
             this.tabMovies.Size = new System.Drawing.Size(986, 454);
+            toolTipTitleItem3.Text = "Movies";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "(#) - Total Movies";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.tabMovies.SuperTip = superToolTip3;
             this.tabMovies.Text = "Movies";
             // 
             // moviesUserControl1
@@ -519,6 +534,12 @@ namespace YANFOE
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
             this.tabTv.Size = new System.Drawing.Size(986, 454);
+            toolTipTitleItem4.Text = "TV";
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "(#) - Total Series";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            superToolTip4.Items.Add(toolTipItem4);
+            this.tabTv.SuperTip = superToolTip4;
             this.tabTv.Text = "TV";
             // 
             // tvUserControl1
@@ -535,6 +556,12 @@ namespace YANFOE
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
             this.tabDownloads.Size = new System.Drawing.Size(986, 454);
+            toolTipTitleItem5.Text = "Downloads Manager\r\n";
+            toolTipItem5.LeftIndent = 6;
+            toolTipItem5.Text = "Downloads (Urgent Queue : Background Queue)";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            superToolTip5.Items.Add(toolTipItem5);
+            this.tabDownloads.SuperTip = superToolTip5;
             this.tabDownloads.Text = "Downloads";
             // 
             // downloadsUserControl1
@@ -1040,14 +1067,6 @@ namespace YANFOE
             this.picThread5.Size = new System.Drawing.Size(24, 24);
             this.picThread5.TabIndex = 8;
             // 
-            // lblDownloadStatus
-            // 
-            this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
-            this.lblDownloadStatus.Name = "lblDownloadStatus";
-            this.lblDownloadStatus.Size = new System.Drawing.Size(63, 13);
-            this.lblDownloadStatus.TabIndex = 7;
-            this.lblDownloadStatus.Text = "labelControl1";
-            // 
             // picThread4
             // 
             this.picThread4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1105,6 +1124,15 @@ namespace YANFOE
             this.uiTimer.Enabled = true;
             this.uiTimer.Interval = 50;
             this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
+            // 
+            // lblDownloadStatus
+            // 
+            this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
+            this.lblDownloadStatus.Name = "lblDownloadStatus";
+            this.lblDownloadStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblDownloadStatus.TabIndex = 7;
+            this.lblDownloadStatus.Text = "labelControl1";
+            this.lblDownloadStatus.Visible = false;
             // 
             // FrmMain
             // 
@@ -1231,7 +1259,6 @@ namespace YANFOE
         private DevExpress.XtraEditors.PictureEdit picThread3;
         private DevExpress.XtraEditors.PictureEdit picThread2;
         private DevExpress.XtraEditors.PictureEdit picThread1;
-        private DevExpress.XtraEditors.LabelControl lblDownloadStatus;
         private DevExpress.XtraBars.BarButtonItem mnuEditSettings;
         private DevExpress.XtraEditors.MemoEdit memoEdit1;
         private DevExpress.XtraEditors.TextEdit txtBuild;
@@ -1274,5 +1301,6 @@ namespace YANFOE
         private DevExpress.XtraBars.BarButtonItem mnuDonate;
         private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEdit5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraEditors.LabelControl lblDownloadStatus;
     }
 }

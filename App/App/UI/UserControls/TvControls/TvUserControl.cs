@@ -53,8 +53,6 @@ namespace YANFOE.UI.UserControls.TvControls
 
             this.picEpisodeFrame.HeaderTitle = "Episode Frame";
 
-            // this.grdTvTitleList.DataSource = (from t in TvDBFactory.TvDatabase orderby t.Value.SeriesName select t.Value).ToList();
-
             this.grdTvTitleList.DataSource = TvDBFactory.MasterSeriesNameList;
 
             TvDBFactory.GalleryChanged += this.TvDBFactory_GalleryChanged;
@@ -138,6 +136,8 @@ namespace YANFOE.UI.UserControls.TvControls
         /// </param>
         private void TvDBFactory_GalleryChanged(object sender, EventArgs e)
         {
+            tabBanner.Text = string.Format("Banner ({0})", this.galleryBanners.Gallery.Groups.Count);
+
             this.galleryBanners.Gallery.Groups.Clear();
             this.galleryBanners.Gallery.Groups.Add(TvDBFactory.GetGalleryGroup());
             this.galleryBanners.Gallery.ItemClick += this.Gallery_ItemClick;
@@ -154,6 +154,7 @@ namespace YANFOE.UI.UserControls.TvControls
         /// </param>
         private void TvDBFactory_MasterSeriesNameListChanged(object sender, EventArgs e)
         {
+            tabTitle.Text = string.Format("Series Name ({0})", TvDBFactory.MasterSeriesNameList);
             this.gridViewTvTitleList.RefreshData();
         }
 

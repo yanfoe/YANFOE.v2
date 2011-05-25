@@ -2,14 +2,9 @@
 // <copyright file="TvDBFactory.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <license>
-//   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
-//   http://creativecommons.org/licenses/by-nc-sa/3.0/
-//   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
-// </license>
+// <summary>
+//   The tv db factory.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace YANFOE.Factories
@@ -56,37 +51,37 @@ namespace YANFOE.Factories
         #region Constants and Fields
 
         /// <summary>
-        /// The current season.
+        ///   The current season.
         /// </summary>
         public static Season CurrentSeason;
 
         /// <summary>
-        /// The gallery group.
+        ///   The gallery group.
         /// </summary>
         private static readonly GalleryItemGroup galleryGroup;
 
         /// <summary>
-        /// The current selected episode.
+        ///   The current selected episode.
         /// </summary>
         private static List<Episode> currentSelectedEpisode;
 
         /// <summary>
-        /// The current selected season.
+        ///   The current selected season.
         /// </summary>
         private static List<Season> currentSelectedSeason;
 
         /// <summary>
-        /// The current selected series.
+        ///   The current selected series.
         /// </summary>
         private static List<Series> currentSelectedSeries;
 
         /// <summary>
-        /// The master series name list.
+        ///   The master series name list.
         /// </summary>
         private static BindingList<MasterSeriesListModel> masterSeriesNameList;
 
         /// <summary>
-        /// The tv database.
+        ///   The tv database.
         /// </summary>
         private static SortedList<string, Series> tvDatabase;
 
@@ -95,7 +90,7 @@ namespace YANFOE.Factories
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="TvDBFactory"/> class. 
+        ///   Initializes static members of the <see cref = "TvDBFactory" /> class.
         /// </summary>
         static TvDBFactory()
         {
@@ -112,6 +107,8 @@ namespace YANFOE.Factories
             currentSelectedSeries = new List<Series>();
             currentSelectedSeason = new List<Season>();
             currentSelectedEpisode = new List<Episode>();
+
+            masterSeriesNameList.ListChanged += masterSeriesNameList_ListChanged;
         }
 
         #endregion
@@ -119,133 +116,133 @@ namespace YANFOE.Factories
         #region Events
 
         /// <summary>
-        /// Occurs when [redraw layout].
-        /// </summary>
-        [field: NonSerialized]
-        public static event EventHandler RedrawLayout = delegate { };
-
-        /// <summary>
-        /// Occurs when [master series name list changed].
-        /// </summary>
-        [field: NonSerialized]
-        public static event EventHandler MasterSeriesNameListChanged = delegate { };
-
-        /// <summary>
-        /// Occurs when [current episode changed].
+        ///   Occurs when [current episode changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler CurrentEpisodeChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [current season changed].
+        ///   Occurs when [current season changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler CurrentSeasonChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [current series changed].
+        ///   Occurs when [current series changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler CurrentSeriesChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [episode loaded].
+        ///   Occurs when [episode loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler EpisodeLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [episode loading].
+        ///   Occurs when [episode loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler EpisodeLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [gallery changed].
+        ///   Occurs when [gallery changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler GalleryChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [season banner loaded].
+        ///   Occurs when [master series name list changed].
+        /// </summary>
+        [field: NonSerialized]
+        public static event EventHandler MasterSeriesNameListChanged = delegate { };
+
+        /// <summary>
+        ///   Occurs when [redraw layout].
+        /// </summary>
+        [field: NonSerialized]
+        public static event EventHandler RedrawLayout = delegate { };
+
+        /// <summary>
+        ///   Occurs when [season banner loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonBannerLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [season banner loading].
+        ///   Occurs when [season banner loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonBannerLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [season fanart loaded].
+        ///   Occurs when [season fanart loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonFanartLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [season fanart loading].
+        ///   Occurs when [season fanart loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonFanartLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [season poster loaded].
+        ///   Occurs when [season poster loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonPosterLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [season poster loading].
+        ///   Occurs when [season poster loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeasonPosterLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [series banner loaded].
+        ///   Occurs when [series banner loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesBannerLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [series banner loading].
+        ///   Occurs when [series banner loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesBannerLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [series fanart loaded].
+        ///   Occurs when [series fanart loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesFanartLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [series fanart loading].
+        ///   Occurs when [series fanart loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesFanartLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [series poster loaded].
+        ///   Occurs when [series poster loaded].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesPosterLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [series poster loading].
+        ///   Occurs when [series poster loading].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SeriesPosterLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [tv db changed].
+        ///   Occurs when [tv db changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler TvDbChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [update progress changed].
+        ///   Occurs when [update progress changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler UpdateProgressChanged = delegate { };
@@ -255,7 +252,12 @@ namespace YANFOE.Factories
         #region Properties
 
         /// <summary>
-        /// Gets or sets CurrentSelectedEpisode.
+        ///   The current episode.
+        /// </summary>
+        public static Episode CurrentEpisode { get; set; }
+
+        /// <summary>
+        ///   Gets or sets CurrentSelectedEpisode.
         /// </summary>
         public static List<Episode> CurrentSelectedEpisode
         {
@@ -271,7 +273,7 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Gets or sets CurrentSelectedSeason.
+        ///   Gets or sets CurrentSelectedSeason.
         /// </summary>
         public static List<Season> CurrentSelectedSeason
         {
@@ -287,7 +289,7 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Gets or sets CurrentSelectedSeries.
+        ///   Gets or sets CurrentSelectedSeries.
         /// </summary>
         public static List<Series> CurrentSelectedSeries
         {
@@ -303,12 +305,12 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The current series.
+        ///   The current series.
         /// </summary>
         public static Series CurrentSeries { get; set; }
 
         /// <summary>
-        /// Gets GetCurrentSeasonsList.
+        ///   Gets GetCurrentSeasonsList.
         /// </summary>
         public static List<Season> GetCurrentSeasonsList
         {
@@ -322,12 +324,11 @@ namespace YANFOE.Factories
                 {
                     return (from s in CurrentSeries.Seasons select s.Value).ToList();
                 }
-
             }
         }
 
         /// <summary>
-        /// Gets or sets the series name list.
+        ///   Gets or sets the series name list.
         /// </summary>
         /// <value>The series name list.</value>
         public static BindingList<MasterSeriesListModel> MasterSeriesNameList
@@ -344,7 +345,7 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Gets or sets the tv database.
+        ///   Gets or sets the tv database.
         /// </summary>
         /// <value>The tv database.</value>
         public static SortedList<string, Series> TvDatabase
@@ -361,18 +362,26 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Gets or sets UpdateStatus.
+        ///   Gets or sets UpdateStatus.
         /// </summary>
         public static string UpdateStatus { get; set; }
-
-        /// <summary>
-        /// The current episode.
-        /// </summary>
-        public static Episode CurrentEpisode { get; set; }
 
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// The add custom series.
+        /// </summary>
+        /// <param name="series">
+        /// The series.
+        /// </param>
+        public static void AddCustomSeries(Series series)
+        {
+            tvDatabase.Add(series.SeriesName, series);
+            GenerateMasterSeriesList();
+            InvokeMasterSeriesNameListChanged(new EventArgs());
+        }
 
         /// <summary>
         /// Check if banner downloaded.
@@ -398,6 +407,15 @@ namespace YANFOE.Factories
         {
             UpdateStatus = value;
             InvokeUpdateProgressChanged(new EventArgs());
+        }
+
+        /// <summary>
+        /// Show the "Add Custom Series" dialog.
+        /// </summary>
+        public static void CreateCustomSeries()
+        {
+            var addCustomSeries = new FrmAddCustomSeries();
+            addCustomSeries.ShowDialog();
         }
 
         /// <summary>
@@ -433,6 +451,7 @@ namespace YANFOE.Factories
                         SetCurrentEpisode(episode.Guid);
                         break;
                     }
+
                     break;
                 }
             }
@@ -520,7 +539,7 @@ namespace YANFOE.Factories
 
                     var galleryItem = new GalleryItem(series.Value.SmallBanner, series.Value.SeriesName, string.Empty)
                         {
-                            Tag = series.Value.Guid, SuperTip = superTip 
+                           Tag = series.Value.Guid, SuperTip = superTip 
                         };
 
                     if (!galleryGroup.Items.Contains(galleryItem))
@@ -627,6 +646,9 @@ namespace YANFOE.Factories
         /// </summary>
         /// <param name="value">
         /// The image value.
+        /// </param>
+        /// <param name="smallVersion">
+        /// The small Version.
         /// </param>
         /// <returns>
         /// The get image url.
@@ -907,32 +929,6 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Invokes the redraw layout.
-        /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        public static void InvokeRedrawLayout(EventArgs e)
-        {
-            EventHandler handler = RedrawLayout;
-            if (handler != null)
-            {
-                handler(null, e);
-            }
-        }
-
-        /// <summary>
-        /// Invokes the master series name list changed.
-        /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        public static void InvokeMasterSeriesNameListChanged(EventArgs e)
-        {
-            EventHandler handler = MasterSeriesNameListChanged;
-            if (handler != null)
-            {
-                handler(null, e);
-            }
-        }
-
-        /// <summary>
         /// Invokes the BannerLoaded event
         /// </summary>
         /// <param name="e">
@@ -1076,6 +1072,36 @@ namespace YANFOE.Factories
         public static void InvokeGalleryEpisodeChanged(EventArgs e)
         {
             EventHandler handler = CurrentEpisodeChanged;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the master series name list changed.
+        /// </summary>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        public static void InvokeMasterSeriesNameListChanged(EventArgs e)
+        {
+            EventHandler handler = MasterSeriesNameListChanged;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+
+        /// <summary>
+        /// Invokes the redraw layout.
+        /// </summary>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        public static void InvokeRedrawLayout(EventArgs e)
+        {
+            EventHandler handler = RedrawLayout;
             if (handler != null)
             {
                 handler(null, e);
@@ -1285,7 +1311,8 @@ namespace YANFOE.Factories
         /// </returns>
         public static Image LoadEpisode()
         {
-            if (!string.IsNullOrEmpty(CurrentEpisode.EpisodeScreenshotPath) && File.Exists(CurrentEpisode.EpisodeScreenshotPath))
+            if (!string.IsNullOrEmpty(CurrentEpisode.EpisodeScreenshotPath)
+                && File.Exists(CurrentEpisode.EpisodeScreenshotPath))
             {
                 return ImageHandler.LoadImage(CurrentEpisode.EpisodeScreenshotPath);
             }
@@ -1695,14 +1722,14 @@ namespace YANFOE.Factories
                 episode.SeasonNumber = newEpisode.SeasonNumber;
                 episode.Writers = newEpisode.Writers;
 
-                if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath) &&
-                    string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
+                if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath)
+                    && string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
                 {
                     episode.EpisodeScreenshotUrl = newEpisode.EpisodeScreenshotUrl;
                 }
 
-                if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath) &&
-                    string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
+                if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath)
+                    && string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
                 {
                     episode.EpisodeScreenshotUrl = newEpisode.EpisodeScreenshotUrl;
                 }
@@ -2278,22 +2305,20 @@ namespace YANFOE.Factories
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// Show the "Add Custom Series" dialog.
+        /// Handles the ListChanged event of the masterSeriesNameList control.
         /// </summary>
-        public static void CreateCustomSeries()
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
+        /// </param>
+        private static void masterSeriesNameList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            var addCustomSeries = new FrmAddCustomSeries();
-            addCustomSeries.ShowDialog();
+            InvokeTvDbChanged(new EventArgs());
         }
 
-        public static void AddCustomSeries(Series series)
-        {
-            tvDatabase.Add(series.SeriesName, series);
-            GenerateMasterSeriesList();
-            InvokeMasterSeriesNameListChanged(new EventArgs());
-        }
+        #endregion
     }
 }
