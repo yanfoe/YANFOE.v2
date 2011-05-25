@@ -99,6 +99,17 @@ namespace YANFOE.UI.UserControls.TvControls
         /// </param>
         private void Gallery_ItemClick(object sender, GalleryItemClickEventArgs e)
         {
+            this.gridViewTvTitleList.ClearSelection();
+
+            var item =
+                (from i in TvDBFactory.MasterSeriesNameList 
+                 where i.SeriesGuid == e.Item.Tag.ToString()
+                 select i).SingleOrDefault();
+
+            var selectedSeries = TvDBFactory.MasterSeriesNameList.IndexOf(item);
+            var handle = this.gridViewTvTitleList.GetRowHandle(selectedSeries);
+            this.gridViewTvTitleList.FocusedRowHandle = handle;
+            this.gridViewTvTitleList.SelectRow(handle);
             TvDBFactory.SetCurrentSeries(e.Item.Tag.ToString());
         }
 
