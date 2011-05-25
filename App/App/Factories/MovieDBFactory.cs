@@ -22,6 +22,7 @@ namespace YANFOE.Factories
     using System.IO;
     using System.Linq;
 
+    using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
     using DevExpress.XtraEditors;
 
@@ -872,8 +873,15 @@ namespace YANFOE.Factories
                 {
                     if (movie.SmallPoster != null)
                     {
+                        var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+
+                        superTip.Items.AddTitle(string.Format("{0} ({1})", movie.Title, movie.Year));
+
                         var galleryItem = new GalleryItem(movie.SmallPoster, movie.Title, string.Empty)
-                            { Tag = movie.MovieUniqueId };
+                            { 
+                                Tag = movie.MovieUniqueId,
+                                SuperTip = superTip
+                            };
 
                         if (!galleryGroup.Items.Contains(galleryItem))
                         {

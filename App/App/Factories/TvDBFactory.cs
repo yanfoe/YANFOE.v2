@@ -510,9 +510,14 @@ namespace YANFOE.Factories
 
                 if (series.Value.SmallBanner != null)
                 {
+                    var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+
+                    superTip.Items.AddTitle(
+                        string.Format("{0} ({1})", series.Value.SeriesName, series.Value.FirstAired.Value.Year));
+
                     var galleryItem = new GalleryItem(series.Value.SmallBanner, series.Value.SeriesName, string.Empty)
                         {
-                           Tag = series.Value.Guid 
+                            Tag = series.Value.Guid, SuperTip = superTip 
                         };
 
                     if (!galleryGroup.Items.Contains(galleryItem))
