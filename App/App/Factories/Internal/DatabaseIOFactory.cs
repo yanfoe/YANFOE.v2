@@ -793,6 +793,8 @@ namespace YANFOE.Factories.Internal
         /// </param>
         private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
         {
+            SavingCount++;
+
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
             var bgw3 = new BackgroundWorker();
@@ -870,6 +872,8 @@ namespace YANFOE.Factories.Internal
                 }
                 while (processed == false);
             }
+
+            SavingCount--;
         }
 
         /// <summary>
