@@ -673,6 +673,7 @@ namespace YANFOE.Factories.Internal
 
             if (max == 0)
             {
+                SavingCount--;
                 return;
             }
 
