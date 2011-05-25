@@ -387,6 +387,10 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             this.grdMoviesList.DataSource = null;
             this.grdMoviesList.DataSource = MovieDBFactory.MovieDatabase;
+
+            grdViewByTitle.BeginSort();
+            grdViewByTitle.Columns["Title"].SortOrder = ColumnSortOrder.Ascending;
+            grdViewByTitle.EndSort();
         }
 
         /// <summary>
