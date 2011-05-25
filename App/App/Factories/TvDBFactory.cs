@@ -484,7 +484,10 @@ namespace YANFOE.Factories
 
             foreach (MasterSeriesListModel v in list)
             {
-                masterSeriesNameList.Add(v);
+                if (!string.IsNullOrEmpty(v.SeriesName.Trim()))
+                {
+                    masterSeriesNameList.Add(v);
+                }
             }
 
             MasterMediaDBFactory.PopulateMasterTvMediaDatabase();

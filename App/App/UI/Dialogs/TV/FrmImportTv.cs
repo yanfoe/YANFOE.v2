@@ -40,6 +40,8 @@ namespace YANFOE.UI.Dialogs.TV
 
         private int count;
 
+        private int currentIndex = 0;
+
         private string currentStatus;
 
         /// <summary>
@@ -53,10 +55,15 @@ namespace YANFOE.UI.Dialogs.TV
             grdSeriesList.DataSource = ImportTvFactory.SeriesNameList;
             ImportTvFactory.DoImportScan();
 
-            this.ButNextClick(null, null);
+            this.ButNext_Click(null, null);
         }
 
-        private void ButNextClick(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the Click event of the ButNext control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void ButNext_Click(object sender, EventArgs e)
         {
             grdSeriesList.DataSource = ImportTvFactory.SeriesNameList;
 
@@ -101,10 +108,13 @@ namespace YANFOE.UI.Dialogs.TV
             {
                 Factories.UI.Windows7UIFactory.SetProgressValue(count);
 
-                if (
-                    (from series in ImportTvFactory.SeriesNameList
+                var item = (from series in ImportTvFactory.SeriesNameList
                      where series.SeriesName == s.Key && series.WaitingForScan
-                     select series).SingleOrDefault() != null)
+                     select series).SingleOrDefault();
+
+                this.currentIndex = gridView1.GetRowHandle(ImportTvFactory.SeriesNameList.IndexOf(item));
+
+                if (item != null)
                 {
                     if (!string.IsNullOrEmpty(s.Key))
                     {
@@ -166,6 +176,7 @@ namespace YANFOE.UI.Dialogs.TV
                 }
 
                 this.count++;
+
                 this.bgw.ReportProgress(this.count);
 
                 if (this.bgw.CancellationPending)
@@ -244,6 +255,7 @@ namespace YANFOE.UI.Dialogs.TV
         private void Bgw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.progressBar.Position = this.count;
+            this.gridView1.FocusedRowHandle = this.currentIndex;
         }
 
         /// <summary>
@@ -301,7 +313,7 @@ namespace YANFOE.UI.Dialogs.TV
 
                 frmSelectSeries.Dispose();
 
-                this.ButNextClick(null, null);
+                this.ButNext_Click(null, null);
             }
             else
             {

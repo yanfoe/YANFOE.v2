@@ -157,7 +157,7 @@
             this.butNext.Name = "butNext";
             this.butNext.Size = new System.Drawing.Size(69, 48);
             this.butNext.TabIndex = 0;
-            this.butNext.Click += new System.EventHandler(this.ButNextClick);
+            this.butNext.Click += new System.EventHandler(this.ButNext_Click);
             // 
             // layoutControlGroup1
             // 

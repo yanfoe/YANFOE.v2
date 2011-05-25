@@ -97,7 +97,7 @@ namespace YANFOE.Factories.Import
 
                 var check2 = (from s in SeriesNameList where s.SeriesName.ToLower() == seriesName.ToLower() select s.SeriesName.ToLower()).ToList();
 
-                if (!check2.Contains(seriesName.ToLower()))
+                if (!check2.Contains(seriesName.ToLower()) && !string.IsNullOrEmpty(seriesName))
                 {
                     SeriesNameList.Add(
                         new SeriesListModel { WaitingForScan = true, SeriesName = seriesName });
