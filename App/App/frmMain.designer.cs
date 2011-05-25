@@ -39,6 +39,9 @@ namespace YANFOE
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -71,6 +74,7 @@ namespace YANFOE
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.tabControlMain = new DevExpress.XtraTab.XtraTabControl();
             this.tabMediaManager = new DevExpress.XtraTab.XtraTabPage();
+            this.mediaPathManager1 = new YANFOE.UI.UserControls.MediaManagerControls.MediaPathManager();
             this.tabMovies = new DevExpress.XtraTab.XtraTabPage();
             this.moviesUserControl1 = new YANFOE.UI.UserControls.MovieControls.MoviesUserControl();
             this.tabTv = new DevExpress.XtraTab.XtraTabPage();
@@ -106,7 +110,6 @@ namespace YANFOE
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.mediaPathManager1 = new MediaPathManager();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -470,13 +473,23 @@ namespace YANFOE
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
             this.tabMediaManager.Size = new System.Drawing.Size(986, 454);
+            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.database24;
+            toolTipTitleItem2.Appearance.Options.UseImage = true;
+            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.database24;
+            toolTipTitleItem2.Text = "Media Manager";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Manage and import TV and Movie media.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.tabMediaManager.SuperTip = superToolTip2;
             this.tabMediaManager.Text = "Media Manager";
             // 
-            // mediaManagerUc1
+            // mediaPathManager1
             // 
             this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
-            this.mediaPathManager1.Name = "mediaManagerUc1";
+            this.mediaPathManager1.Name = "mediaPathManager1";
             this.mediaPathManager1.Size = new System.Drawing.Size(986, 454);
             this.mediaPathManager1.TabIndex = 0;
             // 
@@ -497,7 +510,7 @@ namespace YANFOE
             this.moviesUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.moviesUserControl1.Location = new System.Drawing.Point(0, 0);
             this.moviesUserControl1.Name = "moviesUserControl1";
-            this.moviesUserControl1.Size = new System.Drawing.Size(988, 456);
+            this.moviesUserControl1.Size = new System.Drawing.Size(986, 454);
             this.moviesUserControl1.TabIndex = 0;
             // 
             // tabTv
@@ -513,7 +526,7 @@ namespace YANFOE
             this.tvUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvUserControl1.Location = new System.Drawing.Point(0, 0);
             this.tvUserControl1.Name = "tvUserControl1";
-            this.tvUserControl1.Size = new System.Drawing.Size(988, 456);
+            this.tvUserControl1.Size = new System.Drawing.Size(986, 454);
             this.tvUserControl1.TabIndex = 0;
             // 
             // tabDownloads
@@ -529,7 +542,7 @@ namespace YANFOE
             this.downloadsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.downloadsUserControl1.Location = new System.Drawing.Point(0, 0);
             this.downloadsUserControl1.Name = "downloadsUserControl1";
-            this.downloadsUserControl1.Size = new System.Drawing.Size(988, 456);
+            this.downloadsUserControl1.Size = new System.Drawing.Size(986, 454);
             this.downloadsUserControl1.TabIndex = 0;
             // 
             // tabLogs
@@ -545,7 +558,7 @@ namespace YANFOE
             this.logsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logsUserControl1.Location = new System.Drawing.Point(0, 0);
             this.logsUserControl1.Name = "logsUserControl1";
-            this.logsUserControl1.Size = new System.Drawing.Size(988, 456);
+            this.logsUserControl1.Size = new System.Drawing.Size(986, 454);
             this.logsUserControl1.TabIndex = 0;
             // 
             // tabAbout

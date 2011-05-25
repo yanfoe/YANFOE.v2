@@ -149,13 +149,16 @@ namespace YANFOE.UI.Dialogs.TV
                         {
                             series = this.theTvdb.OpenNewSeries(searchResults[0]); // download series details
 
-                            ImportTvFactory.ScanSeriesPicks.Add(
-                                new ScanSeriesPick
-                                {
-                                    SearchString = s.Key,
-                                    SeriesID = series.SeriesID.ToString(),
-                                    SeriesName = series.SeriesName
-                                });
+                            if ((from scan in ImportTvFactory.ScanSeriesPicks where scan.SearchString == s.Key select s).Count() == 0)
+                            {
+                                ImportTvFactory.ScanSeriesPicks.Add(
+                                    new ScanSeriesPick
+                                        {
+                                            SearchString = s.Key,
+                                            SeriesID = series.SeriesID.ToString(),
+                                            SeriesName = series.SeriesName
+                                        });
+                            }
                         }
 
                         this.Set(series, toRemove, toAdd, s.Key, s.Value);

@@ -53,6 +53,8 @@ namespace YANFOE.UI.UserControls.TvControls
 
             this.picEpisodeFrame.HeaderTitle = "Episode Frame";
 
+            // this.grdTvTitleList.DataSource = (from t in TvDBFactory.TvDatabase orderby t.Value.SeriesName select t.Value).ToList();
+
             this.grdTvTitleList.DataSource = TvDBFactory.MasterSeriesNameList;
 
             TvDBFactory.GalleryChanged += this.TvDBFactory_GalleryChanged;

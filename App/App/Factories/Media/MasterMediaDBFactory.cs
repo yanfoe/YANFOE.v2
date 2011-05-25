@@ -22,8 +22,6 @@ namespace YANFOE.Factories.Media
 
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
-    using YANFOE.Models.MovieModels;
-    using YANFOE.Models.TvModels.Show;
 
     /// <summary>
     /// The master media db factory.
@@ -171,20 +169,17 @@ namespace YANFOE.Factories.Media
         {
             masterTvMediaDatabase = new BindingList<string>();
 
-            foreach (var filePath in
-                TvDBFactory.TvDatabase.SelectMany(
-                    series => series.Value.Seasons, (series, season) => new { series, season }).SelectMany(
-                        @t => @t.season.Value.Episodes, (@t, episode) => episode.CurrentFilenameAndPath).
-                    Where(filePath => !string.IsNullOrEmpty(filePath)).Where(
-                        filePath => !masterTvMediaDatabase.Contains(filePath)))
+            foreach (var series in TvDBFactory.TvDatabase)
             {
-                try
+                foreach (var season in series.Value.Seasons)
                 {
-                    masterTvMediaDatabase.Add(filePath);
-                }
-                catch
-                {
-                    masterTvMediaDatabase.Add(filePath);
+                    foreach (var episode in season.Value.Episodes)
+                    {
+                        if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                        {
+                            masterTvMediaDatabase.Add(episode.FilePath.FileNameAndPath);
+                        }
+                    }
                 }
             }
         }

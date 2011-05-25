@@ -41,6 +41,14 @@ namespace YANFOE.Models.TvModels
         /// </summary>
         public string SeriesName { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="MasterSeriesListModel"/> is locked.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if locked; otherwise, <c>false</c>.
+        /// </value>
+        public bool Locked { get; set; }
+
         #endregion
     }
 }

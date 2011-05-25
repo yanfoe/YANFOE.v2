@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnProcessMovies = new DevExpress.XtraEditors.SimpleButton();
             this.btnProcessTv = new DevExpress.XtraEditors.SimpleButton();
@@ -120,10 +132,13 @@
             // 
             this.btnProcessMovies.Image = global::YANFOE.Properties.Resources.next24;
             this.btnProcessMovies.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnProcessMovies.Location = new System.Drawing.Point(383, 248);
+            this.btnProcessMovies.Location = new System.Drawing.Point(385, 247);
             this.btnProcessMovies.Name = "btnProcessMovies";
-            this.btnProcessMovies.Size = new System.Drawing.Size(236, 30);
+            this.btnProcessMovies.Size = new System.Drawing.Size(244, 30);
             this.btnProcessMovies.StyleController = this.layoutControl1;
+            toolTipTitleItem1.Text = "Process found unsorted movies media.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.btnProcessMovies.SuperTip = superToolTip1;
             this.btnProcessMovies.TabIndex = 12;
             this.btnProcessMovies.Click += new System.EventHandler(this.BtnProcessMovies_Click);
             // 
@@ -131,19 +146,22 @@
             // 
             this.btnProcessTv.Image = global::YANFOE.Properties.Resources.next24;
             this.btnProcessTv.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnProcessTv.Location = new System.Drawing.Point(383, 602);
+            this.btnProcessTv.Location = new System.Drawing.Point(385, 612);
             this.btnProcessTv.Name = "btnProcessTv";
-            this.btnProcessTv.Size = new System.Drawing.Size(236, 30);
+            this.btnProcessTv.Size = new System.Drawing.Size(244, 30);
             this.btnProcessTv.StyleController = this.layoutControl1;
+            toolTipTitleItem2.Text = "Process found unsorted tv media.\r\n";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.btnProcessTv.SuperTip = superToolTip2;
             this.btnProcessTv.TabIndex = 11;
             this.btnProcessTv.Click += new System.EventHandler(this.BtnProcessTv_Click);
             // 
             // grdMediaPathUnsortedTv
             // 
-            this.grdMediaPathUnsortedTv.Location = new System.Drawing.Point(383, 313);
+            this.grdMediaPathUnsortedTv.Location = new System.Drawing.Point(385, 312);
             this.grdMediaPathUnsortedTv.MainView = this.grdViewUnsortedTv;
             this.grdMediaPathUnsortedTv.Name = "grdMediaPathUnsortedTv";
-            this.grdMediaPathUnsortedTv.Size = new System.Drawing.Size(236, 285);
+            this.grdMediaPathUnsortedTv.Size = new System.Drawing.Size(244, 296);
             this.grdMediaPathUnsortedTv.TabIndex = 3;
             this.grdMediaPathUnsortedTv.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewUnsortedTv});
@@ -183,10 +201,10 @@
             // 
             // grdMediaPathUnsortedMovies
             // 
-            this.grdMediaPathUnsortedMovies.Location = new System.Drawing.Point(383, 35);
+            this.grdMediaPathUnsortedMovies.Location = new System.Drawing.Point(385, 25);
             this.grdMediaPathUnsortedMovies.MainView = this.grdViewUnsortedMovies;
             this.grdMediaPathUnsortedMovies.Name = "grdMediaPathUnsortedMovies";
-            this.grdMediaPathUnsortedMovies.Size = new System.Drawing.Size(236, 209);
+            this.grdMediaPathUnsortedMovies.Size = new System.Drawing.Size(244, 218);
             this.grdMediaPathUnsortedMovies.TabIndex = 2;
             this.grdMediaPathUnsortedMovies.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewUnsortedMovies});
@@ -227,10 +245,13 @@
             // 
             this.btnRefresh.Image = global::YANFOE.Properties.Resources.refresh32;
             this.btnRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnRefresh.Location = new System.Drawing.Point(258, 594);
+            this.btnRefresh.Location = new System.Drawing.Point(256, 604);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(110, 38);
+            this.btnRefresh.Size = new System.Drawing.Size(114, 38);
             this.btnRefresh.StyleController = this.layoutControl1;
+            toolTipTitleItem3.Text = "Refresh files found from media path(s).";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.btnRefresh.SuperTip = superToolTip3;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Click += new System.EventHandler(this.ButRefresh_Click);
             // 
@@ -238,10 +259,13 @@
             // 
             this.btnAdd.Image = global::YANFOE.Properties.Resources.add32;
             this.btnAdd.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnAdd.Location = new System.Drawing.Point(15, 594);
+            this.btnAdd.Location = new System.Drawing.Point(5, 604);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(78, 38);
+            this.btnAdd.Size = new System.Drawing.Size(81, 38);
             this.btnAdd.StyleController = this.layoutControl1;
+            toolTipTitleItem4.Text = "Add New Media Path";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            this.btnAdd.SuperTip = superToolTip4;
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
@@ -249,10 +273,13 @@
             // 
             this.btnDelete.Image = global::YANFOE.Properties.Resources.trash32;
             this.btnDelete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnDelete.Location = new System.Drawing.Point(177, 594);
+            this.btnDelete.Location = new System.Drawing.Point(173, 604);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(77, 38);
+            this.btnDelete.Size = new System.Drawing.Size(79, 38);
             this.btnDelete.StyleController = this.layoutControl1;
+            toolTipTitleItem5.Text = "Delete Media Path(s)\r\n";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            this.btnDelete.SuperTip = superToolTip5;
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
@@ -260,29 +287,32 @@
             // 
             this.btnEdit.Image = global::YANFOE.Properties.Resources.pencil32;
             this.btnEdit.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnEdit.Location = new System.Drawing.Point(97, 594);
+            this.btnEdit.Location = new System.Drawing.Point(90, 604);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(76, 38);
+            this.btnEdit.Size = new System.Drawing.Size(79, 38);
             this.btnEdit.StyleController = this.layoutControl1;
+            toolTipTitleItem6.Text = "Edit Selected Media Path";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            this.btnEdit.SuperTip = superToolTip6;
             this.btnEdit.TabIndex = 7;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // lblCurrentStatus
             // 
-            this.lblCurrentStatus.Location = new System.Drawing.Point(12, 639);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(2, 649);
             this.lblCurrentStatus.Name = "lblCurrentStatus";
-            this.lblCurrentStatus.Size = new System.Drawing.Size(610, 13);
+            this.lblCurrentStatus.Size = new System.Drawing.Size(630, 13);
             this.lblCurrentStatus.StyleController = this.layoutControl1;
             this.lblCurrentStatus.TabIndex = 6;
             // 
             // grdMediaPathList
             // 
-            this.grdMediaPathList.Location = new System.Drawing.Point(15, 35);
+            this.grdMediaPathList.Location = new System.Drawing.Point(5, 25);
             this.grdMediaPathList.MainView = this.grdViewMain;
             this.grdMediaPathList.MaximumSize = new System.Drawing.Size(1000, 0);
             this.grdMediaPathList.MinimumSize = new System.Drawing.Size(300, 0);
             this.grdMediaPathList.Name = "grdMediaPathList";
-            this.grdMediaPathList.Size = new System.Drawing.Size(353, 555);
+            this.grdMediaPathList.Size = new System.Drawing.Size(365, 575);
             this.grdMediaPathList.TabIndex = 5;
             this.grdMediaPathList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewMain});
@@ -356,6 +386,7 @@
             this.layoutControlItem2});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(634, 664);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
@@ -372,16 +403,16 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(363, 627);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(375, 647);
             this.layoutControlGroup2.Text = "Media Paths";
             // 
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.btnRefresh;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(243, 559);
+            this.layoutControlItem6.Location = new System.Drawing.Point(251, 579);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(114, 42);
+            this.layoutControlItem6.Size = new System.Drawing.Size(118, 42);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -392,9 +423,9 @@
             this.layoutControlItem4.Control = this.btnDelete;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
             this.layoutControlItem4.Image = global::YANFOE.Properties.Resources.trash32;
-            this.layoutControlItem4.Location = new System.Drawing.Point(162, 559);
+            this.layoutControlItem4.Location = new System.Drawing.Point(168, 579);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(81, 42);
+            this.layoutControlItem4.Size = new System.Drawing.Size(83, 42);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -404,9 +435,9 @@
             // 
             this.layoutControlItem3.Control = this.btnEdit;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(82, 559);
+            this.layoutControlItem3.Location = new System.Drawing.Point(85, 579);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(80, 42);
+            this.layoutControlItem3.Size = new System.Drawing.Size(83, 42);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -416,9 +447,9 @@
             // 
             this.layoutControlItem5.Control = this.btnAdd;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 559);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 579);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(82, 42);
+            this.layoutControlItem5.Size = new System.Drawing.Size(85, 42);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -430,7 +461,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(357, 559);
+            this.layoutControlItem1.Size = new System.Drawing.Size(369, 579);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -442,19 +473,19 @@
             this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem10,
             this.layoutControlItem7});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(368, 0);
+            this.layoutControlGroup4.Location = new System.Drawing.Point(380, 0);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
             this.layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup4.Size = new System.Drawing.Size(246, 273);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(254, 282);
             this.layoutControlGroup4.Text = "Unsorted Movies";
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.btnProcessMovies;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 213);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 222);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(240, 34);
+            this.layoutControlItem10.Size = new System.Drawing.Size(248, 34);
             this.layoutControlItem10.Text = "layoutControlItem10";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
@@ -466,7 +497,7 @@
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(240, 213);
+            this.layoutControlItem7.Size = new System.Drawing.Size(248, 222);
             this.layoutControlItem7.Text = "layoutControlItem7";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextToControlDistance = 0;
@@ -478,10 +509,10 @@
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem8,
             this.layoutControlItem9});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(368, 278);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(380, 287);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(246, 349);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(254, 360);
             this.layoutControlGroup3.Text = "Unsorted TV";
             // 
             // layoutControlItem8
@@ -490,7 +521,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(240, 289);
+            this.layoutControlItem8.Size = new System.Drawing.Size(248, 300);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -501,9 +532,9 @@
             this.layoutControlItem9.Control = this.btnProcessTv;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem9.Image = global::YANFOE.Properties.Resources.next24;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 289);
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 300);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(240, 34);
+            this.layoutControlItem9.Size = new System.Drawing.Size(248, 34);
             this.layoutControlItem9.Text = "layoutControlItem9";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
@@ -513,25 +544,25 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(368, 273);
+            this.splitterItem1.Location = new System.Drawing.Point(380, 282);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(246, 5);
+            this.splitterItem1.Size = new System.Drawing.Size(254, 5);
             // 
             // splitterItem2
             // 
             this.splitterItem2.AllowHotTrack = true;
             this.splitterItem2.CustomizationFormText = "splitterItem2";
-            this.splitterItem2.Location = new System.Drawing.Point(363, 0);
+            this.splitterItem2.Location = new System.Drawing.Point(375, 0);
             this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(5, 627);
+            this.splitterItem2.Size = new System.Drawing.Size(5, 647);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.lblCurrentStatus;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 627);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 647);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(614, 17);
+            this.layoutControlItem2.Size = new System.Drawing.Size(634, 17);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;

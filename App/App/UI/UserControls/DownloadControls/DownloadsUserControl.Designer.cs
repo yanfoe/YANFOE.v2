@@ -81,9 +81,9 @@
             this.xtraScrollableControl1.Controls.Add(this.ucDownloadThread3);
             this.xtraScrollableControl1.Controls.Add(this.ucDownloadThread2);
             this.xtraScrollableControl1.Controls.Add(this.ucDownloadThread1);
-            this.xtraScrollableControl1.Location = new System.Drawing.Point(246, 2);
+            this.xtraScrollableControl1.Location = new System.Drawing.Point(358, 2);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(499, 444);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(387, 444);
             this.xtraScrollableControl1.TabIndex = 10;
             // 
             // ucDownloadThread8
@@ -91,7 +91,7 @@
             this.ucDownloadThread8.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucDownloadThread8.Location = new System.Drawing.Point(0, 385);
             this.ucDownloadThread8.Name = "ucDownloadThread8";
-            this.ucDownloadThread8.Size = new System.Drawing.Size(499, 55);
+            this.ucDownloadThread8.Size = new System.Drawing.Size(387, 55);
             this.ucDownloadThread8.TabIndex = 12;
             // 
             // ucDownloadThread7
@@ -99,7 +99,7 @@
             this.ucDownloadThread7.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucDownloadThread7.Location = new System.Drawing.Point(0, 330);
             this.ucDownloadThread7.Name = "ucDownloadThread7";
-            this.ucDownloadThread7.Size = new System.Drawing.Size(499, 55);
+            this.ucDownloadThread7.Size = new System.Drawing.Size(387, 55);
             this.ucDownloadThread7.TabIndex = 11;
             // 
             // ucDownloadThread6
@@ -107,7 +107,7 @@
             this.ucDownloadThread6.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucDownloadThread6.Location = new System.Drawing.Point(0, 275);
             this.ucDownloadThread6.Name = "ucDownloadThread6";
-            this.ucDownloadThread6.Size = new System.Drawing.Size(499, 55);
+            this.ucDownloadThread6.Size = new System.Drawing.Size(387, 55);
             this.ucDownloadThread6.TabIndex = 10;
             // 
             // ucDownloadThread5
@@ -115,48 +115,48 @@
             this.ucDownloadThread5.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucDownloadThread5.Location = new System.Drawing.Point(0, 220);
             this.ucDownloadThread5.Name = "ucDownloadThread5";
-            this.ucDownloadThread5.Size = new System.Drawing.Size(499, 55);
+            this.ucDownloadThread5.Size = new System.Drawing.Size(387, 55);
             this.ucDownloadThread5.TabIndex = 9;
-            // 
-            // ucDownloadThread1
-            // 
-            this.ucDownloadThread1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucDownloadThread1.Location = new System.Drawing.Point(0, 0);
-            this.ucDownloadThread1.Name = "ucDownloadThread1";
-            this.ucDownloadThread1.Size = new System.Drawing.Size(499, 55);
-            this.ucDownloadThread1.TabIndex = 7;
-            this.ucDownloadThread1.Load += new System.EventHandler(this.ucDownloadThread1_Load);
-            // 
-            // ucDownloadThread2
-            // 
-            this.ucDownloadThread2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucDownloadThread2.Location = new System.Drawing.Point(0, 55);
-            this.ucDownloadThread2.Name = "ucDownloadThread2";
-            this.ucDownloadThread2.Size = new System.Drawing.Size(499, 55);
-            this.ucDownloadThread2.TabIndex = 6;
-            // 
-            // ucDownloadThread3
-            // 
-            this.ucDownloadThread3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucDownloadThread3.Location = new System.Drawing.Point(0, 110);
-            this.ucDownloadThread3.Name = "ucDownloadThread3";
-            this.ucDownloadThread3.Size = new System.Drawing.Size(499, 55);
-            this.ucDownloadThread3.TabIndex = 8;
             // 
             // ucDownloadThread4
             // 
             this.ucDownloadThread4.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucDownloadThread4.Location = new System.Drawing.Point(0, 165);
             this.ucDownloadThread4.Name = "ucDownloadThread4";
-            this.ucDownloadThread4.Size = new System.Drawing.Size(499, 55);
+            this.ucDownloadThread4.Size = new System.Drawing.Size(387, 55);
             this.ucDownloadThread4.TabIndex = 5;
+            // 
+            // ucDownloadThread3
+            // 
+            this.ucDownloadThread3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucDownloadThread3.Location = new System.Drawing.Point(0, 110);
+            this.ucDownloadThread3.Name = "ucDownloadThread3";
+            this.ucDownloadThread3.Size = new System.Drawing.Size(387, 55);
+            this.ucDownloadThread3.TabIndex = 8;
+            // 
+            // ucDownloadThread2
+            // 
+            this.ucDownloadThread2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucDownloadThread2.Location = new System.Drawing.Point(0, 55);
+            this.ucDownloadThread2.Name = "ucDownloadThread2";
+            this.ucDownloadThread2.Size = new System.Drawing.Size(387, 55);
+            this.ucDownloadThread2.TabIndex = 6;
+            // 
+            // ucDownloadThread1
+            // 
+            this.ucDownloadThread1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucDownloadThread1.Location = new System.Drawing.Point(0, 0);
+            this.ucDownloadThread1.Name = "ucDownloadThread1";
+            this.ucDownloadThread1.Size = new System.Drawing.Size(387, 55);
+            this.ucDownloadThread1.TabIndex = 7;
+            this.ucDownloadThread1.Load += new System.EventHandler(this.ucDownloadThread1_Load);
             // 
             // gridControl1
             // 
             this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(235, 444);
+            this.gridControl1.Size = new System.Drawing.Size(347, 444);
             this.gridControl1.TabIndex = 9;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -185,6 +185,8 @@
             // 
             this.clmSection.Caption = "Section";
             this.clmSection.FieldName = "Section";
+            this.clmSection.MaxWidth = 75;
+            this.clmSection.MinWidth = 75;
             this.clmSection.Name = "clmSection";
             this.clmSection.OptionsColumn.AllowEdit = false;
             this.clmSection.Visible = true;
@@ -192,8 +194,10 @@
             // 
             // clmDownloadType
             // 
-            this.clmDownloadType.Caption = "Download Type";
+            this.clmDownloadType.Caption = "Type";
             this.clmDownloadType.FieldName = "DownloadType";
+            this.clmDownloadType.MaxWidth = 75;
+            this.clmDownloadType.MinWidth = 75;
             this.clmDownloadType.Name = "clmDownloadType";
             this.clmDownloadType.OptionsColumn.AllowEdit = false;
             this.clmDownloadType.Visible = true;
@@ -212,7 +216,6 @@
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Size = new System.Drawing.Size(747, 448);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -222,7 +225,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(239, 448);
+            this.layoutControlItem1.Size = new System.Drawing.Size(351, 448);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -232,7 +235,7 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(239, 0);
+            this.splitterItem1.Location = new System.Drawing.Point(351, 0);
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(5, 448);
             // 
@@ -240,9 +243,9 @@
             // 
             this.layoutControlItem6.Control = this.xtraScrollableControl1;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(244, 0);
+            this.layoutControlItem6.Location = new System.Drawing.Point(356, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(503, 448);
+            this.layoutControlItem6.Size = new System.Drawing.Size(391, 448);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;

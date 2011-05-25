@@ -683,6 +683,7 @@ namespace YANFOE.Models.TvModels.Show
         /// <summary>
         /// Gets the locked image.
         /// </summary>
+        [JsonIgnore]
         public Image LockedImage
         {
             get

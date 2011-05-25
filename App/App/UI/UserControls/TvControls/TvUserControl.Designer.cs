@@ -40,6 +40,7 @@
             this.grdTvTitleList = new DevExpress.XtraGrid.GridControl();
             this.gridViewTvTitleList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.clmSeriesName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.tabBanner = new DevExpress.XtraTab.XtraTabPage();
             this.galleryBanners = new DevExpress.XtraBars.Ribbon.GalleryControl();
@@ -254,7 +255,8 @@
             // gridViewTvTitleList
             // 
             this.gridViewTvTitleList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.clmSeriesName});
+            this.clmSeriesName,
+            this.gridColumn3});
             this.gridViewTvTitleList.GridControl = this.grdTvTitleList;
             this.gridViewTvTitleList.Name = "gridViewTvTitleList";
             this.gridViewTvTitleList.OptionsDetail.EnableMasterViewMode = false;
@@ -274,6 +276,16 @@
             this.clmSeriesName.OptionsColumn.AllowEdit = false;
             this.clmSeriesName.Visible = true;
             this.clmSeriesName.VisibleIndex = 0;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Locked";
+            this.gridColumn3.FieldName = "IsLocked";
+            this.gridColumn3.MaxWidth = 20;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.Width = 20;
             // 
             // toolTipController1
             // 
@@ -1119,6 +1131,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
 
     }
 }
