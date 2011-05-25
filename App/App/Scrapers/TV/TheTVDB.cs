@@ -405,10 +405,17 @@ namespace YANFOE.Scrapers.TV
                 return string.Empty;
             }
 
-            var doc = new XmlDocument();
-            doc.LoadXml(serverTimeXml);
-            var timeValue = XRead.GetString(doc, "Time");
-            return timeValue;
+            try
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(serverTimeXml);
+                var timeValue = XRead.GetString(doc, "Time");
+                return timeValue;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         #endregion

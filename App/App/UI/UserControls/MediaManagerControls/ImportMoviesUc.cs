@@ -22,6 +22,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
     using BitFactory.Logging;
 
+    using DevExpress.Data;
     using DevExpress.XtraLayout.Utils;
 
     using YANFOE.Factories;
@@ -84,6 +85,9 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             this.initializing = true;
 
             this.grdMovies.DataSource = ImportMoviesFactory.ImportDatabase;
+            grdViewMoviesList.BeginSort();
+            grdViewMoviesList.Columns["Title"].SortOrder = ColumnSortOrder.Ascending;
+            grdViewMoviesList.EndSort();
 
             btnOK.Enabled = false;
             this.layoutControlItemScrape.Visibility = LayoutVisibility.Never;
