@@ -94,7 +94,19 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             this.layoutControlItemProgress.Visibility = LayoutVisibility.Always;
             grpMain.Enabled = false;
 
-            Factories.UI.Windows7UIFactory.ProgressChanged += this.Windows7UIFactory_ProgressChanged;
+            Factories.UI.Windows7UIFactory.ProgressChanged += (sender, e) =>
+                {
+                    if (this.InvokeRequired)
+                    {
+                        BeginInvoke(
+                            new Progress(UpdateProgress),
+                            new object[]
+                                {
+                                    Factories.UI.Windows7UIFactory.ProgressValue,
+                                    Factories.UI.Windows7UIFactory.ProgressMax
+                                });
+                    }
+                };
 
             this.bgw = new BackgroundWorker();
             this.bgw.DoWork += this.bgw_DoWork;
@@ -106,25 +118,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         }
 
         delegate void Progress(int value, int max);
-
-        /// <summary>
-        /// Handles the ProgressChanged event of the Windows7UIFactory control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void Windows7UIFactory_ProgressChanged(object sender, EventArgs e)
-        {
-            if (this.InvokeRequired)
-            {
-                BeginInvoke(
-                    new Progress(UpdateProgress),
-                    new object[]
-                        {
-                            Factories.UI.Windows7UIFactory.ProgressValue, 
-                            Factories.UI.Windows7UIFactory.ProgressMax 
-                        });
-            }
-        }
 
         public void UpdateProgress(int value, int max)
         {

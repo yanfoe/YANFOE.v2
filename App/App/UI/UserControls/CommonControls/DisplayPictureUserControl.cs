@@ -69,7 +69,15 @@ namespace YANFOE.UI.UserControls.CommonControls
         {
             this.InitializeComponent();
 
-            MovieDBFactory.CurrentMovieChanged += this.MovieDBFactory_CurrentMovieChanged;
+            MovieDBFactory.CurrentMovieChanged += (sender, e) =>
+                {
+                    if (galleryType == GalleryType.MoviePoster || galleryType == GalleryType.MovieFanart)
+                    {
+                        this.populateGallery = true;
+                        this.SetMovieBinding();
+                    }
+                };
+
             TvDBFactory.CurrentSeriesChanged += this.TvDBFactory_CurrentSeriesChanged;
             TvDBFactory.CurrentSeasonChanged += this.TvDBFactory_CurrentSeasonChanged;
             TvDBFactory.CurrentEpisodeChanged += this.TvDBFactory_CurrentEpisodeChanged;
@@ -147,20 +155,6 @@ namespace YANFOE.UI.UserControls.CommonControls
         {
             this.StartLoading();
             this.imageMain.Image = Resources.LoadingGlobe;
-        }
-
-        /// <summary>
-        /// Handles the CurrentMovieChanged event of the MovieDBFactory control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void MovieDBFactory_CurrentMovieChanged(object sender, EventArgs e)
-        {
-            if (galleryType == GalleryType.MoviePoster || galleryType == GalleryType.MovieFanart)
-            {
-                this.populateGallery = true;
-                this.SetMovieBinding();
-            }
         }
 
         /// <summary>
