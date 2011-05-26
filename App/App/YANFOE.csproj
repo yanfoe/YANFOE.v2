@@ -128,6 +128,11 @@
     <Compile Include="Factories\AddCustomSeries\AddCustomSeriesFactory.cs" />
     <Compile Include="Factories\AddCustomSeries\AddCustomSeriesFilesModel.cs" />
     <Compile Include="Factories\AddCustomSeries\AddCustomSeriesModel.cs" />
+    <Compile Include="Factories\Apps\MediaInfo\MediaInfoFactory.cs" />
+    <Compile Include="Factories\Apps\MediaInfo\Models\MiAudioStreamModel.cs" />
+    <Compile Include="Factories\Apps\MediaInfo\Models\MiResponseModel.cs" />
+    <Compile Include="Factories\Apps\MediaInfo\Models\MiSubtitleStreamModel.cs" />
+    <Compile Include="Factories\Apps\MediaInfo\Models\MiVideoStreamModel.cs" />
     <Compile Include="Factories\InOut\Enum\IoType.cs" />
     <Compile Include="Factories\InOut\Model\SaveProgressModel.cs" />
     <Compile Include="Factories\InOut\OutFactory.cs" />
@@ -492,6 +497,12 @@
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Popups\MovieListPopup.cs" />
+    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.Designer.cs">
+      <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -712,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmUpdateShows.resx">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommonControls\MediaInfoUserControl.resx">
+      <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\NFOPreviewUserControl.resx">
       <DependentUpon>NFOPreviewUserControl.cs</DependentUpon>
@@ -974,6 +988,15 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Apps\MediaInfo\License.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\MediaInfo\MediaInfo.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\MediaInfo\MediaInfo.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Dlls\Microsoft.WindowsAPICodePack.dll" />
     <Content Include="Dlls\Microsoft.WindowsAPICodePack.Shell.dll" />
     <Content Include="Dlls\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
@@ -1003,6 +1026,8 @@
     <None Include="Resources\loading_white.gif" />
     <None Include="Resources\loading_black.gif" />
     <None Include="Resources\loading.gif" />
+    <None Include="Resources\down1.png" />
+    <None Include="Resources\delete2.png" />
     <Content Include="Resources\refresh.png" />
     <None Include="Resources\tools1.png" />
     <None Include="Resources\tools2.png" />
@@ -1014,6 +1039,7 @@
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />
+    <None Include="Resources\up2.png" />
     <Content Include="y.ico" />
     <None Include="Resources\LoadingGlobe.gif" />
     <None Include="Resources\promo_red_faded.png" />

@@ -79,7 +79,6 @@
             this.tabMainDetails = new DevExpress.XtraTab.XtraTabPage();
             this.movieMainDetailsUserControl1 = new YANFOE.UI.UserControls.MovieControls.MovieMainDetailsUserControl();
             this.tabFileInfo = new DevExpress.XtraTab.XtraTabPage();
-            this.movieFileInfoUserControl1 = new YANFOE.UI.UserControls.MovieControls.MovieFileInfoUserControl();
             this.tabIdentify = new DevExpress.XtraTab.XtraTabPage();
             this.movieIdentierUserControl11 = new YANFOE.UI.UserControls.MovieControls.MovieIdentierUserControl1();
             this.tabSets = new DevExpress.XtraTab.XtraTabPage();
@@ -133,6 +132,7 @@
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -405,18 +405,10 @@
             // 
             // tabFileInfo
             // 
-            this.tabFileInfo.Controls.Add(this.movieFileInfoUserControl1);
+            this.tabFileInfo.Controls.Add(this.mediaInfoUserControl1);
             this.tabFileInfo.Name = "tabFileInfo";
             this.tabFileInfo.Size = new System.Drawing.Size(771, 305);
             this.tabFileInfo.Text = "File Info";
-            // 
-            // movieFileInfoUserControl1
-            // 
-            this.movieFileInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.movieFileInfoUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.movieFileInfoUserControl1.Name = "movieFileInfoUserControl1";
-            this.movieFileInfoUserControl1.Size = new System.Drawing.Size(771, 305);
-            this.movieFileInfoUserControl1.TabIndex = 0;
             // 
             // tabIdentify
             // 
@@ -959,6 +951,14 @@
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
             // 
+            // mediaInfoUserControl1
+            // 
+            this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
+            this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.mediaInfoUserControl1.TabIndex = 0;
+            // 
             // MoviesUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1084,7 +1084,6 @@
         private DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery galleryControlGallery1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.SplitterItem splitterItem2;
-        private MovieFileInfoUserControl movieFileInfoUserControl1;
         private MovieTrailerUserControl movieTrailerUserControl1;
         private DevExpress.XtraBars.PopupMenu popupMovieList;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
@@ -1092,6 +1091,7 @@
         private DevExpress.XtraBars.BarCheckItem barCheckItem1;
         private DevExpress.XtraBars.BarCheckItem barCheckItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private MediaInfoUserControl mediaInfoUserControl1;
 
     }
 }
