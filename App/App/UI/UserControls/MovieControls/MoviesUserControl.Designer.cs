@@ -79,6 +79,7 @@
             this.tabMainDetails = new DevExpress.XtraTab.XtraTabPage();
             this.movieMainDetailsUserControl1 = new YANFOE.UI.UserControls.MovieControls.MovieMainDetailsUserControl();
             this.tabFileInfo = new DevExpress.XtraTab.XtraTabPage();
+            this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             this.tabIdentify = new DevExpress.XtraTab.XtraTabPage();
             this.movieIdentierUserControl11 = new YANFOE.UI.UserControls.MovieControls.MovieIdentierUserControl1();
             this.tabSets = new DevExpress.XtraTab.XtraTabPage();
@@ -132,7 +133,6 @@
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -409,6 +409,15 @@
             this.tabFileInfo.Name = "tabFileInfo";
             this.tabFileInfo.Size = new System.Drawing.Size(771, 305);
             this.tabFileInfo.Text = "File Info";
+            // 
+            // mediaInfoUserControl1
+            // 
+            this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaInfoUserControl1.Enabled = false;
+            this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
+            this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.mediaInfoUserControl1.TabIndex = 0;
             // 
             // tabIdentify
             // 
@@ -950,14 +959,6 @@
             this.popupMovieList.Manager = this.barManager1;
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
-            // 
-            // mediaInfoUserControl1
-            // 
-            this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
-            this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 305);
-            this.mediaInfoUserControl1.TabIndex = 0;
             // 
             // MoviesUserControl
             // 
