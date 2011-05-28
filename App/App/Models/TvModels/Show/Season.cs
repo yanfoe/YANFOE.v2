@@ -672,7 +672,7 @@ namespace YANFOE.Models.TvModels.Show
 
                             var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                                 {
-                                    Tag = "tvSeasonBanner|" + image.BannerPath, SuperTip = superTip
+                                    Tag = "tvSeasonPoster|" + image.BannerPath, SuperTip = superTip
                                 };
 
                             gallery.Items.Add(galleryItem);
@@ -713,7 +713,7 @@ namespace YANFOE.Models.TvModels.Show
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
                         {
-                            Tag = "tvSeasonBanner|" + image.BannerPath, SuperTip = superTip
+                            Tag = "tvSeasonFanart|" + image.BannerPath, SuperTip = superTip
                         };
 
                         gallery.Items.Add(galleryItem);
