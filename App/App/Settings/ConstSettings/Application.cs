@@ -25,7 +25,7 @@ namespace YANFOE.Settings.ConstSettings
         
         static Application()
         {
-            ApplicationBuild = String.Format("{0:yyMMddhh}", RetrieveLinkerTimestamp());
+            ApplicationBuild = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         #region ApplicationNamingConditions

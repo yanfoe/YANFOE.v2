@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Program.cs" company="The YANFOE Project">
+// <copyright file="AssemblyInfo.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
@@ -10,6 +10,9 @@
 //   For any reuse or distribution, you must make clear to others the 
 //   license terms of this work.  
 // </license>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Reflection;
@@ -21,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("YANFOE2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("YASC")]
+[assembly: AssemblyCompany("The YANFOE Project")]
 [assembly: AssemblyProduct("YANFOE2")]
 [assembly: AssemblyCopyright("Copyright 2011 Russell Lewis")]
 [assembly: AssemblyTrademark("")]
@@ -45,5 +48,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.2000")]
+

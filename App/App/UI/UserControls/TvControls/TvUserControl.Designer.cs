@@ -356,7 +356,6 @@
             this.gridViewSeasons.Name = "gridViewSeasons";
             this.gridViewSeasons.OptionsDetail.EnableMasterViewMode = false;
             this.gridViewSeasons.OptionsSelection.MultiSelect = true;
-            this.gridViewSeasons.OptionsView.ShowColumnHeaders = false;
             this.gridViewSeasons.OptionsView.ShowGroupPanel = false;
             this.gridViewSeasons.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewSeasons_RowCellStyle);
             this.gridViewSeasons.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewSeasons_SelectionChanged);
@@ -364,7 +363,6 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "clmStatus";
             this.gridColumn2.ColumnEdit = this.repositoryItemPictureEdit2;
             this.gridColumn2.FieldName = "Status";
             this.gridColumn2.MaxWidth = 20;
@@ -379,7 +377,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "clmSeasonNumber";
+            this.gridColumn1.Caption = "#";
             this.gridColumn1.FieldName = "SeasonNumber";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
@@ -426,7 +424,6 @@
             this.gridViewEpisodes.Name = "gridViewEpisodes";
             this.gridViewEpisodes.OptionsDetail.EnableMasterViewMode = false;
             this.gridViewEpisodes.OptionsSelection.MultiSelect = true;
-            this.gridViewEpisodes.OptionsView.ShowColumnHeaders = false;
             this.gridViewEpisodes.OptionsView.ShowGroupPanel = false;
             this.gridViewEpisodes.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewEpisodes_RowCellStyle);
             this.gridViewEpisodes.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewEpisodes_SelectionChanged);
@@ -448,7 +445,7 @@
             // 
             // clmEpisodeNumber
             // 
-            this.clmEpisodeNumber.Caption = "gridColumn2";
+            this.clmEpisodeNumber.Caption = "#";
             this.clmEpisodeNumber.FieldName = "EpisodeNumber";
             this.clmEpisodeNumber.MaxWidth = 32;
             this.clmEpisodeNumber.MinWidth = 32;
@@ -460,7 +457,7 @@
             // 
             // clmEpisodeName
             // 
-            this.clmEpisodeName.Caption = "gridColumn2";
+            this.clmEpisodeName.Caption = "Title";
             this.clmEpisodeName.FieldName = "EpisodeName";
             this.clmEpisodeName.Name = "clmEpisodeName";
             this.clmEpisodeName.OptionsColumn.AllowEdit = false;
