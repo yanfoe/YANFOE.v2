@@ -174,7 +174,7 @@ namespace YANFOE.Factories.Versioning
             UpdateTip = new SuperToolTip();
             UpdateTip.Items.AddTitle(string.Format("You are using an unofficial build of YANFOE ({0}).", YANFOE.Settings.ConstSettings.Application.ApplicationBuild));
             UpdateTip.Items.Add(string.Format("Double click to download build {0}", foundReleases.BuildNumber));
-            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.rar", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
+            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
         }
 
         public static void UpdateAvailable(FoundReleases foundReleases)
@@ -184,7 +184,7 @@ namespace YANFOE.Factories.Versioning
             UpdateTip = new SuperToolTip();
             UpdateTip.Items.AddTitle("New Update Available!");
             UpdateTip.Items.Add("Double click to download the latest release build.");
-            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.rar", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
+            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
         }
 
         public class FoundReleases

@@ -842,7 +842,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="YANFOE.snk" />
-    <None Include="YANFOE_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\drive-harddisk.png" />
