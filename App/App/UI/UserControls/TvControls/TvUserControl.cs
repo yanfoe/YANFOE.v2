@@ -156,6 +156,7 @@ namespace YANFOE.UI.UserControls.TvControls
         {
             tabTitle.Text = string.Format("Series Name ({0})", TvDBFactory.MasterSeriesNameList);
             this.gridViewTvTitleList.RefreshData();
+            gridViewTvTitleList_FocusedRowChanged(null, null);
         }
 
         /// <summary>

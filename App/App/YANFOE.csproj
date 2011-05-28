@@ -986,7 +986,6 @@
   <ItemGroup>
     <Folder Include="Factories\Scraper\SupportClasses\" />
     <Folder Include="Movie\Cache\" />
-    <Folder Include="NewFolder1\" />
     <Folder Include="Tools\Collections\" />
   </ItemGroup>
   <ItemGroup>
