@@ -15,6 +15,7 @@
 namespace YANFOE
 {
     using System;
+    using System.IO;
     using System.Windows.Forms;
 
     using YANFOE.UI.Dialogs.General;

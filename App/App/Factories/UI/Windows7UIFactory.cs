@@ -29,6 +29,8 @@
 
             if (os.Version.Build > 7600)
             {
+                goodOSVersion = false;
+
                 goodOSVersion = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
             }

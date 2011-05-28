@@ -40,6 +40,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_BuildVersioningStyle = None.None.None.Increment
 		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
