@@ -291,6 +291,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         private void Timer_Tick(object sender, EventArgs e)
         {
             this.lblCurrentStatus.Text = this.currentProgress.Message;
+            this.progressBarControl.EditValue = this.currentProgress.Percent;
             this.btnProcessTv.Enabled = this.grdViewUnsortedTv.RowCount > 0 && !this.backgroundWorker.IsBusy;
             this.btnProcessMovies.Enabled = this.grdViewUnsortedMovies.RowCount > 0 && !this.backgroundWorker.IsBusy;
         }

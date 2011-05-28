@@ -129,10 +129,9 @@ namespace YANFOE.Factories.Versioning
 
             if (result == null)
             {
-                CheckForUpdateFailed(result);
+                CheckForUpdateFailed();
             }
-
-            if (YANFOE.Settings.ConstSettings.Application.ApplicationBuild == result.BuildNumber)
+            else if (YANFOE.Settings.ConstSettings.Application.ApplicationBuild == result.BuildNumber)
             {
                 NoNewUpdate(result);
             }
@@ -147,7 +146,7 @@ namespace YANFOE.Factories.Versioning
             }
         }
 
-        private static void CheckForUpdateFailed(FoundReleases foundReleases)
+        private static void CheckForUpdateFailed()
         {
             ImageStatus = Resources.delete32;
             InvokeVersionUpdateChanged(new EventArgs());

@@ -16,6 +16,7 @@ namespace YANFOE.Factories.Media
 {
     using System;
     using System.ComponentModel;
+    using System.Linq;
 
     using BitFactory.Logging;
 
@@ -98,10 +99,14 @@ namespace YANFOE.Factories.Media
         /// <summary>
         /// Generatate unsorted list.
         /// </summary>
-        public static void GeneratateUnsortedList()
+        /// <param name="progress"></param>
+        public static void GeneratateUnsortedList(Progress progress)
         {
             mediaPathTvUnsorted.Clear();
             mediaPathMoviesUnsorted.Clear();
+
+            
+            var count = 0;
 
             try
             {
@@ -109,6 +114,8 @@ namespace YANFOE.Factories.Media
                 {
                     for (int index = 0; index < mediaPath.FileCollection.Count; index++)
                     {
+                        progress.Message = string.Format("Processing {0}", mediaPath.FileCollection[index].PathAndFileName);
+
                         MediaPathFileModel filePath = mediaPath.FileCollection[index];
 
                         if (filePath.Type == MediaPathFileModel.MediaPathFileType.Movie)
@@ -129,6 +136,12 @@ namespace YANFOE.Factories.Media
                                 mediaPathTvUnsorted.Add(filePath);
                             }
                         }
+
+                        count++;
+
+                        var total = (long)MediaPathDB.Sum(pathColletion => pathColletion.FileCollection.Count);
+
+                        progress.Percent = Convert.ToInt32((long)count * 100 / total);
                     }
                 }
             }
@@ -175,7 +188,7 @@ namespace YANFOE.Factories.Media
 
             progress.Message = "Scan complete. Processing";
 
-            GeneratateUnsortedList();
+            GeneratateUnsortedList(progress);
 
             progress.Message = "Idle.";
         }
