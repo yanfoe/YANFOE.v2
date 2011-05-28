@@ -24,7 +24,6 @@ namespace YANFOE.Factories
 
     using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
-    using DevExpress.XtraEditors;
 
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;

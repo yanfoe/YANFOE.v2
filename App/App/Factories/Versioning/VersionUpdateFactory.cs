@@ -92,7 +92,7 @@ namespace YANFOE.Factories.Versioning
 
             var matches = Regex.Matches(
                 downloads,
-                @"YANFOE\.v(?<major>\d)\.(?<minor>\d{1,2})-(?<milestone>.*?)\.Build\.(?<buildnumber>\d+?)\.rar");
+                @"YANFOE\.v(?<major>\d)\.(?<minor>\d{1,2})-(?<milestone>.*?)\.Build\.(?<buildnumber>\d+?)\.zip");
 
             var releases = new List<FoundReleases>();
 
@@ -143,6 +143,7 @@ namespace YANFOE.Factories.Versioning
             else
             {
                 UpdateAvailable(result);
+
             }
         }
 
