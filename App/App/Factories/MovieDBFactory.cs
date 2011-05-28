@@ -32,7 +32,6 @@ namespace YANFOE.Factories
     using YANFOE.Models.MovieModels;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
-    using YANFOE.Tools.Images;
     using YANFOE.UI.Dialogs.General;
 
     /// <summary>
@@ -487,7 +486,7 @@ namespace YANFOE.Factories
             {
                 if (movie.SmallPoster != null)
                 {
-                    movie.SmallPoster = Tools.ResizeImage(movie.SmallPoster, 100, 150);
+                    movie.SmallPoster = ImageHandler.ResizeImage(movie.SmallPoster, 100, 150);
                 }
 
                 MovieDatabase.Add(movie);

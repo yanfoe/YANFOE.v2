@@ -38,7 +38,6 @@ namespace YANFOE.Models.MovieModels
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
-    using YANFOE.Tools.Images;
     using YANFOE.Tools.Models;
 
     using ErrorInfo = DevExpress.XtraEditors.DXErrorProvider.ErrorInfo;
@@ -1880,7 +1879,7 @@ namespace YANFOE.Models.MovieModels
         public void GenerateSmallFanart(string path = null)
         {
             this.SmallFanart = string.IsNullOrEmpty(path)
-                                   ? Tools.ResizeImage(this.CurrentFanartImage, 100, 60)
+                                   ? ImageHandler.ResizeImage(this.CurrentFanartImage, 100, 60)
                                    : ImageHandler.LoadImage(path, 100, 60);
         }
 
@@ -1893,7 +1892,7 @@ namespace YANFOE.Models.MovieModels
         public void GenerateSmallPoster(string path = null)
         {
             this.SmallPoster = string.IsNullOrEmpty(path)
-                                   ? Tools.ResizeImage(this.CurrentPosterImage, 100, 150)
+                                   ? ImageHandler.ResizeImage(this.CurrentPosterImage, 100, 150)
                                    : ImageHandler.LoadImage(path, 100, 150);
         }
 
