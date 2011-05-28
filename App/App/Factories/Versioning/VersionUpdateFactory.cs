@@ -26,7 +26,6 @@ namespace YANFOE.Factories.Versioning
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Properties;
-    using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
 
