@@ -133,12 +133,12 @@ namespace YANFOE
             this.picThread7 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread6 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread5 = new DevExpress.XtraEditors.PictureEdit();
+            this.lblDownloadStatus = new DevExpress.XtraEditors.LabelControl();
             this.picThread4 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread3 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread2 = new DevExpress.XtraEditors.PictureEdit();
             this.picThread1 = new DevExpress.XtraEditors.PictureEdit();
             this.uiTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblDownloadStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
@@ -267,7 +267,7 @@ namespace YANFOE
             this.mnuFileSaveDatabase.Glyph = global::YANFOE.Properties.Resources.save;
             this.mnuFileSaveDatabase.Id = 28;
             this.mnuFileSaveDatabase.Name = "mnuFileSaveDatabase";
-            this.mnuFileSaveDatabase.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.MnuFileSaveDatabase_ItemClick);
+            this.mnuFileSaveDatabase.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuFileSaveDatabase_ItemClick);
             // 
             // mnuFileExit
             // 
@@ -275,7 +275,7 @@ namespace YANFOE
             this.mnuFileExit.Glyph = global::YANFOE.Properties.Resources.shut_down;
             this.mnuFileExit.Id = 22;
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.MnuFileExit_ItemClick);
+            this.mnuFileExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuFileExit_ItemClick);
             // 
             // mnuEdit
             // 
@@ -291,7 +291,7 @@ namespace YANFOE
             this.mnuEditSettings.Glyph = global::YANFOE.Properties.Resources.tools2;
             this.mnuEditSettings.Id = 29;
             this.mnuEditSettings.Name = "mnuEditSettings";
-            this.mnuEditSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.MnuEditSettings_ItemClick);
+            this.mnuEditSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuEditSettings_ItemClick);
             // 
             // barSubItem7
             // 
@@ -306,7 +306,7 @@ namespace YANFOE
             this.mnuToolsMovieScraperGroupManager.Caption = global::YANFOE.Language.FrmMain_Menu_Tools_MovieScraperGroupManager;
             this.mnuToolsMovieScraperGroupManager.Id = 25;
             this.mnuToolsMovieScraperGroupManager.Name = "mnuToolsMovieScraperGroupManager";
-            this.mnuToolsMovieScraperGroupManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.MnuToolsMovieScraperGroupManager_ItemClick);
+            this.mnuToolsMovieScraperGroupManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsMovieScraperGroupManager_ItemClick);
             // 
             // barSubItem9
             // 
@@ -1067,6 +1067,15 @@ namespace YANFOE
             this.picThread5.Size = new System.Drawing.Size(24, 24);
             this.picThread5.TabIndex = 8;
             // 
+            // lblDownloadStatus
+            // 
+            this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
+            this.lblDownloadStatus.Name = "lblDownloadStatus";
+            this.lblDownloadStatus.Size = new System.Drawing.Size(63, 13);
+            this.lblDownloadStatus.TabIndex = 7;
+            this.lblDownloadStatus.Text = "labelControl1";
+            this.lblDownloadStatus.Visible = false;
+            // 
             // picThread4
             // 
             this.picThread4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1123,16 +1132,7 @@ namespace YANFOE
             // 
             this.uiTimer.Enabled = true;
             this.uiTimer.Interval = 50;
-            this.uiTimer.Tick += new System.EventHandler(this.UiTimer_Tick);
-            // 
-            // lblDownloadStatus
-            // 
-            this.lblDownloadStatus.Location = new System.Drawing.Point(196, 6);
-            this.lblDownloadStatus.Name = "lblDownloadStatus";
-            this.lblDownloadStatus.Size = new System.Drawing.Size(63, 13);
-            this.lblDownloadStatus.TabIndex = 7;
-            this.lblDownloadStatus.Text = "labelControl1";
-            this.lblDownloadStatus.Visible = false;
+            this.uiTimer.Tick += new System.EventHandler(this.uiTimer_Tick);
             // 
             // FrmMain
             // 
@@ -1153,8 +1153,9 @@ namespace YANFOE
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YANFOE 2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
-            this.Shown += new System.EventHandler(this.FrmMain_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
+            this.Shown += new System.EventHandler(this.frmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();

@@ -79,6 +79,7 @@
             this.tabMainDetails = new DevExpress.XtraTab.XtraTabPage();
             this.movieMainDetailsUserControl1 = new YANFOE.UI.UserControls.MovieControls.MovieMainDetailsUserControl();
             this.tabFileInfo = new DevExpress.XtraTab.XtraTabPage();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             this.tabIdentify = new DevExpress.XtraTab.XtraTabPage();
             this.movieIdentierUserControl11 = new YANFOE.UI.UserControls.MovieControls.MovieIdentierUserControl1();
@@ -405,10 +406,21 @@
             // 
             // tabFileInfo
             // 
+            this.tabFileInfo.Controls.Add(this.labelControl1);
             this.tabFileInfo.Controls.Add(this.mediaInfoUserControl1);
             this.tabFileInfo.Name = "tabFileInfo";
             this.tabFileInfo.Size = new System.Drawing.Size(771, 305);
             this.tabFileInfo.Text = "File Info";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(395, 44);
+            this.labelControl1.TabIndex = 1;
+            this.labelControl1.Text = "Available in a future build";
             // 
             // mediaInfoUserControl1
             // 
@@ -988,6 +1000,7 @@
             this.tabEditTabsControl.ResumeLayout(false);
             this.tabMainDetails.ResumeLayout(false);
             this.tabFileInfo.ResumeLayout(false);
+            this.tabFileInfo.PerformLayout();
             this.tabIdentify.ResumeLayout(false);
             this.tabSets.ResumeLayout(false);
             this.tabTrailers.ResumeLayout(false);
@@ -1093,6 +1106,7 @@
         private DevExpress.XtraBars.BarCheckItem barCheckItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private MediaInfoUserControl mediaInfoUserControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
 
     }
 }

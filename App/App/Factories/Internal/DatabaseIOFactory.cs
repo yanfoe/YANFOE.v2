@@ -2,14 +2,9 @@
 // <copyright file="DatabaseIOFactory.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <license>
-//   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
-//   http://creativecommons.org/licenses/by-nc-sa/3.0/
-//   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
-// </license>
+// <summary>
+//   The database io factory.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace YANFOE.Factories.Internal
@@ -49,25 +44,31 @@ namespace YANFOE.Factories.Internal
         #region Constants and Fields
 
         /// <summary>
-        /// Timer for the Start save dialog
+        /// The saving count.
         /// </summary>
-        private static readonly Timer tmr = new Timer();
-        
         public static int SavingCount;
 
         /// <summary>
-        /// The start save dialog
+        ///   Timer for the Start save dialog
+        /// </summary>
+        private static readonly Timer tmr = new Timer();
+
+        /// <summary>
+        /// The database dirty.
+        /// </summary>
+        private static bool databaseDirty;
+
+        /// <summary>
+        ///   The start save dialog
         /// </summary>
         private static FrmSavingDB frmSavingDB = new FrmSavingDB();
-
-        public static bool AppLoading { get; set; }
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="DatabaseIOFactory"/> class. 
+        ///   Initializes static members of the <see cref = "DatabaseIOFactory" /> class.
         /// </summary>
         static DatabaseIOFactory()
         {
@@ -79,7 +80,7 @@ namespace YANFOE.Factories.Internal
         #region Events
 
         /// <summary>
-        /// The database dirty changed.
+        ///   The database dirty changed.
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler DatabaseDirtyChanged = delegate { };
@@ -94,37 +95,37 @@ namespace YANFOE.Factories.Internal
         public enum OutputName
         {
             /// <summary>
-            /// The null value
+            ///   The null value
             /// </summary>
             None, 
 
             /// <summary>
-            /// The media path db.
+            ///   The media path db.
             /// </summary>
             MediaPathDb, 
 
             /// <summary>
-            /// The movie db.
+            ///   The movie db.
             /// </summary>
             MovieDb, 
 
             /// <summary>
-            /// The movie sets.
+            ///   The movie sets.
             /// </summary>
             MovieSets, 
 
             /// <summary>
-            /// The tv db.
+            ///   The tv db.
             /// </summary>
             TvDb, 
 
             /// <summary>
-            /// The scan series pick db
+            ///   The scan series pick db
             /// </summary>
             ScanSeriesPick, 
 
             /// <summary>
-            /// Save All DB's
+            ///   Save All DB's
             /// </summary>
             All
         }
@@ -133,10 +134,13 @@ namespace YANFOE.Factories.Internal
 
         #region Properties
 
-        private static bool databaseDirty;
+        /// <summary>
+        /// Gets or sets a value indicating whether AppLoading.
+        /// </summary>
+        public static bool AppLoading { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether DatabaseDirty.
+        ///   Gets or sets a value indicating whether DatabaseDirty.
         /// </summary>
         public static bool DatabaseDirty
         {
@@ -144,6 +148,7 @@ namespace YANFOE.Factories.Internal
             {
                 return databaseDirty;
             }
+
             set
             {
                 databaseDirty = value;
@@ -152,32 +157,32 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether SavingMovieDB.
+        ///   Gets or sets a value indicating whether SavingMovieDB.
         /// </summary>
         public static bool SavingMovieDB { get; set; }
 
         /// <summary>
-        /// Gets or sets SavingMovieMax.
+        ///   Gets or sets SavingMovieMax.
         /// </summary>
         public static int SavingMovieMax { get; set; }
 
         /// <summary>
-        /// Gets or sets SavingMovieValue.
+        ///   Gets or sets SavingMovieValue.
         /// </summary>
         public static int SavingMovieValue { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether SavingTVDB.
+        ///   Gets or sets a value indicating whether SavingTVDB.
         /// </summary>
         public static bool SavingTVDB { get; set; }
 
         /// <summary>
-        /// Gets or sets SavingTVDBMax.
+        ///   Gets or sets SavingTVDBMax.
         /// </summary>
         public static int SavingTVDBMax { get; set; }
 
         /// <summary>
-        /// Gets or sets SavingTVDBValue.
+        ///   Gets or sets SavingTVDBValue.
         /// </summary>
         public static int SavingTVDBValue { get; set; }
 
@@ -245,6 +250,11 @@ namespace YANFOE.Factories.Internal
         /// </param>
         public static void Save(OutputName type)
         {
+            if (SavingCount > 0)
+            {
+                return;
+            }
+
             switch (type)
             {
                 case OutputName.MovieDb:

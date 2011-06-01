@@ -46,23 +46,44 @@ namespace YANFOE
         #region Constants and Fields
 
         /// <summary>
-        /// The change text.
+        ///   The change text.
         /// </summary>
         public ChangeText changeText;
 
-        private Timer tmr = new Timer();
-
-        private int MediaPathCount = 0;
-
-        private int MovieCount = 0;
-
-        private int TvCount = 0;
-
+        /// <summary>
+        /// The download count 1.
+        /// </summary>
         private int DownloadCount1 = 0;
 
+        /// <summary>
+        /// The download count 2.
+        /// </summary>
         private int DownloadCount2 = 0;
 
+        /// <summary>
+        /// The log count.
+        /// </summary>
         private int LogCount = 0;
+
+        /// <summary>
+        /// The media path count.
+        /// </summary>
+        private int MediaPathCount = 0;
+
+        /// <summary>
+        /// The movie count.
+        /// </summary>
+        private int MovieCount = 0;
+
+        /// <summary>
+        /// The tv count.
+        /// </summary>
+        private int TvCount = 0;
+
+        /// <summary>
+        /// The tmr.
+        /// </summary>
+        private Timer tmr = new Timer();
 
         #endregion
 
@@ -87,116 +108,63 @@ namespace YANFOE
 
             Settings.Get.InOutCollection.SetCurrentSettings(NFOType.YAMJ);
 
-            MovieDBFactory.MovieDatabase.ListChanged += this.FrmMain_ListChanged;
-            TvDBFactory.TvDbChanged += this.TvDBFactory_TvDbChanged;
-            VersionUpdateFactory.VersionUpdateChanged += this.VersionUpdateFactory_VersionUpdateChanged;
-            DatabaseIOFactory.DatabaseDirtyChanged += this.DatabaseIOFactory_DatabaseDirtyChanged;
-            MediaPathDBFactory.MediaPathDB.ListChanged += this.MediaPathDB_ListChanged;
-            Downloader.Downloading.ListChanged += this.Downloading_ListChanged;
-            Downloader.BackgroundDownloadQue.ListChanged += this.BackgroundDownloadQue_ListChanged;
-            InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged += this.Log_ListChanged;
+            this.SetupEventBindings();
 
             VersionUpdateFactory.CheckForUpdate();
 
             this.tmr.Interval = 500;
-            this.tmr.Tick += new EventHandler(this.tmr_Tick);
+            this.tmr.Tick += this.tmr_Tick;
             this.tmr.Start();
         }
 
-        private delegate void UpdateTabHeadersDelegate();
-
-        /// <summary>
-        /// Handles the Tick event of the tmr control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void tmr_Tick(object sender, EventArgs e)
+        private void SetupEventBindings()
         {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(new UpdateTabHeadersDelegate(this.UpdateTabHeaders));
-            }
-            else
-            {
-                this.UpdateTabHeaders();
-            }
-        }
+            MovieDBFactory.MovieDatabase.ListChanged += (sender, e) =>
+                {
+                    try
+                    {
+                        this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
+                    }
+                    catch (Exception)
+                    {
+                        // Do nothing
+                    }
+                };
 
-        /// <summary>
-        /// Updates the tab headers.
-        /// </summary>
-        private void UpdateTabHeaders()
-        {
-            try
-            {
-                this.tabMediaManager.Text = string.Format("Media Manager ({0})", this.MediaPathCount);
-                this.tabTv.Text = string.Format("TV ({0})", this.TvCount);
-                this.tabLogs.Text = string.Format("Log ({0})", this.LogCount);
-                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", this.DownloadCount1, this.DownloadCount2);
-            }
-            catch (Exception) 
-            { 
+            TvDBFactory.TvDbChanged += (sender, e) => { this.TvCount = TvDBFactory.MasterSeriesNameList.Count; };
 
-            }
-        }
+            VersionUpdateFactory.VersionUpdateChanged +=
+                (sender, e) => { this.picUpdateStatus.Image = VersionUpdateFactory.ImageStatus; };
 
-        /// <summary>
-        /// Handles the ListChanged event of the Log control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private void Log_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            this.LogCount = InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count;
-        }
+            DatabaseIOFactory.DatabaseDirtyChanged += 
+                (sender, e) =>
+                    {
+                        try
+                        {
+                            this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
+                        }
+                        catch (Exception)
+                        {
+                            // ignore
+                        }
+                    };
 
-        /// <summary>
-        /// Handles the ListChanged event of the BackgroundDownloadQue control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private void BackgroundDownloadQue_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            this.UpdateDownloaderTabHeader();
-        }
+            MediaPathDBFactory.MediaPathDB.ListChanged += 
+                (sender, e) =>
+                    {
+                        this.MediaPathCount = MediaPathDBFactory.MediaPathDB.Count;
+                    };
 
-        /// <summary>
-        /// Handles the ListChanged event of the Downloading control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private void Downloading_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            this.UpdateDownloaderTabHeader();
-        }
+            Downloader.Downloading.ListChanged +=
+                (sender, e) => this.UpdateDownloaderTabHeader();
 
-        /// <summary>
-        /// Updates the downloader tab header.
-        /// </summary>
-        private void UpdateDownloaderTabHeader()
-        {
-            this.DownloadCount1 = Downloader.Downloading.Count;
-            this.DownloadCount2 = Downloader.BackgroundDownloadQue.Count;
-        }
+            Downloader.BackgroundDownloadQue.ListChanged +=
+                (sender, e) => this.UpdateDownloaderTabHeader();
 
-        /// <summary>
-        /// Handles the ListChanged event of the MediaPathDB control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private void MediaPathDB_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            this.MediaPathCount = MediaPathDBFactory.MediaPathDB.Count;
-        }
-
-        /// <summary>
-        /// Handles the TvDbChanged event of the TvDBFactory control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void TvDBFactory_TvDbChanged(object sender, EventArgs e)
-        {
-            this.TvCount = TvDBFactory.MasterSeriesNameList.Count;
+            InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged += (sender, e) =>
+                {
+                    this.LogCount = InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count;
+                };
         }
 
         #endregion
@@ -210,6 +178,11 @@ namespace YANFOE
         /// The is dirty.
         /// </param>
         public delegate void ChangeText(bool isDirty);
+
+        /// <summary>
+        /// The update tab headers delegate.
+        /// </summary>
+        private delegate void UpdateTabHeadersDelegate();
 
         #endregion
 
@@ -236,7 +209,7 @@ namespace YANFOE
         #region Methods
 
         /// <summary>
-        /// The database io factory_ database dirty changed.
+        /// The frm main_ form closing.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -244,147 +217,15 @@ namespace YANFOE
         /// <param name="e">
         /// The e.
         /// </param>
-        private void DatabaseIOFactory_DatabaseDirtyChanged(object sender, EventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            if (DatabaseIOFactory.SavingCount > 0)
             {
-                this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
-            }
-            catch
-            {
-                // ignore
-            }
-        }
-
-        /// <summary>
-        /// Handles the FormClosed event of the FrmMain control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.
-        /// </param>
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (DatabaseIOFactory.DatabaseDirty)
-            {
-                DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
-
-                do
-                {
-                    Thread.Sleep(50);
-                    Application.DoEvents();
-                }
-                while (DatabaseIOFactory.SavingCount > 0);
+                e.Cancel = true;
             }
 
-            Settings.Get.SaveAll();
-
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
-            Application.Exit();
-        }
-
-        /// <summary>
-        /// Handles the ListChanged event of the FrmMain control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
-        /// </param>
-        private void FrmMain_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            try
-            {
-                this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
-            }
-            catch (Exception)
-            {
-                // Do nothing
-            }
-        }
-
-        /// <summary>
-        /// The frm main_ shown.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void FrmMain_Shown(object sender, EventArgs e)
-        {
-            DatabaseIOFactory.DatabaseDirty = false;
-
-            if (Settings.Get.Ui.ShowWelcomeMessage)
-            {
-                var frmWelcomePage = new frmWelcomePage();
-                frmWelcomePage.ShowDialog();
-            }
-
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Started.", string.Empty);
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuEditSettings control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
-        /// </param>
-        private void MnuEditSettings_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var settings = new FrmSettingsMain();
-            settings.ShowDialog();
-            settings.Dispose();
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the MnuFileExit control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
-        /// </param>
-        private void MnuFileExit_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the MnuFileSaveDatabase control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
-        /// </param>
-        private void MnuFileSaveDatabase_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
-        }
-
-        /// <summary>
-        /// Handles the ItemClick event of the mnuToolsMovieScraperGroupManager control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
-        /// </param>
-        private void MnuToolsMovieScraperGroupManager_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var frm = new FrmScraperGroupManager();
-            frm.ShowDialog();
+            this.mnuFileSaveDatabase.Enabled = false;
+            this.mnuFileExit.Enabled = false;
         }
 
         /// <summary>
@@ -419,7 +260,7 @@ namespace YANFOE
         /// <param name="e">
         /// The <see cref="System.EventArgs"/> instance containing the event data.
         /// </param>
-        private void UiTimer_Tick(object sender, EventArgs e)
+        private void uiTimer_Tick(object sender, EventArgs e)
         {
             if (Downloader.Progress[0].Message.Contains("Idle."))
             {
@@ -556,7 +397,61 @@ namespace YANFOE
         }
 
         /// <summary>
-        /// The version update factory_ version update changed.
+        /// Updates the downloader tab header.
+        /// </summary>
+        private void UpdateDownloaderTabHeader()
+        {
+            this.DownloadCount1 = Downloader.Downloading.Count;
+            this.DownloadCount2 = Downloader.BackgroundDownloadQue.Count;
+        }
+
+        /// <summary>
+        /// Updates the tab headers.
+        /// </summary>
+        private void UpdateTabHeaders()
+        {
+            try
+            {
+                this.tabMediaManager.Text = string.Format("Media Manager ({0})", this.MediaPathCount);
+                this.tabTv.Text = string.Format("TV ({0})", this.TvCount);
+                this.tabLogs.Text = string.Format("Log ({0})", this.LogCount);
+                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", this.DownloadCount1, this.DownloadCount2);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        /// <summary>
+        /// Handles the FormClosed event of the FrmMain control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.Windows.Forms.FormClosedEventArgs"/> instance containing the event data.
+        /// </param>
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (DatabaseIOFactory.DatabaseDirty)
+            {
+                DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
+
+                do
+                {
+                    Thread.Sleep(50);
+                    Application.DoEvents();
+                }
+                while (DatabaseIOFactory.SavingCount > 0);
+            }
+
+            Settings.Get.SaveAll();
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
+        }
+
+        /// <summary>
+        /// The frm main_ shown.
         /// </summary>
         /// <param name="sender">
         /// The sender.
@@ -564,9 +459,17 @@ namespace YANFOE
         /// <param name="e">
         /// The e.
         /// </param>
-        private void VersionUpdateFactory_VersionUpdateChanged(object sender, EventArgs e)
+        private void frmMain_Shown(object sender, EventArgs e)
         {
-            this.picUpdateStatus.Image = VersionUpdateFactory.ImageStatus;
+            DatabaseIOFactory.DatabaseDirty = false;
+
+            if (Settings.Get.Ui.ShowWelcomeMessage)
+            {
+                var frmWelcomePage = new frmWelcomePage();
+                frmWelcomePage.ShowDialog();
+            }
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Started.", string.Empty);
         }
 
         /// <summary>
@@ -581,6 +484,50 @@ namespace YANFOE
         private void mnuDonate_ItemClick(object sender, ItemClickEventArgs e)
         {
             Process.Start(Settings.ConstSettings.Application.DonateUrl);
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the mnuEditSettings control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuEditSettings_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var settings = new FrmSettingsMain();
+            settings.ShowDialog();
+            settings.Dispose();
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the MnuFileExit control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuFileExit_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /// <summary>
+        /// Handles the ItemClick event of the MnuFileSaveDatabase control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuFileSaveDatabase_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.All);
         }
 
         /// <summary>
@@ -640,6 +587,21 @@ namespace YANFOE
         }
 
         /// <summary>
+        /// Handles the ItemClick event of the mnuToolsMovieScraperGroupManager control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="DevExpress.XtraBars.ItemClickEventArgs"/> instance containing the event data.
+        /// </param>
+        private void mnuToolsMovieScraperGroupManager_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frm = new FrmScraperGroupManager();
+            frm.ShowDialog();
+        }
+
+        /// <summary>
         /// Handles the DoubleClick event of the picUpdateStatus control.
         /// </summary>
         /// <param name="sender">
@@ -653,6 +615,27 @@ namespace YANFOE
             if (!string.IsNullOrEmpty(VersionUpdateFactory.UpdateLink))
             {
                 Process.Start(VersionUpdateFactory.UpdateLink);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Tick event of the tmr control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void tmr_Tick(object sender, EventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new UpdateTabHeadersDelegate(this.UpdateTabHeaders));
+            }
+            else
+            {
+                this.UpdateTabHeaders();
             }
         }
 
