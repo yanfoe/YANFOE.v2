@@ -379,8 +379,11 @@ namespace YANFOE.InternalApps.DownloadManager
         {
             var downloadItem = e.Result as DownloadItem;
 
-            downloadItem.Progress.Message = string.Empty;
-            downloadItem.Progress.Percent = 0;
+            if (downloadItem != null)
+            {
+                downloadItem.Progress.Message = string.Empty;
+                downloadItem.Progress.Percent = 0;
+            }
         }
 
         /// <summary>

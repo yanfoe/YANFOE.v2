@@ -2,15 +2,19 @@
 // <copyright file="frmMain.cs" company="The YANFOE Project">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <summary>
-//   The frm main.
-// </summary>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the 
+//   license terms of this work.  
+// </license>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace YANFOE
 {
     using System;
-    using System.ComponentModel;
     using System.Diagnostics;
     using System.Threading;
     using System.Windows.Forms;
@@ -39,51 +43,46 @@ namespace YANFOE
     using Timer = System.Windows.Forms.Timer;
 
     /// <summary>
-    /// The frm main.
+    /// The main application form
     /// </summary>
     public partial class FrmMain : XtraForm
     {
         #region Constants and Fields
 
         /// <summary>
-        ///   The change text.
+        ///   The current status text
         /// </summary>
-        public ChangeText changeText;
+        public ChangeText ChangeTextValue;
 
         /// <summary>
-        /// The download count 1.
+        ///   The download count 1.
         /// </summary>
-        private int DownloadCount1 = 0;
+        private int downloadCount1;
 
         /// <summary>
-        /// The download count 2.
+        ///   The download count 2.
         /// </summary>
-        private int DownloadCount2 = 0;
+        private int downloadCount2;
 
         /// <summary>
-        /// The log count.
+        ///   The log count.
         /// </summary>
-        private int LogCount = 0;
+        private int logCount;
 
         /// <summary>
-        /// The media path count.
+        ///   The media path count.
         /// </summary>
-        private int MediaPathCount = 0;
+        private int mediaPathCount;
 
         /// <summary>
-        /// The movie count.
+        ///   The tv count.
         /// </summary>
-        private int MovieCount = 0;
+        private int tvCount;
 
         /// <summary>
-        /// The tv count.
+        ///   The tmr.
         /// </summary>
-        private int TvCount = 0;
-
-        /// <summary>
-        /// The tmr.
-        /// </summary>
-        private Timer tmr = new Timer();
+        private readonly Timer tmr = new Timer();
 
         #endregion
 
@@ -98,7 +97,7 @@ namespace YANFOE
 
             this.SetTitle(false);
 
-            this.changeText = new ChangeText(this.SetTitle);
+            this.ChangeTextValue = new ChangeText(this.SetTitle);
 
             this.txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
             this.txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
@@ -115,56 +114,6 @@ namespace YANFOE
             this.tmr.Interval = 500;
             this.tmr.Tick += this.tmr_Tick;
             this.tmr.Start();
-        }
-
-        private void SetupEventBindings()
-        {
-            MovieDBFactory.MovieDatabase.ListChanged += (sender, e) =>
-                {
-                    try
-                    {
-                        this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
-                    }
-                    catch (Exception)
-                    {
-                        // Do nothing
-                    }
-                };
-
-            TvDBFactory.TvDbChanged += (sender, e) => { this.TvCount = TvDBFactory.MasterSeriesNameList.Count; };
-
-            VersionUpdateFactory.VersionUpdateChanged +=
-                (sender, e) => { this.picUpdateStatus.Image = VersionUpdateFactory.ImageStatus; };
-
-            DatabaseIOFactory.DatabaseDirtyChanged += 
-                (sender, e) =>
-                    {
-                        try
-                        {
-                            this.Invoke(this.changeText, DatabaseIOFactory.DatabaseDirty);
-                        }
-                        catch (Exception)
-                        {
-                            // ignore
-                        }
-                    };
-
-            MediaPathDBFactory.MediaPathDB.ListChanged += 
-                (sender, e) =>
-                    {
-                        this.MediaPathCount = MediaPathDBFactory.MediaPathDB.Count;
-                    };
-
-            Downloader.Downloading.ListChanged +=
-                (sender, e) => this.UpdateDownloaderTabHeader();
-
-            Downloader.BackgroundDownloadQue.ListChanged +=
-                (sender, e) => this.UpdateDownloaderTabHeader();
-
-            InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged += (sender, e) =>
-                {
-                    this.LogCount = InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count;
-                };
         }
 
         #endregion
@@ -209,26 +158,6 @@ namespace YANFOE
         #region Methods
 
         /// <summary>
-        /// The frm main_ form closing.
-        /// </summary>
-        /// <param name="sender">
-        /// The sender.
-        /// </param>
-        /// <param name="e">
-        /// The e.
-        /// </param>
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (DatabaseIOFactory.SavingCount > 0)
-            {
-                e.Cancel = true;
-            }
-
-            this.mnuFileSaveDatabase.Enabled = false;
-            this.mnuFileExit.Enabled = false;
-        }
-
-        /// <summary>
         /// The set title.
         /// </summary>
         /// <param name="databaseDirty">
@@ -252,148 +181,48 @@ namespace YANFOE
         }
 
         /// <summary>
-        /// Handles the Tick event of the uiTimer control.
+        /// The setup event bindings.
         /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
-        /// </param>
-        private void uiTimer_Tick(object sender, EventArgs e)
+        private void SetupEventBindings()
         {
-            if (Downloader.Progress[0].Message.Contains("Idle."))
-            {
-                this.picThread1.Image = Resources.globe_faded16;
-                this.picThread1.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread1.Image != Resources.globe16)
+            MovieDBFactory.MovieDatabase.ListChanged += (sender, e) =>
                 {
-                    this.picThread1.Image = Resources.globe16;
-                }
+                    try
+                    {
+                        this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
+                    }
+                    catch (Exception)
+                    {
+                        // Do nothing
+                    }
+                };
 
-                this.picThread3.Image = Resources.globe16;
+            TvDBFactory.TvDbChanged += (sender, e) => { this.tvCount = TvDBFactory.MasterSeriesNameList.Count; };
 
-                this.picThread1.ToolTip = Downloader.Progress[0].Message;
-            }
+            VersionUpdateFactory.VersionUpdateChanged +=
+                (sender, e) => { this.picUpdateStatus.Image = VersionUpdateFactory.ImageStatus; };
 
-            if (Downloader.Progress[1].Message.Contains("Idle."))
-            {
-                this.picThread2.Image = Resources.globe_faded16;
-                this.picThread2.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread2.Image != Resources.globe16)
+            DatabaseIOFactory.DatabaseDirtyChanged += (sender, e) =>
                 {
-                    this.picThread2.Image = Resources.globe16;
-                }
+                    try
+                    {
+                        this.Invoke(this.ChangeTextValue, DatabaseIOFactory.DatabaseDirty);
+                    }
+                    catch (Exception)
+                    {
+                        // ignore
+                    }
+                };
 
-                this.picThread3.Image = Resources.globe16;
+            MediaPathDBFactory.MediaPathDB.ListChanged +=
+                (sender, e) => { this.mediaPathCount = MediaPathDBFactory.MediaPathDB.Count; };
 
-                this.picThread2.ToolTip = Downloader.Progress[1].Message;
-            }
+            Downloader.Downloading.ListChanged += (sender, e) => this.UpdateDownloaderTabHeader();
 
-            if (Downloader.Progress[2].Message.Contains("Idle."))
-            {
-                this.picThread3.Image = Resources.globe_faded16;
-                this.picThread3.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread3.Image != Resources.globe16)
-                {
-                    this.picThread3.Image = Resources.globe16;
-                }
+            Downloader.BackgroundDownloadQue.ListChanged += (sender, e) => this.UpdateDownloaderTabHeader();
 
-                this.picThread3.Image = Resources.globe16;
-                this.picThread3.ToolTip = Downloader.Progress[2].Message;
-            }
-
-            if (Downloader.Progress[3].Message.Contains("Idle."))
-            {
-                this.picThread4.Image = Resources.globe_faded16;
-                this.picThread4.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread4.Image != Resources.globe16)
-                {
-                    this.picThread4.Image = Resources.globe16;
-                }
-
-                this.picThread4.Image = Resources.globe16;
-                this.picThread4.ToolTip = Downloader.Progress[3].Message;
-            }
-
-            if (Downloader.Progress[4].Message.Contains("Idle."))
-            {
-                this.picThread5.Image = Resources.globe_faded16;
-                this.picThread5.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread5.Image != Resources.globe16)
-                {
-                    this.picThread5.Image = Resources.globe16;
-                }
-
-                this.picThread5.Image = Resources.globe16;
-                this.picThread5.ToolTip = Downloader.Progress[4].Message;
-            }
-
-            if (Downloader.Progress[5].Message.Contains("Idle."))
-            {
-                this.picThread6.Image = Resources.globe_faded16;
-                this.picThread6.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread6.Image != Resources.globe16)
-                {
-                    this.picThread6.Image = Resources.globe16;
-                }
-
-                this.picThread6.Image = Resources.globe16;
-                this.picThread6.ToolTip = Downloader.Progress[5].Message;
-            }
-
-            if (Downloader.Progress[6].Message.Contains("Idle."))
-            {
-                this.picThread7.Image = Resources.globe_faded16;
-                this.picThread7.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread7.Image != Resources.globe16)
-                {
-                    this.picThread7.Image = Resources.globe16;
-                }
-
-                this.picThread7.Image = Resources.globe16;
-                this.picThread7.ToolTip = Downloader.Progress[6].Message;
-            }
-
-            if (Downloader.Progress[7].Message.Contains("Idle."))
-            {
-                this.picThread8.Image = Resources.globe_faded16;
-                this.picThread8.ToolTip = string.Empty;
-            }
-            else
-            {
-                if (this.picThread8.Image != Resources.globe16)
-                {
-                    this.picThread8.Image = Resources.globe16;
-                }
-
-                this.picThread8.Image = Resources.globe16;
-                this.picThread8.ToolTip = Downloader.Progress[7].Message;
-            }
-
-            this.lblDownloadStatus.Text = string.Format(
-                "Queue: {0} / Background Que {1}", Downloader.CurrentQue, Downloader.BackgroundDownloadQue.Count);
+            InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).ListChanged +=
+                (sender, e) => { this.logCount = InternalApps.Logs.Log.GetInternalLogger(LoggerName.GeneralLog).Count; };
         }
 
         /// <summary>
@@ -401,8 +230,8 @@ namespace YANFOE
         /// </summary>
         private void UpdateDownloaderTabHeader()
         {
-            this.DownloadCount1 = Downloader.Downloading.Count;
-            this.DownloadCount2 = Downloader.BackgroundDownloadQue.Count;
+            this.downloadCount1 = Downloader.Downloading.Count;
+            this.downloadCount2 = Downloader.BackgroundDownloadQue.Count;
         }
 
         /// <summary>
@@ -412,10 +241,10 @@ namespace YANFOE
         {
             try
             {
-                this.tabMediaManager.Text = string.Format("Media Manager ({0})", this.MediaPathCount);
-                this.tabTv.Text = string.Format("TV ({0})", this.TvCount);
-                this.tabLogs.Text = string.Format("Log ({0})", this.LogCount);
-                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", this.DownloadCount1, this.DownloadCount2);
+                this.tabMediaManager.Text = string.Format("Media Manager ({0})", this.mediaPathCount);
+                this.tabTv.Text = string.Format("TV ({0})", this.tvCount);
+                this.tabLogs.Text = string.Format("Log ({0})", this.logCount);
+                this.tabDownloads.Text = string.Format("Downloads ({0}/{1})", this.downloadCount1, this.downloadCount2);
             }
             catch (Exception)
             {
@@ -448,6 +277,26 @@ namespace YANFOE
             Settings.Get.SaveAll();
 
             InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event of the frmMain control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.Windows.Forms.FormClosingEventArgs"/> instance containing the event data.
+        /// </param>
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DatabaseIOFactory.SavingCount > 0)
+            {
+                e.Cancel = true;
+            }
+
+            this.mnuFileSaveDatabase.Enabled = false;
+            this.mnuFileExit.Enabled = false;
         }
 
         /// <summary>
@@ -653,11 +502,158 @@ namespace YANFOE
         {
             if (e.SelectedControl == this.picUpdateStatus)
             {
-                e.Info = new ToolTipControlInfo();
-                e.Info.Object = this.picUpdateStatus;
-                e.Info.ToolTipType = ToolTipType.SuperTip;
-                e.Info.SuperTip = VersionUpdateFactory.UpdateTip;
+                e.Info = new ToolTipControlInfo
+                    {
+                        Object = this.picUpdateStatus,
+                        ToolTipType = ToolTipType.SuperTip,
+                        SuperTip = VersionUpdateFactory.UpdateTip
+                    };
             }
+        }
+
+        /// <summary>
+        /// Handles the Tick event of the uiTimer control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// </param>
+        private void uiTimer_Tick(object sender, EventArgs e)
+        {
+            if (Downloader.Progress[0].Message.Contains("Idle."))
+            {
+                this.picThread1.Image = Resources.globe_faded16;
+                this.picThread1.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread1.Image != Resources.globe16)
+                {
+                    this.picThread1.Image = Resources.globe16;
+                }
+
+                this.picThread3.Image = Resources.globe16;
+
+                this.picThread1.ToolTip = Downloader.Progress[0].Message;
+            }
+
+            if (Downloader.Progress[1].Message.Contains("Idle."))
+            {
+                this.picThread2.Image = Resources.globe_faded16;
+                this.picThread2.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread2.Image != Resources.globe16)
+                {
+                    this.picThread2.Image = Resources.globe16;
+                }
+
+                this.picThread3.Image = Resources.globe16;
+
+                this.picThread2.ToolTip = Downloader.Progress[1].Message;
+            }
+
+            if (Downloader.Progress[2].Message.Contains("Idle."))
+            {
+                this.picThread3.Image = Resources.globe_faded16;
+                this.picThread3.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread3.Image != Resources.globe16)
+                {
+                    this.picThread3.Image = Resources.globe16;
+                }
+
+                this.picThread3.Image = Resources.globe16;
+                this.picThread3.ToolTip = Downloader.Progress[2].Message;
+            }
+
+            if (Downloader.Progress[3].Message.Contains("Idle."))
+            {
+                this.picThread4.Image = Resources.globe_faded16;
+                this.picThread4.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread4.Image != Resources.globe16)
+                {
+                    this.picThread4.Image = Resources.globe16;
+                }
+
+                this.picThread4.Image = Resources.globe16;
+                this.picThread4.ToolTip = Downloader.Progress[3].Message;
+            }
+
+            if (Downloader.Progress[4].Message.Contains("Idle."))
+            {
+                this.picThread5.Image = Resources.globe_faded16;
+                this.picThread5.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread5.Image != Resources.globe16)
+                {
+                    this.picThread5.Image = Resources.globe16;
+                }
+
+                this.picThread5.Image = Resources.globe16;
+                this.picThread5.ToolTip = Downloader.Progress[4].Message;
+            }
+
+            if (Downloader.Progress[5].Message.Contains("Idle."))
+            {
+                this.picThread6.Image = Resources.globe_faded16;
+                this.picThread6.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread6.Image != Resources.globe16)
+                {
+                    this.picThread6.Image = Resources.globe16;
+                }
+
+                this.picThread6.Image = Resources.globe16;
+                this.picThread6.ToolTip = Downloader.Progress[5].Message;
+            }
+
+            if (Downloader.Progress[6].Message.Contains("Idle."))
+            {
+                this.picThread7.Image = Resources.globe_faded16;
+                this.picThread7.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread7.Image != Resources.globe16)
+                {
+                    this.picThread7.Image = Resources.globe16;
+                }
+
+                this.picThread7.Image = Resources.globe16;
+                this.picThread7.ToolTip = Downloader.Progress[6].Message;
+            }
+
+            if (Downloader.Progress[7].Message.Contains("Idle."))
+            {
+                this.picThread8.Image = Resources.globe_faded16;
+                this.picThread8.ToolTip = string.Empty;
+            }
+            else
+            {
+                if (this.picThread8.Image != Resources.globe16)
+                {
+                    this.picThread8.Image = Resources.globe16;
+                }
+
+                this.picThread8.Image = Resources.globe16;
+                this.picThread8.ToolTip = Downloader.Progress[7].Message;
+            }
+
+            this.lblDownloadStatus.Text = string.Format(
+                "Queue: {0} / Background Que {1}", Downloader.CurrentQue, Downloader.BackgroundDownloadQue.Count);
         }
 
         #endregion

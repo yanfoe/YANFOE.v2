@@ -64,10 +64,12 @@ namespace YANFOE.Tools
         {
             try
             {
-                var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var returnImage = Image.FromStream(fs);
-                fs.Close();
-                fs.Dispose();
+                Image returnImage;
+
+                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    returnImage = Image.FromStream(fs);
+                }
 
                 return returnImage;
             }
@@ -100,9 +102,14 @@ namespace YANFOE.Tools
                 return LoadImage(thumbPath);
             }
 
-            var image = LoadImage(filePath);
-            var resizedImage = ResizeImage(image, width, height);
-            resizedImage.Save(thumbPath);
+            Image resizedImage;
+
+            using (var image = LoadImage(filePath))
+            {
+                resizedImage = ResizeImage(image, width, height);
+                resizedImage.Save(thumbPath);
+            }
+
             return resizedImage;
         }
 
@@ -113,42 +120,44 @@ namespace YANFOE.Tools
                 return;
             }
 
-            var fullSizeImage = Image.FromFile(OriginalFile);
-
-            // Prevent using images internal thumbnail
-            fullSizeImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            fullSizeImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
-
-            if (OnlyResizeIfWider)
+            using (var fullSizeImage = Image.FromFile(OriginalFile))
             {
-                if (fullSizeImage.Width <= newWidth)
+                // Prevent using images internal thumbnail
+                fullSizeImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                fullSizeImage.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
+                if (OnlyResizeIfWider)
                 {
-                    newWidth = fullSizeImage.Width;
+                    if (fullSizeImage.Width <= newWidth)
+                    {
+                        newWidth = fullSizeImage.Width;
+                    }
+                }
+
+                var newHeight = fullSizeImage.Height * newWidth / fullSizeImage.Width;
+
+                if (newHeight > MaxHeight)
+                {
+                    // Resize with height instead
+                    newWidth = fullSizeImage.Width * MaxHeight / fullSizeImage.Height;
+                    newHeight = MaxHeight;
+                }
+
+                using (var newImage = fullSizeImage.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero))
+                {
+                    // Clear handle to original file so that we can overwrite it if necessary
+                    fullSizeImage.Dispose();
+
+                    var qualityParam = new EncoderParameter(Encoder.Quality, quality);
+
+                    var jpegCodec = GetEncoderInfo("image/jpeg");
+                    var encoderParams = new EncoderParameters(1);
+                    encoderParams.Param[0] = qualityParam;
+
+                    // Save resized picture
+                    newImage.Save(NewFile, jpegCodec, encoderParams);
                 }
             }
-
-            var newHeight = fullSizeImage.Height * newWidth / fullSizeImage.Width;
-
-            if (newHeight > MaxHeight)
-            {
-                // Resize with height instead
-                newWidth = fullSizeImage.Width * MaxHeight / fullSizeImage.Height;
-                newHeight = MaxHeight;
-            }
-
-            var newImage = fullSizeImage.GetThumbnailImage(newWidth, newHeight, null, IntPtr.Zero);
-
-            // Clear handle to original file so that we can overwrite it if necessary
-            fullSizeImage.Dispose();
-
-            var qualityParam = new EncoderParameter(Encoder.Quality, quality);
-
-            var jpegCodec = GetEncoderInfo("image/jpeg");
-            var encoderParams = new EncoderParameters(1);
-            encoderParams.Param[0] = qualityParam;
-
-            // Save resized picture
-            newImage.Save(NewFile, jpegCodec, encoderParams);
         }
 
         private static ImageCodecInfo GetEncoderInfo(string mimeType)

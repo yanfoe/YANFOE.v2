@@ -582,17 +582,19 @@ namespace YANFOE.Factories
         /// </param>
         public static void ReplaceMovie(MovieModel movieModel)
         {
-            var tempList = from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m;
-            Debug.Write(tempList.Count());
-
-            var getMovieInDatabase =
-                (from m in MovieDatabase where m.MovieUniqueId == movieModel.MovieUniqueId select m).ToList();
-
-            foreach (var movie in getMovieInDatabase)
+            lock (MovieDatabase)
             {
-                int index = MovieDatabase.IndexOf(movie);
+                var getMovieInDatabase = MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
+
+                if (getMovieInDatabase == -1)
+                {
+                    return;
+                }
+
                 movieModel.IsBusy = false;
-                MovieDatabase[index] = movieModel;
+
+                movieModel.IsBusy = false;
+                MovieDatabase[getMovieInDatabase] = movieModel;
 
                 if (movieModel.MovieUniqueId == currentMovie.MovieUniqueId)
                 {

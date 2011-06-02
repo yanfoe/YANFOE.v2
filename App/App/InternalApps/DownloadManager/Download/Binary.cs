@@ -138,8 +138,8 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                             downloadItem.Progress.Percent = 0;
                             downloadItem.Progress.Message = string.Format("Downloading {0}: 0%", urlToReadFileFrom);
 
-                            string speed = "";
-                            Stopwatch sw1 = new Stopwatch();
+                            var speed = string.Empty;
+                            var sw1 = new Stopwatch();
 
                             if (streamRemote != null)
                             {
@@ -148,7 +148,6 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                                 while ((byteSize = streamRemote.Read(byteBuffer, 0, byteBuffer.Length)) > 0)
                                 {
                                     sw1.Stop();
-                                    // write the bytes to the file system at the file path specified
                                     streamLocal.Write(byteBuffer, 0, byteSize);
                                     runningByteTotal += byteSize;
 
@@ -161,13 +160,30 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                                     // calculate the average speed of the download
                                     if (sw1.ElapsedMilliseconds != 0)
                                     {
-                                        var speedbps = (double)(((runningByteTotal) / ((double)sw1.ElapsedMilliseconds / 1000)));
-                                        var speedkbps = (double)(((runningByteTotal) / ((double)sw1.ElapsedMilliseconds / 1000)) / 1024);
-                                        var speedmbps = (double)(((runningByteTotal) / ((double)sw1.ElapsedMilliseconds / 1000)) / (1024 * 1024));
-                                        if (speedmbps >= 1) speed = string.Format("{0:#.##} MBytes/s", speedmbps);
-                                        else if (speedkbps >= 1) speed = string.Format("{0:#.##} KBytes/s", speedkbps);
-                                        else if (speedbps >= 1) speed = string.Format("{0:#.##} Bytes/s", speedbps);
-                                        else speed = "";
+                                        var speedbps = runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000);
+
+                                        var speedkbps = (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000)) / 1024;
+
+                                        var speedmbps =
+                                            (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000))
+                                            / (1024 * 1024);
+
+                                        if (speedmbps >= 1)
+                                        {
+                                            speed = string.Format("{0:#.##} MBytes/s", speedmbps);
+                                        }
+                                        else if (speedkbps >= 1)
+                                        {
+                                            speed = string.Format("{0:#.##} KBytes/s", speedkbps);
+                                        }
+                                        else if (speedbps >= 1)
+                                        {
+                                            speed = string.Format("{0:#.##} Bytes/s", speedbps);
+                                        }
+                                        else
+                                        {
+                                            speed = string.Empty;
+                                        }
                                     }
 
                                     downloadItem.Progress.Percent = progressPercentageInteger;
