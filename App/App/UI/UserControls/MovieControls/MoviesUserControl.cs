@@ -12,6 +12,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -21,6 +22,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using DevExpress.XtraBars;
     using DevExpress.XtraBars.Ribbon;
     using DevExpress.XtraEditors;
+    using DevExpress.XtraGrid.Drawing;
     using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
@@ -437,10 +439,14 @@ namespace YANFOE.UI.UserControls.MovieControls
             if (hi.InRowCell)
             {
                 var movieModel = this.grdViewByTitle.GetRow(hi.RowHandle) as MovieModel;
-                e.Info = new ToolTipControlInfo(hi + " " + hi.Column.Name + " " + hi.RowHandle, string.Empty)
+
+                if (movieModel != null)
+                {
+                    e.Info = new ToolTipControlInfo(hi + " " + hi.Column.Name + " " + hi.RowHandle, string.Empty)
                     {
                        SuperTip = movieModel.GetMovieSuperTip() 
                     };
+                }
             }
         }
 
