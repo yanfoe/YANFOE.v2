@@ -1388,8 +1388,9 @@ namespace YANFOE.Scrapers.Movie
         {
             result = true;
 
-            foreach (IMovieScraper scraper in scrapers)
+            for (int index = 0; index < scrapers.Count; index++)
             {
+                IMovieScraper scraper = scrapers[index];
                 if (scraper.ScraperName.ToString() == scraperName)
                 {
                     if (type == ScrapeFields.Title)
@@ -1403,7 +1404,7 @@ namespace YANFOE.Scrapers.Movie
                         result = ScrapeOriginalTitle(scraper, scraperName, type, movie);
                         break;
                     }
-                    
+
                     if (type == ScrapeFields.Year)
                     {
                         result = ScrapeYear(scraper, scraperName, type, movie);

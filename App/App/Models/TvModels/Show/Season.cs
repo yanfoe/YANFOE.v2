@@ -103,7 +103,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </summary>
         public Season()
         {
-            this.guid = this.guid = System.Guid.NewGuid().ToString();
+            this.guid = GenerateRandomID.Generate();
 
             this.Episodes = new List<Episode>();
         }

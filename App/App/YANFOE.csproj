@@ -202,6 +202,7 @@
     <Compile Include="Settings\UserSettings\LogSettings.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
+    <Compile Include="Tools\GenerateRandomID.cs" />
     <Compile Include="Tools\Models\TrailerDetailsModel.cs" />
     <Compile Include="Tools\Restructure\FileSystemCharChange.cs" />
     <Compile Include="Tools\IO\FileNaming.cs" />
@@ -1130,7 +1131,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

@@ -173,7 +173,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </summary>
         public Episode()
         {
-            this.guid = System.Guid.NewGuid().ToString();
+            this.guid = GenerateRandomID.Generate();
 
             this.ID = null;
             this.CombinedEpisodenumber = null;

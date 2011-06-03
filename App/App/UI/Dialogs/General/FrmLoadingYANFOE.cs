@@ -1,6 +1,7 @@
 ﻿namespace YANFOE.UI.Dialogs.General
 {
     using System.ComponentModel;
+    using System.IO;
     using System.Windows.Forms;
 
     using YANFOE.Factories.Internal;
@@ -40,6 +41,11 @@
             this.bgw.WorkerReportsProgress = true;
 
             this.bgw.RunWorkerAsync();
+
+            foreach (var file in Directory.GetFiles(Settings.Get.FileSystemPaths.PathDirTemp))
+            {
+                File.Delete(file);
+            }
         }
 
         /// <summary>

@@ -22,6 +22,8 @@ namespace YANFOE.Tools
     using System.IO;
     using System.Linq;
 
+    using BitFactory.Logging;
+
     using YANFOE.Properties;
 
     public class ImageHandler
@@ -107,7 +109,14 @@ namespace YANFOE.Tools
             using (var image = LoadImage(filePath))
             {
                 resizedImage = ResizeImage(image, width, height);
-                resizedImage.Save(thumbPath);
+                try
+                {
+                    resizedImage.Save(thumbPath);
+                }
+                catch (Exception ex)
+                {
+                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, ex.Message, ex.StackTrace);
+                }
             }
 
             return resizedImage;
@@ -179,6 +188,34 @@ namespace YANFOE.Tools
             g.DrawImage(input, 0, 0, width, height);
 
             return thumbNailImg;
-        } 
+        }
+
+        public static Image LoadThumb(string uniqueID, string s)
+        {
+            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+
+            return !File.Exists(path) ? null : LoadImage(path);
+        }
+
+        public static bool Compare(Image value, string uniqueID, string s)
+        {
+            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+
+            bool matchCase;
+
+            using (var image = LoadImage(path))
+            {
+                matchCase = image == value;
+            }
+
+            return matchCase;
+        }
+
+        public static void SaveThumb(Image value, string uniqueID, string s)
+        {
+            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+
+            value.Save(path);
+        }
     }
 }

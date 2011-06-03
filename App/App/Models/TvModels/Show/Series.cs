@@ -220,7 +220,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </summary>
         public Series()
         {
-            this.guid = System.Guid.NewGuid().ToString();
+            this.guid = GenerateRandomID.Generate();
 
             this.ID = null;
             this.AirsDayOfWeek = string.Empty;
@@ -915,6 +915,8 @@ namespace YANFOE.Models.TvModels.Show
         /// </summary>
         public string SeriesBannerPath
         {
+
+
             get
             {
                 return this.seriesBannerPath;
@@ -1031,16 +1033,15 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                return this.smallBanner;
+                return ImageHandler.LoadThumb(this.Guid, "b");
             }
 
             set
             {
-                if (this.smallBanner != value)
+                if (!ImageHandler.Compare(value, this.Guid, "b"))
                 {
-                    this.smallBanner = value;
+                    ImageHandler.SaveThumb(value, this.Guid, "b");
                     this.OnPropertyChanged("SmallBanner");
-                    this.ChangedBanner = true;
                 }
             }
         }
@@ -1049,13 +1050,43 @@ namespace YANFOE.Models.TvModels.Show
         /// Gets or sets SmallFanart.
         /// </summary>
         [JsonIgnore]
-        public Image SmallFanart { get; set; }
+        public Image SmallFanart
+        {
+            get
+            {
+                return ImageHandler.LoadThumb(this.Guid, "f");
+            }
+
+            set
+            {
+                if (!ImageHandler.Compare(value, this.Guid, "f"))
+                {
+                    ImageHandler.SaveThumb(value, this.Guid, "f");
+                    this.OnPropertyChanged("SmallFanart");
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets SmallPoster.
         /// </summary>
         [JsonIgnore]
-        public Image SmallPoster { get; set; }
+        public Image SmallPoster
+        {
+            get
+            {
+                return ImageHandler.LoadThumb(this.Guid, "p");
+            }
+
+            set
+            {
+                if (!ImageHandler.Compare(value, this.Guid, "p"))
+                {
+                    ImageHandler.SaveThumb(value, this.Guid, "p");
+                    this.OnPropertyChanged("SmallPoster");
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets Status.

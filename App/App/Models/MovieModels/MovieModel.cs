@@ -292,7 +292,7 @@ namespace YANFOE.Models.MovieModels
         /// </summary>
         public MovieModel()
         {
-            this.MovieUniqueId = Guid.NewGuid().ToString();
+            this.MovieUniqueId = GenerateRandomID.Generate();
 
             this.IsBusy = false;
 
@@ -1506,14 +1506,14 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
-                return this.smallFanart;
+                return ImageHandler.LoadThumb(this.MovieUniqueId, "f");
             }
 
             set
             {
-                if (this.smallFanart != value)
+                if (!ImageHandler.Compare(value, this.MovieUniqueId, "f"))
                 {
-                    this.smallFanart = value;
+                    ImageHandler.SaveThumb(value, this.MovieUniqueId, "f");
                     this.OnPropertyChanged("SmallFanart");
                 }
             }
@@ -1527,14 +1527,14 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
-                return this.smallPoster;
+                return ImageHandler.LoadThumb(this.MovieUniqueId, "p");
             }
 
             set
             {
-                if (this.smallPoster != value)
+                if (!ImageHandler.Compare(value, this.MovieUniqueId, "p"))
                 {
-                    this.smallPoster = value;
+                    ImageHandler.SaveThumb(value, this.MovieUniqueId, "p");
                     this.OnPropertyChanged("SmallPoster");
                 }
             }
@@ -1973,9 +1973,9 @@ namespace YANFOE.Models.MovieModels
 
             superTip.Items.Add(item);
 
-            if (this.smallFanart != null)
+            if (this.SmallFanart != null)
             {
-                superTip.Items.Add(new ToolTipTitleItem { Image = this.smallFanart });
+                superTip.Items.Add(new ToolTipTitleItem { Image = this.SmallFanart });
             }
             else
             {
