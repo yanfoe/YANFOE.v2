@@ -90,7 +90,7 @@ namespace YANFOE.Tools
         {
             if (!File.Exists(filePath))
             {
-                return null;
+                return Resources.picture128;
             }
 
             var basePath = Path.GetDirectoryName(filePath) + Path.DirectorySeparatorChar;
@@ -117,6 +117,11 @@ namespace YANFOE.Tools
                 {
                     InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, ex.Message, ex.StackTrace);
                 }
+            }
+
+            if (resizedImage == null)
+            {
+                return Resources.picture128;
             }
 
             return resizedImage;
@@ -213,6 +218,11 @@ namespace YANFOE.Tools
 
         public static void SaveThumb(Image value, string uniqueID, string s)
         {
+            if (value == null)
+            {
+                return;
+            }
+
             var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
 
             value.Save(path);

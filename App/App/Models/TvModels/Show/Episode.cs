@@ -22,6 +22,7 @@ namespace YANFOE.Models.TvModels.Show
 
     using YANFOE.Factories;
     using YANFOE.Properties;
+    using YANFOE.Tools;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
     using YANFOE.Tools.Xml;

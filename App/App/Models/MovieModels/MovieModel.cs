@@ -1318,7 +1318,7 @@ namespace YANFOE.Models.MovieModels
 
                     if (File.Exists(path) && !Downloader.Downloading.Contains(path))
                     {
-                        Image resizedimage = ImageHandler.LoadImage(path, 100, 160);
+                        var resizedimage = ImageHandler.LoadImage(path, 100, 160);
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.Width + "x" + image.Height)
                             {

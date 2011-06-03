@@ -1454,8 +1454,7 @@ namespace YANFOE.Models.TvModels.Show
                     {
                         Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
 
-                        var superTip = new SuperToolTip();
-                        superTip.AllowHtmlText = DefaultBoolean.True;
+                        var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
                         superTip.Items.Add("<b>Rating:</b> " + image.Rating);
                         superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
 
