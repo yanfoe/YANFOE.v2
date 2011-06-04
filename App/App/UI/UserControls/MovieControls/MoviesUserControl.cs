@@ -91,6 +91,12 @@ namespace YANFOE.UI.UserControls.MovieControls
             this.grdViewByTitle.RefreshData();
         }
 
+        private void btnWatched_Click(object sender, EventArgs e)
+        {
+            MovieDBFactory.GetCurrentMovie().Watched = !MovieDBFactory.GetCurrentMovie().Watched;
+            this.grdViewByTitle.RefreshData();
+        }
+
         /// <summary>
         /// Handles the Click event of the BtnMarked control.
         /// </summary>
@@ -469,6 +475,10 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             this.UpdatedSelectedMoviesInFactory(rows);
 
+            btnMutliWatchedFalse.Visible = rows.Length != 1;
+            this.btnMultiWatchedTrue.Visible = rows.Length != 1;
+            btnWatched.Visible = rows.Length == 1;
+
             if (rows.Length == 1)
             {
                 MovieDBFactory.IsMultiSelected = false;
@@ -640,9 +650,25 @@ namespace YANFOE.UI.UserControls.MovieControls
 
         #endregion
 
-        private void btnWatched_Click(object sender, EventArgs e)
+        private void btnNew_Click(object sender, EventArgs e)
         {
-            MovieDBFactory.GetCurrentMovie().Watched = !MovieDBFactory.GetCurrentMovie().Watched;
+
+        }
+
+        private void btnMutliWatchedTrue_Click(object sender, EventArgs e)
+        {
+            foreach (var movie in MovieDBFactory.MultiSelectedMovies)
+            {
+                movie.Watched = true;
+            }
+        }
+
+        private void btnMutliWatchedFalse_Click(object sender, EventArgs e)
+        {
+            foreach (var movie in MovieDBFactory.MultiSelectedMovies)
+            {
+                movie.Watched = false;
+            }
         }
     }
 }

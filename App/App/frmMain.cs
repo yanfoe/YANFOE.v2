@@ -278,6 +278,7 @@ namespace YANFOE
             Settings.Get.SaveAll();
 
             InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, "YANFOE Closed.", string.Empty);
+            Environment.Exit(0);
         }
 
         /// <summary>

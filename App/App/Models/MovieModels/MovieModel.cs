@@ -1744,12 +1744,22 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
+                if (this.AssociatedFiles.Media.Count == 0)
+                {
+                    return false;
+                }
+
                 return File.Exists(
                     Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" }));
             }
 
             set
             {
+                if (this.AssociatedFiles.Media.Count == 0)
+                {
+                    return;
+                }
+
                 var path = Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" });
 
                 var exists = File.Exists(path);
@@ -1765,7 +1775,7 @@ namespace YANFOE.Models.MovieModels
                         Tools.Text.IO.WriteTextToFile(path, " ");
                     }
 
-                    this.OnPropertyChanged("Watched", true);
+                    this.OnPropertyChanged("Watched");
                     this.OnPropertyChanged("WatchedImage", true);
                 }
             }
