@@ -72,9 +72,26 @@
             this.clmMarked = new DevExpress.XtraGrid.Columns.GridColumn();
             this.chkMarked = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.clmLocked = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmWatched = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmReleased = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmTagline = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmCast = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmCertification = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmCountries = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmDirector = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmGenre = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmMpaa = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmOutline = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmPlot = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmRating = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmRuntime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmReleaseDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmScraperGroup = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmStudio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmTop250 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmVideoSource = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmVotes = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmWriters = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RepositoryImageComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -143,23 +160,6 @@
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.clmCertification = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmCountries = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmDirector = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmGenre = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmMpaa = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmOutline = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmPlot = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmRating = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmRuntime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmReleaseDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmScraperGroup = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmStudio = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmTop250 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmVideoSource = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmVotes = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmWatched = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.clmWriters = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -333,7 +333,6 @@
             this.clmTitle.FieldName = "Title";
             this.clmTitle.Name = "clmTitle";
             this.clmTitle.OptionsColumn.AllowEdit = false;
-            this.clmTitle.ToolTip = "Test tool tip";
             this.clmTitle.Visible = true;
             this.clmTitle.VisibleIndex = 1;
             this.clmTitle.Width = 105;
@@ -355,11 +354,11 @@
             this.clmMarked.AppearanceHeader.Options.UseImage = true;
             this.clmMarked.ColumnEdit = this.chkMarked;
             this.clmMarked.FieldName = "Marked";
-            this.clmMarked.MaxWidth = 22;
+            this.clmMarked.MaxWidth = 20;
             this.clmMarked.Name = "clmMarked";
             this.clmMarked.Visible = true;
             this.clmMarked.VisibleIndex = 3;
-            this.clmMarked.Width = 22;
+            this.clmMarked.Width = 20;
             // 
             // chkMarked
             // 
@@ -377,6 +376,17 @@
             this.clmLocked.Visible = true;
             this.clmLocked.VisibleIndex = 4;
             this.clmLocked.Width = 20;
+            // 
+            // clmWatched
+            // 
+            this.clmWatched.Caption = "Watched";
+            this.clmWatched.FieldName = "Watched";
+            this.clmWatched.MaxWidth = 20;
+            this.clmWatched.MinWidth = 10;
+            this.clmWatched.Name = "clmWatched";
+            this.clmWatched.Visible = true;
+            this.clmWatched.VisibleIndex = 5;
+            this.clmWatched.Width = 20;
             // 
             // clmReleased
             // 
@@ -396,6 +406,102 @@
             this.clmCast.MinWidth = 10;
             this.clmCast.Name = "clmCast";
             this.clmCast.Width = 10;
+            // 
+            // clmCertification
+            // 
+            this.clmCertification.Caption = "Certification";
+            this.clmCertification.FieldName = "Certification";
+            this.clmCertification.Name = "clmCertification";
+            // 
+            // clmCountries
+            // 
+            this.clmCountries.Caption = "Countries";
+            this.clmCountries.FieldName = "CountryAsString";
+            this.clmCountries.Name = "clmCountries";
+            // 
+            // clmDirector
+            // 
+            this.clmDirector.Caption = "Director";
+            this.clmDirector.FieldName = "DirectorAsString";
+            this.clmDirector.Name = "clmDirector";
+            // 
+            // clmGenre
+            // 
+            this.clmGenre.Caption = "Genres";
+            this.clmGenre.FieldName = "GenreAsString";
+            this.clmGenre.Name = "clmGenre";
+            // 
+            // clmMpaa
+            // 
+            this.clmMpaa.Caption = "Mpaa";
+            this.clmMpaa.FieldName = "Mpaa";
+            this.clmMpaa.Name = "clmMpaa";
+            // 
+            // clmOutline
+            // 
+            this.clmOutline.Caption = "Outline";
+            this.clmOutline.FieldName = "Outline";
+            this.clmOutline.Name = "clmOutline";
+            // 
+            // clmPlot
+            // 
+            this.clmPlot.Caption = "Plot";
+            this.clmPlot.FieldName = "Plot";
+            this.clmPlot.Name = "clmPlot";
+            // 
+            // clmRating
+            // 
+            this.clmRating.Caption = "Rating";
+            this.clmRating.FieldName = "Rating";
+            this.clmRating.Name = "clmRating";
+            // 
+            // clmRuntime
+            // 
+            this.clmRuntime.Caption = "Runtime";
+            this.clmRuntime.FieldName = "RuntimeInHourMin";
+            this.clmRuntime.Name = "clmRuntime";
+            // 
+            // clmReleaseDate
+            // 
+            this.clmReleaseDate.Caption = "Release date";
+            this.clmReleaseDate.FieldName = "ReleaseDate";
+            this.clmReleaseDate.Name = "clmReleaseDate";
+            // 
+            // clmScraperGroup
+            // 
+            this.clmScraperGroup.Caption = "Scraper Group";
+            this.clmScraperGroup.FieldName = "ScraperGroup";
+            this.clmScraperGroup.Name = "clmScraperGroup";
+            // 
+            // clmStudio
+            // 
+            this.clmStudio.Caption = "Studio";
+            this.clmStudio.FieldName = "SetStudio";
+            this.clmStudio.Name = "clmStudio";
+            // 
+            // clmTop250
+            // 
+            this.clmTop250.Caption = "Top250";
+            this.clmTop250.FieldName = "Top250";
+            this.clmTop250.Name = "clmTop250";
+            // 
+            // clmVideoSource
+            // 
+            this.clmVideoSource.Caption = "Video Source";
+            this.clmVideoSource.FieldName = "VideoSource";
+            this.clmVideoSource.Name = "clmVideoSource";
+            // 
+            // clmVotes
+            // 
+            this.clmVotes.Caption = "Votes";
+            this.clmVotes.FieldName = "Votes";
+            this.clmVotes.Name = "clmVotes";
+            // 
+            // clmWriters
+            // 
+            this.clmWriters.Caption = "Writers";
+            this.clmWriters.FieldName = "Writers";
+            this.clmWriters.Name = "clmWriters";
             // 
             // RepositoryImageComboBox
             // 
@@ -1097,113 +1203,6 @@
             this.popupMovieList.Manager = this.barManager1;
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
-            // 
-            // clmCertification
-            // 
-            this.clmCertification.Caption = "Certification";
-            this.clmCertification.FieldName = "Certification";
-            this.clmCertification.Name = "clmCertification";
-            // 
-            // clmCountries
-            // 
-            this.clmCountries.Caption = "Countries";
-            this.clmCountries.FieldName = "CountryAsString";
-            this.clmCountries.Name = "clmCountries";
-            // 
-            // clmDirector
-            // 
-            this.clmDirector.Caption = "Director";
-            this.clmDirector.FieldName = "DirectorAsString";
-            this.clmDirector.Name = "clmDirector";
-            // 
-            // clmGenre
-            // 
-            this.clmGenre.Caption = "Genres";
-            this.clmGenre.FieldName = "GenreAsString";
-            this.clmGenre.Name = "clmGenre";
-            // 
-            // clmMpaa
-            // 
-            this.clmMpaa.Caption = "Mpaa";
-            this.clmMpaa.FieldName = "Mpaa";
-            this.clmMpaa.Name = "clmMpaa";
-            // 
-            // clmOutline
-            // 
-            this.clmOutline.Caption = "Outline";
-            this.clmOutline.FieldName = "Outline";
-            this.clmOutline.Name = "clmOutline";
-            // 
-            // clmPlot
-            // 
-            this.clmPlot.Caption = "Plot";
-            this.clmPlot.FieldName = "Plot";
-            this.clmPlot.Name = "clmPlot";
-            // 
-            // clmRating
-            // 
-            this.clmRating.Caption = "Rating";
-            this.clmRating.FieldName = "Rating";
-            this.clmRating.Name = "clmRating";
-            // 
-            // clmRuntime
-            // 
-            this.clmRuntime.Caption = "Runtime";
-            this.clmRuntime.FieldName = "RuntimeInHourMin";
-            this.clmRuntime.Name = "clmRuntime";
-            // 
-            // clmReleaseDate
-            // 
-            this.clmReleaseDate.Caption = "Release date";
-            this.clmReleaseDate.FieldName = "ReleaseDate";
-            this.clmReleaseDate.Name = "clmReleaseDate";
-            // 
-            // clmScraperGroup
-            // 
-            this.clmScraperGroup.Caption = "Scraper Group";
-            this.clmScraperGroup.FieldName = "ScraperGroup";
-            this.clmScraperGroup.Name = "clmScraperGroup";
-            // 
-            // clmStudio
-            // 
-            this.clmStudio.Caption = "Studio";
-            this.clmStudio.FieldName = "SetStudio";
-            this.clmStudio.Name = "clmStudio";
-            // 
-            // clmTop250
-            // 
-            this.clmTop250.Caption = "Top250";
-            this.clmTop250.FieldName = "Top250";
-            this.clmTop250.Name = "clmTop250";
-            // 
-            // clmVideoSource
-            // 
-            this.clmVideoSource.Caption = "Video Source";
-            this.clmVideoSource.FieldName = "VideoSource";
-            this.clmVideoSource.Name = "clmVideoSource";
-            // 
-            // clmVotes
-            // 
-            this.clmVotes.Caption = "Votes";
-            this.clmVotes.FieldName = "Votes";
-            this.clmVotes.Name = "clmVotes";
-            // 
-            // clmWatched
-            // 
-            this.clmWatched.Caption = "Watched";
-            this.clmWatched.FieldName = "Watched";
-            this.clmWatched.MaxWidth = 20;
-            this.clmWatched.MinWidth = 10;
-            this.clmWatched.Name = "clmWatched";
-            this.clmWatched.Visible = true;
-            this.clmWatched.VisibleIndex = 5;
-            this.clmWatched.Width = 20;
-            // 
-            // clmWriters
-            // 
-            this.clmWriters.Caption = "Writers";
-            this.clmWriters.FieldName = "Writers";
-            this.clmWriters.Name = "clmWriters";
             // 
             // MoviesUserControl
             // 

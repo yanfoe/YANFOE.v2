@@ -1739,18 +1739,32 @@ namespace YANFOE.Models.MovieModels
         /// <summary>
         /// Gets or sets a value indicating whether Watched.
         /// </summary>
+        [JsonIgnore]
         public bool Watched
         {
             get
             {
-                return this.watched;
+                return File.Exists(
+                    Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" }));
             }
 
             set
             {
-                if (this.watched != value)
+                var path = Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" });
+
+                var exists = File.Exists(path);
+
+                if (exists != value)
                 {
-                    this.watched = value;
+                    if (exists)
+                    {
+                        File.Delete(path);
+                    }
+                    else
+                    {
+                        Tools.Text.IO.WriteTextToFile(path, " ");
+                    }
+
                     this.OnPropertyChanged("Watched", true);
                     this.OnPropertyChanged("WatchedImage", true);
                 }
@@ -1760,6 +1774,7 @@ namespace YANFOE.Models.MovieModels
         /// <summary>
         /// Gets the watched image.
         /// </summary>
+        [JsonIgnore]
         public Image WatchedImage
         {
             get
