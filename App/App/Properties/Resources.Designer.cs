@@ -900,6 +900,20 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap watched_green {
+            get {
+                object obj = ResourceManager.GetObject("watched_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap watched_red {
+            get {
+                object obj = ResourceManager.GetObject("watched_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap yanfoe {
             get {
                 object obj = ResourceManager.GetObject("yanfoe", resourceCulture);

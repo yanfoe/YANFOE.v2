@@ -43,18 +43,21 @@
             DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviesUserControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
@@ -70,6 +73,8 @@
             this.chkMarked = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.clmLocked = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmReleased = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmTagline = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmCast = new DevExpress.XtraGrid.Columns.GridColumn();
             this.RepositoryImageComboBox = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -94,6 +99,7 @@
             this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             this.picPoster = new YANFOE.UI.UserControls.CommonControls.DisplayPictureUserControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
             this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
             this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -113,6 +119,15 @@
             this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.popupSave = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.btnSaveNfo = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSaveAllImages = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSavePoster = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSaveFanart = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -121,23 +136,30 @@
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
-            this.btnSaveNfo = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSaveAllImages = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSavePoster = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSaveFanart = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
-            this.popupSave = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu(this.components);
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.clmCertification = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmCountries = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmDirector = new DevExpress.XtraGrid.Columns.GridColumn();
             this.clmGenre = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmMpaa = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmOutline = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmPlot = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmRating = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmRuntime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmReleaseDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmScraperGroup = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmStudio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmTop250 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmVideoSource = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmVotes = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmWatched = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.clmWriters = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
@@ -256,19 +278,35 @@
             this.clmYear,
             this.clmMarked,
             this.clmLocked,
+            this.clmWatched,
             this.clmReleased,
-            this.clmGenre});
+            this.clmTagline,
+            this.clmCast,
+            this.clmCertification,
+            this.clmCountries,
+            this.clmDirector,
+            this.clmGenre,
+            this.clmMpaa,
+            this.clmOutline,
+            this.clmPlot,
+            this.clmRating,
+            this.clmRuntime,
+            this.clmReleaseDate,
+            this.clmScraperGroup,
+            this.clmStudio,
+            this.clmTop250,
+            this.clmVideoSource,
+            this.clmVotes,
+            this.clmWriters});
             this.grdViewByTitle.GridControl = this.grdMoviesList;
             this.grdViewByTitle.Name = "grdViewByTitle";
             this.grdViewByTitle.OptionsDetail.EnableMasterViewMode = false;
-            this.grdViewByTitle.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
             this.grdViewByTitle.OptionsFind.AlwaysVisible = true;
             this.grdViewByTitle.OptionsFind.ShowCloseButton = false;
             this.grdViewByTitle.OptionsSelection.MultiSelect = true;
             this.grdViewByTitle.OptionsView.AnimationType = DevExpress.XtraGrid.Views.Base.GridAnimationType.AnimateAllContent;
             this.grdViewByTitle.OptionsView.EnableAppearanceOddRow = true;
             this.grdViewByTitle.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
-            this.grdViewByTitle.OptionsView.ShowFooter = true;
             this.grdViewByTitle.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GrdViewByTitle_RowCellStyle);
             this.grdViewByTitle.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.grdViewByTitle_PopupMenuShowing);
             this.grdViewByTitle.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.GrdViewByTitle_SelectionChanged);
@@ -282,7 +320,7 @@
             this.LoadingStatus.MaxWidth = 20;
             this.LoadingStatus.Name = "LoadingStatus";
             this.LoadingStatus.Visible = true;
-            this.LoadingStatus.VisibleIndex = 1;
+            this.LoadingStatus.VisibleIndex = 0;
             this.LoadingStatus.Width = 20;
             // 
             // BusyPicture
@@ -297,8 +335,8 @@
             this.clmTitle.OptionsColumn.AllowEdit = false;
             this.clmTitle.ToolTip = "Test tool tip";
             this.clmTitle.Visible = true;
-            this.clmTitle.VisibleIndex = 0;
-            this.clmTitle.Width = 104;
+            this.clmTitle.VisibleIndex = 1;
+            this.clmTitle.Width = 105;
             // 
             // clmYear
             // 
@@ -309,7 +347,7 @@
             this.clmYear.OptionsColumn.AllowEdit = false;
             this.clmYear.Visible = true;
             this.clmYear.VisibleIndex = 2;
-            this.clmYear.Width = 40;
+            this.clmYear.Width = 54;
             // 
             // clmMarked
             // 
@@ -321,7 +359,7 @@
             this.clmMarked.Name = "clmMarked";
             this.clmMarked.Visible = true;
             this.clmMarked.VisibleIndex = 3;
-            this.clmMarked.Width = 20;
+            this.clmMarked.Width = 22;
             // 
             // chkMarked
             // 
@@ -344,6 +382,20 @@
             // 
             this.clmReleased.Caption = "Released";
             this.clmReleased.Name = "clmReleased";
+            // 
+            // clmTagline
+            // 
+            this.clmTagline.Caption = "Tagline";
+            this.clmTagline.FieldName = "Tagline";
+            this.clmTagline.Name = "clmTagline";
+            // 
+            // clmCast
+            // 
+            this.clmCast.Caption = "Cast";
+            this.clmCast.FieldName = "CastAsString";
+            this.clmCast.MinWidth = 10;
+            this.clmCast.Name = "clmCast";
+            this.clmCast.Width = 10;
             // 
             // RepositoryImageComboBox
             // 
@@ -556,6 +608,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btnWatched);
             this.panelControl1.Controls.Add(this.btnOpenFolder);
             this.panelControl1.Controls.Add(this.btnOpenFile);
             this.panelControl1.Controls.Add(this.panelControl2);
@@ -571,6 +624,27 @@
             this.panelControl1.Size = new System.Drawing.Size(777, 45);
             this.panelControl1.TabIndex = 1;
             // 
+            // btnWatched
+            // 
+            this.btnWatched.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnWatched.Image = global::YANFOE.Properties.Resources.watched_red;
+            this.btnWatched.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnWatched.Location = new System.Drawing.Point(583, 2);
+            this.btnWatched.Name = "btnWatched";
+            this.btnWatched.Size = new System.Drawing.Size(48, 41);
+            superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem1.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem1.Appearance.Options.UseImage = true;
+            toolTipTitleItem1.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem1.Text = "Movie is marked as New";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.btnWatched.SuperTip = superToolTip1;
+            this.btnWatched.TabIndex = 12;
+            this.btnWatched.Click += new System.EventHandler(this.btnWatched_Click);
+            // 
             // btnOpenFolder
             // 
             this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Left;
@@ -579,13 +653,13 @@
             this.btnOpenFolder.Location = new System.Drawing.Point(156, 2);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(48, 41);
-            superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem1.Text = "Open Movie";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Clicking this link will open the movie folder.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.btnOpenFolder.SuperTip = superToolTip1;
+            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem2.Text = "Open Movie";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Clicking this link will open the movie folder.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.btnOpenFolder.SuperTip = superToolTip2;
             this.btnOpenFolder.TabIndex = 11;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
@@ -597,13 +671,13 @@
             this.btnOpenFile.Location = new System.Drawing.Point(108, 2);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(48, 41);
-            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem2.Text = "Open Movie";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "Clicking this link will open the current movie file.\r\n";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.btnOpenFile.SuperTip = superToolTip2;
+            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem3.Text = "Open Movie";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "Clicking this link will open the current movie file.\r\n";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.btnOpenFile.SuperTip = superToolTip3;
             this.btnOpenFile.TabIndex = 10;
             this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
@@ -623,16 +697,16 @@
             this.btnNew.Location = new System.Drawing.Point(631, 2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(48, 41);
-            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem3.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem3.Appearance.Options.UseImage = true;
-            toolTipTitleItem3.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem3.Text = "Movie is marked as New";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.btnNew.SuperTip = superToolTip3;
+            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem4.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem4.Appearance.Options.UseImage = true;
+            toolTipTitleItem4.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem4.Text = "Movie is marked as New";
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            superToolTip4.Items.Add(toolTipItem4);
+            this.btnNew.SuperTip = superToolTip4;
             this.btnNew.TabIndex = 7;
             this.btnNew.Visible = false;
             this.btnNew.DoubleClick += new System.EventHandler(this.BtnNew_DoubleClick);
@@ -645,10 +719,10 @@
             this.btnMarked.Location = new System.Drawing.Point(679, 2);
             this.btnMarked.Name = "btnMarked";
             this.btnMarked.Size = new System.Drawing.Size(48, 41);
-            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem4.Text = "Marked / Unmarked";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.btnMarked.SuperTip = superToolTip4;
+            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem5.Text = "Marked / Unmarked";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            this.btnMarked.SuperTip = superToolTip5;
             this.btnMarked.TabIndex = 6;
             this.btnMarked.Tag = "unmarked";
             this.btnMarked.Click += new System.EventHandler(this.BtnMarked_Click);
@@ -662,17 +736,17 @@
             this.btnSave.Name = "btnSave";
             this.barManager1.SetPopupContextMenu(this.btnSave, this.popupSave);
             this.btnSave.Size = new System.Drawing.Size(48, 41);
-            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem5.Text = "Save";
-            toolTipItem4.LeftIndent = 6;
-            toolTipItem4.Text = "Will Save Both NFO and Images To Disk";
-            toolTipTitleItem6.LeftIndent = 6;
-            toolTipTitleItem6.Text = "Right click for more options...\r\n";
-            superToolTip5.Items.Add(toolTipTitleItem5);
-            superToolTip5.Items.Add(toolTipItem4);
-            superToolTip5.Items.Add(toolTipSeparatorItem1);
-            superToolTip5.Items.Add(toolTipTitleItem6);
-            this.btnSave.SuperTip = superToolTip5;
+            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem6.Text = "Save";
+            toolTipItem5.LeftIndent = 6;
+            toolTipItem5.Text = "Will Save Both NFO and Images To Disk";
+            toolTipTitleItem7.LeftIndent = 6;
+            toolTipTitleItem7.Text = "Right click for more options...\r\n";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            superToolTip6.Items.Add(toolTipItem5);
+            superToolTip6.Items.Add(toolTipSeparatorItem1);
+            superToolTip6.Items.Add(toolTipTitleItem7);
+            this.btnSave.SuperTip = superToolTip6;
             this.btnSave.TabIndex = 4;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
@@ -685,17 +759,17 @@
             this.btnLoadFromWeb.Name = "btnLoadFromWeb";
             this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
             this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 41);
-            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem7.Text = "Load From Web";
-            toolTipItem5.LeftIndent = 6;
-            toolTipItem5.Text = "Will download details using the scraper set for this movie.";
-            toolTipTitleItem8.LeftIndent = 6;
-            toolTipTitleItem8.Text = "Right click for more options...\r\n";
-            superToolTip6.Items.Add(toolTipTitleItem7);
-            superToolTip6.Items.Add(toolTipItem5);
-            superToolTip6.Items.Add(toolTipSeparatorItem2);
-            superToolTip6.Items.Add(toolTipTitleItem8);
-            this.btnLoadFromWeb.SuperTip = superToolTip6;
+            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem8.Text = "Load From Web";
+            toolTipItem6.LeftIndent = 6;
+            toolTipItem6.Text = "Will download details using the scraper set for this movie.";
+            toolTipTitleItem9.LeftIndent = 6;
+            toolTipTitleItem9.Text = "Right click for more options...\r\n";
+            superToolTip7.Items.Add(toolTipTitleItem8);
+            superToolTip7.Items.Add(toolTipItem6);
+            superToolTip7.Items.Add(toolTipSeparatorItem2);
+            superToolTip7.Items.Add(toolTipTitleItem9);
+            this.btnLoadFromWeb.SuperTip = superToolTip7;
             this.btnLoadFromWeb.TabIndex = 0;
             this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
             // 
@@ -707,10 +781,10 @@
             this.btnLock.Location = new System.Drawing.Point(727, 2);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(48, 41);
-            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem9.Text = "Locked / Unlock";
-            superToolTip7.Items.Add(toolTipTitleItem9);
-            this.btnLock.SuperTip = superToolTip7;
+            superToolTip8.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem10.Text = "Locked / Unlock";
+            superToolTip8.Items.Add(toolTipTitleItem10);
+            this.btnLock.SuperTip = superToolTip8;
             this.btnLock.TabIndex = 8;
             this.btnLock.Tag = "unlocked";
             this.btnLock.Click += new System.EventHandler(this.BtnLock_Click);
@@ -859,6 +933,80 @@
             this.barCheckItem2});
             this.barManager1.MaxItemId = 15;
             // 
+            // popupSave
+            // 
+            this.popupSave.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveNfo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveAllImages),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSavePoster, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveFanart),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8, true)});
+            this.popupSave.Manager = this.barManager1;
+            this.popupSave.Name = "popupSave";
+            // 
+            // btnSaveNfo
+            // 
+            this.btnSaveNfo.Caption = "Save NFO";
+            this.btnSaveNfo.Glyph = global::YANFOE.Properties.Resources.school_board;
+            this.btnSaveNfo.Id = 5;
+            this.btnSaveNfo.Name = "btnSaveNfo";
+            this.btnSaveNfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveNfo_ItemClick);
+            // 
+            // btnSaveAllImages
+            // 
+            this.btnSaveAllImages.Caption = "Save All Images";
+            this.btnSaveAllImages.Glyph = global::YANFOE.Properties.Resources.picture;
+            this.btnSaveAllImages.Id = 6;
+            this.btnSaveAllImages.Name = "btnSaveAllImages";
+            this.btnSaveAllImages.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveAllImages_ItemClick);
+            // 
+            // btnSavePoster
+            // 
+            this.btnSavePoster.Caption = "Save Poster";
+            this.btnSavePoster.Glyph = global::YANFOE.Properties.Resources.picture_poster;
+            this.btnSavePoster.Id = 7;
+            this.btnSavePoster.Name = "btnSavePoster";
+            this.btnSavePoster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSavePoster_ItemClick);
+            // 
+            // btnSaveFanart
+            // 
+            this.btnSaveFanart.Caption = "Save Fanart";
+            this.btnSaveFanart.Glyph = global::YANFOE.Properties.Resources.picture;
+            this.btnSaveFanart.Id = 8;
+            this.btnSaveFanart.Name = "btnSaveFanart";
+            this.btnSaveFanart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveFanart_ItemClick);
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "Save All";
+            this.barButtonItem8.Glyph = global::YANFOE.Properties.Resources.save;
+            this.barButtonItem8.Id = 10;
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSave_Click);
+            // 
+            // popupLoadFromWeb
+            // 
+            this.popupLoadFromWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7, true)});
+            this.popupLoadFromWeb.Manager = this.barManager1;
+            this.popupLoadFromWeb.Name = "popupLoadFromWeb";
+            this.popupLoadFromWeb.ShowCaption = true;
+            this.popupLoadFromWeb.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupLoadFromWeb_BeforePopup);
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "<Current Scraper Group>";
+            this.barStaticItem2.Id = 4;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "Scrape Using <alternative 1>";
+            this.barButtonItem7.Id = 9;
+            this.barButtonItem7.Name = "barButtonItem7";
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -912,59 +1060,6 @@
             this.barButtonItem2.Id = 3;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "<Current Scraper Group>";
-            this.barStaticItem2.Id = 4;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // btnSaveNfo
-            // 
-            this.btnSaveNfo.Caption = "Save NFO";
-            this.btnSaveNfo.Glyph = global::YANFOE.Properties.Resources.school_board;
-            this.btnSaveNfo.Id = 5;
-            this.btnSaveNfo.Name = "btnSaveNfo";
-            this.btnSaveNfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveNfo_ItemClick);
-            // 
-            // btnSaveAllImages
-            // 
-            this.btnSaveAllImages.Caption = "Save All Images";
-            this.btnSaveAllImages.Glyph = global::YANFOE.Properties.Resources.picture;
-            this.btnSaveAllImages.Id = 6;
-            this.btnSaveAllImages.Name = "btnSaveAllImages";
-            this.btnSaveAllImages.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveAllImages_ItemClick);
-            // 
-            // btnSavePoster
-            // 
-            this.btnSavePoster.Caption = "Save Poster";
-            this.btnSavePoster.Glyph = global::YANFOE.Properties.Resources.picture_poster;
-            this.btnSavePoster.Id = 7;
-            this.btnSavePoster.Name = "btnSavePoster";
-            this.btnSavePoster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSavePoster_ItemClick);
-            // 
-            // btnSaveFanart
-            // 
-            this.btnSaveFanart.Caption = "Save Fanart";
-            this.btnSaveFanart.Glyph = global::YANFOE.Properties.Resources.picture;
-            this.btnSaveFanart.Id = 8;
-            this.btnSaveFanart.Name = "btnSaveFanart";
-            this.btnSaveFanart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveFanart_ItemClick);
-            // 
-            // barButtonItem7
-            // 
-            this.barButtonItem7.Caption = "Scrape Using <alternative 1>";
-            this.barButtonItem7.Id = 9;
-            this.barButtonItem7.Name = "barButtonItem7";
-            // 
-            // barButtonItem8
-            // 
-            this.barButtonItem8.Caption = "Save All";
-            this.barButtonItem8.Glyph = global::YANFOE.Properties.Resources.save;
-            this.barButtonItem8.Id = 10;
-            this.barButtonItem8.Name = "barButtonItem8";
-            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSave_Click);
-            // 
             // barButtonItem3
             // 
             this.barButtonItem3.Caption = "Lock";
@@ -991,27 +1086,6 @@
             this.barCheckItem2.Id = 14;
             this.barCheckItem2.Name = "barCheckItem2";
             // 
-            // popupSave
-            // 
-            this.popupSave.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveNfo),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveAllImages),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSavePoster, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveFanart),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8, true)});
-            this.popupSave.Manager = this.barManager1;
-            this.popupSave.Name = "popupSave";
-            // 
-            // popupLoadFromWeb
-            // 
-            this.popupLoadFromWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7, true)});
-            this.popupLoadFromWeb.Manager = this.barManager1;
-            this.popupLoadFromWeb.Name = "popupLoadFromWeb";
-            this.popupLoadFromWeb.ShowCaption = true;
-            this.popupLoadFromWeb.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupLoadFromWeb_BeforePopup);
-            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
@@ -1024,11 +1098,112 @@
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
             // 
+            // clmCertification
+            // 
+            this.clmCertification.Caption = "Certification";
+            this.clmCertification.FieldName = "Certification";
+            this.clmCertification.Name = "clmCertification";
+            // 
+            // clmCountries
+            // 
+            this.clmCountries.Caption = "Countries";
+            this.clmCountries.FieldName = "CountryAsString";
+            this.clmCountries.Name = "clmCountries";
+            // 
+            // clmDirector
+            // 
+            this.clmDirector.Caption = "Director";
+            this.clmDirector.FieldName = "DirectorAsString";
+            this.clmDirector.Name = "clmDirector";
+            // 
             // clmGenre
             // 
-            this.clmGenre.Caption = "clmGenres";
-            this.clmGenre.FieldName = "GenreAsList";
+            this.clmGenre.Caption = "Genres";
+            this.clmGenre.FieldName = "GenreAsString";
             this.clmGenre.Name = "clmGenre";
+            // 
+            // clmMpaa
+            // 
+            this.clmMpaa.Caption = "Mpaa";
+            this.clmMpaa.FieldName = "Mpaa";
+            this.clmMpaa.Name = "clmMpaa";
+            // 
+            // clmOutline
+            // 
+            this.clmOutline.Caption = "Outline";
+            this.clmOutline.FieldName = "Outline";
+            this.clmOutline.Name = "clmOutline";
+            // 
+            // clmPlot
+            // 
+            this.clmPlot.Caption = "Plot";
+            this.clmPlot.FieldName = "Plot";
+            this.clmPlot.Name = "clmPlot";
+            // 
+            // clmRating
+            // 
+            this.clmRating.Caption = "Rating";
+            this.clmRating.FieldName = "Rating";
+            this.clmRating.Name = "clmRating";
+            // 
+            // clmRuntime
+            // 
+            this.clmRuntime.Caption = "Runtime";
+            this.clmRuntime.FieldName = "RuntimeInHourMin";
+            this.clmRuntime.Name = "clmRuntime";
+            // 
+            // clmReleaseDate
+            // 
+            this.clmReleaseDate.Caption = "Release date";
+            this.clmReleaseDate.FieldName = "ReleaseDate";
+            this.clmReleaseDate.Name = "clmReleaseDate";
+            // 
+            // clmScraperGroup
+            // 
+            this.clmScraperGroup.Caption = "Scraper Group";
+            this.clmScraperGroup.FieldName = "ScraperGroup";
+            this.clmScraperGroup.Name = "clmScraperGroup";
+            // 
+            // clmStudio
+            // 
+            this.clmStudio.Caption = "Studio";
+            this.clmStudio.FieldName = "SetStudio";
+            this.clmStudio.Name = "clmStudio";
+            // 
+            // clmTop250
+            // 
+            this.clmTop250.Caption = "Top250";
+            this.clmTop250.FieldName = "Top250";
+            this.clmTop250.Name = "clmTop250";
+            // 
+            // clmVideoSource
+            // 
+            this.clmVideoSource.Caption = "Video Source";
+            this.clmVideoSource.FieldName = "VideoSource";
+            this.clmVideoSource.Name = "clmVideoSource";
+            // 
+            // clmVotes
+            // 
+            this.clmVotes.Caption = "Votes";
+            this.clmVotes.FieldName = "Votes";
+            this.clmVotes.Name = "clmVotes";
+            // 
+            // clmWatched
+            // 
+            this.clmWatched.Caption = "Watched";
+            this.clmWatched.FieldName = "Watched";
+            this.clmWatched.MaxWidth = 20;
+            this.clmWatched.MinWidth = 10;
+            this.clmWatched.Name = "clmWatched";
+            this.clmWatched.Visible = true;
+            this.clmWatched.VisibleIndex = 5;
+            this.clmWatched.Width = 20;
+            // 
+            // clmWriters
+            // 
+            this.clmWriters.Caption = "Writers";
+            this.clmWriters.FieldName = "Writers";
+            this.clmWriters.Name = "clmWriters";
             // 
             // MoviesUserControl
             // 
@@ -1172,7 +1347,26 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraEditors.SimpleButton btnWatched;
+        private DevExpress.XtraGrid.Columns.GridColumn clmTagline;
+        private DevExpress.XtraGrid.Columns.GridColumn clmCast;
+        private DevExpress.XtraGrid.Columns.GridColumn clmWatched;
+        private DevExpress.XtraGrid.Columns.GridColumn clmCertification;
+        private DevExpress.XtraGrid.Columns.GridColumn clmCountries;
+        private DevExpress.XtraGrid.Columns.GridColumn clmDirector;
         private DevExpress.XtraGrid.Columns.GridColumn clmGenre;
+        private DevExpress.XtraGrid.Columns.GridColumn clmMpaa;
+        private DevExpress.XtraGrid.Columns.GridColumn clmOutline;
+        private DevExpress.XtraGrid.Columns.GridColumn clmPlot;
+        private DevExpress.XtraGrid.Columns.GridColumn clmRating;
+        private DevExpress.XtraGrid.Columns.GridColumn clmRuntime;
+        private DevExpress.XtraGrid.Columns.GridColumn clmReleaseDate;
+        private DevExpress.XtraGrid.Columns.GridColumn clmScraperGroup;
+        private DevExpress.XtraGrid.Columns.GridColumn clmStudio;
+        private DevExpress.XtraGrid.Columns.GridColumn clmTop250;
+        private DevExpress.XtraGrid.Columns.GridColumn clmVideoSource;
+        private DevExpress.XtraGrid.Columns.GridColumn clmVotes;
+        private DevExpress.XtraGrid.Columns.GridColumn clmWriters;
 
     }
 }

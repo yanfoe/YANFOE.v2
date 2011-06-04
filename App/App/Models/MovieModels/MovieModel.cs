@@ -445,6 +445,22 @@ namespace YANFOE.Models.MovieModels
         /// <value>The cast binding list.</value>
         public BindingList<PersonModel> Cast { get; set; }
 
+        [JsonIgnore]
+        public string CastAsString
+        {
+            get
+            {
+                var sb = new StringBuilder();
+
+                foreach (var actor in Cast)
+                {
+                    sb.Append(actor.Name + ",");
+                }
+
+                return sb.ToString();
+            }
+        }
+
         /// <summary>
         /// Gets or sets the certification.
         /// </summary>
@@ -1732,7 +1748,23 @@ namespace YANFOE.Models.MovieModels
 
             set
             {
-                this.watched = value;
+                if (this.watched != value)
+                {
+                    this.watched = value;
+                    this.OnPropertyChanged("Watched", true);
+                    this.OnPropertyChanged("WatchedImage", true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the watched image.
+        /// </summary>
+        public Image WatchedImage
+        {
+            get
+            {
+                return this.Watched ? Resources.watched_green : Resources.watched_red;
             }
         }
 

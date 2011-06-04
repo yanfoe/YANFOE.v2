@@ -12,7 +12,6 @@ namespace YANFOE.UI.UserControls.MovieControls
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -22,7 +21,6 @@ namespace YANFOE.UI.UserControls.MovieControls
     using DevExpress.XtraBars;
     using DevExpress.XtraBars.Ribbon;
     using DevExpress.XtraEditors;
-    using DevExpress.XtraGrid.Drawing;
     using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
@@ -312,6 +310,7 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             this.btnLock.DataBindings.Clear();
             this.btnMarked.DataBindings.Clear();
+            this.btnWatched.DataBindings.Clear();
 
             this.btnLoadFromWeb.DataBindings.Clear();
             this.btnLoadFromWeb.DataBindings.Add("Enabled", MovieDBFactory.GetCurrentMovie(), "Unlocked");
@@ -322,6 +321,8 @@ namespace YANFOE.UI.UserControls.MovieControls
                 "Image", MovieDBFactory.GetCurrentMovie(), "MarkedImage", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.btnNew.Visible = MovieDBFactory.GetCurrentMovie().IsNew;
+
+            this.btnWatched.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "WatchedImage");
         }
 
         /// <summary>
@@ -638,5 +639,10 @@ namespace YANFOE.UI.UserControls.MovieControls
         }
 
         #endregion
+
+        private void btnWatched_Click(object sender, EventArgs e)
+        {
+            MovieDBFactory.GetCurrentMovie().Watched = !MovieDBFactory.GetCurrentMovie().Watched;
+        }
     }
 }
