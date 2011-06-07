@@ -17,8 +17,11 @@ namespace YANFOE.Models.TvModels.Show
     using System;
     using System.ComponentModel;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Xml;
+
+    using Newtonsoft.Json;
 
     using YANFOE.Factories;
     using YANFOE.Properties;
@@ -31,6 +34,7 @@ namespace YANFOE.Models.TvModels.Show
     /// The episode.
     /// </summary>
     [Serializable]
+    [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class Episode : ModelBase
     {
         #region Constants and Fields
@@ -561,6 +565,7 @@ namespace YANFOE.Models.TvModels.Show
                     this.OnPropertyChanged("Path");
                     this.OnPropertyChanged("CurrentFilenameAndPath", true);
                     this.OnPropertyChanged("CurrentFilePathStatusImage");
+                    this.OnPropertyChanged("FileAssigned");
                     this.ChangedText = true;
                 }
             }
@@ -943,6 +948,65 @@ namespace YANFOE.Models.TvModels.Show
                     this.OnPropertyChanged("DirectorAsString", true);
                     this.ChangedText = true;
                 }
+            }
+        }
+
+        public bool FileAssigned
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(this.FilePath.FileNameAndPath);
+            }
+        }
+
+        [JsonIgnore]
+        public bool Watched
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.FilePath.CurrentFileName))
+                {
+                    return false;
+                }
+
+                return File.Exists(
+                    Path.Combine(new[] { this.FilePath.FileNameAndPath + ".watched" }));
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(this.FilePath.CurrentFileName))
+                {
+                    return;
+                }
+
+                var path = Path.Combine(new[] { this.FilePath.FileNameAndPath + ".watched" });
+
+                var exists = File.Exists(path);
+
+                if (exists != value)
+                {
+                    if (exists)
+                    {
+                        File.Delete(path);
+                    }
+                    else
+                    {
+                        Tools.Text.IO.WriteTextToFile(path, " ");
+                    }
+
+                    this.OnPropertyChanged("Watched");
+                    this.OnPropertyChanged("WatchedImage", true);
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public Image WatchedImage
+        {
+            get
+            {
+                return this.Watched ? Resources.watched_green : Resources.watched_red;
             }
         }
 

@@ -718,6 +718,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap search {
+            get {
+                object obj = ResourceManager.GetObject("search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap season {
             get {
                 object obj = ResourceManager.GetObject("season", resourceCulture);

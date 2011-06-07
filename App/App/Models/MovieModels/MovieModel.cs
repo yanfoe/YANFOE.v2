@@ -1750,7 +1750,7 @@ namespace YANFOE.Models.MovieModels
                 }
 
                 return File.Exists(
-                    Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" }));
+                    Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, this.AssociatedFiles.Media[0].FileModel.Filename + ".watched" }));
             }
 
             set
@@ -1760,7 +1760,7 @@ namespace YANFOE.Models.MovieModels
                     return;
                 }
 
-                var path = Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, ".watched" });
+                var path = Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, this.AssociatedFiles.Media[0].FileModel.Filename + ".watched" });
 
                 var exists = File.Exists(path);
 

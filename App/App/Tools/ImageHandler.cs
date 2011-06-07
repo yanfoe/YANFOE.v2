@@ -216,16 +216,25 @@ namespace YANFOE.Tools
             return matchCase;
         }
 
-        public static void SaveThumb(Image value, string uniqueID, string s)
+        public static bool SaveThumb(Image value, string uniqueID, string s)
         {
-            if (value == null)
+            try
             {
-                return;
+                if (value == null)
+                {
+                    return false;
+                }
+
+                var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+
+                value.Save(path);
+
+                return true;
             }
-
-            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
-
-            value.Save(path);
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -29,17 +29,22 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.checkEdit3 = new DevExpress.XtraEditors.CheckEdit();
-            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            this.checkEdit2 = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
-            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
+            this.btnMediainfoScan = new DevExpress.XtraEditors.SimpleButton();
+            this.cmbFiles = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.chkNtsc = new DevExpress.XtraEditors.CheckEdit();
+            this.txtFPS = new DevExpress.XtraEditors.TextEdit();
+            this.chkInterlaced = new DevExpress.XtraEditors.CheckEdit();
+            this.chkProgressive = new DevExpress.XtraEditors.CheckEdit();
+            this.txtResolution = new DevExpress.XtraEditors.TextEdit();
             this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
-            this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
-            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
-            this.checkEdit4 = new DevExpress.XtraEditors.CheckEdit();
-            this.checkedComboBoxEdit1 = new DevExpress.XtraEditors.CheckedComboBoxEdit();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
+            this.txtHeight = new DevExpress.XtraEditors.SpinEdit();
+            this.txtWidth = new DevExpress.XtraEditors.SpinEdit();
+            this.chkPal = new DevExpress.XtraEditors.CheckEdit();
+            this.bmAspectRatioPercent = new DevExpress.XtraEditors.CheckedComboBoxEdit();
+            this.txtVideoCodec = new DevExpress.XtraEditors.TextEdit();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
@@ -50,7 +55,7 @@
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.comboBoxEdit3 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.bmAspectRatioDecimal = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -93,28 +98,31 @@
             this.layoutControlItem26 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             this.layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem29 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkProgressive.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtResolution.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWidth.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPal.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioPercent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVideoCodec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioDecimal.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -155,25 +163,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem26)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnMediainfoScan);
+            this.layoutControl1.Controls.Add(this.cmbFiles);
             this.layoutControl1.Controls.Add(this.xtraTabControl1);
-            this.layoutControl1.Controls.Add(this.checkEdit3);
-            this.layoutControl1.Controls.Add(this.textEdit5);
-            this.layoutControl1.Controls.Add(this.checkEdit2);
-            this.layoutControl1.Controls.Add(this.checkEdit1);
-            this.layoutControl1.Controls.Add(this.textEdit4);
+            this.layoutControl1.Controls.Add(this.chkNtsc);
+            this.layoutControl1.Controls.Add(this.txtFPS);
+            this.layoutControl1.Controls.Add(this.chkInterlaced);
+            this.layoutControl1.Controls.Add(this.chkProgressive);
+            this.layoutControl1.Controls.Add(this.txtResolution);
             this.layoutControl1.Controls.Add(this.textEdit6);
-            this.layoutControl1.Controls.Add(this.spinEdit2);
-            this.layoutControl1.Controls.Add(this.spinEdit1);
-            this.layoutControl1.Controls.Add(this.checkEdit4);
-            this.layoutControl1.Controls.Add(this.checkedComboBoxEdit1);
-            this.layoutControl1.Controls.Add(this.textEdit3);
+            this.layoutControl1.Controls.Add(this.txtHeight);
+            this.layoutControl1.Controls.Add(this.txtWidth);
+            this.layoutControl1.Controls.Add(this.chkPal);
+            this.layoutControl1.Controls.Add(this.bmAspectRatioPercent);
+            this.layoutControl1.Controls.Add(this.txtVideoCodec);
             this.layoutControl1.Controls.Add(this.textEdit2);
             this.layoutControl1.Controls.Add(this.comboBoxEdit2);
             this.layoutControl1.Controls.Add(this.textEdit1);
@@ -184,7 +195,7 @@
             this.layoutControl1.Controls.Add(this.simpleButton5);
             this.layoutControl1.Controls.Add(this.simpleButton4);
             this.layoutControl1.Controls.Add(this.simpleButton3);
-            this.layoutControl1.Controls.Add(this.comboBoxEdit3);
+            this.layoutControl1.Controls.Add(this.bmAspectRatioDecimal);
             this.layoutControl1.Controls.Add(this.gridControl3);
             this.layoutControl1.Controls.Add(this.simpleButton1);
             this.layoutControl1.Controls.Add(this.gridControl1);
@@ -201,147 +212,192 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // checkEdit3
+            // btnMediainfoScan
             // 
-            this.checkEdit3.Location = new System.Drawing.Point(223, 120);
-            this.checkEdit3.Name = "checkEdit3";
-            this.checkEdit3.Properties.Caption = "NTSC";
-            this.checkEdit3.Size = new System.Drawing.Size(70, 19);
-            this.checkEdit3.StyleController = this.layoutControl1;
-            this.checkEdit3.TabIndex = 33;
+            this.btnMediainfoScan.Image = global::YANFOE.Properties.Resources.search;
+            this.btnMediainfoScan.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMediainfoScan.Location = new System.Drawing.Point(757, 25);
+            this.btnMediainfoScan.Name = "btnMediainfoScan";
+            this.btnMediainfoScan.Size = new System.Drawing.Size(78, 22);
+            this.btnMediainfoScan.StyleController = this.layoutControl1;
+            this.btnMediainfoScan.TabIndex = 37;
+            this.btnMediainfoScan.Click += new System.EventHandler(this.btnMediainfoScan_Click);
             // 
-            // textEdit5
+            // cmbFiles
             // 
-            this.textEdit5.Location = new System.Drawing.Point(70, 121);
-            this.textEdit5.Name = "textEdit5";
-            this.textEdit5.Size = new System.Drawing.Size(50, 20);
-            this.textEdit5.StyleController = this.layoutControl1;
-            this.textEdit5.TabIndex = 31;
+            this.cmbFiles.Location = new System.Drawing.Point(5, 25);
+            this.cmbFiles.Name = "cmbFiles";
+            this.cmbFiles.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbFiles.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbFiles.Size = new System.Drawing.Size(748, 20);
+            this.cmbFiles.StyleController = this.layoutControl1;
+            this.cmbFiles.TabIndex = 36;
             // 
-            // checkEdit2
+            // xtraTabControl1
             // 
-            this.checkEdit2.Location = new System.Drawing.Point(223, 97);
-            this.checkEdit2.Name = "checkEdit2";
-            this.checkEdit2.Properties.Caption = "I";
-            this.checkEdit2.Size = new System.Drawing.Size(70, 19);
-            this.checkEdit2.StyleController = this.layoutControl1;
-            this.checkEdit2.TabIndex = 30;
+            this.xtraTabControl1.Location = new System.Drawing.Point(5, 223);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(364, 462);
+            this.xtraTabControl1.TabIndex = 35;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
             // 
-            // checkEdit1
+            // xtraTabPage1
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(178, 97);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "P";
-            this.checkEdit1.Size = new System.Drawing.Size(41, 19);
-            this.checkEdit1.StyleController = this.layoutControl1;
-            this.checkEdit1.TabIndex = 29;
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(358, 436);
+            this.xtraTabPage1.Text = "Preview";
             // 
-            // textEdit4
+            // xtraTabPage2
             // 
-            this.textEdit4.Location = new System.Drawing.Point(70, 97);
-            this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Size = new System.Drawing.Size(104, 20);
-            this.textEdit4.StyleController = this.layoutControl1;
-            this.textEdit4.TabIndex = 28;
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(358, 436);
+            this.xtraTabPage2.Text = "MediaInfo Output";
+            // 
+            // chkNtsc
+            // 
+            this.chkNtsc.Location = new System.Drawing.Point(261, 172);
+            this.chkNtsc.Name = "chkNtsc";
+            this.chkNtsc.Properties.Caption = "NTSC";
+            this.chkNtsc.Size = new System.Drawing.Size(108, 19);
+            this.chkNtsc.StyleController = this.layoutControl1;
+            this.chkNtsc.TabIndex = 33;
+            // 
+            // txtFPS
+            // 
+            this.txtFPS.Location = new System.Drawing.Point(70, 173);
+            this.txtFPS.Name = "txtFPS";
+            this.txtFPS.Size = new System.Drawing.Size(88, 20);
+            this.txtFPS.StyleController = this.layoutControl1;
+            this.txtFPS.TabIndex = 31;
+            // 
+            // chkInterlaced
+            // 
+            this.chkInterlaced.Location = new System.Drawing.Point(261, 149);
+            this.chkInterlaced.Name = "chkInterlaced";
+            this.chkInterlaced.Properties.Caption = "I";
+            this.chkInterlaced.Size = new System.Drawing.Size(108, 19);
+            this.chkInterlaced.StyleController = this.layoutControl1;
+            this.chkInterlaced.TabIndex = 30;
+            // 
+            // chkProgressive
+            // 
+            this.chkProgressive.Location = new System.Drawing.Point(216, 149);
+            this.chkProgressive.Name = "chkProgressive";
+            this.chkProgressive.Properties.Caption = "P";
+            this.chkProgressive.Size = new System.Drawing.Size(41, 19);
+            this.chkProgressive.StyleController = this.layoutControl1;
+            this.chkProgressive.TabIndex = 29;
+            // 
+            // txtResolution
+            // 
+            this.txtResolution.Location = new System.Drawing.Point(70, 149);
+            this.txtResolution.Name = "txtResolution";
+            this.txtResolution.Size = new System.Drawing.Size(142, 20);
+            this.txtResolution.StyleController = this.layoutControl1;
+            this.txtResolution.TabIndex = 28;
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(124, 121);
+            this.textEdit6.Location = new System.Drawing.Point(162, 173);
             this.textEdit6.Name = "textEdit6";
             this.textEdit6.Size = new System.Drawing.Size(50, 20);
             this.textEdit6.StyleController = this.layoutControl1;
             this.textEdit6.TabIndex = 32;
             // 
-            // spinEdit2
+            // txtHeight
             // 
-            this.spinEdit2.EditValue = new decimal(new int[] {
+            this.txtHeight.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinEdit2.Location = new System.Drawing.Point(243, 49);
-            this.spinEdit2.Name = "spinEdit2";
-            this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtHeight.Location = new System.Drawing.Point(281, 101);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.spinEdit2.Size = new System.Drawing.Size(50, 20);
-            this.spinEdit2.StyleController = this.layoutControl1;
-            this.spinEdit2.TabIndex = 27;
+            this.txtHeight.Size = new System.Drawing.Size(88, 20);
+            this.txtHeight.StyleController = this.layoutControl1;
+            this.txtHeight.TabIndex = 27;
             // 
-            // spinEdit1
+            // txtWidth
             // 
-            this.spinEdit1.EditValue = new decimal(new int[] {
+            this.txtWidth.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(70, 49);
-            this.spinEdit1.Name = "spinEdit1";
-            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtWidth.Location = new System.Drawing.Point(70, 101);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.spinEdit1.Size = new System.Drawing.Size(104, 20);
-            this.spinEdit1.StyleController = this.layoutControl1;
-            this.spinEdit1.TabIndex = 26;
+            this.txtWidth.Size = new System.Drawing.Size(142, 20);
+            this.txtWidth.StyleController = this.layoutControl1;
+            this.txtWidth.TabIndex = 26;
             // 
-            // checkEdit4
+            // chkPal
             // 
-            this.checkEdit4.Location = new System.Drawing.Point(178, 120);
-            this.checkEdit4.Name = "checkEdit4";
-            this.checkEdit4.Properties.Caption = "PAL";
-            this.checkEdit4.Size = new System.Drawing.Size(41, 19);
-            this.checkEdit4.StyleController = this.layoutControl1;
-            this.checkEdit4.TabIndex = 34;
+            this.chkPal.Location = new System.Drawing.Point(216, 172);
+            this.chkPal.Name = "chkPal";
+            this.chkPal.Properties.Caption = "PAL";
+            this.chkPal.Size = new System.Drawing.Size(41, 19);
+            this.chkPal.StyleController = this.layoutControl1;
+            this.chkPal.TabIndex = 34;
             // 
-            // checkedComboBoxEdit1
+            // bmAspectRatioPercent
             // 
-            this.checkedComboBoxEdit1.Location = new System.Drawing.Point(70, 73);
-            this.checkedComboBoxEdit1.Name = "checkedComboBoxEdit1";
-            this.checkedComboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.bmAspectRatioPercent.Location = new System.Drawing.Point(70, 125);
+            this.bmAspectRatioPercent.Name = "bmAspectRatioPercent";
+            this.bmAspectRatioPercent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.checkedComboBoxEdit1.Size = new System.Drawing.Size(104, 20);
-            this.checkedComboBoxEdit1.StyleController = this.layoutControl1;
-            this.checkedComboBoxEdit1.TabIndex = 24;
+            this.bmAspectRatioPercent.Size = new System.Drawing.Size(142, 20);
+            this.bmAspectRatioPercent.StyleController = this.layoutControl1;
+            this.bmAspectRatioPercent.TabIndex = 24;
             // 
-            // textEdit3
+            // txtVideoCodec
             // 
-            this.textEdit3.Location = new System.Drawing.Point(70, 25);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(223, 20);
-            this.textEdit3.StyleController = this.layoutControl1;
-            this.textEdit3.TabIndex = 23;
+            this.txtVideoCodec.Location = new System.Drawing.Point(70, 77);
+            this.txtVideoCodec.Name = "txtVideoCodec";
+            this.txtVideoCodec.Size = new System.Drawing.Size(299, 20);
+            this.txtVideoCodec.StyleController = this.layoutControl1;
+            this.txtVideoCodec.TabIndex = 23;
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(438, 265);
+            this.textEdit2.Location = new System.Drawing.Point(513, 286);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(159, 20);
+            this.textEdit2.Size = new System.Drawing.Size(129, 20);
             this.textEdit2.StyleController = this.layoutControl1;
             this.textEdit2.TabIndex = 22;
             // 
             // comboBoxEdit2
             // 
-            this.comboBoxEdit2.Location = new System.Drawing.Point(440, 663);
+            this.comboBoxEdit2.Location = new System.Drawing.Point(516, 663);
             this.comboBoxEdit2.Name = "comboBoxEdit2";
             this.comboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit2.Size = new System.Drawing.Size(395, 20);
+            this.comboBoxEdit2.Size = new System.Drawing.Size(319, 20);
             this.comboBoxEdit2.StyleController = this.layoutControl1;
             this.comboBoxEdit2.TabIndex = 21;
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(601, 265);
+            this.textEdit1.Location = new System.Drawing.Point(646, 286);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(76, 20);
+            this.textEdit1.Size = new System.Drawing.Size(61, 20);
             this.textEdit1.StyleController = this.layoutControl1;
             this.textEdit1.TabIndex = 19;
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(681, 265);
+            this.comboBoxEdit1.Location = new System.Drawing.Point(711, 286);
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(154, 20);
+            this.comboBoxEdit1.Size = new System.Drawing.Size(124, 20);
             this.comboBoxEdit1.StyleController = this.layoutControl1;
             this.comboBoxEdit1.TabIndex = 18;
             // 
@@ -349,7 +405,7 @@
             // 
             this.simpleButton8.Image = global::YANFOE.Properties.Resources.add16;
             this.simpleButton8.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton8.Location = new System.Drawing.Point(374, 663);
+            this.simpleButton8.Location = new System.Drawing.Point(450, 663);
             this.simpleButton8.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton8.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton8.Name = "simpleButton8";
@@ -361,7 +417,7 @@
             // 
             this.simpleButton7.Image = global::YANFOE.Properties.Resources.down;
             this.simpleButton7.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton7.Location = new System.Drawing.Point(341, 663);
+            this.simpleButton7.Location = new System.Drawing.Point(417, 663);
             this.simpleButton7.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton7.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton7.Name = "simpleButton7";
@@ -373,7 +429,7 @@
             // 
             this.simpleButton6.Image = global::YANFOE.Properties.Resources.up1;
             this.simpleButton6.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton6.Location = new System.Drawing.Point(308, 663);
+            this.simpleButton6.Location = new System.Drawing.Point(384, 663);
             this.simpleButton6.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton6.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton6.Name = "simpleButton6";
@@ -385,7 +441,7 @@
             // 
             this.simpleButton5.Image = global::YANFOE.Properties.Resources.delete1;
             this.simpleButton5.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton5.Location = new System.Drawing.Point(407, 663);
+            this.simpleButton5.Location = new System.Drawing.Point(483, 663);
             this.simpleButton5.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton5.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton5.Name = "simpleButton5";
@@ -397,7 +453,7 @@
             // 
             this.simpleButton4.Image = global::YANFOE.Properties.Resources.delete1;
             this.simpleButton4.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton4.Location = new System.Drawing.Point(405, 265);
+            this.simpleButton4.Location = new System.Drawing.Point(480, 286);
             this.simpleButton4.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton4.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton4.Name = "simpleButton4";
@@ -409,7 +465,7 @@
             // 
             this.simpleButton3.Image = global::YANFOE.Properties.Resources.add16;
             this.simpleButton3.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton3.Location = new System.Drawing.Point(372, 265);
+            this.simpleButton3.Location = new System.Drawing.Point(447, 286);
             this.simpleButton3.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton3.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton3.Name = "simpleButton3";
@@ -417,22 +473,22 @@
             this.simpleButton3.StyleController = this.layoutControl1;
             this.simpleButton3.TabIndex = 10;
             // 
-            // comboBoxEdit3
+            // bmAspectRatioDecimal
             // 
-            this.comboBoxEdit3.Location = new System.Drawing.Point(178, 73);
-            this.comboBoxEdit3.Name = "comboBoxEdit3";
-            this.comboBoxEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.bmAspectRatioDecimal.Location = new System.Drawing.Point(216, 125);
+            this.bmAspectRatioDecimal.Name = "bmAspectRatioDecimal";
+            this.bmAspectRatioDecimal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit3.Size = new System.Drawing.Size(115, 20);
-            this.comboBoxEdit3.StyleController = this.layoutControl1;
-            this.comboBoxEdit3.TabIndex = 25;
+            this.bmAspectRatioDecimal.Size = new System.Drawing.Size(153, 20);
+            this.bmAspectRatioDecimal.StyleController = this.layoutControl1;
+            this.bmAspectRatioDecimal.TabIndex = 25;
             // 
             // gridControl3
             // 
-            this.gridControl3.Location = new System.Drawing.Point(308, 322);
+            this.gridControl3.Location = new System.Drawing.Point(384, 343);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(527, 337);
+            this.gridControl3.Size = new System.Drawing.Size(451, 316);
             this.gridControl3.TabIndex = 13;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -446,7 +502,7 @@
             // 
             this.simpleButton1.Image = global::YANFOE.Properties.Resources.down;
             this.simpleButton1.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(339, 265);
+            this.simpleButton1.Location = new System.Drawing.Point(414, 286);
             this.simpleButton1.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton1.MinimumSize = new System.Drawing.Size(29, 22);
             this.simpleButton1.Name = "simpleButton1";
@@ -471,10 +527,10 @@
             // 
             // gridControl2
             // 
-            this.gridControl2.Location = new System.Drawing.Point(308, 25);
+            this.gridControl2.Location = new System.Drawing.Point(384, 77);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(527, 236);
+            this.gridControl2.Size = new System.Drawing.Size(451, 205);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -488,10 +544,10 @@
             // 
             this.simpleButton2.Image = global::YANFOE.Properties.Resources.up1;
             this.simpleButton2.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.Location = new System.Drawing.Point(308, 265);
+            this.simpleButton2.Location = new System.Drawing.Point(384, 286);
             this.simpleButton2.MaximumSize = new System.Drawing.Size(29, 22);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(27, 22);
+            this.simpleButton2.Size = new System.Drawing.Size(26, 22);
             this.simpleButton2.StyleController = this.layoutControl1;
             this.simpleButton2.TabIndex = 7;
             // 
@@ -517,7 +573,8 @@
             this.splitterItem1,
             this.layoutControlGroup4,
             this.splitterItem2,
-            this.layoutControlGroup5});
+            this.layoutControlGroup5,
+            this.layoutControlGroup6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -537,19 +594,19 @@
             this.layoutControlItem5,
             this.layoutControlItem6,
             this.layoutControlItem7});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(303, 0);
+            this.layoutControlGroup2.Location = new System.Drawing.Point(379, 52);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(537, 292);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(461, 261);
             this.layoutControlGroup2.Text = "Audio Streams";
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.simpleButton2;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 240);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 209);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(31, 26);
+            this.layoutControlItem4.Size = new System.Drawing.Size(30, 26);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -561,7 +618,7 @@
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(531, 240);
+            this.layoutControlItem2.Size = new System.Drawing.Size(455, 209);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -571,7 +628,7 @@
             // 
             this.layoutControlItem3.Control = this.simpleButton1;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(31, 240);
+            this.layoutControlItem3.Location = new System.Drawing.Point(30, 209);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem3.Text = "layoutControlItem3";
@@ -583,7 +640,7 @@
             // 
             this.layoutControlItem9.Control = this.simpleButton3;
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem9.Location = new System.Drawing.Point(64, 240);
+            this.layoutControlItem9.Location = new System.Drawing.Point(63, 209);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem9.Text = "layoutControlItem9";
@@ -595,7 +652,7 @@
             // 
             this.layoutControlItem10.Control = this.simpleButton4;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(97, 240);
+            this.layoutControlItem10.Location = new System.Drawing.Point(96, 209);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem10.Text = "layoutControlItem10";
@@ -607,9 +664,9 @@
             // 
             this.layoutControlItem5.Control = this.comboBoxEdit1;
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(373, 240);
+            this.layoutControlItem5.Location = new System.Drawing.Point(327, 209);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(158, 26);
+            this.layoutControlItem5.Size = new System.Drawing.Size(128, 26);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -619,9 +676,9 @@
             // 
             this.layoutControlItem6.Control = this.textEdit1;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(293, 240);
+            this.layoutControlItem6.Location = new System.Drawing.Point(262, 209);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(80, 26);
+            this.layoutControlItem6.Size = new System.Drawing.Size(65, 26);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -631,9 +688,9 @@
             // 
             this.layoutControlItem7.Control = this.textEdit2;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(130, 240);
+            this.layoutControlItem7.Location = new System.Drawing.Point(129, 209);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(163, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(133, 26);
             this.layoutControlItem7.Text = "layoutControlItem7";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextToControlDistance = 0;
@@ -649,10 +706,10 @@
             this.layoutControlItem13,
             this.layoutControlItem14,
             this.layoutControlItem15});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(303, 297);
+            this.layoutControlGroup3.Location = new System.Drawing.Point(379, 318);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(537, 393);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(461, 372);
             this.layoutControlGroup3.Text = "SubTitle Stream";
             // 
             // layoutControlItem8
@@ -661,7 +718,7 @@
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(531, 341);
+            this.layoutControlItem8.Size = new System.Drawing.Size(455, 320);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -671,7 +728,7 @@
             // 
             this.layoutControlItem11.Control = this.simpleButton5;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(99, 341);
+            this.layoutControlItem11.Location = new System.Drawing.Point(99, 320);
             this.layoutControlItem11.Name = "layoutControlItem11";
             this.layoutControlItem11.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem11.Text = "layoutControlItem11";
@@ -683,7 +740,7 @@
             // 
             this.layoutControlItem12.Control = this.simpleButton6;
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 341);
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 320);
             this.layoutControlItem12.Name = "layoutControlItem12";
             this.layoutControlItem12.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem12.Text = "layoutControlItem12";
@@ -695,7 +752,7 @@
             // 
             this.layoutControlItem13.Control = this.simpleButton7;
             this.layoutControlItem13.CustomizationFormText = "layoutControlItem13";
-            this.layoutControlItem13.Location = new System.Drawing.Point(33, 341);
+            this.layoutControlItem13.Location = new System.Drawing.Point(33, 320);
             this.layoutControlItem13.Name = "layoutControlItem13";
             this.layoutControlItem13.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem13.Text = "layoutControlItem13";
@@ -707,7 +764,7 @@
             // 
             this.layoutControlItem14.Control = this.simpleButton8;
             this.layoutControlItem14.CustomizationFormText = "layoutControlItem14";
-            this.layoutControlItem14.Location = new System.Drawing.Point(66, 341);
+            this.layoutControlItem14.Location = new System.Drawing.Point(66, 320);
             this.layoutControlItem14.Name = "layoutControlItem14";
             this.layoutControlItem14.Size = new System.Drawing.Size(33, 26);
             this.layoutControlItem14.Text = "layoutControlItem14";
@@ -719,9 +776,9 @@
             // 
             this.layoutControlItem15.Control = this.comboBoxEdit2;
             this.layoutControlItem15.CustomizationFormText = "layoutControlItem15";
-            this.layoutControlItem15.Location = new System.Drawing.Point(132, 341);
+            this.layoutControlItem15.Location = new System.Drawing.Point(132, 320);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(399, 26);
+            this.layoutControlItem15.Size = new System.Drawing.Size(323, 26);
             this.layoutControlItem15.Text = "layoutControlItem15";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextToControlDistance = 0;
@@ -731,9 +788,9 @@
             // 
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(303, 292);
+            this.splitterItem1.Location = new System.Drawing.Point(379, 313);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(537, 5);
+            this.splitterItem1.Size = new System.Drawing.Size(461, 5);
             // 
             // layoutControlGroup4
             // 
@@ -751,21 +808,21 @@
             this.layoutControlItem27,
             this.layoutControlItem25,
             this.layoutControlItem26});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 52);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
             this.layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup4.Size = new System.Drawing.Size(298, 146);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(374, 146);
             this.layoutControlGroup4.Text = "Video";
             // 
             // layoutControlItem19
             // 
             this.layoutControlItem19.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem19.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem19.Control = this.spinEdit1;
+            this.layoutControlItem19.Control = this.txtWidth;
             this.layoutControlItem19.CustomizationFormText = "Width";
             this.layoutControlItem19.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(173, 24);
+            this.layoutControlItem19.Size = new System.Drawing.Size(211, 24);
             this.layoutControlItem19.Text = "Width";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(61, 13);
             // 
@@ -773,11 +830,11 @@
             // 
             this.layoutControlItem17.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem17.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem17.Control = this.checkedComboBoxEdit1;
+            this.layoutControlItem17.Control = this.bmAspectRatioPercent;
             this.layoutControlItem17.CustomizationFormText = "Aspect Ratio";
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(173, 24);
+            this.layoutControlItem17.Size = new System.Drawing.Size(211, 24);
             this.layoutControlItem17.Text = "Aspect Ratio";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(61, 13);
             // 
@@ -785,21 +842,21 @@
             // 
             this.layoutControlItem16.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem16.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem16.Control = this.textEdit3;
+            this.layoutControlItem16.Control = this.txtVideoCodec;
             this.layoutControlItem16.CustomizationFormText = "Codec";
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(292, 24);
+            this.layoutControlItem16.Size = new System.Drawing.Size(368, 24);
             this.layoutControlItem16.Text = "Codec";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(61, 13);
             // 
             // layoutControlItem18
             // 
-            this.layoutControlItem18.Control = this.comboBoxEdit3;
+            this.layoutControlItem18.Control = this.bmAspectRatioDecimal;
             this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
-            this.layoutControlItem18.Location = new System.Drawing.Point(173, 48);
+            this.layoutControlItem18.Location = new System.Drawing.Point(211, 48);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(119, 24);
+            this.layoutControlItem18.Size = new System.Drawing.Size(157, 24);
             this.layoutControlItem18.Text = "layoutControlItem18";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem18.TextToControlDistance = 0;
@@ -809,11 +866,11 @@
             // 
             this.layoutControlItem20.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem20.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem20.Control = this.spinEdit2;
+            this.layoutControlItem20.Control = this.txtHeight;
             this.layoutControlItem20.CustomizationFormText = "Height";
-            this.layoutControlItem20.Location = new System.Drawing.Point(173, 24);
+            this.layoutControlItem20.Location = new System.Drawing.Point(211, 24);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(119, 24);
+            this.layoutControlItem20.Size = new System.Drawing.Size(157, 24);
             this.layoutControlItem20.Text = "Height";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(61, 13);
             // 
@@ -821,19 +878,19 @@
             // 
             this.layoutControlItem21.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem21.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem21.Control = this.textEdit4;
+            this.layoutControlItem21.Control = this.txtResolution;
             this.layoutControlItem21.CustomizationFormText = "Resolution";
             this.layoutControlItem21.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem21.Name = "layoutControlItem21";
-            this.layoutControlItem21.Size = new System.Drawing.Size(173, 24);
+            this.layoutControlItem21.Size = new System.Drawing.Size(211, 24);
             this.layoutControlItem21.Text = "Resolution";
             this.layoutControlItem21.TextSize = new System.Drawing.Size(61, 13);
             // 
             // layoutControlItem22
             // 
-            this.layoutControlItem22.Control = this.checkEdit1;
+            this.layoutControlItem22.Control = this.chkProgressive;
             this.layoutControlItem22.CustomizationFormText = "layoutControlItem22";
-            this.layoutControlItem22.Location = new System.Drawing.Point(173, 72);
+            this.layoutControlItem22.Location = new System.Drawing.Point(211, 72);
             this.layoutControlItem22.MinSize = new System.Drawing.Size(33, 23);
             this.layoutControlItem22.Name = "layoutControlItem22";
             this.layoutControlItem22.Size = new System.Drawing.Size(45, 23);
@@ -845,11 +902,11 @@
             // 
             // layoutControlItem23
             // 
-            this.layoutControlItem23.Control = this.checkEdit2;
+            this.layoutControlItem23.Control = this.chkInterlaced;
             this.layoutControlItem23.CustomizationFormText = "layoutControlItem23";
-            this.layoutControlItem23.Location = new System.Drawing.Point(218, 72);
+            this.layoutControlItem23.Location = new System.Drawing.Point(256, 72);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(74, 23);
+            this.layoutControlItem23.Size = new System.Drawing.Size(112, 23);
             this.layoutControlItem23.Text = "layoutControlItem23";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem23.TextToControlDistance = 0;
@@ -859,19 +916,19 @@
             // 
             this.layoutControlItem24.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem24.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem24.Control = this.textEdit5;
+            this.layoutControlItem24.Control = this.txtFPS;
             this.layoutControlItem24.CustomizationFormText = "FPS";
             this.layoutControlItem24.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(119, 24);
+            this.layoutControlItem24.Size = new System.Drawing.Size(157, 24);
             this.layoutControlItem24.Text = "FPS";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(61, 13);
             // 
             // layoutControlItem27
             // 
-            this.layoutControlItem27.Control = this.checkEdit4;
+            this.layoutControlItem27.Control = this.chkPal;
             this.layoutControlItem27.CustomizationFormText = "layoutControlItem27";
-            this.layoutControlItem27.Location = new System.Drawing.Point(173, 95);
+            this.layoutControlItem27.Location = new System.Drawing.Point(211, 95);
             this.layoutControlItem27.MaxSize = new System.Drawing.Size(45, 25);
             this.layoutControlItem27.MinSize = new System.Drawing.Size(45, 25);
             this.layoutControlItem27.Name = "layoutControlItem27";
@@ -886,7 +943,7 @@
             // 
             this.layoutControlItem25.Control = this.textEdit6;
             this.layoutControlItem25.CustomizationFormText = "layoutControlItem25";
-            this.layoutControlItem25.Location = new System.Drawing.Point(119, 96);
+            this.layoutControlItem25.Location = new System.Drawing.Point(157, 96);
             this.layoutControlItem25.Name = "layoutControlItem25";
             this.layoutControlItem25.Size = new System.Drawing.Size(54, 24);
             this.layoutControlItem25.Text = "layoutControlItem25";
@@ -898,11 +955,11 @@
             // 
             this.layoutControlItem26.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem26.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem26.Control = this.checkEdit3;
+            this.layoutControlItem26.Control = this.chkNtsc;
             this.layoutControlItem26.CustomizationFormText = "layoutControlItem26";
-            this.layoutControlItem26.Location = new System.Drawing.Point(218, 95);
+            this.layoutControlItem26.Location = new System.Drawing.Point(256, 95);
             this.layoutControlItem26.Name = "layoutControlItem26";
-            this.layoutControlItem26.Size = new System.Drawing.Size(74, 25);
+            this.layoutControlItem26.Size = new System.Drawing.Size(112, 25);
             this.layoutControlItem26.Text = "layoutControlItem26";
             this.layoutControlItem26.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem26.TextToControlDistance = 0;
@@ -912,31 +969,20 @@
             // 
             this.splitterItem2.AllowHotTrack = true;
             this.splitterItem2.CustomizationFormText = "splitterItem2";
-            this.splitterItem2.Location = new System.Drawing.Point(298, 0);
+            this.splitterItem2.Location = new System.Drawing.Point(374, 52);
             this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(5, 690);
+            this.splitterItem2.Size = new System.Drawing.Size(5, 638);
             // 
             // layoutControlGroup5
             // 
             this.layoutControlGroup5.CustomizationFormText = "In and Out";
             this.layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem28});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 146);
+            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 198);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
             this.layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup5.Size = new System.Drawing.Size(298, 544);
+            this.layoutControlGroup5.Size = new System.Drawing.Size(374, 492);
             this.layoutControlGroup5.Text = "In and Out";
-            // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.Location = new System.Drawing.Point(5, 171);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(288, 514);
-            this.xtraTabControl1.TabIndex = 35;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
             // 
             // layoutControlItem28
             // 
@@ -944,23 +990,47 @@
             this.layoutControlItem28.CustomizationFormText = "layoutControlItem28";
             this.layoutControlItem28.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem28.Name = "layoutControlItem28";
-            this.layoutControlItem28.Size = new System.Drawing.Size(292, 518);
+            this.layoutControlItem28.Size = new System.Drawing.Size(368, 466);
             this.layoutControlItem28.Text = "layoutControlItem28";
             this.layoutControlItem28.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem28.TextToControlDistance = 0;
             this.layoutControlItem28.TextVisible = false;
             // 
-            // xtraTabPage1
+            // layoutControlGroup6
             // 
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(282, 488);
-            this.xtraTabPage1.Text = "Preview";
+            this.layoutControlGroup6.CustomizationFormText = "Associated Files";
+            this.layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem29,
+            this.layoutControlItem30});
+            this.layoutControlGroup6.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup6.Name = "layoutControlGroup6";
+            this.layoutControlGroup6.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup6.Size = new System.Drawing.Size(840, 52);
+            this.layoutControlGroup6.Text = "Associated Files";
             // 
-            // xtraTabPage2
+            // layoutControlItem29
             // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(0, 0);
-            this.xtraTabPage2.Text = "MediaInfo Output";
+            this.layoutControlItem29.Control = this.cmbFiles;
+            this.layoutControlItem29.CustomizationFormText = "layoutControlItem29";
+            this.layoutControlItem29.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem29.Name = "layoutControlItem29";
+            this.layoutControlItem29.Size = new System.Drawing.Size(752, 26);
+            this.layoutControlItem29.Text = "layoutControlItem29";
+            this.layoutControlItem29.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem29.TextToControlDistance = 0;
+            this.layoutControlItem29.TextVisible = false;
+            // 
+            // layoutControlItem30
+            // 
+            this.layoutControlItem30.Control = this.btnMediainfoScan;
+            this.layoutControlItem30.CustomizationFormText = "layoutControlItem30";
+            this.layoutControlItem30.Location = new System.Drawing.Point(752, 0);
+            this.layoutControlItem30.Name = "layoutControlItem30";
+            this.layoutControlItem30.Size = new System.Drawing.Size(82, 26);
+            this.layoutControlItem30.Text = "layoutControlItem30";
+            this.layoutControlItem30.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem30.TextToControlDistance = 0;
+            this.layoutControlItem30.TextVisible = false;
             // 
             // MediaInfoUserControl
             // 
@@ -971,22 +1041,25 @@
             this.Size = new System.Drawing.Size(840, 690);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkProgressive.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtResolution.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkedComboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWidth.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPal.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioPercent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVideoCodec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioDecimal.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -1027,9 +1100,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem26)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem29)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem30)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1074,14 +1148,14 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
-        private DevExpress.XtraEditors.CheckEdit checkEdit2;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
-        private DevExpress.XtraEditors.SpinEdit spinEdit2;
-        private DevExpress.XtraEditors.SpinEdit spinEdit1;
-        private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit3;
+        private DevExpress.XtraEditors.CheckEdit chkInterlaced;
+        private DevExpress.XtraEditors.CheckEdit chkProgressive;
+        private DevExpress.XtraEditors.TextEdit txtResolution;
+        private DevExpress.XtraEditors.SpinEdit txtHeight;
+        private DevExpress.XtraEditors.SpinEdit txtWidth;
+        private DevExpress.XtraEditors.CheckedComboBoxEdit bmAspectRatioPercent;
+        private DevExpress.XtraEditors.TextEdit txtVideoCodec;
+        private DevExpress.XtraEditors.ComboBoxEdit bmAspectRatioDecimal;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
@@ -1091,10 +1165,10 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
-        private DevExpress.XtraEditors.CheckEdit checkEdit3;
+        private DevExpress.XtraEditors.CheckEdit chkNtsc;
         private DevExpress.XtraEditors.TextEdit textEdit6;
-        private DevExpress.XtraEditors.TextEdit textEdit5;
-        private DevExpress.XtraEditors.CheckEdit checkEdit4;
+        private DevExpress.XtraEditors.TextEdit txtFPS;
+        private DevExpress.XtraEditors.CheckEdit chkPal;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
@@ -1105,5 +1179,10 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbFiles;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem29;
+        private DevExpress.XtraEditors.SimpleButton btnMediainfoScan;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
     }
 }

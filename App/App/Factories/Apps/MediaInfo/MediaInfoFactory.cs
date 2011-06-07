@@ -27,7 +27,7 @@ namespace YANFOE.Factories.Apps.MediaInfo
         /// <summary>
         /// The media info path.
         /// </summary>
-        private static string mediaInfoPath =
+        private static readonly string mediaInfoPath =
             Path.Combine(new[] { Application.StartupPath, "Apps", "MediaInfo", "MediaInfo.exe" });
 
         #endregion
@@ -70,6 +70,11 @@ namespace YANFOE.Factories.Apps.MediaInfo
 
         public static MiResponseModel DoMediaInfoScan(string filePath)
         {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return null;
+            }
+
             var responseModel = new MiResponseModel();
             var xml = GetMediaInfoXml(filePath);
 

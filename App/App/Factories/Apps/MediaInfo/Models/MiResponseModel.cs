@@ -40,6 +40,8 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             this.EncodedDate = string.Empty;
             this.EncodedApplication = string.Empty;
             this.EncodedLibrary = string.Empty;
+            this.WritingApplication = string.Empty;
+            this.WritingLibrary = string.Empty;
 
             this.VideoStreams = new BindingList<MiVideoStreamModel>();
             this.AudioStreams = new BindingList<MiAudioStreamModel>();
@@ -79,6 +81,16 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         ///   Gets or sets the encoded library.
         /// </summary>
         public string EncodedLibrary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the writing application.
+        /// </summary>
+        public string WritingApplication { get; set; }
+
+        /// <summary>
+        /// Gets or sets the writing library.
+        /// </summary>
+        public string WritingLibrary { get; set; }
 
         /// <summary>
         ///   Gets or sets the full size string.
@@ -187,7 +199,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             {
                 switch (xmlNode.Name)
                 {
-                    case "ID_String":
+                    case "ID":
                         audioStream.ID = xmlNode.InnerText.ToInt();
                         break;
 
@@ -199,47 +211,47 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         audioStream.Format_Info = xmlNode.InnerText;
                         break;
 
-                    case "Format_Settings_ModeExtension":
+                    case "Mode_extension":
                         audioStream.FormatSEttingsModeExtension = xmlNode.InnerText;
                         break;
 
-                    case "CodecID":
+                    case "Codec_ID":
                         audioStream.CodecID = xmlNode.InnerText;
                         break;
 
-                    case "Duration_String":
+                    case "Duration":
                         audioStream.Duration = xmlNode.InnerText;
                         break;
 
-                    case "BitRate_Mode_String":
+                    case "Bit_rate_mode":
                         audioStream.BitRateMode = xmlNode.InnerText;
                         break;
 
-                    case "BitRate_String":
+                    case "Bit_rate":
                         audioStream.Bitrate = xmlNode.InnerText;
                         break;
 
-                    case "Channel_s__String":
+                    case "Channel_s_":
                         audioStream.Channels = xmlNode.InnerText;
                         break;
 
-                    case "ChannelPositions":
+                    case "Channel_positions":
                         audioStream.ChannelPositions = xmlNode.InnerText;
                         break;
 
-                    case "SamplingRate_String":
+                    case "Sampling_rate":
                         audioStream.SamplingRate = xmlNode.InnerText;
                         break;
 
-                    case "BitDepth_String":
+                    case "Bit_depth":
                         audioStream.BitDepth = xmlNode.InnerText;
                         break;
 
-                    case "Compression_Mode_String":
+                    case "Compression_mode":
                         audioStream.CompressionMode = xmlNode.InnerText;
                         break;
 
-                    case "StreamSize_String":
+                    case "Stream_size":
                         audioStream.StreamSize = xmlNode.InnerText;
                         break;
                 }
@@ -260,11 +272,11 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             {
                 switch (xmlNode.Name)
                 {
-                    case "UniqueID_String":
+                    case "Unique_ID":
                         this.UniqueID = xmlNode.InnerText;
                         break;
 
-                    case "CompleteName":
+                    case "Complete_name":
                         this.CompleteName = xmlNode.InnerText;
                         break;
 
@@ -272,19 +284,19 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         this.Format = xmlNode.InnerText;
                         break;
 
-                    case "FileSize_String":
+                    case "File_size":
                         this.FileSize = xmlNode.InnerText;
                         break;
 
-                    case "Duration_String":
+                    case "Duration":
                         this.Duration = xmlNode.InnerText;
                         break;
 
-                    case "OverallBitRate_String":
+                    case "Overall_bit_rate":
                         this.OverallBitRate = xmlNode.InnerText;
                         break;
 
-                    case "Encoded_Date":
+                    case "Encoded_date":
                         this.EncodedDate = xmlNode.InnerText;
                         break;
 
@@ -294,6 +306,14 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
 
                     case "Encoded_Library_String":
                         this.EncodedLibrary = xmlNode.InnerText;
+                        break;
+
+                    case "Writing_application":
+                        this.WritingApplication = xmlNode.InnerText;
+                        break;
+
+                    case "Writing_library":
+                        this.WritingLibrary = xmlNode.InnerText;
                         break;
                 }
             }
@@ -348,7 +368,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             {
                 switch (xmlNode.Name)
                 {
-                    case "ID_String":
+                    case "ID":
                         videoStream.ID = xmlNode.InnerText.ToInt();
                         break;
 
@@ -360,15 +380,15 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         videoStream.FormatInfo = xmlNode.InnerText;
                         break;
 
-                    case "Format_Profile":
+                    case "Format_profile":
                         videoStream.FormatProfile = xmlNode.InnerText;
                         break;
 
-                    case "Format_Settings_CABAC_String":
+                    case "Format_settings__CABAC":
                         videoStream.FormatSettingsCABAC = xmlNode.InnerText;
                         break;
 
-                    case "Format_Settings_RefFrames_String":
+                    case "Format_settings__ReFrames":
                         videoStream.FormatSettingsRefFrames = xmlNode.InnerText;
                         break;
 
@@ -376,67 +396,67 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         videoStream.FormatSettingsGOP = xmlNode.InnerText;
                         break;
 
-                    case "CodecID":
+                    case "Codec_ID":
                         videoStream.CodecID = xmlNode.InnerText;
                         break;
 
-                    case "Duration_String":
+                    case "Duration":
                         videoStream.Duration = xmlNode.InnerText;
                         break;
 
-                    case "BitRate_String":
+                    case "Bit_rate":
                         videoStream.BitRate = xmlNode.InnerText;
                         break;
 
-                    case "Width_String":
+                    case "Width":
                         videoStream.Width = xmlNode.InnerText;
                         break;
 
-                    case "Height_String":
+                    case "Height":
                         videoStream.Height = xmlNode.InnerText;
                         break;
 
-                    case "DisplayAspectRatio_String":
+                    case "Display_aspect_ratio":
                         videoStream.DisplayAspectRatio = xmlNode.InnerText;
                         break;
 
-                    case "FrameRate_String":
+                    case "Frame_rate":
                         videoStream.FrameRate = xmlNode.InnerText;
                         break;
 
-                    case "ColorSpace":
+                    case "Color_space":
                         videoStream.ColorSpace = xmlNode.InnerText;
                         break;
 
-                    case "ChromaSubsampling":
+                    case "Chroma_subsampling":
                         videoStream.ChromaSubsampling = xmlNode.InnerText;
                         break;
 
-                    case "BitDepth_String":
+                    case "Bit_depth":
                         videoStream.BitDepth = xmlNode.InnerText;
                         break;
 
-                    case "ScanType_String":
+                    case "Scan_type":
                         videoStream.ScanType = xmlNode.InnerText;
                         break;
 
-                    case "Bits-_Pixel_Frame_":
+                    case "Bits__Pixel_Frame_":
                         videoStream.BitsPixelFrame = xmlNode.InnerText;
                         break;
 
-                    case "StreamSize_String":
+                    case "Stream_size":
                         videoStream.StreamSize = xmlNode.InnerText;
                         break;
 
-                    case "Encoded_Library_String":
+                    case "Writing_library":
                         videoStream.EncodedLibrary = xmlNode.InnerText;
                         break;
 
-                    case "Encoded_Library_Settings":
+                    case "Encoding_settings":
                         videoStream.EncodedLibrarySettings = xmlNode.InnerText;
                         break;
 
-                    case "Language_String":
+                    case "Language":
                         videoStream.Language = xmlNode.InnerText;
                         break;
                 }

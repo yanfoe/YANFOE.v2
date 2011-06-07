@@ -116,9 +116,13 @@ namespace YANFOE.UI.UserControls.TvControls
         private void SetBinding()
         {
             this.btnAssignFileToEpisode.DataBindings.Clear();
+            this.btnWatched.DataBindings.Clear();
 
             this.btnAssignFileToEpisode.DataBindings.Add(
                 "Image", TvDBFactory.CurrentEpisode, "CurrentFilePathStatusImage");
+
+            this.btnWatched.DataBindings.Add("Image", TvDBFactory.CurrentEpisode, "WatchedImage");
+            this.btnWatched.DataBindings.Add("Enabled", TvDBFactory.CurrentEpisode, "FileAssigned");
 
             this.btnLock.DataBindings.Clear();
 
@@ -424,6 +428,16 @@ namespace YANFOE.UI.UserControls.TvControls
                     TvDBFactory.CurrentEpisode.IsLocked = !TvDBFactory.CurrentEpisode.IsLocked;
                     break;
             }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnWatched control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnWatched_Click(object sender, EventArgs e)
+        {
+            TvDBFactory.CurrentEpisode.Watched = !TvDBFactory.CurrentEpisode.Watched;
         }
     }
 

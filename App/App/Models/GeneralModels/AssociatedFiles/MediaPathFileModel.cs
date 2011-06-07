@@ -161,6 +161,14 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             }
         }
 
+        public string Filename
+        {
+            get
+            {
+                return System.IO.Path.GetFileName(this.pathAndFileName);
+            }
+        }
+
         /// <summary>
         /// Gets FilenameExt.
         /// </summary>

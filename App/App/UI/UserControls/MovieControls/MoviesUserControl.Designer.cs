@@ -32,12 +32,12 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
@@ -122,8 +122,8 @@
             this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             this.picPoster = new YANFOE.UI.UserControls.CommonControls.DisplayPictureUserControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
             this.btnMutliWatchedFalse = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
             this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
             this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
             this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
@@ -634,16 +634,16 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Location = new System.Drawing.Point(173, 146);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(395, 44);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "Available in a future build";
+            this.labelControl1.Visible = false;
             // 
             // mediaInfoUserControl1
             // 
             this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaInfoUserControl1.Enabled = false;
             this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
             this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
             this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 305);
@@ -740,27 +740,6 @@
             this.panelControl1.Size = new System.Drawing.Size(777, 45);
             this.panelControl1.TabIndex = 1;
             // 
-            // btnMultiWatchedTrue
-            // 
-            this.btnMultiWatchedTrue.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMultiWatchedTrue.Image = global::YANFOE.Properties.Resources.watched_green;
-            this.btnMultiWatchedTrue.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMultiWatchedTrue.Location = new System.Drawing.Point(535, 2);
-            this.btnMultiWatchedTrue.Name = "btnMultiWatchedTrue";
-            this.btnMultiWatchedTrue.Size = new System.Drawing.Size(48, 41);
-            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem2.Appearance.Options.UseImage = true;
-            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem2.Text = "Mark all selected movies as Watched";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "\r\n";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.btnMultiWatchedTrue.SuperTip = superToolTip2;
-            this.btnMultiWatchedTrue.TabIndex = 14;
-            this.btnMultiWatchedTrue.Click += new System.EventHandler(this.btnMutliWatchedTrue_Click);
-            // 
             // btnMutliWatchedFalse
             // 
             this.btnMutliWatchedFalse.Dock = System.Windows.Forms.DockStyle.Right;
@@ -781,6 +760,27 @@
             this.btnMutliWatchedFalse.SuperTip = superToolTip1;
             this.btnMutliWatchedFalse.TabIndex = 13;
             this.btnMutliWatchedFalse.Click += new System.EventHandler(this.btnMutliWatchedFalse_Click);
+            // 
+            // btnMultiWatchedTrue
+            // 
+            this.btnMultiWatchedTrue.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMultiWatchedTrue.Image = global::YANFOE.Properties.Resources.watched_green;
+            this.btnMultiWatchedTrue.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMultiWatchedTrue.Location = new System.Drawing.Point(535, 2);
+            this.btnMultiWatchedTrue.Name = "btnMultiWatchedTrue";
+            this.btnMultiWatchedTrue.Size = new System.Drawing.Size(48, 41);
+            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem2.Appearance.Options.UseImage = true;
+            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem2.Text = "Mark all selected movies as Watched";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "\r\n";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.btnMultiWatchedTrue.SuperTip = superToolTip2;
+            this.btnMultiWatchedTrue.TabIndex = 14;
+            this.btnMultiWatchedTrue.Click += new System.EventHandler(this.btnMutliWatchedTrue_Click);
             // 
             // btnWatched
             // 
