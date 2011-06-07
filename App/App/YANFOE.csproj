@@ -177,6 +177,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GeneralModels\FileInfoModel.cs" />
     <Compile Include="Models\IOModels\MovieSaveSettings.cs" />
     <Compile Include="Models\IOModels\TvSaveSettings.cs" />
     <Compile Include="Models\TvModels\Scan\EpisodeDetails.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Tools\ThirdParty\FileLookup.cs" />
     <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
+    <Compile Include="Tools\Xml\XFormat.cs" />
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
       <SubType>UserControl</SubType>
     </Compile>

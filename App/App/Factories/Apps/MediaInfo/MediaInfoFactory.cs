@@ -43,6 +43,11 @@ namespace YANFOE.Factories.Apps.MediaInfo
         /// </returns>
         public static string GetMediaInfoXml(string filePath)
         {
+            if (File.Exists(filePath + ".mediainfo"))
+            {
+                return Tools.Text.IO.ReadTextFromFile(filePath + ".mediainfo");
+            }
+
             if (!File.Exists(mediaInfoPath))
             {
                 XtraMessageBox.Show("MediaInfo.exe not found", filePath, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -65,7 +70,11 @@ namespace YANFOE.Factories.Apps.MediaInfo
             mediaInfo.Start();
             mediaInfo.WaitForExit();
 
-            return mediaInfo.StandardOutput.ReadToEnd();
+            var output = mediaInfo.StandardOutput.ReadToEnd();
+
+            Tools.Text.IO.WriteTextToFile(filePath + ".mediainfo", output);
+
+            return output;
         }
 
         public static MiResponseModel DoMediaInfoScan(string filePath)

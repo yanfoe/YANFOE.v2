@@ -33,8 +33,6 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             this.CodecID = string.Empty;
             this.Duration = string.Empty;
             this.BitRate = string.Empty;
-            this.Width = string.Empty;
-            this.Height = string.Empty;
             this.DisplayAspectRatio = string.Empty;
             this.FrameRate = string.Empty;
             this.ColorSpace = string.Empty;
@@ -140,7 +138,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// <summary>
         /// Gets or sets Height.
         /// </summary>
-        public string Height { get; set; }
+        public int Height { get; set; }
 
         /// <summary>
         /// Gets or sets ID.
@@ -165,7 +163,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// <summary>
         /// Gets or sets Width.
         /// </summary>
-        public string Width { get; set; }
+        public int Width { get; set; }
 
         #endregion
     }

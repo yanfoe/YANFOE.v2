@@ -21,6 +21,11 @@ namespace YANFOE.Tools.Text
     {
         public static string ReadTextFromFile(string path)
         {
+            if (!File.Exists(path))
+            {
+                return string.Empty;
+            }
+
             return File.ReadAllText(path);
         }
 

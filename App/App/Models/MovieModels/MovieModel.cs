@@ -303,6 +303,8 @@ namespace YANFOE.Models.MovieModels
             this.ChangedTrailer = false;
             this.changeList = new BindingList<string>();
 
+            this.FileInfo = new FileInfoModel();
+
             this.Title = string.Empty;
             this.OriginalTitle = string.Empty;
             this.Year = null;

@@ -53,6 +53,17 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         #region Properties
 
         /// <summary>
+        /// Gets or sets the scan XML.
+        /// </summary>
+        public string ScanXML
+        {
+            get
+            {
+                return Tools.Text.IO.ReadTextFromFile(this.CompleteName + ".mediainfo");
+            }
+        }
+
+        /// <summary>
         ///   Gets or sets AudioStreams.
         /// </summary>
         public BindingList<MiAudioStreamModel> AudioStreams { get; set; }
@@ -409,11 +420,11 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         break;
 
                     case "Width":
-                        videoStream.Width = xmlNode.InnerText;
+                        videoStream.Width = xmlNode.InnerText.Replace(" ", string.Empty).GetNumber(4);
                         break;
 
                     case "Height":
-                        videoStream.Height = xmlNode.InnerText;
+                        videoStream.Height = xmlNode.InnerText.Replace(" ", string.Empty).GetNumber(4);
                         break;
 
                     case "Display_aspect_ratio":

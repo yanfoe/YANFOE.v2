@@ -34,6 +34,7 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.txtMediaInfoOutput = new System.Windows.Forms.RichTextBox();
             this.chkNtsc = new DevExpress.XtraEditors.CheckEdit();
             this.txtFPS = new DevExpress.XtraEditors.TextEdit();
             this.chkInterlaced = new DevExpress.XtraEditors.CheckEdit();
@@ -107,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).BeginInit();
@@ -171,11 +173,11 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.btnMediainfoScan);
             this.layoutControl1.Controls.Add(this.cmbFiles);
             this.layoutControl1.Controls.Add(this.xtraTabControl1);
             this.layoutControl1.Controls.Add(this.chkNtsc);
             this.layoutControl1.Controls.Add(this.txtFPS);
+            this.layoutControl1.Controls.Add(this.btnMediainfoScan);
             this.layoutControl1.Controls.Add(this.chkInterlaced);
             this.layoutControl1.Controls.Add(this.chkProgressive);
             this.layoutControl1.Controls.Add(this.txtResolution);
@@ -216,9 +218,9 @@
             // 
             this.btnMediainfoScan.Image = global::YANFOE.Properties.Resources.search;
             this.btnMediainfoScan.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMediainfoScan.Location = new System.Drawing.Point(757, 25);
+            this.btnMediainfoScan.Location = new System.Drawing.Point(727, 25);
             this.btnMediainfoScan.Name = "btnMediainfoScan";
-            this.btnMediainfoScan.Size = new System.Drawing.Size(78, 22);
+            this.btnMediainfoScan.Size = new System.Drawing.Size(108, 22);
             this.btnMediainfoScan.StyleController = this.layoutControl1;
             this.btnMediainfoScan.TabIndex = 37;
             this.btnMediainfoScan.Click += new System.EventHandler(this.btnMediainfoScan_Click);
@@ -230,7 +232,7 @@
             this.cmbFiles.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cmbFiles.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbFiles.Size = new System.Drawing.Size(748, 20);
+            this.cmbFiles.Size = new System.Drawing.Size(718, 20);
             this.cmbFiles.StyleController = this.layoutControl1;
             this.cmbFiles.TabIndex = 36;
             // 
@@ -253,9 +255,20 @@
             // 
             // xtraTabPage2
             // 
+            this.xtraTabPage2.Controls.Add(this.txtMediaInfoOutput);
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.Size = new System.Drawing.Size(358, 436);
             this.xtraTabPage2.Text = "MediaInfo Output";
+            // 
+            // txtMediaInfoOutput
+            // 
+            this.txtMediaInfoOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMediaInfoOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMediaInfoOutput.Location = new System.Drawing.Point(0, 0);
+            this.txtMediaInfoOutput.Name = "txtMediaInfoOutput";
+            this.txtMediaInfoOutput.Size = new System.Drawing.Size(358, 436);
+            this.txtMediaInfoOutput.TabIndex = 0;
+            this.txtMediaInfoOutput.Text = "";
             // 
             // chkNtsc
             // 
@@ -1014,7 +1027,7 @@
             this.layoutControlItem29.CustomizationFormText = "layoutControlItem29";
             this.layoutControlItem29.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem29.Name = "layoutControlItem29";
-            this.layoutControlItem29.Size = new System.Drawing.Size(752, 26);
+            this.layoutControlItem29.Size = new System.Drawing.Size(722, 26);
             this.layoutControlItem29.Text = "layoutControlItem29";
             this.layoutControlItem29.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem29.TextToControlDistance = 0;
@@ -1024,9 +1037,9 @@
             // 
             this.layoutControlItem30.Control = this.btnMediainfoScan;
             this.layoutControlItem30.CustomizationFormText = "layoutControlItem30";
-            this.layoutControlItem30.Location = new System.Drawing.Point(752, 0);
+            this.layoutControlItem30.Location = new System.Drawing.Point(722, 0);
             this.layoutControlItem30.Name = "layoutControlItem30";
-            this.layoutControlItem30.Size = new System.Drawing.Size(82, 26);
+            this.layoutControlItem30.Size = new System.Drawing.Size(112, 26);
             this.layoutControlItem30.Text = "layoutControlItem30";
             this.layoutControlItem30.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem30.TextToControlDistance = 0;
@@ -1039,11 +1052,13 @@
             this.Controls.Add(this.layoutControl1);
             this.Name = "MediaInfoUserControl";
             this.Size = new System.Drawing.Size(840, 690);
+            this.Load += new System.EventHandler(this.MediaInfoUserControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).EndInit();
@@ -1184,5 +1199,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem29;
         private DevExpress.XtraEditors.SimpleButton btnMediainfoScan;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
+        private System.Windows.Forms.RichTextBox txtMediaInfoOutput;
     }
 }

@@ -19,6 +19,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
     using Newtonsoft.Json;
 
+    using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Tools.Models;
 
     /// <summary>
@@ -55,7 +56,6 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         public MediaModel()
         {
             this.FileModel = new MediaPathFileModel();
-            this.MediaInfoScanOutput = new MediaScanOutput();
             this.filePath = string.Empty;
         }
 
@@ -115,7 +115,23 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// Gets or sets the media info scan output.
         /// </summary>
         /// <value>The media info scan output.</value>
-        public MediaScanOutput MediaInfoScanOutput { get; set; }
+        [JsonIgnore]
+        public MiResponseModel MiResponseModel
+        {
+            get
+            {
+                var responseModel = new MiResponseModel();
+
+                if (File.Exists(this.FilePath + ".mediainfo"))
+                {
+                    var xml = Tools.Text.IO.ReadTextFromFile(this.FilePath + ".mediainfo");
+                    responseModel.PopulateFromXML(xml);
+                    return responseModel;
+                }
+
+                return null;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the order.

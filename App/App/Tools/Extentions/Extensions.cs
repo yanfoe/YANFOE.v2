@@ -198,14 +198,19 @@ namespace YANFOE.Tools.Extentions
         /// <returns>
         /// The first found number
         /// </returns>
-        public static int GetNumber(this string value)
+        public static int GetNumber(this string value, int? max = null)
         {
             if (string.IsNullOrEmpty(value))
             {
                 return -1;
             }
 
-            string v = Regex.Match(value, @"\d{1,2}").Groups[0].Value;
+            if (max == null)
+            {
+                max = 2;
+            }
+
+            string v = Regex.Match(value, "\\d{1," + max + "}").Groups[0].Value;
             return Convert.ToInt16(v);
         }
 
