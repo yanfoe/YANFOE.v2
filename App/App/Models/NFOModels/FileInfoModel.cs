@@ -28,20 +28,6 @@ namespace YANFOE.Models.NFOModels
     [Serializable]
     public class FileInfoModel : ModelBase
     {
-        #region Constants and Fields
-
-        /// <summary>
-        /// VideoOutput backing field
-        /// </summary>
-        private string videoOutput;
-
-        /// <summary>
-        /// Videosource backing field
-        /// </summary>
-        private string videoSource;
-
-        #endregion
-
         #region Constructors and Destructors
 
         /// <summary>
@@ -49,9 +35,8 @@ namespace YANFOE.Models.NFOModels
         /// </summary>
         public FileInfoModel()
         {
-            this.VideoSource = string.Empty;
-            this.VideoOutput = string.Empty;
-            this.VideoStream = new BindingList<VideoStream>();
+
+
             this.AudioStream = new BindingList<AudioStreamModel>();
             this.SubtitleStream = new BindingList<string>();
         }
@@ -59,6 +44,30 @@ namespace YANFOE.Models.NFOModels
         #endregion
 
         #region Properties
+
+        public string Codec { get; set; }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public string AspectRatio { get; set; }
+
+        public string AspectRatioDecimal { get; set; }
+
+        public bool ProgressiveScan { get; set; }
+
+        public bool InterlacedScan { get; set; }
+
+        public string FPS { get; set; }
+
+        public string FPSRounded { get; set; }
+
+        public bool Pal { get; set; }
+
+        public bool Ntsc { get; set; }
+
+        public string Resolution { get; set; }
 
         /// <summary>
         /// Gets or sets the audio stream.
@@ -71,48 +80,6 @@ namespace YANFOE.Models.NFOModels
         /// </summary>
         /// <value>The subtitle stream.</value>
         public BindingList<string> SubtitleStream { get; set; }
-
-        /// <summary>
-        /// Gets or sets the video output.
-        /// </summary>
-        /// <value>The video output.</value>
-        public string VideoOutput
-        {
-            get
-            {
-                return this.videoOutput;
-            }
-
-            set
-            {
-                this.videoOutput = value;
-                this.OnPropertyChanged("VideoOutput");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the video source.
-        /// </summary>
-        /// <value>The video source.</value>
-        public string VideoSource
-        {
-            get
-            {
-                return this.videoSource;
-            }
-
-            set
-            {
-                this.videoSource = value;
-                this.OnPropertyChanged("VideoSource");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the video stream.
-        /// </summary>
-        /// <value>The video stream.</value>
-        public BindingList<VideoStream> VideoStream { get; set; }
 
         #endregion
     }

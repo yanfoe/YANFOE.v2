@@ -9,13 +9,17 @@
 
 namespace YANFOE.Factories.Apps.MediaInfo
 {
+    using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
     using DevExpress.XtraEditors;
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
+    using YANFOE.Models.MovieModels;
+    using YANFOE.Tools.Xml;
 
     /// <summary>
     /// The media info factory.
@@ -45,7 +49,15 @@ namespace YANFOE.Factories.Apps.MediaInfo
         {
             if (File.Exists(filePath + ".mediainfo"))
             {
-                return Tools.Text.IO.ReadTextFromFile(filePath + ".mediainfo");
+                var xml = Tools.Text.IO.ReadTextFromFile(filePath + ".mediainfo");
+                var check = XTool.IsValidXML(xml);
+
+                if (check)
+                {
+                    return xml;
+                }
+                
+                File.Delete(filePath + ".mediainfo");
             }
 
             if (!File.Exists(mediaInfoPath))
@@ -60,15 +72,15 @@ namespace YANFOE.Factories.Apps.MediaInfo
                         {
                             FileName = mediaInfoPath, 
                             Arguments = string.Format(@"""{0}"" --Output=XML", filePath), 
-                            UseShellExecute = false, 
+                            UseShellExecute = false,
                             CreateNoWindow = true, 
-                            RedirectStandardOutput = true, 
+                            RedirectStandardOutput = true,
                             RedirectStandardError = true
                         }
                 };
 
             mediaInfo.Start();
-            mediaInfo.WaitForExit();
+            mediaInfo.WaitForExit(Settings.Get.MediaInfo.WaitForScan);
 
             var output = mediaInfo.StandardOutput.ReadToEnd();
 
@@ -92,6 +104,131 @@ namespace YANFOE.Factories.Apps.MediaInfo
             return responseModel;
         }
 
-        #endregion
+        public static void InjectResponseModel(MiResponseModel responseModel, MovieModel movieModel)
+        {
+            if (responseModel.VideoStreams.Count == 0)
+            {
+                return;
+            }
+
+            movieModel.FileInfo.Codec = responseModel.VideoStreams[0].CodecID;
+            movieModel.FileInfo.Width = responseModel.VideoStreams[0].Width;
+            movieModel.FileInfo.Height = responseModel.VideoStreams[0].Height;
+
+            movieModel.FileInfo.AspectRatio = responseModel.VideoStreams[0].DisplayAspectRatio.Replace(" ", string.Empty);
+            movieModel.FileInfo.AspectRatioDecimal = GenerateARDecimal(movieModel.FileInfo.AspectRatio);
+
+            movieModel.FileInfo.FPS = GenerateFPS(responseModel.VideoStreams[0].FrameRate);
+            movieModel.FileInfo.FPSRounded = GenerateFPSRounded(responseModel.VideoStreams[0].FrameRate);
+
+            movieModel.FileInfo.Ntsc = IsNtsc(movieModel.FileInfo.FPS);
+            movieModel.FileInfo.Pal = IsPal(movieModel.FileInfo.FPS);
+
+            movieModel.FileInfo.Resolution = GenerateResolution(movieModel.FileInfo.Width);
+
+            movieModel.FileInfo.ProgressiveScan = responseModel.VideoStreams[0].ScanType == "Progressive";
+            movieModel.FileInfo.InterlacedScan = responseModel.VideoStreams[0].ScanType == "Interlaced";
+        }
+
+        private static string GenerateFPS(string fps)
+        {
+            return fps.Replace(" ", string.Empty).Replace("fps", string.Empty);
+        }
+
+        private static string GenerateFPSRounded(string fps)
+        {
+            fps = GenerateFPS(fps);
+
+            decimal result;
+            var check = decimal.TryParse(fps, out result);
+
+            if (!check)
+            {
+                return string.Empty;
+            }
+
+            return Math.Round(result).ToString();
+        }
+
+        private static string GenerateResolution(int width)
+        {
+            foreach (var resolution in Settings.Get.MediaInfo.Resolutions)
+            {
+                if (resolution.Value.Width <= width && resolution.Value.Height >= width)
+                {
+                    return resolution.Key;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private static string GenerateARDecimal(string arValue)
+        {
+            var regex = Regex.Match(arValue, @"(?<a>.*?):(?<b>\d{1})");
+
+            if (!regex.Success)
+            {
+                return string.Empty;
+            }
+
+            var a = decimal.Parse(regex.Groups["a"].Value);
+            var b = decimal.Parse(regex.Groups["b"].Value);
+
+            var value = (a / b).ToString();
+
+            if (value.Length < 5)
+            {
+                return value;
+            }
+
+            return value.Substring(0, 5);
+        }
+
+        enum ScanType{
+            None, 
+            Pal,
+            Ntsc
+        }
+
+        private static ScanType GetScanType(string fps)
+        {
+            decimal result;
+            var check = decimal.TryParse(fps, out result);
+
+            if (!check)
+            {
+                return ScanType.None;
+            }
+
+            var rounded = (int)Math.Round(result);
+
+            switch (rounded)
+            {
+                case 24:
+                case 29:
+                case 30:
+                case 60:
+                    return ScanType.Ntsc;
+                case 25:
+                case 49:
+                case 50:
+                    return ScanType.Pal;
+            }
+
+            return ScanType.None;
+        }
+
+        private static bool IsNtsc(string fps)
+        {
+            return (GetScanType(fps) == ScanType.Ntsc);
+        }
+
+        private static bool IsPal(string fps)
+        {
+            return (GetScanType(fps) == ScanType.Pal);
+        }
     }
+
+        #endregion
 }

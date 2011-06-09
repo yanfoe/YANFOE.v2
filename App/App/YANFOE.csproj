@@ -197,6 +197,7 @@
     <Compile Include="Settings\UserSettings\Countries.cs" />
     <Compile Include="Settings\UserSettings\Genres.cs" />
     <Compile Include="Settings\UserSettings\LookAndFeel.cs" />
+    <Compile Include="Settings\UserSettings\MediaInfoSettings.cs" />
     <Compile Include="Settings\UserSettings\Scraper.cs" />
     <Compile Include="Settings\UserSettings\ScraperSettings\Generic.cs" />
     <Compile Include="IO\IoBase.cs" />

@@ -85,6 +85,8 @@ namespace YANFOE.Settings
         /// </summary>
         private static Media media;
 
+        private static MediaInfoSettings mediaInfo;
+
         /// <summary>
         /// The scraper settings
         /// </summary>
@@ -278,6 +280,19 @@ namespace YANFOE.Settings
             }
         }
 
+        public static MediaInfoSettings MediaInfo
+        {
+            get
+            {
+                return mediaInfo ?? (mediaInfo = new MediaInfoSettings());
+            }
+
+            set
+            {
+                mediaInfo = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets Scraper.
         /// </summary>
@@ -346,6 +361,7 @@ namespace YANFOE.Settings
             LoadLogSettings();
             LoadLookAndFeelSettings();
             LoadMediaSettings();
+            LoadMediaInfoSettings();
             LoadScraperSettings();
             LoadUiSettings();
             LoadWebSettings();
@@ -360,7 +376,7 @@ namespace YANFOE.Settings
                 new dynamic[]
                     {
                         Countries, FileSystemPaths, Genres, Image, InOutCollection, Keywords, Localization, LogSettings, LookAndFeel, 
-                        Media, Scraper, Ui, Web
+                        Media, MediaInfo, Scraper, Ui, Web
                     });
         }
 
@@ -581,6 +597,28 @@ namespace YANFOE.Settings
                 string json = IO.ReadTextFromFile(path);
 
                 lookAndFeel = JsonConvert.DeserializeObject(json, typeof(LookAndFeel)) as LookAndFeel;
+            }
+            catch (Exception exception)
+            {
+                XtraMessageBox.Show("Failed to load LookAndFeel settings. Please check log for more info.");
+                Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
+            }
+        }
+
+        private static void LoadMediaInfoSettings()
+        {
+            try
+            {
+                string path = FileSystemPaths.PathSettings + "MediaInfo.txt";
+
+                if (!File.Exists(path))
+                {
+                    return;
+                }
+
+                string json = IO.ReadTextFromFile(path);
+
+                mediaInfo = JsonConvert.DeserializeObject(json, typeof(MediaInfoSettings)) as MediaInfoSettings;
             }
             catch (Exception exception)
             {

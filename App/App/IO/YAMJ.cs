@@ -21,6 +21,7 @@ namespace YANFOE.IO
     using System.Text;
     using System.Xml;
 
+    using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Factories.Renamer;
     using YANFOE.Factories.Sets;

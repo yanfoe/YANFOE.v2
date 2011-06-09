@@ -17,6 +17,7 @@ namespace YANFOE.Tools.Xml
     using System;
     using System.Linq;
     using System.Text;
+    using System.Xml;
 
     /// <summary>
     /// The x tool.
@@ -65,6 +66,33 @@ namespace YANFOE.Tools.Xml
             }
 
             return buffer.ToString();
+        }
+
+        public static bool IsValidXML(string value)
+        {
+            try
+            {
+                // Check we actually have a value
+                if (string.IsNullOrEmpty(value) == false)
+                {
+                    // Try to load the value into a document
+                    XmlDocument xmlDoc = new XmlDocument();
+
+                    xmlDoc.LoadXml(value);
+
+                    // If we managed with no exception then this is valid XML!
+                    return true;
+                }
+                else
+                {
+                    // A blank value is not valid xml
+                    return false;
+                }
+            }
+            catch (System.Xml.XmlException)
+            {
+                return false;
+            }
         }
 
         #endregion

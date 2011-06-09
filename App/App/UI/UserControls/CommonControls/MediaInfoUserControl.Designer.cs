@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.btnMediainfoScan = new DevExpress.XtraEditors.SimpleButton();
             this.cmbFiles = new DevExpress.XtraEditors.ComboBoxEdit();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.txtMediaInfoOutput = new System.Windows.Forms.RichTextBox();
             this.chkNtsc = new DevExpress.XtraEditors.CheckEdit();
-            this.txtFPS = new DevExpress.XtraEditors.TextEdit();
+            this.txtFPSRounded = new DevExpress.XtraEditors.TextEdit();
+            this.btnMediainfoScan = new DevExpress.XtraEditors.SimpleButton();
             this.chkInterlaced = new DevExpress.XtraEditors.CheckEdit();
             this.chkProgressive = new DevExpress.XtraEditors.CheckEdit();
             this.txtResolution = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
+            this.txtFPSFull = new DevExpress.XtraEditors.TextEdit();
             this.txtHeight = new DevExpress.XtraEditors.SpinEdit();
             this.txtWidth = new DevExpress.XtraEditors.SpinEdit();
             this.chkPal = new DevExpress.XtraEditors.CheckEdit();
-            this.bmAspectRatioPercent = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             this.txtVideoCodec = new DevExpress.XtraEditors.TextEdit();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -56,7 +55,7 @@
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.bmAspectRatioDecimal = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cmbAspectRatioDecimal = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -65,6 +64,7 @@
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.cmbAspectRatio = new DevExpress.XtraEditors.ComboBoxEdit();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -110,27 +110,27 @@
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPSRounded.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProgressive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtResolution.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPSFull.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtHeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtWidth.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPal.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioPercent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVideoCodec.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioDecimal.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAspectRatioDecimal.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAspectRatio.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -176,16 +176,15 @@
             this.layoutControl1.Controls.Add(this.cmbFiles);
             this.layoutControl1.Controls.Add(this.xtraTabControl1);
             this.layoutControl1.Controls.Add(this.chkNtsc);
-            this.layoutControl1.Controls.Add(this.txtFPS);
+            this.layoutControl1.Controls.Add(this.txtFPSRounded);
             this.layoutControl1.Controls.Add(this.btnMediainfoScan);
             this.layoutControl1.Controls.Add(this.chkInterlaced);
             this.layoutControl1.Controls.Add(this.chkProgressive);
             this.layoutControl1.Controls.Add(this.txtResolution);
-            this.layoutControl1.Controls.Add(this.textEdit6);
+            this.layoutControl1.Controls.Add(this.txtFPSFull);
             this.layoutControl1.Controls.Add(this.txtHeight);
             this.layoutControl1.Controls.Add(this.txtWidth);
             this.layoutControl1.Controls.Add(this.chkPal);
-            this.layoutControl1.Controls.Add(this.bmAspectRatioPercent);
             this.layoutControl1.Controls.Add(this.txtVideoCodec);
             this.layoutControl1.Controls.Add(this.textEdit2);
             this.layoutControl1.Controls.Add(this.comboBoxEdit2);
@@ -197,12 +196,13 @@
             this.layoutControl1.Controls.Add(this.simpleButton5);
             this.layoutControl1.Controls.Add(this.simpleButton4);
             this.layoutControl1.Controls.Add(this.simpleButton3);
-            this.layoutControl1.Controls.Add(this.bmAspectRatioDecimal);
+            this.layoutControl1.Controls.Add(this.cmbAspectRatioDecimal);
             this.layoutControl1.Controls.Add(this.gridControl3);
             this.layoutControl1.Controls.Add(this.simpleButton1);
             this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Controls.Add(this.gridControl2);
             this.layoutControl1.Controls.Add(this.simpleButton2);
+            this.layoutControl1.Controls.Add(this.cmbAspectRatio);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
@@ -213,17 +213,6 @@
             this.layoutControl1.Size = new System.Drawing.Size(840, 690);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
-            // 
-            // btnMediainfoScan
-            // 
-            this.btnMediainfoScan.Image = global::YANFOE.Properties.Resources.search;
-            this.btnMediainfoScan.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMediainfoScan.Location = new System.Drawing.Point(727, 25);
-            this.btnMediainfoScan.Name = "btnMediainfoScan";
-            this.btnMediainfoScan.Size = new System.Drawing.Size(108, 22);
-            this.btnMediainfoScan.StyleController = this.layoutControl1;
-            this.btnMediainfoScan.TabIndex = 37;
-            this.btnMediainfoScan.Click += new System.EventHandler(this.btnMediainfoScan_Click);
             // 
             // cmbFiles
             // 
@@ -279,13 +268,24 @@
             this.chkNtsc.StyleController = this.layoutControl1;
             this.chkNtsc.TabIndex = 33;
             // 
-            // txtFPS
+            // txtFPSRounded
             // 
-            this.txtFPS.Location = new System.Drawing.Point(70, 173);
-            this.txtFPS.Name = "txtFPS";
-            this.txtFPS.Size = new System.Drawing.Size(88, 20);
-            this.txtFPS.StyleController = this.layoutControl1;
-            this.txtFPS.TabIndex = 31;
+            this.txtFPSRounded.Location = new System.Drawing.Point(70, 173);
+            this.txtFPSRounded.Name = "txtFPSRounded";
+            this.txtFPSRounded.Size = new System.Drawing.Size(88, 20);
+            this.txtFPSRounded.StyleController = this.layoutControl1;
+            this.txtFPSRounded.TabIndex = 31;
+            // 
+            // btnMediainfoScan
+            // 
+            this.btnMediainfoScan.Image = global::YANFOE.Properties.Resources.search;
+            this.btnMediainfoScan.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMediainfoScan.Location = new System.Drawing.Point(727, 25);
+            this.btnMediainfoScan.Name = "btnMediainfoScan";
+            this.btnMediainfoScan.Size = new System.Drawing.Size(108, 22);
+            this.btnMediainfoScan.StyleController = this.layoutControl1;
+            this.btnMediainfoScan.TabIndex = 37;
+            this.btnMediainfoScan.Click += new System.EventHandler(this.btnMediainfoScan_Click);
             // 
             // chkInterlaced
             // 
@@ -313,13 +313,13 @@
             this.txtResolution.StyleController = this.layoutControl1;
             this.txtResolution.TabIndex = 28;
             // 
-            // textEdit6
+            // txtFPSFull
             // 
-            this.textEdit6.Location = new System.Drawing.Point(162, 173);
-            this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Size = new System.Drawing.Size(50, 20);
-            this.textEdit6.StyleController = this.layoutControl1;
-            this.textEdit6.TabIndex = 32;
+            this.txtFPSFull.Location = new System.Drawing.Point(162, 173);
+            this.txtFPSFull.Name = "txtFPSFull";
+            this.txtFPSFull.Size = new System.Drawing.Size(50, 20);
+            this.txtFPSFull.StyleController = this.layoutControl1;
+            this.txtFPSFull.TabIndex = 32;
             // 
             // txtHeight
             // 
@@ -359,16 +359,6 @@
             this.chkPal.Size = new System.Drawing.Size(41, 19);
             this.chkPal.StyleController = this.layoutControl1;
             this.chkPal.TabIndex = 34;
-            // 
-            // bmAspectRatioPercent
-            // 
-            this.bmAspectRatioPercent.Location = new System.Drawing.Point(70, 125);
-            this.bmAspectRatioPercent.Name = "bmAspectRatioPercent";
-            this.bmAspectRatioPercent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.bmAspectRatioPercent.Size = new System.Drawing.Size(142, 20);
-            this.bmAspectRatioPercent.StyleController = this.layoutControl1;
-            this.bmAspectRatioPercent.TabIndex = 24;
             // 
             // txtVideoCodec
             // 
@@ -486,15 +476,16 @@
             this.simpleButton3.StyleController = this.layoutControl1;
             this.simpleButton3.TabIndex = 10;
             // 
-            // bmAspectRatioDecimal
+            // cmbAspectRatioDecimal
             // 
-            this.bmAspectRatioDecimal.Location = new System.Drawing.Point(216, 125);
-            this.bmAspectRatioDecimal.Name = "bmAspectRatioDecimal";
-            this.bmAspectRatioDecimal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cmbAspectRatioDecimal.Location = new System.Drawing.Point(216, 125);
+            this.cmbAspectRatioDecimal.Name = "cmbAspectRatioDecimal";
+            this.cmbAspectRatioDecimal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.bmAspectRatioDecimal.Size = new System.Drawing.Size(153, 20);
-            this.bmAspectRatioDecimal.StyleController = this.layoutControl1;
-            this.bmAspectRatioDecimal.TabIndex = 25;
+            this.cmbAspectRatioDecimal.Size = new System.Drawing.Size(153, 20);
+            this.cmbAspectRatioDecimal.StyleController = this.layoutControl1;
+            this.cmbAspectRatioDecimal.TabIndex = 25;
+            this.cmbAspectRatioDecimal.SelectedIndexChanged += new System.EventHandler(this.cmbAspectRatioDecimal_SelectedIndexChanged);
             // 
             // gridControl3
             // 
@@ -563,6 +554,18 @@
             this.simpleButton2.Size = new System.Drawing.Size(26, 22);
             this.simpleButton2.StyleController = this.layoutControl1;
             this.simpleButton2.TabIndex = 7;
+            // 
+            // cmbAspectRatio
+            // 
+            this.cmbAspectRatio.Location = new System.Drawing.Point(70, 125);
+            this.cmbAspectRatio.Name = "cmbAspectRatio";
+            this.cmbAspectRatio.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbAspectRatio.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbAspectRatio.Size = new System.Drawing.Size(142, 20);
+            this.cmbAspectRatio.StyleController = this.layoutControl1;
+            this.cmbAspectRatio.TabIndex = 24;
+            this.cmbAspectRatio.SelectedIndexChanged += new System.EventHandler(this.cmbAspectRatio_SelectedIndexChanged);
             // 
             // layoutControlItem1
             // 
@@ -843,7 +846,7 @@
             // 
             this.layoutControlItem17.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem17.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem17.Control = this.bmAspectRatioPercent;
+            this.layoutControlItem17.Control = this.cmbAspectRatio;
             this.layoutControlItem17.CustomizationFormText = "Aspect Ratio";
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem17.Name = "layoutControlItem17";
@@ -865,7 +868,7 @@
             // 
             // layoutControlItem18
             // 
-            this.layoutControlItem18.Control = this.bmAspectRatioDecimal;
+            this.layoutControlItem18.Control = this.cmbAspectRatioDecimal;
             this.layoutControlItem18.CustomizationFormText = "layoutControlItem18";
             this.layoutControlItem18.Location = new System.Drawing.Point(211, 48);
             this.layoutControlItem18.Name = "layoutControlItem18";
@@ -929,7 +932,7 @@
             // 
             this.layoutControlItem24.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem24.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.layoutControlItem24.Control = this.txtFPS;
+            this.layoutControlItem24.Control = this.txtFPSRounded;
             this.layoutControlItem24.CustomizationFormText = "FPS";
             this.layoutControlItem24.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem24.Name = "layoutControlItem24";
@@ -954,7 +957,7 @@
             // 
             // layoutControlItem25
             // 
-            this.layoutControlItem25.Control = this.textEdit6;
+            this.layoutControlItem25.Control = this.txtFPSFull;
             this.layoutControlItem25.CustomizationFormText = "layoutControlItem25";
             this.layoutControlItem25.Location = new System.Drawing.Point(157, 96);
             this.layoutControlItem25.Name = "layoutControlItem25";
@@ -1060,27 +1063,27 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFPS.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPSRounded.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkInterlaced.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProgressive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtResolution.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFPSFull.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtHeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtWidth.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPal.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioPercent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVideoCodec.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bmAspectRatioDecimal.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAspectRatioDecimal.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAspectRatio.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -1168,9 +1171,8 @@
         private DevExpress.XtraEditors.TextEdit txtResolution;
         private DevExpress.XtraEditors.SpinEdit txtHeight;
         private DevExpress.XtraEditors.SpinEdit txtWidth;
-        private DevExpress.XtraEditors.CheckedComboBoxEdit bmAspectRatioPercent;
         private DevExpress.XtraEditors.TextEdit txtVideoCodec;
-        private DevExpress.XtraEditors.ComboBoxEdit bmAspectRatioDecimal;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbAspectRatioDecimal;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
@@ -1181,8 +1183,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
         private DevExpress.XtraEditors.CheckEdit chkNtsc;
-        private DevExpress.XtraEditors.TextEdit textEdit6;
-        private DevExpress.XtraEditors.TextEdit txtFPS;
+        private DevExpress.XtraEditors.TextEdit txtFPSFull;
+        private DevExpress.XtraEditors.TextEdit txtFPSRounded;
         private DevExpress.XtraEditors.CheckEdit chkPal;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
@@ -1200,5 +1202,6 @@
         private DevExpress.XtraEditors.SimpleButton btnMediainfoScan;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
         private System.Windows.Forms.RichTextBox txtMediaInfoOutput;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbAspectRatio;
     }
 }

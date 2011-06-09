@@ -19,6 +19,7 @@
 
 namespace YANFOE.IO
 {
+    using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.TvModels.Show;
