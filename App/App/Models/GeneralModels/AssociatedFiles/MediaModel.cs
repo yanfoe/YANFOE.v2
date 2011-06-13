@@ -129,7 +129,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                     return responseModel;
                 }
 
-                return null;
+                return new MiResponseModel();
             }
         }
 

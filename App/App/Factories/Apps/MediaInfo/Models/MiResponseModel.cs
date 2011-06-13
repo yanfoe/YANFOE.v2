@@ -219,7 +219,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         break;
 
                     case "Format_Info":
-                        audioStream.Format_Info = xmlNode.InnerText;
+                        audioStream.FormatInfo = xmlNode.InnerText;
                         break;
 
                     case "Mode_extension":
@@ -344,19 +344,19 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             {
                 switch (xmlNode.Name)
                 {
-                    case "ID_String":
+                    case "ID":
                         subtitleStream.ID = xmlNode.InnerText.ToInt();
                         break;
                     case "Format":
                         subtitleStream.Format = xmlNode.InnerText;
                         break;
-                    case "CodecID":
+                    case "Codec_ID":
                         subtitleStream.CodecID = xmlNode.InnerText;
                         break;
-                    case "CodecID_Info":
+                    case "Codec_ID_Info":
                         subtitleStream.CodecIDInfo = xmlNode.InnerText;
                         break;
-                    case "Language_String":
+                    case "Language":
                         subtitleStream.Language = xmlNode.InnerText;
                         break;
                 }

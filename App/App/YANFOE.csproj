@@ -216,111 +216,165 @@
     <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
     <Compile Include="Tools\Xml\XFormat.cs" />
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.Designer.cs">
       <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralUi.Designer.cs">
       <DependentUpon>UcSettingsGeneralUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralWeb.Designer.cs">
       <DependentUpon>UcSettingsGeneralWeb.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMovieIn.Designer.cs">
       <DependentUpon>UcSettingsMovieIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesIO.Designer.cs">
       <DependentUpon>UcSettingsMoviesIO.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperImdb.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperImdb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperImdb.Designer.cs">
       <DependentUpon>UcSettingsScraperImdb.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTmdb.Designer.cs">
       <DependentUpon>UcSettingsScraperTmdb.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIO.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIO.Designer.cs">
       <DependentUpon>UcSettingsTvIO.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.Designer.cs">
       <DependentUpon>UcSettingsTvIOKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.Designer.cs">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTVMisc.Designer.cs">
       <DependentUpon>UcSettingsTVMisc.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmEditMediaPath.cs" />
+    <Compile Include="UI\Dialogs\General\FrmEditMediaPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmEditMediaPath.Designer.cs">
       <DependentUpon>FrmEditMediaPath.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmEnterAValue.cs" />
+    <Compile Include="UI\Dialogs\General\FrmEnterAValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmEnterAValue.Designer.cs">
       <DependentUpon>FrmEnterAValue.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.cs" />
+    <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmLoadingYANFOE.Designer.cs">
       <DependentUpon>FrmLoadingYANFOE.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmMissingFilesMovies.cs" />
+    <Compile Include="UI\Dialogs\General\FrmMissingFilesMovies.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmMissingFilesMovies.Designer.cs">
       <DependentUpon>FrmMissingFilesMovies.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmMoveDialog.cs" />
+    <Compile Include="UI\Dialogs\General\FrmMoveDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmMoveDialog.Designer.cs">
       <DependentUpon>FrmMoveDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmProcessingMoviesStatus.cs" />
+    <Compile Include="UI\Dialogs\General\FrmProcessingMoviesStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmProcessingMoviesStatus.Designer.cs">
       <DependentUpon>FrmProcessingMoviesStatus.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmSavingDB.cs" />
+    <Compile Include="UI\Dialogs\General\FrmSavingDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmSavingDB.Designer.cs">
       <DependentUpon>FrmSavingDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\FrmSavingDialog.cs" />
+    <Compile Include="UI\Dialogs\General\FrmSavingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\FrmSavingDialog.Designer.cs">
       <DependentUpon>FrmSavingDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\General\frmWelcomePage.cs" />
+    <Compile Include="UI\Dialogs\General\frmWelcomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\General\frmWelcomePage.Designer.cs">
       <DependentUpon>frmWelcomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\Movies\FrmMovieRename.cs" />
+    <Compile Include="UI\Dialogs\Movies\FrmMovieRename.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\Movies\FrmMovieRename.Designer.cs">
       <DependentUpon>FrmMovieRename.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\Movies\FrmScraperGroupManager.cs" />
+    <Compile Include="UI\Dialogs\Movies\FrmScraperGroupManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\Movies\FrmScraperGroupManager.Designer.cs">
       <DependentUpon>FrmScraperGroupManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DSettings\FrmSettingsMain.cs" />
+    <Compile Include="UI\Dialogs\DSettings\FrmSettingsMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\FrmSettingsMain.Designer.cs">
       <DependentUpon>FrmSettingsMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmAddCustomSeries.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmAddCustomSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmAddCustomSeries.Designer.cs">
       <DependentUpon>FrmAddCustomSeries.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmImportTv.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmImportTv.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmImportTv.Designer.cs">
       <DependentUpon>FrmImportTv.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmNotCatagorized2.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmNotCatagorized2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmNotCatagorized2.Designer.cs">
       <DependentUpon>FrmNotCatagorized2.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmSelectSeries.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmSelectSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmSelectSeries.Designer.cs">
       <DependentUpon>FrmSelectSeries.cs</DependentUpon>
     </Compile>
@@ -416,7 +470,9 @@
     <Compile Include="Models\NFOModels\VideoStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="frmMain.cs" />
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
@@ -452,88 +508,136 @@
     <Compile Include="Tools\Xml\XTool.cs" />
     <Compile Include="Tools\Xml\XWrite.cs" />
     <Compile Include="Tools\YRegex.cs" />
-    <Compile Include="UI\Dialogs\TV\FrmTvRestructure.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmTvRestructure.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmTvRestructure.Designer.cs">
       <DependentUpon>FrmTvRestructure.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\TV\FrmUpdateShows.cs" />
+    <Compile Include="UI\Dialogs\TV\FrmUpdateShows.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Popups\MovieListPopup.cs" />
-    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.cs" />
+    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.Designer.cs">
       <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs" />
+    <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.Designer.cs">
       <DependentUpon>NFOPreviewUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\DownloadControls\DownloadStatusUserControl.cs" />
+    <Compile Include="UI\UserControls\CommonControls\XmlPreviewUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CommonControls\XmlPreviewUserControl.Designer.cs">
+      <DependentUpon>XmlPreviewUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\DownloadControls\DownloadStatusUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\DownloadControls\DownloadStatusUserControl.Designer.cs">
       <DependentUpon>DownloadStatusUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\DownloadControls\DownloadsUserControl.cs" />
+    <Compile Include="UI\UserControls\DownloadControls\DownloadsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\DownloadControls\DownloadsUserControl.Designer.cs">
       <DependentUpon>DownloadsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\LogControls\LogsUserControl.cs" />
+    <Compile Include="UI\UserControls\LogControls\LogsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\LogControls\LogsUserControl.Designer.cs">
       <DependentUpon>LogsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.cs" />
+    <Compile Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\ImportMoviesUc.Designer.cs">
       <DependentUpon>ImportMoviesUc.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MediaManagerControls\MediaPathManager.cs" />
+    <Compile Include="UI\UserControls\MediaManagerControls\MediaPathManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MediaManagerControls\MediaPathManager.Designer.cs">
       <DependentUpon>MediaPathManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\MovieTrailerUserControl.cs" />
+    <Compile Include="UI\UserControls\MovieControls\MovieTrailerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\MovieTrailerUserControl.Designer.cs">
       <DependentUpon>MovieTrailerUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.cs" />
+    <Compile Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\MovieFileInfoUserControl.Designer.cs">
       <DependentUpon>MovieFileInfoUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\MovieIdentierUserControl1.cs" />
+    <Compile Include="UI\UserControls\MovieControls\MovieIdentierUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\MovieIdentierUserControl1.Designer.cs">
       <DependentUpon>MovieIdentierUserControl1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\MovieMainDetailsUserControl.cs" />
+    <Compile Include="UI\UserControls\MovieControls\MovieMainDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\MovieMainDetailsUserControl.Designer.cs">
       <DependentUpon>MovieMainDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\SetManagerUserControl.cs" />
+    <Compile Include="UI\UserControls\MovieControls\SetManagerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\SetManagerUserControl.Designer.cs">
       <DependentUpon>SetManagerUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\MovieControls\MoviesUserControl.cs" />
+    <Compile Include="UI\UserControls\MovieControls\MoviesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\MovieControls\MoviesUserControl.Designer.cs">
       <DependentUpon>MoviesUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\CommonControls\DisplayPictureUserControl.cs" />
+    <Compile Include="UI\UserControls\CommonControls\DisplayPictureUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\DisplayPictureUserControl.Designer.cs">
       <DependentUpon>DisplayPictureUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\TvControls\TvEpisodeDetailsUserControl.cs" />
+    <Compile Include="UI\UserControls\TvControls\TvEpisodeDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\TvControls\TvEpisodeDetailsUserControl.Designer.cs">
       <DependentUpon>TvEpisodeDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\TvControls\TvSeasonDetailsUserControl.cs" />
+    <Compile Include="UI\UserControls\TvControls\TvSeasonDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\TvControls\TvSeasonDetailsUserControl.Designer.cs">
       <DependentUpon>TvSeasonDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\TvControls\TvSeriesDetailsUserControl.cs" />
+    <Compile Include="UI\UserControls\TvControls\TvSeriesDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\TvControls\TvSeriesDetailsUserControl.Designer.cs">
       <DependentUpon>TvSeriesDetailsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\TvControls\TvTopMenuUserControl.cs" />
+    <Compile Include="UI\UserControls\TvControls\TvTopMenuUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\TvControls\TvTopMenuUserControl.Designer.cs">
       <DependentUpon>TvTopMenuUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControls\TvControls\TvUserControl.cs" />
+    <Compile Include="UI\UserControls\TvControls\TvUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\UserControls\TvControls\TvUserControl.Designer.cs">
       <DependentUpon>TvUserControl.cs</DependentUpon>
     </Compile>
@@ -655,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\NFOPreviewUserControl.resx">
       <DependentUpon>NFOPreviewUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommonControls\XmlPreviewUserControl.resx">
+      <DependentUpon>XmlPreviewUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\DownloadControls\DownloadStatusUserControl.resx">
       <DependentUpon>DownloadStatusUserControl.cs</DependentUpon>
@@ -966,6 +1073,8 @@
     <None Include="Resources\sharp.gif" />
     <None Include="Resources\Untitled-3.png" />
     <None Include="Resources\search.png" />
+    <None Include="Resources\searchred.png" />
+    <None Include="Resources\search32.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />
@@ -1042,7 +1151,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
+      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

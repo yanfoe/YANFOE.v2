@@ -33,6 +33,9 @@
 
         private void PopulateFileInfo()
         {
+            grdAudioStreams.DataSource = MovieDBFactory.GetCurrentMovie().FileInfo.AudioStreams;
+            grdSubtitleStreams.DataSource = MovieDBFactory.GetCurrentMovie().FileInfo.SubtitleStreams;
+
             txtVideoCodec.DataBindings.Clear();
             txtVideoCodec.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "Codec", true, DataSourceUpdateMode.OnPropertyChanged);
         
@@ -68,6 +71,13 @@
 
             chkNtsc.DataBindings.Clear();
             chkNtsc.DataBindings.Add("Checked", MovieDBFactory.GetCurrentMovie().FileInfo, "Ntsc");
+
+            var currentMovie = MovieDBFactory.GetCurrentMovie();
+
+            if (currentMovie.AssociatedFiles.Media.Count > 0 && currentMovie.AssociatedFiles.Media != null)
+            {
+                xmlPreviewMediaInfoOutput.SetXML(currentMovie.AssociatedFiles.Media[0].MiResponseModel.ScanXML);
+            }
         }
 
         private void PopulateDropdowns()
@@ -86,12 +96,23 @@
 
         private void SetupMovieEventBinding()
         {
-            MovieDBFactory.CurrentMovieChanged += (sender, e) => this.RefreshMovieBindings();
+            MovieDBFactory.CurrentMovieChanged += (sender, e) =>
+                { 
+                    this.RefreshMovieBindings();
+                    MovieDBFactory.GetCurrentMovie().MediaInfoChanged += (s, e2) => this.PopulateFileInfo();
+                };
         }
 
         private void RefreshMovieBindings()
         {
-            txtMediaInfoOutput.Clear();
+            this.layoutControl1.Enabled = !MovieDBFactory.IsMultiSelected;
+
+            if (MovieDBFactory.IsMultiSelected)
+            {
+                return;
+            }
+
+            xmlPreviewMediaInfoOutput.Clear();
             cmbFiles.Properties.Items.Clear();
             foreach (var file in MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media)
             {
@@ -101,6 +122,8 @@
             cmbFiles.SelectedIndex = 0;
             PopulateMediaInfoModel(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].MiResponseModel);
             PopulateFileInfo();
+
+
         }
 
         /// <summary>
@@ -110,25 +133,25 @@
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnMediainfoScan_Click(object sender, EventArgs e)
         {
-            var bgw = new BackgroundWorker();
-            bgw.DoWork += (bgwSender, bgwE) =>
-                {
-                    var result = MediaInfoFactory.DoMediaInfoScan(cmbFiles.SelectedItem.ToString());
+            //var bgw = new BackgroundWorker();
+            //bgw.DoWork += (bgwSender, bgwE) =>
+            //    {
+            //        var result = MediaInfoFactory.DoMediaInfoScan(cmbFiles.SelectedItem.ToString());
 
-                    bgwE.Result = result;
-                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie());
-                };
+            //        bgwE.Result = result;
+            //        MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie());
+            //    };
 
-            bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
-                {
-                    this.PopulateMediaInfoModel(bgwE.Result as MiResponseModel);
-                    btnMediainfoScan.Enabled = true;
-                    PopulateFileInfo();
-                };
+            //bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
+            //    {
+            //        this.PopulateMediaInfoModel(bgwE.Result as MiResponseModel);
+            //        btnMediainfoScan.Enabled = true;
+            //        PopulateFileInfo();
+            //    };
 
-            btnMediainfoScan.Enabled = false;
+            //btnMediainfoScan.Enabled = false;
 
-            bgw.RunWorkerAsync();
+            //bgw.RunWorkerAsync();
         }
 
         private void PopulateMediaInfoModel(MiResponseModel miResponseModel)
@@ -137,24 +160,30 @@
             {
                 return;
             }
-
-            XFormat.AddColouredText(miResponseModel.ScanXML, txtMediaInfoOutput);
         }
 
-        private void MediaInfoUserControl_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the FocusedRowChanged event of the grdViewSubtitleStreams control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs"/> instance containing the event data.</param>
+        private void grdViewSubtitleStreams_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-
+            btnSubtitleUp.Enabled = grdViewSubtitleStreams.GetSelectedRows().Length > 0;
+            btnSubtitleDown.Enabled = grdViewSubtitleStreams.GetSelectedRows().Length > 0;
+            btnSubtitleRemove.Enabled = grdViewSubtitleStreams.GetSelectedRows().Length > 0;
         }
 
-        private void cmbAspectRatioDecimal_SelectedIndexChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the FocusedRowChanged event of the grdViewAudioStreams control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs"/> instance containing the event data.</param>
+        private void grdViewAudioStreams_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-
-
-        }
-
-        private void cmbAspectRatio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            btnAudioUp.Enabled = grdViewAudioStreams.GetSelectedRows().Length > 0;
+            btnAudioDown.Enabled = grdViewAudioStreams.GetSelectedRows().Length > 0;
+            btnAudioRemove.Enabled = grdViewAudioStreams.GetSelectedRows().Length > 0;
         }
 
     }

@@ -22,7 +22,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         public MiAudioStreamModel()
         {
             this.Format = string.Empty;
-            this.Format_Info = string.Empty;
+            this.FormatInfo = string.Empty;
             this.FormatVersion = string.Empty;
             this.FormatProfile = string.Empty;
             this.FormatSettingsMode = string.Empty;
@@ -123,7 +123,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// <summary>
         /// Gets or sets Format_Info.
         /// </summary>
-        public string Format_Info { get; set; }
+        public string FormatInfo { get; set; }
 
         /// <summary>
         /// Gets or sets ID.

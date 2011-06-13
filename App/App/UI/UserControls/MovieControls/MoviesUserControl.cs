@@ -91,6 +91,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             this.grdViewByTitle.RefreshData();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnWatched control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnWatched_Click(object sender, EventArgs e)
         {
             MovieDBFactory.GetCurrentMovie().Watched = !MovieDBFactory.GetCurrentMovie().Watched;
@@ -329,6 +334,10 @@ namespace YANFOE.UI.UserControls.MovieControls
             this.btnNew.Visible = MovieDBFactory.GetCurrentMovie().IsNew;
 
             this.btnWatched.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "WatchedImage");
+
+            this.btnMediaInfo.DataBindings.Clear();
+            
+            this.btnMediaInfo.DataBindings.Add("Image", MovieDBFactory.GetCurrentMovie(), "MediaInfoImage");
         }
 
         /// <summary>
@@ -669,6 +678,11 @@ namespace YANFOE.UI.UserControls.MovieControls
             {
                 movie.Watched = false;
             }
+        }
+
+        private void btnMediaInfo_Click(object sender, EventArgs e)
+        {
+            MovieDBFactory.GetCurrentMovie().DoMediaInfoLookup();
         }
     }
 }

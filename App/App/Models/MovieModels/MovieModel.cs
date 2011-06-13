@@ -28,6 +28,9 @@ namespace YANFOE.Models.MovieModels
 
     using Newtonsoft.Json;
 
+    using YANFOE.Factories;
+    using YANFOE.Factories.Apps.MediaInfo;
+    using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Factories.Sets;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
@@ -355,6 +358,18 @@ namespace YANFOE.Models.MovieModels
         #endregion
 
         #region Events
+
+        [field: NonSerialized]
+        public event EventHandler MediaInfoChanged;
+
+        public void InvokeMediaInfoChanged(EventArgs e)
+        {
+            EventHandler handler = this.MediaInfoChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
 
         /// <summary>
         /// The locked status changed.
@@ -1237,6 +1252,32 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        [JsonIgnore]
+        public Image MediaInfoImage
+        {
+            get
+            {
+                if (ContainsMediaInfo())
+                {
+                    return Resources.search32;
+                }
+                else
+                {
+                    return Resources.searchred;
+                }
+            }
+        }
+
+        private bool ContainsMediaInfo()
+        {
+            if (this.AssociatedFiles.Media.Count == 0)
+            {
+                return false;
+            }
+
+            return File.Exists(this.AssociatedFiles.Media[0].FileModel.PathAndFileName + ".mediainfo");
+        }
+
         /// <summary>
         /// Gets or sets Nfo Path.
         /// </summary>
@@ -1928,6 +1969,30 @@ namespace YANFOE.Models.MovieModels
         #endregion
 
         #region Public Methods
+
+        public void DoMediaInfoLookup()
+        {
+            foreach (var media in AssociatedFiles.Media)
+            {
+                var bgw = new BackgroundWorker();
+                bgw.DoWork += (bgwSender, bgwE) =>
+                {
+                    var result = MediaInfoFactory.DoMediaInfoScan(media.FileModel.PathAndFileName);
+
+                    bgwE.Result = result;
+                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie());
+                };
+
+                bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
+                {
+                    this.OnPropertyChanged("MediaInfoImage");
+                    this.InvokeMediaInfoChanged(new EventArgs());
+                };
+
+
+                bgw.RunWorkerAsync();
+            }
+        }
 
         /// <summary>
         /// The generate small fanart.

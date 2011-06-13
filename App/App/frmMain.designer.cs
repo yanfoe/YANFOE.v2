@@ -304,7 +304,9 @@ namespace YANFOE
             // mnuToolsMovieScraperGroupManager
             // 
             this.mnuToolsMovieScraperGroupManager.Caption = global::YANFOE.Language.FrmMain_Menu_Tools_MovieScraperGroupManager;
+            this.mnuToolsMovieScraperGroupManager.Glyph = global::YANFOE.Properties.Resources.scrapergroupmanager;
             this.mnuToolsMovieScraperGroupManager.Id = 25;
+            this.mnuToolsMovieScraperGroupManager.LargeGlyph = global::YANFOE.Properties.Resources.scrapergroupmanager;
             this.mnuToolsMovieScraperGroupManager.Name = "mnuToolsMovieScraperGroupManager";
             this.mnuToolsMovieScraperGroupManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsMovieScraperGroupManager_ItemClick);
             // 

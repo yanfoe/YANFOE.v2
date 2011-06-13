@@ -18,6 +18,7 @@ namespace YANFOE.Factories.Apps.MediaInfo
     using DevExpress.XtraEditors;
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
+    using YANFOE.Models.GeneralModels;
     using YANFOE.Models.MovieModels;
     using YANFOE.Tools.Xml;
 
@@ -128,6 +129,9 @@ namespace YANFOE.Factories.Apps.MediaInfo
 
             movieModel.FileInfo.ProgressiveScan = responseModel.VideoStreams[0].ScanType == "Progressive";
             movieModel.FileInfo.InterlacedScan = responseModel.VideoStreams[0].ScanType == "Interlaced";
+
+            movieModel.FileInfo.SubtitleStreams = responseModel.SubtitleStreams;
+            movieModel.FileInfo.AudioStreams = responseModel.AudioStreams;
         }
 
         private static string GenerateFPS(string fps)

@@ -20,6 +20,8 @@ namespace YANFOE.Models.NFOModels
     using System;
     using System.ComponentModel;
 
+    using YANFOE.Factories.Apps.MediaInfo.Models;
+    using YANFOE.Models.GeneralModels;
     using YANFOE.Tools.Models;
 
     /// <summary>
@@ -37,8 +39,8 @@ namespace YANFOE.Models.NFOModels
         {
 
 
-            this.AudioStream = new BindingList<AudioStreamModel>();
-            this.SubtitleStream = new BindingList<string>();
+            this.AudioStreams = new BindingList<MiAudioStreamModel>();
+            this.SubtitleStreams = new BindingList<MiSubtitleStreamModel>();
         }
 
         #endregion
@@ -73,13 +75,13 @@ namespace YANFOE.Models.NFOModels
         /// Gets or sets the audio stream.
         /// </summary>
         /// <value>The audio stream.</value>
-        public BindingList<AudioStreamModel> AudioStream { get; set; }
+        public BindingList<MiAudioStreamModel> AudioStreams { get; set; }
 
         /// <summary>
         /// Gets or sets the subtitle stream.
         /// </summary>
         /// <value>The subtitle stream.</value>
-        public BindingList<string> SubtitleStream { get; set; }
+        public BindingList<MiSubtitleStreamModel> SubtitleStreams { get; set; }
 
         #endregion
     }

@@ -29,29 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -82,6 +84,7 @@
             this.btnAssignFileToEpisode = new DevExpress.XtraEditors.SimpleButton();
             this.btnLock = new DevExpress.XtraEditors.SimpleButton();
             this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMediaInfo = new DevExpress.XtraEditors.SimpleButton();
             this.btnUpdate = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -261,14 +264,14 @@
             toolTipTitleItem6.Appearance.Options.UseImage = true;
             toolTipTitleItem6.Image = global::YANFOE.Properties.Resources.saveall;
             toolTipTitleItem6.Text = "Save all";
-            toolTipItem6.LeftIndent = 6;
-            toolTipItem6.Text = "Save All Series, Season and Episode Elements";
+            toolTipItem7.LeftIndent = 6;
+            toolTipItem7.Text = "Save All Series, Season and Episode Elements";
             toolTipTitleItem7.LeftIndent = 6;
             toolTipTitleItem7.Text = "Right click for more options";
-            superToolTip7.Items.Add(toolTipTitleItem6);
-            superToolTip7.Items.Add(toolTipItem6);
-            superToolTip7.Items.Add(toolTipTitleItem7);
-            this.btnSaveAll.SuperTip = superToolTip7;
+            superToolTip8.Items.Add(toolTipTitleItem6);
+            superToolTip8.Items.Add(toolTipItem7);
+            superToolTip8.Items.Add(toolTipTitleItem7);
+            this.btnSaveAll.SuperTip = superToolTip8;
             this.btnSaveAll.TabIndex = 1;
             this.btnSaveAll.Click += new System.EventHandler(this.btnSaveAll_Click);
             // 
@@ -297,9 +300,9 @@
             toolTipTitleItem4.Text = "Save All Series Elements";
             toolTipTitleItem5.LeftIndent = 6;
             toolTipTitleItem5.Text = "Right click for more options";
-            superToolTip6.Items.Add(toolTipTitleItem4);
-            superToolTip6.Items.Add(toolTipTitleItem5);
-            this.btnSaveSelectedSeries.SuperTip = superToolTip6;
+            superToolTip7.Items.Add(toolTipTitleItem4);
+            superToolTip7.Items.Add(toolTipTitleItem5);
+            this.btnSaveSelectedSeries.SuperTip = superToolTip7;
             this.btnSaveSelectedSeries.TabIndex = 2;
             this.btnSaveSelectedSeries.Visible = false;
             this.btnSaveSelectedSeries.Click += new System.EventHandler(this.btnSaveSelectedSeries_Click);
@@ -327,11 +330,11 @@
             toolTipTitleItem3.Appearance.Options.UseImage = true;
             toolTipTitleItem3.Image = global::YANFOE.Properties.Resources.season;
             toolTipTitleItem3.Text = "Save All Season Elements";
-            toolTipItem5.LeftIndent = 6;
-            toolTipItem5.Text = "Right click for more options";
-            superToolTip5.Items.Add(toolTipTitleItem3);
-            superToolTip5.Items.Add(toolTipItem5);
-            this.btnSaveSelectedSeason.SuperTip = superToolTip5;
+            toolTipItem6.LeftIndent = 6;
+            toolTipItem6.Text = "Right click for more options";
+            superToolTip6.Items.Add(toolTipTitleItem3);
+            superToolTip6.Items.Add(toolTipItem6);
+            this.btnSaveSelectedSeason.SuperTip = superToolTip6;
             this.btnSaveSelectedSeason.TabIndex = 3;
             this.btnSaveSelectedSeason.Visible = false;
             this.btnSaveSelectedSeason.Click += new System.EventHandler(this.btnSaveSelectedSeason_Click);
@@ -358,11 +361,11 @@
             toolTipTitleItem2.Appearance.Options.UseImage = true;
             toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.episode;
             toolTipTitleItem2.Text = "Save Alll Episode Elements";
-            toolTipItem4.LeftIndent = 6;
-            toolTipItem4.Text = "Right click for more options";
-            superToolTip4.Items.Add(toolTipTitleItem2);
-            superToolTip4.Items.Add(toolTipItem4);
-            this.btnSaveSelectedEpisode.SuperTip = superToolTip4;
+            toolTipItem5.LeftIndent = 6;
+            toolTipItem5.Text = "Right click for more options";
+            superToolTip5.Items.Add(toolTipTitleItem2);
+            superToolTip5.Items.Add(toolTipItem5);
+            this.btnSaveSelectedEpisode.SuperTip = superToolTip5;
             this.btnSaveSelectedEpisode.TabIndex = 4;
             this.btnSaveSelectedEpisode.Visible = false;
             this.btnSaveSelectedEpisode.Click += new System.EventHandler(this.btnSaveSelectedEpisode_Click);
@@ -384,18 +387,18 @@
             this.btnAssignFileToEpisode.Name = "btnAssignFileToEpisode";
             this.barManager1.SetPopupContextMenu(this.btnAssignFileToEpisode, this.popupEpisode);
             this.btnAssignFileToEpisode.Size = new System.Drawing.Size(47, 44);
-            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem1.Appearance.Image = global::YANFOE.Properties.Resources.episode;
             toolTipTitleItem1.Appearance.Options.UseImage = true;
             toolTipTitleItem1.Image = global::YANFOE.Properties.Resources.episode;
             toolTipTitleItem1.Text = "Assign File to Episode";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "Allows you to assign a TV file to an episode.\r\n\r\n<b>Click</b>: Rename file to mat" +
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "Allows you to assign a TV file to an episode.\r\n\r\n<b>Click</b>: Rename file to mat" +
     "ch episode\r\n<b>Shift-Click</b>: Rename file to match episode and move to season " +
     "folder.";
-            superToolTip3.Items.Add(toolTipTitleItem1);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.btnAssignFileToEpisode.SuperTip = superToolTip3;
+            superToolTip4.Items.Add(toolTipTitleItem1);
+            superToolTip4.Items.Add(toolTipItem4);
+            this.btnAssignFileToEpisode.SuperTip = superToolTip4;
             this.btnAssignFileToEpisode.TabIndex = 5;
             this.btnAssignFileToEpisode.Click += new System.EventHandler(this.btnAssignFileToEpisode_Click);
             // 
@@ -408,9 +411,9 @@
             this.btnLock.Name = "btnLock";
             this.barManager1.SetPopupContextMenu(this.btnLock, this.popupEpisode);
             this.btnLock.Size = new System.Drawing.Size(47, 44);
-            toolTipItem2.Text = "\r\n";
-            superToolTip2.Items.Add(toolTipItem2);
-            this.btnLock.SuperTip = superToolTip2;
+            toolTipItem3.Text = "\r\n";
+            superToolTip3.Items.Add(toolTipItem3);
+            this.btnLock.SuperTip = superToolTip3;
             this.btnLock.TabIndex = 7;
             this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
@@ -423,11 +426,25 @@
             this.btnWatched.Name = "btnWatched";
             this.barManager1.SetPopupContextMenu(this.btnWatched, this.popupEpisode);
             this.btnWatched.Size = new System.Drawing.Size(47, 44);
-            toolTipItem1.Text = "\r\n";
-            superToolTip1.Items.Add(toolTipItem1);
-            this.btnWatched.SuperTip = superToolTip1;
+            toolTipItem2.Text = "\r\n";
+            superToolTip2.Items.Add(toolTipItem2);
+            this.btnWatched.SuperTip = superToolTip2;
             this.btnWatched.TabIndex = 8;
             this.btnWatched.Click += new System.EventHandler(this.btnWatched_Click);
+            // 
+            // btnMediaInfo
+            // 
+            this.btnMediaInfo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMediaInfo.Image = global::YANFOE.Properties.Resources.searchred;
+            this.btnMediaInfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMediaInfo.Location = new System.Drawing.Point(-189, 2);
+            this.btnMediaInfo.Name = "btnMediaInfo";
+            this.barManager1.SetPopupContextMenu(this.btnMediaInfo, this.popupEpisode);
+            this.btnMediaInfo.Size = new System.Drawing.Size(47, 44);
+            toolTipItem1.Text = "\r\n";
+            superToolTip1.Items.Add(toolTipItem1);
+            this.btnMediaInfo.SuperTip = superToolTip1;
+            this.btnMediaInfo.TabIndex = 9;
             // 
             // btnUpdate
             // 
@@ -442,19 +459,20 @@
             toolTipTitleItem8.Appearance.Options.UseImage = true;
             toolTipTitleItem8.Image = global::YANFOE.Properties.Resources.saveall;
             toolTipTitleItem8.Text = "Update Series";
-            toolTipItem7.LeftIndent = 6;
-            toolTipItem7.Text = "Update the current series from TvDB";
+            toolTipItem8.LeftIndent = 6;
+            toolTipItem8.Text = "Update the current series from TvDB";
             toolTipTitleItem9.LeftIndent = 6;
             toolTipTitleItem9.Text = "Right click for more options";
-            superToolTip8.Items.Add(toolTipTitleItem8);
-            superToolTip8.Items.Add(toolTipItem7);
-            superToolTip8.Items.Add(toolTipTitleItem9);
-            this.btnUpdate.SuperTip = superToolTip8;
+            superToolTip9.Items.Add(toolTipTitleItem8);
+            superToolTip9.Items.Add(toolTipItem8);
+            superToolTip9.Items.Add(toolTipTitleItem9);
+            this.btnUpdate.SuperTip = superToolTip9;
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btnMediaInfo);
             this.panelControl1.Controls.Add(this.btnWatched);
             this.panelControl1.Controls.Add(this.btnLock);
             this.panelControl1.Controls.Add(this.btnAssignFileToEpisode);
@@ -526,5 +544,6 @@
         private DevExpress.XtraEditors.SimpleButton btnUpdate;
         private DevExpress.XtraEditors.SimpleButton btnLock;
         private DevExpress.XtraEditors.SimpleButton btnWatched;
+        private DevExpress.XtraEditors.SimpleButton btnMediaInfo;
     }
 }
