@@ -251,7 +251,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xmlPreviewMediaInfoOutput);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(420, 436);
+            this.xtraTabPage2.Size = new System.Drawing.Size(420, 438);
             this.xtraTabPage2.Text = "MediaInfo Output";
             // 
             // xmlPreviewMediaInfoOutput
@@ -259,7 +259,7 @@
             this.xmlPreviewMediaInfoOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xmlPreviewMediaInfoOutput.Location = new System.Drawing.Point(0, 0);
             this.xmlPreviewMediaInfoOutput.Name = "xmlPreviewMediaInfoOutput";
-            this.xmlPreviewMediaInfoOutput.Size = new System.Drawing.Size(420, 436);
+            this.xmlPreviewMediaInfoOutput.Size = new System.Drawing.Size(420, 438);
             this.xmlPreviewMediaInfoOutput.TabIndex = 0;
             // 
             // chkNtsc

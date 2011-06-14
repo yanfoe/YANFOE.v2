@@ -18,8 +18,7 @@ namespace YANFOE.Factories.Apps.MediaInfo
     using DevExpress.XtraEditors;
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
-    using YANFOE.Models.GeneralModels;
-    using YANFOE.Models.MovieModels;
+    using YANFOE.Models.NFOModels;
     using YANFOE.Tools.Xml;
 
     /// <summary>
@@ -105,33 +104,33 @@ namespace YANFOE.Factories.Apps.MediaInfo
             return responseModel;
         }
 
-        public static void InjectResponseModel(MiResponseModel responseModel, MovieModel movieModel)
+        public static void InjectResponseModel(MiResponseModel responseModel, FileInfoModel fileInfoModel)
         {
             if (responseModel.VideoStreams.Count == 0)
             {
                 return;
             }
 
-            movieModel.FileInfo.Codec = responseModel.VideoStreams[0].CodecID;
-            movieModel.FileInfo.Width = responseModel.VideoStreams[0].Width;
-            movieModel.FileInfo.Height = responseModel.VideoStreams[0].Height;
+            fileInfoModel.Codec = responseModel.VideoStreams[0].CodecID;
+            fileInfoModel.Width = responseModel.VideoStreams[0].Width;
+            fileInfoModel.Height = responseModel.VideoStreams[0].Height;
 
-            movieModel.FileInfo.AspectRatio = responseModel.VideoStreams[0].DisplayAspectRatio.Replace(" ", string.Empty);
-            movieModel.FileInfo.AspectRatioDecimal = GenerateARDecimal(movieModel.FileInfo.AspectRatio);
+            fileInfoModel.AspectRatio = responseModel.VideoStreams[0].DisplayAspectRatio.Replace(" ", string.Empty);
+            fileInfoModel.AspectRatioDecimal = GenerateARDecimal(fileInfoModel.AspectRatio);
 
-            movieModel.FileInfo.FPS = GenerateFPS(responseModel.VideoStreams[0].FrameRate);
-            movieModel.FileInfo.FPSRounded = GenerateFPSRounded(responseModel.VideoStreams[0].FrameRate);
+            fileInfoModel.FPS = GenerateFPS(responseModel.VideoStreams[0].FrameRate);
+            fileInfoModel.FPSRounded = GenerateFPSRounded(responseModel.VideoStreams[0].FrameRate);
 
-            movieModel.FileInfo.Ntsc = IsNtsc(movieModel.FileInfo.FPS);
-            movieModel.FileInfo.Pal = IsPal(movieModel.FileInfo.FPS);
+            fileInfoModel.Ntsc = IsNtsc(fileInfoModel.FPS);
+            fileInfoModel.Pal = IsPal(fileInfoModel.FPS);
 
-            movieModel.FileInfo.Resolution = GenerateResolution(movieModel.FileInfo.Width);
+            fileInfoModel.Resolution = GenerateResolution(fileInfoModel.Width);
 
-            movieModel.FileInfo.ProgressiveScan = responseModel.VideoStreams[0].ScanType == "Progressive";
-            movieModel.FileInfo.InterlacedScan = responseModel.VideoStreams[0].ScanType == "Interlaced";
+            fileInfoModel.ProgressiveScan = responseModel.VideoStreams[0].ScanType == "Progressive";
+            fileInfoModel.InterlacedScan = responseModel.VideoStreams[0].ScanType == "Interlaced";
 
-            movieModel.FileInfo.SubtitleStreams = responseModel.SubtitleStreams;
-            movieModel.FileInfo.AudioStreams = responseModel.AudioStreams;
+            fileInfoModel.SubtitleStreams = responseModel.SubtitleStreams;
+            fileInfoModel.AudioStreams = responseModel.AudioStreams;
         }
 
         private static string GenerateFPS(string fps)

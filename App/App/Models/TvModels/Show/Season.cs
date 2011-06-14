@@ -28,6 +28,7 @@ namespace YANFOE.Models.TvModels.Show
     using YANFOE.Factories;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Properties;
     using YANFOE.Tools;
@@ -591,7 +592,7 @@ namespace YANFOE.Models.TvModels.Show
             {
                 if (e.FilePath == null)
                 {
-                    e.FilePath = new FilePath();
+                    e.FilePath = new MediaModel();
                 }
 
                 if (string.IsNullOrEmpty(e.FilePath.FileNameAndPath))

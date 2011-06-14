@@ -31,6 +31,7 @@ namespace YANFOE.Models.MovieModels
     using YANFOE.Factories;
     using YANFOE.Factories.Apps.MediaInfo;
     using YANFOE.Factories.Apps.MediaInfo.Models;
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Sets;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
@@ -331,7 +332,6 @@ namespace YANFOE.Models.MovieModels
             this.AlternativePosters = new BindingList<ImageDetailsModel>();
             this.AlternativeFanart = new BindingList<ImageDetailsModel>();
             this.AlternativeTrailers = new BindingList<TrailerDetailsModel>();
-            this.FileInfo = new FileInfoModel();
             this.AssociatedFiles = new AssociatedFilesModel();
 
             this.AllocineId = string.Empty;
@@ -353,6 +353,12 @@ namespace YANFOE.Models.MovieModels
             this.TrailerPathOnDisk = string.Empty;
 
             this.PropertyChanged += this.MovieModel_PropertyChanged;
+
+            //this.FileInfo.PropertyChanged += (sender, e) =>
+            //    {
+            //        DatabaseIOFactory.DatabaseDirty = true;
+            //        ChangedText = true;
+            //    };
         }
 
         #endregion
@@ -1980,7 +1986,7 @@ namespace YANFOE.Models.MovieModels
                     var result = MediaInfoFactory.DoMediaInfoScan(media.FileModel.PathAndFileName);
 
                     bgwE.Result = result;
-                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie());
+                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie().FileInfo);
                 };
 
                 bgw.RunWorkerCompleted += (bgwSender, bgwE) =>

@@ -1,13 +1,10 @@
 ﻿namespace YANFOE.UI.UserControls.CommonControls
 {
-    using System;
-    using System.ComponentModel;
     using System.Windows.Forms;
 
     using YANFOE.Factories;
-    using YANFOE.Factories.Apps.MediaInfo;
     using YANFOE.Factories.Apps.MediaInfo.Models;
-    using YANFOE.Tools.Xml;
+    using YANFOE.Models.NFOModels;
 
     public partial class MediaInfoUserControl : DevExpress.XtraEditors.XtraUserControl
     {
@@ -17,7 +14,21 @@
             TV
         }
 
-        public FileInfoType Type { get; set; }
+        private FileInfoType _type;
+
+        public FileInfoType Type
+        {
+            get
+            {
+                return this._type;
+            }
+            set
+            {
+                this._type = value;
+                InitialSetup();
+                PopulateDropdowns();
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaInfoUserControl"/> class.
@@ -25,52 +36,67 @@
         public MediaInfoUserControl()
         {
             InitializeComponent();
-
-            this.InitialSetup();
-            this.PopulateDropdowns();
-            this.PopulateFileInfo();
         }
 
         private void PopulateFileInfo()
         {
-            grdAudioStreams.DataSource = MovieDBFactory.GetCurrentMovie().FileInfo.AudioStreams;
-            grdSubtitleStreams.DataSource = MovieDBFactory.GetCurrentMovie().FileInfo.SubtitleStreams;
+            FileInfoModel fileInfoModel;
+
+            if (Type == FileInfoType.Movie)
+            {
+                fileInfoModel = MovieDBFactory.GetCurrentMovie().FileInfo;
+            }
+            else
+            {
+                fileInfoModel = TvDBFactory.CurrentEpisode.FileInfo;
+            }
+
+            grdAudioStreams.DataSource = fileInfoModel.AudioStreams;
+            grdSubtitleStreams.DataSource = fileInfoModel.SubtitleStreams;
 
             txtVideoCodec.DataBindings.Clear();
-            txtVideoCodec.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "Codec", true, DataSourceUpdateMode.OnPropertyChanged);
-        
+            txtVideoCodec.DataBindings.Add("Text", fileInfoModel, "Codec", true, DataSourceUpdateMode.OnPropertyChanged);
+            txtVideoCodec.Refresh();
+
             txtWidth.DataBindings.Clear();
-            txtWidth.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "Width", true, DataSourceUpdateMode.OnPropertyChanged);
+            txtWidth.DataBindings.Add("Text", fileInfoModel, "Width", true, DataSourceUpdateMode.OnPropertyChanged);
+            txtWidth.Refresh();
 
             txtHeight.DataBindings.Clear();
-            txtHeight.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "Height", true, DataSourceUpdateMode.OnPropertyChanged);
-        
+            txtHeight.DataBindings.Add("Text", fileInfoModel, "Height", true, DataSourceUpdateMode.OnPropertyChanged);
+            txtHeight.Refresh();
+
             txtFPSFull.DataBindings.Clear();
-            txtFPSFull.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "FPS");
+            txtFPSFull.DataBindings.Add("Text", fileInfoModel, "FPS");
+            txtFPSFull.Refresh();
 
             txtFPSRounded.DataBindings.Clear();
-            txtFPSRounded.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "FPSRounded");
+            txtFPSRounded.DataBindings.Add("Text", fileInfoModel, "FPSRounded");
+            txtFPSRounded.Refresh();
 
             cmbAspectRatioDecimal.DataBindings.Clear();
-            cmbAspectRatioDecimal.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "AspectRatioDecimal");
+            cmbAspectRatioDecimal.DataBindings.Add("Text", fileInfoModel, "AspectRatioDecimal");
+            cmbAspectRatioDecimal.Refresh();
 
             cmbAspectRatio.DataBindings.Clear();
-            cmbAspectRatio.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "AspectRatio");
+            cmbAspectRatio.DataBindings.Add("Text", fileInfoModel, "AspectRatio");
+            cmbAspectRatio.Refresh();
 
             txtResolution.DataBindings.Clear();
-            txtResolution.DataBindings.Add("Text", MovieDBFactory.GetCurrentMovie().FileInfo, "Resolution");
+            txtResolution.DataBindings.Add("Text", fileInfoModel, "Resolution");
+            txtResolution.Refresh();
 
             chkInterlaced.DataBindings.Clear();
-            chkInterlaced.DataBindings.Add("Checked", MovieDBFactory.GetCurrentMovie().FileInfo, "InterlacedScan");
+            chkInterlaced.DataBindings.Add("Checked", fileInfoModel, "InterlacedScan");
 
             chkProgressive.DataBindings.Clear();
-            chkProgressive.DataBindings.Add("Checked", MovieDBFactory.GetCurrentMovie().FileInfo, "ProgressiveScan");
+            chkProgressive.DataBindings.Add("Checked", fileInfoModel, "ProgressiveScan");
 
             chkPal.DataBindings.Clear();
-            chkPal.DataBindings.Add("Checked", MovieDBFactory.GetCurrentMovie().FileInfo, "Pal");
+            chkPal.DataBindings.Add("Checked", fileInfoModel, "Pal");
 
             chkNtsc.DataBindings.Clear();
-            chkNtsc.DataBindings.Add("Checked", MovieDBFactory.GetCurrentMovie().FileInfo, "Ntsc");
+            chkNtsc.DataBindings.Add("Checked", fileInfoModel, "Ntsc");
 
             var currentMovie = MovieDBFactory.GetCurrentMovie();
 
@@ -88,18 +114,43 @@
 
         private void InitialSetup()
         {
+            layoutControlGroup4.Text = this.Type.ToString();
+
             if (this.Type == FileInfoType.Movie)
             {
                 this.SetupMovieEventBinding();
+            }
+            else if (this.Type == FileInfoType.TV)
+            {
+                this.SetupTvEventBindings();
             }
         }
 
         private void SetupMovieEventBinding()
         {
             MovieDBFactory.CurrentMovieChanged += (sender, e) =>
-                { 
+                {
+                    MovieDBFactory.GetCurrentMovie().MediaInfoChanged += (s, e2) =>
+                        {
+                            this.PopulateFileInfo();
+                        };
+
                     this.RefreshMovieBindings();
-                    MovieDBFactory.GetCurrentMovie().MediaInfoChanged += (s, e2) => this.PopulateFileInfo();
+                    
+                };
+        }
+
+        private void SetupTvEventBindings()
+        {
+            TvDBFactory.CurrentEpisodeChanged += (sender, e) =>
+                {
+                    TvDBFactory.CurrentEpisode.MediaInfoChanged += (s, e2) =>
+                        {
+                            this.PopulateFileInfo();
+                        };
+
+                    this.RefreshTvBindings();
+                    
                 };
         }
 
@@ -116,42 +167,22 @@
             cmbFiles.Properties.Items.Clear();
             foreach (var file in MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media)
             {
-                cmbFiles.Properties.Items.Add(file.FilePath);
+                cmbFiles.Properties.Items.Add(file.FileNameAndPath);
             }
 
             cmbFiles.SelectedIndex = 0;
             PopulateMediaInfoModel(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].MiResponseModel);
             PopulateFileInfo();
-
-
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnMediainfoScan control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnMediainfoScan_Click(object sender, EventArgs e)
+        private void RefreshTvBindings()
         {
-            //var bgw = new BackgroundWorker();
-            //bgw.DoWork += (bgwSender, bgwE) =>
-            //    {
-            //        var result = MediaInfoFactory.DoMediaInfoScan(cmbFiles.SelectedItem.ToString());
-
-            //        bgwE.Result = result;
-            //        MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie());
-            //    };
-
-            //bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
-            //    {
-            //        this.PopulateMediaInfoModel(bgwE.Result as MiResponseModel);
-            //        btnMediainfoScan.Enabled = true;
-            //        PopulateFileInfo();
-            //    };
-
-            //btnMediainfoScan.Enabled = false;
-
-            //bgw.RunWorkerAsync();
+            xmlPreviewMediaInfoOutput.Clear();
+            cmbFiles.Properties.Items.Clear();
+            cmbFiles.Properties.Items.Add(TvDBFactory.CurrentEpisode.FilePath.FileNameAndPath);
+            cmbFiles.SelectedIndex = 0;
+            this.PopulateMediaInfoModel(TvDBFactory.CurrentEpisode.FilePath.MiResponseModel);
+            this.PopulateFileInfo();
         }
 
         private void PopulateMediaInfoModel(MiResponseModel miResponseModel)

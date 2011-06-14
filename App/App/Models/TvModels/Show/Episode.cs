@@ -24,6 +24,11 @@ namespace YANFOE.Models.TvModels.Show
     using Newtonsoft.Json;
 
     using YANFOE.Factories;
+    using YANFOE.Factories.Apps.MediaInfo;
+    using YANFOE.Factories.Internal;
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
+    using YANFOE.Models.IOModels;
+    using YANFOE.Models.NFOModels;
     using YANFOE.Properties;
     using YANFOE.Tools;
     using YANFOE.Tools.Extentions;
@@ -107,7 +112,7 @@ namespace YANFOE.Models.TvModels.Show
         /// <summary>
         /// The file path.
         /// </summary>
-        private FilePath filePath;
+        private MediaModel filePath;
 
         /// <summary>
         /// The first aired.
@@ -203,13 +208,38 @@ namespace YANFOE.Models.TvModels.Show
             this.Seriesid = null;
             this.Director = new BindingList<PersonModel>();
             this.Writers = new BindingList<PersonModel>();
-            this.FilePath = new FilePath();
+            this.FilePath = new MediaModel();
             this.GuestStars = new BindingList<PersonModel>();
+            this.FileInfo = new FileInfoModel();
+
+            this.FileInfo.PropertyChanged += (sender, e) =>
+            {
+                DatabaseIOFactory.DatabaseDirty = true;
+                ChangedText = true;
+            };
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Occurs when [media info changed].
+        /// </summary>
+        [field: NonSerialized]
+        public event EventHandler MediaInfoChanged;
+
+        public void InvokeMediaInfoChanged(EventArgs e)
+        {
+            EventHandler handler = this.MediaInfoChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public FileInfoModel FileInfo { get; set; }
+        
 
         /// <summary>
         /// Gets or sets AbsoluteNumber.
@@ -432,6 +462,20 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        [JsonIgnore]
+        public Image MediaInfoImage
+        {
+            get
+            {
+                return this.ContainsMediaInfo() ? Resources.search32 : Resources.searchred;
+            }
+        }
+
+        private bool ContainsMediaInfo()
+        {
+            return File.Exists(this.FilePath.FileNameAndPath + ".mediainfo");
+        }
+
         /// <summary>
         /// Gets or sets episodeImgFlag.
         /// </summary>
@@ -550,7 +594,7 @@ namespace YANFOE.Models.TvModels.Show
         /// <summary>
         /// Gets or sets Path.
         /// </summary>
-        public FilePath FilePath
+        public MediaModel FilePath
         {
             get
             {
@@ -851,6 +895,8 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+
+
         /// <summary>
         /// Gets a value indicating whether Secondary.
         /// </summary>
@@ -964,7 +1010,7 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                if (string.IsNullOrEmpty(this.FilePath.CurrentFileName))
+                if (string.IsNullOrEmpty(this.FilePath.FileName))
                 {
                     return false;
                 }
@@ -975,7 +1021,7 @@ namespace YANFOE.Models.TvModels.Show
 
             set
             {
-                if (string.IsNullOrEmpty(this.FilePath.CurrentFileName))
+                if (string.IsNullOrEmpty(this.FilePath.FileName))
                 {
                     return;
                 }
@@ -1105,5 +1151,27 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         #endregion
+
+        public void DoMediaInfoLookup()
+        {
+
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += (bgwSender, bgwE) =>
+            {
+                var result = MediaInfoFactory.DoMediaInfoScan(this.FilePath.FileNameAndPath);
+
+                bgwE.Result = result;
+                MediaInfoFactory.InjectResponseModel(result, this.FileInfo);
+            };
+
+            bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
+            {
+                this.OnPropertyChanged("MediaInfoImage");
+                this.InvokeMediaInfoChanged(new EventArgs());
+            };
+
+
+            bgw.RunWorkerAsync();
+        }
     }
 }

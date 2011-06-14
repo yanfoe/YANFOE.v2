@@ -70,7 +70,7 @@ namespace YANFOE.UI.Dialogs.General
                 foreach (var file in movie.AssociatedFiles.Media)
                 {
                     MasterMediaDBFactory.MasterMovieMediaDatabase.Remove(
-                        (from m in MasterMediaDBFactory.MasterMovieMediaDatabase where m.FilePath == file.FilePath select m).
+                        (from m in MasterMediaDBFactory.MasterMovieMediaDatabase where m.FileNameAndPath == file.FileNameAndPath select m).
                             SingleOrDefault());
                 }
 

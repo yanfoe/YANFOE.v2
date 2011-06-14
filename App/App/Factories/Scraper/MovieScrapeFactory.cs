@@ -17,6 +17,7 @@ namespace YANFOE.Factories.Scraper
     using System;
     using System.ComponentModel;
     using System.Threading;
+    using System.Windows.Forms;
 
     using BitFactory.Logging;
 
@@ -201,6 +202,7 @@ namespace YANFOE.Factories.Scraper
                 do
                 {
                     Thread.Sleep(50);
+                    Application.DoEvents();
                 }
                 while (scrapeCount > 4);
 
@@ -211,6 +213,7 @@ namespace YANFOE.Factories.Scraper
             do
             {
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             while (scrapeCount > 0);
 

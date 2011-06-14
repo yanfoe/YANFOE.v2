@@ -21,7 +21,6 @@ namespace YANFOE.Models.NFOModels
     using System.ComponentModel;
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
-    using YANFOE.Models.GeneralModels;
     using YANFOE.Tools.Models;
 
     /// <summary>
@@ -37,39 +36,242 @@ namespace YANFOE.Models.NFOModels
         /// </summary>
         public FileInfoModel()
         {
-
-
             this.AudioStreams = new BindingList<MiAudioStreamModel>();
             this.SubtitleStreams = new BindingList<MiSubtitleStreamModel>();
+
+            this.AudioStreams.ListChanged += (sender, e) => this.OnPropertyChanged("AudioStreams");
+            this.SubtitleStreams.ListChanged += (sender, e) => this.OnPropertyChanged("SubtitleStreams");
+
+            this.Codec = string.Empty;
+            this.AspectRatio = string.Empty;
+            this.AspectRatioDecimal = string.Empty;
+            this.FPS = string.Empty;
+            this.FPSRounded = string.Empty;
+            this.Resolution = string.Empty;
         }
 
         #endregion
 
         #region Properties
 
-        public string Codec { get; set; }
+        private string _codec;
 
-        public int Width { get; set; }
+        public string Codec
+        {
+            get
+            {
+                return this._codec;
+            }
+            set
+            {
+                if (this._codec != value)
+                {
+                    this._codec = value;
+                    this.OnPropertyChanged("Codec");
+                }
+            }
+        }
 
-        public int Height { get; set; }
+        private int _width;
 
-        public string AspectRatio { get; set; }
+        public int Width
+        {
+            get
+            {
+                return this._width;
+            }
 
-        public string AspectRatioDecimal { get; set; }
+            set
+            {
+                if (this._width != value)
+                {
+                    this._width = value;
+                    this.OnPropertyChanged("Width");
+                }
+            }
+        }
 
-        public bool ProgressiveScan { get; set; }
+        private int _height;
 
-        public bool InterlacedScan { get; set; }
+        public int Height
+        {
+            get
+            {
+                return this._height;
+            }
 
-        public string FPS { get; set; }
+            set
+            {
+                if (this._height != value)
+                {
+                    this._height = value;
+                    this.OnPropertyChanged("Height");
+                }
+            }
+        }
 
-        public string FPSRounded { get; set; }
+        private string _aspectRatio;
 
-        public bool Pal { get; set; }
+        public string AspectRatio
+        {
+            get
+            {
+                return this._aspectRatio;
+            }
+            set
+            {
+                if (this._aspectRatio != value)
+                {
+                    this._aspectRatio = value;
+                    this.OnPropertyChanged("AspectRatio");
+                }
+            }
+        }
 
-        public bool Ntsc { get; set; }
+        private string _aspectRatioDecimal;
 
-        public string Resolution { get; set; }
+        public string AspectRatioDecimal
+        {
+            get
+            {
+                return this._aspectRatioDecimal;
+            }
+            set
+            {
+                if (this._aspectRatioDecimal != value)
+                {
+                    this._aspectRatioDecimal = value;
+                    this.OnPropertyChanged("AspectRatioDecimal");
+                }
+            }
+        }
+
+        private bool _progressiveScan;
+
+        public bool ProgressiveScan
+        {
+            get
+            {
+                return this._progressiveScan;
+            }
+            set
+            {
+                if (this._progressiveScan != value)
+                {
+                    this._progressiveScan = value;
+                    this.OnPropertyChanged("ProgressiveScan");
+                }
+            }
+        }
+
+        private bool _interlacedScan;
+
+        public bool InterlacedScan
+        {
+            get
+            {
+                return this._interlacedScan;
+            }
+            set
+            {
+                if (this._interlacedScan != value)
+                {
+                    this._interlacedScan = value;
+                    this.OnPropertyChanged("InterlacedScan");
+                }
+                
+            }
+        }
+
+        private string _fps;
+
+        public string FPS
+        {
+            get
+            {
+                return this._fps;
+            }
+            set
+            {
+                if (this._fps != value)
+                {
+                    this._fps = value;
+                    this.OnPropertyChanged("FPS");
+                }
+            }
+        }
+
+        private string _fpsRounded;
+
+        public string FPSRounded
+        {
+            get
+            {
+                return this._fpsRounded;
+            }
+            set
+            {
+                if (this._fpsRounded != value)
+                {
+                    this._fpsRounded = value;
+                    this.OnPropertyChanged("FPSRounded");
+                }
+            }
+        }
+
+        private bool _pal;
+
+        public bool Pal
+        {
+            get
+            {
+                return this._pal;
+            }
+            set
+            {
+                if (this._pal != value)
+                {
+                    this._pal = value;
+                    this.OnPropertyChanged("Pal");
+                }
+            }
+        }
+
+        private bool _ntsc;
+
+        public bool Ntsc
+        {
+            get
+            {
+                return this._ntsc;
+            }
+            set
+            {
+                if (this._ntsc != value)
+                {
+                    this._ntsc = value;
+                    this.OnPropertyChanged("Ntsc");
+                }
+            }
+        }
+
+        private string _resolution;
+
+        public string Resolution
+        {
+            get
+            {
+                return this._resolution;
+            }
+            set
+            {
+                if (this._resolution != value)
+                {
+                    this._resolution = value;
+                    this.OnPropertyChanged("Resolution");
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the audio stream.

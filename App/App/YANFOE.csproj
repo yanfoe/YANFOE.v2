@@ -180,7 +180,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\GeneralModels\FileInfoModel.cs" />
     <Compile Include="Models\IOModels\MovieSaveSettings.cs" />
     <Compile Include="Models\IOModels\TvSaveSettings.cs" />
     <Compile Include="Models\TvModels\Scan\EpisodeDetails.cs" />
@@ -460,7 +459,6 @@
     <Compile Include="Models\GeneralModels\MediaCollectionModel.cs" />
     <Compile Include="Models\GeneralModels\SubtitleStreamModel.cs" />
     <Compile Include="Models\IOModels\ImportPathCollection.cs" />
-    <Compile Include="Models\IOModels\MediaModel.cs" />
     <Compile Include="Models\MovieModels\MovieModel.cs" />
     <Compile Include="Models\NFOModels\AudioStreamModel.cs" />
     <Compile Include="Models\NFOModels\EpisodeDetailsModel.cs" />

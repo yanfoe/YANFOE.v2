@@ -16,6 +16,7 @@ namespace YANFOE.Factories.AddCustomSeries
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Tools.Extentions;
@@ -131,11 +132,11 @@ namespace YANFOE.Factories.AddCustomSeries
 
                 foreach (var file in seasonFiles)
                 {
-                    var filePath = new FilePath();
+                    var filePath = new MediaModel();
 
                     filePath.FileNameAndPath = file.FilePath;
 
-                    season.Episodes.Add(new Episode { FilePath = filePath, EpisodeNumber = file.EpisodeNumber, EpisodeName = Path.GetFileName(file.FilePath) });
+                    season.Episodes.Add(new Episode {FilePath = filePath, EpisodeNumber = file.EpisodeNumber, EpisodeName = Path.GetFileName(file.FilePath) });
                 }
 
                 series.Seasons.Add(seasonText.GetNumber(), season);

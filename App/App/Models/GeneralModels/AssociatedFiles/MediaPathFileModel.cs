@@ -16,6 +16,8 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
     using System;
 
+    using Newtonsoft.Json;
+
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
 
@@ -23,6 +25,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
     /// The media path file model.
     /// </summary>
     [Serializable]
+    [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class MediaPathFileModel : ModelBase
     {
         #region Constants and Fields
@@ -161,6 +164,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             }
         }
 
+        [JsonIgnore]
         public string Filename
         {
             get
@@ -172,6 +176,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// Gets FilenameExt.
         /// </summary>
+        [JsonIgnore]
         public string FilenameExt
         {
             get
@@ -183,6 +188,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// Gets FilenameWithOutExt.
         /// </summary>
+        [JsonIgnore]
         public string FilenameWithOutExt
         {
             get
@@ -211,6 +217,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// Gets Path.
         /// </summary>
+        [JsonIgnore]
         public string Path
         {
             get

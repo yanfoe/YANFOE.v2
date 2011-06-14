@@ -39,7 +39,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// The file path.
         /// </summary>
-        private string filePath;
+        private string _fileNameAndPath;
 
         /// <summary>
         /// Order backing field
@@ -56,7 +56,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         public MediaModel()
         {
             this.FileModel = new MediaPathFileModel();
-            this.filePath = string.Empty;
+            this._fileNameAndPath = string.Empty;
         }
 
         #endregion
@@ -76,7 +76,6 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
             set
             {
-                this.filePath = value.PathAndFileName;
 
                 this.fileModel = value;
                 this.OnPropertyChanged("FileModel");
@@ -86,16 +85,16 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// Gets or sets FilePath.
         /// </summary>
-        public string FilePath
+        public string FileNameAndPath
         {
             get
             {
-                return this.filePath;
+                return this._fileNameAndPath;
             }
 
             set
             {
-                this.filePath = value;
+                this._fileNameAndPath = value;
             }
         }
 
@@ -107,7 +106,12 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         {
             get
             {
-                return this.filePath.Replace(Path.GetFileName(this.filePath), string.Empty);
+                if (string.IsNullOrEmpty(_fileNameAndPath))
+                {
+                    return string.Empty;
+                }
+
+                return this._fileNameAndPath.Replace(Path.GetFileName(this._fileNameAndPath), string.Empty);
             }
         }
 
@@ -122,9 +126,9 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             {
                 var responseModel = new MiResponseModel();
 
-                if (File.Exists(this.FilePath + ".mediainfo"))
+                if (File.Exists(this.FileNameAndPath + ".mediainfo"))
                 {
-                    var xml = Tools.Text.IO.ReadTextFromFile(this.FilePath + ".mediainfo");
+                    var xml = Tools.Text.IO.ReadTextFromFile(this.FileNameAndPath + ".mediainfo");
                     responseModel.PopulateFromXML(xml);
                     return responseModel;
                 }
@@ -148,6 +152,22 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             {
                 this.order = value;
                 this.OnPropertyChanged("Order");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets FileName.
+        /// </summary>
+        public string FileName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_fileNameAndPath))
+                {
+                    return string.Empty;
+                }
+
+                return Path.GetFileName(_fileNameAndPath);
             }
         }
 

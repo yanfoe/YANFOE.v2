@@ -89,6 +89,7 @@
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem7 = new DevExpress.XtraLayout.SplitterItem();
             this.tabFileInfo = new DevExpress.XtraTab.XtraTabPage();
+            this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             this.tabPreview = new DevExpress.XtraTab.XtraTabPage();
             this.tabCurrent = new DevExpress.XtraTab.XtraTabPage();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -110,6 +111,7 @@
             this.columnVisibility = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.popupSeries = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.tvTopMenuUserControl1 = new YANFOE.UI.UserControls.TvControls.TvTopMenuUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -160,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem7)).BeginInit();
+            this.tabFileInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -779,9 +782,20 @@
             // 
             // tabFileInfo
             // 
+            this.tabFileInfo.Controls.Add(this.tvTopMenuUserControl1);
+            this.tabFileInfo.Controls.Add(this.mediaInfoUserControl1);
             this.tabFileInfo.Name = "tabFileInfo";
             this.tabFileInfo.Size = new System.Drawing.Size(601, 592);
             this.tabFileInfo.Text = "File Info";
+            // 
+            // mediaInfoUserControl1
+            // 
+            this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
+            this.mediaInfoUserControl1.Size = new System.Drawing.Size(601, 592);
+            this.mediaInfoUserControl1.TabIndex = 0;
+            this.mediaInfoUserControl1.Type = YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl.FileInfoType.TV;
             // 
             // tabPreview
             // 
@@ -971,6 +985,17 @@
             this.popupSeries.Name = "popupSeries";
             this.popupSeries.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupSeries_BeforePopup);
             // 
+            // tvTopMenuUserControl1
+            // 
+            this.tvTopMenuUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tvTopMenuUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
+            this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
+            this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
+            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(601, 48);
+            this.tvTopMenuUserControl1.TabIndex = 1;
+            this.tvTopMenuUserControl1.Type = YANFOE.UI.UserControls.TvControls.SaveType.All;
+            // 
             // TvUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1033,6 +1058,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem7)).EndInit();
+            this.tabFileInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -1129,6 +1155,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private MediaInfoUserControl mediaInfoUserControl1;
+        private TvTopMenuUserControl tvTopMenuUserControl1;
 
     }
 }

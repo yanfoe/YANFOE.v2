@@ -102,7 +102,7 @@ namespace YANFOE.Factories.Media
         /// </returns>
         public static bool MovieDatabaseContains(string path)
         {
-            var result = from m in masterMovieMediaDatabase where m.FilePath == path select m;
+            var result = from m in masterMovieMediaDatabase where m.FileNameAndPath == path select m;
 
             return result.Count() > 0;
         }

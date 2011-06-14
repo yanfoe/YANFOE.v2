@@ -414,6 +414,7 @@ namespace YANFOE.InternalApps.DownloadManager
                 }
 
                 Thread.Sleep(100);
+                Application.DoEvents();
             }
             while (true);
         }

@@ -568,9 +568,9 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </param>
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
-            if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath))
+            if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FileNameAndPath))
             {
-                Process.Start(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath);
+                Process.Start(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FileNameAndPath);
             }
         }
 
@@ -587,8 +587,8 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             string argument = string.Format(
                 @"/select,""{0}""",
-                File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath)
-                    ? MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePath
+                File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FileNameAndPath)
+                    ? MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FileNameAndPath
                     : MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].FilePathFolder);
 
             Process.Start("explorer.exe", argument);

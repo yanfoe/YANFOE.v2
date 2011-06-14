@@ -23,6 +23,7 @@ namespace YANFOE.Tools.IO
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using System.Windows.Forms;
 
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Tools.Enums;
@@ -64,6 +65,7 @@ namespace YANFOE.Tools.IO
             do
             {
                 Thread.Sleep(50);
+                Application.DoEvents();
             }
             while (importInProgress);
         }

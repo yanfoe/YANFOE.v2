@@ -126,6 +126,9 @@ namespace YANFOE.UI.UserControls.TvControls
 
             this.btnLock.DataBindings.Clear();
 
+            this.btnMediaInfo.DataBindings.Clear();
+            this.btnMediaInfo.DataBindings.Add("Image", TvDBFactory.CurrentEpisode, "MediaInfoImage");
+
             switch (this.Type)
             {
                 case SaveType.SaveSeries:
@@ -438,6 +441,11 @@ namespace YANFOE.UI.UserControls.TvControls
         private void btnWatched_Click(object sender, EventArgs e)
         {
             TvDBFactory.CurrentEpisode.Watched = !TvDBFactory.CurrentEpisode.Watched;
+        }
+
+        private void btnMediaInfo_Click(object sender, EventArgs e)
+        {
+            TvDBFactory.CurrentEpisode.DoMediaInfoLookup();
         }
     }
 

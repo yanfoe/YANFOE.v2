@@ -1149,7 +1149,7 @@ namespace YANFOE.Factories
 
                 foreach (var file in movie.AssociatedFiles.Media)
                 {
-                    if (!File.Exists(file.FilePath))
+                    if (!File.Exists(file.FileNameAndPath))
                     {
                         toDelete.Add(movie);
                         break;

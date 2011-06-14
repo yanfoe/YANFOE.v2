@@ -66,7 +66,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
         public string FilesAsList()
         {
-            return string.Join(", ", (from f in this.Media select f.FilePath).ToArray());
+            return string.Join(", ", (from f in this.Media select f.FileNameAndPath).ToArray());
         }
 
         /// <summary>
