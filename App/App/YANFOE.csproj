@@ -1079,6 +1079,9 @@
     <None Include="Resources\up2.png" />
     <None Include="Resources\watched_red.png" />
     <None Include="Resources\watched_green.png" />
+    <Content Include="TV\Defaults\DefaultShows.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="y.ico" />
     <None Include="Resources\LoadingGlobe.gif" />
     <None Include="Resources\promo_red_faded.png" />

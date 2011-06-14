@@ -120,7 +120,12 @@ namespace YANFOE.UI.Dialogs.TV
                     {
                         this.currentStatus = "Processing " + s.Key;
 
-                        var searchResults = this.theTvdb.SeriesSearch(s.Key); // open initial object and do search
+                        var searchResults = TvDBFactory.SearchDefaultShowDatabase(s.Key);
+
+                        if (searchResults.Count == 0)
+                        {
+                            searchResults = this.theTvdb.SeriesSearch(s.Key); // open initial object and do search
+                        }
 
                         Series series;
 

@@ -19,6 +19,7 @@ namespace YANFOE.Factories
     using System.Linq;
     using System.Text;
     using System.Windows.Forms;
+    using System.Xml;
 
     using BitFactory.Logging;
 
@@ -34,10 +35,12 @@ namespace YANFOE.Factories
     using YANFOE.IO;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Show;
+    using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Scrapers.TV;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
+    using YANFOE.Tools.Xml;
     using YANFOE.UI.Dialogs.TV;
 
     #endregion
@@ -2317,6 +2320,41 @@ namespace YANFOE.Factories
         private static void masterSeriesNameList_ListChanged(object sender, ListChangedEventArgs e)
         {
             InvokeTvDbChanged(new EventArgs());
+        }
+
+        public static List<SearchDetails> SearchDefaultShowDatabase(string showName)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "TV", "Defaults", "DefaultShows.xml");
+
+            if (!File.Exists(path))
+            {
+                return new List<SearchDetails>();
+            }
+
+            var xml = XRead.OpenPath(path);
+            var shows = xml.GetElementsByTagName("show");
+
+            var returnList = new List<SearchDetails>();
+
+            foreach (XmlNode show in shows)
+            {
+                if (show.Attributes != null)
+                {
+                    if (show.Attributes["name"].Value.Equals(showName, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        var searchDetails = new SearchDetails();
+
+                        searchDetails.SeriesName = show.Attributes["name"].Value;
+                        searchDetails.SeriesID = show.Attributes["id"].Value;
+
+                        returnList.Add(searchDetails);
+
+                        return returnList;
+                    }
+                }
+            }
+
+            return new List<SearchDetails>();
         }
 
         #endregion
