@@ -17,7 +17,9 @@
   <show name="Boston Legal" id="74058" />
   <show name="Boston Med" id="171811" />
   <show name="Big Love" id="74156" />
+  <show name="Breaking Bad" id="81189" />
   <show name="Buffy the Vampire Slayer" id="70327" />
+  <show name="Burn Notice" id="80270" />
   <show name="Californication" id="80349" />
   <show name="Castle" id="83462" />
   <show name="Chappelle's Show" id="71862" />
@@ -28,17 +30,26 @@
   <show name="Criminal Minds" id="75710" />
   <show name="Criminal Minds: Suspect Behavior" id="168151" />
   <show name="Chuck" id="80348" />
+  <show name="CSI: Miami" id="78310" />
+  <show name="CSI: NY" id="73696" />
   <show name="Curb Your Enthusiasm" id="76203" />
+  <show name="Dead Like Me" id="72129" />
   <show name="Deadwood" id="72023" />
   <show name="Desperate Housewives" id="73800" />
   <show name="Dexter" id="79349" />
+  <show name="Dollhouse" id="82046" />
   <show name="Drawn Together" id="78831" />
   <show name="Eastbound &amp; Down" id="82467" />
   <show name="Entourage" id="74543" />
   <show name="Episodes" id="123581" />
   <show name="Extras" id="75660" />
+  <show name="Eureka" id="79334" />
   <show name="Family Guy" id="75978" />
+  <show name="Fawlty Towers" id="75932" />
+  <show name="FlashForward" id="84024" />
   <show name="Flight of the Conchords" id="80252" />
+  <show name="Firefly" id="78874" />
+  <show name="Frasier" id="77811" />
   <show name="Friends" id="79168" />
   <show name="Fringe" id="82066" />
   <show name="Frisky Dingo" id="79930" />
@@ -46,60 +57,112 @@
   <show name="Game of Thrones" id="121361" />
   <show name="Gavin &amp; Stacey" id="80435" />
   <show name="Glee" id="83610" />
+  <show name="Gossip Girl" id="80547" />
   <show name="Grey's Anatomy" id="73762" />
+  <show name="GReek" id="80301" />
   <show name="Harry's Law" id="163581" />
   <show name="Happy Endings" id="167571" />
+  <show name="Heroes" id="79501" />
   <show name="House" id="73255" />
   <show name="How I Met Your Mother" id="75760" />
   <show name="Hung" id="82091" />
   <show name="It's Always Sunny in Philadelphia" id="75805" />
   <show name="King of the Hill" id="73903" />
   <show name="John from Cincinnati" id="80215" />
+  <show name="Mad Men" id="80337" />
+  <show name="Man vs. Wild" id="79545" />
+  <show name="Married with Children" id="76385" />
   <show name="Misfits" id="124051" />
   <show name="Mock the Week" id="79761" />
   <show name="Modern Family" id="95011" />
   <show name="Mongrels" id="171481" />
+  <show name="Mr. Bean" id="76316" />
+  <show name="My Name Is Earl" id="75397" />
   <show name="Mythbusters" id="73388" />
+  <show name="NCIS" id="72108" />
   <show name="Nip Tuck" id="72201" />
+  <show name="Nurse Jackie" id="95731" />
   <show name="No Ordinary Family" id="163851" />
+  <show name="Las Vegas" id="72229" />
+  <show name="Lie To Me" id="83602" />
   <show name="Little Britain USA" id="83232" />
   <show name="Lost" id="73739" />
   <show name="Lucky Louie" id="79326" />
+  <show name="One Tree Hill" id="72158" />
   <show name="Only Fools and Horses" id="75628" />
   <show name="Outnumbered" id="80592" />
   <show name="Outsourced" id="163561" />
   <show name="Oz" id="70682" />
   <show name="Parks and Recreation" id="84912" />
+  <show name="Party Down" id="83616" />
+  <show name="Pawn Stars" id="111051" />
   <show name="Peep Show" id="71656" />
+  <show name="Penn and Teller: Bullshit" id="72301" />
   <show name="Perfect Couples" id="171251" />
   <show name="Prison Break" id="75340" />
   <show name="Private Practice" id="80542" />
+  <show name="Pinky and the Brain" id="72880" />
+  <show name="Psych" id="English" />
   <show name="QI" id="72716" />
   <show name="QI XL" id="85508" />
   <show name="Raising Hope" id="164021" />
+  <show name="Reaper" id="80345" />
+  <show name="Reno 911!" id="72336" />
+  <show name="Robot Chicken" id="75734" />
   <show name="Real Time with Bill Maher" id="72231" />
+  <show name="Robot Chicken" id="75734" />
   <show name="Rome" id="73508" />
+  <show name="Sealab 2021" id="76884" />
   <show name="Secret Diary of a Call Girl" id="80621" />
+  <show name="Seinfeld" id="79169" />
   <show name="Sex and the City" id="76648" />
+  <show name="Scrubs" id="76156" />
+  <show name="Sons of Anarchy" id="82696" />
   <show name="South Park" id="75897" />
   <show name="Six Feet Under" id="75450" />
+  <show name="Smallville" id="72218" />
+  <show name="Spartacus: Blood and Sand" id="129261" />
+  <show name="Stargate SG-1" id="72449" />
   <show name="Stargate Atlantis" id="70851" />
+  <show name="Stargate Universe" id="83237" />
+  <show name="Star Trek" id="77526" />
+  <show name="Star Trek: DS9" id="72073" />
+  <show name="Star Trek: Enterprise" id="73893" />
+  <show name="Star Trek: Voyager" id="74550" />
+  <show name="Star Trek: The Next Generation" id="71470" />
+  <show name="Supernatural" id="78901" />
   <show name="Tell Me You Love Me" id="80462" />
   <show name="That Mitchell and Webb Look" id="80165" />
+  <show name="That '70s Show" id="73787" />
+  <show name="The Big Bang Theory" id="80379" />
+  <show name="The Boondocks" id="74413" />
   <show name="The Cleveland Show" id="93991" />
   <show name="The Colbert Report" id="79274" />
   <show name="The Event" id="163531" />
+  <show name="The Fresh Prince of Bel-Air" id="76738" />
   <show name="The Good Wife" id="95451" />
+  <show name="The Hills" id="79550" />
   <show name="The Inbetweeners" id="81950" />
+  <show name="The IT Crowd" id="79216" />
+  <show name="The King of Queens" id="73641" />
+  <show name="The Mentalist" id="82459" />
   <show name="The Neistat Brothers" id="166061" />
   <show name="The Ricky Gervais Show" id="142581" />
+  <show name="The Tudors" id="79925" />
   <show name="The Simpsons" id="71663" />
+  <show name="The Shield" id="78261" />
   <show name="The Sopranos" id="75299" />
   <show name="The Walking Dead" id="153021" />
   <show name="The West Wing" id="72521" />
   <show name="The Wire" id="79126" />
+  <show name="The Vampire Diaries" id="95491" />
+  <show name="The X-Files" id="77398" />
+  <show name="Top Gear" id="74608" />
   <show name="Torchwood" id="79511" />
+  <show name="Trailer Park Boys" id="70566" />
   <show name="Treme" id="84946" />
   <show name="True Blood" id="82283" />
+  <show name="Two and a Half Men" id="72227" />
+  <show name="Weeds" id="74845" />
   <show name="V (2009)" id="94971" />
 </shows>

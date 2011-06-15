@@ -765,7 +765,7 @@ namespace YANFOE.Factories
             {
                 var tip = new ToolTipItem();
 
-                string found = File.Exists(episode.FilePath.FileNameAndPath)
+                string found = File.Exists(episode.FilePath.PathAndFilename)
                                    ? "<color=206,244,208>File Exists</color>"
                                    : "<b><color=244,206,206>File Does Not Exist</color></b>";
 
@@ -924,7 +924,7 @@ namespace YANFOE.Factories
                 else
                 {
                     count +=
-                        season.Value.Episodes.Count(episode => string.IsNullOrEmpty(episode.FilePath.FileNameAndPath));
+                        season.Value.Episodes.Count(episode => string.IsNullOrEmpty(episode.FilePath.PathAndFilename));
                 }
             }
 
@@ -1760,7 +1760,7 @@ namespace YANFOE.Factories
 
             if (dialogResult == DialogResult.OK)
             {
-                CurrentEpisode.FilePath.FileNameAndPath = fileDialog.FileName;
+                CurrentEpisode.FilePath.PathAndFilename = fileDialog.FileName;
                 InvokeCurrentEpisodeChanged(new EventArgs());
             }
         }

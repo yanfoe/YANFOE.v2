@@ -211,10 +211,10 @@ namespace YANFOE.IO
         /// </param>
         public void SaveMovie(MovieModel movieModel)
         {
-            string actualTrailerFileName = "";
-            string actualTrailerFileNameExt = "";
-            string actualFilePath = movieModel.AssociatedFiles.Media[0].FileModel.Path;
-            string actualFileName = movieModel.AssociatedFiles.Media[0].FileModel.FilenameWithOutExt;
+            string actualTrailerFileName = string.Empty;
+            string actualTrailerFileNameExt = string.Empty;
+            string actualFilePath = movieModel.AssociatedFiles.Media[0].FolderPath;
+            string actualFileName = movieModel.AssociatedFiles.Media[0].FilenameWithOutExt;
             string currentTrailerUrl = movieModel.CurrentTrailerUrl;
 
             MovieSaveSettings movieSaveSettings = Get.InOutCollection.CurrentMovieSaveSettings;

@@ -316,7 +316,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetEpisodeNFO(Episode episode)
         {
-            string fullPath = episode.FilePath.FileNameAndPath;
+            string fullPath = episode.FilePath.PathAndFilename;
 
             string path = Path.GetDirectoryName(fullPath);
             string fileName = Path.GetFileNameWithoutExtension(fullPath);
@@ -340,7 +340,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetEpisodeScreenshot(Episode episode)
         {
-            string fullPath = episode.FilePath.FileNameAndPath;
+            string fullPath = episode.FilePath.PathAndFilename;
 
             string path = Path.GetDirectoryName(fullPath);
             string fileName = Path.GetFileNameWithoutExtension(fullPath);
@@ -799,7 +799,7 @@ namespace YANFOE.IO
                 return;
             }
 
-            if (string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+            if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
             {
                 return;
             }
@@ -807,12 +807,12 @@ namespace YANFOE.IO
             string nfoTemplate;
             string screenshotTemplate;
 
-            if (MovieNaming.IsDVD(episode.FilePath.FileNameAndPath))
+            if (MovieNaming.IsDVD(episode.FilePath.PathAndFilename))
             {
                 nfoTemplate = Get.InOutCollection.CurrentTvSaveSettings.DVDEpisodeNFOTemplate;
                 screenshotTemplate = Get.InOutCollection.CurrentTvSaveSettings.DVDEpisodeScreenshotTemplate;
             }
-            else if (MovieNaming.IsBluRay(episode.FilePath.FileNameAndPath))
+            else if (MovieNaming.IsBluRay(episode.FilePath.PathAndFilename))
             {
                 nfoTemplate = Get.InOutCollection.CurrentTvSaveSettings.BlurayEpisodeNFOTemplate;
                 screenshotTemplate = Get.InOutCollection.CurrentTvSaveSettings.BlurayEpisodeScreenshotTemplate;
@@ -835,7 +835,7 @@ namespace YANFOE.IO
             // Screenshot
             if (type == EpisodeIOType.Screenshot || type == EpisodeIOType.All)
             {
-                if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                 {
                     string screenshotPathFrom;
 

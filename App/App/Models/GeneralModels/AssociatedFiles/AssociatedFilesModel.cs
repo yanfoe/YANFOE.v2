@@ -61,12 +61,12 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// </param>
         public void AddToMediaCollection(MediaPathFileModel fileModel, int order = 1)
         {
-            this.Media.Add(new MediaModel { FileModel = fileModel, Order = 1 });
+            this.Media.Add(new MediaModel { PathAndFilename = fileModel.PathAndFileName, Order = 1 });
         }
 
         public string FilesAsList()
         {
-            return string.Join(", ", (from f in this.Media select f.FileNameAndPath).ToArray());
+            return string.Join(", ", (from f in this.Media select f.PathAndFilename).ToArray());
         }
 
         /// <summary>

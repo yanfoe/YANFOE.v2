@@ -1000,7 +1000,7 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
-                return this.AssociatedFiles.GetMediaCollection()[0].FilePathFolder;
+                return this.AssociatedFiles.GetMediaCollection()[0].FolderPath;
             }
         }
 
@@ -1281,7 +1281,7 @@ namespace YANFOE.Models.MovieModels
                 return false;
             }
 
-            return File.Exists(this.AssociatedFiles.Media[0].FileModel.PathAndFileName + ".mediainfo");
+            return File.Exists(this.AssociatedFiles.Media[0].PathAndFilename + ".mediainfo");
         }
 
         /// <summary>
@@ -1798,8 +1798,7 @@ namespace YANFOE.Models.MovieModels
                     return false;
                 }
 
-                return File.Exists(
-                    Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, this.AssociatedFiles.Media[0].FileModel.Filename + ".watched" }));
+                return File.Exists(this.AssociatedFiles.Media[0].PathAndFilename + ".watched");
             }
 
             set
@@ -1809,7 +1808,7 @@ namespace YANFOE.Models.MovieModels
                     return;
                 }
 
-                var path = Path.Combine(new[] { this.AssociatedFiles.Media[0].FilePathFolder, this.AssociatedFiles.Media[0].FileModel.Filename + ".watched" });
+                var path = this.AssociatedFiles.Media[0].PathAndFilename + ".watched";
 
                 var exists = File.Exists(path);
 
@@ -1983,7 +1982,7 @@ namespace YANFOE.Models.MovieModels
                 var bgw = new BackgroundWorker();
                 bgw.DoWork += (bgwSender, bgwE) =>
                 {
-                    var result = MediaInfoFactory.DoMediaInfoScan(media.FileModel.PathAndFileName);
+                    var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
 
                     bgwE.Result = result;
                     MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie().FileInfo);

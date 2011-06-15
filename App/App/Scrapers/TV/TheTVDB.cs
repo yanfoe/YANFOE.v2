@@ -133,7 +133,7 @@ namespace YANFOE.Scrapers.TV
                                 {
                                     if (s.EpisodeNumber == episode.Key)
                                     {
-                                        s.FilePath.FileNameAndPath = episode.Value.FilePath;
+                                        s.FilePath.PathAndFilename = episode.Value.FilePath;
 
                                         s.SecondaryTo = episode.Value.SecondaryTo;
                                     }

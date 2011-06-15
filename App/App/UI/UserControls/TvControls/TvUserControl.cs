@@ -225,9 +225,9 @@ namespace YANFOE.UI.UserControls.TvControls
                             Get.InOutCollection.VideoExtentions.Contains(
                                 Path.GetExtension(fileName.ToLower()).Replace(".", string.Empty)))
                         {
-                            if (string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                            if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                             {
-                                episode.FilePath.FileNameAndPath = fileName;
+                                episode.FilePath.PathAndFilename = fileName;
                             }
                             else
                             {
@@ -235,7 +235,7 @@ namespace YANFOE.UI.UserControls.TvControls
                                     XtraMessageBox.Show(
                                         string.Format(
                                             "Do you want to replace\n{0}\nwith\n{1}", 
-                                            episode.FilePath.FileNameAndPath, 
+                                            episode.FilePath.PathAndFilename, 
                                             fileName), 
                                         "Are you sure to want to replace?", 
                                         MessageBoxButtons.YesNo, 
@@ -243,7 +243,7 @@ namespace YANFOE.UI.UserControls.TvControls
 
                                 if (result == DialogResult.Yes)
                                 {
-                                    episode.FilePath.FileNameAndPath = fileName;
+                                    episode.FilePath.PathAndFilename = fileName;
                                 }
                             }
 

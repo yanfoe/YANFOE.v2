@@ -1142,7 +1142,7 @@ namespace YANFOE.Models.TvModels.Show
         {
             return
                 this.Seasons.Values.SelectMany(s => s.Episodes).Count(
-                    e => !string.IsNullOrEmpty(e.FilePath.FileNameAndPath));
+                    e => !string.IsNullOrEmpty(e.FilePath.PathAndFilename));
         }
 
         /// <summary>
@@ -1155,11 +1155,11 @@ namespace YANFOE.Models.TvModels.Show
             {
                 foreach (Episode episode in season.Value.Episodes)
                 {
-                    if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
-                        if (File.Exists(episode.FilePath.FileNameAndPath))
+                        if (File.Exists(episode.FilePath.PathAndFilename))
                         {
-                            string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                            string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
 
                             return segSplit[segSplit.Length - 3];
                         }
@@ -1180,26 +1180,26 @@ namespace YANFOE.Models.TvModels.Show
             {
                 foreach (Episode episode in seasons.Value.Episodes)
                 {
-                    if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
-                        if (File.Exists(episode.FilePath.FileNameAndPath))
+                        if (File.Exists(episode.FilePath.PathAndFilename))
                         {
-                            if (MovieNaming.IsDVD(episode.FilePath.FileNameAndPath))
+                            if (MovieNaming.IsDVD(episode.FilePath.PathAndFilename))
                             {
-                                string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                                string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
 
                                 return string.Join(@"\", segSplit, 0, segSplit.Length - 2);
                             }
 
-                            if (MovieNaming.IsBluRay(episode.FilePath.FileNameAndPath))
+                            if (MovieNaming.IsBluRay(episode.FilePath.PathAndFilename))
                             {
-                                string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                                string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
 
                                 return string.Join(@"\", segSplit, 0, segSplit.Length - 3);
                             }
                             else
                             {
-                                string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                                string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
                                 string path = string.Join(@"\", segSplit, 0, segSplit.Length - 2);
 
                                 return path;

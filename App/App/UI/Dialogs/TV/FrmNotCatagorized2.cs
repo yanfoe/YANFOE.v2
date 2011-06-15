@@ -82,7 +82,7 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="notCatagorized">The not catagorized.</param>
         private void ReplaceShow(Episode episode, ScanNotCatagorized notCatagorized)
         {
-            episode.FilePath.FileNameAndPath = notCatagorized.FilePath;
+            episode.FilePath.PathAndFilename = notCatagorized.FilePath;
             ImportTvFactory.NotCatagorized.Remove(notCatagorized);
             this.grdViewEpisodes.RefreshData();
             this.lblStatus.Text = string.Format("{0} set to {1}", notCatagorized.FilePath, episode.EpisodeName);
@@ -201,7 +201,7 @@ namespace YANFOE.UI.Dialogs.TV
                         }
                     }
 
-                    if (string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                    if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
                         this.ReplaceShow(episode, notCatagorized);
                     }
@@ -211,7 +211,7 @@ namespace YANFOE.UI.Dialogs.TV
                             XtraMessageBox.Show(
                                 string.Format(
                                     "Do you want to replace\n{0}\nwith\n{1}", 
-                                    episode.FilePath.FileNameAndPath, 
+                                    episode.FilePath.PathAndFilename, 
                                     notCatagorized.FilePath), 
                                 "Are you sure to want to replace?", 
                                 MessageBoxButtons.YesNo, 

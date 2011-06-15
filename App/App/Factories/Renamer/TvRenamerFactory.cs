@@ -293,35 +293,35 @@ namespace YANFOE.Factories.Renamer
             {
                 if (doRename)
                 {
-                    string newPath = DoRename(episode.FilePath.FileNameAndPath, episodeTemplate);
+                    string newPath = DoRename(episode.FilePath.PathAndFilename, episodeTemplate);
 
                     if (!string.IsNullOrEmpty(newPath))
                     {
                         string pathAddition;
 
-                        if (MovieNaming.IsBluRay(episode.FilePath.FileNameAndPath))
+                        if (MovieNaming.IsBluRay(episode.FilePath.PathAndFilename))
                         {
                             pathAddition =
-                                episode.FilePath.FileNameAndPath.Replace(
-                                    MovieNaming.GetBluRayPath(episode.FilePath.FileNameAndPath) +
-                                    MovieNaming.GetBluRayName(episode.FilePath.FileNameAndPath), 
+                                episode.FilePath.PathAndFilename.Replace(
+                                    MovieNaming.GetBluRayPath(episode.FilePath.PathAndFilename) +
+                                    MovieNaming.GetBluRayName(episode.FilePath.PathAndFilename), 
                                     string.Empty);
 
-                            episode.FilePath.FileNameAndPath = newPath + pathAddition;
+                            episode.FilePath.PathAndFilename = newPath + pathAddition;
                         }
-                        else if (MovieNaming.IsDVD(episode.FilePath.FileNameAndPath))
+                        else if (MovieNaming.IsDVD(episode.FilePath.PathAndFilename))
                         {
                             pathAddition =
-                                episode.FilePath.FileNameAndPath.Replace(
-                                    MovieNaming.GetDvdPath(episode.FilePath.FileNameAndPath) +
-                                    MovieNaming.GetDvdName(episode.FilePath.FileNameAndPath), 
+                                episode.FilePath.PathAndFilename.Replace(
+                                    MovieNaming.GetDvdPath(episode.FilePath.PathAndFilename) +
+                                    MovieNaming.GetDvdName(episode.FilePath.PathAndFilename), 
                                     string.Empty);
 
-                            episode.FilePath.FileNameAndPath = newPath + pathAddition;
+                            episode.FilePath.PathAndFilename = newPath + pathAddition;
                         }
                         else
                         {
-                            episode.FilePath.FileNameAndPath = newPath;
+                            episode.FilePath.PathAndFilename = newPath;
                         }
                     }
                 }
@@ -342,7 +342,7 @@ namespace YANFOE.Factories.Renamer
             {
                 foreach (Episode episode in season.Value.Episodes)
                 {
-                    if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
                         RenameEpisode(episode);
                     }
@@ -362,7 +362,7 @@ namespace YANFOE.Factories.Renamer
         private static List<Episode> GetEpisodesContainingFile(Episode episode)
         {
             return (from e in episode.GetSeason().Episodes
-                    where e.FilePath.FileNameAndPath == episode.FilePath.FileNameAndPath
+                    where e.FilePath.PathAndFilename == episode.FilePath.PathAndFilename
                     orderby e.EpisodeNumber
                     select e).ToList();
         }

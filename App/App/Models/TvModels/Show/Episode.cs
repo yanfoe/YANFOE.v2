@@ -332,14 +332,14 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                return this.filePath.FileNameAndPath;
+                return this.filePath.PathAndFilename;
             }
 
             set
             {
-                if (this.filePath.FileNameAndPath != value)
+                if (this.filePath.PathAndFilename != value)
                 {
-                    this.FilePath.FileNameAndPath = value;
+                    this.FilePath.PathAndFilename = value;
                     this.OnPropertyChanged("Path", true);
                     this.OnPropertyChanged("CurrentFilenameAndPath", true);
                     this.OnPropertyChanged("CurrentFilePathStatusImage");
@@ -473,7 +473,7 @@ namespace YANFOE.Models.TvModels.Show
 
         private bool ContainsMediaInfo()
         {
-            return File.Exists(this.FilePath.FileNameAndPath + ".mediainfo");
+            return File.Exists(this.FilePath.PathAndFilename + ".mediainfo");
         }
 
         /// <summary>
@@ -941,7 +941,7 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                if (string.IsNullOrEmpty(this.FilePath.FileNameAndPath))
+                if (string.IsNullOrEmpty(this.FilePath.PathAndFilename))
                 {
                     return Resources.promo_red_faded16;
                 }
@@ -1001,7 +1001,7 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                return !string.IsNullOrEmpty(this.FilePath.FileNameAndPath);
+                return !string.IsNullOrEmpty(this.FilePath.PathAndFilename);
             }
         }
 
@@ -1016,7 +1016,7 @@ namespace YANFOE.Models.TvModels.Show
                 }
 
                 return File.Exists(
-                    Path.Combine(new[] { this.FilePath.FileNameAndPath + ".watched" }));
+                    Path.Combine(new[] { this.FilePath.PathAndFilename + ".watched" }));
             }
 
             set
@@ -1026,7 +1026,7 @@ namespace YANFOE.Models.TvModels.Show
                     return;
                 }
 
-                var path = Path.Combine(new[] { this.FilePath.FileNameAndPath + ".watched" });
+                var path = Path.Combine(new[] { this.FilePath.PathAndFilename + ".watched" });
 
                 var exists = File.Exists(path);
 
@@ -1158,7 +1158,7 @@ namespace YANFOE.Models.TvModels.Show
             var bgw = new BackgroundWorker();
             bgw.DoWork += (bgwSender, bgwE) =>
             {
-                var result = MediaInfoFactory.DoMediaInfoScan(this.FilePath.FileNameAndPath);
+                var result = MediaInfoFactory.DoMediaInfoScan(this.FilePath.PathAndFilename);
 
                 bgwE.Result = result;
                 MediaInfoFactory.InjectResponseModel(result, this.FileInfo);

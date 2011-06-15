@@ -89,6 +89,7 @@
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem7 = new DevExpress.XtraLayout.SplitterItem();
             this.tabFileInfo = new DevExpress.XtraTab.XtraTabPage();
+            this.tvTopMenuUserControl1 = new YANFOE.UI.UserControls.TvControls.TvTopMenuUserControl();
             this.mediaInfoUserControl1 = new YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl();
             this.tabPreview = new DevExpress.XtraTab.XtraTabPage();
             this.tabCurrent = new DevExpress.XtraTab.XtraTabPage();
@@ -111,7 +112,6 @@
             this.columnVisibility = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.popupSeries = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.tvTopMenuUserControl1 = new YANFOE.UI.UserControls.TvControls.TvTopMenuUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -788,6 +788,17 @@
             this.tabFileInfo.Size = new System.Drawing.Size(601, 592);
             this.tabFileInfo.Text = "File Info";
             // 
+            // tvTopMenuUserControl1
+            // 
+            this.tvTopMenuUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tvTopMenuUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
+            this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
+            this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
+            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(601, 48);
+            this.tvTopMenuUserControl1.TabIndex = 1;
+            this.tvTopMenuUserControl1.Type = YANFOE.UI.UserControls.TvControls.SaveType.All;
+            // 
             // mediaInfoUserControl1
             // 
             this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -984,17 +995,6 @@
             this.popupSeries.Manager = this.barManager1;
             this.popupSeries.Name = "popupSeries";
             this.popupSeries.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupSeries_BeforePopup);
-            // 
-            // tvTopMenuUserControl1
-            // 
-            this.tvTopMenuUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tvTopMenuUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
-            this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
-            this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
-            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(601, 48);
-            this.tvTopMenuUserControl1.TabIndex = 1;
-            this.tvTopMenuUserControl1.Type = YANFOE.UI.UserControls.TvControls.SaveType.All;
             // 
             // TvUserControl
             // 

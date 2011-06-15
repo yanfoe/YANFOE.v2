@@ -134,7 +134,7 @@ namespace YANFOE.Factories.AddCustomSeries
                 {
                     var filePath = new MediaModel();
 
-                    filePath.FileNameAndPath = file.FilePath;
+                    filePath.PathAndFilename = file.FilePath;
 
                     season.Episodes.Add(new Episode {FilePath = filePath, EpisodeNumber = file.EpisodeNumber, EpisodeName = Path.GetFileName(file.FilePath) });
                 }

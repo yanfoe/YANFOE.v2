@@ -102,7 +102,7 @@ namespace YANFOE.Factories.Media
         /// </returns>
         public static bool MovieDatabaseContains(string path)
         {
-            var result = from m in masterMovieMediaDatabase where m.FileNameAndPath == path select m;
+            var result = from m in masterMovieMediaDatabase where m.PathAndFilename == path select m;
 
             return result.Count() > 0;
         }
@@ -175,9 +175,9 @@ namespace YANFOE.Factories.Media
                 {
                     foreach (var episode in season.Value.Episodes)
                     {
-                        if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                        if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                         {
-                            masterTvMediaDatabase.Add(episode.FilePath.FileNameAndPath);
+                            masterTvMediaDatabase.Add(episode.FilePath.PathAndFilename);
                         }
                     }
                 }

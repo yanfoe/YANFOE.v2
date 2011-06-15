@@ -42,14 +42,7 @@
         {
             FileInfoModel fileInfoModel;
 
-            if (Type == FileInfoType.Movie)
-            {
-                fileInfoModel = MovieDBFactory.GetCurrentMovie().FileInfo;
-            }
-            else
-            {
-                fileInfoModel = TvDBFactory.CurrentEpisode.FileInfo;
-            }
+            fileInfoModel = this.Type == FileInfoType.Movie ? MovieDBFactory.GetCurrentMovie().FileInfo : TvDBFactory.CurrentEpisode.FileInfo;
 
             grdAudioStreams.DataSource = fileInfoModel.AudioStreams;
             grdSubtitleStreams.DataSource = fileInfoModel.SubtitleStreams;
@@ -98,11 +91,20 @@
             chkNtsc.DataBindings.Clear();
             chkNtsc.DataBindings.Add("Checked", fileInfoModel, "Ntsc");
 
-            var currentMovie = MovieDBFactory.GetCurrentMovie();
-
-            if (currentMovie.AssociatedFiles.Media.Count > 0 && currentMovie.AssociatedFiles.Media != null)
+            if (this.Type == FileInfoType.Movie)
             {
-                xmlPreviewMediaInfoOutput.SetXML(currentMovie.AssociatedFiles.Media[0].MiResponseModel.ScanXML);
+                var currentMovie = MovieDBFactory.GetCurrentMovie();
+
+                if (currentMovie.AssociatedFiles.Media.Count > 0 && currentMovie.AssociatedFiles.Media != null)
+                {
+                    xmlPreviewMediaInfoOutput.SetXML(currentMovie.AssociatedFiles.Media[0].ScanXML);
+                }
+            }
+            else
+            {
+                var currentEpisode = TvDBFactory.CurrentEpisode;
+
+                xmlPreviewMediaInfoOutput.SetXML(currentEpisode.FilePath.MiResponseModel.ScanXML);
             }
         }
 
@@ -167,7 +169,7 @@
             cmbFiles.Properties.Items.Clear();
             foreach (var file in MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media)
             {
-                cmbFiles.Properties.Items.Add(file.FileNameAndPath);
+                cmbFiles.Properties.Items.Add(file.PathAndFilename);
             }
 
             cmbFiles.SelectedIndex = 0;
@@ -179,7 +181,7 @@
         {
             xmlPreviewMediaInfoOutput.Clear();
             cmbFiles.Properties.Items.Clear();
-            cmbFiles.Properties.Items.Add(TvDBFactory.CurrentEpisode.FilePath.FileNameAndPath);
+            cmbFiles.Properties.Items.Add(TvDBFactory.CurrentEpisode.FilePath.PathAndFilename);
             cmbFiles.SelectedIndex = 0;
             this.PopulateMediaInfoModel(TvDBFactory.CurrentEpisode.FilePath.MiResponseModel);
             this.PopulateFileInfo();

@@ -440,7 +440,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </returns>
         public bool ContainsEpisodesWithFiles()
         {
-            return this.Episodes.Any(episode => !string.IsNullOrEmpty(episode.FilePath.FileNameAndPath));
+            return this.Episodes.Any(episode => !string.IsNullOrEmpty(episode.FilePath.PathAndFilename));
         }
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </returns>
         public int CountMissingEpisodes()
         {
-            return this.Episodes.Count(e => !File.Exists(e.FilePath.FileNameAndPath));
+            return this.Episodes.Count(e => !File.Exists(e.FilePath.PathAndFilename));
         }
 
         /// <summary>
@@ -466,11 +466,11 @@ namespace YANFOE.Models.TvModels.Show
 
             foreach (Episode episode in this.Episodes)
             {
-                if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                 {
-                    if (File.Exists(episode.FilePath.FileNameAndPath))
+                    if (File.Exists(episode.FilePath.PathAndFilename))
                     {
-                        return episode.FilePath.FileNameAndPath;
+                        return episode.FilePath.PathAndFilename;
                     }
                 }
             }
@@ -488,11 +488,11 @@ namespace YANFOE.Models.TvModels.Show
         {
             foreach (Episode episode in this.Episodes)
             {
-                if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                 {
-                    if (File.Exists(episode.FilePath.FileNameAndPath))
+                    if (File.Exists(episode.FilePath.PathAndFilename))
                     {
-                        string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                        string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
 
                         return segSplit[segSplit.Length - 2];
                     }
@@ -514,17 +514,17 @@ namespace YANFOE.Models.TvModels.Show
 
             foreach (Episode episode in this.Episodes)
             {
-                if (!string.IsNullOrEmpty(episode.FilePath.FileNameAndPath))
+                if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                 {
-                    if (File.Exists(episode.FilePath.FileNameAndPath))
+                    if (File.Exists(episode.FilePath.PathAndFilename))
                     {
-                        string[] segSplit = episode.FilePath.FileNameAndPath.Split(new[] { '\\' });
+                        string[] segSplit = episode.FilePath.PathAndFilename.Split(new[] { '\\' });
 
-                        if (MovieNaming.IsDVD(episode.FilePath.FileNameAndPath))
+                        if (MovieNaming.IsDVD(episode.FilePath.PathAndFilename))
                         {
                             path = string.Join(@"\", segSplit, 0, segSplit.Length - 3);
                         }
-                        else if (MovieNaming.IsBluRay(episode.FilePath.FileNameAndPath))
+                        else if (MovieNaming.IsBluRay(episode.FilePath.PathAndFilename))
                         {
                             path = string.Join(@"\", segSplit, 0, segSplit.Length - 4);
                         }
@@ -575,7 +575,7 @@ namespace YANFOE.Models.TvModels.Show
         /// </returns>
         public bool HasEpisodeWithPath()
         {
-            return this.Episodes.Any(episode => !string.IsNullOrEmpty(episode.FilePath.FileNameAndPath));
+            return this.Episodes.Any(episode => !string.IsNullOrEmpty(episode.FilePath.PathAndFilename));
         }
 
         /// <summary>
@@ -595,7 +595,7 @@ namespace YANFOE.Models.TvModels.Show
                     e.FilePath = new MediaModel();
                 }
 
-                if (string.IsNullOrEmpty(e.FilePath.FileNameAndPath))
+                if (string.IsNullOrEmpty(e.FilePath.PathAndFilename))
                 {
                     missingEpisodes = true;
                 }
