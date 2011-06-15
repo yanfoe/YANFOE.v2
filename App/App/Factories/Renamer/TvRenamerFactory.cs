@@ -20,6 +20,7 @@ namespace YANFOE.Factories.Renamer
 
     using BitFactory.Logging;
 
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.TvModels.Show;
@@ -308,6 +309,7 @@ namespace YANFOE.Factories.Renamer
                                     string.Empty);
 
                             episode.FilePath.PathAndFilename = newPath + pathAddition;
+                            DatabaseIOFactory.SetDatabaseDirty();
                         }
                         else if (MovieNaming.IsDVD(episode.FilePath.PathAndFilename))
                         {
@@ -318,10 +320,12 @@ namespace YANFOE.Factories.Renamer
                                     string.Empty);
 
                             episode.FilePath.PathAndFilename = newPath + pathAddition;
+                            DatabaseIOFactory.SetDatabaseDirty();
                         }
                         else
                         {
                             episode.FilePath.PathAndFilename = newPath;
+                            DatabaseIOFactory.SetDatabaseDirty();
                         }
                     }
                 }

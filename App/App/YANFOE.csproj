@@ -215,6 +215,12 @@
     <Compile Include="Tools\ThirdParty\MovieMeterApiHandler.cs" />
     <Compile Include="Tools\UI\Skin.cs" />
     <Compile Include="Tools\Xml\XFormat.cs" />
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.Designer.cs">
+      <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -649,6 +655,9 @@
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.resx">
+      <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.resx">
       <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
     </EmbeddedResource>
@@ -1073,6 +1082,7 @@
     <None Include="Resources\search.png" />
     <None Include="Resources\searchred.png" />
     <None Include="Resources\search32.png" />
+    <None Include="Resources\search1.png" />
     <Content Include="Resources\up.png" />
     <None Include="Resources\yanfoe.jpg" />
     <None Include="Resources\warning24.png" />

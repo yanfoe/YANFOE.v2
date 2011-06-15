@@ -45,6 +45,10 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
+            this.tabGeneralFileInfo = new DevExpress.XtraTab.XtraTabPage();
+            this.panelControl12 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
+            this.pictureEdit12 = new DevExpress.XtraEditors.PictureEdit();
             this.tabMovies = new DevExpress.XtraTab.XtraTabPage();
             this.tabControlMovies = new DevExpress.XtraTab.XtraTabControl();
             this.tabMovieOut = new DevExpress.XtraTab.XtraTabPage();
@@ -89,6 +93,7 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit4 = new DevExpress.XtraEditors.PictureEdit();
             this.tabTVDB = new DevExpress.XtraTab.XtraTabPage();
+            this.UcSettingsScraperTvDB1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTvDB();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit5 = new DevExpress.XtraEditors.PictureEdit();
@@ -96,6 +101,7 @@
             this.navGroupGeneral = new DevExpress.XtraNavBar.NavBarGroup();
             this.navItemGeneralUI = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemGeneralWeb = new DevExpress.XtraNavBar.NavBarItem();
+            this.navItemGeneralFileInfo = new DevExpress.XtraNavBar.NavBarItem();
             this.navGroupMovies = new DevExpress.XtraNavBar.NavBarGroup();
             this.navItemMovieIn = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemMoviesOut = new DevExpress.XtraNavBar.NavBarItem();
@@ -114,7 +120,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
-            this.UcSettingsScraperTvDB1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsScraperTvDB();
+            this.ucSettingsGeneralFileInfo1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsGeneralFileInfo();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
@@ -130,6 +136,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).BeginInit();
+            this.tabGeneralFileInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl12)).BeginInit();
+            this.panelControl12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit12.Properties)).BeginInit();
             this.tabMovies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMovies)).BeginInit();
             this.tabControlMovies.SuspendLayout();
@@ -195,7 +205,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(949, 423, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(805, 504);
+            this.layoutControl1.Size = new System.Drawing.Size(860, 628);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -204,9 +214,9 @@
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::YANFOE.Properties.Resources.delete32;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnCancel.Location = new System.Drawing.Point(92, 454);
+            this.btnCancel.Location = new System.Drawing.Point(98, 578);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(73, 38);
+            this.btnCancel.Size = new System.Drawing.Size(78, 38);
             this.btnCancel.StyleController = this.layoutControl1;
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -215,20 +225,20 @@
             // 
             this.btnOk.Image = global::YANFOE.Properties.Resources.accept32;
             this.btnOk.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnOk.Location = new System.Drawing.Point(12, 454);
+            this.btnOk.Location = new System.Drawing.Point(12, 578);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(76, 38);
+            this.btnOk.Size = new System.Drawing.Size(82, 38);
             this.btnOk.StyleController = this.layoutControl1;
             this.btnOk.TabIndex = 6;
             this.btnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // tabMain
             // 
-            this.tabMain.Location = new System.Drawing.Point(171, 12);
+            this.tabMain.Location = new System.Drawing.Point(182, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedTabPage = this.tabGeneral;
             this.tabMain.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
-            this.tabMain.Size = new System.Drawing.Size(622, 480);
+            this.tabMain.Size = new System.Drawing.Size(666, 604);
             this.tabMain.TabIndex = 5;
             this.tabMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneral,
@@ -240,7 +250,7 @@
             // 
             this.tabGeneral.Controls.Add(this.tabControlGeneral);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Size = new System.Drawing.Size(618, 456);
+            this.tabGeneral.Size = new System.Drawing.Size(662, 580);
             this.tabGeneral.Text = "General";
             // 
             // tabControlGeneral
@@ -249,11 +259,12 @@
             this.tabControlGeneral.Location = new System.Drawing.Point(0, 0);
             this.tabControlGeneral.Name = "tabControlGeneral";
             this.tabControlGeneral.SelectedTabPage = this.tabGeneralUi;
-            this.tabControlGeneral.Size = new System.Drawing.Size(618, 456);
+            this.tabControlGeneral.Size = new System.Drawing.Size(662, 580);
             this.tabControlGeneral.TabIndex = 0;
             this.tabControlGeneral.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneralUi,
-            this.tabGeneralWeb});
+            this.tabGeneralWeb,
+            this.tabGeneralFileInfo});
             // 
             // tabGeneralUi
             // 
@@ -349,6 +360,45 @@
             this.pictureEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pictureEdit2.Size = new System.Drawing.Size(58, 48);
             this.pictureEdit2.TabIndex = 0;
+            // 
+            // tabGeneralFileInfo
+            // 
+            this.tabGeneralFileInfo.Controls.Add(this.ucSettingsGeneralFileInfo1);
+            this.tabGeneralFileInfo.Controls.Add(this.panelControl12);
+            this.tabGeneralFileInfo.Name = "tabGeneralFileInfo";
+            this.tabGeneralFileInfo.Size = new System.Drawing.Size(658, 556);
+            this.tabGeneralFileInfo.Text = "File Info";
+            // 
+            // panelControl12
+            // 
+            this.panelControl12.Controls.Add(this.labelControl12);
+            this.panelControl12.Controls.Add(this.pictureEdit12);
+            this.panelControl12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl12.Location = new System.Drawing.Point(0, 0);
+            this.panelControl12.Name = "panelControl12";
+            this.panelControl12.Size = new System.Drawing.Size(658, 52);
+            this.panelControl12.TabIndex = 3;
+            // 
+            // labelControl12
+            // 
+            this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl12.Location = new System.Drawing.Point(65, 9);
+            this.labelControl12.Name = "labelControl12";
+            this.labelControl12.Size = new System.Drawing.Size(224, 33);
+            this.labelControl12.TabIndex = 1;
+            this.labelControl12.Text = "General > File Info";
+            // 
+            // pictureEdit12
+            // 
+            this.pictureEdit12.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureEdit12.EditValue = global::YANFOE.Properties.Resources.monitor1;
+            this.pictureEdit12.Location = new System.Drawing.Point(2, 2);
+            this.pictureEdit12.Name = "pictureEdit12";
+            this.pictureEdit12.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEdit12.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit12.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit12.Size = new System.Drawing.Size(58, 48);
+            this.pictureEdit12.TabIndex = 0;
             // 
             // tabMovies
             // 
@@ -767,6 +817,14 @@
             this.tabTVDB.Size = new System.Drawing.Size(614, 432);
             this.tabTVDB.Text = "The TvDB";
             // 
+            // UcSettingsScraperTvDB1
+            // 
+            this.UcSettingsScraperTvDB1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UcSettingsScraperTvDB1.Location = new System.Drawing.Point(0, 52);
+            this.UcSettingsScraperTvDB1.Name = "UcSettingsScraperTvDB1";
+            this.UcSettingsScraperTvDB1.Size = new System.Drawing.Size(614, 380);
+            this.UcSettingsScraperTvDB1.TabIndex = 6;
+            // 
             // panelControl5
             // 
             this.panelControl5.Controls.Add(this.labelControl5);
@@ -817,11 +875,12 @@
             this.navItemTvRename,
             this.navBarItem1,
             this.navItemMovieIn,
-            this.navBarItem2});
+            this.navBarItem2,
+            this.navItemGeneralFileInfo});
             this.navBarControl1.Location = new System.Drawing.Point(12, 12);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 177;
-            this.navBarControl1.Size = new System.Drawing.Size(153, 438);
+            this.navBarControl1.Size = new System.Drawing.Size(164, 562);
             this.navBarControl1.TabIndex = 4;
             this.navBarControl1.Text = "Tv";
             // 
@@ -831,7 +890,8 @@
             this.navGroupGeneral.Expanded = true;
             this.navGroupGeneral.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralUI),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralWeb)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralWeb),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralFileInfo)});
             this.navGroupGeneral.LargeImage = global::YANFOE.Properties.Resources.tools;
             this.navGroupGeneral.Name = "navGroupGeneral";
             // 
@@ -848,6 +908,13 @@
             this.navItemGeneralWeb.Name = "navItemGeneralWeb";
             this.navItemGeneralWeb.SmallImage = global::YANFOE.Properties.Resources.globe24;
             this.navItemGeneralWeb.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavItemGeneralWeb_LinkClicked);
+            // 
+            // navItemGeneralFileInfo
+            // 
+            this.navItemGeneralFileInfo.Caption = "File Info";
+            this.navItemGeneralFileInfo.Name = "navItemGeneralFileInfo";
+            this.navItemGeneralFileInfo.SmallImage = global::YANFOE.Properties.Resources.search1;
+            this.navItemGeneralFileInfo.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemGeneralFileInfo_LinkClicked);
             // 
             // navGroupMovies
             // 
@@ -948,7 +1015,7 @@
             this.simpleSeparator1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(805, 504);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(860, 628);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -958,7 +1025,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(157, 442);
+            this.layoutControlItem1.Size = new System.Drawing.Size(168, 566);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
@@ -968,9 +1035,9 @@
             // 
             this.layoutControlItem2.Control = this.tabMain;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(159, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(170, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(626, 484);
+            this.layoutControlItem2.Size = new System.Drawing.Size(670, 608);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -980,9 +1047,9 @@
             // 
             this.layoutControlItem3.Control = this.btnOk;
             this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 442);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 566);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(80, 42);
+            this.layoutControlItem3.Size = new System.Drawing.Size(86, 42);
             this.layoutControlItem3.Text = "layoutControlItem3";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextToControlDistance = 0;
@@ -992,9 +1059,9 @@
             // 
             this.layoutControlItem4.Control = this.btnCancel;
             this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(80, 442);
+            this.layoutControlItem4.Location = new System.Drawing.Point(86, 566);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(77, 42);
+            this.layoutControlItem4.Size = new System.Drawing.Size(82, 42);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -1002,26 +1069,27 @@
             // 
             // simpleSeparator1
             // 
+            this.simpleSeparator1.AllowHotTrack = false;
             this.simpleSeparator1.CustomizationFormText = "simpleSeparator1";
-            this.simpleSeparator1.Location = new System.Drawing.Point(157, 0);
+            this.simpleSeparator1.Location = new System.Drawing.Point(168, 0);
             this.simpleSeparator1.Name = "simpleSeparator1";
-            this.simpleSeparator1.Size = new System.Drawing.Size(2, 484);
+            this.simpleSeparator1.Size = new System.Drawing.Size(2, 608);
             this.simpleSeparator1.Text = "simpleSeparator1";
             // 
-            // UcSettingsScraperTvDB1
+            // ucSettingsGeneralFileInfo1
             // 
-            this.UcSettingsScraperTvDB1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UcSettingsScraperTvDB1.Location = new System.Drawing.Point(0, 52);
-            this.UcSettingsScraperTvDB1.Name = "UcSettingsScraperTvDB1";
-            this.UcSettingsScraperTvDB1.Size = new System.Drawing.Size(614, 380);
-            this.UcSettingsScraperTvDB1.TabIndex = 6;
+            this.ucSettingsGeneralFileInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSettingsGeneralFileInfo1.Location = new System.Drawing.Point(0, 52);
+            this.ucSettingsGeneralFileInfo1.Name = "ucSettingsGeneralFileInfo1";
+            this.ucSettingsGeneralFileInfo1.Size = new System.Drawing.Size(658, 504);
+            this.ucSettingsGeneralFileInfo1.TabIndex = 4;
             // 
             // FrmSettingsMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(805, 504);
+            this.ClientSize = new System.Drawing.Size(860, 628);
             this.Controls.Add(this.layoutControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSettingsMain";
@@ -1044,6 +1112,11 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).EndInit();
+            this.tabGeneralFileInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl12)).EndInit();
+            this.panelControl12.ResumeLayout(false);
+            this.panelControl12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit12.Properties)).EndInit();
             this.tabMovies.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMovies)).EndInit();
             this.tabControlMovies.ResumeLayout(false);
@@ -1197,6 +1270,12 @@
         private DevExpress.XtraEditors.PictureEdit pictureEdit11;
         private UcSettingsScraperTmdb ucSettingsScraperTmdb1;
         private UcSettingsScraperTvDB UcSettingsScraperTvDB1;
+        private DevExpress.XtraNavBar.NavBarItem navItemGeneralFileInfo;
+        private DevExpress.XtraTab.XtraTabPage tabGeneralFileInfo;
+        private DevExpress.XtraEditors.PanelControl panelControl12;
+        private DevExpress.XtraEditors.LabelControl labelControl12;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit12;
+        private UcSettingsGeneralFileInfo ucSettingsGeneralFileInfo1;
 
     }
 }

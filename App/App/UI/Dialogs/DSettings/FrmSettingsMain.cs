@@ -156,5 +156,11 @@ namespace YANFOE.UI.Dialogs.DSettings
             tabMain.SelectedTabPage = tabScrapers;
             tabControlScrapers.SelectedTabPage = this.tabTVDB;
         }
+
+        private void navItemGeneralFileInfo_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            tabMain.SelectedTabPage = tabGeneral;
+            tabControlScrapers.SelectedTabPage = this.tabGeneralFileInfo;
+        }
     }
 }

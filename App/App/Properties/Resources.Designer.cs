@@ -725,6 +725,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap search1 {
+            get {
+                object obj = ResourceManager.GetObject("search1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap search32 {
             get {
                 object obj = ResourceManager.GetObject("search32", resourceCulture);
