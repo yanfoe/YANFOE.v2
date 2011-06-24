@@ -19,6 +19,7 @@ namespace YANFOE.IO
     using System.ComponentModel;
     using System.IO;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Xml;
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
@@ -26,6 +27,7 @@ namespace YANFOE.IO
     using YANFOE.Factories.Renamer;
     using YANFOE.Factories.Sets;
     using YANFOE.Models.MovieModels;
+    using YANFOE.Models.NFOModels;
     using YANFOE.Models.SetsModels;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Settings;
@@ -187,10 +189,12 @@ namespace YANFOE.IO
 
                     XWrite.WriteEnclosedElement(xmlWriter, "videosource", movieModel.VideoSource);
 
+                    XWrite.WriteEnclosedElement(xmlWriter, "fileinfo", "template");
+
                     xmlWriter.WriteEndElement();
                 }
 
-                return stringWriter.ToString();
+                return stringWriter.ToString().Replace("<fileinfo>template</fileinfo>", this.GetFileInfo(movie: movieModel));
             }
         }
 
@@ -295,15 +299,18 @@ namespace YANFOE.IO
                     // Plot
                     XWrite.WriteEnclosedElement(xmlWriter, "plot", episode.Overview);
 
+                    XWrite.WriteEnclosedElement(xmlWriter, "fileinfo", "template");
+
                     xmlWriter.WriteEndElement();
 
                     if (writeDocumentTags)
                     {
                         xmlWriter.WriteEndDocument();
                     }
+
                 }
 
-                return stringWriter.ToString();
+                return stringWriter.ToString().Replace("<fileinfo>template</fileinfo>", this.GetFileInfo(episode: episode));
             }
         }
 
@@ -353,6 +360,94 @@ namespace YANFOE.IO
             }
 
             return string.Empty;
+        }
+
+        public string GetFileInfo(MovieModel movie = null, Episode episode = null)
+        {
+            FileInfoModel fileInfoModel;
+
+            if (movie != null)
+            {
+                fileInfoModel = movie.FileInfo;
+            }
+            else if (episode != null)
+            {
+                fileInfoModel = episode.FileInfo;
+            }
+            else
+            {
+                return string.Empty;
+            }
+
+            string output;
+
+            using (var stringWriter = new StringWriterWithEncoding(Encoding.UTF8))
+            {
+                using (var xmlWriter = XmlWriter.Create(stringWriter, this.GetSettings()))
+                {
+                    XWrite.WriteEnclosedElement(xmlWriter, "videooutput", Get.MediaInfo.DoReplace(fileInfoModel));
+
+                }
+
+                output = stringWriter.ToString() + Environment.NewLine;
+            }
+
+            using (var stringWriter = new StringWriterWithEncoding(Encoding.UTF8))
+            {
+                using (var xmlWriter = XmlWriter.Create(stringWriter, this.GetSettings()))
+                {
+                    xmlWriter.WriteStartElement("fileinfo");
+
+                    xmlWriter.WriteStartElement("video");
+
+                    // Codec
+                    XWrite.WriteEnclosedElement(xmlWriter, "codec", fileInfoModel.Codec);
+
+                    // Aspect
+                    XWrite.WriteEnclosedElement(xmlWriter, "aspect", fileInfoModel.AspectRatio);
+
+                    // Width
+                    XWrite.WriteEnclosedElement(xmlWriter, "width", fileInfoModel.Width);
+
+                    // Height
+                    XWrite.WriteEnclosedElement(xmlWriter, "height", fileInfoModel.Height);
+
+                    xmlWriter.WriteEndElement();
+
+                    foreach (var audioStream in fileInfoModel.AudioStreams)
+                    {
+                        xmlWriter.WriteStartElement("audio");
+
+                        // Codec
+                        XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.CodecID);
+
+                        // Language
+                        XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.Language);
+
+                        // Channels
+                        XWrite.WriteEnclosedElement(xmlWriter, "channels", audioStream.Channels);
+
+                        xmlWriter.WriteEndElement();
+                    }
+
+                    foreach (var subtitleStream in fileInfoModel.SubtitleStreams)
+                    {
+                        xmlWriter.WriteStartElement("subtitle");
+
+                        // Codec
+                        XWrite.WriteEnclosedElement(xmlWriter, "codec", subtitleStream.Language);
+
+                        xmlWriter.WriteEndElement();
+                    }
+
+
+                    xmlWriter.WriteEndElement();
+                }
+
+                return Regex.Replace(output + stringWriter, @"\<\?xml.*?\>", string.Empty)
+                    .Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine)
+                    .Trim();
+            }
         }
 
         /// <summary>

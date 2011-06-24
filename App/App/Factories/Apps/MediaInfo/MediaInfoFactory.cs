@@ -115,8 +115,8 @@ namespace YANFOE.Factories.Apps.MediaInfo
             fileInfoModel.Width = responseModel.VideoStreams[0].Width;
             fileInfoModel.Height = responseModel.VideoStreams[0].Height;
 
-            fileInfoModel.AspectRatio = responseModel.VideoStreams[0].DisplayAspectRatio.Replace(" ", string.Empty);
-            fileInfoModel.AspectRatioDecimal = GenerateARDecimal(fileInfoModel.AspectRatio);
+            fileInfoModel.AspectRatioPercent = responseModel.VideoStreams[0].DisplayAspectRatio.Replace(" ", string.Empty);
+            fileInfoModel.AspectRatioDecimal = GenerateARDecimal(fileInfoModel.AspectRatioPercent);
 
             fileInfoModel.FPS = GenerateFPS(responseModel.VideoStreams[0].FrameRate);
             fileInfoModel.FPSRounded = GenerateFPSRounded(responseModel.VideoStreams[0].FrameRate);

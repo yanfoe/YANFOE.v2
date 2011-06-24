@@ -161,5 +161,13 @@ namespace YANFOE.IO
         /// <param name="episode">The episode.</param>
         /// <returns>Episode Screenshot path</returns>
         string GetEpisodeScreenshot(Episode episode);
+
+        /// <summary>
+        /// Gets the file info block
+        /// </summary>
+        /// <param name="movie">The movie.</param>
+        /// <param name="episode">The episode.</param>
+        /// <returns></returns>
+        string GetFileInfo(MovieModel movie = null, Episode episode = null);
     }
 }

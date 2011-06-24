@@ -43,7 +43,7 @@ namespace YANFOE.Models.NFOModels
             this.SubtitleStreams.ListChanged += (sender, e) => this.OnPropertyChanged("SubtitleStreams");
 
             this.Codec = string.Empty;
-            this.AspectRatio = string.Empty;
+            this.AspectRatioPercent = string.Empty;
             this.AspectRatioDecimal = string.Empty;
             this.FPS = string.Empty;
             this.FPSRounded = string.Empty;
@@ -109,19 +109,19 @@ namespace YANFOE.Models.NFOModels
             }
         }
 
-        private string _aspectRatio;
+        private string aspectRatioPercent;
 
-        public string AspectRatio
+        public string AspectRatioPercent
         {
             get
             {
-                return this._aspectRatio;
+                return this.aspectRatioPercent;
             }
             set
             {
-                if (this._aspectRatio != value)
+                if (this.aspectRatioPercent != value)
                 {
-                    this._aspectRatio = value;
+                    this.aspectRatioPercent = value;
                     this.OnPropertyChanged("AspectRatio");
                 }
             }
@@ -329,6 +329,25 @@ namespace YANFOE.Models.NFOModels
                 else if (this.Ntsc)
                 {
                     return "NTSC";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string AspectRatio
+        {
+            get
+            {
+                if (Settings.Get.MediaInfo.UsePercentAspectRatio)
+                {
+                    return AspectRatioPercent;
+                }
+                else if (Settings.Get.MediaInfo.UseDecimalAspectRatio)
+                {
+                    return AspectRatioDecimal;
                 }
                 else
                 {

@@ -107,11 +107,13 @@
             this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem29 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.xmlPreview = new YANFOE.UI.UserControls.CommonControls.XmlPreviewUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFPSRounded.Properties)).BeginInit();
@@ -243,6 +245,7 @@
             // 
             // xtraTabPage1
             // 
+            this.xtraTabPage1.Controls.Add(this.xmlPreview);
             this.xtraTabPage1.Name = "xtraTabPage1";
             this.xtraTabPage1.Size = new System.Drawing.Size(420, 438);
             this.xtraTabPage1.Text = "Preview";
@@ -1068,6 +1071,14 @@
             this.layoutControlItem29.TextToControlDistance = 0;
             this.layoutControlItem29.TextVisible = false;
             // 
+            // xmlPreview
+            // 
+            this.xmlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xmlPreview.Location = new System.Drawing.Point(0, 0);
+            this.xmlPreview.Name = "xmlPreview";
+            this.xmlPreview.Size = new System.Drawing.Size(420, 438);
+            this.xmlPreview.TabIndex = 0;
+            // 
             // MediaInfoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1080,6 +1091,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbFiles.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkNtsc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFPSRounded.Properties)).EndInit();
@@ -1219,5 +1231,6 @@
         private DevExpress.XtraEditors.SimpleButton btnAudioRemove;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private XmlPreviewUserControl xmlPreviewMediaInfoOutput;
+        private XmlPreviewUserControl xmlPreview;
     }
 }

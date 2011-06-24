@@ -122,14 +122,9 @@ namespace YANFOE.Tools.Xml
 
             value = value.ToString();
 
-            if (attributeName == null)
+            if (attributeName == null || attributeValue == null)
             {
                 attributeName = string.Empty;
-            }
-
-            if (attributeValue == null)
-            {
-                attributeValue = string.Empty;
             }
 
             if (!string.IsNullOrEmpty(value))

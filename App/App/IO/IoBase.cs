@@ -122,7 +122,7 @@ namespace YANFOE.IO
         /// </returns>
         public XmlWriterSettings GetSettings()
         {
-            return new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true };
+            return new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true, };
         }
 
         /// <summary>

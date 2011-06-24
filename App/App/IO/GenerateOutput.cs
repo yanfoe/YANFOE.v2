@@ -40,7 +40,7 @@ namespace YANFOE.IO
         /// <returns>
         /// The current IO handler
         /// </returns>
-        public static dynamic AccessCurrentIOHandler()
+        public static IoInterface AccessCurrentIOHandler()
         {
             switch (Get.InOutCollection.IoType)
             {

@@ -13,6 +13,7 @@ namespace YANFOE.Settings.UserSettings
     using System.Collections.Generic;
     using System.Drawing;
 
+    using YANFOE.Factories.Apps.MediaInfo;
     using YANFOE.Models.NFOModels;
 
     public class MediaInfoSettings
@@ -60,6 +61,26 @@ namespace YANFOE.Settings.UserSettings
             value = value.Replace("%P", fileInfoModel.VideoType);
 
             return value.Trim();
+        }
+
+        public string DoReplace(FileInfoModel fileInfoModel)
+        {
+            if (fileInfoModel.Resolution == "1080")
+            {
+                return this.DoReplace(this.VideoOutput1080, fileInfoModel);
+            }
+
+            if (fileInfoModel.Resolution == "720")
+            {
+                return this.DoReplace(this.VideoOutput720, fileInfoModel);
+            }
+
+            if (fileInfoModel.Resolution == "480")
+            {
+                return this.DoReplace(this.VideoOutput480, fileInfoModel);
+            }
+
+            return string.Empty;
         }
 
         public string DoReplaceDemo(string value, int width, int height)

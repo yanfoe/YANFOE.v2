@@ -99,13 +99,19 @@
                 {
                     xmlPreviewMediaInfoOutput.SetXML(currentMovie.AssociatedFiles.Media[0].ScanXML);
                 }
+
+                xmlPreview.SetXML(IO.GenerateOutput.AccessCurrentIOHandler().GetFileInfo(movie: currentMovie));
             }
             else
             {
                 var currentEpisode = TvDBFactory.CurrentEpisode;
 
                 xmlPreviewMediaInfoOutput.SetXML(currentEpisode.FilePath.MiResponseModel.ScanXML);
+
+                xmlPreview.SetXML(IO.GenerateOutput.AccessCurrentIOHandler().GetFileInfo(episode: currentEpisode));
             }
+
+
         }
 
         private void PopulateDropdowns()
@@ -116,8 +122,6 @@
 
         private void InitialSetup()
         {
-            layoutControlGroup4.Text = this.Type.ToString();
-
             if (this.Type == FileInfoType.Movie)
             {
                 this.SetupMovieEventBinding();
@@ -138,7 +142,6 @@
                         };
 
                     this.RefreshMovieBindings();
-                    
                 };
         }
 
