@@ -47,7 +47,6 @@ namespace YANFOE.Models.NFOModels
             this.AspectRatioDecimal = string.Empty;
             this.FPS = string.Empty;
             this.FPSRounded = string.Empty;
-            this.Resolution = string.Empty;
         }
 
         #endregion
@@ -255,22 +254,37 @@ namespace YANFOE.Models.NFOModels
             }
         }
 
-        private string _resolution;
-
         public string Resolution
         {
             get
             {
-                return this._resolution;
+                return GetResolution(this.Width);
             }
-            set
+        }
+
+        private string GetResolution(int width)
+        {
+            if (width >= Settings.Get.MediaInfo.Resolution480From && width <= Settings.Get.MediaInfo.Resolution480To)
             {
-                if (this._resolution != value)
-                {
-                    this._resolution = value;
-                    this.OnPropertyChanged("Resolution");
-                }
+                return "480";
             }
+
+            if (width >= Settings.Get.MediaInfo.Resolution576From && width <= Settings.Get.MediaInfo.Resolution576To)
+            {
+                return "576";
+            }
+
+            if (width >= Settings.Get.MediaInfo.Resolution720From && width <= Settings.Get.MediaInfo.Resolution720To)
+            {
+                return "720";
+            }
+
+            if (width >= Settings.Get.MediaInfo.Resolution1080From && width <= Settings.Get.MediaInfo.Resolution1080To)
+            {
+                return "1080";
+            }
+
+            return string.Empty;
         }
 
         /// <summary>

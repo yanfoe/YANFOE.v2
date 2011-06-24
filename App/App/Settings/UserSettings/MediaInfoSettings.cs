@@ -47,6 +47,8 @@ namespace YANFOE.Settings.UserSettings
             this.KeyRoundedFPS = "%D";
             this.KeyScanType = "%S";
             this.KeyNTSCPal = "%P";
+
+            this.UsePercentAspectRatio = true;
         }
 
         public string DoReplace(string value, FileInfoModel fileInfoModel)
@@ -57,7 +59,7 @@ namespace YANFOE.Settings.UserSettings
             value = value.Replace("%S", fileInfoModel.ScanType);
             value = value.Replace("%P", fileInfoModel.VideoType);
 
-            return value;
+            return value.Trim();
         }
 
         public string DoReplaceDemo(string value, int width, int height)
@@ -65,11 +67,12 @@ namespace YANFOE.Settings.UserSettings
             var fileInfoModel = new FileInfoModel
                 {
                     Height = height,
-                    Width = width, 
-                    Codec = "V_MPEG4/ISO/AVC", 
-                    FPS = "25", 
-                    FPSRounded = "25", 
-                    Ntsc = true
+                    Width = width,
+                    Codec = "V_MPEG4/ISO/AVC",
+                    FPS = "25",
+                    FPSRounded = "25",
+                    Ntsc = true,
+                    ProgressiveScan = true
                 };
 
             return this.DoReplace(value, fileInfoModel);

@@ -4,6 +4,9 @@
 
     public partial class UcSettingsGeneralFileInfo : DevExpress.XtraEditors.XtraUserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UcSettingsGeneralFileInfo"/> class.
+        /// </summary>
         public UcSettingsGeneralFileInfo()
         {
             InitializeComponent();
@@ -11,6 +14,9 @@
             SetupBindings();
         }
 
+        /// <summary>
+        /// Setup the bindings.
+        /// </summary>
         private void SetupBindings()
         {
             txtVideoOutput480.DataBindings.Add("Text", Settings.Get.MediaInfo, "VideoOutput480", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -39,6 +45,36 @@
             txtKeyResolution.Text = Settings.Get.MediaInfo.KeyResolution;
             txtKeyRoundedFramesPerSecond.Text = Settings.Get.MediaInfo.KeyRoundedFPS;
             txtKeyScanType.Text = Settings.Get.MediaInfo.KeyScanType;
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the txtVideoOutput480 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void txtVideoOutput480_TextChanged(object sender, System.EventArgs e)
+        {
+            lblVideoOutput480.Text = Settings.Get.MediaInfo.DoReplaceDemo(txtVideoOutput480.Text, 704, 480);
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the txtVideoOutput720 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void txtVideoOutput720_TextChanged(object sender, System.EventArgs e)
+        {
+            lblVideoOutput720.Text = Settings.Get.MediaInfo.DoReplaceDemo(txtVideoOutput720.Text, 1280, 720);
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the txtVideoOutput1080 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void txtVideoOutput1080_TextChanged(object sender, System.EventArgs e)
+        {
+            lblVideoOutput1080.Text = Settings.Get.MediaInfo.DoReplaceDemo(txtVideoOutput1080.Text, 1920, 1080);
         }
     }
 }

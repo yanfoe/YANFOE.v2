@@ -352,6 +352,7 @@
             this.txtVideoOutput1080.Size = new System.Drawing.Size(569, 20);
             this.txtVideoOutput1080.StyleController = this.layoutControl1;
             this.txtVideoOutput1080.TabIndex = 20;
+            this.txtVideoOutput1080.TextChanged += new System.EventHandler(this.txtVideoOutput1080_TextChanged);
             // 
             // txtVideoOutput720
             // 
@@ -360,6 +361,7 @@
             this.txtVideoOutput720.Size = new System.Drawing.Size(569, 20);
             this.txtVideoOutput720.StyleController = this.layoutControl1;
             this.txtVideoOutput720.TabIndex = 19;
+            this.txtVideoOutput720.TextChanged += new System.EventHandler(this.txtVideoOutput720_TextChanged);
             // 
             // txtVideoOutput480
             // 
@@ -368,6 +370,7 @@
             this.txtVideoOutput480.Size = new System.Drawing.Size(569, 20);
             this.txtVideoOutput480.StyleController = this.layoutControl1;
             this.txtVideoOutput480.TabIndex = 18;
+            this.txtVideoOutput480.TextChanged += new System.EventHandler(this.txtVideoOutput480_TextChanged);
             // 
             // txtDefineRes1080To
             // 

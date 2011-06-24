@@ -124,8 +124,6 @@ namespace YANFOE.Factories.Apps.MediaInfo
             fileInfoModel.Ntsc = IsNtsc(fileInfoModel.FPS);
             fileInfoModel.Pal = IsPal(fileInfoModel.FPS);
 
-            fileInfoModel.Resolution = GenerateResolution(fileInfoModel.Width);
-
             fileInfoModel.ProgressiveScan = responseModel.VideoStreams[0].ScanType == "Progressive";
             fileInfoModel.InterlacedScan = responseModel.VideoStreams[0].ScanType == "Interlaced";
 
@@ -151,19 +149,6 @@ namespace YANFOE.Factories.Apps.MediaInfo
             }
 
             return Math.Round(result).ToString();
-        }
-
-        private static string GenerateResolution(int width)
-        {
-            foreach (var resolution in Settings.Get.MediaInfo.Resolutions)
-            {
-                if (resolution.Value.Width <= width && resolution.Value.Height >= width)
-                {
-                    return resolution.Key;
-                }
-            }
-
-            return string.Empty;
         }
 
         private static string GenerateARDecimal(string arValue)
