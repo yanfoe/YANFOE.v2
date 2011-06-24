@@ -157,10 +157,15 @@ namespace YANFOE.UI.Dialogs.DSettings
             tabControlScrapers.SelectedTabPage = this.tabTVDB;
         }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the navItemGeneralFileInfo control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevExpress.XtraNavBar.NavBarLinkEventArgs"/> instance containing the event data.</param>
         private void navItemGeneralFileInfo_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
             tabMain.SelectedTabPage = tabGeneral;
-            tabControlScrapers.SelectedTabPage = this.tabGeneralFileInfo;
+            tabControlGeneral.SelectedTabPage = this.tabGeneralFileInfo;
         }
     }
 }

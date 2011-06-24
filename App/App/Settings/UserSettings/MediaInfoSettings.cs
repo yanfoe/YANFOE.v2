@@ -9,8 +9,11 @@
 
 namespace YANFOE.Settings.UserSettings
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
+
+    using YANFOE.Models.NFOModels;
 
     public class MediaInfoSettings
     {
@@ -21,19 +24,94 @@ namespace YANFOE.Settings.UserSettings
         {
             this.WaitForScan = 3000;
 
-            this.Resolutions = new Dictionary<string, Size>(3);
+            this.Resolution480From = 1;
+            this.Resolution480To = 799;
 
-            this.Resolutions.Add("480", new Size(1, 799));
-            this.Resolutions.Add("576", new Size(0, 0));
-            this.Resolutions.Add("720", new Size(800, 1280));
-            this.Resolutions.Add("1080", new Size(1281, 1920));
+            this.Resolution576From = 0;
+            this.Resolution576To = 0;
 
-            this.VideoOutput480 = "[P] [D][S]";
-            this.VideoOutput720 = "[[R][S] [D]Hz]";
-            this.VideoOutput1080 = "[R][S] [D]Hz";
+            this.Resolution720From = 800;
+            this.Resolution720To = 1280;
 
-            this.AspectRatioString = "[E]";
+            this.Resolution1080From = 1281;
+            this.Resolution1080To = 1920;
+
+            this.VideoOutput480 = "%P %D%S";
+            this.VideoOutput720 = "%R%S %DHz";
+            this.VideoOutput1080 = "%R%S %DHz";
+
+            this.AspectRatioString = "%E";
+
+            this.KeyResolution = "%R";
+            this.KeyFPS = "%F";
+            this.KeyRoundedFPS = "%D";
+            this.KeyScanType = "%S";
+            this.KeyNTSCPal = "%P";
         }
+
+        public string DoReplace(string value, FileInfoModel fileInfoModel)
+        {
+            value = value.Replace("%R", fileInfoModel.Resolution);
+            value = value.Replace("%F", fileInfoModel.FPS);
+            value = value.Replace("%D", fileInfoModel.FPSRounded);
+            value = value.Replace("%S", fileInfoModel.ScanType);
+            value = value.Replace("%P", fileInfoModel.VideoType);
+
+            return value;
+        }
+
+        public string DoReplaceDemo(string value, int width, int height)
+        {
+            var fileInfoModel = new FileInfoModel
+                {
+                    Height = height,
+                    Width = width, 
+                    Codec = "V_MPEG4/ISO/AVC", 
+                    FPS = "25", 
+                    FPSRounded = "25", 
+                    Ntsc = true
+                };
+
+            return this.DoReplace(value, fileInfoModel);
+        }
+
+        public string KeyResolution { get; private set; }
+
+        public string KeyFPS { get; private set; }
+
+        public string KeyScanType { get; private set; }
+
+        public string KeyRoundedFPS { get; private set; }
+
+        public string KeyNTSCPal { get; private set; }
+
+        /// <summary>
+        /// Gets or sets Resolution480From.
+        /// </summary>
+        public int Resolution480From { get; set; }
+
+        /// <summary>
+        /// Gets or sets Resolution480To.
+        /// </summary>
+        public int Resolution480To { get; set; }
+
+        /// <summary>
+        /// Gets or sets Resolution576From.
+        /// </summary>
+        public int Resolution576From { get; set; }
+
+        /// <summary>
+        /// Gets or sets Resolution576To.
+        /// </summary>
+        public int Resolution576To { get; set; }
+
+        public int Resolution720From { get; set; }
+
+        public int Resolution720To { get; set; }
+
+        public int Resolution1080From { get; set; }
+
+        public int Resolution1080To { get; set; }
 
         public int WaitForScan { get; set; }
 
@@ -85,5 +163,13 @@ namespace YANFOE.Settings.UserSettings
         public string VideoOutput1080 { get; set; }
 
         public bool OutputPWhenFIs24 { get; set; }
+
+        public bool UseDecimalAspectRatio { get; set; }
+
+        public bool UsePercentAspectRatio { get; set; }
+
+        public bool ScanNTSC { get; set; }
+
+        public bool ScanPAL { get; set; }
     }
 }

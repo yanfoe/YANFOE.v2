@@ -285,6 +285,44 @@ namespace YANFOE.Models.NFOModels
         /// <value>The subtitle stream.</value>
         public BindingList<MiSubtitleStreamModel> SubtitleStreams { get; set; }
 
+        public string ScanType
+        {
+            get
+            {
+                if (this.InterlacedScan)
+                {
+                    return "i";
+                }
+                else if (this.ProgressiveScan)
+                {
+                    return "p";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        public string VideoType
+        {
+            get
+            {
+                if (this.Pal)
+                {
+                    return "PAL";
+                }
+                else if (this.Ntsc)
+                {
+                    return "NTSC";
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
         #endregion
     }
 }
