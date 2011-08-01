@@ -213,7 +213,7 @@ namespace YANFOE.IO
         {
             string actualTrailerFileName = string.Empty;
             string actualTrailerFileNameExt = string.Empty;
-            string actualFilePath = movieModel.AssociatedFiles.Media[0].FolderPath;
+            string actualFilePath = movieModel.AssociatedFiles.Media[0].FolderPath + "\\";
             string actualFileName = movieModel.AssociatedFiles.Media[0].FilenameWithOutExt;
             string currentTrailerUrl = movieModel.CurrentTrailerUrl;
 
