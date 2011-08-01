@@ -18,6 +18,7 @@ namespace YANFOE.Models.MovieModels
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
@@ -1019,6 +1020,11 @@ namespace YANFOE.Models.MovieModels
             {
                 if (this.imdbId != value)
                 {
+                    if (value.StartsWith("tt", true, CultureInfo.CurrentCulture))
+                    {
+                        value = value.Replace("tt", string.Empty);
+                    }
+
                     this.imdbId = value;
                     this.OnPropertyChanged("ImdbId", true);
                     this.OnPropertyChanged("Status");
