@@ -90,8 +90,8 @@ namespace YANFOE.Scrapers.Movie
 
             this.BingMatchString = "http://www.imdb.com/title/";
             this.BingSearchQuery = "{0} {1} site:www.imdb.com";
-            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
-            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\sMovieMeter\.nl";
+            this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\simdb\.com";
+            this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\simdb\.com";
             this.BingRegexMatchID = @"(?<imdbid>tt\d{7})";
         }
 
@@ -106,7 +106,7 @@ namespace YANFOE.Scrapers.Movie
         {
             try
             {
-                var url = string.Format("http://www.imdb.com/find?s=all&q={0}", query.Title);
+                var url = string.Format("http://www.imdb.com/find?s=tt&q={0} ({1})", query.Title, query.Year);
 
                 var webPage = Downloader.ProcessDownload(url, DownloadType.Html, Section.Movies).RemoveCharacterReturn();
 

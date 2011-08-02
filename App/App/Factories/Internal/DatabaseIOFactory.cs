@@ -577,8 +577,9 @@ namespace YANFOE.Factories.Internal
 
             int count = 0;
 
-            foreach (MediaPathModel mediaPath in MediaPathDBFactory.MediaPathDB)
+            for (int index = 0; index < MediaPathDBFactory.MediaPathDB.Count; index++)
             {
+                MediaPathModel mediaPath = MediaPathDBFactory.MediaPathDB[index];
                 string json = JsonConvert.SerializeObject(mediaPath);
                 Gzip.CompressString(json, path + count + ".MediaPath.gz");
 

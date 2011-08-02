@@ -330,6 +330,7 @@
             this.grdMediaPathList.TabIndex = 5;
             this.grdMediaPathList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdViewMain});
+            this.grdMediaPathList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdMediaPathList_KeyDown);
             // 
             // grdViewMain
             // 
