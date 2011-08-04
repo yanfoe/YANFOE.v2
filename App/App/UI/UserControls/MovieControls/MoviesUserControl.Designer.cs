@@ -32,6 +32,16 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
@@ -55,16 +65,6 @@
             DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem13 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviesUserControl));
@@ -125,35 +125,15 @@
             this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             this.picPoster = new YANFOE.UI.UserControls.CommonControls.DisplayPictureUserControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnMediaInfo = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMutliWatchedFalse = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
-            this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.btnNew = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMarked = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLoadFromWeb = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLock = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlImages = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.popupSave = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnSaveNfo = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveAllImages = new DevExpress.XtraBars.BarButtonItem();
             this.btnSavePoster = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveFanart = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnLoadFromWeb = new DevExpress.XtraEditors.SimpleButton();
             this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
@@ -169,6 +149,26 @@
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
+            this.btnMediaInfo = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMutliWatchedFalse = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
+            this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnNew = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMarked = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLock = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlImages = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -199,6 +199,9 @@
             this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -210,9 +213,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).BeginInit();
             this.SuspendLayout();
@@ -640,7 +640,7 @@
             this.labelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.labelControl1.Location = new System.Drawing.Point(173, 146);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(395, 44);
+            this.labelControl1.Size = new System.Drawing.Size(393, 42);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "Available in a future build";
             this.labelControl1.Visible = false;
@@ -745,6 +745,230 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(777, 45);
             this.panelControl1.TabIndex = 1;
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barButtonItem1,
+            this.barStaticItem1,
+            this.barSubItem1,
+            this.barButtonItem2,
+            this.barStaticItem2,
+            this.btnSaveNfo,
+            this.btnSaveAllImages,
+            this.btnSavePoster,
+            this.btnSaveFanart,
+            this.barButtonItem7,
+            this.barButtonItem8,
+            this.barButtonItem3,
+            this.barButtonItem4,
+            this.barCheckItem1,
+            this.barCheckItem2});
+            this.barManager1.MaxItemId = 15;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSave.Image = global::YANFOE.Properties.Resources.save32;
+            this.btnSave.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnSave.Location = new System.Drawing.Point(50, 2);
+            this.btnSave.Name = "btnSave";
+            this.barManager1.SetPopupContextMenu(this.btnSave, this.popupSave);
+            this.btnSave.Size = new System.Drawing.Size(48, 41);
+            superToolTip9.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem9.Text = "Save";
+            toolTipItem8.LeftIndent = 6;
+            toolTipItem8.Text = "Will Save Both NFO and Images To Disk";
+            toolTipTitleItem10.LeftIndent = 6;
+            toolTipTitleItem10.Text = "Right click for more options...\r\n";
+            superToolTip9.Items.Add(toolTipTitleItem9);
+            superToolTip9.Items.Add(toolTipItem8);
+            superToolTip9.Items.Add(toolTipSeparatorItem1);
+            superToolTip9.Items.Add(toolTipTitleItem10);
+            this.btnSave.SuperTip = superToolTip9;
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // popupSave
+            // 
+            this.popupSave.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveNfo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveAllImages),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSavePoster, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveFanart),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8, true)});
+            this.popupSave.Manager = this.barManager1;
+            this.popupSave.Name = "popupSave";
+            // 
+            // btnSaveNfo
+            // 
+            this.btnSaveNfo.Caption = "Save NFO";
+            this.btnSaveNfo.Glyph = global::YANFOE.Properties.Resources.school_board;
+            this.btnSaveNfo.Id = 5;
+            this.btnSaveNfo.Name = "btnSaveNfo";
+            this.btnSaveNfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveNfo_ItemClick);
+            // 
+            // btnSaveAllImages
+            // 
+            this.btnSaveAllImages.Caption = "Save All Images";
+            this.btnSaveAllImages.Glyph = global::YANFOE.Properties.Resources.picture;
+            this.btnSaveAllImages.Id = 6;
+            this.btnSaveAllImages.Name = "btnSaveAllImages";
+            this.btnSaveAllImages.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveAllImages_ItemClick);
+            // 
+            // btnSavePoster
+            // 
+            this.btnSavePoster.Caption = "Save Poster";
+            this.btnSavePoster.Glyph = global::YANFOE.Properties.Resources.picture_poster;
+            this.btnSavePoster.Id = 7;
+            this.btnSavePoster.Name = "btnSavePoster";
+            this.btnSavePoster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSavePoster_ItemClick);
+            // 
+            // btnSaveFanart
+            // 
+            this.btnSaveFanart.Caption = "Save Fanart";
+            this.btnSaveFanart.Glyph = global::YANFOE.Properties.Resources.picture;
+            this.btnSaveFanart.Id = 8;
+            this.btnSaveFanart.Name = "btnSaveFanart";
+            this.btnSaveFanart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveFanart_ItemClick);
+            // 
+            // barButtonItem8
+            // 
+            this.barButtonItem8.Caption = "Save All";
+            this.barButtonItem8.Glyph = global::YANFOE.Properties.Resources.save;
+            this.barButtonItem8.Id = 10;
+            this.barButtonItem8.Name = "barButtonItem8";
+            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSave_Click);
+            // 
+            // btnLoadFromWeb
+            // 
+            this.btnLoadFromWeb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLoadFromWeb.Image = global::YANFOE.Properties.Resources.globe32;
+            this.btnLoadFromWeb.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnLoadFromWeb.Location = new System.Drawing.Point(2, 2);
+            this.btnLoadFromWeb.Name = "btnLoadFromWeb";
+            this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
+            this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 41);
+            superToolTip10.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem11.Text = "Load From Web";
+            toolTipItem9.LeftIndent = 6;
+            toolTipItem9.Text = "Will download details using the scraper set for this movie.";
+            toolTipTitleItem12.LeftIndent = 6;
+            toolTipTitleItem12.Text = "Right click for more options...\r\n";
+            superToolTip10.Items.Add(toolTipTitleItem11);
+            superToolTip10.Items.Add(toolTipItem9);
+            superToolTip10.Items.Add(toolTipSeparatorItem2);
+            superToolTip10.Items.Add(toolTipTitleItem12);
+            this.btnLoadFromWeb.SuperTip = superToolTip10;
+            this.btnLoadFromWeb.TabIndex = 0;
+            this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
+            // 
+            // popupLoadFromWeb
+            // 
+            this.popupLoadFromWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7, true)});
+            this.popupLoadFromWeb.Manager = this.barManager1;
+            this.popupLoadFromWeb.Name = "popupLoadFromWeb";
+            this.popupLoadFromWeb.ShowCaption = true;
+            this.popupLoadFromWeb.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupLoadFromWeb_BeforePopup);
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "<Current Scraper Group>";
+            this.barStaticItem2.Id = 4;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "Scrape Using <alternative 1>";
+            this.barButtonItem7.Id = 9;
+            this.barButtonItem7.Name = "barButtonItem7";
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1049, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 714);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1049, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 714);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1049, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 714);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Load From Web";
+            this.barButtonItem1.Id = 0;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barStaticItem1
+            // 
+            this.barStaticItem1.Caption = "Load From Web";
+            this.barStaticItem1.Id = 1;
+            this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Caption = "barSubItem1";
+            this.barSubItem1.Id = 2;
+            this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Scrape Text From Scraper Group";
+            this.barButtonItem2.Id = 3;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Lock";
+            this.barButtonItem3.Id = 11;
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Unlock";
+            this.barButtonItem4.Id = 12;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "Lock";
+            this.barCheckItem1.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.barCheckItem1.Id = 13;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // barCheckItem2
+            // 
+            this.barCheckItem2.Caption = "Mark";
+            this.barCheckItem2.Glyph = global::YANFOE.Properties.Resources.star_empty32;
+            this.barCheckItem2.Id = 14;
+            this.barCheckItem2.Name = "barCheckItem2";
             // 
             // btnMediaInfo
             // 
@@ -913,52 +1137,6 @@
             this.btnMarked.Tag = "unmarked";
             this.btnMarked.Click += new System.EventHandler(this.BtnMarked_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSave.Image = global::YANFOE.Properties.Resources.save32;
-            this.btnSave.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnSave.Location = new System.Drawing.Point(50, 2);
-            this.btnSave.Name = "btnSave";
-            this.barManager1.SetPopupContextMenu(this.btnSave, this.popupSave);
-            this.btnSave.Size = new System.Drawing.Size(48, 41);
-            superToolTip9.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem9.Text = "Save";
-            toolTipItem8.LeftIndent = 6;
-            toolTipItem8.Text = "Will Save Both NFO and Images To Disk";
-            toolTipTitleItem10.LeftIndent = 6;
-            toolTipTitleItem10.Text = "Right click for more options...\r\n";
-            superToolTip9.Items.Add(toolTipTitleItem9);
-            superToolTip9.Items.Add(toolTipItem8);
-            superToolTip9.Items.Add(toolTipSeparatorItem1);
-            superToolTip9.Items.Add(toolTipTitleItem10);
-            this.btnSave.SuperTip = superToolTip9;
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // btnLoadFromWeb
-            // 
-            this.btnLoadFromWeb.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLoadFromWeb.Image = global::YANFOE.Properties.Resources.globe32;
-            this.btnLoadFromWeb.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnLoadFromWeb.Location = new System.Drawing.Point(2, 2);
-            this.btnLoadFromWeb.Name = "btnLoadFromWeb";
-            this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
-            this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 41);
-            superToolTip10.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem11.Text = "Load From Web";
-            toolTipItem9.LeftIndent = 6;
-            toolTipItem9.Text = "Will download details using the scraper set for this movie.";
-            toolTipTitleItem12.LeftIndent = 6;
-            toolTipTitleItem12.Text = "Right click for more options...\r\n";
-            superToolTip10.Items.Add(toolTipTitleItem11);
-            superToolTip10.Items.Add(toolTipItem9);
-            superToolTip10.Items.Add(toolTipSeparatorItem2);
-            superToolTip10.Items.Add(toolTipTitleItem12);
-            this.btnLoadFromWeb.SuperTip = superToolTip10;
-            this.btnLoadFromWeb.TabIndex = 0;
-            this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
-            // 
             // btnLock
             // 
             this.btnLock.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1094,184 +1272,6 @@
             this.layoutControlItem5.TextToControlDistance = 0;
             this.layoutControlItem5.TextVisible = false;
             // 
-            // barManager1
-            // 
-            this.barManager1.DockControls.Add(this.barDockControlTop);
-            this.barManager1.DockControls.Add(this.barDockControlBottom);
-            this.barManager1.DockControls.Add(this.barDockControlLeft);
-            this.barManager1.DockControls.Add(this.barDockControlRight);
-            this.barManager1.Form = this;
-            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem1,
-            this.barStaticItem1,
-            this.barSubItem1,
-            this.barButtonItem2,
-            this.barStaticItem2,
-            this.btnSaveNfo,
-            this.btnSaveAllImages,
-            this.btnSavePoster,
-            this.btnSaveFanart,
-            this.barButtonItem7,
-            this.barButtonItem8,
-            this.barButtonItem3,
-            this.barButtonItem4,
-            this.barCheckItem1,
-            this.barCheckItem2});
-            this.barManager1.MaxItemId = 15;
-            // 
-            // popupSave
-            // 
-            this.popupSave.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveNfo),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveAllImages),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSavePoster, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveFanart),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8, true)});
-            this.popupSave.Manager = this.barManager1;
-            this.popupSave.Name = "popupSave";
-            // 
-            // btnSaveNfo
-            // 
-            this.btnSaveNfo.Caption = "Save NFO";
-            this.btnSaveNfo.Glyph = global::YANFOE.Properties.Resources.school_board;
-            this.btnSaveNfo.Id = 5;
-            this.btnSaveNfo.Name = "btnSaveNfo";
-            this.btnSaveNfo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveNfo_ItemClick);
-            // 
-            // btnSaveAllImages
-            // 
-            this.btnSaveAllImages.Caption = "Save All Images";
-            this.btnSaveAllImages.Glyph = global::YANFOE.Properties.Resources.picture;
-            this.btnSaveAllImages.Id = 6;
-            this.btnSaveAllImages.Name = "btnSaveAllImages";
-            this.btnSaveAllImages.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveAllImages_ItemClick);
-            // 
-            // btnSavePoster
-            // 
-            this.btnSavePoster.Caption = "Save Poster";
-            this.btnSavePoster.Glyph = global::YANFOE.Properties.Resources.picture_poster;
-            this.btnSavePoster.Id = 7;
-            this.btnSavePoster.Name = "btnSavePoster";
-            this.btnSavePoster.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSavePoster_ItemClick);
-            // 
-            // btnSaveFanart
-            // 
-            this.btnSaveFanart.Caption = "Save Fanart";
-            this.btnSaveFanart.Glyph = global::YANFOE.Properties.Resources.picture;
-            this.btnSaveFanart.Id = 8;
-            this.btnSaveFanart.Name = "btnSaveFanart";
-            this.btnSaveFanart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSaveFanart_ItemClick);
-            // 
-            // barButtonItem8
-            // 
-            this.barButtonItem8.Caption = "Save All";
-            this.barButtonItem8.Glyph = global::YANFOE.Properties.Resources.save;
-            this.barButtonItem8.Id = 10;
-            this.barButtonItem8.Name = "barButtonItem8";
-            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSave_Click);
-            // 
-            // popupLoadFromWeb
-            // 
-            this.popupLoadFromWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem2),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem7, true)});
-            this.popupLoadFromWeb.Manager = this.barManager1;
-            this.popupLoadFromWeb.Name = "popupLoadFromWeb";
-            this.popupLoadFromWeb.ShowCaption = true;
-            this.popupLoadFromWeb.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupLoadFromWeb_BeforePopup);
-            // 
-            // barStaticItem2
-            // 
-            this.barStaticItem2.Caption = "<Current Scraper Group>";
-            this.barStaticItem2.Id = 4;
-            this.barStaticItem2.Name = "barStaticItem2";
-            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barButtonItem7
-            // 
-            this.barButtonItem7.Caption = "Scrape Using <alternative 1>";
-            this.barButtonItem7.Id = 9;
-            this.barButtonItem7.Name = "barButtonItem7";
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(1049, 0);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 714);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1049, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 714);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1049, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 714);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "Load From Web";
-            this.barButtonItem1.Id = 0;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // barStaticItem1
-            // 
-            this.barStaticItem1.Caption = "Load From Web";
-            this.barStaticItem1.Id = 1;
-            this.barStaticItem1.Name = "barStaticItem1";
-            this.barStaticItem1.TextAlignment = System.Drawing.StringAlignment.Near;
-            // 
-            // barSubItem1
-            // 
-            this.barSubItem1.Caption = "barSubItem1";
-            this.barSubItem1.Id = 2;
-            this.barSubItem1.Name = "barSubItem1";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Scrape Text From Scraper Group";
-            this.barButtonItem2.Id = 3;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "Lock";
-            this.barButtonItem3.Id = 11;
-            this.barButtonItem3.Name = "barButtonItem3";
-            // 
-            // barButtonItem4
-            // 
-            this.barButtonItem4.Caption = "Unlock";
-            this.barButtonItem4.Id = 12;
-            this.barButtonItem4.Name = "barButtonItem4";
-            // 
-            // barCheckItem1
-            // 
-            this.barCheckItem1.Caption = "Lock";
-            this.barCheckItem1.Glyph = global::YANFOE.Properties.Resources.unlock32;
-            this.barCheckItem1.Id = 13;
-            this.barCheckItem1.Name = "barCheckItem1";
-            // 
-            // barCheckItem2
-            // 
-            this.barCheckItem2.Caption = "Mark";
-            this.barCheckItem2.Glyph = global::YANFOE.Properties.Resources.star_empty32;
-            this.barCheckItem2.Id = 14;
-            this.barCheckItem2.Name = "barCheckItem2";
-            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
@@ -1323,6 +1323,9 @@
             this.tabPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -1334,9 +1337,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).EndInit();
             this.ResumeLayout(false);
