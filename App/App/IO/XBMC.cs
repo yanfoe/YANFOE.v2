@@ -152,23 +152,29 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "id", imdbid);
 
                     // Trailer
-                    if (movieModel.TrailerPathOnDisk.Equals(String.Empty))
+                    try
                     {
-                        if (!movieModel.CurrentTrailerUrl.Equals(String.Empty))
+                        if (movieModel.TrailerPathOnDisk != null && !movieModel.TrailerPathOnDisk.Equals(String.Empty))
                         {
-                            XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.CurrentTrailerUrl);
+                            XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.TrailerPathOnDisk);
                         }
                         else
                         {
-                            if (movieModel.AlternativeTrailers.Count > 0)
+                            if (movieModel.CurrentTrailerUrl != null && !movieModel.CurrentTrailerUrl.Equals(String.Empty))
                             {
-                                XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.AlternativeTrailers[0].ToString());
+                                XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.CurrentTrailerUrl);
+                            }
+                            else
+                            {
+                                if (movieModel.AlternativeTrailers.Count > 0)
+                                {
+                                    XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.AlternativeTrailers[0].ToString());
+                                }
                             }
                         }
                     }
-                    else
+                    catch (NullReferenceException e)
                     {
-                        XWrite.WriteEnclosedElement(xmlWriter, "trailer", movieModel.TrailerPathOnDisk);
                     }
 
                     // Genre
