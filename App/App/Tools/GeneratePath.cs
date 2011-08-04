@@ -77,6 +77,7 @@ namespace YANFOE.Tools
 
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesName, seriesName);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodePathOfSeries, firstEpisodePath);
+            replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, series.GetSeriesPath());
 
             return replace;
         }
@@ -146,6 +147,9 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodePathOfSeries, firstEpisodePath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodeOfSeasonPath, firstEpisodeOfSeasonPath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodeOfSeason, firstEpisodeOfSeason);
+            replace = replace.Replace(Settings.Get.InOutCollection.TvSeasonNumber, season.SeasonNumber.ToString());
+            replace = replace.Replace(Settings.Get.InOutCollection.TvSeasonNumber2, string.Format("{0:d2}", season.SeasonNumber));
+            replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, season.GetSeries().GetSeriesPath());
 
             return replace;
         }
