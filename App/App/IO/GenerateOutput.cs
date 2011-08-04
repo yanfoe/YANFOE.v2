@@ -30,6 +30,11 @@ namespace YANFOE.IO
         /// </summary>
         private static readonly YAMJ yamj = new YAMJ();
 
+        /// <summary>
+        /// The XBMC IO Handler
+        /// </summary>
+        private static readonly XBMC xbmc = new XBMC();
+
         #endregion
 
         #region Public Methods
@@ -46,6 +51,8 @@ namespace YANFOE.IO
             {
                 case NFOType.YAMJ:
                     return yamj;
+                case NFOType.XBMC:
+                    return xbmc;
             }
 
             return null;
@@ -66,6 +73,8 @@ namespace YANFOE.IO
             {
                 case NFOType.YAMJ:
                     return yamj.GenerateMovieOutput(movieModel);
+                case NFOType.XBMC:
+                    return xbmc.GenerateMovieOutput(movieModel);
             }
 
             return string.Empty;

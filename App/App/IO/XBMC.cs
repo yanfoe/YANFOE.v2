@@ -271,7 +271,7 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "mpaa", series.ContentRating);
 
                     // Votes
-                    XWrite.WriteEnclosedElement(xmlWriter, "votes", series.Votes);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "votes", series.Votes);
 
                     // Plot
                     XWrite.WriteEnclosedElement(xmlWriter, "plot", series.Overview);
@@ -280,7 +280,7 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "runtime", series.Runtime);
 
                     // Tagline
-                    XWrite.WriteEnclosedElement(xmlWriter, "tagline", series.Tagline);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "tagline", series.Tagline);
 
                     // Thumb
 
@@ -288,7 +288,7 @@ namespace YANFOE.IO
 
                     // Episodeguide
                     xmlWriter.WriteStartElement("episodeguide");
-                    XWrite.WriteEnclosedElement(xmlWriter, "url", series.EpisodeGuideUrl); // Cache attribute supported: <url cache="73388.xml">http://www.thetvdb.com/api/1D62F2F90030C444/series/73388/all/en.zip</url>
+                    //XWrite.WriteEnclosedElement(xmlWriter, "url", series.EpisodeGuideUrl); // Cache attribute supported: <url cache="73388.xml">http://www.thetvdb.com/api/1D62F2F90030C444/series/73388/all/en.zip</url>
                     xmlWriter.WriteEndElement();
 
                     // Genre
@@ -298,7 +298,7 @@ namespace YANFOE.IO
                     }
 
                     // Director
-                    XWrite.WriteEnclosedElement(xmlWriter, "director", series.Director);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "director", series.Director);
 
                     // Premiered
                     if (series.FirstAired != null)
@@ -317,7 +317,7 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "studio", series.Network);
 
                     // Trailer
-                    XWrite.WriteEnclosedElement(xmlWriter, "trailer", series.Trailer);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "trailer", series.Trailer);
 
                     // Actor
                     foreach (PersonModel actor in series.Actors)
@@ -381,13 +381,13 @@ namespace YANFOE.IO
                     // Thumb
 
                     // Playcount
-                    XWrite.WriteEnclosedElement(xmlWriter, "playcount", episode.PlayCount);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "playcount", episode.PlayCount);
 
                     // Lastplayed
-                    XWrite.WriteEnclosedElement(xmlWriter, "lastplayed", episode.LastPlayed);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "lastplayed", episode.LastPlayed);
 
                     // Credits
-                    XWrite.WriteEnclosedElement(xmlWriter, "credits", episode.Credits);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "credits", episode.Credits);
 
                     // Director
                     XWrite.WriteEnclosedElement(xmlWriter, "director", episode.Director);
@@ -396,16 +396,16 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "aired", episode.FirstAired);
 
                     // Premiered
-                    XWrite.WriteEnclosedElement(xmlWriter, "premiered", episode.Premiered);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "premiered", episode.Premiered);
 
                     // Studio
-                    XWrite.WriteEnclosedElement(xmlWriter, "studio", episode.Studio);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "studio", episode.Studio);
 
                     // Mpaa
-                    XWrite.WriteEnclosedElement(xmlWriter, "mpaa", episode.Mpaa);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "mpaa", episode.Mpaa);
 
                     // Displayepisode: For TV show specials, determines how the episode is sorted in the series
-                    XWrite.WriteEnclosedElement(xmlWriter, "displayepisode", episode.DisplayEpisode);
+                    //XWrite.WriteEnclosedElement(xmlWriter, "displayepisode", episode.DisplayEpisode);
 
                     // Actor
                     int count = 1;
@@ -481,7 +481,7 @@ namespace YANFOE.IO
             string path = Path.GetDirectoryName(fullPath);
             string fileName = Path.GetFileNameWithoutExtension(fullPath);
 
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".jpg";
+            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".tbn";
 
             if (File.Exists(checkPath))
             {
@@ -629,6 +629,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeasonFanart(Season season)
         {
+            // Not sure this is supported by XBMC
             string firstEpisode = season.GetFirstEpisode();
 
             if (string.IsNullOrEmpty(firstEpisode))
@@ -665,9 +666,9 @@ namespace YANFOE.IO
             }
 
             string path = Path.GetDirectoryName(seasonPath);
-            // <root>/<tv series>/season<00>.jpg
+            // <root>/<tv series>/season<00>.tbn
             // <root>/<tv series>/season <00>/<episodes>
-            string checkPath = path + "season" + +".jpg";
+            string checkPath = path + "season" + string.Format("{0:d2}", season.SeasonNumber) +".tbn";
 
             if (File.Exists(checkPath))
             {
@@ -686,17 +687,14 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesBanner(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
+            string seriesPath = series.GetSeriesPath();
 
-            if (string.IsNullOrEmpty(firstEpisode))
+            if (string.IsNullOrEmpty(seriesPath))
             {
                 return string.Empty;
             }
 
-            string path = Path.GetDirectoryName(firstEpisode);
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".banner.jpg";
+            string checkPath = seriesPath + Path.DirectorySeparatorChar + "folder.jpg";
 
             if (File.Exists(checkPath))
             {
@@ -715,18 +713,14 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesFanart(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
+            string seriesPath = series.GetSeriesPath();
 
-            if (string.IsNullOrEmpty(firstEpisode))
+            if (string.IsNullOrEmpty(seriesPath))
             {
                 return string.Empty;
             }
 
-            string path = Path.GetDirectoryName(firstEpisode);
-
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".fanart.jpg";
+            string checkPath = seriesPath + Path.DirectorySeparatorChar + "fanart.jpg";
 
             if (File.Exists(checkPath))
             {
@@ -745,12 +739,14 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesNFO(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
+            string seriesPath = series.GetSeriesPath();
 
-            string path = Path.GetDirectoryName(firstEpisode);
-            string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
+            if (string.IsNullOrEmpty(seriesPath))
+            {
+                return string.Empty;
+            }
 
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".nfo";
+            string checkPath = seriesPath + Path.DirectorySeparatorChar + "tvshow.nfo";
 
             if (File.Exists(checkPath))
             {
@@ -769,17 +765,14 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesPoster(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
+            string seriesPath = series.GetSeriesPath();
 
-            if (string.IsNullOrEmpty(firstEpisode))
+            if (string.IsNullOrEmpty(seriesPath))
             {
                 return string.Empty;
             }
 
-            string path = Path.GetDirectoryName(firstEpisode);
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".jpg";
+            string checkPath = seriesPath + Path.DirectorySeparatorChar + "season-all.tbn";
 
             if (File.Exists(checkPath))
             {
@@ -1020,20 +1013,20 @@ namespace YANFOE.IO
             series.SeriesName = XRead.GetString(doc, "title");
             series.Rating = XRead.GetDouble(doc, "rating");
             series.ContentRating = XRead.GetString(doc, "mpaa");
-            series.Votes = XRead.GetInt(doc, "votes");
+            //series.Votes = XRead.GetInt(doc, "votes");
             series.Overview = XRead.GetString(doc, "plot");
             series.Runtime = XRead.GetInt(doc, "runtime");
-            series.Tagline = XRead.GetString(doc, "tagline");
+            //series.Tagline = XRead.GetString(doc, "tagline");
             // Thumb
             // Fanart
-            series.EpisodeGuide = XRead.GetString(doc, "url"); // url is located in episodeguide tags
+            //series.EpisodeGuide = XRead.GetString(doc, "url"); // url is located in episodeguide tags
             series.Genre = XRead.GetStrings(doc, "genre").ToBindingList();
-            series.Director = XRead.GetString(doc, "director");
+            //series.Director = XRead.GetString(doc, "director");
             series.FirstAired = XRead.GetDateTime(doc, "premiered", "yyyy-MM-dd");
             series.Status = XRead.GetString(doc, "status");
-            series.Aired = XRead.GetString(doc, "aired");
+            //series.Aired = XRead.GetString(doc, "aired");
             series.Network = XRead.GetString(doc, "studio");
-            series.Trailer = XRead.GetString(doc, "trailer");
+            //series.Trailer = XRead.GetString(doc, "trailer");
 
             if (doc.GetElementsByTagName("actor").Count > 0)
             {

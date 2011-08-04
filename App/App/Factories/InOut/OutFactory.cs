@@ -47,6 +47,11 @@ namespace YANFOE.Factories.InOut
         /// </summary>
         private static readonly YAMJ yamj = new YAMJ();
 
+        /// <summary>
+        /// The XBMC handler object.
+        /// </summary>
+        private static readonly XBMC xbmc = new XBMC();
+
         #endregion
 
         #region Constructors and Destructors
@@ -114,6 +119,10 @@ namespace YANFOE.Factories.InOut
                 {
                     yamj.LoadMovie(movie);
                 }
+                else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                {
+                    xbmc.LoadMovie(movie);
+                }
 
                 return true;
             }
@@ -138,6 +147,10 @@ namespace YANFOE.Factories.InOut
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
                     yamj.LoadSeries(series);
+                }
+                else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                {
+                    xbmc.LoadSeries(series);
                 }
 
                 return true;
@@ -245,6 +258,10 @@ namespace YANFOE.Factories.InOut
                     {
                         yamj.SaveMovie(movie);
                     }
+                    else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                    {
+                        xbmc.LoadMovie(movie);
+                    }
                 }
 
                 return true;
@@ -310,6 +327,10 @@ namespace YANFOE.Factories.InOut
                 {
                     yamj.SaveEpisode(episode, type);
                 }
+                else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                {
+                    xbmc.SaveEpisode(episode, type);
+                }
             }
             catch (Exception exception)
             {
@@ -336,6 +357,10 @@ namespace YANFOE.Factories.InOut
                 {
                     yamj.SaveSeason(season, type);
                 }
+                else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                {
+                    xbmc.SaveSeason(season, type);
+                }
             }
             catch (Exception exception)
             {
@@ -359,6 +384,10 @@ namespace YANFOE.Factories.InOut
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
                     yamj.SaveSeries(series, type);
+                }
+                else if (Get.InOutCollection.IoType == NFOType.XBMC)
+                {
+                    xbmc.SaveSeries(series, type);
                 }
             }
             catch (Exception exception)

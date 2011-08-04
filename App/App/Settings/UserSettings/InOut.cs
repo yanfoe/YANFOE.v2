@@ -86,6 +86,9 @@ namespace YANFOE.Settings.UserSettings
             this.TvFirstEpisodeOfSeasonPath = "<firstEpisodeOfSeasonPath>";
             this.TvFirstEpisodePathOfSeries = "<firstEpisodePath>";
             this.TvSeriesName = "<seriesName>";
+            this.TvSeasonNumber = "<seasonNumber>";
+            this.TvSeasonNumber2 = "<seasonNumber2>";
+            this.TvSeriesPath = "<seriesPath>";
 
             this.FillVideoExtentions();
             this.FillNfoExtentions();
@@ -108,6 +111,8 @@ namespace YANFOE.Settings.UserSettings
 
             this.AddYAMJMoviesToDefault();
             this.AddYAMJTvToDefault();
+            this.AddXBMCMoviesToDefault();
+            this.AddXBMCTvToDefault();
 
             this.EpisodeNamingTemplate = "<seriesname> s<season2>e<episode2> <episodename>";
 
@@ -377,12 +382,36 @@ namespace YANFOE.Settings.UserSettings
         public Dictionary<NFOType, TvSaveSettings> TvSaveSettings { get; set; }
 
         /// <summary>
+        /// Gets or sets the season number of the tv series.
+        /// </summary>
+        /// <value>
+        /// The season number of the tv series.
+        /// </value>
+        public string TvSeasonNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the season number of the tv series, 2 digits.
+        /// </summary>
+        /// <value>
+        /// The season number of the tv series.
+        /// </value>
+        public string TvSeasonNumber2 { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the tv series.
         /// </summary>
         /// <value>
         /// The name of the tv series.
         /// </value>
         public string TvSeriesName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the path of the tv series.
+        /// </summary>
+        /// <value>
+        /// The path of the tv series.
+        /// </value>
+        public string TvSeriesPath { get; set; }
 
         /// <summary>
         /// Gets or sets VideoExtentions.
@@ -511,6 +540,104 @@ namespace YANFOE.Settings.UserSettings
             this.TvSaveSettings[NFOType.YAMJ].RenameSeriesTemplate = "<seriesname>";
             this.TvSaveSettings[NFOType.YAMJ].RenameSeasonTemplate = "Season <seasonnumber>";
             this.TvSaveSettings[NFOType.YAMJ].RenameEpisodeTemplate =
+                "<seriesname> s<season2>e<episode2> <episodename><ext>";
+        }
+
+        /// <summary>
+        /// Adds the XBMC Movie default settings to collection.
+        /// </summary>
+        private void AddXBMCMoviesToDefault()
+        {
+            this.MovieSaveSettings.Add(NFOType.XBMC, new MovieSaveSettings());
+
+            this.MovieSaveSettings[NFOType.XBMC].NormalNfoNameTemplate = "<path><filename>.nfo";
+            this.MovieSaveSettings[NFOType.XBMC].NormalPosterNameTemplate = "<path><filename>.tbn";
+            this.MovieSaveSettings[NFOType.XBMC].NormalFanartNameTemplate = "<path><filename>-fanart.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].NormalTrailerNameTemplate = "<path><filename>-trailer.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].NormalSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].NormalSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
+
+            this.MovieSaveSettings[NFOType.XBMC].DvdNfoNameTemplate = "<path><filename>\\VIDEO_TS\\video_ts.nfo";
+            this.MovieSaveSettings[NFOType.XBMC].DvdPosterNameTemplate = "<path><filename>\\VIDEO_TS\\movie.tbn";
+            this.MovieSaveSettings[NFOType.XBMC].DvdFanartNameTemplate = "<path><filename>\\VIDEO_TS\\fanart.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].DvdTrailerNameTemplate = "<path><filename>\\VIDEO_TS\\movie-trailer.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].DvdSetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].DvdSetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
+
+            this.MovieSaveSettings[NFOType.XBMC].BlurayNfoNameTemplate = "<path><filename>\\<filename>.nfo";
+            this.MovieSaveSettings[NFOType.XBMC].BlurayPosterNameTemplate = "<path><filename>\\<filename>.tbn";
+            this.MovieSaveSettings[NFOType.XBMC].BlurayFanartNameTemplate = "<path><filename>\\<filename>-fanart.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].BlurayTrailerNameTemplate = "<path><filename>\\<filename>-trailer.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].BluraySetPosterNameTemplate = "<path>Set_<setname>_1.<ext>";
+            this.MovieSaveSettings[NFOType.XBMC].BluraySetFanartNameTemplate = "<path>Set_<setname>_1.fanart.<ext>";
+        }
+
+        /// <summary>
+        /// Adds the XBMC TV default settings to collection.
+        /// </summary>
+        private void AddXBMCTvToDefault()
+        {
+            this.TvSaveSettings.Add(NFOType.XBMC, new TvSaveSettings());
+
+            this.TvSaveSettings[NFOType.XBMC].SeriesNfoTemplate = this.TvSeriesPath + "\\tvshow.nfo";
+            this.TvSaveSettings[NFOType.XBMC].SeriesPosterTemplate = this.TvSeriesPath + "\\season-all.tbn";
+            this.TvSaveSettings[NFOType.XBMC].SeriesBannerTemplate = this.TvSeriesPath + "\\folder.jpg";
+            this.TvSaveSettings[NFOType.XBMC].SeriesFanartTemplate = this.TvSeriesPath + "\\fanart.jpg";
+
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesNfoTemplate = string.Format(
+                "{0}\\Set_{1}_1.nfo", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesPosterTemplate = string.Format(
+                "{0}\\Set_{1}_1", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesBannerTemplate = string.Format(
+                "{0}\\Set_{1}_1.banner", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesFanartTemplate = string.Format(
+                "{0}\\Set_{1}_1.fanart", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesNfoTemplate = string.Format(
+                "{0}\\Set_{1}_1.nfo", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesPosterTemplate = string.Format(
+                "{0}\\Set_{1}_1", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesBannerTemplate = string.Format(
+                "{0}\\Set_{1}_1.banner", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesFanartTemplate = string.Format(
+                "{0}\\Set_{1}_1.fanart", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+
+            this.TvSaveSettings[NFOType.XBMC].SeasonPosterTemplate = string.Format(
+                "{0}\\season{1}.tbn", this.TvFirstEpisodeOfSeasonPath, this.TvSeasonNumber2);
+            this.TvSaveSettings[NFOType.XBMC].SeasonFanartTemplate = this.TvFirstEpisodeOfSeasonPath + "\\fanart.jpg";
+            this.TvSaveSettings[NFOType.XBMC].SeasonBannerTemplate = this.TvFirstEpisodeOfSeasonPath + "\\folder.jpg";
+
+            this.TvSaveSettings[NFOType.XBMC].DVDSeasonPosterTemplate = string.Format(
+                "{0}\\{1}", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeasonFanartTemplate = string.Format(
+                "{0}\\{1}.fanart", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeasonBannerTemplate = string.Format(
+                "{0}\\{1}.banner", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+
+            this.TvSaveSettings[NFOType.XBMC].BluraySeasonPosterTemplate = string.Format(
+                "{0}\\{1}", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeasonFanartTemplate = string.Format(
+                "{0}\\{1}.fanart", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeasonBannerTemplate = string.Format(
+                "{0}\\{1}.banner", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+
+            this.TvSaveSettings[NFOType.XBMC].EpisodeNFOTemplate = string.Format(
+                "{0}\\{1}.nfo", this.TvEpisodePath, this.TvEpisodeFileName);
+            this.TvSaveSettings[NFOType.XBMC].DVDEpisodeNFOTemplate = string.Format(
+                "{0}\\{1}.nfo", this.TvEpisodePath, this.TvEpisodeFileName);
+            this.TvSaveSettings[NFOType.XBMC].BlurayEpisodeNFOTemplate = string.Format(
+                "{0}\\{1}.nfo", this.TvEpisodePath, this.TvEpisodeFileName);
+
+            this.TvSaveSettings[NFOType.XBMC].EpisodeScreenshotTemplate = string.Format(
+                "{0}\\{1}.tbn", this.TvEpisodePath, this.TvEpisodeFileName);
+            this.TvSaveSettings[NFOType.XBMC].DVDEpisodeScreenshotTemplate = string.Format(
+                "{0}\\{1}.tbn", this.TvEpisodePath, this.TvEpisodeFileName);
+            this.TvSaveSettings[NFOType.XBMC].BlurayEpisodeScreenshotTemplate = string.Format(
+                "{0}\\{1}.tbn", this.TvEpisodePath, this.TvEpisodeFileName);
+
+            this.TvSaveSettings[NFOType.XBMC].RenameSeriesTemplate = "<seriesname>";
+            this.TvSaveSettings[NFOType.XBMC].RenameSeasonTemplate = "Season <seasonnumber>";
+            this.TvSaveSettings[NFOType.XBMC].RenameEpisodeTemplate =
                 "<seriesname> s<season2>e<episode2> <episodename><ext>";
         }
 

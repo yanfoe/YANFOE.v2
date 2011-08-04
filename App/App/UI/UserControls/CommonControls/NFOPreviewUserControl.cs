@@ -105,6 +105,7 @@ namespace YANFOE.UI.UserControls.CommonControls
             if (this.layoutControl1.TabIndex == 0)
             {
                 AddColouredText(MovieDBFactory.GetCurrentMovie().YamjXml, this.rtbYAMJ);
+                AddColouredText(MovieDBFactory.GetCurrentMovie().XbmcXml, this.rtbXBMC);
             }
         }
 

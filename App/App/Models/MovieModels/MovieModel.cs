@@ -1885,6 +1885,19 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+
+        /// <summary>
+        /// Gets XbmcXml.
+        /// </summary>
+        public string XbmcXml
+        {
+            get
+            {
+                var xbmc = new XBMC();
+                return xbmc.GenerateMovieOutput(this);
+            }
+        }
+
         /// <summary>
         /// Gets or sets YanfoeID.
         /// </summary>
