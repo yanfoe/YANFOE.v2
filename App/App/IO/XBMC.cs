@@ -403,7 +403,7 @@ namespace YANFOE.IO
 
                     // Premiered
                     //XWrite.WriteEnclosedElement(xmlWriter, "premiered", episode.Premiered);
-
+                    
                     // Studio
                     //XWrite.WriteEnclosedElement(xmlWriter, "studio", episode.Studio);
 
@@ -573,7 +573,7 @@ namespace YANFOE.IO
                         XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.Language);
 
                         // Channels
-                        XWrite.WriteEnclosedElement(xmlWriter, "channels", audioStream.Channels);
+                        XWrite.WriteEnclosedElement(xmlWriter, "channels", audioStream.Channels.Replace(" channels",string.Empty));
 
                         xmlWriter.WriteEndElement();
                     }
@@ -1121,7 +1121,7 @@ namespace YANFOE.IO
 
                     string screenshotPathTo = GeneratePath.TvEpisode(episode, screenshotTemplate);
 
-                    this.CopyFile(screenshotPathFrom, screenshotPathTo + ".jpg");
+                    this.CopyFile(screenshotPathFrom, screenshotPathTo);
                     episode.ChangedScreenshot = false;
                 }
             }
@@ -1179,7 +1179,7 @@ namespace YANFOE.IO
 
                         string posterPathTo = GeneratePath.TvSeason(season, posterTemplate);
 
-                        this.CopyFile(posterPathFrom, posterPathTo + ".jpg");
+                        this.CopyFile(posterPathFrom, posterPathTo);
                         season.ChangedPoster = false;
                     }
                 }
@@ -1202,7 +1202,7 @@ namespace YANFOE.IO
 
                         string fanartPathTo = GeneratePath.TvSeason(season, fanartTemplate);
 
-                        this.CopyFile(fanartPathFrom, fanartPathTo + ".jpg");
+                        this.CopyFile(fanartPathFrom, fanartPathTo);
                         season.ChangedFanart = false;
                     }
                 }
@@ -1225,7 +1225,7 @@ namespace YANFOE.IO
 
                         string bannerPathTo = GeneratePath.TvSeason(season, bannerTemplate);
 
-                        this.CopyFile(bannerPathFrom, bannerPathTo + ".jpg");
+                        this.CopyFile(bannerPathFrom, bannerPathTo);
                         season.ChangedBanner = false;
                     }
                 }
@@ -1306,7 +1306,7 @@ namespace YANFOE.IO
 
                     string posterPathTo = GeneratePath.TvSeries(series, posterTemplate);
 
-                    this.CopyFile(posterPathFrom, posterPathTo + ".jpg");
+                    this.CopyFile(posterPathFrom, posterPathTo);
                     series.ChangedPoster = false;
                 }
             }
@@ -1329,7 +1329,7 @@ namespace YANFOE.IO
 
                     string fanartPathTo = GeneratePath.TvSeries(series, fanartTemplate);
 
-                    this.CopyFile(fanartPathFrom, fanartPathTo + ".jpg");
+                    this.CopyFile(fanartPathFrom, fanartPathTo);
                     series.ChangedFanart = false;
                 }
             }
@@ -1352,7 +1352,7 @@ namespace YANFOE.IO
 
                     string bannerPathTo = GeneratePath.TvSeries(series, bannerTemplate);
 
-                    this.CopyFile(bannerPathFrom, bannerPathTo + ".jpg");
+                    this.CopyFile(bannerPathFrom, bannerPathTo);
                     series.ChangedBanner = false;
                 }
             }
