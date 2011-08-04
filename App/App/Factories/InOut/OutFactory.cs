@@ -260,7 +260,7 @@ namespace YANFOE.Factories.InOut
                     }
                     else if (Get.InOutCollection.IoType == NFOType.XBMC)
                     {
-                        xbmc.LoadMovie(movie);
+                        xbmc.SaveMovie(movie);
                     }
                 }
 
