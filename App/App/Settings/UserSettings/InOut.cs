@@ -584,42 +584,30 @@ namespace YANFOE.Settings.UserSettings
             this.TvSaveSettings[NFOType.XBMC].SeriesBannerTemplate = this.TvSeriesPath + "\\folder.jpg";
             this.TvSaveSettings[NFOType.XBMC].SeriesFanartTemplate = this.TvSeriesPath + "\\fanart.jpg";
 
-            this.TvSaveSettings[NFOType.XBMC].DVDSeriesNfoTemplate = string.Format(
-                "{0}\\Set_{1}_1.nfo", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].DVDSeriesPosterTemplate = string.Format(
-                "{0}\\Set_{1}_1", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].DVDSeriesBannerTemplate = string.Format(
-                "{0}\\Set_{1}_1.banner", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].DVDSeriesFanartTemplate = string.Format(
-                "{0}\\Set_{1}_1.fanart", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesNfoTemplate = this.TvSeriesPath + "\\tvshow.nfo";
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesPosterTemplate = this.TvSeriesPath + "\\season-all.tbn";
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesBannerTemplate = this.TvSeriesPath + "\\folder.jpg";
+            this.TvSaveSettings[NFOType.XBMC].DVDSeriesFanartTemplate = this.TvSeriesPath + "\\fanart.jpg";
 
-            this.TvSaveSettings[NFOType.XBMC].BluraySeriesNfoTemplate = string.Format(
-                "{0}\\Set_{1}_1.nfo", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].BluraySeriesPosterTemplate = string.Format(
-                "{0}\\Set_{1}_1", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].BluraySeriesBannerTemplate = string.Format(
-                "{0}\\Set_{1}_1.banner", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
-            this.TvSaveSettings[NFOType.XBMC].BluraySeriesFanartTemplate = string.Format(
-                "{0}\\Set_{1}_1.fanart", this.TvFirstEpisodePathOfSeries, this.TvSeriesName);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesNfoTemplate = this.TvSeriesPath + "\\tvshow.nfo";
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesPosterTemplate = this.TvSeriesPath + "\\season-all.tbn";
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesBannerTemplate = this.TvSeriesPath + "\\folder.jpg";
+            this.TvSaveSettings[NFOType.XBMC].BluraySeriesFanartTemplate = this.TvSeriesPath + "\\fanart.jpg";
 
             this.TvSaveSettings[NFOType.XBMC].SeasonPosterTemplate = string.Format(
-                "{0}\\season{1}.tbn", this.TvFirstEpisodeOfSeasonPath, this.TvSeasonNumber2);
+                "{0}\\season{1}.tbn", this.TvSeriesPath, this.TvSeasonNumber2);
             this.TvSaveSettings[NFOType.XBMC].SeasonFanartTemplate = this.TvFirstEpisodeOfSeasonPath + "\\fanart.jpg";
             this.TvSaveSettings[NFOType.XBMC].SeasonBannerTemplate = this.TvFirstEpisodeOfSeasonPath + "\\folder.jpg";
 
             this.TvSaveSettings[NFOType.XBMC].DVDSeasonPosterTemplate = string.Format(
-                "{0}\\{1}", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
-            this.TvSaveSettings[NFOType.XBMC].DVDSeasonFanartTemplate = string.Format(
-                "{0}\\{1}.fanart", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
-            this.TvSaveSettings[NFOType.XBMC].DVDSeasonBannerTemplate = string.Format(
-                "{0}\\{1}.banner", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+                "{0}\\season{1}.tbn", this.TvSeriesPath, this.TvSeasonNumber2);
+            this.TvSaveSettings[NFOType.XBMC].DVDSeasonFanartTemplate = this.TvFirstEpisodeOfSeasonPath + "\\fanart.jpg";
+            this.TvSaveSettings[NFOType.XBMC].DVDSeasonBannerTemplate = this.TvFirstEpisodeOfSeasonPath + "\\folder.jpg";
 
             this.TvSaveSettings[NFOType.XBMC].BluraySeasonPosterTemplate = string.Format(
-                "{0}\\{1}", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
-            this.TvSaveSettings[NFOType.XBMC].BluraySeasonFanartTemplate = string.Format(
-                "{0}\\{1}.fanart", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
-            this.TvSaveSettings[NFOType.XBMC].BluraySeasonBannerTemplate = string.Format(
-                "{0}\\{1}.banner", this.TvFirstEpisodeOfSeasonPath, this.TvFirstEpisodeOfSeason);
+                "{0}\\season{1}.tbn", this.TvSeriesPath, this.TvSeasonNumber2);
+            this.TvSaveSettings[NFOType.XBMC].BluraySeasonFanartTemplate = this.TvFirstEpisodeOfSeasonPath + "\\fanart.jpg";
+            this.TvSaveSettings[NFOType.XBMC].BluraySeasonBannerTemplate = this.TvFirstEpisodeOfSeasonPath + "\\folder.jpg";
 
             this.TvSaveSettings[NFOType.XBMC].EpisodeNFOTemplate = string.Format(
                 "{0}\\{1}.nfo", this.TvEpisodePath, this.TvEpisodeFileName);
@@ -646,7 +634,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillBannerType()
         {
-            this.BannerTypes = new List<string> { "<fileName>.banner" };
+            this.BannerTypes = new List<string> { "<fileName>.banner", "folder" };
         }
 
         /// <summary>
@@ -654,7 +642,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillEpisodeType()
         {
-            this.EpisodeTypes = new List<string> { "<fileName>.videoimage" };
+            this.EpisodeTypes = new List<string> { "<fileName>.videoimage", "<filename>" };
         }
 
         /// <summary>
@@ -662,7 +650,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillFanartType()
         {
-            this.FanartTypes = new List<string> { "<fileName>-fanart", "<fileName>.fanart" };
+            this.FanartTypes = new List<string> { "<fileName>-fanart", "<fileName>.fanart", "fanart" };
         }
 
         /// <summary>
@@ -670,7 +658,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillTrailerType()
         {
-            this.TrailerTypes = new List<string> { "<fileName>-[TRAILER-<trailerName>]", "<fileName>.[TRAILER-<trailerName>]" };
+            this.TrailerTypes = new List<string> { "<fileName>-[TRAILER-<trailerName>]", "<fileName>.[TRAILER-<trailerName>]", "<filename>-trailer" };
         }
 
         /// <summary>
@@ -718,7 +706,7 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         private void FillPosterType()
         {
-            this.PosterTypes = new List<string> { "<fileName>" };
+            this.PosterTypes = new List<string> { "<fileName>", "season-all", "season<seasonNumber2>" };
         }
 
         /// <summary>
