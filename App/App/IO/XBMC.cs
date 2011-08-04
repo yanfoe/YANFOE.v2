@@ -602,17 +602,15 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeasonBanner(Season season)
         {
-            string firstEpisode = season.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
+            // Having folder.jpg inside the season folder, might overwrite the season poster named seasonxx.tbn in season root
+            if (string.IsNullOrEmpty(season.GetSeasonPath()))
             {
                 return string.Empty;
             }
 
-            string path = Path.GetDirectoryName(firstEpisode);
-            string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
+            string path = season.GetSeasonPath();
 
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".banner.jpg";
+            string checkPath = path + Path.DirectorySeparatorChar + "folder.jpg";
 
             if (File.Exists(checkPath))
             {
