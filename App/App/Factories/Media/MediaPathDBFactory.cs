@@ -24,7 +24,9 @@ namespace YANFOE.Factories.Media
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
+    using YANFOE.Models.MovieModels;
     using YANFOE.Settings;
+    using YANFOE.Tools.Importing;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.IO;
 
@@ -200,7 +202,34 @@ namespace YANFOE.Factories.Media
         public static void RemoveFromDatabase(MediaPathModel mediaPathModel)
         {
             EnsureMediaPathDatabaseExists();
+            // Remove movies from db
+            for (int index = 0; index < mediaPathModel.FileCollection.Count; index++)
+            {
+
+                MediaPathFileModel filePath = mediaPathModel.FileCollection[index];
+
+                if (filePath.Type == MediaPathFileModel.MediaPathFileType.Movie)
+                {
+                    string p = filePath.Path.TrimEnd('\\');
+                    MovieDBFactory.MovieDatabase.Remove(
+                        (from m in MovieDBFactory.MovieDatabase where m.GetBaseFilePath == p select m).
+                            SingleOrDefault());
+                }
+
+                if (filePath.Type == MediaPathFileModel.MediaPathFileType.TV)
+                {
+                    if (MasterMediaDBFactory.TvDatabaseContains(filePath.PathAndFileName))
+                    {
+                        MasterMediaDBFactory.MasterTvMediaDatabase.Remove(filePath.PathAndFileName);
+                    }
+                }
+            }
+
+            // Remove media path
             MediaPathDB.Remove(mediaPathModel);
+
+            // Update master
+            MasterMediaDBFactory.PopulateMasterMovieMediaDatabase();
         }
 
         #endregion
