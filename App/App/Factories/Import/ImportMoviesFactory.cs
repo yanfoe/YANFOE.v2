@@ -128,7 +128,7 @@ namespace YANFOE.Factories.Import
 
             UI.Windows7UIFactory.StartProgressState(db.Count);
 
-            foreach (var file in db)
+            foreach (var file in db.Reverse())
             {
                 if (cancelImport)
                 {
