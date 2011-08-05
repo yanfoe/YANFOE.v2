@@ -141,6 +141,8 @@ namespace YANFOE.IO
                     //XWrite.WriteEnclosedElement(xmlWriter, "playcount", movieModel.PlayCount); // Support needed
 
                     // Watched
+                    // http://forum.xbmc.org/showthread.php?p=747648
+                    // Maybe this should be replaced by <playcount>1</playcount>
                     XWrite.WriteEnclosedElement(xmlWriter, "watched", movieModel.Watched);
 
                     // Imdb MovieUniqueId
