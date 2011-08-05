@@ -127,8 +127,8 @@ namespace YANFOE.Factories.Import
             var currentGetPathFiles = string.Empty;
 
             UI.Windows7UIFactory.StartProgressState(db.Count);
-
-            foreach (var file in db.Reverse())
+            
+            foreach (var file in db)
             {
                 if (cancelImport)
                 {

@@ -123,9 +123,6 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             progressBarControl1.EditValue = value;
             progressBarControl1.Properties.Maximum = max;
-
-            if (grdViewMoviesList.RowCount > 1)
-                grdViewMoviesList.FocusedRowHandle = grdViewMoviesList.GetRowHandle(grdViewMoviesList.RowCount - 1);
         }
 
         /// <summary>
