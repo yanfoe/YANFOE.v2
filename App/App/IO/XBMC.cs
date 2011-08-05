@@ -196,8 +196,10 @@ namespace YANFOE.IO
                     }
 
                     // Director
-                    string writerList = movieModel.WritersAsString.Replace(",", " / ");
-                    XWrite.WriteEnclosedElement(xmlWriter, "director", writerList);
+                    foreach (PersonModel director in movieModel.Director)
+                    {
+                        XWrite.WriteEnclosedElement(xmlWriter, "director", director.Name);
+                    }
 
                     // Actor
                     int count = 1;
