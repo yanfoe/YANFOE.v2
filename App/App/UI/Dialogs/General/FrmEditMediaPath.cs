@@ -136,6 +136,15 @@ namespace YANFOE.UI.Dialogs.General
             switch (actionType)
             {
                 case MediaPathActionType.Add:
+                    // This can probably be prettier
+                    foreach (var model in MediaPathDBFactory.MediaPathDB)
+                    {
+                        if (model.MediaPath == this.editingMediaPathModel.MediaPath)
+                        {
+                            XtraMessageBox.Show("You can't add the same source twice!");
+                            return;
+                        }
+                    }
                     MediaPathDBFactory.MediaPathDB.Add(this.editingMediaPathModel);
                     break;
             }
