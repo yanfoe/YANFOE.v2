@@ -137,7 +137,7 @@ namespace YANFOE.Factories.Import
 
                 MovieDBFactory.ImportProgressCurrent = count;
 
-                MovieDBFactory.ImportProgressStatus = string.Format("Processing: " + file.PathAndFileName);
+                MovieDBFactory.ImportProgressStatus = string.Format("Processing: " + file.PathAndFileName.Replace("{","").Replace("}",""));
 
                 if (file.Path != currentGetPathFiles)
                 {
