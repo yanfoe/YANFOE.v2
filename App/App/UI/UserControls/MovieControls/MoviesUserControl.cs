@@ -27,6 +27,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using YANFOE.Factories;
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Factories.Scraper;
+    using YANFOE.Factories.UI;
     using YANFOE.Models.MovieModels;
 
     /// <summary>
@@ -682,7 +683,36 @@ namespace YANFOE.UI.UserControls.MovieControls
 
         private void btnMediaInfo_Click(object sender, EventArgs e)
         {
-            MovieDBFactory.GetCurrentMovie().DoMediaInfoLookup();
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += new DoWorkEventHandler(bgw_DoWork);
+            bgw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgw_RunWorkerCompleted);
+            btnMediaInfo.Enabled = false;
+            bgw.RunWorkerAsync();
+        }
+
+
+
+        void bgw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var rows = grdViewByTitle.GetSelectedRows();
+            var countMax = rows.Count();
+            var count = 0;
+
+            Windows7UIFactory.StartProgressState(countMax);
+
+            foreach (var movieIndex in rows)
+            {
+                (grdViewByTitle.GetRow(movieIndex) as MovieModel).DoMediaInfoLookup();
+                count++;
+                Windows7UIFactory.SetProgressValue(count);
+            }
+
+            Windows7UIFactory.StopProgressState();
+        }
+
+        void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btnMediaInfo.Enabled = true;
         }
     }
 }

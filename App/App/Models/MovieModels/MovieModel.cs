@@ -1994,7 +1994,7 @@ namespace YANFOE.Models.MovieModels
 
         #region Public Methods
 
-        public void DoMediaInfoLookup()
+        public void DoMediaInfoLookupBgw()
         {
             foreach (var media in AssociatedFiles.Media)
             {
@@ -2015,6 +2015,17 @@ namespace YANFOE.Models.MovieModels
 
 
                 bgw.RunWorkerAsync();
+            }
+        }
+
+        public void DoMediaInfoLookup()
+        {
+            foreach (var media in AssociatedFiles.Media)
+            {
+                    var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
+                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie().FileInfo);
+                    this.OnPropertyChanged("MediaInfoImage");
+                    this.InvokeMediaInfoChanged(new EventArgs());
             }
         }
 

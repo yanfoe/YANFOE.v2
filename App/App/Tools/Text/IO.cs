@@ -32,9 +32,17 @@ namespace YANFOE.Tools.Text
         public static void WriteTextToFile(string path, string value)
         {
             var textWriter = new StreamWriter(path, false, Encoding.UTF8);
-            textWriter.Write(value);
-            textWriter.Flush();
-            textWriter.Close();
+
+            try
+            {
+                textWriter.Write(value);
+
+            }
+            finally
+            {
+                textWriter.Flush();
+                textWriter.Close(); 
+            }
         }
     }
 }
