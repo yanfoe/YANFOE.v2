@@ -444,9 +444,16 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
                 }
             }
 
-            var row = this.grdViewMoviesList.GetSelectedRows()[0];
-            grdViewMoviesList.ClearSelection();
-            grdViewMoviesList.SelectRow(row);
+            try
+            {
+                var row = this.grdViewMoviesList.GetSelectedRows()[0];
+                grdViewMoviesList.ClearSelection();
+                grdViewMoviesList.SelectRow(row);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                // Popup telling you to select something?
+            }
         }
 
         #endregion
