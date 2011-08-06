@@ -494,6 +494,8 @@ namespace YANFOE.Settings
 
                 if (!File.Exists(path))
                 {
+                    inOutCollection = new InOut();
+                    inOutCollection.SetCurrentSettings(YANFOE.Tools.Enums.NFOType.YAMJ);
                     return;
                 }
 

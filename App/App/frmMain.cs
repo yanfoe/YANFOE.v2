@@ -106,8 +106,6 @@ namespace YANFOE
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SkinName = Skin.SetCurrentSkin();
 
-            Settings.Get.InOutCollection.SetCurrentSettings(NFOType.YAMJ);
-
             this.SetupEventBindings();
 
             VersionUpdateFactory.CheckForUpdate();
