@@ -101,7 +101,17 @@ namespace YANFOE.Tools.IO
         /// </returns>
         public static string FindMovieNFO(string fileName, string path, string[] fileList = null)
         {
-            return FindCore(fileName, path, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+            string nfo = FindCore(fileName, path, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+
+            if (nfo == string.Empty)
+            {
+                // Attempt to find any nfo file stored in the folder
+                string[] files = Directory.GetFiles(path, "*.nfo", SearchOption.TopDirectoryOnly);
+                if (files.Length > 0)
+                    nfo = files[0];
+            }
+
+            return nfo;
         }
 
         /// <summary>
