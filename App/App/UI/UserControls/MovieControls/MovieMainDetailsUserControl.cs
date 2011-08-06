@@ -214,18 +214,31 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             for (int i = 0; i < currentGenres.Count; i++)
             {
-                var genre = this.cmbGenre.Properties.Items[i];
-                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre.Value.ToString() select g).SingleOrDefault();
+                var genre = currentGenres[i];
+                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre select g).SingleOrDefault();
 
                 if (check == null)
                 {
                     this.cmbGenre.Properties.Items.Add(genre);
-                    genreList.Add(genre.Value.ToString());
+                    genreList.Add(genre);
                 }
 
-                var index = this.cmbGenre.Properties.Items.IndexOf(genre);
+                //var index = this.cmbGenre.Properties.Items.IndexOf(genre.ToString());
+                
+                // Workaround for .IndexOf always returning -1
+                int c = 0;
+                var index = -1;
+                foreach (var it in this.cmbGenre.Properties.Items)
+                {
+                    if (it.ToString() == genre)
+                    {
+                        index = c;
+                        break;
+                    }
+                    c++;
+                }
 
-                if (genreList.Contains(genre.Value))
+                if (currentGenres.Contains(genre))
                 {
                     this.cmbGenre.Properties.Items[index].CheckState = CheckState.Checked;
                 }
