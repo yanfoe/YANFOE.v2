@@ -20,6 +20,8 @@ namespace YANFOE.Factories.Internal
     using Newtonsoft.Json;
 
     using BitFactory.Logging;
+    using YANFOE.InternalApps.Logs;
+    using YANFOE.InternalApps.Logs.Enums;
 
     using YANFOE.Factories.Import;
     using YANFOE.Factories.Media;
@@ -356,8 +358,8 @@ namespace YANFOE.Factories.Internal
 
                 if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
                 {
-                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, string.Format("Deleting {0}. Movie not found on the filesystem",
-                        movieModel.AssociatedFiles.GetMediaCollection()[0].FileName), string.Empty);
+                    Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadMovieDB", 
+                        string.Format("Deleting {0}. Movie not found on the filesystem", movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
                     // We should check for network path and make sure the file has actually been deleted or removed
                     File.Delete(file);
                     continue;
