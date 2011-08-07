@@ -230,12 +230,11 @@ namespace YANFOE.IO
                     // Company
                     XWrite.WriteEnclosedElement(xmlWriter, "studio", movieModel.SetStudio);
 
-                    // Unused in XBMC?
                     // Country
-                    /*foreach (var country in movieModel.Country)
+                    foreach (var country in movieModel.Country)
                     {
                         XWrite.WriteEnclosedElement(xmlWriter, "country", country);
-                    }*/
+                    }
 
                     // Unused in XBMC?
                     //XWrite.WriteEnclosedElement(xmlWriter, "videosource", movieModel.VideoSource);
@@ -849,7 +848,6 @@ namespace YANFOE.IO
 
             // Sets
             XmlNodeList sets = xmlReader.GetElementsByTagName("set");
-
             foreach (XmlElement set in sets)
             {
                 MovieSetManager.AddMovieToSet(movieModel, set.InnerXml);
@@ -944,9 +942,12 @@ namespace YANFOE.IO
             string directorList = XRead.GetString(xmlReader, "director");
             movieModel.DirectorAsString = directorList.Replace(" / ", ",");
 
-            // Unused in XBMC?
             // Country
-            //movieModel.CountryAsString = XRead.GetString(xmlReader, "country");
+            XmlNodeList countries = xmlReader.GetElementsByTagName("country");
+            foreach (XmlElement country in countries)
+            {
+                movieModel.Country.Add(country.InnerXml);
+            }
 
             // Unused in XBMC?
             // Language
