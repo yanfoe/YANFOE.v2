@@ -220,6 +220,15 @@ namespace YANFOE.Factories.Import
                 series = Path.GetFileNameWithoutExtension(filePath);
             }
 
+            // Check if dir structure is <root>/<series>/<season>/<episodes>
+            string dir = Directory.GetParent(filePath).Name;
+            string seriesGuess = string.Empty;
+            if (dir.StartsWith("season", true, System.Globalization.CultureInfo.CurrentCulture))
+            {
+                // Looks like it. Qualified series guess
+                seriesGuess = Directory.GetParent(filePath).Parent.Name;
+            }
+
             var regex = Regex.Match(
                 series,
                 "(?<seriesName>.*?)" + DefaultRegex.Tv,
@@ -231,6 +240,24 @@ namespace YANFOE.Factories.Import
 
                 var result = (from r in ScanSeriesPicks where r.SearchString == rawSeriesName select r)
                     .SingleOrDefault();
+
+                if (seriesGuess != string.Empty)
+                {
+                    if (rawSeriesName.StartsWith(seriesGuess))
+                    {
+                        // Regex might've picked up some random crap between series name and s01e01
+                        rawSeriesName = seriesGuess;
+                    }
+                    else if (rawSeriesName.Substring(0, 1) == seriesGuess.Substring(0, 1))
+                    {
+                        // Regex might've picked up an acronym for the series
+                        // TGaaG = Two Guys and a Girl
+                        if (result == null)
+                        {
+                            rawSeriesName = seriesGuess;
+                        }
+                    }
+                }
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
