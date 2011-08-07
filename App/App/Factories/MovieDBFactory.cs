@@ -83,6 +83,7 @@ namespace YANFOE.Factories
         static MovieDBFactory()
         {
             MovieDatabase = new BindingList<MovieModel>();
+            DuplicatedMoviesDatabase = new BindingList<MovieModel>();
             currentMovie = new MovieModel();
             galleryGroup = new GalleryItemGroup();
             multiSelectedMovies = new BindingList<MovieModel>();
@@ -219,6 +220,14 @@ namespace YANFOE.Factories
                 MultiSelectedValuesChanged(null, new EventArgs());
             }
         }
+
+        /// <summary>
+        /// Gets or sets the database of duplicated movies.
+        /// </summary>
+        /// <value>
+        /// The database of duplicated movies.
+        /// </value>
+        public static BindingList<MovieModel> DuplicatedMoviesDatabase { get; set; }
 
         #endregion
 
@@ -480,7 +489,7 @@ namespace YANFOE.Factories
         /// <param name="importDatabase">
         /// The import database.
         /// </param>
-        public static void MergeWithDatabase(BindingList<MovieModel> importDatabase)
+        public static void MergeWithDatabase(BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
         {
             foreach (MovieModel movie in importDatabase)
             {
@@ -489,11 +498,24 @@ namespace YANFOE.Factories
                     movie.SmallPoster = ImageHandler.ResizeImage(movie.SmallPoster, 100, 150);
                 }
 
-                MovieDatabase.Add(movie);
+                switch (type)
+                {
+                    case MovieDBTypes.Movies:
+                        MovieDatabase.Add(movie);
+                        break;
+                    case MovieDBTypes.Duplicates:
+                        DuplicatedMoviesDatabase.Add(movie);
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            MediaPathDBFactory.GetMediaPathMoviesUnsorted().Clear();
-            GeneratePictureGallery();
+            if (type == MovieDBTypes.Movies)
+            {
+                MediaPathDBFactory.GetMediaPathMoviesUnsorted().Clear();
+                GeneratePictureGallery();
+            }
         }
 
         /// <summary>
@@ -1162,6 +1184,12 @@ namespace YANFOE.Factories
                 var frmMissingFilesMovies = new FrmMissingFilesMovies(toDelete);
                 frmMissingFilesMovies.ShowDialog();
             }
+        }
+
+        public enum MovieDBTypes
+        {
+            Movies = 0,
+            Duplicates
         }
     }
 }

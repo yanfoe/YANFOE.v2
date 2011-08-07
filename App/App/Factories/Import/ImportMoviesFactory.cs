@@ -37,6 +37,7 @@ namespace YANFOE.Factories.Import
         static ImportMoviesFactory()
         {
             ImportDatabase = new BindingList<MovieModel>();
+            ImportDuplicatesDatabase = new BindingList<MovieModel>();
             CurrentRecord = new MovieModel();
         }
 
@@ -57,6 +58,14 @@ namespace YANFOE.Factories.Import
         /// The import database.
         /// </value>
         public static BindingList<MovieModel> ImportDatabase { get; set; }
+
+        /// <summary>
+        /// Gets or sets the import duplicates database.
+        /// </summary>
+        /// <value>
+        /// The import duplicates database.
+        /// </value>
+        public static BindingList<MovieModel> ImportDuplicatesDatabase { get; set; }
 
         /// <summary>
         /// Gets the import movie database.
@@ -122,6 +131,7 @@ namespace YANFOE.Factories.Import
             MovieDBFactory.ImportProgressMaximum = db.Count;
 
             ImportDatabase.Clear();
+            ImportDuplicatesDatabase.Clear();
 
             var getFiles = new string[1];
             var currentGetPathFiles = string.Empty;
@@ -199,12 +209,25 @@ namespace YANFOE.Factories.Import
                     }
 
                     movieModel.AssociatedFiles.AddToMediaCollection(file);
+
+                    // Does the movie exist in our current DB?
+                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
+                    if (result2.Count > 0)
+                    {
+                        ImportDuplicatesDatabase.Add(movieModel);
+                    }
+                    
+                    // Add it to the list anyway, since there's no implementation of any action on duplicates.
                     ImportDatabase.Add(movieModel);
                 }
                 else
                 {
                     // result[0].AssociatedFiles.GetMediaCollection().Clear();
-                    result[0].AssociatedFiles.AddToMediaCollection(file);
+                    // result[0].AssociatedFiles.AddToMediaCollection(file);
+
+                    ImportDuplicatesDatabase.Add(movieModel);
+                    // Add it to the list anyway, since there's no implementation of any action on duplicates.
+                    ImportDatabase.Add(movieModel);
                 }
 
                 count++;
@@ -221,6 +244,7 @@ namespace YANFOE.Factories.Import
         {
             MovieDBFactory.MergeWithDatabase(ImportDatabase);
             MasterMediaDBFactory.PopulateMasterMovieMediaDatabase();
+            MovieDBFactory.MergeWithDatabase(ImportDuplicatesDatabase, MovieDBFactory.MovieDBTypes.Duplicates);
             MovieSetManager.ScanForSetImages();
         }
     }

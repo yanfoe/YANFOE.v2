@@ -24,6 +24,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
 
     using DevExpress.Data;
     using DevExpress.XtraLayout.Utils;
+    using DevExpress.XtraEditors;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Import;
@@ -147,6 +148,11 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             this.layoutControlItemScrape.Visibility = LayoutVisibility.Always;
             this.layoutControlItemProgress.Visibility = LayoutVisibility.Never;
             grpMain.Enabled = true;
+            if (ImportMoviesFactory.ImportDuplicatesDatabase.Count > 0)
+            {
+                XtraMessageBox.Show(string.Format("{0} scanned movies already exists in the database", 
+                    ImportMoviesFactory.ImportDuplicatesDatabase.Count), "Duplicate movies found");
+            }
         }
 
         #endregion
