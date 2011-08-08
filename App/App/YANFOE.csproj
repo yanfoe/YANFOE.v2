@@ -206,6 +206,7 @@
     <Compile Include="IO\IoBase.cs" />
     <Compile Include="Settings\UserSettings\LogSettings.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
+    <Compile Include="Tools\Clean\FileCleanUp.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
     <Compile Include="Tools\GenerateRandomID.cs" />
     <Compile Include="Tools\Models\TrailerDetailsModel.cs" />

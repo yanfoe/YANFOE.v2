@@ -41,7 +41,10 @@
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnClean = new DevExpress.XtraEditors.SimpleButton();
             this.progressBarControl = new DevExpress.XtraEditors.ProgressBarControl();
             this.btnProcessMovies = new DevExpress.XtraEditors.SimpleButton();
             this.btnProcessTv = new DevExpress.XtraEditors.SimpleButton();
@@ -71,6 +74,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -98,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
@@ -112,6 +117,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnClean);
             this.layoutControl1.Controls.Add(this.progressBarControl);
             this.layoutControl1.Controls.Add(this.btnProcessMovies);
             this.layoutControl1.Controls.Add(this.btnProcessTv);
@@ -133,6 +139,20 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnClean
+            // 
+            this.btnClean.Image = global::YANFOE.Properties.Resources.remove1;
+            this.btnClean.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnClean.Location = new System.Drawing.Point(255, 588);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(78, 38);
+            this.btnClean.StyleController = this.layoutControl1;
+            toolTipTitleItem1.Text = "Clean Media Path(s)";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            this.btnClean.SuperTip = superToolTip1;
+            this.btnClean.TabIndex = 14;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            // 
             // progressBarControl
             // 
             this.progressBarControl.Location = new System.Drawing.Point(2, 650);
@@ -150,9 +170,9 @@
             this.btnProcessMovies.Name = "btnProcessMovies";
             this.btnProcessMovies.Size = new System.Drawing.Size(234, 30);
             this.btnProcessMovies.StyleController = this.layoutControl1;
-            toolTipTitleItem1.Text = "Process found unsorted movies media.";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            this.btnProcessMovies.SuperTip = superToolTip1;
+            toolTipTitleItem2.Text = "Process found unsorted movies media.";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            this.btnProcessMovies.SuperTip = superToolTip2;
             this.btnProcessMovies.TabIndex = 12;
             this.btnProcessMovies.Click += new System.EventHandler(this.BtnProcessMovies_Click);
             // 
@@ -164,9 +184,9 @@
             this.btnProcessTv.Name = "btnProcessTv";
             this.btnProcessTv.Size = new System.Drawing.Size(234, 30);
             this.btnProcessTv.StyleController = this.layoutControl1;
-            toolTipTitleItem2.Text = "Process found unsorted tv media.\r\n";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            this.btnProcessTv.SuperTip = superToolTip2;
+            toolTipTitleItem3.Text = "Process found unsorted tv media.\r\n";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            this.btnProcessTv.SuperTip = superToolTip3;
             this.btnProcessTv.TabIndex = 11;
             this.btnProcessTv.Click += new System.EventHandler(this.BtnProcessTv_Click);
             // 
@@ -259,13 +279,13 @@
             // 
             this.btnRefresh.Image = global::YANFOE.Properties.Resources.refresh32;
             this.btnRefresh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnRefresh.Location = new System.Drawing.Point(256, 588);
+            this.btnRefresh.Location = new System.Drawing.Point(337, 588);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(124, 38);
+            this.btnRefresh.Size = new System.Drawing.Size(43, 38);
             this.btnRefresh.StyleController = this.layoutControl1;
-            toolTipTitleItem3.Text = "Refresh files found from media path(s).";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            this.btnRefresh.SuperTip = superToolTip3;
+            toolTipTitleItem4.Text = "Refresh files found from media path(s).";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            this.btnRefresh.SuperTip = superToolTip4;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Click += new System.EventHandler(this.ButRefresh_Click);
             // 
@@ -277,9 +297,9 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(81, 38);
             this.btnAdd.StyleController = this.layoutControl1;
-            toolTipTitleItem4.Text = "Add New Media Path";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            this.btnAdd.SuperTip = superToolTip4;
+            toolTipTitleItem5.Text = "Add New Media Path";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            this.btnAdd.SuperTip = superToolTip5;
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
@@ -289,11 +309,11 @@
             this.btnDelete.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.btnDelete.Location = new System.Drawing.Point(173, 588);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(79, 38);
+            this.btnDelete.Size = new System.Drawing.Size(78, 38);
             this.btnDelete.StyleController = this.layoutControl1;
-            toolTipTitleItem5.Text = "Delete Media Path(s)\r\n";
-            superToolTip5.Items.Add(toolTipTitleItem5);
-            this.btnDelete.SuperTip = superToolTip5;
+            toolTipTitleItem6.Text = "Delete Media Path(s)\r\n";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            this.btnDelete.SuperTip = superToolTip6;
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
@@ -305,9 +325,9 @@
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(79, 38);
             this.btnEdit.StyleController = this.layoutControl1;
-            toolTipTitleItem6.Text = "Edit Selected Media Path";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            this.btnEdit.SuperTip = superToolTip6;
+            toolTipTitleItem7.Text = "Edit Selected Media Path";
+            superToolTip7.Items.Add(toolTipTitleItem7);
+            this.btnEdit.SuperTip = superToolTip7;
             this.btnEdit.TabIndex = 7;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -415,7 +435,8 @@
             this.layoutControlItem4,
             this.layoutControlItem3,
             this.layoutControlItem5,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.layoutControlItem12});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -426,9 +447,9 @@
             // 
             this.layoutControlItem6.Control = this.btnRefresh;
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
-            this.layoutControlItem6.Location = new System.Drawing.Point(251, 563);
+            this.layoutControlItem6.Location = new System.Drawing.Point(332, 563);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(128, 42);
+            this.layoutControlItem6.Size = new System.Drawing.Size(47, 42);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -441,7 +462,7 @@
             this.layoutControlItem4.Image = global::YANFOE.Properties.Resources.trash32;
             this.layoutControlItem4.Location = new System.Drawing.Point(168, 563);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(83, 42);
+            this.layoutControlItem4.Size = new System.Drawing.Size(82, 42);
             this.layoutControlItem4.Text = "layoutControlItem4";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextToControlDistance = 0;
@@ -482,6 +503,18 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.btnClean;
+            this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
+            this.layoutControlItem12.Location = new System.Drawing.Point(250, 563);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(82, 42);
+            this.layoutControlItem12.Text = "layoutControlItem12";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem12.TextToControlDistance = 0;
+            this.layoutControlItem12.TextVisible = false;
             // 
             // layoutControlGroup4
             // 
@@ -624,6 +657,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
@@ -681,5 +715,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraEditors.ProgressBarControl progressBarControl;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraEditors.SimpleButton btnClean;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
     }
 }

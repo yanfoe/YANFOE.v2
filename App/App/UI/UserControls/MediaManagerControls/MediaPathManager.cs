@@ -330,5 +330,28 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
                 RemoteMediaPaths();
             }
         }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            DialogResult result = XtraMessageBox.Show(
+                this,
+                string.Format(
+                    "Are you sure you wish to clean the selected {0} media path(s)?\nNote that this will delete ALL files except movie and subtitles!",
+                    this.grdViewMain.SelectedRowsCount),
+                "Are you sure?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var cleanModels = new List<MediaPathModel>();
+
+                foreach (int v in this.grdViewMain.GetSelectedRows())
+                {
+                    var row = this.grdViewMain.GetRow(v) as MediaPathModel;
+                    YANFOE.Tools.Clean.FileCleanUp.CleanFolder(row.MediaPath);
+                }
+            }
+        }
     }
 }
