@@ -90,6 +90,8 @@ namespace YANFOE.Settings.UserSettings
             this.TvSeasonNumber2 = "<seasonNumber2>";
             this.TvSeriesPath = "<seriesPath>";
 
+            this.CleanActorRoles = true;
+
             this.FillVideoExtentions();
             this.FillNfoExtentions();
             this.FillImageExtentions();
@@ -147,6 +149,11 @@ namespace YANFOE.Settings.UserSettings
         /// Gets or sets CurrentTvSaveSettings.
         /// </summary>
         public TvSaveSettings CurrentTvSaveSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets CleanActorRoles.
+        /// </summary>
+        public bool CleanActorRoles { get; set; }
 
         /// <summary>
         /// Gets or sets EpisodeNamingTemplate.

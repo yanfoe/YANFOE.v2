@@ -153,8 +153,14 @@ namespace YANFOE.IO
 
                         xmlWriter.WriteStartElement("actor");
 
+                        string role = actor.Role;
+                        if (Get.InOutCollection.CleanActorRoles)
+                        {
+                            role = Regex.Replace(actor.Role, @"\(as.*?\)", string.Empty).Trim();
+                        }
+
                         XWrite.WriteEnclosedElement(xmlWriter, "name", actor.Name);
-                        XWrite.WriteEnclosedElement(xmlWriter, "role", actor.Role);
+                        XWrite.WriteEnclosedElement(xmlWriter, "role", role);
                         XWrite.WriteEnclosedElement(xmlWriter, "thumb", actor.ImageUrl);
 
                         xmlWriter.WriteEndElement();
@@ -252,9 +258,15 @@ namespace YANFOE.IO
                     // Actor
                     foreach (PersonModel actor in series.Actors)
                     {
+                        string role = actor.Role;
+                        if (Get.InOutCollection.CleanActorRoles)
+                        {
+                            role = Regex.Replace(actor.Role, @"\(as.*?\)", string.Empty).Trim();
+                        }
+
                         xmlWriter.WriteStartElement("actor");
                         XWrite.WriteEnclosedElement(xmlWriter, "name", actor.Name);
-                        XWrite.WriteEnclosedElement(xmlWriter, "role", actor.Role);
+                        XWrite.WriteEnclosedElement(xmlWriter, "role", role);
                         XWrite.WriteEnclosedElement(xmlWriter, "thumb", actor.ImageUrl);
                         xmlWriter.WriteEndElement();
                     }
