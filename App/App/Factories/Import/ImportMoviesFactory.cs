@@ -17,6 +17,7 @@ namespace YANFOE.Factories.Import
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
 
     using YANFOE.Factories.Media;
     using YANFOE.Factories.Sets;
@@ -223,9 +224,13 @@ namespace YANFOE.Factories.Import
                 else
                 {
                     // result[0].AssociatedFiles.GetMediaCollection().Clear();
-                    // result[0].AssociatedFiles.AddToMediaCollection(file);
+                    result[0].AssociatedFiles.AddToMediaCollection(file);
 
-                    ImportDuplicatesDatabase.Add(movieModel);
+                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)"))
+                    {
+                        // Dont count a disc or part as a dupe
+                        ImportDuplicatesDatabase.Add(movieModel);
+                    }
                     // Add it to the list anyway, since there's no implementation of any action on duplicates.
                     ImportDatabase.Add(movieModel);
                 }

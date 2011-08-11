@@ -19,6 +19,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using System.Diagnostics;
     using System.Threading;
     using System.Windows.Forms;
+    using System.Linq;
 
     using BitFactory.Logging;
 
@@ -150,8 +151,29 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             grpMain.Enabled = true;
             if (ImportMoviesFactory.ImportDuplicatesDatabase.Count > 0)
             {
-                XtraMessageBox.Show(string.Format("{0} scanned movies already exists in the database", 
-                    ImportMoviesFactory.ImportDuplicatesDatabase.Count), "Duplicate movies found");
+                string movies = "";
+                BindingList<string> moviesCounted = new BindingList<string>();
+                foreach (var movie in ImportMoviesFactory.ImportDuplicatesDatabase)
+                {
+                    var result = (from m in ImportMoviesFactory.ImportDuplicatesDatabase where (m.Title.ToLower().Trim() == movie.Title.ToLower().Trim()) select m).ToList();
+                    if (result.Count > 1)
+                    {
+                        if (!moviesCounted.Contains(movie.Title))
+                        {
+                            movies += movie.Title + " (multiple), ";
+                            moviesCounted.Add(movie.Title);
+                        }
+                    }
+                    else
+                    {
+                        movies += movie.Title + ", ";
+                    }
+                }
+                XtraMessageBox.Show(string.Format("{0} scanned movies already exists in the database:\n{1}", 
+                    ImportMoviesFactory.ImportDuplicatesDatabase.Count, movies.Substring(0, movies.Length - 2)), "Duplicate movies found");
+
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, string.Format("{0} duplicate movies found: {1}",
+                    ImportMoviesFactory.ImportDuplicatesDatabase.Count, movies.Substring(0, movies.Length - 2)), "ImportMoviesUC > RunWorkerCompleted");
             }
         }
 
