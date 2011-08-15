@@ -28,6 +28,7 @@ namespace YANFOE.UI.Dialogs.TV
     using YANFOE.Scrapers.TV;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
+    using YANFOE.Factories.Import;
 
     /// <summary>
     /// The frm select series.
@@ -68,6 +69,9 @@ namespace YANFOE.UI.Dialogs.TV
             this.CmbSearchResults_SelectedValueChanged(null, null);
 
             lblLanguage.Text = Settings.Get.Scraper.TvDBLanguageAbbr;
+            var seriesname =
+                        (from s in ImportTvFactory.SeriesNameList where s.SeriesName == searchTerm select s).SingleOrDefault();
+            lblSeriesPath.Text = seriesname.SeriesPath;
         }
 
         #endregion

@@ -95,6 +95,7 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private void Bgw_DoWork(object sender, DoWorkEventArgs e)
         {
+            string logCategory = "FrmImportTv > Bgw_DoWork";
             this.theTvdb = new TheTvdb();
 
             var toAdd = new Dictionary<string, ScanSeries>();
@@ -104,8 +105,14 @@ namespace YANFOE.UI.Dialogs.TV
 
             var count = 0;
 
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Starting import of tv series. {0} shows to scan.",
+                    ImportTvFactory.Scan.Count), logCategory);
+
             foreach (var s in ImportTvFactory.Scan)
             {
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Starting import of show {0}",
+                    s.Key), logCategory);
+
                 Factories.UI.Windows7UIFactory.SetProgressValue(count);
 
                 var item = (from series in ImportTvFactory.SeriesNameList
@@ -119,18 +126,25 @@ namespace YANFOE.UI.Dialogs.TV
                     if (!string.IsNullOrEmpty(s.Key))
                     {
                         this.currentStatus = "Processing " + s.Key;
+                        InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, string.Format("Processing {0}",
+                            s.Key), logCategory);
 
                         var searchResults = TvDBFactory.SearchDefaultShowDatabase(s.Key);
 
                         if (searchResults.Count == 0)
                         {
-                            searchResults = this.theTvdb.SeriesSearch(s.Key); // open initial object and do search
+                            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("{0} was not found in default show database. Trying TvDB",
+                                s.Key), logCategory);
+                            searchResults = this.theTvdb.SeriesSearch(Tools.Clean.Text.UrlEncode(s.Key)); // open initial object and do search
                         }
 
                         Series series;
 
                         if (searchResults.Count > 1 || searchResults.Count == 0)
                         {
+                            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("{0} results was found",
+                                searchResults.Count), logCategory);
+
                            var scan =
                                 (from scanSeriesPick in ImportTvFactory.ScanSeriesPicks
                                  where scanSeriesPick.SearchString == s.Key
@@ -138,14 +152,23 @@ namespace YANFOE.UI.Dialogs.TV
 
                             if (scan != null)
                             {
-                                searchResults = this.theTvdb.SeriesSearch(scan.SeriesName);
 
+                                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Attempting to search for {0} based on scanSeriesPick.",
+                                    scan.SeriesName), logCategory);
+
+                                searchResults = this.theTvdb.SeriesSearch(Tools.Clean.Text.UrlEncode(scan.SeriesName));
+                                
                                 var result = (from r in searchResults where r.SeriesID == scan.SeriesID select r).Single();
                                 series = this.theTvdb.OpenNewSeries(result);
+                                
+                                InternalApps.Logs.Log.WriteToLog(LogSeverity.Info, 0, string.Format("{0} was found to have ID {1} (IMDb: {2})",
+                                    series.SeriesName, series.ID, series.ImdbId), logCategory);
                             }
                             else
                             {
-                            
+                                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("{0} was not found in scanSeriesPick",
+                                    s.Key), logCategory);
+
                                 var resultCollection = new List<object>(4)
                                     { 
                                         searchResults, 
@@ -163,6 +186,8 @@ namespace YANFOE.UI.Dialogs.TV
                         else
                         {
                             series = this.theTvdb.OpenNewSeries(searchResults[0]); // download series details
+                            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("{0} was found to have ID {1} (IMDb: {2})",
+                                    series.SeriesName, series.ID, series.ImdbId), logCategory);
 
                             if ((from scan in ImportTvFactory.ScanSeriesPicks where scan.SearchString == s.Key select s).Count() == 0)
                             {
@@ -173,6 +198,8 @@ namespace YANFOE.UI.Dialogs.TV
                                             SeriesID = series.SeriesID.ToString(),
                                             SeriesName = series.SeriesName
                                         });
+                                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("{0} was added to scanSeriesPick",
+                                    series.SeriesName), logCategory);
                             }
                         }
 
@@ -195,11 +222,15 @@ namespace YANFOE.UI.Dialogs.TV
             foreach (var s in toRemove)
             {
                 ImportTvFactory.Scan.Remove(s);
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Removing {0} from scan database",
+                    s), logCategory);
             }
 
             foreach (var s in toAdd)
             {
                 ImportTvFactory.Scan.Add(s.Key, s.Value);
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Adding {0} to scan database",
+                    s), logCategory);
             }
 
             this.theTvdb.ApplyScan();
@@ -287,7 +318,7 @@ namespace YANFOE.UI.Dialogs.TV
                 {
                     var seriesname =
                         (from s in ImportTvFactory.SeriesNameList where s.SeriesName == s1 select s).SingleOrDefault();
-
+                    
                     seriesname.Skipped = true;
                     seriesname.WaitingForScan = false;
                 }

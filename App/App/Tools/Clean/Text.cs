@@ -375,5 +375,15 @@ namespace YANFOE.Tools.Clean
                 return null;
             }
         }
+
+        /// <summary>
+        /// Url-encodes a string and returns the encoded string.
+        /// </summary>
+        /// <param name="text">The text string to encode. </param>
+        /// <returns>The Url-encoded text.</returns>
+        public static string UrlEncode(string text)
+        {
+            return System.Web.HttpUtility.UrlEncode(text);
+        }
     }
 }

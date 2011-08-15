@@ -25,8 +25,18 @@ namespace YANFOE.Settings.ConstSettings
         public const string HourMinute = @"(?<Hour>\d*)h\s(?<Minute>\d*)\w\w";
 
         /// <summary>
-        /// Used to detect if a filename is in a TV show format, and extract series and episode numbers.
+        /// Used to detect if a filename is in a TV show format.
         /// </summary>
-        public const string Tv = @"(?<![0-9])s{0,1}([0-9]{1,2})((?:(?:(e|\se)[0-9]+)+)|(?:(?:x[0-9]+)+))";
+        public const string Tv = @"(?<![0-9])((s[0-9]{1,4})|[0-9]{1,2})(?:(\s|\.|x))?((?:(e|x)\s?[0-9]+)+)";
+
+        /// <summary>
+        /// Used to extract season number.
+        /// </summary>
+        public const string TvSeason = @"s{0,1}([0-9]+)(\\s|\\.)?[ex-]";
+
+        /// <summary>
+        /// Used to extract tv episodes.
+        /// </summary>
+        public const string TvEpisode = @"[ex]\s?([0-9]+)";
     }
 }

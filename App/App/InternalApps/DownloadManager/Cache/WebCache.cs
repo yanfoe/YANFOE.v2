@@ -34,6 +34,11 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
         /// <returns>A full path</returns>
         public static string GetPathFromUrl(string url, Section section)
         {
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            foreach (char c in invalid)
+            {
+                url = url.Replace(c.ToString(), "");
+            }
             return GetSectionPath(section) + Path.DirectorySeparatorChar + UrlToFileName(url);
         }
 

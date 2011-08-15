@@ -20,6 +20,8 @@ namespace YANFOE.Factories.Import
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using BitFactory.Logging;
+
     using YANFOE.Factories.Media;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Scan;
@@ -99,8 +101,21 @@ namespace YANFOE.Factories.Import
 
                 if (!check2.Contains(seriesName.ToLower()) && !string.IsNullOrEmpty(seriesName))
                 {
+                    string dir = Directory.GetParent(episodeDetails.FilePath).Name;
+                    string path = string.Empty;
+                    if (dir.StartsWith("season", true, System.Globalization.CultureInfo.CurrentCulture))
+                    {
+                        // Looks like it. Qualified series guess
+                        path = Directory.GetParent(episodeDetails.FilePath).Parent.FullName;
+                    }
+                    else
+                    {
+                        // Best guess
+                        path = Directory.GetParent(episodeDetails.FilePath).FullName;
+                    }
+                    
                     SeriesNameList.Add(
-                        new SeriesListModel { WaitingForScan = true, SeriesName = seriesName });
+                        new SeriesListModel { WaitingForScan = true, SeriesName = seriesName, SeriesPath = path });
                 }
             }
             else
@@ -200,6 +215,8 @@ namespace YANFOE.Factories.Import
         /// <returns>The episode details.</returns>
         public static EpisodeDetails GetEpisodeDetails(string filePath)
         {
+            string logCategory = "ImportTvFactory > GetEpisodeDetails";
+
             var episodeDetails = new EpisodeDetails
                 {
                     FilePath = filePath
@@ -219,6 +236,8 @@ namespace YANFOE.Factories.Import
             {
                 series = Path.GetFileNameWithoutExtension(filePath);
             }
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Getting episode details for: {0}",
+                            series), logCategory);
 
             // Check if dir structure is <root>/<series>/<season>/<episodes>
             string dir = Directory.GetParent(filePath).Name;
@@ -228,27 +247,39 @@ namespace YANFOE.Factories.Import
                 // Looks like it. Qualified series guess
                 seriesGuess = Directory.GetParent(filePath).Parent.Name;
             }
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Qualified series name guess, based on folder: {0}",
+                            seriesGuess), logCategory);
 
             var regex = Regex.Match(
                 series,
                 "(?<seriesName>.*?)" + DefaultRegex.Tv,
                 RegexOptions.IgnoreCase);
-
+            
+            string rawSeriesName;
             if (regex.Success)
             {
-                var rawSeriesName = regex.Groups["seriesName"].Value.Trim();
+                rawSeriesName = regex.Groups["seriesName"].Value.Trim();
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Series name from file: {0}",
+                            rawSeriesName), logCategory);
 
                 var result = (from r in ScanSeriesPicks where r.SearchString == rawSeriesName select r)
                     .SingleOrDefault();
 
+                string rawSeriesGuess = rawSeriesName.Replace(new string[] { ".", "_" }, " ");
                 if (seriesGuess != string.Empty)
                 {
-                    if (rawSeriesName.StartsWith(seriesGuess))
+                    if (rawSeriesName == string.Empty)
+                    {
+                        // Anything's better than nothing
+                        rawSeriesName = seriesGuess;
+                    }
+                    else if (rawSeriesName.StartsWith(seriesGuess))
                     {
                         // Regex might've picked up some random crap between series name and s01e01
                         rawSeriesName = seriesGuess;
                     }
-                    else if (rawSeriesName.Substring(0, 1) == seriesGuess.Substring(0, 1))
+                    else if (rawSeriesName.Length > 0 && (rawSeriesName.Substring(0, 1) == seriesGuess.Substring(0, 1) ||
+                        rawSeriesGuess.ToLower().Replace("and", "&") == seriesGuess.ToLower().Replace("and", "&")))
                     {
                         // Regex might've picked up an acronym for the series
                         // TGaaG = Two Guys and a Girl
@@ -258,13 +289,62 @@ namespace YANFOE.Factories.Import
                         }
                     }
                 }
+                else
+                {
+                    rawSeriesName = seriesGuess;
+                }
+                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Best series guess: {0}",
+                        rawSeriesName), logCategory);
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
                 episodeDetails.SeriesName = Tools.Restructure.FileSystemCharChange.From(episodeDetails.SeriesName);
+
+                /*catch (System.Exception e)
+                {
+                    if (e is System.ArgumentNullException || e is System.InvalidOperationException)
+                    {
+                        InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, string.Format("Error while trying to guess series name: {0}",
+                            e.Message), "ImportTvFactory > GetEpisodeDetails");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }*/
+            }
+            var seasonMatch = Regex.Match(series, DefaultRegex.TvSeason, RegexOptions.IgnoreCase);
+            if (seasonMatch.Success)
+            {
+                episodeDetails.SeasonNumber = seasonMatch.Groups[1].Value.GetNumber();
+            }
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted season number: {0}",
+                    episodeDetails.SeasonNumber), logCategory);
+
+            var episodeMatch = Regex.Match(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
+            if (episodeMatch.Success)
+            {
+                episodeDetails.TvMatchSuccess = true;
+                if (episodeMatch.Groups.Count > 2)
+                {
+                    for (var i = 2; i < episodeMatch.Groups.Count; i++)
+                    {
+                        episodeDetails.SecondaryNumbers.Add(episodeMatch.Groups[i].Value.GetNumber());
+                    }
+
+                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode numbers ({0}): {1}",
+                            episodeDetails.SecondaryNumbers.Count, string.Join(", ", episodeDetails.SecondaryNumbers)), logCategory);
+                }
+                else
+                {
+                    episodeDetails.EpisodeNumber = episodeMatch.Groups[1].Value.GetNumber();
+
+                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode number: {0}",
+                            episodeDetails.EpisodeNumber), logCategory);
+                }
             }
 
-            var fileMatch = Regex.Match(series, DefaultRegex.Tv, RegexOptions.IgnoreCase);
+            /*var fileMatch = Regex.Match(series, DefaultRegex.Tv, RegexOptions.IgnoreCase);
 
             if (fileMatch.Success)
             {
@@ -291,7 +371,7 @@ namespace YANFOE.Factories.Import
                         episodeDetails.SecondaryNumbers.Add(episodeNumbers[i]);
                     }
                 }
-            }
+            }*/
 
             episodeDetails.SeriesName = episodeDetails.SeriesName.Replace(".", string.Empty).Trim();
             if (episodeDetails.SeriesName.EndsWith("-"))
@@ -306,6 +386,9 @@ namespace YANFOE.Factories.Import
             {
                 episodeDetails.SeriesName = check.SeriesName;
             }
+
+            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Final series name: {0}",
+                    episodeDetails.SeriesName), logCategory);
 
             return episodeDetails;
         }

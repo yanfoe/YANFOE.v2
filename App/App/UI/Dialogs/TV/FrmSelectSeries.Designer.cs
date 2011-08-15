@@ -48,6 +48,8 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.lblSearchTerm = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.lblSeriesPath = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSearchResults)).BeginInit();
@@ -59,6 +61,8 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.lblSeriesPath);
+            this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.cmbSearchResults);
             this.groupControl1.Controls.Add(this.panelControl2);
             this.groupControl1.Controls.Add(this.butCancel);
@@ -72,13 +76,13 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(579, 278);
+            this.groupControl1.Size = new System.Drawing.Size(579, 313);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "Identify this series";
             // 
             // cmbSearchResults
             // 
-            this.cmbSearchResults.Location = new System.Drawing.Point(6, 92);
+            this.cmbSearchResults.Location = new System.Drawing.Point(5, 131);
             this.cmbSearchResults.Name = "cmbSearchResults";
             this.cmbSearchResults.Size = new System.Drawing.Size(246, 84);
             this.cmbSearchResults.TabIndex = 17;
@@ -96,12 +100,12 @@
             this.panelControl2.Controls.Add(this.pictureBox1);
             this.panelControl2.Location = new System.Drawing.Point(258, 25);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(310, 199);
+            this.panelControl2.Size = new System.Drawing.Size(310, 238);
             this.panelControl2.TabIndex = 16;
             // 
             // lblFirstAired
             // 
-            this.lblFirstAired.Location = new System.Drawing.Point(65, 178);
+            this.lblFirstAired.Location = new System.Drawing.Point(64, 220);
             this.lblFirstAired.Name = "lblFirstAired";
             this.lblFirstAired.Size = new System.Drawing.Size(73, 13);
             this.lblFirstAired.TabIndex = 7;
@@ -109,7 +113,7 @@
             // 
             // labelControl10
             // 
-            this.labelControl10.Location = new System.Drawing.Point(6, 178);
+            this.labelControl10.Location = new System.Drawing.Point(5, 220);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(53, 13);
             this.labelControl10.TabIndex = 6;
@@ -122,7 +126,7 @@
             this.tbOverview.Multiline = true;
             this.tbOverview.Name = "tbOverview";
             this.tbOverview.ReadOnly = true;
-            this.tbOverview.Size = new System.Drawing.Size(299, 85);
+            this.tbOverview.Size = new System.Drawing.Size(299, 126);
             this.tbOverview.TabIndex = 5;
             // 
             // lblLanguage
@@ -169,7 +173,7 @@
             // 
             this.butCancel.Image = global::YANFOE.Properties.Resources.delete32;
             this.butCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.butCancel.Location = new System.Drawing.Point(413, 230);
+            this.butCancel.Location = new System.Drawing.Point(412, 269);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(74, 39);
             this.butCancel.TabIndex = 15;
@@ -177,7 +181,7 @@
             // 
             // txtSearchAgain
             // 
-            this.txtSearchAgain.Location = new System.Drawing.Point(10, 204);
+            this.txtSearchAgain.Location = new System.Drawing.Point(9, 243);
             this.txtSearchAgain.Name = "txtSearchAgain";
             this.txtSearchAgain.Size = new System.Drawing.Size(242, 20);
             this.txtSearchAgain.TabIndex = 14;
@@ -185,7 +189,7 @@
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(10, 186);
+            this.labelControl4.Location = new System.Drawing.Point(9, 225);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(67, 13);
             this.labelControl4.TabIndex = 13;
@@ -195,7 +199,7 @@
             // 
             this.butSearchAgain.Image = global::YANFOE.Properties.Resources.globe32;
             this.butSearchAgain.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.butSearchAgain.Location = new System.Drawing.Point(185, 230);
+            this.butSearchAgain.Location = new System.Drawing.Point(184, 269);
             this.butSearchAgain.Name = "butSearchAgain";
             this.butSearchAgain.Size = new System.Drawing.Size(67, 39);
             this.butSearchAgain.TabIndex = 12;
@@ -206,7 +210,7 @@
             this.butUse.Enabled = false;
             this.butUse.Image = global::YANFOE.Properties.Resources.accept32;
             this.butUse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.butUse.Location = new System.Drawing.Point(493, 230);
+            this.butUse.Location = new System.Drawing.Point(492, 269);
             this.butUse.Name = "butUse";
             this.butUse.Size = new System.Drawing.Size(75, 39);
             this.butUse.TabIndex = 4;
@@ -214,7 +218,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(10, 75);
+            this.labelControl3.Location = new System.Drawing.Point(9, 114);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(75, 13);
             this.labelControl3.TabIndex = 2;
@@ -238,11 +242,27 @@
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Series Name:";
             // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(10, 63);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(58, 13);
+            this.labelControl2.TabIndex = 18;
+            this.labelControl2.Text = "Series Path:";
+            // 
+            // lblSeriesPath
+            // 
+            this.lblSeriesPath.Location = new System.Drawing.Point(6, 83);
+            this.lblSeriesPath.Name = "lblSeriesPath";
+            this.lblSeriesPath.Size = new System.Drawing.Size(69, 13);
+            this.lblSeriesPath.TabIndex = 19;
+            this.lblSeriesPath.Text = "<series path>";
+            // 
             // FrmSelectSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 278);
+            this.ClientSize = new System.Drawing.Size(579, 313);
             this.Controls.Add(this.groupControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -285,5 +305,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl lblSearchTerm;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblSeriesPath;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }

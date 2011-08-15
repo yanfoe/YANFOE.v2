@@ -188,7 +188,7 @@ namespace YANFOE.Scrapers.TV
             }
 
             Series series = this.OpenNewSeries(selectResult); // download series details
-
+            
             if (!TvDBFactory.TvDatabase.ContainsKey(series.SeriesName))
             {
                 TvDBFactory.TvDatabase.Add(series.SeriesName, series); // add series to db
@@ -301,7 +301,7 @@ namespace YANFOE.Scrapers.TV
                 frmSelectSeriesName.ShowDialog();
 
                 Factories.UI.Windows7UIFactory.PauseProgressState();
-
+                
                 return frmSelectSeriesName.SelectedSeries;
             }
 
