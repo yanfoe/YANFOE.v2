@@ -33,6 +33,11 @@ namespace YANFOE.InternalApps.Logs
         #region Constants and Fields
 
         /// <summary>
+        /// The log treshold.
+        /// </summary>
+        public static LogSeverity logTreshold = LogSeverity.Info;
+
+        /// <summary>
         /// The main file log.
         /// </summary>
         private static readonly FileLogger MainFileLog =
@@ -370,8 +375,11 @@ namespace YANFOE.InternalApps.Logs
 
             BindingList<LogModel> internalLogger = internalLoggers[loggerName];
 
-            LogFile(logSeverity, fileLogger, catagory, message);
-            LogInternal(logSeverity, internalLogger, catagory, message);
+            if (logSeverity >= Log.logTreshold)
+            {
+                LogFile(logSeverity, fileLogger, catagory, message);
+                LogInternal(logSeverity, internalLogger, catagory, message);
+            }
         }
 
         /// <summary>
