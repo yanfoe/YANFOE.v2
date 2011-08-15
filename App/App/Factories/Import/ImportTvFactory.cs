@@ -300,18 +300,6 @@ namespace YANFOE.Factories.Import
 
                 episodeDetails.SeriesName = Tools.Restructure.FileSystemCharChange.From(episodeDetails.SeriesName);
 
-                /*catch (System.Exception e)
-                {
-                    if (e is System.ArgumentNullException || e is System.InvalidOperationException)
-                    {
-                        InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, string.Format("Error while trying to guess series name: {0}",
-                            e.Message), "ImportTvFactory > GetEpisodeDetails");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }*/
             }
             var seasonMatch = Regex.Match(series, DefaultRegex.TvSeason, RegexOptions.IgnoreCase);
             if (seasonMatch.Success)
@@ -340,12 +328,7 @@ namespace YANFOE.Factories.Import
                             episodeDetails.SecondaryNumbers.Add(match.Value.GetNumber());
                         }
                     }
-                    /*episodeDetails.EpisodeNumber = episodeMatch.Groups[1].Value.GetNumber();
-                    for (var i = 2; i < episodeMatch.Groups.Count; i++)
-                    {
-                        episodeDetails.SecondaryNumbers.Add(episodeMatch.Groups[i].Value.GetNumber());
-                    }
-                    */
+
                     InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode numbers ({0}): {1}",
                             episodeDetails.SecondaryNumbers.Count, string.Join(", ", episodeDetails.SecondaryNumbers)), logCategory);
                 }
@@ -358,35 +341,6 @@ namespace YANFOE.Factories.Import
                             episodeDetails.EpisodeNumber), logCategory);
                 }
             }
-
-            /*var fileMatch = Regex.Match(series, DefaultRegex.Tv, RegexOptions.IgnoreCase);
-
-            if (fileMatch.Success)
-            {
-                episodeDetails.TvMatchSuccess = true;
-
-                var ep = fileMatch.Groups[2].Value;
-                if (string.IsNullOrEmpty(ep))
-                {
-                    ep = fileMatch.Groups[3].Value;
-                }
-
-                var episodeNumberString = ep;
-                var seriesNumberString = fileMatch.Groups[1].Value;
-
-                episodeDetails.SeasonNumber = seriesNumberString.GetNumber();
-                episodeDetails.EpisodeNumber = episodeNumberString.GetNumbers()[0];
-
-                var episodeNumbers = episodeNumberString.GetNumbers();
-
-                if (episodeNumbers.Count > 1)
-                {
-                    for (var i = 1; i < episodeNumbers.Count; i++)
-                    {
-                        episodeDetails.SecondaryNumbers.Add(episodeNumbers[i]);
-                    }
-                }
-            }*/
 
             episodeDetails.SeriesName = episodeDetails.SeriesName.Replace(".", string.Empty).Trim();
             if (episodeDetails.SeriesName.EndsWith("-"))
