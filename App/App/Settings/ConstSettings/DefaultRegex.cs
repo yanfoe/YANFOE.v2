@@ -37,6 +37,6 @@ namespace YANFOE.Settings.ConstSettings
         /// <summary>
         /// Used to extract tv episodes.
         /// </summary>
-        public const string TvEpisode = @"[ex]\s?([0-9]+)";
+        public const string TvEpisode = @"((?!x264)[ex]\s?([0-9]+)|([ .][0-9]{3}[ .]))";
     }
 }

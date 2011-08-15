@@ -321,23 +321,38 @@ namespace YANFOE.Factories.Import
             InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted season number: {0}",
                     episodeDetails.SeasonNumber), logCategory);
 
-            var episodeMatch = Regex.Match(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
-            if (episodeMatch.Success)
+            var episodeMatch = Regex.Matches(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
+            if (episodeMatch.Count > 0)
             {
                 episodeDetails.TvMatchSuccess = true;
-                if (episodeMatch.Groups.Count > 2)
+                if (episodeMatch.Count > 1)
                 {
+                    bool first = true;
+                    foreach (Match match in episodeMatch)
+                    {
+                        if (first)
+                        {
+                            episodeDetails.EpisodeNumber = match.Value.GetNumber();
+                            first = false;
+                        }
+                        else
+                        {
+                            episodeDetails.SecondaryNumbers.Add(match.Value.GetNumber());
+                        }
+                    }
+                    /*episodeDetails.EpisodeNumber = episodeMatch.Groups[1].Value.GetNumber();
                     for (var i = 2; i < episodeMatch.Groups.Count; i++)
                     {
                         episodeDetails.SecondaryNumbers.Add(episodeMatch.Groups[i].Value.GetNumber());
                     }
-
+                    */
                     InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode numbers ({0}): {1}",
                             episodeDetails.SecondaryNumbers.Count, string.Join(", ", episodeDetails.SecondaryNumbers)), logCategory);
                 }
                 else
                 {
-                    episodeDetails.EpisodeNumber = episodeMatch.Groups[1].Value.GetNumber();
+                    var episodeMatch2 = Regex.Match(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
+                    episodeDetails.EpisodeNumber = episodeMatch2.Groups[1].Value.GetNumber();
 
                     InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode number: {0}",
                             episodeDetails.EpisodeNumber), logCategory);
