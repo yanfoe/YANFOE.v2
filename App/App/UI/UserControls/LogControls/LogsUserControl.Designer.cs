@@ -47,6 +47,8 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -62,6 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -114,6 +119,7 @@
             // 
             // groupControl2
             // 
+            this.groupControl2.Controls.Add(this.groupControl3);
             this.groupControl2.Controls.Add(this.chbEnableLog);
             this.groupControl2.Location = new System.Drawing.Point(779, 2);
             this.groupControl2.Name = "groupControl2";
@@ -255,6 +261,32 @@
             this.layoutControlItem3.TextToControlDistance = 0;
             this.layoutControlItem3.TextVisible = false;
             // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.radioGroup1);
+            this.groupControl3.Location = new System.Drawing.Point(9, 51);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(200, 180);
+            this.groupControl3.TabIndex = 1;
+            this.groupControl3.Text = "Log treshold";
+            // 
+            // radioGroup1
+            // 
+            this.radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioGroup1.Location = new System.Drawing.Point(2, 22);
+            this.radioGroup1.Name = "radioGroup1";
+            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "Debug"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(2)), "Info"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(3)), "Status"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(4)), "Warning"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(5)), "Error"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(6)), "Critical"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(7)), "Fatal")});
+            this.radioGroup1.Size = new System.Drawing.Size(196, 156);
+            this.radioGroup1.TabIndex = 0;
+            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
+            // 
             // LogsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,6 +309,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,5 +335,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraEditors.CheckButton chbEnableLog;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.RadioGroup radioGroup1;
     }
 }

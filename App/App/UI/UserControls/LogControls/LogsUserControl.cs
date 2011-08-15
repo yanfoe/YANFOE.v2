@@ -31,6 +31,32 @@ namespace YANFOE.UI.UserControls.LogControls
 
             chbEnableLog.DataBindings.Add(
                 "Checked", Settings.Get.LogSettings, "EnableLog", true, DataSourceUpdateMode.OnPropertyChanged);
+            int index = 1;
+            switch (InternalApps.Logs.Log.logTreshold)
+            {
+                case BitFactory.Logging.LogSeverity.Debug:
+                    index = 1;
+                    break;
+                case BitFactory.Logging.LogSeverity.Info:
+                    index = 2;
+                    break;
+                case BitFactory.Logging.LogSeverity.Status:
+                    index = 3;
+                    break;
+                case BitFactory.Logging.LogSeverity.Warning:
+                    index = 4;
+                    break;
+                case BitFactory.Logging.LogSeverity.Error:
+                    index = 5;
+                    break;
+                case BitFactory.Logging.LogSeverity.Critical:
+                    index = 6;
+                    break;
+                case BitFactory.Logging.LogSeverity.Fatal:
+                    index = 7;
+                    break;
+            }
+            radioGroup1.SelectedIndex = index - 1;
         }
 
         /// <summary>
@@ -51,6 +77,12 @@ namespace YANFOE.UI.UserControls.LogControls
         private void btnClearLog_Click(object sender, System.EventArgs e)
         {
             InternalApps.Logs.Log.ClearInternalLogger(LoggerName.GeneralLog);
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            var logTreshold = (BitFactory.Logging.LogSeverity)System.Enum.ToObject(typeof(BitFactory.Logging.LogSeverity), radioGroup1.SelectedIndex + 1);
+            InternalApps.Logs.Log.logTreshold = logTreshold;
         }
     }
 }
