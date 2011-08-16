@@ -175,7 +175,8 @@ namespace YANFOE.Factories.Media
                 {
                     foreach (var episode in season.Value.Episodes)
                     {
-                        if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+                        if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename) && 
+                            System.IO.File.Exists(episode.FilePath.PathAndFilename))
                         {
                             masterTvMediaDatabase.Add(episode.FilePath.PathAndFilename);
                         }
