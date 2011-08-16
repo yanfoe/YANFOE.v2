@@ -462,6 +462,21 @@ namespace YANFOE.Factories.Internal
                     series.SmallBanner = ImageHandler.LoadImage(banner);
                 }
 
+                foreach (var season in series.Seasons)
+                {
+                    foreach (var episode in season.Value.Episodes)
+                    {
+                        if (episode.FilePath.PathAndFilename != string.Empty && !File.Exists(episode.FilePath.PathAndFilename))
+                        {
+                            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadTvDB",
+                                string.Format("Deleting {0}. Episode not found on the filesystem", episode.FilePath.PathAndFilename));
+                            // We should check for network path and make sure the file has actually been deleted or removed
+                            File.Delete(file);
+                            series.Seasons[season.Key].Episodes.Remove(episode);
+                        }
+                    }
+                }
+
                 TvDBFactory.TvDatabase.Add(series.SeriesName, series);
             }
 
