@@ -1001,7 +1001,14 @@ namespace YANFOE.Models.MovieModels
         {
             get
             {
-                return this.AssociatedFiles.GetMediaCollection()[0].FolderPath;
+                try
+                {
+                    return this.AssociatedFiles.GetMediaCollection()[0].FolderPath;
+                }
+                catch
+                {
+                    return string.Empty;
+                }
             }
         }
 
