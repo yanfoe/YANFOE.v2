@@ -1,5 +1,6 @@
 ﻿namespace YANFOE.UI.UserControls.CommonControls
 {
+    using System;
     using System.Windows.Forms;
 
     using YANFOE.Factories;
@@ -138,7 +139,19 @@
                 {
                     MovieDBFactory.GetCurrentMovie().MediaInfoChanged += (s, e2) =>
                         {
-                            this.PopulateFileInfo();
+
+                            if (this.InvokeRequired)
+                            {
+                                this.Invoke(new EventHandler(delegate(object o, EventArgs a)
+                                {
+                                    this.PopulateFileInfo();
+                                }));
+                            }
+                            else
+                            {
+                                this.PopulateFileInfo();
+                            }
+                            
                         };
 
                     this.RefreshMovieBindings();
