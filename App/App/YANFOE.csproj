@@ -1074,6 +1074,8 @@
     <None Include="RequiredAddons\RequiredAddons">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\promo_orange.png" />
+    <None Include="Resources\promo_orange_faded.png" />
     <Content Include="Resources\refresh.png" />
     <None Include="Resources\tools1.png" />
     <None Include="Resources\tools2.png" />

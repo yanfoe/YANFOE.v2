@@ -413,7 +413,13 @@ namespace YANFOE.Models.TvModels.Show
         {
             get
             {
-                return this.HasMissingEpisodes() ? Resources.promo_red_faded16 : Resources.promo_green_faded16;
+                if (this.HasNoEpisodes())
+                {
+                    return Resources.promo_red_faded16;
+
+                }
+
+                return this.HasMissingEpisodes() ? Resources.promo_orange_faded : Resources.promo_green_faded16;
             }
         }
 
@@ -586,7 +592,25 @@ namespace YANFOE.Models.TvModels.Show
         /// </returns>
         public bool HasMissingEpisodes()
         {
-            bool missingEpisodes = false;
+            foreach (Episode e in this.Episodes)
+            {
+                if (e.FilePath == null)
+                {
+                    e.FilePath = new MediaModel();
+                }
+
+                if (string.IsNullOrEmpty(e.FilePath.PathAndFilename))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasNoEpisodes()
+        {
+            int missingEpisodeCount = 0; 
 
             foreach (Episode e in this.Episodes)
             {
@@ -597,11 +621,11 @@ namespace YANFOE.Models.TvModels.Show
 
                 if (string.IsNullOrEmpty(e.FilePath.PathAndFilename))
                 {
-                    missingEpisodes = true;
+                    missingEpisodeCount++;
                 }
             }
 
-            return missingEpisodes;
+            return missingEpisodeCount == this.Episodes.Count;
         }
 
         [JsonIgnore]

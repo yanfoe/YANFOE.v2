@@ -795,7 +795,7 @@
             this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
-            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(601, 48);
+            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.TabIndex = 1;
             this.tvTopMenuUserControl1.Type = YANFOE.UI.UserControls.TvControls.SaveType.All;
             // 
