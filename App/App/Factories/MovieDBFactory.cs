@@ -196,6 +196,8 @@ namespace YANFOE.Factories
             }
         }
 
+        public static bool IgnoreMultiSelect { get; set; }
+
         /// <summary>
         /// Gets or sets the movie database.
         /// </summary>
@@ -529,7 +531,7 @@ namespace YANFOE.Factories
         /// </param>
         public static void MultiSelect_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (isMultiSelected)
+            if (isMultiSelected && !IgnoreMultiSelect)
             {
                 foreach (MovieModel movie in multiSelectedMovies)
                 {
