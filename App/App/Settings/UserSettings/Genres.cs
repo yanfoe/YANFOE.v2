@@ -16,6 +16,8 @@ namespace YANFOE.Settings.UserSettings
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
 
     using YANFOE.Tools.Enums;
 
@@ -30,7 +32,7 @@ namespace YANFOE.Settings.UserSettings
         /// <summary>
         /// The imdb collection
         /// </summary>
-        private List<string> imdb;
+        public BindingList<string> CustomGenres;
 
         #endregion
 
@@ -41,65 +43,22 @@ namespace YANFOE.Settings.UserSettings
         /// </summary>
         public Genres()
         {
-            this.GenreDictionary = new Dictionary<ScraperList, List<string>>();
-            this.AddImdb();
+            this.PopulateGenresFromScraper(ScraperList.Imdb);
+            CustomGenres.AllowEdit = true;
+            CustomGenres.AllowNew = true;
+            CustomGenres.AllowRemove = true;
         }
 
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the genre dictionary.
-        /// </summary>
-        /// <value>
-        /// The genre dictionary.
-        /// </value>
-        public Dictionary<ScraperList, List<string>> GenreDictionary { get; set; }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The add imdb.
-        /// </summary>
-        private void AddImdb()
+        private void PopulateGenresFromScraper(ScraperList scraper)
         {
-            this.imdb = new List<string>
-                {
-                    "Action",
-                    "Adventure",
-                    "Animation",
-                    "Biography",
-                    "Comedy",
-                    "Crime",
-                    "Documentary",
-                    "Drama",
-                    "Family",
-                    "Fantasy",
-                    "Film-Noir",
-                    "Game-Show",
-                    "History",
-                    "Horror",
-                    "Music",
-                    "Musical",
-                    "Mystery",
-                    "News",
-                    "Reality-TV",
-                    "Romance",
-                    "Sci-Fi",
-                    "Short",
-                    "Sport",
-                    "Talk-Show",
-                    "Thriller",
-                    "War",
-                    "Western"
-                };
+            var scrapers = Scrapers.Movie.MovieScraperHandler.ReturnAllScrapers();
 
-            this.GenreDictionary.Add(ScraperList.Imdb, this.imdb);
+            var imdbScraper = (from s in scrapers where s.ScraperName == scraper select s).Single();
+
+            this.CustomGenres = imdbScraper.DefaultGenres;
         }
 
         #endregion
+
     }
 }

@@ -316,7 +316,7 @@
             // 
             this.tabNormal.Controls.Add(this.layoutControl5);
             this.tabNormal.Name = "tabNormal";
-            this.tabNormal.Size = new System.Drawing.Size(567, 404);
+            this.tabNormal.Size = new System.Drawing.Size(569, 406);
             this.tabNormal.Text = "Normal";
             // 
             // layoutControl5
@@ -339,33 +339,33 @@
             this.layoutControl5.Name = "layoutControl5";
             this.layoutControl5.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1067, 304, 250, 350);
             this.layoutControl5.Root = this.layoutControlGroup5;
-            this.layoutControl5.Size = new System.Drawing.Size(567, 404);
+            this.layoutControl5.Size = new System.Drawing.Size(569, 406);
             this.layoutControl5.TabIndex = 0;
             this.layoutControl5.Text = "layoutControl5";
             // 
             // txtNormalTestPath
             // 
-            this.txtNormalTestPath.Location = new System.Drawing.Point(108, 233);
+            this.txtNormalTestPath.Location = new System.Drawing.Point(108, 234);
             this.txtNormalTestPath.Name = "txtNormalTestPath";
-            this.txtNormalTestPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalTestPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalTestPath.StyleController = this.layoutControl5;
             this.txtNormalTestPath.TabIndex = 20;
             // 
             // txtNormalSetFanartPreview
             // 
-            this.txtNormalSetFanartPreview.Location = new System.Drawing.Point(108, 353);
+            this.txtNormalSetFanartPreview.Location = new System.Drawing.Point(108, 354);
             this.txtNormalSetFanartPreview.Name = "txtNormalSetFanartPreview";
             this.txtNormalSetFanartPreview.Properties.ReadOnly = true;
-            this.txtNormalSetFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalSetFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtNormalSetFanartPreview.StyleController = this.layoutControl5;
             this.txtNormalSetFanartPreview.TabIndex = 19;
             // 
             // txtNormalSetPosterPreview
             // 
-            this.txtNormalSetPosterPreview.Location = new System.Drawing.Point(108, 329);
+            this.txtNormalSetPosterPreview.Location = new System.Drawing.Point(108, 330);
             this.txtNormalSetPosterPreview.Name = "txtNormalSetPosterPreview";
             this.txtNormalSetPosterPreview.Properties.ReadOnly = true;
-            this.txtNormalSetPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalSetPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtNormalSetPosterPreview.StyleController = this.layoutControl5;
             this.txtNormalSetPosterPreview.TabIndex = 18;
             // 
@@ -373,7 +373,7 @@
             // 
             this.txtNormalSetFanartPath.Location = new System.Drawing.Point(108, 132);
             this.txtNormalSetFanartPath.Name = "txtNormalSetFanartPath";
-            this.txtNormalSetFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalSetFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalSetFanartPath.StyleController = this.layoutControl5;
             this.txtNormalSetFanartPath.TabIndex = 17;
             // 
@@ -381,7 +381,7 @@
             // 
             this.txtNormalTrailerPath.Location = new System.Drawing.Point(108, 84);
             this.txtNormalTrailerPath.Name = "txtNormalTrailerPath";
-            this.txtNormalTrailerPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalTrailerPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalTrailerPath.StyleController = this.layoutControl5;
             this.txtNormalTrailerPath.TabIndex = 21;
             // 
@@ -389,34 +389,34 @@
             // 
             this.txtNormalSetPosterPath.Location = new System.Drawing.Point(108, 108);
             this.txtNormalSetPosterPath.Name = "txtNormalSetPosterPath";
-            this.txtNormalSetPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalSetPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalSetPosterPath.StyleController = this.layoutControl5;
             this.txtNormalSetPosterPath.TabIndex = 16;
             // 
             // txtNormalFanartPreview
             // 
-            this.txtNormalFanartPreview.Location = new System.Drawing.Point(108, 305);
+            this.txtNormalFanartPreview.Location = new System.Drawing.Point(108, 306);
             this.txtNormalFanartPreview.Name = "txtNormalFanartPreview";
             this.txtNormalFanartPreview.Properties.ReadOnly = true;
-            this.txtNormalFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtNormalFanartPreview.StyleController = this.layoutControl5;
             this.txtNormalFanartPreview.TabIndex = 15;
             // 
             // txtNormalPosterPreview
             // 
-            this.txtNormalPosterPreview.Location = new System.Drawing.Point(108, 281);
+            this.txtNormalPosterPreview.Location = new System.Drawing.Point(108, 282);
             this.txtNormalPosterPreview.Name = "txtNormalPosterPreview";
             this.txtNormalPosterPreview.Properties.ReadOnly = true;
-            this.txtNormalPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtNormalPosterPreview.StyleController = this.layoutControl5;
             this.txtNormalPosterPreview.TabIndex = 14;
             // 
             // txtNormalNFOPreview
             // 
-            this.txtNormalNFOPreview.Location = new System.Drawing.Point(108, 257);
+            this.txtNormalNFOPreview.Location = new System.Drawing.Point(108, 258);
             this.txtNormalNFOPreview.Name = "txtNormalNFOPreview";
             this.txtNormalNFOPreview.Properties.ReadOnly = true;
-            this.txtNormalNFOPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalNFOPreview.Size = new System.Drawing.Size(449, 20);
             this.txtNormalNFOPreview.StyleController = this.layoutControl5;
             this.txtNormalNFOPreview.TabIndex = 13;
             // 
@@ -425,7 +425,7 @@
             this.groupControl3.Controls.Add(this.layoutControl7);
             this.groupControl3.Location = new System.Drawing.Point(12, 156);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(543, 73);
+            this.groupControl3.Size = new System.Drawing.Size(545, 74);
             this.groupControl3.TabIndex = 12;
             this.groupControl3.Text = "Key";
             // 
@@ -439,17 +439,17 @@
             this.layoutControl7.Location = new System.Drawing.Point(2, 22);
             this.layoutControl7.Name = "layoutControl7";
             this.layoutControl7.Root = this.layoutControlGroup7;
-            this.layoutControl7.Size = new System.Drawing.Size(539, 49);
+            this.layoutControl7.Size = new System.Drawing.Size(541, 50);
             this.layoutControl7.TabIndex = 0;
             this.layoutControl7.Text = "layoutControl7";
             // 
             // txtNormalTrailerNameKey
             // 
             this.txtNormalTrailerNameKey.EditValue = "<trailername>";
-            this.txtNormalTrailerNameKey.Location = new System.Drawing.Point(291, 26);
+            this.txtNormalTrailerNameKey.Location = new System.Drawing.Point(292, 26);
             this.txtNormalTrailerNameKey.Name = "txtNormalTrailerNameKey";
             this.txtNormalTrailerNameKey.Properties.ReadOnly = true;
-            this.txtNormalTrailerNameKey.Size = new System.Drawing.Size(246, 20);
+            this.txtNormalTrailerNameKey.Size = new System.Drawing.Size(247, 20);
             this.txtNormalTrailerNameKey.StyleController = this.layoutControl7;
             this.txtNormalTrailerNameKey.TabIndex = 7;
             // 
@@ -459,17 +459,17 @@
             this.txtNormalSetNameKey.Location = new System.Drawing.Point(66, 26);
             this.txtNormalSetNameKey.Name = "txtNormalSetNameKey";
             this.txtNormalSetNameKey.Properties.ReadOnly = true;
-            this.txtNormalSetNameKey.Size = new System.Drawing.Size(157, 20);
+            this.txtNormalSetNameKey.Size = new System.Drawing.Size(158, 20);
             this.txtNormalSetNameKey.StyleController = this.layoutControl7;
             this.txtNormalSetNameKey.TabIndex = 6;
             // 
             // txtNormalMovieNameKey
             // 
             this.txtNormalMovieNameKey.EditValue = "<filename>";
-            this.txtNormalMovieNameKey.Location = new System.Drawing.Point(291, 2);
+            this.txtNormalMovieNameKey.Location = new System.Drawing.Point(292, 2);
             this.txtNormalMovieNameKey.Name = "txtNormalMovieNameKey";
             this.txtNormalMovieNameKey.Properties.ReadOnly = true;
-            this.txtNormalMovieNameKey.Size = new System.Drawing.Size(246, 20);
+            this.txtNormalMovieNameKey.Size = new System.Drawing.Size(247, 20);
             this.txtNormalMovieNameKey.StyleController = this.layoutControl7;
             this.txtNormalMovieNameKey.TabIndex = 5;
             // 
@@ -479,7 +479,7 @@
             this.txtNormalMoviePathKey.Location = new System.Drawing.Point(66, 2);
             this.txtNormalMoviePathKey.Name = "txtNormalMoviePathKey";
             this.txtNormalMoviePathKey.Properties.ReadOnly = true;
-            this.txtNormalMoviePathKey.Size = new System.Drawing.Size(157, 20);
+            this.txtNormalMoviePathKey.Size = new System.Drawing.Size(158, 20);
             this.txtNormalMoviePathKey.StyleController = this.layoutControl7;
             this.txtNormalMoviePathKey.TabIndex = 4;
             // 
@@ -496,8 +496,7 @@
             this.layoutControlGroup7.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup7.Name = "layoutControlGroup3";
             this.layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup7.Size = new System.Drawing.Size(539, 49);
-            this.layoutControlGroup7.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup7.Size = new System.Drawing.Size(541, 50);
             this.layoutControlGroup7.Text = "layoutControlGroup3";
             this.layoutControlGroup7.TextVisible = false;
             // 
@@ -509,7 +508,7 @@
             this.layoutControlItem20.CustomizationFormText = "Movie Path";
             this.layoutControlItem20.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem20.Name = "layoutControlItem9";
-            this.layoutControlItem20.Size = new System.Drawing.Size(225, 24);
+            this.layoutControlItem20.Size = new System.Drawing.Size(226, 24);
             this.layoutControlItem20.Text = "Movie Path";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -519,9 +518,9 @@
             this.layoutControlItem21.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem21.Control = this.txtNormalMovieNameKey;
             this.layoutControlItem21.CustomizationFormText = "Movie Name";
-            this.layoutControlItem21.Location = new System.Drawing.Point(225, 0);
+            this.layoutControlItem21.Location = new System.Drawing.Point(226, 0);
             this.layoutControlItem21.Name = "layoutControlItem10";
-            this.layoutControlItem21.Size = new System.Drawing.Size(314, 24);
+            this.layoutControlItem21.Size = new System.Drawing.Size(315, 24);
             this.layoutControlItem21.Text = "Movie Name";
             this.layoutControlItem21.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -533,7 +532,7 @@
             this.layoutControlItem29.CustomizationFormText = "Set Name";
             this.layoutControlItem29.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem29.Name = "layoutControlItem29";
-            this.layoutControlItem29.Size = new System.Drawing.Size(225, 25);
+            this.layoutControlItem29.Size = new System.Drawing.Size(226, 26);
             this.layoutControlItem29.Text = "Set Name";
             this.layoutControlItem29.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -543,9 +542,9 @@
             this.layoutControlItem48.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem48.Control = this.txtNormalTrailerNameKey;
             this.layoutControlItem48.CustomizationFormText = "Trailer Name";
-            this.layoutControlItem48.Location = new System.Drawing.Point(225, 24);
+            this.layoutControlItem48.Location = new System.Drawing.Point(226, 24);
             this.layoutControlItem48.Name = "layoutControlItem48";
-            this.layoutControlItem48.Size = new System.Drawing.Size(314, 25);
+            this.layoutControlItem48.Size = new System.Drawing.Size(315, 26);
             this.layoutControlItem48.Text = "Trailer Name";
             this.layoutControlItem48.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -553,7 +552,7 @@
             // 
             this.txtNormalFanartPath.Location = new System.Drawing.Point(108, 60);
             this.txtNormalFanartPath.Name = "txtNormalFanartPath";
-            this.txtNormalFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalFanartPath.StyleController = this.layoutControl5;
             this.txtNormalFanartPath.TabIndex = 6;
             // 
@@ -561,7 +560,7 @@
             // 
             this.txtNormalPosterPath.Location = new System.Drawing.Point(108, 36);
             this.txtNormalPosterPath.Name = "txtNormalPosterPath";
-            this.txtNormalPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalPosterPath.StyleController = this.layoutControl5;
             this.txtNormalPosterPath.TabIndex = 5;
             // 
@@ -569,7 +568,7 @@
             // 
             this.txtNormalNfoPath.Location = new System.Drawing.Point(108, 12);
             this.txtNormalNfoPath.Name = "txtNormalNfoPath";
-            this.txtNormalNfoPath.Size = new System.Drawing.Size(447, 20);
+            this.txtNormalNfoPath.Size = new System.Drawing.Size(449, 20);
             this.txtNormalNfoPath.StyleController = this.layoutControl5;
             this.txtNormalNfoPath.TabIndex = 4;
             // 
@@ -595,8 +594,7 @@
             this.layoutControlItem47});
             this.layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup5.Name = "Root";
-            this.layoutControlGroup5.Size = new System.Drawing.Size(567, 404);
-            this.layoutControlGroup5.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup5.Size = new System.Drawing.Size(569, 406);
             this.layoutControlGroup5.Text = "Root";
             this.layoutControlGroup5.TextVisible = false;
             // 
@@ -608,7 +606,7 @@
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem11.Text = "NFO Path";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -620,7 +618,7 @@
             this.layoutControlItem12.CustomizationFormText = "Poster Path";
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem12.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem12.Text = "Poster Path";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -632,7 +630,7 @@
             this.layoutControlItem13.CustomizationFormText = "Fanart Path";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem13.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem13.Text = "Fanart Path";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -642,7 +640,7 @@
             this.layoutControlItem22.CustomizationFormText = "layoutControlItem22";
             this.layoutControlItem22.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem22.Name = "layoutControlItem22";
-            this.layoutControlItem22.Size = new System.Drawing.Size(547, 77);
+            this.layoutControlItem22.Size = new System.Drawing.Size(549, 78);
             this.layoutControlItem22.Text = "layoutControlItem22";
             this.layoutControlItem22.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem22.TextToControlDistance = 0;
@@ -654,9 +652,9 @@
             this.layoutControlItem26.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem26.Control = this.txtNormalNFOPreview;
             this.layoutControlItem26.CustomizationFormText = "NFO Preview";
-            this.layoutControlItem26.Location = new System.Drawing.Point(0, 245);
+            this.layoutControlItem26.Location = new System.Drawing.Point(0, 246);
             this.layoutControlItem26.Name = "layoutControlItem26";
-            this.layoutControlItem26.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem26.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem26.Text = "NFO Preview";
             this.layoutControlItem26.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -666,9 +664,9 @@
             this.layoutControlItem27.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem27.Control = this.txtNormalPosterPreview;
             this.layoutControlItem27.CustomizationFormText = "Poster Preview";
-            this.layoutControlItem27.Location = new System.Drawing.Point(0, 269);
+            this.layoutControlItem27.Location = new System.Drawing.Point(0, 270);
             this.layoutControlItem27.Name = "layoutControlItem27";
-            this.layoutControlItem27.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem27.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem27.Text = "Poster Preview";
             this.layoutControlItem27.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -678,18 +676,19 @@
             this.layoutControlItem28.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem28.Control = this.txtNormalFanartPreview;
             this.layoutControlItem28.CustomizationFormText = "Fanart Preview";
-            this.layoutControlItem28.Location = new System.Drawing.Point(0, 293);
+            this.layoutControlItem28.Location = new System.Drawing.Point(0, 294);
             this.layoutControlItem28.Name = "layoutControlItem28";
-            this.layoutControlItem28.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem28.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem28.Text = "Fanart Preview";
             this.layoutControlItem28.TextSize = new System.Drawing.Size(92, 13);
             // 
             // emptySpaceItem3
             // 
+            this.emptySpaceItem3.AllowHotTrack = false;
             this.emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 365);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 366);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(547, 19);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(549, 20);
             this.emptySpaceItem3.Text = "emptySpaceItem3";
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -701,7 +700,7 @@
             this.layoutControlItem31.CustomizationFormText = "Set Fanart Path";
             this.layoutControlItem31.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem31.Name = "layoutControlItem31";
-            this.layoutControlItem31.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem31.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem31.Text = "Set Fanart Path";
             this.layoutControlItem31.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -711,9 +710,9 @@
             this.layoutControlItem42.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem42.Control = this.txtNormalSetPosterPreview;
             this.layoutControlItem42.CustomizationFormText = "Set Poster Preview";
-            this.layoutControlItem42.Location = new System.Drawing.Point(0, 317);
+            this.layoutControlItem42.Location = new System.Drawing.Point(0, 318);
             this.layoutControlItem42.Name = "layoutControlItem42";
-            this.layoutControlItem42.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem42.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem42.Text = "Set Poster Preview";
             this.layoutControlItem42.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -723,9 +722,9 @@
             this.layoutControlItem43.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem43.Control = this.txtNormalSetFanartPreview;
             this.layoutControlItem43.CustomizationFormText = "Set Fanart Preview";
-            this.layoutControlItem43.Location = new System.Drawing.Point(0, 341);
+            this.layoutControlItem43.Location = new System.Drawing.Point(0, 342);
             this.layoutControlItem43.Name = "layoutControlItem43";
-            this.layoutControlItem43.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem43.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem43.Text = "Set Fanart Preview";
             this.layoutControlItem43.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -735,9 +734,9 @@
             this.layoutControlItem44.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem44.Control = this.txtNormalTestPath;
             this.layoutControlItem44.CustomizationFormText = "Text Path";
-            this.layoutControlItem44.Location = new System.Drawing.Point(0, 221);
+            this.layoutControlItem44.Location = new System.Drawing.Point(0, 222);
             this.layoutControlItem44.Name = "layoutControlItem44";
-            this.layoutControlItem44.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem44.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem44.Text = "Test Path";
             this.layoutControlItem44.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -749,7 +748,7 @@
             this.layoutControlItem30.CustomizationFormText = "Set Poster Path";
             this.layoutControlItem30.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem30.Name = "layoutControlItem30";
-            this.layoutControlItem30.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem30.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem30.Text = "Set Poster Path";
             this.layoutControlItem30.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -761,7 +760,7 @@
             this.layoutControlItem47.CustomizationFormText = "Trailer Path";
             this.layoutControlItem47.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem47.Name = "layoutControlItem47";
-            this.layoutControlItem47.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem47.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem47.Text = "Trailer Path";
             this.layoutControlItem47.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -770,7 +769,7 @@
             this.tabDVD.Controls.Add(this.layoutControl4);
             this.tabDVD.Image = global::YANFOE.Properties.Resources.dvd;
             this.tabDVD.Name = "tabDVD";
-            this.tabDVD.Size = new System.Drawing.Size(567, 404);
+            this.tabDVD.Size = new System.Drawing.Size(569, 406);
             // 
             // layoutControl4
             // 
@@ -792,7 +791,7 @@
             this.layoutControl4.Name = "layoutControl4";
             this.layoutControl4.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(963, 311, 250, 350);
             this.layoutControl4.Root = this.layoutControlGroup4;
-            this.layoutControl4.Size = new System.Drawing.Size(567, 404);
+            this.layoutControl4.Size = new System.Drawing.Size(569, 406);
             this.layoutControl4.TabIndex = 0;
             this.layoutControl4.Text = "layoutControl4";
             // 
@@ -800,33 +799,33 @@
             // 
             this.txtDVDTrailerPath.Location = new System.Drawing.Point(108, 84);
             this.txtDVDTrailerPath.Name = "txtDVDTrailerPath";
-            this.txtDVDTrailerPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDTrailerPath.Size = new System.Drawing.Size(449, 20);
             this.txtDVDTrailerPath.StyleController = this.layoutControl4;
             this.txtDVDTrailerPath.TabIndex = 7;
             // 
             // txtDvdTestPath
             // 
-            this.txtDvdTestPath.Location = new System.Drawing.Point(108, 234);
+            this.txtDvdTestPath.Location = new System.Drawing.Point(108, 235);
             this.txtDvdTestPath.Name = "txtDvdTestPath";
-            this.txtDvdTestPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDvdTestPath.Size = new System.Drawing.Size(449, 20);
             this.txtDvdTestPath.StyleController = this.layoutControl4;
             this.txtDvdTestPath.TabIndex = 20;
             // 
             // txtDVDSetFanartPreview
             // 
-            this.txtDVDSetFanartPreview.Location = new System.Drawing.Point(108, 354);
+            this.txtDVDSetFanartPreview.Location = new System.Drawing.Point(108, 355);
             this.txtDVDSetFanartPreview.Name = "txtDVDSetFanartPreview";
             this.txtDVDSetFanartPreview.Properties.ReadOnly = true;
-            this.txtDVDSetFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDSetFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtDVDSetFanartPreview.StyleController = this.layoutControl4;
             this.txtDVDSetFanartPreview.TabIndex = 19;
             // 
             // txtDVDSetPosterPreview
             // 
-            this.txtDVDSetPosterPreview.Location = new System.Drawing.Point(108, 330);
+            this.txtDVDSetPosterPreview.Location = new System.Drawing.Point(108, 331);
             this.txtDVDSetPosterPreview.Name = "txtDVDSetPosterPreview";
             this.txtDVDSetPosterPreview.Properties.ReadOnly = true;
-            this.txtDVDSetPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDSetPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtDVDSetPosterPreview.StyleController = this.layoutControl4;
             this.txtDVDSetPosterPreview.TabIndex = 18;
             // 
@@ -834,7 +833,7 @@
             // 
             this.txtDvdSetFanartPath.Location = new System.Drawing.Point(108, 132);
             this.txtDvdSetFanartPath.Name = "txtDvdSetFanartPath";
-            this.txtDvdSetFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDvdSetFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtDvdSetFanartPath.StyleController = this.layoutControl4;
             this.txtDvdSetFanartPath.TabIndex = 17;
             // 
@@ -842,34 +841,34 @@
             // 
             this.txtDvdSetPosterPath.Location = new System.Drawing.Point(108, 108);
             this.txtDvdSetPosterPath.Name = "txtDvdSetPosterPath";
-            this.txtDvdSetPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDvdSetPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtDvdSetPosterPath.StyleController = this.layoutControl4;
             this.txtDvdSetPosterPath.TabIndex = 16;
             // 
             // txtDVDFanartPreview
             // 
-            this.txtDVDFanartPreview.Location = new System.Drawing.Point(108, 306);
+            this.txtDVDFanartPreview.Location = new System.Drawing.Point(108, 307);
             this.txtDVDFanartPreview.Name = "txtDVDFanartPreview";
             this.txtDVDFanartPreview.Properties.ReadOnly = true;
-            this.txtDVDFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtDVDFanartPreview.StyleController = this.layoutControl4;
             this.txtDVDFanartPreview.TabIndex = 15;
             // 
             // txtDVDPosterPreview
             // 
-            this.txtDVDPosterPreview.Location = new System.Drawing.Point(108, 282);
+            this.txtDVDPosterPreview.Location = new System.Drawing.Point(108, 283);
             this.txtDVDPosterPreview.Name = "txtDVDPosterPreview";
             this.txtDVDPosterPreview.Properties.ReadOnly = true;
-            this.txtDVDPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtDVDPosterPreview.StyleController = this.layoutControl4;
             this.txtDVDPosterPreview.TabIndex = 14;
             // 
             // txtDVDNfoPreview
             // 
-            this.txtDVDNfoPreview.Location = new System.Drawing.Point(108, 258);
+            this.txtDVDNfoPreview.Location = new System.Drawing.Point(108, 259);
             this.txtDVDNfoPreview.Name = "txtDVDNfoPreview";
             this.txtDVDNfoPreview.Properties.ReadOnly = true;
-            this.txtDVDNfoPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDNfoPreview.Size = new System.Drawing.Size(449, 20);
             this.txtDVDNfoPreview.StyleController = this.layoutControl4;
             this.txtDVDNfoPreview.TabIndex = 13;
             // 
@@ -878,7 +877,7 @@
             this.groupControl2.Controls.Add(this.layoutControl6);
             this.groupControl2.Location = new System.Drawing.Point(12, 156);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(543, 74);
+            this.groupControl2.Size = new System.Drawing.Size(545, 75);
             this.groupControl2.TabIndex = 12;
             this.groupControl2.Text = "Key";
             // 
@@ -892,7 +891,7 @@
             this.layoutControl6.Location = new System.Drawing.Point(2, 22);
             this.layoutControl6.Name = "layoutControl6";
             this.layoutControl6.Root = this.layoutControlGroup6;
-            this.layoutControl6.Size = new System.Drawing.Size(539, 50);
+            this.layoutControl6.Size = new System.Drawing.Size(541, 51);
             this.layoutControl6.TabIndex = 0;
             this.layoutControl6.Text = "layoutControl6";
             // 
@@ -902,27 +901,27 @@
             this.txtDvdSetNameKey.Location = new System.Drawing.Point(66, 26);
             this.txtDvdSetNameKey.Name = "txtDvdSetNameKey";
             this.txtDvdSetNameKey.Properties.ReadOnly = true;
-            this.txtDvdSetNameKey.Size = new System.Drawing.Size(246, 20);
+            this.txtDvdSetNameKey.Size = new System.Drawing.Size(247, 20);
             this.txtDvdSetNameKey.StyleController = this.layoutControl6;
             this.txtDvdSetNameKey.TabIndex = 8;
             // 
             // txtDVDTrailerNameKey
             // 
             this.txtDVDTrailerNameKey.EditValue = "<trailername>";
-            this.txtDVDTrailerNameKey.Location = new System.Drawing.Point(380, 26);
+            this.txtDVDTrailerNameKey.Location = new System.Drawing.Point(381, 26);
             this.txtDVDTrailerNameKey.Name = "txtDVDTrailerNameKey";
             this.txtDVDTrailerNameKey.Properties.ReadOnly = true;
-            this.txtDVDTrailerNameKey.Size = new System.Drawing.Size(157, 20);
+            this.txtDVDTrailerNameKey.Size = new System.Drawing.Size(158, 20);
             this.txtDVDTrailerNameKey.StyleController = this.layoutControl6;
             this.txtDVDTrailerNameKey.TabIndex = 6;
             // 
             // txtDVDMovieNameKey
             // 
             this.txtDVDMovieNameKey.EditValue = "<filename>";
-            this.txtDVDMovieNameKey.Location = new System.Drawing.Point(380, 2);
+            this.txtDVDMovieNameKey.Location = new System.Drawing.Point(381, 2);
             this.txtDVDMovieNameKey.Name = "txtDVDMovieNameKey";
             this.txtDVDMovieNameKey.Properties.ReadOnly = true;
-            this.txtDVDMovieNameKey.Size = new System.Drawing.Size(157, 20);
+            this.txtDVDMovieNameKey.Size = new System.Drawing.Size(158, 20);
             this.txtDVDMovieNameKey.StyleController = this.layoutControl6;
             this.txtDVDMovieNameKey.TabIndex = 5;
             // 
@@ -932,7 +931,7 @@
             this.txtDVDMoviePathKey.Location = new System.Drawing.Point(66, 2);
             this.txtDVDMoviePathKey.Name = "txtDVDMoviePathKey";
             this.txtDVDMoviePathKey.Properties.ReadOnly = true;
-            this.txtDVDMoviePathKey.Size = new System.Drawing.Size(246, 20);
+            this.txtDVDMoviePathKey.Size = new System.Drawing.Size(247, 20);
             this.txtDVDMoviePathKey.StyleController = this.layoutControl6;
             this.txtDVDMoviePathKey.TabIndex = 4;
             // 
@@ -949,8 +948,7 @@
             this.layoutControlGroup6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup6.Name = "layoutControlGroup3";
             this.layoutControlGroup6.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup6.Size = new System.Drawing.Size(539, 50);
-            this.layoutControlGroup6.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup6.Size = new System.Drawing.Size(541, 51);
             this.layoutControlGroup6.Text = "layoutControlGroup3";
             this.layoutControlGroup6.TextVisible = false;
             // 
@@ -962,7 +960,7 @@
             this.layoutControlItem17.CustomizationFormText = "Movie Path";
             this.layoutControlItem17.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem17.Name = "layoutControlItem9";
-            this.layoutControlItem17.Size = new System.Drawing.Size(314, 24);
+            this.layoutControlItem17.Size = new System.Drawing.Size(315, 24);
             this.layoutControlItem17.Text = "Movie Path";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -972,9 +970,9 @@
             this.layoutControlItem18.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem18.Control = this.txtDVDMovieNameKey;
             this.layoutControlItem18.CustomizationFormText = "Movie Name";
-            this.layoutControlItem18.Location = new System.Drawing.Point(314, 0);
+            this.layoutControlItem18.Location = new System.Drawing.Point(315, 0);
             this.layoutControlItem18.Name = "layoutControlItem10";
-            this.layoutControlItem18.Size = new System.Drawing.Size(225, 24);
+            this.layoutControlItem18.Size = new System.Drawing.Size(226, 24);
             this.layoutControlItem18.Text = "Movie Name";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -984,9 +982,9 @@
             this.layoutControlItem49.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem49.Control = this.txtDVDTrailerNameKey;
             this.layoutControlItem49.CustomizationFormText = "Trailer Name";
-            this.layoutControlItem49.Location = new System.Drawing.Point(314, 24);
+            this.layoutControlItem49.Location = new System.Drawing.Point(315, 24);
             this.layoutControlItem49.Name = "layoutControlItem49";
-            this.layoutControlItem49.Size = new System.Drawing.Size(225, 26);
+            this.layoutControlItem49.Size = new System.Drawing.Size(226, 27);
             this.layoutControlItem49.Text = "Trailer Name";
             this.layoutControlItem49.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -998,7 +996,7 @@
             this.layoutControlItem32.CustomizationFormText = "Set Name";
             this.layoutControlItem32.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem32.Name = "layoutControlItem32";
-            this.layoutControlItem32.Size = new System.Drawing.Size(314, 26);
+            this.layoutControlItem32.Size = new System.Drawing.Size(315, 27);
             this.layoutControlItem32.Text = "Set Name";
             this.layoutControlItem32.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -1006,7 +1004,7 @@
             // 
             this.txtDVDFanartPath.Location = new System.Drawing.Point(108, 60);
             this.txtDVDFanartPath.Name = "txtDVDFanartPath";
-            this.txtDVDFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtDVDFanartPath.StyleController = this.layoutControl4;
             this.txtDVDFanartPath.TabIndex = 6;
             // 
@@ -1014,7 +1012,7 @@
             // 
             this.txtDVDPosterPath.Location = new System.Drawing.Point(108, 36);
             this.txtDVDPosterPath.Name = "txtDVDPosterPath";
-            this.txtDVDPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtDVDPosterPath.StyleController = this.layoutControl4;
             this.txtDVDPosterPath.TabIndex = 5;
             // 
@@ -1022,7 +1020,7 @@
             // 
             this.txtDVDNfoPath.Location = new System.Drawing.Point(108, 12);
             this.txtDVDNfoPath.Name = "txtDVDNfoPath";
-            this.txtDVDNfoPath.Size = new System.Drawing.Size(447, 20);
+            this.txtDVDNfoPath.Size = new System.Drawing.Size(449, 20);
             this.txtDVDNfoPath.StyleController = this.layoutControl4;
             this.txtDVDNfoPath.TabIndex = 4;
             // 
@@ -1048,8 +1046,7 @@
             this.layoutControlItem50});
             this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup4.Name = "Root";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(567, 404);
-            this.layoutControlGroup4.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(569, 406);
             this.layoutControlGroup4.Text = "Root";
             this.layoutControlGroup4.TextVisible = false;
             // 
@@ -1061,7 +1058,7 @@
             this.layoutControlItem14.CustomizationFormText = "NFO Path";
             this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem14.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem14.Text = "NFO Path";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1073,7 +1070,7 @@
             this.layoutControlItem15.CustomizationFormText = "Poster Path";
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem15.Text = "Poster Path";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1085,7 +1082,7 @@
             this.layoutControlItem16.CustomizationFormText = "Fanart Path";
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem16.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem16.Text = "Fanart Path";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1095,7 +1092,7 @@
             this.layoutControlItem19.CustomizationFormText = "layoutControlItem19";
             this.layoutControlItem19.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(547, 78);
+            this.layoutControlItem19.Size = new System.Drawing.Size(549, 79);
             this.layoutControlItem19.Text = "layoutControlItem19";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem19.TextToControlDistance = 0;
@@ -1107,9 +1104,9 @@
             this.layoutControlItem23.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem23.Control = this.txtDVDNfoPreview;
             this.layoutControlItem23.CustomizationFormText = "NFO Preview";
-            this.layoutControlItem23.Location = new System.Drawing.Point(0, 246);
+            this.layoutControlItem23.Location = new System.Drawing.Point(0, 247);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem23.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem23.Text = "NFO Preview";
             this.layoutControlItem23.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1119,9 +1116,9 @@
             this.layoutControlItem24.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem24.Control = this.txtDVDPosterPreview;
             this.layoutControlItem24.CustomizationFormText = "Poster Preview";
-            this.layoutControlItem24.Location = new System.Drawing.Point(0, 270);
+            this.layoutControlItem24.Location = new System.Drawing.Point(0, 271);
             this.layoutControlItem24.Name = "layoutControlItem24";
-            this.layoutControlItem24.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem24.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem24.Text = "Poster Preview";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1131,18 +1128,19 @@
             this.layoutControlItem25.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem25.Control = this.txtDVDFanartPreview;
             this.layoutControlItem25.CustomizationFormText = "Fanart Preview";
-            this.layoutControlItem25.Location = new System.Drawing.Point(0, 294);
+            this.layoutControlItem25.Location = new System.Drawing.Point(0, 295);
             this.layoutControlItem25.Name = "layoutControlItem25";
-            this.layoutControlItem25.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem25.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem25.Text = "Fanart Preview";
             this.layoutControlItem25.TextSize = new System.Drawing.Size(92, 13);
             // 
             // emptySpaceItem2
             // 
+            this.emptySpaceItem2.AllowHotTrack = false;
             this.emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 366);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 367);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(547, 18);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(549, 19);
             this.emptySpaceItem2.Text = "emptySpaceItem2";
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -1154,7 +1152,7 @@
             this.layoutControlItem33.CustomizationFormText = "Set Poster Path";
             this.layoutControlItem33.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem33.Name = "layoutControlItem33";
-            this.layoutControlItem33.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem33.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem33.Text = "Set Poster Path";
             this.layoutControlItem33.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1166,7 +1164,7 @@
             this.layoutControlItem34.CustomizationFormText = "Set Fanart Path";
             this.layoutControlItem34.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem34.Name = "layoutControlItem34";
-            this.layoutControlItem34.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem34.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem34.Text = "Set Fanart Path";
             this.layoutControlItem34.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1176,9 +1174,9 @@
             this.layoutControlItem40.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem40.Control = this.txtDVDSetPosterPreview;
             this.layoutControlItem40.CustomizationFormText = "Set Poster Preview";
-            this.layoutControlItem40.Location = new System.Drawing.Point(0, 318);
+            this.layoutControlItem40.Location = new System.Drawing.Point(0, 319);
             this.layoutControlItem40.Name = "layoutControlItem40";
-            this.layoutControlItem40.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem40.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem40.Text = "Set Poster Preview";
             this.layoutControlItem40.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1188,9 +1186,9 @@
             this.layoutControlItem41.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem41.Control = this.txtDVDSetFanartPreview;
             this.layoutControlItem41.CustomizationFormText = "Set Fanart Preview";
-            this.layoutControlItem41.Location = new System.Drawing.Point(0, 342);
+            this.layoutControlItem41.Location = new System.Drawing.Point(0, 343);
             this.layoutControlItem41.Name = "layoutControlItem41";
-            this.layoutControlItem41.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem41.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem41.Text = "Set Fanart Preview";
             this.layoutControlItem41.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1200,9 +1198,9 @@
             this.layoutControlItem45.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem45.Control = this.txtDvdTestPath;
             this.layoutControlItem45.CustomizationFormText = "Test Path";
-            this.layoutControlItem45.Location = new System.Drawing.Point(0, 222);
+            this.layoutControlItem45.Location = new System.Drawing.Point(0, 223);
             this.layoutControlItem45.Name = "layoutControlItem45";
-            this.layoutControlItem45.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem45.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem45.Text = "Test Path";
             this.layoutControlItem45.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1214,7 +1212,7 @@
             this.layoutControlItem50.CustomizationFormText = "Trailer Path";
             this.layoutControlItem50.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem50.Name = "layoutControlItem50";
-            this.layoutControlItem50.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem50.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem50.Text = "Trailer Path";
             this.layoutControlItem50.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1223,7 +1221,7 @@
             this.tabBluRay.Controls.Add(this.layoutControl2);
             this.tabBluRay.Image = global::YANFOE.Properties.Resources.bluray2;
             this.tabBluRay.Name = "tabBluRay";
-            this.tabBluRay.Size = new System.Drawing.Size(567, 404);
+            this.tabBluRay.Size = new System.Drawing.Size(569, 406);
             // 
             // layoutControl2
             // 
@@ -1245,7 +1243,7 @@
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1104, 351, 250, 350);
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(567, 404);
+            this.layoutControl2.Size = new System.Drawing.Size(569, 406);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -1253,33 +1251,33 @@
             // 
             this.txtBlurayTrailerPath.Location = new System.Drawing.Point(108, 84);
             this.txtBlurayTrailerPath.Name = "txtBlurayTrailerPath";
-            this.txtBlurayTrailerPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayTrailerPath.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayTrailerPath.StyleController = this.layoutControl2;
             this.txtBlurayTrailerPath.TabIndex = 7;
             // 
             // txtBluRayTestPath
             // 
-            this.txtBluRayTestPath.Location = new System.Drawing.Point(108, 233);
+            this.txtBluRayTestPath.Location = new System.Drawing.Point(108, 234);
             this.txtBluRayTestPath.Name = "txtBluRayTestPath";
-            this.txtBluRayTestPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBluRayTestPath.Size = new System.Drawing.Size(449, 20);
             this.txtBluRayTestPath.StyleController = this.layoutControl2;
             this.txtBluRayTestPath.TabIndex = 16;
             // 
             // txtBluraySetFanartPreview
             // 
-            this.txtBluraySetFanartPreview.Location = new System.Drawing.Point(108, 353);
+            this.txtBluraySetFanartPreview.Location = new System.Drawing.Point(108, 354);
             this.txtBluraySetFanartPreview.Name = "txtBluraySetFanartPreview";
             this.txtBluraySetFanartPreview.Properties.ReadOnly = true;
-            this.txtBluraySetFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtBluraySetFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtBluraySetFanartPreview.StyleController = this.layoutControl2;
             this.txtBluraySetFanartPreview.TabIndex = 15;
             // 
             // txtBluraySetPosterPreview
             // 
-            this.txtBluraySetPosterPreview.Location = new System.Drawing.Point(108, 329);
+            this.txtBluraySetPosterPreview.Location = new System.Drawing.Point(108, 330);
             this.txtBluraySetPosterPreview.Name = "txtBluraySetPosterPreview";
             this.txtBluraySetPosterPreview.Properties.ReadOnly = true;
-            this.txtBluraySetPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtBluraySetPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtBluraySetPosterPreview.StyleController = this.layoutControl2;
             this.txtBluraySetPosterPreview.TabIndex = 14;
             // 
@@ -1287,7 +1285,7 @@
             // 
             this.txtBluraySetFanartPath.Location = new System.Drawing.Point(108, 132);
             this.txtBluraySetFanartPath.Name = "txtBluraySetFanartPath";
-            this.txtBluraySetFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBluraySetFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtBluraySetFanartPath.StyleController = this.layoutControl2;
             this.txtBluraySetFanartPath.TabIndex = 13;
             // 
@@ -1295,7 +1293,7 @@
             // 
             this.txtBluraySetPosterPath.Location = new System.Drawing.Point(108, 108);
             this.txtBluraySetPosterPath.Name = "txtBluraySetPosterPath";
-            this.txtBluraySetPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBluraySetPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtBluraySetPosterPath.StyleController = this.layoutControl2;
             this.txtBluraySetPosterPath.TabIndex = 12;
             // 
@@ -1304,7 +1302,7 @@
             this.groupControl1.Controls.Add(this.layoutControl3);
             this.groupControl1.Location = new System.Drawing.Point(12, 156);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(543, 73);
+            this.groupControl1.Size = new System.Drawing.Size(545, 74);
             this.groupControl1.TabIndex = 11;
             this.groupControl1.Text = "Key";
             // 
@@ -1318,17 +1316,17 @@
             this.layoutControl3.Location = new System.Drawing.Point(2, 22);
             this.layoutControl3.Name = "layoutControl3";
             this.layoutControl3.Root = this.layoutControlGroup3;
-            this.layoutControl3.Size = new System.Drawing.Size(539, 49);
+            this.layoutControl3.Size = new System.Drawing.Size(541, 50);
             this.layoutControl3.TabIndex = 0;
             this.layoutControl3.Text = "layoutControl3";
             // 
             // txtBlurayTrailerNameKey
             // 
             this.txtBlurayTrailerNameKey.EditValue = "<trailername>";
-            this.txtBlurayTrailerNameKey.Location = new System.Drawing.Point(336, 26);
+            this.txtBlurayTrailerNameKey.Location = new System.Drawing.Point(337, 26);
             this.txtBlurayTrailerNameKey.Name = "txtBlurayTrailerNameKey";
             this.txtBlurayTrailerNameKey.Properties.ReadOnly = true;
-            this.txtBlurayTrailerNameKey.Size = new System.Drawing.Size(201, 20);
+            this.txtBlurayTrailerNameKey.Size = new System.Drawing.Size(202, 20);
             this.txtBlurayTrailerNameKey.StyleController = this.layoutControl3;
             this.txtBlurayTrailerNameKey.TabIndex = 6;
             // 
@@ -1338,17 +1336,17 @@
             this.textEdit4.Location = new System.Drawing.Point(66, 26);
             this.textEdit4.Name = "textEdit4";
             this.textEdit4.Properties.ReadOnly = true;
-            this.textEdit4.Size = new System.Drawing.Size(202, 20);
+            this.textEdit4.Size = new System.Drawing.Size(203, 20);
             this.textEdit4.StyleController = this.layoutControl3;
             this.textEdit4.TabIndex = 6;
             // 
             // txtBlurayMovieNameKey
             // 
             this.txtBlurayMovieNameKey.EditValue = "<filename>";
-            this.txtBlurayMovieNameKey.Location = new System.Drawing.Point(336, 2);
+            this.txtBlurayMovieNameKey.Location = new System.Drawing.Point(337, 2);
             this.txtBlurayMovieNameKey.Name = "txtBlurayMovieNameKey";
             this.txtBlurayMovieNameKey.Properties.ReadOnly = true;
-            this.txtBlurayMovieNameKey.Size = new System.Drawing.Size(201, 20);
+            this.txtBlurayMovieNameKey.Size = new System.Drawing.Size(202, 20);
             this.txtBlurayMovieNameKey.StyleController = this.layoutControl3;
             this.txtBlurayMovieNameKey.TabIndex = 5;
             // 
@@ -1358,7 +1356,7 @@
             this.txtBlurayMoviePathKey.Location = new System.Drawing.Point(66, 2);
             this.txtBlurayMoviePathKey.Name = "txtBlurayMoviePathKey";
             this.txtBlurayMoviePathKey.Properties.ReadOnly = true;
-            this.txtBlurayMoviePathKey.Size = new System.Drawing.Size(202, 20);
+            this.txtBlurayMoviePathKey.Size = new System.Drawing.Size(203, 20);
             this.txtBlurayMoviePathKey.StyleController = this.layoutControl3;
             this.txtBlurayMoviePathKey.TabIndex = 4;
             // 
@@ -1375,8 +1373,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(539, 49);
-            this.layoutControlGroup3.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(541, 50);
             this.layoutControlGroup3.Text = "layoutControlGroup3";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -1388,7 +1385,7 @@
             this.layoutControlItem9.CustomizationFormText = "Movie Path";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(270, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(271, 24);
             this.layoutControlItem9.Text = "Movie Path";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -1398,9 +1395,9 @@
             this.layoutControlItem10.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem10.Control = this.txtBlurayMovieNameKey;
             this.layoutControlItem10.CustomizationFormText = "Movie Name";
-            this.layoutControlItem10.Location = new System.Drawing.Point(270, 0);
+            this.layoutControlItem10.Location = new System.Drawing.Point(271, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(269, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(270, 24);
             this.layoutControlItem10.Text = "Movie Name";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -1412,7 +1409,7 @@
             this.layoutControlItem35.CustomizationFormText = "Set Name";
             this.layoutControlItem35.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem35.Name = "layoutControlItem35";
-            this.layoutControlItem35.Size = new System.Drawing.Size(270, 25);
+            this.layoutControlItem35.Size = new System.Drawing.Size(271, 26);
             this.layoutControlItem35.Text = "Set Name";
             this.layoutControlItem35.TextSize = new System.Drawing.Size(60, 13);
             // 
@@ -1422,36 +1419,36 @@
             this.layoutControlItem52.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem52.Control = this.txtBlurayTrailerNameKey;
             this.layoutControlItem52.CustomizationFormText = "Trailer Name";
-            this.layoutControlItem52.Location = new System.Drawing.Point(270, 24);
+            this.layoutControlItem52.Location = new System.Drawing.Point(271, 24);
             this.layoutControlItem52.Name = "layoutControlItem52";
-            this.layoutControlItem52.Size = new System.Drawing.Size(269, 25);
+            this.layoutControlItem52.Size = new System.Drawing.Size(270, 26);
             this.layoutControlItem52.Text = "Trailer Name";
             this.layoutControlItem52.TextSize = new System.Drawing.Size(60, 13);
             // 
             // txtBlurayFanartPreview
             // 
-            this.txtBlurayFanartPreview.Location = new System.Drawing.Point(108, 305);
+            this.txtBlurayFanartPreview.Location = new System.Drawing.Point(108, 306);
             this.txtBlurayFanartPreview.Name = "txtBlurayFanartPreview";
             this.txtBlurayFanartPreview.Properties.ReadOnly = true;
-            this.txtBlurayFanartPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayFanartPreview.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayFanartPreview.StyleController = this.layoutControl2;
             this.txtBlurayFanartPreview.TabIndex = 10;
             // 
             // txtBlurayPosterPreview
             // 
-            this.txtBlurayPosterPreview.Location = new System.Drawing.Point(108, 281);
+            this.txtBlurayPosterPreview.Location = new System.Drawing.Point(108, 282);
             this.txtBlurayPosterPreview.Name = "txtBlurayPosterPreview";
             this.txtBlurayPosterPreview.Properties.ReadOnly = true;
-            this.txtBlurayPosterPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayPosterPreview.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayPosterPreview.StyleController = this.layoutControl2;
             this.txtBlurayPosterPreview.TabIndex = 9;
             // 
             // txtBlurayNfoPreview
             // 
-            this.txtBlurayNfoPreview.Location = new System.Drawing.Point(108, 257);
+            this.txtBlurayNfoPreview.Location = new System.Drawing.Point(108, 258);
             this.txtBlurayNfoPreview.Name = "txtBlurayNfoPreview";
             this.txtBlurayNfoPreview.Properties.ReadOnly = true;
-            this.txtBlurayNfoPreview.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayNfoPreview.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayNfoPreview.StyleController = this.layoutControl2;
             this.txtBlurayNfoPreview.TabIndex = 8;
             // 
@@ -1459,7 +1456,7 @@
             // 
             this.txtBlurayFanartPath.Location = new System.Drawing.Point(108, 60);
             this.txtBlurayFanartPath.Name = "txtBlurayFanartPath";
-            this.txtBlurayFanartPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayFanartPath.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayFanartPath.StyleController = this.layoutControl2;
             this.txtBlurayFanartPath.TabIndex = 6;
             // 
@@ -1467,7 +1464,7 @@
             // 
             this.txtBlurayPosterPath.Location = new System.Drawing.Point(108, 36);
             this.txtBlurayPosterPath.Name = "txtBlurayPosterPath";
-            this.txtBlurayPosterPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayPosterPath.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayPosterPath.StyleController = this.layoutControl2;
             this.txtBlurayPosterPath.TabIndex = 5;
             // 
@@ -1475,7 +1472,7 @@
             // 
             this.txtBlurayNfoPath.Location = new System.Drawing.Point(108, 12);
             this.txtBlurayNfoPath.Name = "txtBlurayNfoPath";
-            this.txtBlurayNfoPath.Size = new System.Drawing.Size(447, 20);
+            this.txtBlurayNfoPath.Size = new System.Drawing.Size(449, 20);
             this.txtBlurayNfoPath.StyleController = this.layoutControl2;
             this.txtBlurayNfoPath.TabIndex = 4;
             // 
@@ -1501,8 +1498,7 @@
             this.layoutControlItem51});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(567, 404);
-            this.layoutControlGroup2.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(569, 406);
             this.layoutControlGroup2.Text = "Root";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -1514,7 +1510,7 @@
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem2.Text = "NFO Path";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1526,7 +1522,7 @@
             this.layoutControlItem3.CustomizationFormText = "Poster Path";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem3.Text = "Poster Path";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1538,7 +1534,7 @@
             this.layoutControlItem4.CustomizationFormText = "Fanart Path";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem4.Text = "Fanart Path";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1548,9 +1544,9 @@
             this.layoutControlItem6.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem6.Control = this.txtBlurayNfoPreview;
             this.layoutControlItem6.CustomizationFormText = "NFO Preview";
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 245);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 246);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem6.Text = "NFO Preview";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1560,9 +1556,9 @@
             this.layoutControlItem7.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem7.Control = this.txtBlurayPosterPreview;
             this.layoutControlItem7.CustomizationFormText = "Poster Preview";
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 269);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 270);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem7.Text = "Poster Preview";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1572,9 +1568,9 @@
             this.layoutControlItem8.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem8.Control = this.txtBlurayFanartPreview;
             this.layoutControlItem8.CustomizationFormText = "Fanart Preview";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 293);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 294);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem8.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem8.Text = "Fanart Preview";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1584,7 +1580,7 @@
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(547, 77);
+            this.layoutControlItem5.Size = new System.Drawing.Size(549, 78);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -1592,10 +1588,11 @@
             // 
             // emptySpaceItem1
             // 
+            this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 365);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 366);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(547, 19);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(549, 20);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -1607,7 +1604,7 @@
             this.layoutControlItem36.CustomizationFormText = "Set Poster Path";
             this.layoutControlItem36.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem36.Name = "layoutControlItem36";
-            this.layoutControlItem36.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem36.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem36.Text = "Set Poster Path";
             this.layoutControlItem36.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1619,7 +1616,7 @@
             this.layoutControlItem37.CustomizationFormText = "Set Fanart Path";
             this.layoutControlItem37.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem37.Name = "layoutControlItem37";
-            this.layoutControlItem37.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem37.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem37.Text = "Set Fanart Path";
             this.layoutControlItem37.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1629,9 +1626,9 @@
             this.layoutControlItem38.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem38.Control = this.txtBluraySetPosterPreview;
             this.layoutControlItem38.CustomizationFormText = "Set Poster Preview";
-            this.layoutControlItem38.Location = new System.Drawing.Point(0, 317);
+            this.layoutControlItem38.Location = new System.Drawing.Point(0, 318);
             this.layoutControlItem38.Name = "layoutControlItem38";
-            this.layoutControlItem38.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem38.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem38.Text = "Set Poster Preview";
             this.layoutControlItem38.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1641,9 +1638,9 @@
             this.layoutControlItem39.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem39.Control = this.txtBluraySetFanartPreview;
             this.layoutControlItem39.CustomizationFormText = "Set Fanart Preview";
-            this.layoutControlItem39.Location = new System.Drawing.Point(0, 341);
+            this.layoutControlItem39.Location = new System.Drawing.Point(0, 342);
             this.layoutControlItem39.Name = "layoutControlItem39";
-            this.layoutControlItem39.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem39.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem39.Text = "Set Fanart Preview";
             this.layoutControlItem39.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1653,9 +1650,9 @@
             this.layoutControlItem46.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.layoutControlItem46.Control = this.txtBluRayTestPath;
             this.layoutControlItem46.CustomizationFormText = "Test Path";
-            this.layoutControlItem46.Location = new System.Drawing.Point(0, 221);
+            this.layoutControlItem46.Location = new System.Drawing.Point(0, 222);
             this.layoutControlItem46.Name = "layoutControlItem46";
-            this.layoutControlItem46.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem46.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem46.Text = "Test Path";
             this.layoutControlItem46.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1667,7 +1664,7 @@
             this.layoutControlItem51.CustomizationFormText = "Trailer Path";
             this.layoutControlItem51.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem51.Name = "layoutControlItem51";
-            this.layoutControlItem51.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem51.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem51.Text = "Trailer Path";
             this.layoutControlItem51.TextSize = new System.Drawing.Size(92, 13);
             // 
@@ -1681,7 +1678,6 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(597, 455);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 

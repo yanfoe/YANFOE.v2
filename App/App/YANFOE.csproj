@@ -224,6 +224,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.Designer.cs">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.Designer.cs">
+      <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -528,6 +534,13 @@
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Popups\MovieListPopup.cs" />
+    <Compile Include="UI\UserControls\CommonControls\IEnumberable.cs" />
+    <Compile Include="UI\UserControls\CommonControls\ListEditUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CommonControls\ListEditUserControl.Designer.cs">
+      <DependentUpon>ListEditUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -661,6 +674,9 @@
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.resx">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.resx">
+      <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.resx">
       <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
     </EmbeddedResource>
@@ -763,6 +779,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmUpdateShows.resx">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommonControls\ListEditUserControl.resx">
+      <DependentUpon>ListEditUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\MediaInfoUserControl.resx">
       <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
@@ -1167,7 +1186,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

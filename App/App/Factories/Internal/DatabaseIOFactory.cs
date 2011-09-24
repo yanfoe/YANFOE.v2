@@ -356,13 +356,17 @@ namespace YANFOE.Factories.Internal
 
                 movieModel.DatabaseSaved = true;
 
-                if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+
+                if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
                 {
-                    Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadMovieDB", 
-                        string.Format("Deleting {0}. Movie not found on the filesystem", movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
-                    // We should check for network path and make sure the file has actually been deleted or removed
-                    File.Delete(file);
-                    continue;
+                    if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+                    {
+                        Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadMovieDB", 
+                            string.Format("Deleting {0}. Movie not found on the filesystem", movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
+                        // We should check for network path and make sure the file has actually been deleted or removed
+                        File.Delete(file);
+                        continue;
+                    }
                 }
 
                 MovieDBFactory.MovieDatabase.Add(movieModel);

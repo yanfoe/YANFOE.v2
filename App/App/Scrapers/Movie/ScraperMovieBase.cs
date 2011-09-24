@@ -46,6 +46,11 @@ namespace YANFOE.Scrapers.Movie
             this.AvailableSearchMethod = new BindingList<ScrapeSearchMethod>();
             this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
             this.UrlHtmlCache = new Dictionary<string, string>();
+            this.DefaultGenres = new BindingList<string>();
+
+            DefaultGenres.AllowEdit = true;
+            DefaultGenres.AllowNew = true;
+            DefaultGenres.AllowRemove = true;
         }
 
         /// <summary>
@@ -139,6 +144,8 @@ namespace YANFOE.Scrapers.Movie
         /// The bing match string.
         /// </value>
         public string BingMatchString { get; set; }
+
+        public BindingList<string> DefaultGenres { get; set; }
 
         /// <summary>
         /// Searches bing for the scraper MovieUniqueId.
