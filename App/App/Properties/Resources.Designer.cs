@@ -109,6 +109,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap back1 {
+            get {
+                object obj = ResourceManager.GetObject("back1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap back24 {
             get {
                 object obj = ResourceManager.GetObject("back24", resourceCulture);

@@ -483,7 +483,7 @@ namespace YANFOE
             this.tabMediaManager.Controls.Add(this.mediaPathManager1);
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
-            this.tabMediaManager.Size = new System.Drawing.Size(986, 454);
+            this.tabMediaManager.Size = new System.Drawing.Size(988, 456);
             superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.database24;
             toolTipTitleItem2.Appearance.Options.UseImage = true;
@@ -501,7 +501,7 @@ namespace YANFOE
             this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
             this.mediaPathManager1.Name = "mediaPathManager1";
-            this.mediaPathManager1.Size = new System.Drawing.Size(986, 454);
+            this.mediaPathManager1.Size = new System.Drawing.Size(988, 456);
             this.mediaPathManager1.TabIndex = 0;
             // 
             // tabMovies
@@ -509,7 +509,7 @@ namespace YANFOE
             this.tabMovies.Controls.Add(this.moviesUserControl1);
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(986, 454);
+            this.tabMovies.Size = new System.Drawing.Size(988, 456);
             toolTipTitleItem3.Text = "Movies";
             toolTipItem3.LeftIndent = 6;
             toolTipItem3.Text = "(#) - Total Movies";
@@ -535,7 +535,7 @@ namespace YANFOE
             this.tabTv.Controls.Add(this.tvUserControl1);
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(986, 454);
+            this.tabTv.Size = new System.Drawing.Size(988, 456);
             toolTipTitleItem4.Text = "TV";
             toolTipItem4.LeftIndent = 6;
             toolTipItem4.Text = "(#) - Total Series";
@@ -557,7 +557,7 @@ namespace YANFOE
             this.tabDownloads.Controls.Add(this.downloadsUserControl1);
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
-            this.tabDownloads.Size = new System.Drawing.Size(986, 454);
+            this.tabDownloads.Size = new System.Drawing.Size(988, 456);
             toolTipTitleItem5.Text = "Downloads Manager\r\n";
             toolTipItem5.LeftIndent = 6;
             toolTipItem5.Text = "Downloads (Urgent Queue : Background Queue)";
@@ -579,7 +579,7 @@ namespace YANFOE
             this.tabLogs.Controls.Add(this.logsUserControl1);
             this.tabLogs.Image = global::YANFOE.Properties.Resources.books24;
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Size = new System.Drawing.Size(986, 454);
+            this.tabLogs.Size = new System.Drawing.Size(988, 456);
             this.tabLogs.Text = "Logs";
             // 
             // logsUserControl1
@@ -595,7 +595,7 @@ namespace YANFOE
             this.tabAbout.Controls.Add(this.layoutControl1);
             this.tabAbout.Image = global::YANFOE.Properties.Resources.info1;
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(986, 454);
+            this.tabAbout.Size = new System.Drawing.Size(988, 456);
             this.tabAbout.Text = "About";
             // 
             // layoutControl1

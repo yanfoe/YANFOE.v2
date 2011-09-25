@@ -1097,6 +1097,7 @@
     <None Include="Resources\promo_orange_faded.png" />
     <None Include="Resources\find.png" />
     <None Include="Resources\find1.png" />
+    <None Include="Resources\back2.png" />
     <Content Include="Resources\refresh.png" />
     <None Include="Resources\tools1.png" />
     <None Include="Resources\tools2.png" />

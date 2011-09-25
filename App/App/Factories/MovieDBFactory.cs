@@ -1216,11 +1216,18 @@ namespace YANFOE.Factories
             MovieDatabase.Remove(movie);
         }
 
-        public static void HideMovie(MovieModel movie)
+        public static void HideMovie(MovieModel movieModel)
         {
-            HiddenMovieDatabase.Add(movie);
-            movie.Hidden = true;
-            MovieDatabase.Remove(movie);
+            HiddenMovieDatabase.Add(movieModel);
+            movieModel.Hidden = true;
+            MovieDatabase.Remove(movieModel);
+        }
+
+        public static void RestoreHiddenMovie(MovieModel movieModel)
+        {
+            HiddenMovieDatabase.Remove(movieModel);
+            movieModel.Hidden = false;
+            MovieDatabase.Add(movieModel);
         }
     }
 }
