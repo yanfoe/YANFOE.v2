@@ -28,6 +28,7 @@ namespace YANFOE.Factories
     using DevExpress.XtraBars.Ribbon;
 
     using YANFOE.Factories.InOut;
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Cache;
@@ -2426,6 +2427,8 @@ namespace YANFOE.Factories
         public static void SetSeriesHide(MasterSeriesListModel series)
         {
             TvDBFactory.HideSeries(series.SeriesName);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         private static void HideSeries(string seriesName)
@@ -2437,6 +2440,8 @@ namespace YANFOE.Factories
             TvDBFactory.tvDatabase.Remove(seriesName);
 
             TvDBFactory.InvokeTvDbChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         public static void RestoreHiddenSeries(Series series)
@@ -2455,6 +2460,39 @@ namespace YANFOE.Factories
             TvDBFactory.HiddenTvDatabase.Remove(series);
 
             TvDBFactory.InvokeTvDbChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        public static void DeleteSeries(MasterSeriesListModel masterSeriesList)
+        {
+            var series = MasterSeriesNameList.Where(c => c.SeriesName == masterSeriesList.SeriesName).Single();
+            TvDBFactory.masterSeriesNameList.Remove(series);
+
+            var s = TvDBFactory.tvDatabase[series.SeriesName];
+
+            foreach (var season in s.Seasons)
+            {
+                foreach (var episode in season.Value.Episodes)
+                {
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+                    {
+                        var files =
+                            (MasterMediaDBFactory.MasterTvMediaDatabase.Where(
+                                f => f == episode.FilePath.PathAndFilename)).ToList();
+
+                        for (int index = 0; index < files.Count; index++)
+                        {
+                            var f = files[index];
+                            MasterMediaDBFactory.MasterTvMediaDatabase.Remove(f);
+                        }
+                    }
+                }
+            }
+
+            TvDBFactory.tvDatabase.Remove(series.SeriesName);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
     }
 }

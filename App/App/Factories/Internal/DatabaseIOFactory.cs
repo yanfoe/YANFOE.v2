@@ -451,9 +451,18 @@ namespace YANFOE.Factories.Internal
 
             TvDBFactory.TvDatabase.Clear();
 
+            var hidden = path + "hidden.hiddenSeries.gz";
+
+            if (File.Exists(hidden))
+            {
+                var json = Gzip.Decompress(hidden);
+                TvDBFactory.HiddenTvDatabase =
+                    JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
+            }
+
             foreach (string file in files)
             {
-                string json = Gzip.Decompress(file);
+                var json = Gzip.Decompress(file);
 
                 var series = JsonConvert.DeserializeObject(json, typeof(Series)) as Series;
 
@@ -869,6 +878,10 @@ namespace YANFOE.Factories.Internal
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.DeleteFilesInFolder(path);
+
+            string writePath = path + "hidden.hiddenSeries";
+            string json = JsonConvert.SerializeObject(TvDBFactory.HiddenTvDatabase);
+            Gzip.CompressString(json, writePath + ".gz");
 
             foreach (var series in TvDBFactory.TvDatabase)
             {

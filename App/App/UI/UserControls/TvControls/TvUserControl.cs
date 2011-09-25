@@ -551,13 +551,14 @@ namespace YANFOE.UI.UserControls.TvControls
             this.popupSeries.AddItem(hideItem);
 
             var deleteItem = new BarButtonItem(this.barManager1, "Remove") { Glyph = Resources.find1 };
-            deleteItem.ItemClick += new ItemClickEventHandler(deleteItem_ItemClick);
+            deleteItem.ItemClick += this.deleteItem_ItemClick;
             this.popupSeries.AddItem(deleteItem);
         }
 
         private void deleteItem_ItemClick(object sender, ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            this.gridViewTvTitleList.GetSelectedRows().Select(row => this.gridViewTvTitleList.GetRow(row) as MasterSeriesListModel)
+                .ToList().ForEach(TvDBFactory.DeleteSeries);
         }
 
         private void hideItem_ItemClick(object sender, ItemClickEventArgs e)

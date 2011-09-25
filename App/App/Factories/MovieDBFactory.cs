@@ -25,6 +25,7 @@ namespace YANFOE.Factories
     using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
 
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Cache;
@@ -1214,6 +1215,8 @@ namespace YANFOE.Factories
             }
 
             MovieDatabase.Remove(movie);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         public static void HideMovie(MovieModel movieModel)
@@ -1221,6 +1224,8 @@ namespace YANFOE.Factories
             HiddenMovieDatabase.Add(movieModel);
             movieModel.Hidden = true;
             MovieDatabase.Remove(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         public static void RestoreHiddenMovie(MovieModel movieModel)
@@ -1228,6 +1233,8 @@ namespace YANFOE.Factories
             HiddenMovieDatabase.Remove(movieModel);
             movieModel.Hidden = false;
             MovieDatabase.Add(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
     }
 }
