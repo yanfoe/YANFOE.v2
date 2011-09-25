@@ -491,7 +491,8 @@ namespace YANFOE.Factories
         /// <param name="importDatabase">
         /// The import database.
         /// </param>
-        public static void MergeWithDatabase(BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
+        public static void MergeWithDatabase(
+            BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
         {
             foreach (MovieModel movie in importDatabase)
             {
@@ -608,7 +609,8 @@ namespace YANFOE.Factories
         {
             lock (MovieDatabase)
             {
-                var getMovieInDatabase = MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
+                var getMovieInDatabase =
+                    MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
 
                 if (getMovieInDatabase == -1)
                 {
@@ -902,10 +904,7 @@ namespace YANFOE.Factories
                         superTip.Items.AddTitle(string.Format("{0} ({1})", movie.Title, movie.Year));
 
                         var galleryItem = new GalleryItem(movie.SmallPoster, movie.Title, string.Empty)
-                            { 
-                                Tag = movie.MovieUniqueId,
-                                SuperTip = superTip
-                            };
+                            { Tag = movie.MovieUniqueId, SuperTip = superTip };
 
                         if (!galleryGroup.Items.Contains(galleryItem))
                         {
@@ -1191,7 +1190,27 @@ namespace YANFOE.Factories
         public enum MovieDBTypes
         {
             Movies = 0,
+
             Duplicates
+        }
+
+        public static void RemoveMovie(MovieModel movie)
+        {
+            foreach (var file in movie.AssociatedFiles.Media)
+            {
+                var fileEntry =
+                    (from f in MasterMediaDBFactory.MasterMovieMediaDatabase
+                     where f.PathAndFilename == file.PathAndFilename
+                     select f).SingleOrDefault();
+                    
+
+                if (fileEntry != null)
+                {
+                    MasterMediaDBFactory.MasterMovieMediaDatabase.Remove(fileEntry);
+                }
+            }
+
+            MovieDatabase.Remove(movie);
         }
     }
 }

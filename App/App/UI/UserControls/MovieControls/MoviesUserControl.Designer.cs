@@ -176,6 +176,10 @@
             this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
             this.popupUnlock = new DevExpress.XtraBars.BarButtonItem();
             this.popupUnmark = new DevExpress.XtraBars.BarButtonItem();
+            this.popupHide = new DevExpress.XtraBars.BarButtonItem();
+            this.popupDelete = new DevExpress.XtraBars.BarButtonItem();
+            this.popupOpenFolder = new DevExpress.XtraBars.BarButtonItem();
+            this.popupOpenMovie = new DevExpress.XtraBars.BarButtonItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -1130,8 +1134,12 @@
             this.barButtonItem10,
             this.barButtonItem11,
             this.popupUnlock,
-            this.popupUnmark});
-            this.barManager1.MaxItemId = 22;
+            this.popupUnmark,
+            this.popupHide,
+            this.popupDelete,
+            this.popupOpenFolder,
+            this.popupOpenMovie});
+            this.barManager1.MaxItemId = 26;
             // 
             // popupSave
             // 
@@ -1337,6 +1345,37 @@
             this.popupUnmark.Name = "popupUnmark";
             this.popupUnmark.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupUnmark_ItemClick);
             // 
+            // popupHide
+            // 
+            this.popupHide.Caption = "Hide";
+            this.popupHide.Glyph = global::YANFOE.Properties.Resources.find1;
+            this.popupHide.Id = 22;
+            this.popupHide.Name = "popupHide";
+            // 
+            // popupDelete
+            // 
+            this.popupDelete.Caption = "Remove";
+            this.popupDelete.Glyph = global::YANFOE.Properties.Resources.delete32;
+            this.popupDelete.Id = 23;
+            this.popupDelete.Name = "popupDelete";
+            this.popupDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupDelete_ItemClick);
+            // 
+            // popupOpenFolder
+            // 
+            this.popupOpenFolder.Caption = "Open Folder";
+            this.popupOpenFolder.Glyph = global::YANFOE.Properties.Resources.folder32;
+            this.popupOpenFolder.Id = 24;
+            this.popupOpenFolder.Name = "popupOpenFolder";
+            this.popupOpenFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupOpenFolder_ItemClick);
+            // 
+            // popupOpenMovie
+            // 
+            this.popupOpenMovie.Caption = "Open Movie";
+            this.popupOpenMovie.Glyph = global::YANFOE.Properties.Resources.video32;
+            this.popupOpenMovie.Id = 25;
+            this.popupOpenMovie.Name = "popupOpenMovie";
+            this.popupOpenMovie.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupOpenMovie_ItemClick);
+            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
@@ -1346,10 +1385,14 @@
             // popupMovieList
             // 
             this.popupMovieList.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.popupLock),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupOpenMovie),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupOpenFolder),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupLock, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.popupUnlock),
-            new DevExpress.XtraBars.LinkPersistInfo(this.popupMark),
-            new DevExpress.XtraBars.LinkPersistInfo(this.popupUnmark)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupMark, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupUnmark),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupHide, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupDelete, true)});
             this.popupMovieList.Manager = this.barManager1;
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
@@ -1526,6 +1569,10 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem11;
         private DevExpress.XtraBars.BarButtonItem popupUnlock;
         private DevExpress.XtraBars.BarButtonItem popupUnmark;
+        private DevExpress.XtraBars.BarButtonItem popupHide;
+        private DevExpress.XtraBars.BarButtonItem popupDelete;
+        private DevExpress.XtraBars.BarButtonItem popupOpenFolder;
+        private DevExpress.XtraBars.BarButtonItem popupOpenMovie;
 
     }
 }

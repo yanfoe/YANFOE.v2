@@ -569,6 +569,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </param>
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
+            StartMovieFile();
+        }
+
+        private static void StartMovieFile()
+        {
             if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].PathAndFilename))
             {
                 Process.Start(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].PathAndFilename);
@@ -585,6 +590,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// The <see cref="System.EventArgs"/> instance containing the event data.
         /// </param>
         private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            OpenMovieFolder();
+        }
+
+        private static void OpenMovieFolder()
         {
             string argument = string.Format(
                 @"/select,""{0}""",
@@ -657,6 +667,9 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             if (movieList.Count == 1)
             {
+                this.popupOpenMovie.Enabled = true;
+                this.popupOpenFolder.Enabled = true;
+
                 this.popupLock.Visibility = movieList[0].Locked ? BarItemVisibility.Never : BarItemVisibility.Always;
                 this.popupUnlock.Visibility = movieList[0].Locked ? BarItemVisibility.Always : BarItemVisibility.Never;
 
@@ -665,6 +678,9 @@ namespace YANFOE.UI.UserControls.MovieControls
             }
             else
             {
+                this.popupOpenMovie.Enabled = false;
+                this.popupOpenFolder.Enabled = false;
+
                 if (movieList.Exists(i => i.Locked))
                 {
                     this.popupUnlock.Visibility = BarItemVisibility.Always;
@@ -784,6 +800,30 @@ namespace YANFOE.UI.UserControls.MovieControls
         private void popupUnmark_ItemClick(object sender, ItemClickEventArgs e)
         {
             ChangeAllMarkOnSelected(false);
+        }
+
+        private void popupOpenMovie_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            StartMovieFile();
+        }
+
+        private void popupOpenFolder_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenMovieFolder();
+        }
+
+        private void popupDelete_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var check = XtraMessageBox.Show("Are you sure you wish to remove the selected movies?", "Remove Movies", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (check == DialogResult.Yes)
+            {
+                this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
+                    ToList().ForEach(c => { MovieDBFactory.RemoveMovie(c); });
+            }
+
+            var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
+            MovieDBFactory.SetCurrentMovie(movieModel);
         }
     }
 }
