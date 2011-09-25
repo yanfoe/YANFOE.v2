@@ -480,7 +480,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             }
             catch (IndexOutOfRangeException ex)
             {
-                // Popup telling you to select something?
+                XtraMessageBox.Show("Please select a row to perform the action", "Nothing selected");
             }
         }
 
