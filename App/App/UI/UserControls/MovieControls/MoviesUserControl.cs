@@ -737,7 +737,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
 
 
-        void bgw_DoWork(object sender, DoWorkEventArgs e)
+        private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             var rows = grdViewByTitle.GetSelectedRows();
             var countMax = rows.Count();
@@ -819,7 +819,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             if (check == DialogResult.Yes)
             {
                 this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
-                    ToList().ForEach(c => { MovieDBFactory.RemoveMovie(c); });
+                    ToList().ForEach(MovieDBFactory.RemoveMovie);
             }
 
             var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
@@ -833,7 +833,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             if (check == DialogResult.Yes)
             {
                 this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
-                    ToList().ForEach(c => { MovieDBFactory.HideMovie(c); });
+                    ToList().ForEach(MovieDBFactory.HideMovie);
             }
 
             var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;

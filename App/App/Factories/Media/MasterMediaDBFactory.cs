@@ -178,7 +178,14 @@ namespace YANFOE.Factories.Media
                         if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename) && 
                             System.IO.File.Exists(episode.FilePath.PathAndFilename))
                         {
-                            masterTvMediaDatabase.Add(episode.FilePath.PathAndFilename);
+                            try
+                            {
+                                masterTvMediaDatabase.Add(episode.FilePath.PathAndFilename);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.WriteToLog(LogSeverity.Error, 0, "BuildMasterTvMediaDatabase", ex.Message);
+                            }
                         }
                     }
                 }

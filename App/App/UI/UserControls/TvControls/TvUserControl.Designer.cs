@@ -111,7 +111,19 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.columnVisibility = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupSeasonLock = new DevExpress.XtraBars.BarButtonItem();
+            this.popupSeasonUnlock = new DevExpress.XtraBars.BarButtonItem();
+            this.popupSeasonHide = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeLock = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeUnlock = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeHide = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeWatched = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeUnwatched = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeOpenShow = new DevExpress.XtraBars.BarButtonItem();
+            this.popupEpisodeOpenFolder = new DevExpress.XtraBars.BarButtonItem();
             this.popupSeries = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupSeason = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupEpisode = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -174,6 +186,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSeason)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupEpisode)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -240,7 +254,7 @@
             // 
             this.tabTitle.Controls.Add(this.grdTvTitleList);
             this.tabTitle.Name = "tabTitle";
-            this.tabTitle.Size = new System.Drawing.Size(238, 306);
+            this.tabTitle.Size = new System.Drawing.Size(240, 308);
             this.tabTitle.Text = "Title";
             // 
             // grdTvTitleList
@@ -249,7 +263,7 @@
             this.grdTvTitleList.Location = new System.Drawing.Point(0, 0);
             this.grdTvTitleList.MainView = this.gridViewTvTitleList;
             this.grdTvTitleList.Name = "grdTvTitleList";
-            this.grdTvTitleList.Size = new System.Drawing.Size(238, 306);
+            this.grdTvTitleList.Size = new System.Drawing.Size(240, 308);
             this.grdTvTitleList.TabIndex = 0;
             this.grdTvTitleList.ToolTipController = this.toolTipController1;
             this.grdTvTitleList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -299,7 +313,7 @@
             // 
             this.tabBanner.Controls.Add(this.galleryBanners);
             this.tabBanner.Name = "tabBanner";
-            this.tabBanner.Size = new System.Drawing.Size(238, 306);
+            this.tabBanner.Size = new System.Drawing.Size(240, 308);
             this.tabBanner.Text = "Banners";
             // 
             // galleryBanners
@@ -361,6 +375,7 @@
             this.gridViewSeasons.OptionsSelection.MultiSelect = true;
             this.gridViewSeasons.OptionsView.ShowGroupPanel = false;
             this.gridViewSeasons.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewSeasons_RowCellStyle);
+            this.gridViewSeasons.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridViewSeasons_PopupMenuShowing);
             this.gridViewSeasons.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewSeasons_SelectionChanged);
             this.gridViewSeasons.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewSeasons_FocusedRowChanged);
             // 
@@ -429,6 +444,7 @@
             this.gridViewEpisodes.OptionsSelection.MultiSelect = true;
             this.gridViewEpisodes.OptionsView.ShowGroupPanel = false;
             this.gridViewEpisodes.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewEpisodes_RowCellStyle);
+            this.gridViewEpisodes.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gridViewEpisodes_PopupMenuShowing);
             this.gridViewEpisodes.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewEpisodes_SelectionChanged);
             this.gridViewEpisodes.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewEpisodes_FocusedRowChanged);
             // 
@@ -483,10 +499,10 @@
             // 
             // tabsTv
             // 
-            this.tabsTv.Location = new System.Drawing.Point(281, 2);
+            this.tabsTv.Location = new System.Drawing.Point(283, 2);
             this.tabsTv.Name = "tabsTv";
             this.tabsTv.SelectedTabPage = this.tabSeries;
-            this.tabsTv.Size = new System.Drawing.Size(607, 618);
+            this.tabsTv.Size = new System.Drawing.Size(605, 618);
             this.tabsTv.TabIndex = 5;
             this.tabsTv.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabSeries,
@@ -500,7 +516,7 @@
             // 
             this.tabSeries.Controls.Add(this.layoutControl2);
             this.tabSeries.Name = "tabSeries";
-            this.tabSeries.Size = new System.Drawing.Size(601, 592);
+            this.tabSeries.Size = new System.Drawing.Size(601, 594);
             this.tabSeries.Text = "Series";
             // 
             // layoutControl2
@@ -514,7 +530,7 @@
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1319, 385, 250, 350);
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(601, 592);
+            this.layoutControl2.Size = new System.Drawing.Size(601, 594);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -522,9 +538,9 @@
             // 
             this.picSeriesPoster.HeaderDetails = "No Image";
             this.picSeriesPoster.HeaderTitle = "Poster";
-            this.picSeriesPoster.Location = new System.Drawing.Point(5, 253);
+            this.picSeriesPoster.Location = new System.Drawing.Point(5, 256);
             this.picSeriesPoster.Name = "picSeriesPoster";
-            this.picSeriesPoster.Size = new System.Drawing.Size(236, 314);
+            this.picSeriesPoster.Size = new System.Drawing.Size(236, 313);
             this.picSeriesPoster.TabIndex = 5;
             this.picSeriesPoster.Type = YANFOE.Tools.Enums.GalleryType.TvSeriesPoster;
             // 
@@ -533,7 +549,7 @@
             this.panelControl1.Controls.Add(this.tvSeriesDetailsUserControl1);
             this.panelControl1.Location = new System.Drawing.Point(2, 2);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(597, 239);
+            this.panelControl1.Size = new System.Drawing.Size(597, 240);
             this.panelControl1.TabIndex = 4;
             // 
             // tvSeriesDetailsUserControl1
@@ -541,16 +557,16 @@
             this.tvSeriesDetailsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSeriesDetailsUserControl1.Location = new System.Drawing.Point(2, 2);
             this.tvSeriesDetailsUserControl1.Name = "tvSeriesDetailsUserControl1";
-            this.tvSeriesDetailsUserControl1.Size = new System.Drawing.Size(593, 235);
+            this.tvSeriesDetailsUserControl1.Size = new System.Drawing.Size(593, 236);
             this.tvSeriesDetailsUserControl1.TabIndex = 0;
             // 
             // picSeriesBanner
             // 
             this.picSeriesBanner.HeaderDetails = "No Image";
             this.picSeriesBanner.HeaderTitle = "Banner";
-            this.picSeriesBanner.Location = new System.Drawing.Point(250, 253);
+            this.picSeriesBanner.Location = new System.Drawing.Point(252, 256);
             this.picSeriesBanner.Name = "picSeriesBanner";
-            this.picSeriesBanner.Size = new System.Drawing.Size(346, 125);
+            this.picSeriesBanner.Size = new System.Drawing.Size(344, 125);
             this.picSeriesBanner.TabIndex = 6;
             this.picSeriesBanner.Type = YANFOE.Tools.Enums.GalleryType.TvSeriesBanner;
             // 
@@ -558,9 +574,9 @@
             // 
             this.picSeriesFanart.HeaderDetails = "No Image";
             this.picSeriesFanart.HeaderTitle = "Fanart";
-            this.picSeriesFanart.Location = new System.Drawing.Point(250, 387);
+            this.picSeriesFanart.Location = new System.Drawing.Point(252, 392);
             this.picSeriesFanart.Name = "picSeriesFanart";
-            this.picSeriesFanart.Size = new System.Drawing.Size(346, 180);
+            this.picSeriesFanart.Size = new System.Drawing.Size(344, 177);
             this.picSeriesFanart.TabIndex = 7;
             this.picSeriesFanart.Type = YANFOE.Tools.Enums.GalleryType.TvSeriesFanart;
             // 
@@ -576,7 +592,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "Root";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(601, 592);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(601, 594);
             this.layoutControlGroup2.Text = "Root";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -586,7 +602,7 @@
             this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(601, 243);
+            this.layoutControlItem5.Size = new System.Drawing.Size(601, 244);
             this.layoutControlItem5.Text = "layoutControlItem5";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextToControlDistance = 0;
@@ -596,9 +612,9 @@
             // 
             this.splitterItem4.AllowHotTrack = true;
             this.splitterItem4.CustomizationFormText = "splitterItem4";
-            this.splitterItem4.Location = new System.Drawing.Point(0, 243);
+            this.splitterItem4.Location = new System.Drawing.Point(0, 244);
             this.splitterItem4.Name = "splitterItem4";
-            this.splitterItem4.Size = new System.Drawing.Size(601, 5);
+            this.splitterItem4.Size = new System.Drawing.Size(601, 7);
             // 
             // layoutControlGroup5
             // 
@@ -612,10 +628,10 @@
             this.layoutControlItem7,
             this.splitterItem6,
             this.layoutControlItem8});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 248);
+            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 251);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
             this.layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup5.Size = new System.Drawing.Size(601, 344);
+            this.layoutControlGroup5.Size = new System.Drawing.Size(601, 343);
             this.layoutControlGroup5.Text = "Show / Hide";
             this.layoutControlGroup5.TextLocation = DevExpress.Utils.Locations.Bottom;
             // 
@@ -625,7 +641,7 @@
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(240, 318);
+            this.layoutControlItem6.Size = new System.Drawing.Size(240, 317);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -637,15 +653,15 @@
             this.splitterItem5.CustomizationFormText = "splitterItem5";
             this.splitterItem5.Location = new System.Drawing.Point(240, 0);
             this.splitterItem5.Name = "splitterItem5";
-            this.splitterItem5.Size = new System.Drawing.Size(5, 318);
+            this.splitterItem5.Size = new System.Drawing.Size(7, 317);
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.picSeriesBanner;
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
-            this.layoutControlItem7.Location = new System.Drawing.Point(245, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(247, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(350, 129);
+            this.layoutControlItem7.Size = new System.Drawing.Size(348, 129);
             this.layoutControlItem7.Text = "layoutControlItem7";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextToControlDistance = 0;
@@ -655,17 +671,17 @@
             // 
             this.splitterItem6.AllowHotTrack = true;
             this.splitterItem6.CustomizationFormText = "splitterItem6";
-            this.splitterItem6.Location = new System.Drawing.Point(245, 129);
+            this.splitterItem6.Location = new System.Drawing.Point(247, 129);
             this.splitterItem6.Name = "splitterItem6";
-            this.splitterItem6.Size = new System.Drawing.Size(350, 5);
+            this.splitterItem6.Size = new System.Drawing.Size(348, 7);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.picSeriesFanart;
             this.layoutControlItem8.CustomizationFormText = "layoutControlItem8";
-            this.layoutControlItem8.Location = new System.Drawing.Point(245, 134);
+            this.layoutControlItem8.Location = new System.Drawing.Point(247, 136);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(350, 184);
+            this.layoutControlItem8.Size = new System.Drawing.Size(348, 181);
             this.layoutControlItem8.Text = "layoutControlItem8";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextToControlDistance = 0;
@@ -675,7 +691,7 @@
             // 
             this.tabSeason.Controls.Add(this.tvSeasonDetailsUserControl1);
             this.tabSeason.Name = "tabSeason";
-            this.tabSeason.Size = new System.Drawing.Size(601, 592);
+            this.tabSeason.Size = new System.Drawing.Size(601, 594);
             this.tabSeason.Text = "Season";
             // 
             // tvSeasonDetailsUserControl1
@@ -691,7 +707,7 @@
             // 
             this.tabEpisode.Controls.Add(this.layoutControl3);
             this.tabEpisode.Name = "tabEpisode";
-            this.tabEpisode.Size = new System.Drawing.Size(601, 592);
+            this.tabEpisode.Size = new System.Drawing.Size(601, 594);
             this.tabEpisode.Text = "Episode";
             // 
             // layoutControl3
@@ -710,9 +726,9 @@
             // 
             this.picEpisodeFrame.HeaderDetails = null;
             this.picEpisodeFrame.HeaderTitle = null;
-            this.picEpisodeFrame.Location = new System.Drawing.Point(2, 283);
+            this.picEpisodeFrame.Location = new System.Drawing.Point(2, 285);
             this.picEpisodeFrame.Name = "picEpisodeFrame";
-            this.picEpisodeFrame.Size = new System.Drawing.Size(597, 307);
+            this.picEpisodeFrame.Size = new System.Drawing.Size(597, 305);
             this.picEpisodeFrame.TabIndex = 6;
             this.picEpisodeFrame.Type = YANFOE.Tools.Enums.GalleryType.TvEpisodeScreenshot;
             // 
@@ -764,9 +780,9 @@
             // 
             this.layoutControlItem11.Control = this.picEpisodeFrame;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 281);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 283);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(601, 311);
+            this.layoutControlItem11.Size = new System.Drawing.Size(601, 309);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -778,14 +794,14 @@
             this.splitterItem7.CustomizationFormText = "splitterItem7";
             this.splitterItem7.Location = new System.Drawing.Point(0, 276);
             this.splitterItem7.Name = "splitterItem7";
-            this.splitterItem7.Size = new System.Drawing.Size(601, 5);
+            this.splitterItem7.Size = new System.Drawing.Size(601, 7);
             // 
             // tabFileInfo
             // 
             this.tabFileInfo.Controls.Add(this.tvTopMenuUserControl1);
             this.tabFileInfo.Controls.Add(this.mediaInfoUserControl1);
             this.tabFileInfo.Name = "tabFileInfo";
-            this.tabFileInfo.Size = new System.Drawing.Size(601, 592);
+            this.tabFileInfo.Size = new System.Drawing.Size(601, 594);
             this.tabFileInfo.Text = "File Info";
             // 
             // tvTopMenuUserControl1
@@ -811,13 +827,13 @@
             // tabPreview
             // 
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(601, 592);
+            this.tabPreview.Size = new System.Drawing.Size(601, 594);
             this.tabPreview.Text = "Preview";
             // 
             // tabCurrent
             // 
             this.tabCurrent.Name = "tabCurrent";
-            this.tabCurrent.Size = new System.Drawing.Size(601, 592);
+            this.tabCurrent.Size = new System.Drawing.Size(601, 594);
             this.tabCurrent.Text = "Current";
             // 
             // layoutControlItem10
@@ -851,9 +867,9 @@
             // 
             this.layoutControlItem2.Control = this.tabsTv;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(279, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(281, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(611, 622);
+            this.layoutControlItem2.Size = new System.Drawing.Size(609, 622);
             this.layoutControlItem2.Text = "layoutControlItem2";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
@@ -929,7 +945,7 @@
             this.splitterItem1.CustomizationFormText = "splitterItem1";
             this.splitterItem1.Location = new System.Drawing.Point(274, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(5, 622);
+            this.splitterItem1.Size = new System.Drawing.Size(7, 622);
             // 
             // timer1
             // 
@@ -946,8 +962,18 @@
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.columnVisibility,
-            this.barButtonItem1});
-            this.barManager1.MaxItemId = 3;
+            this.barButtonItem1,
+            this.popupSeasonLock,
+            this.popupSeasonUnlock,
+            this.popupSeasonHide,
+            this.popupEpisodeLock,
+            this.popupEpisodeUnlock,
+            this.popupEpisodeHide,
+            this.popupEpisodeWatched,
+            this.popupEpisodeUnwatched,
+            this.popupEpisodeOpenShow,
+            this.popupEpisodeOpenFolder});
+            this.barManager1.MaxItemId = 13;
             // 
             // barDockControlTop
             // 
@@ -988,6 +1014,86 @@
             this.barButtonItem1.Id = 1;
             this.barButtonItem1.Name = "barButtonItem1";
             // 
+            // popupSeasonLock
+            // 
+            this.popupSeasonLock.Caption = "Lock";
+            this.popupSeasonLock.Glyph = global::YANFOE.Properties.Resources.locked32;
+            this.popupSeasonLock.Id = 3;
+            this.popupSeasonLock.Name = "popupSeasonLock";
+            this.popupSeasonLock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupSeasonLock_ItemClick);
+            // 
+            // popupSeasonUnlock
+            // 
+            this.popupSeasonUnlock.Caption = "Unlock";
+            this.popupSeasonUnlock.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.popupSeasonUnlock.Id = 4;
+            this.popupSeasonUnlock.Name = "popupSeasonUnlock";
+            this.popupSeasonUnlock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupSeasonUnlock_ItemClick);
+            // 
+            // popupSeasonHide
+            // 
+            this.popupSeasonHide.Caption = "Hide";
+            this.popupSeasonHide.Glyph = global::YANFOE.Properties.Resources.find1;
+            this.popupSeasonHide.Id = 5;
+            this.popupSeasonHide.Name = "popupSeasonHide";
+            this.popupSeasonHide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupSeasonHide_ItemClick);
+            // 
+            // popupEpisodeLock
+            // 
+            this.popupEpisodeLock.Caption = "Lock";
+            this.popupEpisodeLock.Glyph = global::YANFOE.Properties.Resources.locked32;
+            this.popupEpisodeLock.Id = 6;
+            this.popupEpisodeLock.Name = "popupEpisodeLock";
+            this.popupEpisodeLock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeLock_ItemClick);
+            // 
+            // popupEpisodeUnlock
+            // 
+            this.popupEpisodeUnlock.Caption = "Unlock";
+            this.popupEpisodeUnlock.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.popupEpisodeUnlock.Id = 7;
+            this.popupEpisodeUnlock.Name = "popupEpisodeUnlock";
+            this.popupEpisodeUnlock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeUnlock_ItemClick);
+            // 
+            // popupEpisodeHide
+            // 
+            this.popupEpisodeHide.Caption = "Hide";
+            this.popupEpisodeHide.Glyph = global::YANFOE.Properties.Resources.find1;
+            this.popupEpisodeHide.Id = 8;
+            this.popupEpisodeHide.Name = "popupEpisodeHide";
+            this.popupEpisodeHide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeHide_ItemClick);
+            // 
+            // popupEpisodeWatched
+            // 
+            this.popupEpisodeWatched.Caption = "Watched";
+            this.popupEpisodeWatched.Glyph = global::YANFOE.Properties.Resources.watched_green;
+            this.popupEpisodeWatched.Id = 9;
+            this.popupEpisodeWatched.Name = "popupEpisodeWatched";
+            this.popupEpisodeWatched.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeWatched_ItemClick);
+            // 
+            // popupEpisodeUnwatched
+            // 
+            this.popupEpisodeUnwatched.Caption = "Unwatched";
+            this.popupEpisodeUnwatched.Glyph = global::YANFOE.Properties.Resources.watched_red;
+            this.popupEpisodeUnwatched.Id = 10;
+            this.popupEpisodeUnwatched.Name = "popupEpisodeUnwatched";
+            this.popupEpisodeUnwatched.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeUnwatched_ItemClick);
+            // 
+            // popupEpisodeOpenShow
+            // 
+            this.popupEpisodeOpenShow.Caption = "Open Show";
+            this.popupEpisodeOpenShow.Glyph = global::YANFOE.Properties.Resources.television;
+            this.popupEpisodeOpenShow.Id = 11;
+            this.popupEpisodeOpenShow.Name = "popupEpisodeOpenShow";
+            this.popupEpisodeOpenShow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeOpenShow_ItemClick);
+            // 
+            // popupEpisodeOpenFolder
+            // 
+            this.popupEpisodeOpenFolder.Caption = "Open Folder";
+            this.popupEpisodeOpenFolder.Glyph = global::YANFOE.Properties.Resources.folder32;
+            this.popupEpisodeOpenFolder.Id = 12;
+            this.popupEpisodeOpenFolder.Name = "popupEpisodeOpenFolder";
+            this.popupEpisodeOpenFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupEpisodeOpenFolder_ItemClick);
+            // 
             // popupSeries
             // 
             this.popupSeries.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
@@ -995,6 +1101,28 @@
             this.popupSeries.Manager = this.barManager1;
             this.popupSeries.Name = "popupSeries";
             this.popupSeries.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupSeries_BeforePopup);
+            // 
+            // popupSeason
+            // 
+            this.popupSeason.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupSeasonLock),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupSeasonUnlock)});
+            this.popupSeason.Manager = this.barManager1;
+            this.popupSeason.Name = "popupSeason";
+            this.popupSeason.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupSeason_BeforePopup);
+            // 
+            // popupEpisode
+            // 
+            this.popupEpisode.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeOpenShow),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeOpenFolder),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeLock, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeUnlock),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeWatched, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupEpisodeUnwatched)});
+            this.popupEpisode.Manager = this.barManager1;
+            this.popupEpisode.Name = "popupEpisode";
+            this.popupEpisode.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupEpisode_BeforePopup);
             // 
             // TvUserControl
             // 
@@ -1070,6 +1198,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSeason)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupEpisode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1157,6 +1287,18 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private MediaInfoUserControl mediaInfoUserControl1;
         private TvTopMenuUserControl tvTopMenuUserControl1;
+        private DevExpress.XtraBars.PopupMenu popupSeason;
+        private DevExpress.XtraBars.PopupMenu popupEpisode;
+        private DevExpress.XtraBars.BarButtonItem popupSeasonLock;
+        private DevExpress.XtraBars.BarButtonItem popupSeasonUnlock;
+        private DevExpress.XtraBars.BarButtonItem popupSeasonHide;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeLock;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeUnlock;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeHide;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeWatched;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeUnwatched;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeOpenShow;
+        private DevExpress.XtraBars.BarButtonItem popupEpisodeOpenFolder;
 
     }
 }

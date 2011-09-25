@@ -10,6 +10,7 @@
 namespace YANFOE.UI.UserControls.TvControls
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
@@ -544,6 +545,25 @@ namespace YANFOE.UI.UserControls.TvControls
             this.popupSeries.AddItem(updateBarItem);
 
             updateBarItem.AddItem(new BarButtonItem(this.barManager1, "From TvDB"));
+
+            var hideItem = new BarButtonItem(this.barManager1, "Hide") { Glyph = Resources.find1 };
+            hideItem.ItemClick += this.hideItem_ItemClick;
+            this.popupSeries.AddItem(hideItem);
+
+            var deleteItem = new BarButtonItem(this.barManager1, "Remove") { Glyph = Resources.find1 };
+            deleteItem.ItemClick += new ItemClickEventHandler(deleteItem_ItemClick);
+            this.popupSeries.AddItem(deleteItem);
+        }
+
+        private void deleteItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void hideItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewTvTitleList.GetSelectedRows().Select(row => this.gridViewTvTitleList.GetRow(row) as MasterSeriesListModel)
+                .ToList().ForEach(TvDBFactory.SetSeriesHide);
         }
 
         /// <summary>
@@ -617,5 +637,124 @@ namespace YANFOE.UI.UserControls.TvControls
         }
 
         #endregion
+
+        private void gridViewSeasons_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            var view = sender as GridView;
+            e.Allow = false;
+
+            this.popupSeason.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
+        }
+
+        private void gridViewEpisodes_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            var view = sender as GridView;
+            e.Allow = false;
+
+            this.popupEpisode.ShowPopup(this.barManager1, view.GridControl.PointToScreen(e.Point));
+        }
+
+        private void popupSeasonLock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewSeasons.GetSelectedRows().Select(row => this.gridViewSeasons.GetRow(row) as Season)
+                .ToList().ForEach(TvDBFactory.LockSeason);
+        }
+
+        private void popupSeasonUnlock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewSeasons.GetSelectedRows().Select(row => this.gridViewSeasons.GetRow(row) as Season)
+                .ToList().ForEach(TvDBFactory.UnlockSeason);
+        }
+
+        private void popupSeasonHide_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewSeasons.GetSelectedRows().Select(row => this.gridViewSeasons.GetRow(row) as Season)
+                .ToList().ForEach(TvDBFactory.UnlockSeason);
+        }
+
+        private void popupEpisodeOpenShow_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.OpenEpisodeFile);
+        }
+
+        private void popupEpisodeOpenFolder_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.OpenEpisodeFolder);
+        }
+
+        private void popupEpisodeLock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.LockEpisode);
+        }
+
+        private void popupEpisodeUnlock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+               .ToList().ForEach(TvDBFactory.UnlockEpisode);
+        }
+
+        private void popupEpisodeHide_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.HideEpisode);
+        }
+
+        private void popupEpisodeWatched_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.SetEpisodeWatched);
+        }
+
+        private void popupEpisodeUnwatched_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode)
+                .ToList().ForEach(TvDBFactory.SetEpisodeUnwatched);
+        }
+
+        private void popupSeason_BeforePopup(object sender, CancelEventArgs e)
+        {
+            var selectedSeasons = this.gridViewSeasons.GetSelectedRows().Select(row => this.gridViewSeasons.GetRow(row) as Season).ToList();
+
+            if (selectedSeasons.Count == 1)
+            {
+                this.popupSeasonLock.Visibility = selectedSeasons[0].IsLocked ? BarItemVisibility.Never : BarItemVisibility.Always;
+                this.popupSeasonUnlock.Visibility = selectedSeasons[0].IsLocked ? BarItemVisibility.Always : BarItemVisibility.Never;
+            }
+        }
+
+        private void popupEpisode_BeforePopup(object sender, CancelEventArgs e)
+        {
+            var selectedEpisodes = this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode).ToList();
+
+            if (selectedEpisodes.Count == 1)
+            {
+                this.popupEpisodeLock.Visibility = selectedEpisodes[0].IsLocked ? BarItemVisibility.Never : BarItemVisibility.Always;
+                this.popupEpisodeUnlock.Visibility = selectedEpisodes[0].IsLocked ? BarItemVisibility.Always : BarItemVisibility.Never;
+
+                this.popupEpisodeWatched.Visibility = selectedEpisodes[0].Watched ? BarItemVisibility.Never : BarItemVisibility.Always;
+                this.popupEpisodeUnwatched.Visibility = selectedEpisodes[0].Watched ? BarItemVisibility.Always : BarItemVisibility.Never;
+
+                if (File.Exists(selectedEpisodes[0].FilePath.PathAndFilename))
+                {
+                    this.popupEpisodeOpenShow.Visibility = BarItemVisibility.Always;
+                    this.popupEpisodeOpenFolder.Visibility = BarItemVisibility.Always;
+                }
+                else
+                {
+                    this.popupEpisodeOpenShow.Visibility = BarItemVisibility.Never;
+                    this.popupEpisodeOpenFolder.Visibility = BarItemVisibility.Never;
+                    this.popupEpisodeWatched.Visibility = BarItemVisibility.Never;
+                    this.popupEpisodeUnwatched.Visibility = BarItemVisibility.Never; 
+                }
+            }
+            else
+            {
+                this.popupEpisodeOpenShow.Visibility = BarItemVisibility.Never;
+                this.popupEpisodeOpenFolder.Visibility = BarItemVisibility.Never;
+            }
+        }
     }
 }

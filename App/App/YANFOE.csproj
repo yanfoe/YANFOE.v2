@@ -284,6 +284,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.Designer.cs">
       <DependentUpon>UcSettingsTvIOKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvLists.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvLists.Designer.cs">
+      <DependentUpon>UcSettingsTvLists.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -701,6 +707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.resx">
       <DependentUpon>UcSettingsTvIOKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvLists.resx">
+      <DependentUpon>UcSettingsTvLists.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvRename.resx">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
@@ -1189,7 +1198,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
+      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
