@@ -825,5 +825,19 @@ namespace YANFOE.UI.UserControls.MovieControls
             var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
             MovieDBFactory.SetCurrentMovie(movieModel);
         }
+
+        private void popupHide_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var check = XtraMessageBox.Show("Are you sure you wish to hide the selected movies?", "Remove Movies", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (check == DialogResult.Yes)
+            {
+                this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
+                    ToList().ForEach(c => { MovieDBFactory.HideMovie(c); });
+            }
+
+            var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
+            MovieDBFactory.SetCurrentMovie(movieModel);
+        }
     }
 }

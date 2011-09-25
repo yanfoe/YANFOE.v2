@@ -405,6 +405,8 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        public bool Hidden { get; set; }
+
         /// <summary>
         /// Gets or sets AllocineId.
         /// </summary>

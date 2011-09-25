@@ -1351,6 +1351,7 @@
             this.popupHide.Glyph = global::YANFOE.Properties.Resources.find1;
             this.popupHide.Id = 22;
             this.popupHide.Name = "popupHide";
+            this.popupHide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupHide_ItemClick);
             // 
             // popupDelete
             // 

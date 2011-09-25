@@ -83,6 +83,7 @@ namespace YANFOE.Factories
         static MovieDBFactory()
         {
             MovieDatabase = new BindingList<MovieModel>();
+            HiddenMovieDatabase = new BindingList<MovieModel>();
             DuplicatedMoviesDatabase = new BindingList<MovieModel>();
             currentMovie = new MovieModel();
             galleryGroup = new GalleryItemGroup();
@@ -205,6 +206,8 @@ namespace YANFOE.Factories
         /// The movie database.
         /// </value>
         public static BindingList<MovieModel> MovieDatabase { get; set; }
+
+        public static BindingList<MovieModel> HiddenMovieDatabase { get; set; }
 
         /// <summary>
         /// Gets or sets MultiSelectedMovies.
@@ -1210,6 +1213,13 @@ namespace YANFOE.Factories
                 }
             }
 
+            MovieDatabase.Remove(movie);
+        }
+
+        public static void HideMovie(MovieModel movie)
+        {
+            HiddenMovieDatabase.Add(movie);
+            movie.Hidden = true;
             MovieDatabase.Remove(movie);
         }
     }
