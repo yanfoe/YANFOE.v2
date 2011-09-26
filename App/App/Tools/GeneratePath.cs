@@ -22,7 +22,7 @@ namespace YANFOE.Tools
 
     public static class GeneratePath
     {
-        public static string TvSeries(Series series, string replace, string altFirstEpisode = null)
+        public static string TvSeries(Series series, string replace, string fromFile, string altFirstEpisode = null)
         {
             string firstEpisodeFullPath;
             string seriesName;
@@ -79,10 +79,10 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodePathOfSeries, firstEpisodePath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, series.GetSeriesPath());
 
-            return replace;
+            return replace + Path.GetExtension(fromFile);
         }
 
-        public static string TvSeason(Season season, string replace, string altFirstEpisode = null)
+        public static string TvSeason(Season season, string replace, string fromFile, string altFirstEpisode = null)
         {
             string firstEpisodeFullPath;
             string seriesName;
@@ -151,10 +151,10 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeasonNumber2, string.Format("{0:d2}", season.SeasonNumber));
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, season.GetSeries().GetSeriesPath());
 
-            return replace;
+            return replace + Path.GetExtension(fromFile); ;
         }
 
-        public static string TvEpisode(Episode episode, string replace, string altEpisode = null)
+        public static string TvEpisode(Episode episode, string replace, string fromFile, string altEpisode = null)
         {
             string episodePath;
             string episodeFileName;
@@ -189,7 +189,7 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvEpisodeFileName, episodeFileName);
 
 
-            return replace;
+            return replace + Path.GetExtension(fromFile);
         }
     }
 }

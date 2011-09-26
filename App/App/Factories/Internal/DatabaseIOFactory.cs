@@ -489,12 +489,19 @@ namespace YANFOE.Factories.Internal
 
                 foreach (var season in series.Seasons)
                 {
-                    foreach (var episode in season.Value.Episodes)
+                    for (int index = 0; index < season.Value.Episodes.Count; index++)
                     {
-                        if (episode.FilePath.PathAndFilename != string.Empty && !File.Exists(episode.FilePath.PathAndFilename))
+                        var episode = season.Value.Episodes[index];
+                        if (episode.FilePath.PathAndFilename != string.Empty
+                            && !File.Exists(episode.FilePath.PathAndFilename))
                         {
-                            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadTvDB",
-                                string.Format("Deleting {0}. Episode not found on the filesystem", episode.FilePath.PathAndFilename));
+                            Log.WriteToLog(
+                                LogSeverity.Info,
+                                LoggerName.GeneralLog,
+                                "Internal > DatabaseIOFactory > LoadTvDB",
+                                string.Format(
+                                    "Deleting {0}. Episode not found on the filesystem",
+                                    episode.FilePath.PathAndFilename));
                             // We should check for network path and make sure the file has actually been deleted or removed
                             File.Delete(file);
                             series.Seasons[season.Key].Episodes.Remove(episode);

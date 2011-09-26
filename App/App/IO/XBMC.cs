@@ -1119,7 +1119,7 @@ namespace YANFOE.IO
             // Nfo
             if (type == EpisodeIOType.All || type == EpisodeIOType.Nfo)
             {
-                string nfoPathTo = GeneratePath.TvEpisode(episode, nfoTemplate);
+                string nfoPathTo = GeneratePath.TvEpisode(episode, nfoTemplate, string.Empty);
 
                 this.WriteNFO(this.GenerateSingleEpisodeOutput(episode, true), nfoPathTo);
                 episode.ChangedText = false;
@@ -1142,7 +1142,7 @@ namespace YANFOE.IO
                         screenshotPathFrom = this.TvPathImageGet(episode.EpisodeScreenshotUrl);
                     }
 
-                    string screenshotPathTo = GeneratePath.TvEpisode(episode, screenshotTemplate);
+                    string screenshotPathTo = GeneratePath.TvEpisode(episode, screenshotTemplate, screenshotPathFrom);
 
                     this.CopyFile(screenshotPathFrom, screenshotPathTo);
                     episode.ChangedScreenshot = false;
@@ -1200,7 +1200,7 @@ namespace YANFOE.IO
                             posterPathFrom = this.TvPathImageGet(season.PosterUrl);
                         }
 
-                        string posterPathTo = GeneratePath.TvSeason(season, posterTemplate);
+                        string posterPathTo = GeneratePath.TvSeason(season, posterTemplate, posterPathFrom);
 
                         this.CopyFile(posterPathFrom, posterPathTo);
                         season.ChangedPoster = false;
@@ -1223,7 +1223,7 @@ namespace YANFOE.IO
                             fanartPathFrom = this.TvPathImageGet(season.FanartUrl);
                         }
 
-                        string fanartPathTo = GeneratePath.TvSeason(season, fanartTemplate);
+                        string fanartPathTo = GeneratePath.TvSeason(season, fanartTemplate, fanartPathFrom);
 
                         this.CopyFile(fanartPathFrom, fanartPathTo);
                         season.ChangedFanart = false;
@@ -1246,7 +1246,7 @@ namespace YANFOE.IO
                             bannerPathFrom = this.TvPathImageGet(season.BannerUrl);
                         }
 
-                        string bannerPathTo = GeneratePath.TvSeason(season, bannerTemplate);
+                        string bannerPathTo = GeneratePath.TvSeason(season, bannerTemplate, bannerPathFrom);
 
                         this.CopyFile(bannerPathFrom, bannerPathTo);
                         season.ChangedBanner = false;
@@ -1305,7 +1305,7 @@ namespace YANFOE.IO
             if (type == SeriesIOType.All || type == SeriesIOType.Nfo)
             {
                 // Nfo
-                string nfoPathTo = GeneratePath.TvSeries(series, nfoTemplate);
+                string nfoPathTo = GeneratePath.TvSeries(series, nfoTemplate, string.Empty);
 
                 this.WriteNFO(this.GenerateSeriesOutput(series), nfoPathTo);
                 series.ChangedText = false;
@@ -1327,7 +1327,7 @@ namespace YANFOE.IO
                         posterPathFrom = this.TvPathImageGet(series.PosterUrl);
                     }
 
-                    string posterPathTo = GeneratePath.TvSeries(series, posterTemplate);
+                    string posterPathTo = GeneratePath.TvSeries(series, posterTemplate, posterPathFrom);
 
                     this.CopyFile(posterPathFrom, posterPathTo);
                     series.ChangedPoster = false;
@@ -1350,7 +1350,7 @@ namespace YANFOE.IO
                         fanartPathFrom = this.TvPathImageGet(series.FanartUrl);
                     }
 
-                    string fanartPathTo = GeneratePath.TvSeries(series, fanartTemplate);
+                    string fanartPathTo = GeneratePath.TvSeries(series, fanartTemplate, fanartPathFrom);
 
                     this.CopyFile(fanartPathFrom, fanartPathTo);
                     series.ChangedFanart = false;
@@ -1373,7 +1373,7 @@ namespace YANFOE.IO
                         bannerPathFrom = this.TvPathImageGet(series.SeriesBannerUrl);
                     }
 
-                    string bannerPathTo = GeneratePath.TvSeries(series, bannerTemplate);
+                    string bannerPathTo = GeneratePath.TvSeries(series, bannerTemplate, bannerPathFrom);
 
                     this.CopyFile(bannerPathFrom, bannerPathTo);
                     series.ChangedBanner = false;

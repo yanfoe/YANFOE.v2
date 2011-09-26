@@ -124,6 +124,11 @@
             this.popupSeries = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupSeason = new DevExpress.XtraBars.PopupMenu(this.components);
             this.popupEpisode = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.tabPreviewSeries = new DevExpress.XtraTab.XtraTabPage();
+            this.tabPreviewEpisode = new DevExpress.XtraTab.XtraTabPage();
+            this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
+            this.nfoPreviewUserControl2 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -175,6 +180,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem7)).BeginInit();
             this.tabFileInfo.SuspendLayout();
+            this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -188,6 +194,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSeason)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupEpisode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.tabPreviewSeries.SuspendLayout();
+            this.tabPreviewEpisode.SuspendLayout();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -329,7 +339,7 @@
             this.galleryBanners.Gallery.ScrollMode = DevExpress.XtraBars.Ribbon.Gallery.GalleryScrollMode.Smooth;
             this.galleryBanners.Location = new System.Drawing.Point(0, 0);
             this.galleryBanners.Name = "galleryBanners";
-            this.galleryBanners.Size = new System.Drawing.Size(238, 306);
+            this.galleryBanners.Size = new System.Drawing.Size(240, 308);
             this.galleryBanners.TabIndex = 0;
             this.galleryBanners.Text = "galleryControl1";
             // 
@@ -337,7 +347,7 @@
             // 
             this.galleryControlClient1.GalleryControl = this.galleryBanners;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 2);
-            this.galleryControlClient1.Size = new System.Drawing.Size(217, 302);
+            this.galleryControlClient1.Size = new System.Drawing.Size(219, 304);
             // 
             // groupControl3
             // 
@@ -700,7 +710,7 @@
             this.tvSeasonDetailsUserControl1.Location = new System.Drawing.Point(0, 0);
             this.tvSeasonDetailsUserControl1.Name = "tvSeasonDetailsUserControl1";
             this.tvSeasonDetailsUserControl1.Padding = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.tvSeasonDetailsUserControl1.Size = new System.Drawing.Size(601, 592);
+            this.tvSeasonDetailsUserControl1.Size = new System.Drawing.Size(601, 594);
             this.tvSeasonDetailsUserControl1.TabIndex = 0;
             // 
             // tabEpisode
@@ -718,7 +728,7 @@
             this.layoutControl3.Location = new System.Drawing.Point(0, 0);
             this.layoutControl3.Name = "layoutControl3";
             this.layoutControl3.Root = this.layoutControlGroup3;
-            this.layoutControl3.Size = new System.Drawing.Size(601, 592);
+            this.layoutControl3.Size = new System.Drawing.Size(601, 594);
             this.layoutControl3.TabIndex = 0;
             this.layoutControl3.Text = "layoutControl3";
             // 
@@ -726,9 +736,9 @@
             // 
             this.picEpisodeFrame.HeaderDetails = null;
             this.picEpisodeFrame.HeaderTitle = null;
-            this.picEpisodeFrame.Location = new System.Drawing.Point(2, 285);
+            this.picEpisodeFrame.Location = new System.Drawing.Point(2, 286);
             this.picEpisodeFrame.Name = "picEpisodeFrame";
-            this.picEpisodeFrame.Size = new System.Drawing.Size(597, 305);
+            this.picEpisodeFrame.Size = new System.Drawing.Size(597, 306);
             this.picEpisodeFrame.TabIndex = 6;
             this.picEpisodeFrame.Type = YANFOE.Tools.Enums.GalleryType.TvEpisodeScreenshot;
             // 
@@ -737,7 +747,7 @@
             this.panelControl2.Controls.Add(this.tvEpisodeDetailsUserControl1);
             this.panelControl2.Location = new System.Drawing.Point(2, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(597, 272);
+            this.panelControl2.Size = new System.Drawing.Size(597, 273);
             this.panelControl2.TabIndex = 4;
             // 
             // tvEpisodeDetailsUserControl1
@@ -745,7 +755,7 @@
             this.tvEpisodeDetailsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvEpisodeDetailsUserControl1.Location = new System.Drawing.Point(2, 2);
             this.tvEpisodeDetailsUserControl1.Name = "tvEpisodeDetailsUserControl1";
-            this.tvEpisodeDetailsUserControl1.Size = new System.Drawing.Size(593, 268);
+            this.tvEpisodeDetailsUserControl1.Size = new System.Drawing.Size(593, 269);
             this.tvEpisodeDetailsUserControl1.TabIndex = 0;
             // 
             // layoutControlGroup3
@@ -760,7 +770,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "Root";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup3.Size = new System.Drawing.Size(601, 592);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(601, 594);
             this.layoutControlGroup3.Text = "Root";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -770,7 +780,7 @@
             this.layoutControlItem9.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(601, 276);
+            this.layoutControlItem9.Size = new System.Drawing.Size(601, 277);
             this.layoutControlItem9.Text = "layoutControlItem9";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextToControlDistance = 0;
@@ -780,9 +790,9 @@
             // 
             this.layoutControlItem11.Control = this.picEpisodeFrame;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 283);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 284);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(601, 309);
+            this.layoutControlItem11.Size = new System.Drawing.Size(601, 310);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -792,7 +802,7 @@
             // 
             this.splitterItem7.AllowHotTrack = true;
             this.splitterItem7.CustomizationFormText = "splitterItem7";
-            this.splitterItem7.Location = new System.Drawing.Point(0, 276);
+            this.splitterItem7.Location = new System.Drawing.Point(0, 277);
             this.splitterItem7.Name = "splitterItem7";
             this.splitterItem7.Size = new System.Drawing.Size(601, 7);
             // 
@@ -811,7 +821,7 @@
             this.tvTopMenuUserControl1.MaximumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.MinimumSize = new System.Drawing.Size(0, 48);
             this.tvTopMenuUserControl1.Name = "tvTopMenuUserControl1";
-            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(0, 48);
+            this.tvTopMenuUserControl1.Size = new System.Drawing.Size(601, 48);
             this.tvTopMenuUserControl1.TabIndex = 1;
             this.tvTopMenuUserControl1.Type = YANFOE.UI.UserControls.TvControls.SaveType.All;
             // 
@@ -820,12 +830,13 @@
             this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
             this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
-            this.mediaInfoUserControl1.Size = new System.Drawing.Size(601, 592);
+            this.mediaInfoUserControl1.Size = new System.Drawing.Size(601, 594);
             this.mediaInfoUserControl1.TabIndex = 0;
             this.mediaInfoUserControl1.Type = YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl.FileInfoType.TV;
             // 
             // tabPreview
             // 
+            this.tabPreview.Controls.Add(this.xtraTabControl1);
             this.tabPreview.Name = "tabPreview";
             this.tabPreview.Size = new System.Drawing.Size(601, 594);
             this.tabPreview.Text = "Preview";
@@ -1124,6 +1135,50 @@
             this.popupEpisode.Name = "popupEpisode";
             this.popupEpisode.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupEpisode_BeforePopup);
             // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.tabPreviewSeries;
+            this.xtraTabControl1.Size = new System.Drawing.Size(601, 594);
+            this.xtraTabControl1.TabIndex = 0;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabPreviewSeries,
+            this.tabPreviewEpisode});
+            // 
+            // tabPreviewSeries
+            // 
+            this.tabPreviewSeries.Controls.Add(this.nfoPreviewUserControl1);
+            this.tabPreviewSeries.Name = "tabPreviewSeries";
+            this.tabPreviewSeries.Size = new System.Drawing.Size(597, 570);
+            this.tabPreviewSeries.Text = "Series Preview";
+            // 
+            // tabPreviewEpisode
+            // 
+            this.tabPreviewEpisode.Controls.Add(this.nfoPreviewUserControl2);
+            this.tabPreviewEpisode.Name = "tabPreviewEpisode";
+            this.tabPreviewEpisode.Size = new System.Drawing.Size(597, 570);
+            this.tabPreviewEpisode.Text = "Episode Preview";
+            // 
+            // nfoPreviewUserControl1
+            // 
+            this.nfoPreviewUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nfoPreviewUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.nfoPreviewUserControl1.Name = "nfoPreviewUserControl1";
+            this.nfoPreviewUserControl1.PreviewArea = YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl.TvOrMovies.TvEpisode;
+            this.nfoPreviewUserControl1.Size = new System.Drawing.Size(597, 570);
+            this.nfoPreviewUserControl1.TabIndex = 0;
+            // 
+            // nfoPreviewUserControl2
+            // 
+            this.nfoPreviewUserControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nfoPreviewUserControl2.Location = new System.Drawing.Point(0, 0);
+            this.nfoPreviewUserControl2.Name = "nfoPreviewUserControl2";
+            this.nfoPreviewUserControl2.PreviewArea = YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl.TvOrMovies.TvEpisode;
+            this.nfoPreviewUserControl2.Size = new System.Drawing.Size(597, 570);
+            this.nfoPreviewUserControl2.TabIndex = 0;
+            // 
             // TvUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1187,6 +1242,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem7)).EndInit();
             this.tabFileInfo.ResumeLayout(false);
+            this.tabPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -1200,6 +1256,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupSeries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupSeason)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupEpisode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.tabPreviewSeries.ResumeLayout(false);
+            this.tabPreviewEpisode.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1299,6 +1359,11 @@
         private DevExpress.XtraBars.BarButtonItem popupEpisodeUnwatched;
         private DevExpress.XtraBars.BarButtonItem popupEpisodeOpenShow;
         private DevExpress.XtraBars.BarButtonItem popupEpisodeOpenFolder;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage tabPreviewSeries;
+        private NFOPreviewUserControl nfoPreviewUserControl1;
+        private DevExpress.XtraTab.XtraTabPage tabPreviewEpisode;
+        private NFOPreviewUserControl nfoPreviewUserControl2;
 
     }
 }
