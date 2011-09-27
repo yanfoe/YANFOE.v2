@@ -212,10 +212,23 @@ namespace YANFOE.Factories.Import
                     movieModel.AssociatedFiles.AddToMediaCollection(file);
 
                     // Does the movie exist in our current DB?
-                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
+                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim() && m.Year == movieModel.Year) select m).ToList();
                     if (result2.Count > 0)
                     {
-                        ImportDuplicatesDatabase.Add(movieModel);
+                        if (movieModel.Year != null)
+                        {
+                            var r = (from m in result2 where m.Year == movieModel.Year select m).ToList();
+                            if (r.Count > 0)
+                            {
+                                // We already have a movie with that name and title, mark as dupe
+                                ImportDuplicatesDatabase.Add(movieModel);
+                            }
+                        }
+                        else
+                        {
+                            // No year, so we can't ensure it's a dupe
+                            ImportDuplicatesDatabase.Add(movieModel);
+                        }
                     }
                     
                     // Add it to the list anyway, since there's no implementation of any action on duplicates.
