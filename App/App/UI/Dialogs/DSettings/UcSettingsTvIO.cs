@@ -225,6 +225,8 @@ namespace YANFOE.UI.Dialogs.DSettings
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void TxtNormal_EditValueChanged(object sender, EventArgs e)
         {
+
+
             this.txtSeriesNFOPreview.Text = GeneratePath.TvSeries(
                 null, Get.InOutCollection.CurrentTvSaveSettings.SeriesNfoTemplate, this.txtNormalTestPath.Text);
             this.txtSeriesPosterPreview.Text =
@@ -246,11 +248,11 @@ namespace YANFOE.UI.Dialogs.DSettings
                 ".jpg";
             this.txtSeasonFanartPreview.Text =
                 GeneratePath.TvSeason(
-                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonPosterTemplate, this.txtNormalTestPath.Text) +
+                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonFanartTemplate, this.txtNormalTestPath.Text) +
                 ".jpg";
             this.txtSeasonBannerPreview.Text =
                 GeneratePath.TvSeason(
-                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonPosterTemplate, this.txtNormalTestPath.Text) +
+                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonBannerTemplate, this.txtNormalTestPath.Text) +
                 ".jpg";
 
             this.txtEpisodeNFOPreview.Text = GeneratePath.TvEpisode(

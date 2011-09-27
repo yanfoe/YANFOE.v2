@@ -32,16 +32,6 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
@@ -65,6 +55,16 @@
             DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem2 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem13 = new DevExpress.Utils.ToolTipTitleItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviesUserControl));
@@ -125,15 +125,35 @@
             this.nfoPreviewUserControl1 = new YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl();
             this.picPoster = new YANFOE.UI.UserControls.CommonControls.DisplayPictureUserControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.btnMediaInfo = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMutliWatchedFalse = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
+            this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnNew = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMarked = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLoadFromWeb = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLock = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlImages = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.popupSave = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnSaveNfo = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveAllImages = new DevExpress.XtraBars.BarButtonItem();
             this.btnSavePoster = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveFanart = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnLoadFromWeb = new DevExpress.XtraEditors.SimpleButton();
             this.popupLoadFromWeb = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
@@ -149,26 +169,17 @@
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.barCheckItem2 = new DevExpress.XtraBars.BarCheckItem();
-            this.btnMediaInfo = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMutliWatchedFalse = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMultiWatchedTrue = new DevExpress.XtraEditors.SimpleButton();
-            this.btnWatched = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenFolder = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.btnNew = new DevExpress.XtraEditors.SimpleButton();
-            this.btnMarked = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLock = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlImages = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.popupLock = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMark = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupUnlock = new DevExpress.XtraBars.BarButtonItem();
+            this.popupUnmark = new DevExpress.XtraBars.BarButtonItem();
+            this.popupHide = new DevExpress.XtraBars.BarButtonItem();
+            this.popupDelete = new DevExpress.XtraBars.BarButtonItem();
+            this.popupOpenFolder = new DevExpress.XtraBars.BarButtonItem();
+            this.popupOpenMovie = new DevExpress.XtraBars.BarButtonItem();
             this.galleryControlGallery1 = new DevExpress.XtraBars.Ribbon.Gallery.GalleryControlGallery();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.popupMovieList = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -199,9 +210,6 @@
             this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -213,6 +221,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).BeginInit();
             this.SuspendLayout();
@@ -249,7 +260,7 @@
             // 
             this.tabByTitle.Controls.Add(this.layoutControl2);
             this.tabByTitle.Name = "tabByTitle";
-            this.tabByTitle.Size = new System.Drawing.Size(253, 684);
+            this.tabByTitle.Size = new System.Drawing.Size(255, 686);
             this.tabByTitle.Text = "Title (0)";
             // 
             // layoutControl2
@@ -259,7 +270,7 @@
             this.layoutControl2.Location = new System.Drawing.Point(0, 0);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup2;
-            this.layoutControl2.Size = new System.Drawing.Size(253, 684);
+            this.layoutControl2.Size = new System.Drawing.Size(255, 686);
             this.layoutControl2.TabIndex = 2;
             this.layoutControl2.Text = "layoutControl2";
             // 
@@ -276,7 +287,7 @@
             this.BusyPicture,
             this.chkMarked});
             this.grdMoviesList.ShowOnlyPredefinedDetails = true;
-            this.grdMoviesList.Size = new System.Drawing.Size(249, 680);
+            this.grdMoviesList.Size = new System.Drawing.Size(251, 682);
             this.grdMoviesList.TabIndex = 1;
             this.grdMoviesList.ToolTipController = this.toolTipController1;
             this.grdMoviesList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -538,7 +549,7 @@
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(253, 684);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(255, 686);
             this.layoutControlGroup2.Text = "layoutControlGroup2";
             this.layoutControlGroup2.TextVisible = false;
             // 
@@ -548,7 +559,7 @@
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(253, 684);
+            this.layoutControlItem6.Size = new System.Drawing.Size(255, 686);
             this.layoutControlItem6.Text = "layoutControlItem6";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextToControlDistance = 0;
@@ -558,7 +569,7 @@
             // 
             this.tabByPoster.Controls.Add(this.galleryControl1);
             this.tabByPoster.Name = "tabByPoster";
-            this.tabByPoster.Size = new System.Drawing.Size(253, 684);
+            this.tabByPoster.Size = new System.Drawing.Size(255, 686);
             this.tabByPoster.Text = "Poster (0)";
             // 
             // galleryControl1
@@ -575,7 +586,7 @@
             this.galleryControl1.Gallery.ItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.GalleryItem_Click);
             this.galleryControl1.Location = new System.Drawing.Point(0, 0);
             this.galleryControl1.Name = "galleryControl1";
-            this.galleryControl1.Size = new System.Drawing.Size(253, 684);
+            this.galleryControl1.Size = new System.Drawing.Size(255, 686);
             this.galleryControl1.TabIndex = 0;
             this.galleryControl1.Text = "Movies";
             // 
@@ -583,25 +594,25 @@
             // 
             this.galleryControlClient1.GalleryControl = this.galleryControl1;
             this.galleryControlClient1.Location = new System.Drawing.Point(2, 2);
-            this.galleryControlClient1.Size = new System.Drawing.Size(232, 680);
+            this.galleryControlClient1.Size = new System.Drawing.Size(234, 682);
             // 
             // picFanart
             // 
             this.picFanart.HeaderDetails = "No Image";
             this.picFanart.HeaderTitle = "Fanart";
-            this.picFanart.Location = new System.Drawing.Point(692, 394);
+            this.picFanart.Location = new System.Drawing.Point(695, 396);
             this.picFanart.Margin = new System.Windows.Forms.Padding(0);
             this.picFanart.Name = "picFanart";
-            this.picFanart.Size = new System.Drawing.Size(352, 295);
+            this.picFanart.Size = new System.Drawing.Size(349, 293);
             this.picFanart.TabIndex = 7;
             this.picFanart.Type = YANFOE.Tools.Enums.GalleryType.MovieFanart;
             // 
             // tabEditTabsControl
             // 
-            this.tabEditTabsControl.Location = new System.Drawing.Point(270, 51);
+            this.tabEditTabsControl.Location = new System.Drawing.Point(272, 51);
             this.tabEditTabsControl.Name = "tabEditTabsControl";
             this.tabEditTabsControl.SelectedTabPage = this.tabMainDetails;
-            this.tabEditTabsControl.Size = new System.Drawing.Size(777, 331);
+            this.tabEditTabsControl.Size = new System.Drawing.Size(775, 331);
             this.tabEditTabsControl.TabIndex = 5;
             this.tabEditTabsControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabMainDetails,
@@ -615,7 +626,7 @@
             // 
             this.tabMainDetails.Controls.Add(this.movieMainDetailsUserControl1);
             this.tabMainDetails.Name = "tabMainDetails";
-            this.tabMainDetails.Size = new System.Drawing.Size(771, 305);
+            this.tabMainDetails.Size = new System.Drawing.Size(771, 307);
             this.tabMainDetails.Text = "Main Details";
             // 
             // movieMainDetailsUserControl1
@@ -623,7 +634,7 @@
             this.movieMainDetailsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.movieMainDetailsUserControl1.Location = new System.Drawing.Point(0, 0);
             this.movieMainDetailsUserControl1.Name = "movieMainDetailsUserControl1";
-            this.movieMainDetailsUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.movieMainDetailsUserControl1.Size = new System.Drawing.Size(771, 307);
             this.movieMainDetailsUserControl1.TabIndex = 0;
             // 
             // tabFileInfo
@@ -631,7 +642,7 @@
             this.tabFileInfo.Controls.Add(this.labelControl1);
             this.tabFileInfo.Controls.Add(this.mediaInfoUserControl1);
             this.tabFileInfo.Name = "tabFileInfo";
-            this.tabFileInfo.Size = new System.Drawing.Size(771, 305);
+            this.tabFileInfo.Size = new System.Drawing.Size(771, 307);
             this.tabFileInfo.Text = "File Info";
             // 
             // labelControl1
@@ -650,7 +661,7 @@
             this.mediaInfoUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaInfoUserControl1.Location = new System.Drawing.Point(0, 0);
             this.mediaInfoUserControl1.Name = "mediaInfoUserControl1";
-            this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.mediaInfoUserControl1.Size = new System.Drawing.Size(771, 307);
             this.mediaInfoUserControl1.TabIndex = 0;
             this.mediaInfoUserControl1.Type = YANFOE.UI.UserControls.CommonControls.MediaInfoUserControl.FileInfoType.Movie;
             // 
@@ -658,7 +669,7 @@
             // 
             this.tabIdentify.Controls.Add(this.movieIdentierUserControl11);
             this.tabIdentify.Name = "tabIdentify";
-            this.tabIdentify.Size = new System.Drawing.Size(771, 305);
+            this.tabIdentify.Size = new System.Drawing.Size(771, 307);
             this.tabIdentify.Text = "Identifier";
             // 
             // movieIdentierUserControl11
@@ -666,14 +677,14 @@
             this.movieIdentierUserControl11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.movieIdentierUserControl11.Location = new System.Drawing.Point(0, 0);
             this.movieIdentierUserControl11.Name = "movieIdentierUserControl11";
-            this.movieIdentierUserControl11.Size = new System.Drawing.Size(771, 305);
+            this.movieIdentierUserControl11.Size = new System.Drawing.Size(771, 307);
             this.movieIdentierUserControl11.TabIndex = 0;
             // 
             // tabSets
             // 
             this.tabSets.Controls.Add(this.setManagerUserControl1);
             this.tabSets.Name = "tabSets";
-            this.tabSets.Size = new System.Drawing.Size(771, 305);
+            this.tabSets.Size = new System.Drawing.Size(771, 307);
             this.tabSets.Text = "Set";
             // 
             // setManagerUserControl1
@@ -681,14 +692,14 @@
             this.setManagerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.setManagerUserControl1.Location = new System.Drawing.Point(0, 0);
             this.setManagerUserControl1.Name = "setManagerUserControl1";
-            this.setManagerUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.setManagerUserControl1.Size = new System.Drawing.Size(771, 307);
             this.setManagerUserControl1.TabIndex = 0;
             // 
             // tabTrailers
             // 
             this.tabTrailers.Controls.Add(this.movieTrailerUserControl1);
             this.tabTrailers.Name = "tabTrailers";
-            this.tabTrailers.Size = new System.Drawing.Size(771, 305);
+            this.tabTrailers.Size = new System.Drawing.Size(771, 307);
             this.tabTrailers.Text = "Trailers";
             // 
             // movieTrailerUserControl1
@@ -696,14 +707,14 @@
             this.movieTrailerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.movieTrailerUserControl1.Location = new System.Drawing.Point(0, 0);
             this.movieTrailerUserControl1.Name = "movieTrailerUserControl1";
-            this.movieTrailerUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.movieTrailerUserControl1.Size = new System.Drawing.Size(771, 307);
             this.movieTrailerUserControl1.TabIndex = 0;
             // 
             // tabPreview
             // 
             this.tabPreview.Controls.Add(this.nfoPreviewUserControl1);
             this.tabPreview.Name = "tabPreview";
-            this.tabPreview.Size = new System.Drawing.Size(771, 305);
+            this.tabPreview.Size = new System.Drawing.Size(771, 307);
             this.tabPreview.Text = "Previews";
             // 
             // nfoPreviewUserControl1
@@ -712,16 +723,16 @@
             this.nfoPreviewUserControl1.Location = new System.Drawing.Point(0, 0);
             this.nfoPreviewUserControl1.Name = "nfoPreviewUserControl1";
             this.nfoPreviewUserControl1.PreviewArea = YANFOE.UI.UserControls.CommonControls.NFOPreviewUserControl.TvOrMovies.Movies;
-            this.nfoPreviewUserControl1.Size = new System.Drawing.Size(771, 305);
+            this.nfoPreviewUserControl1.Size = new System.Drawing.Size(771, 307);
             this.nfoPreviewUserControl1.TabIndex = 0;
             // 
             // picPoster
             // 
             this.picPoster.HeaderDetails = "No Image";
             this.picPoster.HeaderTitle = "Poster";
-            this.picPoster.Location = new System.Drawing.Point(273, 394);
+            this.picPoster.Location = new System.Drawing.Point(275, 396);
             this.picPoster.Name = "picPoster";
-            this.picPoster.Size = new System.Drawing.Size(410, 295);
+            this.picPoster.Size = new System.Drawing.Size(409, 293);
             this.picPoster.TabIndex = 6;
             this.picPoster.Type = YANFOE.Tools.Enums.GalleryType.MoviePoster;
             // 
@@ -739,37 +750,179 @@
             this.panelControl1.Controls.Add(this.btnSave);
             this.panelControl1.Controls.Add(this.btnLoadFromWeb);
             this.panelControl1.Controls.Add(this.btnLock);
-            this.panelControl1.Location = new System.Drawing.Point(270, 2);
+            this.panelControl1.Location = new System.Drawing.Point(272, 2);
             this.panelControl1.MaximumSize = new System.Drawing.Size(0, 45);
             this.panelControl1.MinimumSize = new System.Drawing.Size(0, 45);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(777, 45);
+            this.panelControl1.Size = new System.Drawing.Size(775, 45);
             this.panelControl1.TabIndex = 1;
             // 
-            // barManager1
+            // btnMediaInfo
             // 
-            this.barManager1.DockControls.Add(this.barDockControlTop);
-            this.barManager1.DockControls.Add(this.barDockControlBottom);
-            this.barManager1.DockControls.Add(this.barDockControlLeft);
-            this.barManager1.DockControls.Add(this.barDockControlRight);
-            this.barManager1.Form = this;
-            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem1,
-            this.barStaticItem1,
-            this.barSubItem1,
-            this.barButtonItem2,
-            this.barStaticItem2,
-            this.btnSaveNfo,
-            this.btnSaveAllImages,
-            this.btnSavePoster,
-            this.btnSaveFanart,
-            this.barButtonItem7,
-            this.barButtonItem8,
-            this.barButtonItem3,
-            this.barButtonItem4,
-            this.barCheckItem1,
-            this.barCheckItem2});
-            this.barManager1.MaxItemId = 15;
+            this.btnMediaInfo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMediaInfo.Image = global::YANFOE.Properties.Resources.searchred;
+            this.btnMediaInfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMediaInfo.Location = new System.Drawing.Point(437, 2);
+            this.btnMediaInfo.Name = "btnMediaInfo";
+            this.btnMediaInfo.Size = new System.Drawing.Size(48, 41);
+            superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem1.Appearance.Image = global::YANFOE.Properties.Resources.searchred;
+            toolTipTitleItem1.Appearance.Options.UseImage = true;
+            toolTipTitleItem1.Image = global::YANFOE.Properties.Resources.searchred;
+            toolTipTitleItem1.Text = "Do MediaInfo lookup\r\n";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "\r\n";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.btnMediaInfo.SuperTip = superToolTip1;
+            this.btnMediaInfo.TabIndex = 15;
+            this.btnMediaInfo.Click += new System.EventHandler(this.btnMediaInfo_Click);
+            // 
+            // btnMutliWatchedFalse
+            // 
+            this.btnMutliWatchedFalse.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMutliWatchedFalse.Image = global::YANFOE.Properties.Resources.watched_red;
+            this.btnMutliWatchedFalse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMutliWatchedFalse.Location = new System.Drawing.Point(485, 2);
+            this.btnMutliWatchedFalse.Name = "btnMutliWatchedFalse";
+            this.btnMutliWatchedFalse.Size = new System.Drawing.Size(48, 41);
+            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.watched_red;
+            toolTipTitleItem2.Appearance.Options.UseImage = true;
+            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.watched_red;
+            toolTipTitleItem2.Text = "Unmark all selected movies as Watched";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "\r\n";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.btnMutliWatchedFalse.SuperTip = superToolTip2;
+            this.btnMutliWatchedFalse.TabIndex = 13;
+            this.btnMutliWatchedFalse.Click += new System.EventHandler(this.btnMutliWatchedFalse_Click);
+            // 
+            // btnMultiWatchedTrue
+            // 
+            this.btnMultiWatchedTrue.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMultiWatchedTrue.Image = global::YANFOE.Properties.Resources.watched_green;
+            this.btnMultiWatchedTrue.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMultiWatchedTrue.Location = new System.Drawing.Point(533, 2);
+            this.btnMultiWatchedTrue.Name = "btnMultiWatchedTrue";
+            this.btnMultiWatchedTrue.Size = new System.Drawing.Size(48, 41);
+            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem3.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem3.Appearance.Options.UseImage = true;
+            toolTipTitleItem3.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem3.Text = "Mark all selected movies as Watched";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "\r\n";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.btnMultiWatchedTrue.SuperTip = superToolTip3;
+            this.btnMultiWatchedTrue.TabIndex = 14;
+            this.btnMultiWatchedTrue.Click += new System.EventHandler(this.btnMutliWatchedTrue_Click);
+            // 
+            // btnWatched
+            // 
+            this.btnWatched.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnWatched.Image = global::YANFOE.Properties.Resources.watched_red;
+            this.btnWatched.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnWatched.Location = new System.Drawing.Point(581, 2);
+            this.btnWatched.Name = "btnWatched";
+            this.btnWatched.Size = new System.Drawing.Size(48, 41);
+            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem4.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem4.Appearance.Options.UseImage = true;
+            toolTipTitleItem4.Image = global::YANFOE.Properties.Resources.watched_green;
+            toolTipTitleItem4.Text = "Mark movie as Watched";
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "\r\n";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            superToolTip4.Items.Add(toolTipItem4);
+            this.btnWatched.SuperTip = superToolTip4;
+            this.btnWatched.TabIndex = 12;
+            this.btnWatched.Click += new System.EventHandler(this.btnWatched_Click);
+            // 
+            // btnOpenFolder
+            // 
+            this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenFolder.Image = global::YANFOE.Properties.Resources.folder32;
+            this.btnOpenFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnOpenFolder.Location = new System.Drawing.Point(156, 2);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(48, 41);
+            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem5.Text = "Open Movie";
+            toolTipItem5.LeftIndent = 6;
+            toolTipItem5.Text = "Clicking this link will open the movie folder.";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            superToolTip5.Items.Add(toolTipItem5);
+            this.btnOpenFolder.SuperTip = superToolTip5;
+            this.btnOpenFolder.TabIndex = 11;
+            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenFile.Image = global::YANFOE.Properties.Resources.monitor;
+            this.btnOpenFile.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnOpenFile.Location = new System.Drawing.Point(108, 2);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(48, 41);
+            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem6.Text = "Open Movie";
+            toolTipItem6.LeftIndent = 6;
+            toolTipItem6.Text = "Clicking this link will open the current movie file.\r\n";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            superToolTip6.Items.Add(toolTipItem6);
+            this.btnOpenFile.SuperTip = superToolTip6;
+            this.btnOpenFile.TabIndex = 10;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelControl2.Location = new System.Drawing.Point(98, 2);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(10, 41);
+            this.panelControl2.TabIndex = 9;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNew.Image = global::YANFOE.Properties.Resources.new32;
+            this.btnNew.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnNew.Location = new System.Drawing.Point(629, 2);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(48, 41);
+            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem7.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem7.Appearance.Options.UseImage = true;
+            toolTipTitleItem7.Image = global::YANFOE.Properties.Resources.promo_red16;
+            toolTipTitleItem7.Text = "Movie is marked as New";
+            toolTipItem7.LeftIndent = 6;
+            toolTipItem7.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
+            superToolTip7.Items.Add(toolTipTitleItem7);
+            superToolTip7.Items.Add(toolTipItem7);
+            this.btnNew.SuperTip = superToolTip7;
+            this.btnNew.TabIndex = 7;
+            this.btnNew.Visible = false;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.DoubleClick += new System.EventHandler(this.BtnNew_DoubleClick);
+            // 
+            // btnMarked
+            // 
+            this.btnMarked.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMarked.Image = global::YANFOE.Properties.Resources.star_empty32;
+            this.btnMarked.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnMarked.Location = new System.Drawing.Point(677, 2);
+            this.btnMarked.Name = "btnMarked";
+            this.btnMarked.Size = new System.Drawing.Size(48, 41);
+            superToolTip8.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem8.Text = "Marked / Unmarked";
+            superToolTip8.Items.Add(toolTipTitleItem8);
+            this.btnMarked.SuperTip = superToolTip8;
+            this.btnMarked.TabIndex = 6;
+            this.btnMarked.Tag = "unmarked";
+            this.btnMarked.Click += new System.EventHandler(this.BtnMarked_Click);
             // 
             // btnSave
             // 
@@ -793,6 +946,200 @@
             this.btnSave.SuperTip = superToolTip9;
             this.btnSave.TabIndex = 4;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // btnLoadFromWeb
+            // 
+            this.btnLoadFromWeb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLoadFromWeb.Image = global::YANFOE.Properties.Resources.globe32;
+            this.btnLoadFromWeb.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnLoadFromWeb.Location = new System.Drawing.Point(2, 2);
+            this.btnLoadFromWeb.Name = "btnLoadFromWeb";
+            this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
+            this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 41);
+            superToolTip10.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem11.Text = "Load From Web";
+            toolTipItem9.LeftIndent = 6;
+            toolTipItem9.Text = "Will download details using the scraper set for this movie.";
+            toolTipTitleItem12.LeftIndent = 6;
+            toolTipTitleItem12.Text = "Right click for more options...\r\n";
+            superToolTip10.Items.Add(toolTipTitleItem11);
+            superToolTip10.Items.Add(toolTipItem9);
+            superToolTip10.Items.Add(toolTipSeparatorItem2);
+            superToolTip10.Items.Add(toolTipTitleItem12);
+            this.btnLoadFromWeb.SuperTip = superToolTip10;
+            this.btnLoadFromWeb.TabIndex = 0;
+            this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
+            // 
+            // btnLock
+            // 
+            this.btnLock.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnLock.Image = global::YANFOE.Properties.Resources.unlock32;
+            this.btnLock.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.btnLock.Location = new System.Drawing.Point(725, 2);
+            this.btnLock.Name = "btnLock";
+            this.btnLock.Size = new System.Drawing.Size(48, 41);
+            superToolTip11.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem13.Text = "Locked / Unlock";
+            superToolTip11.Items.Add(toolTipTitleItem13);
+            this.btnLock.SuperTip = superToolTip11;
+            this.btnLock.TabIndex = 8;
+            this.btnLock.Tag = "unlocked";
+            this.btnLock.Click += new System.EventHandler(this.BtnLock_Click);
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem2,
+            this.layoutControlImages,
+            this.splitterItem3,
+            this.layoutControlItem1,
+            this.splitterItem2,
+            this.layoutControlItem5});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1049, 714);
+            this.layoutControlGroup1.Text = "Root";
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.tabEditTabsControl;
+            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem2.Location = new System.Drawing.Point(270, 49);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(779, 335);
+            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextToControlDistance = 0;
+            this.layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlImages
+            // 
+            this.layoutControlImages.CustomizationFormText = "Images";
+            this.layoutControlImages.ExpandButtonMode = DevExpress.Utils.Controls.ExpandButtonMode.Inverted;
+            this.layoutControlImages.ExpandButtonVisible = true;
+            this.layoutControlImages.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.splitterItem1,
+            this.layoutControlItem3});
+            this.layoutControlImages.Location = new System.Drawing.Point(270, 391);
+            this.layoutControlImages.Name = "layoutControlImages";
+            this.layoutControlImages.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlImages.Size = new System.Drawing.Size(779, 323);
+            this.layoutControlImages.Text = "Show / Hide Images";
+            this.layoutControlImages.TextLocation = DevExpress.Utils.Locations.Bottom;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.picFanart;
+            this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
+            this.layoutControlItem4.Location = new System.Drawing.Point(420, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(353, 297);
+            this.layoutControlItem4.Text = "layoutControlItem4";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextToControlDistance = 0;
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // splitterItem1
+            // 
+            this.splitterItem1.AllowHotTrack = true;
+            this.splitterItem1.CustomizationFormText = "splitterItem1";
+            this.splitterItem1.Location = new System.Drawing.Point(413, 0);
+            this.splitterItem1.Name = "splitterItem1";
+            this.splitterItem1.Size = new System.Drawing.Size(7, 297);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.picPoster;
+            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(413, 297);
+            this.layoutControlItem3.Text = "layoutControlItem3";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextToControlDistance = 0;
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // splitterItem3
+            // 
+            this.splitterItem3.AllowHotTrack = true;
+            this.splitterItem3.CustomizationFormText = "splitterItem3";
+            this.splitterItem3.Location = new System.Drawing.Point(270, 384);
+            this.splitterItem3.Name = "splitterItem3";
+            this.splitterItem3.Size = new System.Drawing.Size(779, 7);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.xtraTabControl2;
+            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(263, 714);
+            this.layoutControlItem1.Text = "layoutControlItem1";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextToControlDistance = 0;
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // splitterItem2
+            // 
+            this.splitterItem2.AllowHotTrack = true;
+            this.splitterItem2.CustomizationFormText = "splitterItem2";
+            this.splitterItem2.Location = new System.Drawing.Point(263, 0);
+            this.splitterItem2.Name = "splitterItem2";
+            this.splitterItem2.Size = new System.Drawing.Size(7, 714);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.panelControl1;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
+            this.layoutControlItem5.Location = new System.Drawing.Point(270, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(779, 49);
+            this.layoutControlItem5.Text = "layoutControlItem5";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextToControlDistance = 0;
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barButtonItem1,
+            this.barStaticItem1,
+            this.barSubItem1,
+            this.barButtonItem2,
+            this.barStaticItem2,
+            this.btnSaveNfo,
+            this.btnSaveAllImages,
+            this.btnSavePoster,
+            this.btnSaveFanart,
+            this.barButtonItem7,
+            this.barButtonItem8,
+            this.barButtonItem3,
+            this.barButtonItem4,
+            this.barCheckItem1,
+            this.barCheckItem2,
+            this.popupLock,
+            this.barButtonItem6,
+            this.popupMark,
+            this.barButtonItem10,
+            this.barButtonItem11,
+            this.popupUnlock,
+            this.popupUnmark,
+            this.popupHide,
+            this.popupDelete,
+            this.popupOpenFolder,
+            this.popupOpenMovie});
+            this.barManager1.MaxItemId = 26;
             // 
             // popupSave
             // 
@@ -844,29 +1191,6 @@
             this.barButtonItem8.Id = 10;
             this.barButtonItem8.Name = "barButtonItem8";
             this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BtnSave_Click);
-            // 
-            // btnLoadFromWeb
-            // 
-            this.btnLoadFromWeb.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLoadFromWeb.Image = global::YANFOE.Properties.Resources.globe32;
-            this.btnLoadFromWeb.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnLoadFromWeb.Location = new System.Drawing.Point(2, 2);
-            this.btnLoadFromWeb.Name = "btnLoadFromWeb";
-            this.barManager1.SetPopupContextMenu(this.btnLoadFromWeb, this.popupLoadFromWeb);
-            this.btnLoadFromWeb.Size = new System.Drawing.Size(48, 41);
-            superToolTip10.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem11.Text = "Load From Web";
-            toolTipItem9.LeftIndent = 6;
-            toolTipItem9.Text = "Will download details using the scraper set for this movie.";
-            toolTipTitleItem12.LeftIndent = 6;
-            toolTipTitleItem12.Text = "Right click for more options...\r\n";
-            superToolTip10.Items.Add(toolTipTitleItem11);
-            superToolTip10.Items.Add(toolTipItem9);
-            superToolTip10.Items.Add(toolTipSeparatorItem2);
-            superToolTip10.Items.Add(toolTipTitleItem12);
-            this.btnLoadFromWeb.SuperTip = superToolTip10;
-            this.btnLoadFromWeb.TabIndex = 0;
-            this.btnLoadFromWeb.Click += new System.EventHandler(this.BtnLoadFromWeb_Click);
             // 
             // popupLoadFromWeb
             // 
@@ -970,307 +1294,88 @@
             this.barCheckItem2.Id = 14;
             this.barCheckItem2.Name = "barCheckItem2";
             // 
-            // btnMediaInfo
+            // popupLock
             // 
-            this.btnMediaInfo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMediaInfo.Image = global::YANFOE.Properties.Resources.searchred;
-            this.btnMediaInfo.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMediaInfo.Location = new System.Drawing.Point(439, 2);
-            this.btnMediaInfo.Name = "btnMediaInfo";
-            this.btnMediaInfo.Size = new System.Drawing.Size(48, 41);
-            superToolTip1.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem1.Appearance.Image = global::YANFOE.Properties.Resources.searchred;
-            toolTipTitleItem1.Appearance.Options.UseImage = true;
-            toolTipTitleItem1.Image = global::YANFOE.Properties.Resources.searchred;
-            toolTipTitleItem1.Text = "Do MediaInfo lookup\r\n";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "\r\n";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.btnMediaInfo.SuperTip = superToolTip1;
-            this.btnMediaInfo.TabIndex = 15;
-            this.btnMediaInfo.Click += new System.EventHandler(this.btnMediaInfo_Click);
+            this.popupLock.Caption = "Lock";
+            this.popupLock.Glyph = global::YANFOE.Properties.Resources.locked32;
+            this.popupLock.Id = 15;
+            this.popupLock.Name = "popupLock";
+            this.popupLock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupLock_ItemClick);
             // 
-            // btnMutliWatchedFalse
+            // barButtonItem6
             // 
-            this.btnMutliWatchedFalse.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMutliWatchedFalse.Image = global::YANFOE.Properties.Resources.watched_red;
-            this.btnMutliWatchedFalse.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMutliWatchedFalse.Location = new System.Drawing.Point(487, 2);
-            this.btnMutliWatchedFalse.Name = "btnMutliWatchedFalse";
-            this.btnMutliWatchedFalse.Size = new System.Drawing.Size(48, 41);
-            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.watched_red;
-            toolTipTitleItem2.Appearance.Options.UseImage = true;
-            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.watched_red;
-            toolTipTitleItem2.Text = "Unmark all selected movies as Watched";
-            toolTipItem2.LeftIndent = 6;
-            toolTipItem2.Text = "\r\n";
-            superToolTip2.Items.Add(toolTipTitleItem2);
-            superToolTip2.Items.Add(toolTipItem2);
-            this.btnMutliWatchedFalse.SuperTip = superToolTip2;
-            this.btnMutliWatchedFalse.TabIndex = 13;
-            this.btnMutliWatchedFalse.Click += new System.EventHandler(this.btnMutliWatchedFalse_Click);
+            this.barButtonItem6.Caption = "Unlock";
+            this.barButtonItem6.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.barButtonItem6.Id = 16;
+            this.barButtonItem6.Name = "barButtonItem6";
             // 
-            // btnMultiWatchedTrue
+            // popupMark
             // 
-            this.btnMultiWatchedTrue.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMultiWatchedTrue.Image = global::YANFOE.Properties.Resources.watched_green;
-            this.btnMultiWatchedTrue.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMultiWatchedTrue.Location = new System.Drawing.Point(535, 2);
-            this.btnMultiWatchedTrue.Name = "btnMultiWatchedTrue";
-            this.btnMultiWatchedTrue.Size = new System.Drawing.Size(48, 41);
-            superToolTip3.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem3.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem3.Appearance.Options.UseImage = true;
-            toolTipTitleItem3.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem3.Text = "Mark all selected movies as Watched";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "\r\n";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.btnMultiWatchedTrue.SuperTip = superToolTip3;
-            this.btnMultiWatchedTrue.TabIndex = 14;
-            this.btnMultiWatchedTrue.Click += new System.EventHandler(this.btnMutliWatchedTrue_Click);
+            this.popupMark.Caption = "Mark";
+            this.popupMark.Glyph = global::YANFOE.Properties.Resources.star_full32;
+            this.popupMark.Id = 17;
+            this.popupMark.Name = "popupMark";
+            this.popupMark.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMark_ItemClick);
             // 
-            // btnWatched
+            // barButtonItem10
             // 
-            this.btnWatched.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnWatched.Image = global::YANFOE.Properties.Resources.watched_red;
-            this.btnWatched.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnWatched.Location = new System.Drawing.Point(583, 2);
-            this.btnWatched.Name = "btnWatched";
-            this.btnWatched.Size = new System.Drawing.Size(48, 41);
-            superToolTip4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem4.Appearance.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem4.Appearance.Options.UseImage = true;
-            toolTipTitleItem4.Image = global::YANFOE.Properties.Resources.watched_green;
-            toolTipTitleItem4.Text = "Mark movie as Watched";
-            toolTipItem4.LeftIndent = 6;
-            toolTipItem4.Text = "\r\n";
-            superToolTip4.Items.Add(toolTipTitleItem4);
-            superToolTip4.Items.Add(toolTipItem4);
-            this.btnWatched.SuperTip = superToolTip4;
-            this.btnWatched.TabIndex = 12;
-            this.btnWatched.Click += new System.EventHandler(this.btnWatched_Click);
+            this.barButtonItem10.Caption = "Unmark";
+            this.barButtonItem10.Id = 18;
+            this.barButtonItem10.Name = "barButtonItem10";
             // 
-            // btnOpenFolder
+            // barButtonItem11
             // 
-            this.btnOpenFolder.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnOpenFolder.Image = global::YANFOE.Properties.Resources.folder32;
-            this.btnOpenFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnOpenFolder.Location = new System.Drawing.Point(156, 2);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(48, 41);
-            superToolTip5.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem5.Text = "Open Movie";
-            toolTipItem5.LeftIndent = 6;
-            toolTipItem5.Text = "Clicking this link will open the movie folder.";
-            superToolTip5.Items.Add(toolTipTitleItem5);
-            superToolTip5.Items.Add(toolTipItem5);
-            this.btnOpenFolder.SuperTip = superToolTip5;
-            this.btnOpenFolder.TabIndex = 11;
-            this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
+            this.barButtonItem11.Caption = "rewrwe";
+            this.barButtonItem11.Id = 19;
+            this.barButtonItem11.Name = "barButtonItem11";
             // 
-            // btnOpenFile
+            // popupUnlock
             // 
-            this.btnOpenFile.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnOpenFile.Image = global::YANFOE.Properties.Resources.monitor;
-            this.btnOpenFile.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnOpenFile.Location = new System.Drawing.Point(108, 2);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(48, 41);
-            superToolTip6.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem6.Text = "Open Movie";
-            toolTipItem6.LeftIndent = 6;
-            toolTipItem6.Text = "Clicking this link will open the current movie file.\r\n";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            superToolTip6.Items.Add(toolTipItem6);
-            this.btnOpenFile.SuperTip = superToolTip6;
-            this.btnOpenFile.TabIndex = 10;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            this.popupUnlock.Caption = "UnLock";
+            this.popupUnlock.Glyph = global::YANFOE.Properties.Resources.unlock32;
+            this.popupUnlock.Id = 20;
+            this.popupUnlock.Name = "popupUnlock";
+            this.popupUnlock.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupUnlock_ItemClick);
             // 
-            // panelControl2
+            // popupUnmark
             // 
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelControl2.Location = new System.Drawing.Point(98, 2);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(10, 41);
-            this.panelControl2.TabIndex = 9;
+            this.popupUnmark.Caption = "Unmark";
+            this.popupUnmark.Glyph = global::YANFOE.Properties.Resources.star_empty32;
+            this.popupUnmark.Id = 21;
+            this.popupUnmark.Name = "popupUnmark";
+            this.popupUnmark.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupUnmark_ItemClick);
             // 
-            // btnNew
+            // popupHide
             // 
-            this.btnNew.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNew.Image = global::YANFOE.Properties.Resources.new32;
-            this.btnNew.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnNew.Location = new System.Drawing.Point(631, 2);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(48, 41);
-            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem7.Appearance.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem7.Appearance.Options.UseImage = true;
-            toolTipTitleItem7.Image = global::YANFOE.Properties.Resources.promo_red16;
-            toolTipTitleItem7.Text = "Movie is marked as New";
-            toolTipItem7.LeftIndent = 6;
-            toolTipItem7.Text = "The new status will be removed next time YANFOE is started.<br>\r\n\r\n\r\n";
-            superToolTip7.Items.Add(toolTipTitleItem7);
-            superToolTip7.Items.Add(toolTipItem7);
-            this.btnNew.SuperTip = superToolTip7;
-            this.btnNew.TabIndex = 7;
-            this.btnNew.Visible = false;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            this.btnNew.DoubleClick += new System.EventHandler(this.BtnNew_DoubleClick);
+            this.popupHide.Caption = "Hide";
+            this.popupHide.Glyph = global::YANFOE.Properties.Resources.find1;
+            this.popupHide.Id = 22;
+            this.popupHide.Name = "popupHide";
+            this.popupHide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupHide_ItemClick);
             // 
-            // btnMarked
+            // popupDelete
             // 
-            this.btnMarked.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMarked.Image = global::YANFOE.Properties.Resources.star_empty32;
-            this.btnMarked.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnMarked.Location = new System.Drawing.Point(679, 2);
-            this.btnMarked.Name = "btnMarked";
-            this.btnMarked.Size = new System.Drawing.Size(48, 41);
-            superToolTip8.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem8.Text = "Marked / Unmarked";
-            superToolTip8.Items.Add(toolTipTitleItem8);
-            this.btnMarked.SuperTip = superToolTip8;
-            this.btnMarked.TabIndex = 6;
-            this.btnMarked.Tag = "unmarked";
-            this.btnMarked.Click += new System.EventHandler(this.BtnMarked_Click);
+            this.popupDelete.Caption = "Remove";
+            this.popupDelete.Glyph = global::YANFOE.Properties.Resources.delete32;
+            this.popupDelete.Id = 23;
+            this.popupDelete.Name = "popupDelete";
+            this.popupDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupDelete_ItemClick);
             // 
-            // btnLock
+            // popupOpenFolder
             // 
-            this.btnLock.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnLock.Image = global::YANFOE.Properties.Resources.unlock32;
-            this.btnLock.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.btnLock.Location = new System.Drawing.Point(727, 2);
-            this.btnLock.Name = "btnLock";
-            this.btnLock.Size = new System.Drawing.Size(48, 41);
-            superToolTip11.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem13.Text = "Locked / Unlock";
-            superToolTip11.Items.Add(toolTipTitleItem13);
-            this.btnLock.SuperTip = superToolTip11;
-            this.btnLock.TabIndex = 8;
-            this.btnLock.Tag = "unlocked";
-            this.btnLock.Click += new System.EventHandler(this.BtnLock_Click);
+            this.popupOpenFolder.Caption = "Open Folder";
+            this.popupOpenFolder.Glyph = global::YANFOE.Properties.Resources.folder32;
+            this.popupOpenFolder.Id = 24;
+            this.popupOpenFolder.Name = "popupOpenFolder";
+            this.popupOpenFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupOpenFolder_ItemClick);
             // 
-            // layoutControlGroup1
+            // popupOpenMovie
             // 
-            this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2,
-            this.layoutControlImages,
-            this.splitterItem3,
-            this.layoutControlItem1,
-            this.splitterItem2,
-            this.layoutControlItem5});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1049, 714);
-            this.layoutControlGroup1.Text = "Root";
-            this.layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.tabEditTabsControl;
-            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            this.layoutControlItem2.Location = new System.Drawing.Point(268, 49);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(781, 335);
-            this.layoutControlItem2.Text = "layoutControlItem2";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextToControlDistance = 0;
-            this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlImages
-            // 
-            this.layoutControlImages.CustomizationFormText = "Images";
-            this.layoutControlImages.ExpandButtonMode = DevExpress.Utils.Controls.ExpandButtonMode.Inverted;
-            this.layoutControlImages.ExpandButtonVisible = true;
-            this.layoutControlImages.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4,
-            this.splitterItem1,
-            this.layoutControlItem3});
-            this.layoutControlImages.Location = new System.Drawing.Point(268, 389);
-            this.layoutControlImages.Name = "layoutControlImages";
-            this.layoutControlImages.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlImages.Size = new System.Drawing.Size(781, 325);
-            this.layoutControlImages.Text = "Show / Hide Images";
-            this.layoutControlImages.TextLocation = DevExpress.Utils.Locations.Bottom;
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.picFanart;
-            this.layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            this.layoutControlItem4.Location = new System.Drawing.Point(419, 0);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(356, 299);
-            this.layoutControlItem4.Text = "layoutControlItem4";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextToControlDistance = 0;
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // splitterItem1
-            // 
-            this.splitterItem1.AllowHotTrack = true;
-            this.splitterItem1.CustomizationFormText = "splitterItem1";
-            this.splitterItem1.Location = new System.Drawing.Point(414, 0);
-            this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(5, 299);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.picPoster;
-            this.layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(414, 299);
-            this.layoutControlItem3.Text = "layoutControlItem3";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextToControlDistance = 0;
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // splitterItem3
-            // 
-            this.splitterItem3.AllowHotTrack = true;
-            this.splitterItem3.CustomizationFormText = "splitterItem3";
-            this.splitterItem3.Location = new System.Drawing.Point(268, 384);
-            this.splitterItem3.Name = "splitterItem3";
-            this.splitterItem3.Size = new System.Drawing.Size(781, 5);
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.xtraTabControl2;
-            this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(263, 714);
-            this.layoutControlItem1.Text = "layoutControlItem1";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextToControlDistance = 0;
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // splitterItem2
-            // 
-            this.splitterItem2.AllowHotTrack = true;
-            this.splitterItem2.CustomizationFormText = "splitterItem2";
-            this.splitterItem2.Location = new System.Drawing.Point(263, 0);
-            this.splitterItem2.Name = "splitterItem2";
-            this.splitterItem2.Size = new System.Drawing.Size(5, 714);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.panelControl1;
-            this.layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            this.layoutControlItem5.Location = new System.Drawing.Point(268, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(781, 49);
-            this.layoutControlItem5.Text = "layoutControlItem5";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextToControlDistance = 0;
-            this.layoutControlItem5.TextVisible = false;
+            this.popupOpenMovie.Caption = "Open Movie";
+            this.popupOpenMovie.Glyph = global::YANFOE.Properties.Resources.video32;
+            this.popupOpenMovie.Id = 25;
+            this.popupOpenMovie.Name = "popupOpenMovie";
+            this.popupOpenMovie.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupOpenMovie_ItemClick);
             // 
             // imageCollection1
             // 
@@ -1280,6 +1385,15 @@
             // 
             // popupMovieList
             // 
+            this.popupMovieList.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupOpenMovie),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupOpenFolder),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupLock, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupUnlock),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupMark, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupUnmark),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupHide, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.popupDelete, true)});
             this.popupMovieList.Manager = this.barManager1;
             this.popupMovieList.Name = "popupMovieList";
             this.popupMovieList.BeforePopup += new System.ComponentModel.CancelEventHandler(this.popupMovieList_BeforePopup);
@@ -1323,9 +1437,6 @@
             this.tabPreview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -1337,6 +1448,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupLoadFromWeb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMovieList)).EndInit();
             this.ResumeLayout(false);
@@ -1449,6 +1563,17 @@
         private DevExpress.XtraEditors.SimpleButton btnMultiWatchedTrue;
         private DevExpress.XtraEditors.SimpleButton btnMutliWatchedFalse;
         private DevExpress.XtraEditors.SimpleButton btnMediaInfo;
+        private DevExpress.XtraBars.BarButtonItem popupLock;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarButtonItem popupMark;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem11;
+        private DevExpress.XtraBars.BarButtonItem popupUnlock;
+        private DevExpress.XtraBars.BarButtonItem popupUnmark;
+        private DevExpress.XtraBars.BarButtonItem popupHide;
+        private DevExpress.XtraBars.BarButtonItem popupDelete;
+        private DevExpress.XtraBars.BarButtonItem popupOpenFolder;
+        private DevExpress.XtraBars.BarButtonItem popupOpenMovie;
 
     }
 }

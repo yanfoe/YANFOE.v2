@@ -109,6 +109,13 @@ namespace YANFOE.Properties {
             }
         }
         
+        public static System.Drawing.Bitmap back1 {
+            get {
+                object obj = ResourceManager.GetObject("back1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         public static System.Drawing.Bitmap back24 {
             get {
                 object obj = ResourceManager.GetObject("back24", resourceCulture);
@@ -266,6 +273,20 @@ namespace YANFOE.Properties {
         public static System.Drawing.Bitmap episode {
             get {
                 object obj = ResourceManager.GetObject("episode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap find {
+            get {
+                object obj = ResourceManager.GetObject("find", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap find1 {
+            get {
+                object obj = ResourceManager.GetObject("find1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

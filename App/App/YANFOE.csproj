@@ -224,6 +224,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.Designer.cs">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.Designer.cs">
+      <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -277,6 +283,12 @@
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.Designer.cs">
       <DependentUpon>UcSettingsTvIOKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvLists.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsTvLists.Designer.cs">
+      <DependentUpon>UcSettingsTvLists.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsTvRename.cs">
       <SubType>UserControl</SubType>
@@ -527,12 +539,17 @@
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Popups\MovieListPopup.cs" />
-    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.cs">
+    <Compile Include="UI\UserControls\CommonControls\ListEditUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\UserControls\CommonControls\MediaInfoUserControl.Designer.cs">
-      <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
+    <Compile Include="UI\UserControls\CommonControls\ListEditUserControl.Designer.cs">
+      <DependentUpon>ListEditUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\CommonControls\MoviesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\CommonControls\MoviesUserControl.Designer.cs">
+      <DependentUpon>MoviesUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UserControls\CommonControls\NFOPreviewUserControl.cs">
       <SubType>UserControl</SubType>
@@ -661,6 +678,9 @@
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.resx">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.resx">
+      <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.resx">
       <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
     </EmbeddedResource>
@@ -687,6 +707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvIOKey.resx">
       <DependentUpon>UcSettingsTvIOKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvLists.resx">
+      <DependentUpon>UcSettingsTvLists.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsTvRename.resx">
       <DependentUpon>UcSettingsTvRename.cs</DependentUpon>
@@ -764,8 +787,11 @@
     <EmbeddedResource Include="UI\Dialogs\TV\FrmUpdateShows.resx">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserControls\CommonControls\MediaInfoUserControl.resx">
-      <DependentUpon>MediaInfoUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\UserControls\CommonControls\ListEditUserControl.resx">
+      <DependentUpon>ListEditUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\CommonControls\MoviesUserControl.resx">
+      <DependentUpon>MoviesUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\NFOPreviewUserControl.resx">
       <DependentUpon>NFOPreviewUserControl.cs</DependentUpon>
@@ -805,6 +831,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\MovieControls\MoviesUserControl.resx">
       <DependentUpon>MoviesUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\DisplayPictureUserControl.resx">
       <DependentUpon>DisplayPictureUserControl.cs</DependentUpon>
@@ -1013,6 +1040,7 @@
     <Folder Include="Factories\Scraper\SupportClasses\" />
     <Folder Include="Movie\Cache\" />
     <Folder Include="Tools\Collections\" />
+    <Folder Include="UI\Popups\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -1076,6 +1104,9 @@
     </None>
     <None Include="Resources\promo_orange.png" />
     <None Include="Resources\promo_orange_faded.png" />
+    <None Include="Resources\find.png" />
+    <None Include="Resources\find1.png" />
+    <None Include="Resources\back2.png" />
     <Content Include="Resources\refresh.png" />
     <None Include="Resources\tools1.png" />
     <None Include="Resources\tools2.png" />

@@ -74,6 +74,8 @@ namespace YANFOE.Scrapers.Movie.Interfaces
         /// <value>The URL HTML cache string.</value>
         Dictionary<string, string> UrlHtmlCache { get; set; }
 
+        BindingList<string> DefaultGenres { get; set; }
+
         #region Searching Methods
 
         /// <summary>

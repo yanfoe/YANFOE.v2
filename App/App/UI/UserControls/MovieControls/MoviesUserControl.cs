@@ -569,6 +569,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </param>
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
+            StartMovieFile();
+        }
+
+        private static void StartMovieFile()
+        {
             if (File.Exists(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].PathAndFilename))
             {
                 Process.Start(MovieDBFactory.GetCurrentMovie().AssociatedFiles.Media[0].PathAndFilename);
@@ -585,6 +590,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// The <see cref="System.EventArgs"/> instance containing the event data.
         /// </param>
         private void btnOpenFolder_Click(object sender, EventArgs e)
+        {
+            OpenMovieFolder();
+        }
+
+        private static void OpenMovieFolder()
         {
             string argument = string.Format(
                 @"/select,""{0}""",
@@ -655,7 +665,42 @@ namespace YANFOE.UI.UserControls.MovieControls
             var rows = this.grdViewByTitle.GetSelectedRows();
             var movieList = rows.Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).ToList();
 
-            Popups.MovieListPopup.Generate(this.barManager1, this.popupMovieList, movieList);
+            if (movieList.Count == 1)
+            {
+                this.popupOpenMovie.Enabled = true;
+                this.popupOpenFolder.Enabled = true;
+
+                this.popupLock.Visibility = movieList[0].Locked ? BarItemVisibility.Never : BarItemVisibility.Always;
+                this.popupUnlock.Visibility = movieList[0].Locked ? BarItemVisibility.Always : BarItemVisibility.Never;
+
+                this.popupMark.Visibility = movieList[0].Marked ? BarItemVisibility.Never : BarItemVisibility.Always;
+                this.popupUnmark.Visibility = movieList[0].Marked ? BarItemVisibility.Always : BarItemVisibility.Never;
+            }
+            else
+            {
+                this.popupOpenMovie.Enabled = false;
+                this.popupOpenFolder.Enabled = false;
+
+                if (movieList.Exists(i => i.Locked))
+                {
+                    this.popupUnlock.Visibility = BarItemVisibility.Always;
+                }
+
+                if (movieList.Exists(i => i.Unlocked))
+                {
+                    this.popupLock.Visibility = BarItemVisibility.Always;
+                }
+
+                if (movieList.Exists(i => i.Marked))
+                {
+                    this.popupUnmark.Visibility = BarItemVisibility.Always;
+                }
+
+                if (movieList.Exists(i => i.Unlocked))
+                {
+                    this.popupMark.Visibility = BarItemVisibility.Always;
+                }
+            }
         }
 
         #endregion
@@ -692,7 +737,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
 
 
-        void bgw_DoWork(object sender, DoWorkEventArgs e)
+        private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             var rows = grdViewByTitle.GetSelectedRows();
             var countMax = rows.Count();
@@ -713,6 +758,86 @@ namespace YANFOE.UI.UserControls.MovieControls
         void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             btnMediaInfo.Enabled = true;
+        }
+
+        private void popupLock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangeAllLockOnSelected(true);
+        }
+
+        private void popupUnlock_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangeAllLockOnSelected(false);
+        }
+
+        private void ChangeAllLockOnSelected(bool value)
+        {
+            MovieDBFactory.IgnoreMultiSelect = true;
+
+            this.grdViewByTitle.GetSelectedRows()
+                .Select(row => this.grdViewByTitle.GetRow(row) as MovieModel)
+                .Select(c => c.Locked = value).ToList();
+
+            MovieDBFactory.IgnoreMultiSelect = false;
+        }
+
+        private void ChangeAllMarkOnSelected(bool value)
+        {
+            MovieDBFactory.IgnoreMultiSelect = true;
+
+            this.grdViewByTitle.GetSelectedRows()
+                .Select(row => this.grdViewByTitle.GetRow(row) as MovieModel)
+                .Select(c => c.Marked = value).ToList();
+
+            MovieDBFactory.IgnoreMultiSelect = false;
+        }
+
+        private void popupMark_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangeAllMarkOnSelected(true);
+        }
+
+        private void popupUnmark_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangeAllMarkOnSelected(false);
+        }
+
+        private void popupOpenMovie_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            StartMovieFile();
+        }
+
+        private void popupOpenFolder_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenMovieFolder();
+        }
+
+        private void popupDelete_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var check = XtraMessageBox.Show("Are you sure you wish to remove the selected movies?", "Remove Movies", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (check == DialogResult.Yes)
+            {
+                this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
+                    ToList().ForEach(MovieDBFactory.RemoveMovie);
+            }
+
+            var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
+            MovieDBFactory.SetCurrentMovie(movieModel);
+        }
+
+        private void popupHide_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var check = XtraMessageBox.Show("Are you sure you wish to hide the selected movies?", "Remove Movies", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (check == DialogResult.Yes)
+            {
+                this.grdViewByTitle.GetSelectedRows().Select(row => this.grdViewByTitle.GetRow(row) as MovieModel).
+                    ToList().ForEach(MovieDBFactory.HideMovie);
+            }
+
+            var movieModel = grdViewByTitle.GetFocusedRow() as MovieModel;
+            MovieDBFactory.SetCurrentMovie(movieModel);
         }
     }
 }

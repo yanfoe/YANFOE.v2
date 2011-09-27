@@ -329,10 +329,18 @@ namespace YANFOE.Factories.Internal
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
-            string[] files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
 
             MovieDBFactory.MovieDatabase.Clear();
 
+            var files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
+            LoadMovies(path, files, MovieDBFactory.MovieDatabase);
+
+            files = FileHelper.GetFilesRecursive(path, "*.hiddenmovie.gz").ToArray();
+            LoadMovies(path, files, MovieDBFactory.HiddenMovieDatabase);
+        }
+
+        private static void LoadMovies(string path, string[] files, BindingList<MovieModel> database)
+        {
             foreach (string file in files)
             {
                 string json = Gzip.Decompress(file);
@@ -356,16 +364,24 @@ namespace YANFOE.Factories.Internal
 
                 movieModel.DatabaseSaved = true;
 
-                if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+                if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
                 {
-                    Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadMovieDB", 
-                        string.Format("Deleting {0}. Movie not found on the filesystem", movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
-                    // We should check for network path and make sure the file has actually been deleted or removed
-                    File.Delete(file);
-                    continue;
+                    if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+                    {
+                        Log.WriteToLog(
+                            LogSeverity.Info,
+                            LoggerName.GeneralLog,
+                            "Internal > DatabaseIOFactory > LoadMovieDB",
+                            string.Format(
+                                "Deleting {0}. Movie not found on the filesystem",
+                                movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
+                        // We should check for network path and make sure the file has actually been deleted or removed
+                        File.Delete(file);
+                        continue;
+                    }
                 }
 
-                MovieDBFactory.MovieDatabase.Add(movieModel);
+                database.Add(movieModel);
 
                 string title = FileNaming.RemoveIllegalChars(movieModel.Title);
 
@@ -435,9 +451,18 @@ namespace YANFOE.Factories.Internal
 
             TvDBFactory.TvDatabase.Clear();
 
+            var hidden = path + "hidden.hiddenSeries.gz";
+
+            if (File.Exists(hidden))
+            {
+                var json = Gzip.Decompress(hidden);
+                TvDBFactory.HiddenTvDatabase =
+                    JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
+            }
+
             foreach (string file in files)
             {
-                string json = Gzip.Decompress(file);
+                var json = Gzip.Decompress(file);
 
                 var series = JsonConvert.DeserializeObject(json, typeof(Series)) as Series;
 
@@ -464,12 +489,19 @@ namespace YANFOE.Factories.Internal
 
                 foreach (var season in series.Seasons)
                 {
-                    foreach (var episode in season.Value.Episodes)
+                    for (int index = 0; index < season.Value.Episodes.Count; index++)
                     {
-                        if (episode.FilePath.PathAndFilename != string.Empty && !File.Exists(episode.FilePath.PathAndFilename))
+                        var episode = season.Value.Episodes[index];
+                        if (episode.FilePath.PathAndFilename != string.Empty
+                            && !File.Exists(episode.FilePath.PathAndFilename))
                         {
-                            Log.WriteToLog(LogSeverity.Info, LoggerName.GeneralLog, "Internal > DatabaseIOFactory > LoadTvDB",
-                                string.Format("Deleting {0}. Episode not found on the filesystem", episode.FilePath.PathAndFilename));
+                            Log.WriteToLog(
+                                LogSeverity.Info,
+                                LoggerName.GeneralLog,
+                                "Internal > DatabaseIOFactory > LoadTvDB",
+                                string.Format(
+                                    "Deleting {0}. Episode not found on the filesystem",
+                                    episode.FilePath.PathAndFilename));
                             // We should check for network path and make sure the file has actually been deleted or removed
                             File.Delete(file);
                             series.Seasons[season.Key].Episodes.Remove(episode);
@@ -630,20 +662,29 @@ namespace YANFOE.Factories.Internal
         {
             SavingCount++;
 
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
 
             var movieModel = e.Argument as MovieModel;
 
-            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+            var title = FileNaming.RemoveIllegalChars(movieModel.Title);
 
-            string writePath = path + title + ".movie";
+            string writePath;
+
+            if (movieModel.Hidden)
+            {
+                writePath = path + title + ".hiddenmovie";
+            }
+            else
+            {
+                writePath = path + title + ".movie";
+            }
 
             movieModel.DatabaseSaved = true;
-            string json = JsonConvert.SerializeObject(movieModel);
+            var json = JsonConvert.SerializeObject(movieModel);
             Gzip.CompressString(json, writePath + ".gz");
 
-            string posterPath = path + title + ".poster.jpg";
-            string fanartPath = path + title + ".fanart.jpg";
+            var posterPath = path + title + ".poster.jpg";
+            var fanartPath = path + title + ".fanart.jpg";
 
             if (movieModel.SmallPoster != null)
             {
@@ -677,6 +718,23 @@ namespace YANFOE.Factories.Internal
             Directory.CreateDirectory(path);
             Folders.DeleteFilesInFolder(path);
 
+            SaveMovies(MovieDBFactory.MovieDatabase);
+            SaveMovies(MovieDBFactory.HiddenMovieDatabase);
+        }
+
+        private static void SaveMovies(BindingList<MovieModel> database)
+        {
+            int count = 0;
+            int max = database.Count;
+
+            if (max == 0)
+            {
+                SavingCount--;
+                return;
+            }
+
+            SavingMovieMax = database.Count;
+
             var bgw1 = new BackgroundWorker();
             var bgw2 = new BackgroundWorker();
             var bgw3 = new BackgroundWorker();
@@ -691,22 +749,11 @@ namespace YANFOE.Factories.Internal
             bgw5.DoWork += bgwSaveMovieDBWork_DoWork;
             bgw6.DoWork += bgwSaveMovieDBWork_DoWork;
 
-            int count = 0;
-            int max = MovieDBFactory.MovieDatabase.Count;
-
-            if (max == 0)
-            {
-                SavingCount--;
-                return;
-            }
-
-            SavingMovieMax = MovieDBFactory.MovieDatabase.Count;
-
             do
             {
                 SavingMovieValue = count;
 
-                MovieModel movieModel = MovieDBFactory.MovieDatabase[count];
+                MovieModel movieModel = database[count];
 
                 if (!bgw1.IsBusy)
                 {
@@ -838,6 +885,10 @@ namespace YANFOE.Factories.Internal
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
             Folders.DeleteFilesInFolder(path);
+
+            string writePath = path + "hidden.hiddenSeries";
+            string json = JsonConvert.SerializeObject(TvDBFactory.HiddenTvDatabase);
+            Gzip.CompressString(json, writePath + ".gz");
 
             foreach (var series in TvDBFactory.TvDatabase)
             {

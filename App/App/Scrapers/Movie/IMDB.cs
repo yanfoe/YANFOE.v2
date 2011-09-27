@@ -93,6 +93,37 @@ namespace YANFOE.Scrapers.Movie
             this.BingRegexMatchTitle = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\simdb\.com";
             this.BingRegexMatchYear = @"(?<title>.*?)\s\((?<year>\d{4})\)\s-\simdb\.com";
             this.BingRegexMatchID = @"(?<imdbid>tt\d{7})";
+
+            this.DefaultGenres = new BindingList<string>
+                {
+                    "Action",
+                    "Adventure",
+                    "Animation",
+                    "Biography",
+                    "Comedy",
+                    "Crime",
+                    "Documentary",
+                    "Drama",
+                    "Family",
+                    "Fantasy",
+                    "Film-Noir",
+                    "Game-Show",
+                    "History",
+                    "Horror",
+                    "Music",
+                    "Musical",
+                    "Mystery",
+                    "News",
+                    "Reality-TV",
+                    "Romance",
+                    "Sci-Fi",
+                    "Short",
+                    "Sport",
+                    "Talk-Show",
+                    "Thriller",
+                    "War",
+                    "Western"
+                };
         }
 
         /// <summary>

@@ -41,6 +41,14 @@ namespace YANFOE.Tools.Extentions
     {
         #region Public Methods
 
+       public static IEnumerable<T> ForEach<T>(
+    this IEnumerable<T> source,
+    Action<T> act)
+       {
+           foreach (T element in source) act(element);
+           return source;
+       }
+
         /// <summary>
         /// Adds the range.
         /// </summary>

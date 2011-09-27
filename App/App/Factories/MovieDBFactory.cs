@@ -25,6 +25,7 @@ namespace YANFOE.Factories
     using DevExpress.Utils;
     using DevExpress.XtraBars.Ribbon;
 
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Cache;
@@ -83,6 +84,7 @@ namespace YANFOE.Factories
         static MovieDBFactory()
         {
             MovieDatabase = new BindingList<MovieModel>();
+            HiddenMovieDatabase = new BindingList<MovieModel>();
             DuplicatedMoviesDatabase = new BindingList<MovieModel>();
             currentMovie = new MovieModel();
             galleryGroup = new GalleryItemGroup();
@@ -196,6 +198,8 @@ namespace YANFOE.Factories
             }
         }
 
+        public static bool IgnoreMultiSelect { get; set; }
+
         /// <summary>
         /// Gets or sets the movie database.
         /// </summary>
@@ -203,6 +207,8 @@ namespace YANFOE.Factories
         /// The movie database.
         /// </value>
         public static BindingList<MovieModel> MovieDatabase { get; set; }
+
+        public static BindingList<MovieModel> HiddenMovieDatabase { get; set; }
 
         /// <summary>
         /// Gets or sets MultiSelectedMovies.
@@ -489,7 +495,8 @@ namespace YANFOE.Factories
         /// <param name="importDatabase">
         /// The import database.
         /// </param>
-        public static void MergeWithDatabase(BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
+        public static void MergeWithDatabase(
+            BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
         {
             foreach (MovieModel movie in importDatabase)
             {
@@ -529,7 +536,7 @@ namespace YANFOE.Factories
         /// </param>
         public static void MultiSelect_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (isMultiSelected)
+            if (isMultiSelected && !IgnoreMultiSelect)
             {
                 foreach (MovieModel movie in multiSelectedMovies)
                 {
@@ -606,7 +613,8 @@ namespace YANFOE.Factories
         {
             lock (MovieDatabase)
             {
-                var getMovieInDatabase = MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
+                var getMovieInDatabase =
+                    MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
 
                 if (getMovieInDatabase == -1)
                 {
@@ -900,10 +908,7 @@ namespace YANFOE.Factories
                         superTip.Items.AddTitle(string.Format("{0} ({1})", movie.Title, movie.Year));
 
                         var galleryItem = new GalleryItem(movie.SmallPoster, movie.Title, string.Empty)
-                            { 
-                                Tag = movie.MovieUniqueId,
-                                SuperTip = superTip
-                            };
+                            { Tag = movie.MovieUniqueId, SuperTip = superTip };
 
                         if (!galleryGroup.Items.Contains(galleryItem))
                         {
@@ -1189,7 +1194,47 @@ namespace YANFOE.Factories
         public enum MovieDBTypes
         {
             Movies = 0,
+
             Duplicates
+        }
+
+        public static void RemoveMovie(MovieModel movie)
+        {
+            foreach (var file in movie.AssociatedFiles.Media)
+            {
+                var fileEntry =
+                    (from f in MasterMediaDBFactory.MasterMovieMediaDatabase
+                     where f.PathAndFilename == file.PathAndFilename
+                     select f).SingleOrDefault();
+                    
+
+                if (fileEntry != null)
+                {
+                    MasterMediaDBFactory.MasterMovieMediaDatabase.Remove(fileEntry);
+                }
+            }
+
+            MovieDatabase.Remove(movie);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        public static void HideMovie(MovieModel movieModel)
+        {
+            HiddenMovieDatabase.Add(movieModel);
+            movieModel.Hidden = true;
+            MovieDatabase.Remove(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        public static void RestoreHiddenMovie(MovieModel movieModel)
+        {
+            HiddenMovieDatabase.Remove(movieModel);
+            movieModel.Hidden = false;
+            MovieDatabase.Add(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
     }
 }

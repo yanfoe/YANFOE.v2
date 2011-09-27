@@ -17,13 +17,22 @@ namespace YANFOE.Tools
     using System.IO;
     using System.Text.RegularExpressions;
 
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Tools.Importing;
 
     public static class GeneratePath
     {
-        public static string TvSeries(Series series, string replace, string altFirstEpisode = null)
+        public static string TvSeries(Series series, string replace, string fromFile, string altFirstEpisode = null)
         {
+            if (series == null)
+            {
+                series = new Series();
+                series.SeriesName = "Test series";
+                series.Seasons.Add(1, new Season());
+                series.Seasons[1].Episodes.Add(new Episode{FilePath = new MediaModel{PathAndFilename = @"c:\testshow\season 1\test show.s01e01.avi"}});
+            }
+
             string firstEpisodeFullPath;
             string seriesName;
 
@@ -79,13 +88,23 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodePathOfSeries, firstEpisodePath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, series.GetSeriesPath());
 
-            return replace;
+            return replace + Path.GetExtension(fromFile);
         }
 
-        public static string TvSeason(Season season, string replace, string altFirstEpisode = null)
+        public static string TvSeason(Season season, string replace, string fromFile, string altFirstEpisode = null)
         {
-            string firstEpisodeFullPath;
-            string seriesName;
+            string seriesName = "test show";
+            string firstEpisodeFullPath = @"c:\test show\season 1\test show.s01e01.avi";
+            bool settings = false;
+            
+
+            if (season == null)
+            {
+                season = new Season();
+                season.Episodes.Add(new Episode { FilePath = new MediaModel { PathAndFilename = @"c:\test show\season 1\test show.s01e01.avi" } });
+                settings = true;
+            }
+
             string firstEpisodeOfSeasonPath;
             string firstEpisodeOfSeason;
 
@@ -120,8 +139,11 @@ namespace YANFOE.Tools
             }
             else
             {
-                firstEpisodeFullPath = season.GetFirstEpisode();
-                seriesName = Restructure.FileSystemCharChange.To(season.GetSeries().SeriesName);
+                if (!settings)
+                {
+                    firstEpisodeFullPath = season.GetFirstEpisode();
+                    seriesName = Restructure.FileSystemCharChange.To(season.GetSeries().SeriesName);
+                }
 
                 if (MovieNaming.IsDVD(firstEpisodeFullPath))
                 {
@@ -142,20 +164,33 @@ namespace YANFOE.Tools
 
             var firstEpisodePath = Path.GetDirectoryName(firstEpisodeFullPath);
 
-
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesName, seriesName);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodePathOfSeries, firstEpisodePath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodeOfSeasonPath, firstEpisodeOfSeasonPath);
             replace = replace.Replace(Settings.Get.InOutCollection.TvFirstEpisodeOfSeason, firstEpisodeOfSeason);
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeasonNumber, season.SeasonNumber.ToString());
             replace = replace.Replace(Settings.Get.InOutCollection.TvSeasonNumber2, string.Format("{0:d2}", season.SeasonNumber));
-            replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, season.GetSeries().GetSeriesPath());
 
-            return replace;
+            if (settings)
+            {
+                replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, @"c:\testshow\season 1\");
+            }
+            else
+            {
+                replace = replace.Replace(Settings.Get.InOutCollection.TvSeriesPath, season.GetSeries().GetSeriesPath());
+            }
+
+            return replace + Path.GetExtension(fromFile); ;
         }
 
-        public static string TvEpisode(Episode episode, string replace, string altEpisode = null)
+        public static string TvEpisode(Episode episode, string replace, string fromFile, string altEpisode = null)
         {
+            if (episode == null)
+            {
+                episode = new Episode();
+                episode.FilePath = new MediaModel { PathAndFilename = @"c:\testshow\season 1\test show.s01e01.avi" };
+            }
+
             string episodePath;
             string episodeFileName;
 
@@ -189,7 +224,7 @@ namespace YANFOE.Tools
             replace = replace.Replace(Settings.Get.InOutCollection.TvEpisodeFileName, episodeFileName);
 
 
-            return replace;
+            return replace + Path.GetExtension(fromFile);
         }
     }
 }

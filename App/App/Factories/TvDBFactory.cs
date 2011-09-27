@@ -14,6 +14,7 @@ namespace YANFOE.Factories
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Linq;
@@ -27,6 +28,7 @@ namespace YANFOE.Factories
     using DevExpress.XtraBars.Ribbon;
 
     using YANFOE.Factories.InOut;
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Cache;
@@ -88,6 +90,8 @@ namespace YANFOE.Factories
         /// </summary>
         private static SortedList<string, Series> tvDatabase;
 
+        public static BindingList<Series> HiddenTvDatabase; 
+
         #endregion
 
         #region Constructors and Destructors
@@ -98,6 +102,8 @@ namespace YANFOE.Factories
         static TvDBFactory()
         {
             tvDatabase = new SortedList<string, Series>();
+
+            HiddenTvDatabase = new BindingList<Series>();
 
             CurrentSeries = new Series();
             CurrentSeason = new Season();
@@ -2358,5 +2364,135 @@ namespace YANFOE.Factories
         }
 
         #endregion
+
+        public static void LockSeason(Season season)
+        {
+            season.IsLocked = true;
+        }
+
+        public static void UnlockSeason(Season season)
+        {
+            season.IsLocked = false;
+        }
+
+        public static void HideSeason(Season season)
+        {
+            // TODO: Hide season
+        }
+
+        public static void LockEpisode(Episode episode)
+        {
+            episode.IsLocked = true;
+        }
+
+        public static void UnlockEpisode(Episode episode)
+        {
+            episode.IsLocked = false;
+        }
+
+        public static void HideEpisode(Episode episode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void SetEpisodeWatched(Episode episode)
+        {
+            episode.Watched = true;
+        }
+
+        public static void SetEpisodeUnwatched(Episode episode)
+        {
+            episode.Watched = false;
+        }
+
+        public static void OpenEpisodeFile(Episode episode)
+        {
+            if (File.Exists(episode.FilePath.PathAndFilename))
+            {
+                Process.Start(episode.FilePath.PathAndFilename);
+            }
+        }
+
+        public static void OpenEpisodeFolder(Episode episode)
+        {
+            string argument = string.Format(
+                @"/select,""{0}""",
+                File.Exists(episode.FilePath.PathAndFilename)
+                    ? episode.FilePath.PathAndFilename
+                    : episode.FilePath.FolderPath);
+
+            Process.Start("explorer.exe", argument);
+        }
+
+        public static void SetSeriesHide(MasterSeriesListModel series)
+        {
+            TvDBFactory.HideSeries(series.SeriesName);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        private static void HideSeries(string seriesName)
+        {
+            var series = MasterSeriesNameList.Where(c => c.SeriesName == seriesName).Single();
+            TvDBFactory.masterSeriesNameList.Remove(series);
+
+            TvDBFactory.HiddenTvDatabase.Add(TvDBFactory.tvDatabase[seriesName]);
+            TvDBFactory.tvDatabase.Remove(seriesName);
+
+            TvDBFactory.InvokeTvDbChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        public static void RestoreHiddenSeries(Series series)
+        {
+            TvDBFactory.masterSeriesNameList.Add(
+                new MasterSeriesListModel
+                    {
+                        BannerPath = series.SeriesBannerPath,
+                        Locked = false,
+                        SeriesGuid = series.Guid,
+                        SeriesName = series.SeriesName
+                    });
+
+            TvDBFactory.tvDatabase.Add(series.SeriesName, series);
+
+            TvDBFactory.HiddenTvDatabase.Remove(series);
+
+            TvDBFactory.InvokeTvDbChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        public static void DeleteSeries(MasterSeriesListModel masterSeriesList)
+        {
+            var series = MasterSeriesNameList.Where(c => c.SeriesName == masterSeriesList.SeriesName).Single();
+            TvDBFactory.masterSeriesNameList.Remove(series);
+
+            var s = TvDBFactory.tvDatabase[series.SeriesName];
+
+            foreach (var season in s.Seasons)
+            {
+                foreach (var episode in season.Value.Episodes)
+                {
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+                    {
+                        var files =
+                            (MasterMediaDBFactory.MasterTvMediaDatabase.Where(
+                                f => f == episode.FilePath.PathAndFilename)).ToList();
+
+                        for (int index = 0; index < files.Count; index++)
+                        {
+                            var f = files[index];
+                            MasterMediaDBFactory.MasterTvMediaDatabase.Remove(f);
+                        }
+                    }
+                }
+            }
+
+            TvDBFactory.tvDatabase.Remove(series.SeriesName);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace YANFOE.UI.UserControls.MovieControls
     using DevExpress.XtraEditors.Controls;
     using DevExpress.XtraLayout.Utils;
 
+    using YANFOE.Settings.UserSettings;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
 
@@ -184,6 +185,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         {
             ScraperList type;
 
+            if (Settings.Get.Genres == null)
+            {
+                Settings.Get.Genres = new Genres();
+            }
+
             Enum.TryParse(Factories.MovieDBFactory.GetCurrentMovie().ScraperGroup, out type);
 
             if (this.currentGenre == type.ToString())
@@ -198,12 +204,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
             this.currentGenre = type.ToString();
 
-            if (!Settings.Get.Genres.GenreDictionary.ContainsKey(type))
-            {
-                cmbGenre.Properties.Items.Add("No Scraper Group Selected");
-            }
-
-            var genreList = Settings.Get.Genres.GenreDictionary[type];
+            var genreList = Settings.Get.Genres.CustomGenres;
 
             foreach (var genre in genreList)
             {
@@ -215,7 +216,7 @@ namespace YANFOE.UI.UserControls.MovieControls
             for (int i = 0; i < currentGenres.Count; i++)
             {
                 var genre = currentGenres[i];
-                var check = (from g in Settings.Get.Genres.GenreDictionary[type] where g == genre select g).SingleOrDefault();
+                var check = (from g in currentGenres where g == genre select g).SingleOrDefault();
 
                 if (check == null)
                 {
