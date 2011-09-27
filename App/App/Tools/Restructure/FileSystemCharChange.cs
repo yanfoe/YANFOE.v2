@@ -34,6 +34,7 @@ namespace YANFOE.Tools.Restructure
         {
             value = value.Replace("$3A", ":");
             value = value.Replace("$22", "\"");
+            value = value.Replace("$5C", "\\");
             value = value.Replace("$3C", "<");
             value = value.Replace("$3E", ">");
             value = value.Replace("$7C", "|");
@@ -57,6 +58,7 @@ namespace YANFOE.Tools.Restructure
             value = value.Replace(":", "$3A");
             value = value.Replace("\"", "$22");
             value = value.Replace("<", "$3C");
+            value = value.Replace("\\", "$5C");
             value = value.Replace(">", "$3E");
             value = value.Replace("|", "$7C");
             value = value.Replace("*", "$2A");

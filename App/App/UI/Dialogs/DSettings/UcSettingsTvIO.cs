@@ -248,11 +248,11 @@ namespace YANFOE.UI.Dialogs.DSettings
                 ".jpg";
             this.txtSeasonFanartPreview.Text =
                 GeneratePath.TvSeason(
-                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonPosterTemplate, this.txtNormalTestPath.Text) +
+                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonFanartTemplate, this.txtNormalTestPath.Text) +
                 ".jpg";
             this.txtSeasonBannerPreview.Text =
                 GeneratePath.TvSeason(
-                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonPosterTemplate, this.txtNormalTestPath.Text) +
+                    null, Get.InOutCollection.CurrentTvSaveSettings.SeasonBannerTemplate, this.txtNormalTestPath.Text) +
                 ".jpg";
 
             this.txtEpisodeNFOPreview.Text = GeneratePath.TvEpisode(
