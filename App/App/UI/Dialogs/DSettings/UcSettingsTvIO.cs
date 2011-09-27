@@ -225,6 +225,8 @@ namespace YANFOE.UI.Dialogs.DSettings
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void TxtNormal_EditValueChanged(object sender, EventArgs e)
         {
+
+
             this.txtSeriesNFOPreview.Text = GeneratePath.TvSeries(
                 null, Get.InOutCollection.CurrentTvSaveSettings.SeriesNfoTemplate, this.txtNormalTestPath.Text);
             this.txtSeriesPosterPreview.Text =
