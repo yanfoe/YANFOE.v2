@@ -1142,7 +1142,29 @@ namespace YANFOE.Models.TvModels.Show
         {
             return
                 this.Seasons.Values.SelectMany(s => s.Episodes).Count(
+                    e => string.IsNullOrEmpty(e.FilePath.PathAndFilename));
+        }
+
+        /// <summary>
+        /// Counts the total amount of episodes in the series
+        /// </summary>
+        /// <returns>Total episodes without a filepath</returns>
+        public int CountTotalEpisodes()
+        {
+            return
+                this.Seasons.Values.SelectMany(s => s.Episodes).Count(
                     e => !string.IsNullOrEmpty(e.FilePath.PathAndFilename));
+        }
+
+        /// <summary>
+        /// Gets the missing episodes in the series
+        /// </summary>
+        /// <returns>Total episodes without a filepath</returns>
+        public List<Episode> GetMissingEpisodes()
+        {
+            return
+                this.Seasons.Values.SelectMany(s => s.Episodes).Where(
+                    e => string.IsNullOrEmpty(e.FilePath.PathAndFilename)).ToList();
         }
 
         /// <summary>
