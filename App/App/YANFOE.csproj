@@ -114,6 +114,8 @@
     <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v11.1, Version=11.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DiscUtils">
       <HintPath>.\Dlls\DiscUtils.dll</HintPath>
     </Reference>
@@ -208,6 +210,7 @@
     <Compile Include="Settings\UserSettings\LogSettings.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\Clean\FileCleanUp.cs" />
+    <Compile Include="Tools\Exporting\Exporting.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
     <Compile Include="Tools\GenerateRandomID.cs" />
     <Compile Include="Tools\Models\TrailerDetailsModel.cs" />
@@ -539,6 +542,19 @@
     <Compile Include="UI\Dialogs\TV\FrmUpdateShows.Designer.cs">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Popups\ExportMissingEpisodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Popups\ExportMissingEpisodes.Designer.cs">
+      <DependentUpon>ExportMissingEpisodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Popups\MissingEpisodeTreeList.cs" />
+    <Compile Include="UI\Popups\SimpleBrowseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Popups\SimpleBrowseForm.Designer.cs">
+      <DependentUpon>SimpleBrowseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\CommonControls\ListEditUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -786,6 +802,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\TV\FrmUpdateShows.resx">
       <DependentUpon>FrmUpdateShows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Popups\ExportMissingEpisodes.resx">
+      <DependentUpon>ExportMissingEpisodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Popups\SimpleBrowseForm.resx">
+      <DependentUpon>SimpleBrowseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserControls\CommonControls\ListEditUserControl.resx">
       <DependentUpon>ListEditUserControl.cs</DependentUpon>
@@ -1040,7 +1062,6 @@
     <Folder Include="Factories\Scraper\SupportClasses\" />
     <Folder Include="Movie\Cache\" />
     <Folder Include="Tools\Collections\" />
-    <Folder Include="UI\Popups\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

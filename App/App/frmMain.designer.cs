@@ -61,6 +61,10 @@ namespace YANFOE
             this.mnuEditSettings = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mnuToolsMovieScraperGroupManager = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem6 = new DevExpress.XtraBars.BarSubItem();
+            this.mnuToolsExportMissingEpisodesList = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuToolsExportMovieList = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuToolsExportTvShowsList = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem9 = new DevExpress.XtraBars.BarSubItem();
             this.mnuHelpReportIssues = new DevExpress.XtraBars.BarButtonItem();
             this.mnuHelpSourceCode = new DevExpress.XtraBars.BarButtonItem();
@@ -225,9 +229,13 @@ namespace YANFOE
             this.mnuHelpHomepage,
             this.mnuHelpSourceCode,
             this.mnuHelpWiki,
-            this.mnuDonate});
+            this.mnuDonate,
+            this.barSubItem6,
+            this.mnuToolsExportMissingEpisodesList,
+            this.mnuToolsExportMovieList,
+            this.mnuToolsExportTvShowsList});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 35;
+            this.barManager1.MaxItemId = 39;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             // 
@@ -298,7 +306,8 @@ namespace YANFOE
             this.barSubItem7.Caption = global::YANFOE.Language.FrmMain_Menu_Tools;
             this.barSubItem7.Id = 7;
             this.barSubItem7.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsMovieScraperGroupManager)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsMovieScraperGroupManager),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem6)});
             this.barSubItem7.Name = "barSubItem7";
             // 
             // mnuToolsMovieScraperGroupManager
@@ -309,6 +318,35 @@ namespace YANFOE
             this.mnuToolsMovieScraperGroupManager.LargeGlyph = global::YANFOE.Properties.Resources.scrapergroupmanager;
             this.mnuToolsMovieScraperGroupManager.Name = "mnuToolsMovieScraperGroupManager";
             this.mnuToolsMovieScraperGroupManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsMovieScraperGroupManager_ItemClick);
+            // 
+            // barSubItem6
+            // 
+            this.barSubItem6.Caption = "Export";
+            this.barSubItem6.Id = 35;
+            this.barSubItem6.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportMissingEpisodesList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportMovieList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportTvShowsList)});
+            this.barSubItem6.Name = "barSubItem6";
+            // 
+            // mnuToolsExportMissingEpisodesList
+            // 
+            this.mnuToolsExportMissingEpisodesList.Caption = "Missing Episodes List";
+            this.mnuToolsExportMissingEpisodesList.Id = 36;
+            this.mnuToolsExportMissingEpisodesList.Name = "mnuToolsExportMissingEpisodesList";
+            this.mnuToolsExportMissingEpisodesList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsExportMissingEpisodesList_ItemClick);
+            // 
+            // mnuToolsExportMovieList
+            // 
+            this.mnuToolsExportMovieList.Caption = "Movie List";
+            this.mnuToolsExportMovieList.Id = 37;
+            this.mnuToolsExportMovieList.Name = "mnuToolsExportMovieList";
+            // 
+            // mnuToolsExportTvShowsList
+            // 
+            this.mnuToolsExportTvShowsList.Caption = "TV Shows List";
+            this.mnuToolsExportTvShowsList.Id = 38;
+            this.mnuToolsExportTvShowsList.Name = "mnuToolsExportTvShowsList";
             // 
             // barSubItem9
             // 
@@ -483,7 +521,7 @@ namespace YANFOE
             this.tabMediaManager.Controls.Add(this.mediaPathManager1);
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
-            this.tabMediaManager.Size = new System.Drawing.Size(988, 456);
+            this.tabMediaManager.Size = new System.Drawing.Size(986, 454);
             superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.database24;
             toolTipTitleItem2.Appearance.Options.UseImage = true;
@@ -501,7 +539,7 @@ namespace YANFOE
             this.mediaPathManager1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mediaPathManager1.Location = new System.Drawing.Point(0, 0);
             this.mediaPathManager1.Name = "mediaPathManager1";
-            this.mediaPathManager1.Size = new System.Drawing.Size(988, 456);
+            this.mediaPathManager1.Size = new System.Drawing.Size(986, 454);
             this.mediaPathManager1.TabIndex = 0;
             // 
             // tabMovies
@@ -509,7 +547,7 @@ namespace YANFOE
             this.tabMovies.Controls.Add(this.moviesUserControl1);
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
-            this.tabMovies.Size = new System.Drawing.Size(988, 456);
+            this.tabMovies.Size = new System.Drawing.Size(986, 454);
             toolTipTitleItem3.Text = "Movies";
             toolTipItem3.LeftIndent = 6;
             toolTipItem3.Text = "(#) - Total Movies";
@@ -535,7 +573,7 @@ namespace YANFOE
             this.tabTv.Controls.Add(this.tvUserControl1);
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
-            this.tabTv.Size = new System.Drawing.Size(988, 456);
+            this.tabTv.Size = new System.Drawing.Size(986, 454);
             toolTipTitleItem4.Text = "TV";
             toolTipItem4.LeftIndent = 6;
             toolTipItem4.Text = "(#) - Total Series";
@@ -557,7 +595,7 @@ namespace YANFOE
             this.tabDownloads.Controls.Add(this.downloadsUserControl1);
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
-            this.tabDownloads.Size = new System.Drawing.Size(988, 456);
+            this.tabDownloads.Size = new System.Drawing.Size(986, 454);
             toolTipTitleItem5.Text = "Downloads Manager\r\n";
             toolTipItem5.LeftIndent = 6;
             toolTipItem5.Text = "Downloads (Urgent Queue : Background Queue)";
@@ -579,7 +617,7 @@ namespace YANFOE
             this.tabLogs.Controls.Add(this.logsUserControl1);
             this.tabLogs.Image = global::YANFOE.Properties.Resources.books24;
             this.tabLogs.Name = "tabLogs";
-            this.tabLogs.Size = new System.Drawing.Size(988, 456);
+            this.tabLogs.Size = new System.Drawing.Size(986, 454);
             this.tabLogs.Text = "Logs";
             // 
             // logsUserControl1
@@ -595,7 +633,7 @@ namespace YANFOE
             this.tabAbout.Controls.Add(this.layoutControl1);
             this.tabAbout.Image = global::YANFOE.Properties.Resources.info1;
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(988, 456);
+            this.tabAbout.Size = new System.Drawing.Size(986, 454);
             this.tabAbout.Text = "About";
             // 
             // layoutControl1
@@ -1305,5 +1343,9 @@ namespace YANFOE
         private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEdit5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraEditors.LabelControl lblDownloadStatus;
+        private DevExpress.XtraBars.BarSubItem barSubItem6;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportMissingEpisodesList;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportMovieList;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportTvShowsList;
     }
 }

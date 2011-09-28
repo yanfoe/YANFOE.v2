@@ -19,6 +19,7 @@ namespace YANFOE
     using System.IO;
     using System.Threading;
     using System.Windows.Forms;
+    using System.Collections.Generic;
 
     using BitFactory.Logging;
 
@@ -662,5 +663,10 @@ namespace YANFOE
         }
 
         #endregion
+
+        private void mnuToolsExportMissingEpisodesList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            YANFOE.Tools.Exporting.Exporting.ExportMissingTvShowEpisodes();
+        }
     }
 }
