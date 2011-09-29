@@ -159,14 +159,14 @@ namespace YANFOE.Scrapers.TV
         /// <returns>
         /// Updated series object, or NULL value if no update was found.
         /// </returns>
-        public Series CheckForUpdate(uint? seriesId, string seriesLanguage, string lastUpdated)
+        public Series CheckForUpdate(uint? seriesId, string seriesLanguage, string lastUpdated, bool force = false)
         {
             var seriesXml = this.GetSeriesDetails(seriesId.ToString(), seriesLanguage, true);
             var newSeries = new Series();
 
             newSeries.PopulateFullDetails(seriesXml);
 
-            return lastUpdated != newSeries.Lastupdated ? newSeries : null;
+            return lastUpdated != newSeries.Lastupdated ? newSeries : force ? newSeries : null;
         }
 
         /// <summary>

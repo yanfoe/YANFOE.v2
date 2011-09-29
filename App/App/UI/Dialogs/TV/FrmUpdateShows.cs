@@ -20,6 +20,7 @@ namespace YANFOE.UI.Dialogs.TV
     using System.Linq;
 
     using DevExpress.XtraEditors;
+    using BitFactory.Logging;
 
     using YANFOE.Factories;
     using YANFOE.Models.TvModels.Show;
@@ -71,6 +72,115 @@ namespace YANFOE.UI.Dialogs.TV
             }
         }
 
+        public FrmUpdateShows(List<Episode> episodes, bool autoStart = false)
+        {
+            this.InitializeComponent();
+
+            if (this.updateDatabase == null)
+            {
+                this.updateDatabase = new List<UpdateTvRecords>();
+            }
+
+            InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        "UI > Dialogs > TV > Update Episodes",
+                        string.Format(
+                            "Adding {0} episodes(s) {{1}} to update queue",
+                            episodes[0].GetSeriesName(),
+                            string.Join(", ", (from s in episodes select string.Format("{0}x{1:00}", s.SeasonNumber.GetValueOrDefault(0), s.EpisodeNumber.GetValueOrDefault(0))).ToList())
+                        )
+            );
+
+            this.updateDatabase.Clear();
+            foreach (var ep in episodes)
+            {
+                try
+                {
+                    this.updateDatabase.AddRange((from s in TvDBFactory.TvDatabase
+                                                  where s.Value.SeriesName == ep.GetSeriesName()
+                                                  select
+                                                      new UpdateTvRecords
+                                                      {
+                                                          SeriesName = s.Key,
+                                                          SeriesId = s.Value.SeriesID,
+                                                          PreviousTime = ep.Lastupdated,
+                                                          SeasonNumber = ep.SeasonNumber,
+                                                          EpisodeNumber = ep.EpisodeNumber
+                                                      }).ToList());
+                }
+                catch (ArgumentNullException e)
+                {
+                    InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Error,
+                        0,
+                        "UI > Dialogs > TV > Update Episodes",
+                        e.Message);
+                }
+            }
+
+            this.SetBindings();
+
+            if (autoStart)
+            {
+                this.DoFullScan();
+            }
+        }
+
+        public FrmUpdateShows(List<Season> seasons, bool autoStart = false)
+        {
+            this.InitializeComponent();
+
+            if (this.updateDatabase == null)
+            {
+                this.updateDatabase = new List<UpdateTvRecords>();
+            }
+
+            InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        "UI > Dialogs > TV > Update Shows",
+                        string.Format(
+                            "Adding {0} season(s) {{1}} to update queue",
+                            seasons[0].GetSeries().SeriesName,
+                            string.Join(", ", (from s in seasons select s.SeasonNumber).ToList())
+                        )
+            );
+
+            this.updateDatabase.Clear();
+            foreach (var season in seasons)
+            {
+                try
+                {
+                    this.updateDatabase.AddRange((from s in TvDBFactory.TvDatabase
+                                                  where s.Value.SeriesName == season.GetSeries().SeriesName
+                                                  select
+                                                      new UpdateTvRecords
+                                                      {
+                                                          SeriesName = s.Key,
+                                                          SeriesId = s.Value.SeriesID,
+                                                          PreviousTime = season.Episodes[0].Lastupdated,
+                                                          SeasonNumber = season.SeasonNumber
+                                                      }).ToList());
+                }
+                catch (ArgumentNullException e)
+                {
+                    InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Error,
+                        0,
+                        "UI > Dialogs > TV > Update Shows",
+                        e.Message);
+                }
+            }
+
+            this.SetBindings();
+
+            if (autoStart)
+            {
+                this.DoFullScan();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -84,7 +194,7 @@ namespace YANFOE.UI.Dialogs.TV
 
             this.bgwScan = new BackgroundWorker
                 {
-                    WorkerReportsProgress = true, 
+                    WorkerReportsProgress = true,
                     WorkerSupportsCancellation = true
                 };
 
@@ -111,8 +221,8 @@ namespace YANFOE.UI.Dialogs.TV
                                    select
                                        new UpdateTvRecords
                                            {
-                                               SeriesName = s.Key, 
-                                               SeriesId = s.Value.SeriesID, 
+                                               SeriesName = s.Key,
+                                               SeriesId = s.Value.SeriesID,
                                                PreviousTime = s.Value.Lastupdated
                                            }).ToList();
         }
@@ -139,17 +249,37 @@ namespace YANFOE.UI.Dialogs.TV
             var tvdb = new TheTvdb();
             int count = 0;
 
-            foreach (UpdateTvRecords series in this.updateDatabase)
+            foreach (UpdateTvRecords record in this.updateDatabase)
             {
-                this.bgwScan.ReportProgress(0, series.SeriesName);
+                InternalApps.Logs.Log.WriteToLog(
+                            LogSeverity.Debug,
+                            0,
+                            "UI > Dialogs > TV > FrmUpdateShows > BgwScan_DoWork",
+                            string.Format(
+                                "Checking {0} {1}x{2:00} for update",
+                                record.SeriesName, record.SeasonNumber.GetValueOrDefault(0), record.EpisodeNumber.GetValueOrDefault(0)
+                            )
+                );
 
-                Series seriesObj = TvDBFactory.GetSeriesFromName(series.SeriesName);
+                this.bgwScan.ReportProgress(0, record);
+
+                Series seriesObj = TvDBFactory.GetSeriesFromName(record.SeriesName);
 
                 Series newSeries = tvdb.CheckForUpdate(seriesObj.SeriesID, seriesObj.Language, seriesObj.Lastupdated);
 
                 if (newSeries != null)
                 {
-                    series.NewTime = newSeries.Lastupdated;
+                    InternalApps.Logs.Log.WriteToLog(
+                                LogSeverity.Debug,
+                                0,
+                                "UI > Dialogs > TV > FrmUpdateShows > BgwScan_DoWork",
+                                string.Format(
+                                    "Update found for {0} {1}x{2:00}",
+                                    record.SeriesName, record.SeasonNumber.GetValueOrDefault(0), record.EpisodeNumber.GetValueOrDefault(0)
+                                )
+                    );
+
+                    record.NewTime = newSeries.Lastupdated;
                     count++;
                 }
             }
@@ -164,10 +294,31 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.ComponentModel.ProgressChangedEventArgs"/> instance containing the event data.</param>
         private void BgwScan_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.txtStatus.Text = string.Format("Updating: {0}", e.UserState);
+            var record = e.UserState as UpdateTvRecords;
+            this.txtStatus.Text = string.Format("Updating: {0}", string.Format(
+                "{0} {1}x{2:00}",
+                record.SeriesName,
+                record.SeasonNumber.GetValueOrDefault(0),
+                record.EpisodeNumber.GetValueOrDefault(0)
+                )
+            );
 
-            UpdateTvRecords row =
-                (from r in this.updateDatabase where r.SeriesName == e.UserState.ToString() select r).SingleOrDefault();
+            UpdateTvRecords row;
+            if (record.EpisodeNumber != null)
+            {
+                row =
+                    (from r in this.updateDatabase where r.SeriesName == record.SeriesName && r.SeasonNumber == record.SeasonNumber && r.EpisodeNumber == record.EpisodeNumber select r).SingleOrDefault();
+            }
+            else if (record.SeasonNumber != null)
+            {
+                row =
+                    (from r in this.updateDatabase where r.SeriesName == record.SeriesName && r.SeasonNumber == record.SeasonNumber select r).SingleOrDefault();
+            }
+            else
+            {
+                row =
+                    (from r in this.updateDatabase where r.SeriesName == record.SeriesName select r).SingleOrDefault();
+            }
 
             this.gridSeriesListView.RefreshData();
 
@@ -185,7 +336,7 @@ namespace YANFOE.UI.Dialogs.TV
         {
             this.gridSeriesListView.RefreshData();
             this.btnOk.Enabled = true;
-            this.txtStatus.Text = string.Format("Updating Complete. {0} updated series available.", (int)e.Result);
+            this.txtStatus.Text = string.Format("Updating Complete. {0} updated elements available.", (int)e.Result);
         }
 
         /// <summary>
@@ -195,12 +346,23 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
         private void BgwUpdate_DoWork(object sender, DoWorkEventArgs e)
         {
-            foreach (UpdateTvRecords series in this.updateDatabase)
+            foreach (UpdateTvRecords record in this.updateDatabase)
             {
-                if (series.UpdateSeries)
+                if (record.UpdateSeries)
                 {
-                    this.bgwUpdate.ReportProgress(0, series.SeriesName);
-                    TvDBFactory.UpdateSeries(series.SeriesId);
+                    if (record.EpisodeNumber != null)
+                    {
+                        this.bgwUpdate.ReportProgress(0, string.Format("{0} episode {1}x{1:00}", record.SeriesName, record.SeasonNumber, record.EpisodeNumber));
+                    }
+                    else if (record.SeasonNumber != null)
+                    {
+                        this.bgwUpdate.ReportProgress(0, string.Format("{0} season {1}", record.SeriesName, record.SeasonNumber));
+                    }
+                    else
+                    {
+                        this.bgwUpdate.ReportProgress(0, record.SeriesName);
+                    }
+                    TvDBFactory.UpdateSeries(record.SeriesId, record.SeasonNumber, record.EpisodeNumber);
                 }
             }
         }
@@ -313,6 +475,9 @@ namespace YANFOE.UI.Dialogs.TV
             /// Gets or sets a value indicating whether UpdatedOnServer.
             /// </summary>
             public bool UpdatedOnServer { get; set; }
+
+            public int? SeasonNumber { get; set; }
+            public int? EpisodeNumber { get; set; }
 
             #endregion
         }

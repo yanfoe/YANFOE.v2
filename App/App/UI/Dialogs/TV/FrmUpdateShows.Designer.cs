@@ -47,6 +47,8 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.seasonNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.episodeNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSeriesList)).BeginInit();
@@ -101,7 +103,9 @@
             this.SeriesID,
             this.SeriesName,
             this.UpdatedOnServer,
-            this.UpdateSeries});
+            this.UpdateSeries,
+            this.seasonNumber,
+            this.episodeNumber});
             this.gridSeriesListView.GridControl = this.grdSeriesList;
             this.gridSeriesListView.Name = "gridSeriesListView";
             this.gridSeriesListView.OptionsView.ShowGroupPanel = false;
@@ -180,7 +184,6 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(711, 479);
-            this.layoutControlGroup1.Spacing = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroup1.Text = "layoutControlGroup1";
             this.layoutControlGroup1.TextVisible = false;
             // 
@@ -266,6 +269,22 @@
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
             // 
+            // seasonNumber
+            // 
+            this.seasonNumber.Caption = "Season Number";
+            this.seasonNumber.FieldName = "SeasonNumber";
+            this.seasonNumber.Name = "seasonNumber";
+            this.seasonNumber.Visible = true;
+            this.seasonNumber.VisibleIndex = 4;
+            // 
+            // episodeNumber
+            // 
+            this.episodeNumber.Caption = "Episode Number";
+            this.episodeNumber.FieldName = "EpisodeNumber";
+            this.episodeNumber.Name = "episodeNumber";
+            this.episodeNumber.Visible = true;
+            this.episodeNumber.VisibleIndex = 5;
+            // 
             // FrmUpdateShows
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,5 +331,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn SeriesName;
         private DevExpress.XtraGrid.Columns.GridColumn UpdatedOnServer;
         private DevExpress.XtraGrid.Columns.GridColumn UpdateSeries;
+        private DevExpress.XtraGrid.Columns.GridColumn seasonNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn episodeNumber;
     }
 }

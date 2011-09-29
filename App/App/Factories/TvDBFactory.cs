@@ -1697,8 +1697,18 @@ namespace YANFOE.Factories
         /// <param name="newEpisode">
         /// The new episode.
         /// </param>
-        public static void UpdateEpisode(Season season, Episode newEpisode)
+        public static void UpdateEpisode(Season season, Episode newEpisode, bool force = false)
         {
+            InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        "Factories > TvDBFactory > UpdateEpisode",
+                        string.Format(
+                            "Updating episode {0} in season {1} ({2}). Forced: {3}",
+                            newEpisode.EpisodeNumber, newEpisode.SeasonNumber, newEpisode.GetSeriesName(), force ? "true" : "false"
+                        )
+            );
+
             Episode episode =
                 (from e in season.Episodes where e.EpisodeNumber == newEpisode.EpisodeNumber select e).SingleOrDefault();
 
@@ -1708,7 +1718,7 @@ namespace YANFOE.Factories
                 return;
             }
 
-            if (!newEpisode.IsLocked && episode.Lastupdated != newEpisode.Lastupdated)
+            if (!newEpisode.IsLocked && (episode.Lastupdated != newEpisode.Lastupdated || force))
             {
                 episode.AbsoluteNumber = newEpisode.AbsoluteNumber;
                 episode.CombinedEpisodenumber = newEpisode.CombinedEpisodenumber;
@@ -1730,12 +1740,6 @@ namespace YANFOE.Factories
                 episode.Rating = newEpisode.Rating;
                 episode.SeasonNumber = newEpisode.SeasonNumber;
                 episode.Writers = newEpisode.Writers;
-
-                if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath)
-                    && string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
-                {
-                    episode.EpisodeScreenshotUrl = newEpisode.EpisodeScreenshotUrl;
-                }
 
                 if (string.IsNullOrEmpty(episode.EpisodeScreenshotPath)
                     && string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
@@ -1780,8 +1784,18 @@ namespace YANFOE.Factories
         /// <param name="newSeason">
         /// The new season.
         /// </param>
-        public static void UpdateSeason(Series series, Season newSeason)
+        public static void UpdateSeason(Series series, Season newSeason, int? episodeNumber = null, bool force = false)
         {
+            InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        "Factories > TvDBFactory > UpdateSeason",
+                        string.Format(
+                            "Called with episodeNumber {0} ({1}). Forced: {2}",
+                            episodeNumber.GetValueOrDefault(0), series.SeriesName, force ? "true" : "false"
+                        )
+            );
+
             if (!series.Seasons.ContainsKey(newSeason.SeasonNumber))
             {
                 series.Seasons.Add(newSeason.SeasonNumber, newSeason);
@@ -1799,18 +1813,25 @@ namespace YANFOE.Factories
 
                 if (string.IsNullOrEmpty(season.FanartPath) && string.IsNullOrEmpty(season.FanartUrl))
                 {
-                    season.BannerUrl = newSeason.FanartUrl;
+                    season.FanartPath = newSeason.FanartUrl;
                 }
 
                 if (string.IsNullOrEmpty(season.PosterPath) && string.IsNullOrEmpty(season.PosterUrl))
                 {
-                    season.BannerUrl = newSeason.PosterUrl;
+                    season.PosterPath = newSeason.PosterUrl;
                 }
             }
-
-            foreach (Episode episode in season.Episodes)
+            
+            foreach (Episode episode in newSeason.Episodes)
             {
-                UpdateEpisode(season, episode);
+                if (episodeNumber == null)
+                {
+                    UpdateEpisode(season, episode, force);
+                }
+                else if (episode.EpisodeNumber == episodeNumber)
+                {
+                    UpdateEpisode(season, episode, true);
+                }
             }
         }
 
@@ -1820,15 +1841,25 @@ namespace YANFOE.Factories
         /// <param name="seriesId">
         /// The series id.
         /// </param>
-        public static void UpdateSeries(uint? seriesId)
+        public static void UpdateSeries(uint? seriesId, int? seasonNumber = null, int? episodeNumber = null)
         {
             Series seriesObj = GetSeriesFromSeriesId(seriesId);
 
+            InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        "Factories > TvDBFactory > UpdateSeries",
+                        string.Format(
+                            "Called with seriesId {0}({1}), seasonNumber {2}, episodeNumber {3}",
+                            seriesId.GetValueOrDefault(0), seriesObj.SeriesName, seasonNumber.GetValueOrDefault(0), episodeNumber.GetValueOrDefault(0)
+                        )
+            );
+
             var tvdb = new TheTvdb();
 
-            Series newSeries = tvdb.CheckForUpdate(seriesObj.SeriesID, seriesObj.Language, seriesObj.Lastupdated);
+            Series newSeries = tvdb.CheckForUpdate(seriesObj.SeriesID, seriesObj.Language, seriesObj.Lastupdated, true);
 
-            if (!seriesObj.IsLocked)
+            if (!seriesObj.IsLocked && seasonNumber == null && episodeNumber == null)
             {
                 seriesObj.Added = newSeries.Added;
                 seriesObj.AddedBy = newSeries.AddedBy;
@@ -1867,7 +1898,14 @@ namespace YANFOE.Factories
 
             foreach (var season in newSeries.Seasons)
             {
-                UpdateSeason(seriesObj, season.Value);
+                if (seasonNumber == null)
+                {
+                    UpdateSeason(seriesObj, season.Value, episodeNumber);
+                }
+                else if (season.Value.SeasonNumber == seasonNumber)
+                {
+                    UpdateSeason(seriesObj, season.Value, episodeNumber, true);
+                }
             }
         }
 

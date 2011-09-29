@@ -757,5 +757,25 @@ namespace YANFOE.UI.UserControls.TvControls
                 this.popupEpisodeOpenFolder.Visibility = BarItemVisibility.Never;
             }
         }
+
+        private void btnUpdateEpisodes_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedEpisodes = this.gridViewEpisodes.GetSelectedRows().Select(row => this.gridViewEpisodes.GetRow(row) as Episode).ToList();
+
+            var update = new UI.Dialogs.TV.FrmUpdateShows(selectedEpisodes, true);
+            update.ShowDialog();
+
+            this.UpdateEpisodes();
+        }
+
+        private void btnUpdateSeason_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedSeasons = this.gridViewSeasons.GetSelectedRows().Select(row => this.gridViewSeasons.GetRow(row) as Season).ToList();
+
+            var update = new UI.Dialogs.TV.FrmUpdateShows(selectedSeasons, true);
+            update.ShowDialog();
+
+            this.UpdateSeasons();
+        }
     }
 }
