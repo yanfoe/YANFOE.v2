@@ -93,8 +93,15 @@ namespace YANFOE.Factories
 
             inGallery = new BindingList<string>();
 
+            MovieDatabase.ListChanged += MovieDatabase_ListChanged;
+
             multiSelectedMovies.ListChanged += MultiSelectedMovies_ListChanged;
             MovieDatabase.ListChanged += MovieDB_ListChanged;
+        }
+
+        static void MovieDatabase_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            DatabaseChanged(sender, e);
         }
 
         #endregion
@@ -392,6 +399,15 @@ namespace YANFOE.Factories
         public static void InvokeFanartLoading(EventArgs e)
         {
             EventHandler handler = FanartLoading;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+
+        public static void InvokeDatabaseChanged(EventArgs e)
+        {
+            EventHandler handler = DatabaseChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -938,6 +954,11 @@ namespace YANFOE.Factories
         /// </param>
         private static void MovieDB_ListChanged(object sender, ListChangedEventArgs e)
         {
+            if (DatabaseIOFactory.AppLoading)
+            {
+                return;
+            }
+
             GeneratePictureGallery();
         }
 

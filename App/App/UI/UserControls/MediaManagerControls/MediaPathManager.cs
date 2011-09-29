@@ -317,6 +317,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
             this.btnDelete.Enabled = enable;
             this.btnProcessMovies.Enabled = enable;
             this.btnProcessTv.Enabled = enable;
+            this.btnClean.Enabled = enable;
         }
 
         /// <summary>

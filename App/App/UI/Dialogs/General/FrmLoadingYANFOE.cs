@@ -1,9 +1,11 @@
 ﻿namespace YANFOE.UI.Dialogs.General
 {
+    using System;
     using System.ComponentModel;
     using System.IO;
     using System.Windows.Forms;
 
+    using YANFOE.Factories;
     using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
     using YANFOE.Factories.Sets;
@@ -102,6 +104,7 @@
         {
             this.frmMain.Show();
             DatabaseIOFactory.AppLoading = false;
+            MovieDBFactory.InvokeDatabaseChanged(new EventArgs());
             this.Hide();
         }
     }

@@ -99,7 +99,7 @@ namespace YANFOE
 
             this.SetTitle(false);
 
-            this.ChangeTextValue = new ChangeText(this.SetTitle);
+            this.ChangeTextValue = this.SetTitle;
 
             this.txtBuild.Text = Settings.ConstSettings.Application.ApplicationBuild;
             this.txtVersion.Text = Settings.ConstSettings.Application.ApplicationVersion;
@@ -185,15 +185,11 @@ namespace YANFOE
         /// </summary>
         private void SetupEventBindings()
         {
-            MovieDBFactory.MovieDatabase.ListChanged += (sender, e) =>
+            MovieDBFactory.DatabaseChanged += (sender, e) =>
                 {
-                    try
+                    if (!DatabaseIOFactory.AppLoading)
                     {
                         this.tabMovies.Text = string.Format("Movies ({0})", MovieDBFactory.MovieDatabase.Count);
-                    }
-                    catch (Exception)
-                    {
-                        // Do nothing
                     }
                 };
 
@@ -291,11 +287,6 @@ namespace YANFOE
         /// </param>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (DatabaseIOFactory.SavingCount > 0)
-            {
-                e.Cancel = true;
-            }
-
             this.mnuFileSaveDatabase.Enabled = false;
             this.mnuFileExit.Enabled = false;
 

@@ -765,7 +765,7 @@ namespace YANFOE
             // 
             // textEdit2
             // 
-            this.textEdit2.EditValue = "Kamil Kluziak, Steven Tarcza";
+            this.textEdit2.EditValue = "Kamil Kluziak, Matthias Larsen, Steven Tarcza";
             this.textEdit2.Location = new System.Drawing.Point(117, 160);
             this.textEdit2.MenuManager = this.barManager1;
             this.textEdit2.Name = "textEdit2";
@@ -834,7 +834,7 @@ namespace YANFOE
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(475, 24);
-            this.layoutControlItem2.Text = "Contributers";
+            this.layoutControlItem2.Text = "Code Contributers";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(89, 13);
             // 
             // layoutControlItem10
