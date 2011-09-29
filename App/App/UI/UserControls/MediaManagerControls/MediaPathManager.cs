@@ -157,6 +157,35 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         }
 
         /// <summary>
+        /// Handles the DoWork event of the BackgroundWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        private void BackgroundWorker_DoWorkRemoveMediaPath(object sender, DoWorkEventArgs e)
+        {
+            var removeModels = (List<MediaPathModel>)e.Argument;
+            foreach (var model in removeModels)
+            {
+                MediaPathDBFactory.RemoveFromDatabase(model);
+            }
+        }
+
+        /// <summary>
+        /// Handles the RunWorkerCompleted event of the BackgroundWorker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        private void BackgroundWorker_RunWorkerCompletedRemoveMediaPath(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+            this.SetupBindings();
+
+            this.grdViewMain.RefreshData();
+
+            this.EnableForm(true);
+        }
+
+        /// <summary>
         /// Handles the Click event of the BtnAdd control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -201,12 +230,14 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
                     removeModels.Add(row);
                 }
 
-                foreach (var model in removeModels)
-                {
-                    MediaPathDBFactory.RemoveFromDatabase(model);
-                }
+                this.backgroundWorker = new BackgroundWorker();
 
-                this.grdViewMain.RefreshData();
+                this.backgroundWorker.DoWork += this.BackgroundWorker_DoWorkRemoveMediaPath;
+                this.backgroundWorker.RunWorkerCompleted += this.BackgroundWorker_RunWorkerCompletedRemoveMediaPath;
+
+                this.backgroundWorker.RunWorkerAsync(removeModels);
+
+                this.EnableForm(false);
             }
         }
 

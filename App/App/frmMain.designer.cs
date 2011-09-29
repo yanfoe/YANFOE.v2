@@ -61,6 +61,10 @@ namespace YANFOE
             this.mnuEditSettings = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem7 = new DevExpress.XtraBars.BarSubItem();
             this.mnuToolsMovieScraperGroupManager = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem6 = new DevExpress.XtraBars.BarSubItem();
+            this.mnuToolsExportMissingEpisodesList = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuToolsExportMovieList = new DevExpress.XtraBars.BarButtonItem();
+            this.mnuToolsExportTvShowsList = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItem9 = new DevExpress.XtraBars.BarSubItem();
             this.mnuHelpReportIssues = new DevExpress.XtraBars.BarButtonItem();
             this.mnuHelpSourceCode = new DevExpress.XtraBars.BarButtonItem();
@@ -225,9 +229,13 @@ namespace YANFOE
             this.mnuHelpHomepage,
             this.mnuHelpSourceCode,
             this.mnuHelpWiki,
-            this.mnuDonate});
+            this.mnuDonate,
+            this.barSubItem6,
+            this.mnuToolsExportMissingEpisodesList,
+            this.mnuToolsExportMovieList,
+            this.mnuToolsExportTvShowsList});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 35;
+            this.barManager1.MaxItemId = 39;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
             // 
@@ -298,7 +306,8 @@ namespace YANFOE
             this.barSubItem7.Caption = global::YANFOE.Language.FrmMain_Menu_Tools;
             this.barSubItem7.Id = 7;
             this.barSubItem7.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsMovieScraperGroupManager)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsMovieScraperGroupManager),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem6)});
             this.barSubItem7.Name = "barSubItem7";
             // 
             // mnuToolsMovieScraperGroupManager
@@ -309,6 +318,35 @@ namespace YANFOE
             this.mnuToolsMovieScraperGroupManager.LargeGlyph = global::YANFOE.Properties.Resources.scrapergroupmanager;
             this.mnuToolsMovieScraperGroupManager.Name = "mnuToolsMovieScraperGroupManager";
             this.mnuToolsMovieScraperGroupManager.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsMovieScraperGroupManager_ItemClick);
+            // 
+            // barSubItem6
+            // 
+            this.barSubItem6.Caption = "Export";
+            this.barSubItem6.Id = 35;
+            this.barSubItem6.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportMissingEpisodesList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportMovieList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.mnuToolsExportTvShowsList)});
+            this.barSubItem6.Name = "barSubItem6";
+            // 
+            // mnuToolsExportMissingEpisodesList
+            // 
+            this.mnuToolsExportMissingEpisodesList.Caption = "Missing Episodes List";
+            this.mnuToolsExportMissingEpisodesList.Id = 36;
+            this.mnuToolsExportMissingEpisodesList.Name = "mnuToolsExportMissingEpisodesList";
+            this.mnuToolsExportMissingEpisodesList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuToolsExportMissingEpisodesList_ItemClick);
+            // 
+            // mnuToolsExportMovieList
+            // 
+            this.mnuToolsExportMovieList.Caption = "Movie List";
+            this.mnuToolsExportMovieList.Id = 37;
+            this.mnuToolsExportMovieList.Name = "mnuToolsExportMovieList";
+            // 
+            // mnuToolsExportTvShowsList
+            // 
+            this.mnuToolsExportTvShowsList.Caption = "TV Shows List";
+            this.mnuToolsExportTvShowsList.Id = 38;
+            this.mnuToolsExportTvShowsList.Name = "mnuToolsExportTvShowsList";
             // 
             // barSubItem9
             // 
@@ -1305,5 +1343,9 @@ namespace YANFOE
         private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEdit5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraEditors.LabelControl lblDownloadStatus;
+        private DevExpress.XtraBars.BarSubItem barSubItem6;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportMissingEpisodesList;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportMovieList;
+        private DevExpress.XtraBars.BarButtonItem mnuToolsExportTvShowsList;
     }
 }
