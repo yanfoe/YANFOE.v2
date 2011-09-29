@@ -335,12 +335,12 @@ namespace YANFOE.IO
                     {
                         if (File.Exists(set.PosterUrl))
                         {
-                            File.Copy(set.PosterUrl, currentSetPosterPath);
+                            File.Copy(set.PosterUrl, currentSetPosterPath, true);
                         }
 
                         if (File.Exists(set.FanartUrl))
                         {
-                            File.Copy(set.FanartUrl, currentSetFanartPath);
+                            File.Copy(set.FanartUrl, currentSetFanartPath, true);
                         }
                     }
                     else

@@ -527,7 +527,10 @@ namespace YANFOE.Factories.Internal
                             }
                         }
 
-                        TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                        lock (TvDBFactory.TvDatabase)
+                        {
+                            TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                        }
                     });
 
             TvDBFactory.GeneratePictureGallery();

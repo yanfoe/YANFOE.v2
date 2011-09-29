@@ -287,11 +287,6 @@ namespace YANFOE
         /// </param>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (DatabaseIOFactory.SavingCount > 0)
-            {
-                e.Cancel = true;
-            }
-
             this.mnuFileSaveDatabase.Enabled = false;
             this.mnuFileExit.Enabled = false;
 

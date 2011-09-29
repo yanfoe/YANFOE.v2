@@ -259,13 +259,14 @@ namespace YANFOE.Factories.Import
             if (regex.Success)
             {
                 rawSeriesName = regex.Groups["seriesName"].Value.Trim();
-                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Series name from file: {0}",
-                            rawSeriesName), logCategory);
+                InternalApps.Logs.Log.WriteToLog(
+                    LogSeverity.Debug, 0, string.Format("Series name from file: {0}", rawSeriesName), logCategory);
 
                 var result = (from r in ScanSeriesPicks where r.SearchString == rawSeriesName select r)
                     .SingleOrDefault();
 
-                string rawSeriesGuess = rawSeriesName.Replace(new string[] { ".", "_" }, " ");
+                string rawSeriesGuess = rawSeriesName.Replace(new string[] { ".", "_", "-" }, " ").Trim();
+
                 if (seriesGuess != string.Empty)
                 {
                     if (rawSeriesName == string.Empty)
@@ -291,10 +292,11 @@ namespace YANFOE.Factories.Import
                 }
                 else
                 {
-                    rawSeriesName = seriesGuess;
+                    rawSeriesName = rawSeriesGuess;
                 }
-                InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Best series guess: {0}",
-                        rawSeriesName), logCategory);
+
+                InternalApps.Logs.Log.WriteToLog(
+                    LogSeverity.Debug, 0, string.Format("Best series guess: {0}", rawSeriesName), logCategory);
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
@@ -306,8 +308,12 @@ namespace YANFOE.Factories.Import
             {
                 episodeDetails.SeasonNumber = seasonMatch.Groups[1].Value.GetNumber();
             }
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted season number: {0}",
-                    episodeDetails.SeasonNumber), logCategory);
+
+            InternalApps.Logs.Log.WriteToLog(
+                LogSeverity.Debug,
+                0,
+                string.Format("Extracted season number: {0}", episodeDetails.SeasonNumber),
+                logCategory);
 
             var episodeMatch = Regex.Matches(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
             if (episodeMatch.Count > 0)
@@ -329,16 +335,25 @@ namespace YANFOE.Factories.Import
                         }
                     }
 
-                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode numbers ({0}): {1}",
-                            episodeDetails.SecondaryNumbers.Count, string.Join(", ", episodeDetails.SecondaryNumbers)), logCategory);
+                    InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        string.Format(
+                            "Extracted episode numbers ({0}): {1}",
+                            episodeDetails.SecondaryNumbers.Count,
+                            string.Join(", ", episodeDetails.SecondaryNumbers)),
+                        logCategory);
                 }
                 else
                 {
                     var episodeMatch2 = Regex.Match(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
                     episodeDetails.EpisodeNumber = episodeMatch2.Groups[1].Value.GetNumber();
 
-                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Extracted episode number: {0}",
-                            episodeDetails.EpisodeNumber), logCategory);
+                    InternalApps.Logs.Log.WriteToLog(
+                        LogSeverity.Debug,
+                        0,
+                        string.Format("Extracted episode number: {0}", episodeDetails.EpisodeNumber),
+                        logCategory);
                 }
             }
 
