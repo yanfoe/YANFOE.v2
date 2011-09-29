@@ -252,8 +252,9 @@ namespace YANFOE.Factories.InOut
 
                 movieSaveSettings.IoType = type;
 
-                foreach (MovieModel movie in MovieDBFactory.MultiSelectedMovies)
+                for (int index = 0; index < MovieDBFactory.MultiSelectedMovies.Count; index++)
                 {
+                    MovieModel movie = MovieDBFactory.MultiSelectedMovies[index];
                     if (Get.InOutCollection.IoType == NFOType.YAMJ)
                     {
                         yamj.SaveMovie(movie);

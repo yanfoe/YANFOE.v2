@@ -326,10 +326,10 @@ namespace YANFOE.IO
                             SingleOrDefault();
 
                     string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", setName).Replace(
-                        "<ext>", ".jpg");
+                        "<ext>", "jpg");
 
                     string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", setName).Replace(
-                        "<ext>", ".jpg");
+                        "<ext>", "jpg");
 
                     if (setObjectModel.Order == 1)
                     {
