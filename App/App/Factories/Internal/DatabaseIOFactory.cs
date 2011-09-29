@@ -15,6 +15,7 @@ namespace YANFOE.Factories.Internal
     using System.Drawing;
     using System.IO;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using Newtonsoft.Json;
@@ -341,63 +342,75 @@ namespace YANFOE.Factories.Internal
 
         private static void LoadMovies(string path, string[] files, BindingList<MovieModel> database)
         {
-            foreach (string file in files)
-            {
-                string json = Gzip.Decompress(file);
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-                var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
-
-                if (json.Contains(@"ChangedText"":false"))
-                {
-                    movieModel.ChangedText = false;
-                }
-
-                if (json.Contains(@"ChangedPoster"":false"))
-                {
-                    movieModel.ChangedPoster = false;
-                }
-
-                if (json.Contains(@"ChangedFanart"":false"))
-                {
-                    movieModel.ChangedFanart = false;
-                }
-
-                movieModel.DatabaseSaved = true;
-
-                if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
-                {
-                    if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+            Parallel.ForEach(
+                files,
+                parallelOptions,
+                file =>
                     {
-                        Log.WriteToLog(
-                            LogSeverity.Info,
-                            LoggerName.GeneralLog,
-                            "Internal > DatabaseIOFactory > LoadMovieDB",
-                            string.Format(
-                                "Deleting {0}. Movie not found on the filesystem",
-                                movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
-                        // We should check for network path and make sure the file has actually been deleted or removed
-                        File.Delete(file);
-                        continue;
-                    }
-                }
+                        string json = Gzip.Decompress(file);
 
-                database.Add(movieModel);
+                        var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
 
-                string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+                        if (json.Contains(@"ChangedText"":false"))
+                        {
+                            movieModel.ChangedText = false;
+                        }
 
-                string poster = path + title + ".poster.jpg";
-                string fanart = path + title + ".fanart.jpg";
+                        if (json.Contains(@"ChangedPoster"":false"))
+                        {
+                            movieModel.ChangedPoster = false;
+                        }
 
-                if (File.Exists(poster))
-                {
-                    movieModel.SmallPoster = ImageHandler.LoadImage(poster);
-                }
+                        if (json.Contains(@"ChangedFanart"":false"))
+                        {
+                            movieModel.ChangedFanart = false;
+                        }
 
-                if (File.Exists(fanart))
-                {
-                    movieModel.SmallFanart = ImageHandler.LoadImage(fanart);
-                }
-            }
+                        movieModel.DatabaseSaved = true;
+
+                        if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
+                        {
+                            if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+                            {
+                                Log.WriteToLog(
+                                    LogSeverity.Info,
+                                    LoggerName.GeneralLog,
+                                    "Internal > DatabaseIOFactory > LoadMovieDB",
+                                    string.Format(
+                                        "Deleting {0}. Movie not found on the filesystem",
+                                        movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
+                                // We should check for network path and make sure the file has actually been deleted or removed
+                                File.Delete(file);
+                            }
+                        }
+
+                        if (movieModel != null)
+                        {
+                            lock (database)
+                            {
+                                database.Add(movieModel);
+                            }
+                        }
+
+                        string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+
+                        string poster = path + title + ".poster.jpg";
+                        string fanart = path + title + ".fanart.jpg";
+
+                        if (File.Exists(poster))
+                        {
+                            movieModel.SmallPoster = ImageHandler.LoadImage(poster);
+                        }
+
+                        if (File.Exists(fanart))
+                        {
+                            movieModel.SmallFanart = ImageHandler.LoadImage(fanart);
+                        }
+
+
+                    });
         }
 
         /// <summary>
@@ -460,57 +473,62 @@ namespace YANFOE.Factories.Internal
                     JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
             }
 
-            foreach (string file in files)
-            {
-                var json = Gzip.Decompress(file);
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-                var series = JsonConvert.DeserializeObject(json, typeof(Series)) as Series;
-
-                string title = FileNaming.RemoveIllegalChars(series.SeriesName);
-
-                string poster = path + title + ".poster.jpg";
-                string fanart = path + title + ".fanart.jpg";
-                string banner = path + title + ".banner.jpg";
-
-                if (File.Exists(poster))
-                {
-                    series.SmallPoster = ImageHandler.LoadImage(poster);
-                }
-
-                if (File.Exists(fanart))
-                {
-                    series.SmallFanart = ImageHandler.LoadImage(fanart);
-                }
-
-                if (File.Exists(banner))
-                {
-                    series.SmallBanner = ImageHandler.LoadImage(banner);
-                }
-
-                foreach (var season in series.Seasons)
-                {
-                    for (int index = 0; index < season.Value.Episodes.Count; index++)
+            Parallel.ForEach(
+                files,
+                parallelOptions,
+                file =>
                     {
-                        var episode = season.Value.Episodes[index];
-                        if (episode.FilePath.PathAndFilename != string.Empty
-                            && !File.Exists(episode.FilePath.PathAndFilename))
-                        {
-                            Log.WriteToLog(
-                                LogSeverity.Info,
-                                LoggerName.GeneralLog,
-                                "Internal > DatabaseIOFactory > LoadTvDB",
-                                string.Format(
-                                    "Deleting {0}. Episode not found on the filesystem",
-                                    episode.FilePath.PathAndFilename));
-                            // We should check for network path and make sure the file has actually been deleted or removed
-                            File.Delete(file);
-                            series.Seasons[season.Key].Episodes.Remove(episode);
-                        }
-                    }
-                }
+                        var json = Gzip.Decompress(file);
 
-                TvDBFactory.TvDatabase.Add(series.SeriesName, series);
-            }
+                        var series = JsonConvert.DeserializeObject(json, typeof(Series)) as Series;
+
+                        string title = FileNaming.RemoveIllegalChars(series.SeriesName);
+
+                        string poster = path + title + ".poster.jpg";
+                        string fanart = path + title + ".fanart.jpg";
+                        string banner = path + title + ".banner.jpg";
+
+                        if (File.Exists(poster))
+                        {
+                            series.SmallPoster = ImageHandler.LoadImage(poster);
+                        }
+
+                        if (File.Exists(fanart))
+                        {
+                            series.SmallFanart = ImageHandler.LoadImage(fanart);
+                        }
+
+                        if (File.Exists(banner))
+                        {
+                            series.SmallBanner = ImageHandler.LoadImage(banner);
+                        }
+
+                        foreach (var season in series.Seasons)
+                        {
+                            for (int index = 0; index < season.Value.Episodes.Count; index++)
+                            {
+                                var episode = season.Value.Episodes[index];
+                                if (episode.FilePath.PathAndFilename != string.Empty
+                                    && !File.Exists(episode.FilePath.PathAndFilename))
+                                {
+                                    Log.WriteToLog(
+                                        LogSeverity.Info,
+                                        LoggerName.GeneralLog,
+                                        "Internal > DatabaseIOFactory > LoadTvDB",
+                                        string.Format(
+                                            "Deleting {0}. Episode not found on the filesystem",
+                                            episode.FilePath.PathAndFilename));
+                                    // We should check for network path and make sure the file has actually been deleted or removed
+                                    File.Delete(file);
+                                    series.Seasons[season.Key].Episodes.Remove(episode);
+                                }
+                            }
+                        }
+
+                        TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                    });
 
             TvDBFactory.GeneratePictureGallery();
             TvDBFactory.GenerateMasterSeriesList();
@@ -531,9 +549,25 @@ namespace YANFOE.Factories.Internal
         /// </summary>
         private static void SaveMovieDB()
         {
-            var bgwSaveMovieDB = new BackgroundWorker();
-            bgwSaveMovieDB.DoWork += bgwSaveMovieDB_DoWork;
-            bgwSaveMovieDB.RunWorkerAsync();
+            SavingCount++;
+
+            SavingMovieDB = true;
+
+            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
+            Directory.CreateDirectory(path);
+            Folders.DeleteFilesInFolder(path);
+
+            SavingMovieValue = 0;
+            SavingMovieMax = 0;
+
+            SaveMovies(MovieDBFactory.MovieDatabase);
+            SaveMovies(MovieDBFactory.HiddenMovieDatabase);
+
+            SavingMovieDB = false;
+
+            SavingCount--;
+
+            frmSavingDB.TvDBFinished();
         }
 
         /// <summary>
@@ -554,55 +588,6 @@ namespace YANFOE.Factories.Internal
             var bgwSaveScanSeriesPick = new BackgroundWorker();
             bgwSaveScanSeriesPick.DoWork += bgwSaveScanSeriesPick_DoWork;
             bgwSaveScanSeriesPick.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Saves the tv DB.
-        /// </summary>
-        private static void SaveTvDB()
-        {
-            var bgwSaveTvDB = new BackgroundWorker();
-            bgwSaveTvDB.DoWork += bgwSaveTvDB_DoWork;
-            bgwSaveTvDB.RunWorkerCompleted += bgwSaveTvDB_RunWorkerCompleted;
-            bgwSaveTvDB.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Handles the DoWork event of the SavingTVDB control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void SavingTVDB_DoWork(object sender, DoWorkEventArgs e)
-        {
-            var series = e.Argument as Series;
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
-            string title = FileNaming.RemoveIllegalChars(series.SeriesName);
-
-            string writePath = path + title + ".Series";
-            string json = JsonConvert.SerializeObject(series);
-            Gzip.CompressString(json, writePath + ".gz");
-
-            if (series.SmallBanner != null)
-            {
-                var smallBanner = new Bitmap(series.SmallBanner);
-                smallBanner.Save(path + title + ".banner.jpg");
-            }
-
-            if (series.SmallFanart != null)
-            {
-                var smallFanart = new Bitmap(series.SmallFanart);
-                smallFanart.Save(path + title + ".fanner.jpg");
-            }
-
-            if (series.SmallPoster != null)
-            {
-                var smallPoster = new Bitmap(series.SmallPoster);
-                smallPoster.Save(path + title + ".poster.jpg");
-            }
         }
 
         /// <summary>
@@ -649,158 +634,65 @@ namespace YANFOE.Factories.Internal
             SavingCount--;
         }
 
-        /// <summary>
-        /// Handles the DoWork event of the bgw control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveMovieDBWork_DoWork(object sender, DoWorkEventArgs e)
-        {
-            SavingCount++;
-
-            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
-
-            var movieModel = e.Argument as MovieModel;
-
-            var title = FileNaming.RemoveIllegalChars(movieModel.Title);
-
-            string writePath;
-
-            if (movieModel.Hidden)
-            {
-                writePath = path + title + ".hiddenmovie";
-            }
-            else
-            {
-                writePath = path + title + ".movie";
-            }
-
-            movieModel.DatabaseSaved = true;
-            var json = JsonConvert.SerializeObject(movieModel);
-            Gzip.CompressString(json, writePath + ".gz");
-
-            var posterPath = path + title + ".poster.jpg";
-            var fanartPath = path + title + ".fanart.jpg";
-
-            if (movieModel.SmallPoster != null)
-            {
-                movieModel.SmallPoster.Save(posterPath);
-            }
-
-            if (movieModel.SmallFanart != null)
-            {
-                movieModel.SmallFanart.Save(fanartPath);
-            }
-
-            SavingCount--;
-        }
-
-        /// <summary>
-        /// Handles the DoWork event of the bgwSaveMovieDB control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveMovieDB_DoWork(object sender, DoWorkEventArgs e)
-        {
-            SavingCount++;
-
-            SavingMovieDB = true;
-
-            var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-            Folders.DeleteFilesInFolder(path);
-
-            SaveMovies(MovieDBFactory.MovieDatabase);
-            SaveMovies(MovieDBFactory.HiddenMovieDatabase);
-        }
-
         private static void SaveMovies(BindingList<MovieModel> database)
         {
-            int count = 0;
             int max = database.Count;
 
             if (max == 0)
             {
-                SavingCount--;
                 return;
             }
 
-            SavingMovieMax = database.Count;
+            SavingMovieMax += database.Count - 1;
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-            var bgw1 = new BackgroundWorker();
-            var bgw2 = new BackgroundWorker();
-            var bgw3 = new BackgroundWorker();
-            var bgw4 = new BackgroundWorker();
-            var bgw5 = new BackgroundWorker();
-            var bgw6 = new BackgroundWorker();
+            Parallel.ForEach(
+                database,
+                parallelOptions,
+                movie =>
+                    {
+                        SavingCount++;
 
-            bgw1.DoWork += bgwSaveMovieDBWork_DoWork;
-            bgw2.DoWork += bgwSaveMovieDBWork_DoWork;
-            bgw3.DoWork += bgwSaveMovieDBWork_DoWork;
-            bgw4.DoWork += bgwSaveMovieDBWork_DoWork;
-            bgw5.DoWork += bgwSaveMovieDBWork_DoWork;
-            bgw6.DoWork += bgwSaveMovieDBWork_DoWork;
+                        var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
 
-            do
-            {
-                SavingMovieValue = count;
+                        var title = FileNaming.RemoveIllegalChars(movie.Title);
 
-                MovieModel movieModel = database[count];
+                        string writePath;
 
-                if (!bgw1.IsBusy)
-                {
-                    count++;
-                    bgw1.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else if (!bgw2.IsBusy)
-                {
-                    count++;
-                    bgw2.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else if (!bgw3.IsBusy)
-                {
-                    count++;
-                    bgw3.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else if (!bgw4.IsBusy)
-                {
-                    count++;
-                    bgw4.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else if (!bgw5.IsBusy)
-                {
-                    count++;
-                    bgw5.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else if (!bgw6.IsBusy)
-                {
-                    count++;
-                    bgw6.RunWorkerAsync(movieModel);
-                    Application.DoEvents();
-                }
-                else
-                {
-                    Application.DoEvents();
-                    Thread.Sleep(50);
-                }
-            }
-            while (count < max);
+                        if (movie.Hidden)
+                        {
+                            writePath = path + title + ".hiddenmovie";
+                        }
+                        else
+                        {
+                            writePath = path + title + ".movie";
+                        }
+
+                        movie.DatabaseSaved = true;
+                        var json = JsonConvert.SerializeObject(movie);
+                        Gzip.CompressString(json, writePath + ".gz");
+
+                        var posterPath = path + title + ".poster.jpg";
+                        var fanartPath = path + title + ".fanart.jpg";
+
+                        if (movie.SmallPoster != null)
+                        {
+                            movie.SmallPoster.Save(posterPath);
+                        }
+
+                        if (movie.SmallFanart != null)
+                        {
+                            movie.SmallFanart.Save(fanartPath);
+                        }
+
+                        Application.DoEvents();
+
+                        SavingMovieValue++;
+                    });
+
+            frmSavingDB.MovieDBFinished();
 
             SavingMovieDB = false;
-            SavingCount--;
         }
 
         /// <summary>
@@ -852,35 +744,9 @@ namespace YANFOE.Factories.Internal
             SavingCount--;
         }
 
-        /// <summary>
-        /// Handles the DoWork event of the bgwSaveTvDB control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveTvDB_DoWork(object sender, DoWorkEventArgs e)
+        private static void SaveTvDB()
         {
             SavingCount++;
-
-            var bgw1 = new BackgroundWorker();
-            var bgw2 = new BackgroundWorker();
-            var bgw3 = new BackgroundWorker();
-            var bgw4 = new BackgroundWorker();
-            var bgw5 = new BackgroundWorker();
-            var bgw6 = new BackgroundWorker();
-
-            bgw1.DoWork += SavingTVDB_DoWork;
-            bgw2.DoWork += SavingTVDB_DoWork;
-            bgw3.DoWork += SavingTVDB_DoWork;
-            bgw4.DoWork += SavingTVDB_DoWork;
-            bgw5.DoWork += SavingTVDB_DoWork;
-            bgw6.DoWork += SavingTVDB_DoWork;
-
-            SavingTVDBMax = TvDBFactory.TvDatabase.Count;
-            SavingTVDBValue = 0;
 
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
@@ -890,77 +756,47 @@ namespace YANFOE.Factories.Internal
             string json = JsonConvert.SerializeObject(TvDBFactory.HiddenTvDatabase);
             Gzip.CompressString(json, writePath + ".gz");
 
-            foreach (var series in TvDBFactory.TvDatabase)
-            {
-                bool processed = false;
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-                do
-                {
-                    if (!bgw1.IsBusy)
+            SavingTVDBMax = TvDBFactory.TvDatabase.Count;
+            SavingTVDBValue = 0;
+
+            Parallel.ForEach(
+                TvDBFactory.TvDatabase,
+                parallelOptions,
+                series =>
                     {
+                        path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
+                        string title = FileNaming.RemoveIllegalChars(series.Value.SeriesName);
+
+                        writePath = path + title + ".Series";
+                        json = JsonConvert.SerializeObject(series);
+                        Gzip.CompressString(json, writePath + ".gz");
+
+                        if (series.Value.SmallBanner != null)
+                        {
+                            var smallBanner = new Bitmap(series.Value.SmallBanner);
+                            smallBanner.Save(path + title + ".banner.jpg");
+                        }
+
+                        if (series.Value.SmallFanart != null)
+                        {
+                            var smallFanart = new Bitmap(series.Value.SmallFanart);
+                            smallFanart.Save(path + title + ".fanner.jpg");
+                        }
+
+                        if (series.Value.SmallPoster != null)
+                        {
+                            var smallPoster = new Bitmap(series.Value.SmallPoster);
+                            smallPoster.Save(path + title + ".poster.jpg");
+                        }
+
                         SavingTVDBValue++;
-                        bgw1.RunWorkerAsync(series.Value);
+
                         Application.DoEvents();
-                        processed = true;
-                    }
-                    else if (!bgw2.IsBusy)
-                    {
-                        SavingTVDBValue++;
-                        bgw2.RunWorkerAsync(series.Value);
-                        Application.DoEvents();
-                        processed = true;
-                    }
-                    else if (!bgw3.IsBusy)
-                    {
-                        SavingTVDBValue++;
-                        bgw3.RunWorkerAsync(series.Value);
-                        Application.DoEvents();
-                        processed = true;
-                    }
-                    else if (!bgw4.IsBusy)
-                    {
-                        SavingTVDBValue++;
-                        bgw4.RunWorkerAsync(series.Value);
-                        Application.DoEvents();
-                        processed = true;
-                    }
-                    else if (!bgw5.IsBusy)
-                    {
-                        SavingTVDBValue++;
-                        bgw5.RunWorkerAsync(series.Value);
-                        Application.DoEvents();
-                        processed = true;
-                    }
-                    else if (!bgw6.IsBusy)
-                    {
-                        SavingTVDBValue++;
-                        bgw6.RunWorkerAsync(series.Value);
-                        Application.DoEvents();
-                        processed = true;
-                    }
-                    else
-                    {
-                        Application.DoEvents();
-                        Thread.Sleep(50);
-                    }
-                }
-                while (processed == false);
-            }
+                    });
 
             SavingCount--;
-        }
-
-        /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSaveTvDB control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveTvDB_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
             frmSavingDB.TvDBFinished();
         }
 

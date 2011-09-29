@@ -68,6 +68,11 @@ namespace YANFOE.Tools
             {
                 Image returnImage;
 
+                if (!File.Exists(filePath))
+                {
+                    return Resources.picture;
+                }
+
                 using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     returnImage = Image.FromStream(fs);

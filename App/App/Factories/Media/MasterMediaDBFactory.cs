@@ -154,9 +154,13 @@ namespace YANFOE.Factories.Media
         {
             masterMovieMediaDatabase = new BindingList<MediaModel>();
 
-            foreach (var f in MovieDBFactory.MovieDatabase.SelectMany(m => m.AssociatedFiles.Media))
+            foreach (var f in MovieDBFactory.MovieDatabase.Where(m => m.AssociatedFiles.Media != null))
             {
-                masterMovieMediaDatabase.Add(f);
+                foreach (var m in f.AssociatedFiles.Media)
+                {
+                    masterMovieMediaDatabase.Add(m);
+                }
+
             }
         }
 

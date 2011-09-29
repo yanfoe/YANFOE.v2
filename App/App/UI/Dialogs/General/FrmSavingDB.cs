@@ -14,8 +14,6 @@
 
 namespace YANFOE.UI.Dialogs.General
 {
-    using System.Threading;
-
     public partial class FrmSavingDB : DevExpress.XtraEditors.XtraForm
     {
         private bool tvFinished;

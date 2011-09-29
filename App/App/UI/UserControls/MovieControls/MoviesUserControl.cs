@@ -26,6 +26,7 @@ namespace YANFOE.UI.UserControls.MovieControls
 
     using YANFOE.Factories;
     using YANFOE.Factories.InOut.Enum;
+    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Scraper;
     using YANFOE.Factories.UI;
     using YANFOE.Models.MovieModels;
@@ -352,7 +353,10 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </param>
         private void MovieDBFactory_DatabaseChanged(object sender, EventArgs e)
         {
-            this.SetupDatabindings();
+            if (!DatabaseIOFactory.AppLoading)
+            {
+                this.SetupDatabindings();
+            }
         }
 
         /// <summary>
@@ -523,6 +527,11 @@ namespace YANFOE.UI.UserControls.MovieControls
         /// </summary>
         private void UpdateTitleCount()
         {
+            if (DatabaseIOFactory.AppLoading)
+            {
+                return;
+            }
+
             this.tabByTitle.Text = string.Format("Title ({0})", MovieDBFactory.MovieDatabase.Count);
         }
 
