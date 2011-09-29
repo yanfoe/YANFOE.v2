@@ -25,6 +25,7 @@ namespace YANFOE.Factories.Sets
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.SetsModels;
     using YANFOE.Settings;
+    using YANFOE.Tools.Restructure;
 
     /// <summary>
     /// The movie set manager.
@@ -205,7 +206,7 @@ namespace YANFOE.Factories.Sets
         /// <param name="path">The path to change fanart</param>
         public static void ChangeCurrentSetFanart(string path)
         {
-            var newPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + GetCurrentSet.SetName +
+            var newPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + FileSystemCharChange.To(GetCurrentSet.SetName) +
                              Path.GetExtension(path);
 
             File.Copy(path, newPath, true);
@@ -221,7 +222,7 @@ namespace YANFOE.Factories.Sets
         /// <param name="path">The path to process the poster change</param>
         public static void ChangeCurrentSetPoster(string path)
         {
-            var newPath = Get.FileSystemPaths.PathMoviesSets + "poster." + GetCurrentSet.SetName +
+            var newPath = Get.FileSystemPaths.PathMoviesSets + "poster." + FileSystemCharChange.To(GetCurrentSet.SetName) +
                              Path.GetExtension(path);
 
             File.Copy(path, newPath, true);
@@ -428,14 +429,14 @@ namespace YANFOE.Factories.Sets
                 {
                     if (movie.GetMovieModel() != null)
                     {
-                        string posterPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + set.SetName + "_1.jpg";
+                        string posterPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + FileSystemCharChange.To(set.SetName) + "_1.jpg";
 
-                        string fanartPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + set.SetName +
+                        string fanartPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + FileSystemCharChange.To(set.SetName) +
                                             "_1.fanart.jpg";
 
                         if (File.Exists(posterPath))
                         {
-                            string newPosterPath = Get.FileSystemPaths.PathMoviesSets + "poster." + set.SetName +
+                            string newPosterPath = Get.FileSystemPaths.PathMoviesSets + "poster." + FileSystemCharChange.To(set.SetName) +
                                                    Path.GetExtension(posterPath);
                             File.Copy(posterPath, newPosterPath, true);
                             set.PosterUrl = newPosterPath;
@@ -444,7 +445,7 @@ namespace YANFOE.Factories.Sets
 
                         if (File.Exists(fanartPath))
                         {
-                            string newFanartPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + set.SetName +
+                            string newFanartPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + FileSystemCharChange.To(set.SetName) +
                                                    Path.GetExtension(fanartPath);
                             File.Copy(fanartPath, newFanartPath, true);
                             set.FanartUrl = newFanartPath;

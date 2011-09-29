@@ -325,10 +325,10 @@ namespace YANFOE.IO
                         (from s in set.Movies where s.MovieUniqueId == movieModel.MovieUniqueId select s).
                             SingleOrDefault();
 
-                    string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", setName).Replace(
+                    string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", FileSystemCharChange.To(setName)).Replace(
                         "<ext>", "jpg");
 
-                    string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", setName).Replace(
+                    string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", FileSystemCharChange.To(setName)).Replace(
                         "<ext>", "jpg");
 
                     if (setObjectModel.Order == 1)
