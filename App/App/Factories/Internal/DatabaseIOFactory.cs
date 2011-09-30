@@ -10,6 +10,7 @@
 namespace YANFOE.Factories.Internal
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
@@ -527,7 +528,7 @@ namespace YANFOE.Factories.Internal
                             }
                         }
 
-                        lock (TvDBFactory.TvDatabase)
+                        lock (((IList)TvDBFactory.TvDatabase).SyncRoot)
                         {
                             TvDBFactory.TvDatabase.Add(series.SeriesName, series);
                         }
