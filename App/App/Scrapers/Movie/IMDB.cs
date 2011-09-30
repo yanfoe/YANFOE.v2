@@ -45,6 +45,8 @@ namespace YANFOE.Scrapers.Movie
         public IMDB()
         {
             this.ScraperName = ScraperList.Imdb;
+            this.DefaultUrl = @"http://www.imdb.com/";
+            this.IdRegexMatch = @"http://www\.imdb\.com/title/tt(?<id>\d{7})/";
 
             this.Urls = new Dictionary<string, string>
                             {

@@ -31,8 +31,6 @@ namespace YANFOE.Models.MovieModels
 
     using YANFOE.Factories;
     using YANFOE.Factories.Apps.MediaInfo;
-    using YANFOE.Factories.Apps.MediaInfo.Models;
-    using YANFOE.Factories.Internal;
     using YANFOE.Factories.Sets;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
@@ -40,6 +38,8 @@ namespace YANFOE.Models.MovieModels
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.NFOModels;
     using YANFOE.Properties;
+    using YANFOE.Scrapers.Movie;
+    using YANFOE.Scrapers.Movie.Interfaces;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
@@ -55,8 +55,6 @@ namespace YANFOE.Models.MovieModels
     public class MovieModel : ModelBase, IDXDataErrorInfo
     {
         #region Constants and Fields
-
-        private Dictionary<ScraperList, string> ScraperIds { get; set; }
 
         /// <summary>
         /// The change list.
@@ -354,12 +352,6 @@ namespace YANFOE.Models.MovieModels
             this.TrailerPathOnDisk = string.Empty;
 
             this.PropertyChanged += this.MovieModel_PropertyChanged;
-
-            //this.FileInfo.PropertyChanged += (sender, e) =>
-            //    {
-            //        DatabaseIOFactory.DatabaseDirty = true;
-            //        ChangedText = true;
-            //    };
         }
 
         #endregion
@@ -1697,6 +1689,18 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
+        public string TheMovieDbId
+        {
+            get
+            {
+                return TmdbId;
+            }
+            set
+            {
+                TmdbId = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets TmdbId.
         /// </summary>
@@ -1713,6 +1717,7 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.tmdbId = value;
                     this.OnPropertyChanged("TmdbId", true);
+                    this.OnPropertyChanged("TheMovieDbId", true);
                     this.OnPropertyChanged("Status");
                 }
             }

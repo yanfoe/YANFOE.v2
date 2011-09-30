@@ -53,6 +53,8 @@ namespace YANFOE.Scrapers.Movie
                                                {
                                                    ScrapeFields.Trailer
                                                });
+
+            this.IncludeInWebIDList = false;
         }
 
         /// <summary>

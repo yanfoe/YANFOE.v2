@@ -45,6 +45,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.FilmUp;
 
+            this.DefaultUrl = "http://filmup.leonardo.it/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://filmup.leonardo.it/sc_{0}.htm" }

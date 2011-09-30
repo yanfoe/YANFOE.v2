@@ -44,6 +44,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.Kinopoisk;
 
+            this.DefaultUrl = "http://www.kinopoisk.ru/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://www.kinopoisk.ru/level/1/film/{0}" },

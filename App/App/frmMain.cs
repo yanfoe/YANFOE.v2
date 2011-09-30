@@ -19,8 +19,6 @@ namespace YANFOE
     using System.IO;
     using System.Threading;
     using System.Windows.Forms;
-    using System.Collections.Generic;
-
     using BitFactory.Logging;
 
     using DevExpress.LookAndFeel;
@@ -36,7 +34,6 @@ namespace YANFOE
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.Logs.Enums;
     using YANFOE.Properties;
-    using YANFOE.Tools.Enums;
     using YANFOE.UI.Dialogs.DSettings;
     using YANFOE.UI.Dialogs.General;
     using YANFOE.UI.Dialogs.Movies;

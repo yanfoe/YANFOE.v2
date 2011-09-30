@@ -44,6 +44,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.FilmDelta;
 
+            this.DefaultUrl = @"http://http://www.filmdelta.se/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://www.filmdelta.se/titles.php?movieId={0}" }

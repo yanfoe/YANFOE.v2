@@ -48,6 +48,8 @@ namespace YANFOE.Scrapers.Movie
             this.UrlHtmlCache = new Dictionary<string, string>();
             this.DefaultGenres = new BindingList<string>();
 
+            this.IncludeInWebIDList = true;
+
             DefaultGenres.AllowEdit = true;
             DefaultGenres.AllowNew = true;
             DefaultGenres.AllowRemove = true;
@@ -58,6 +60,12 @@ namespace YANFOE.Scrapers.Movie
         /// </summary>
         /// <value>The name of the scraper.</value>
         public ScraperList ScraperName { get; set; }
+
+        public string DefaultUrl { get; set; }
+
+        public string IdRegexMatch { get; set; }
+
+        public bool IncludeInWebIDList { get; set; }
 
         /// <summary>
         /// Gets or sets the available methods.

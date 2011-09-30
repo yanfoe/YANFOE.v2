@@ -1160,10 +1160,10 @@ namespace YANFOE.UI.UserControls.CommonControls
         /// <param name="e">The <see cref="System.Windows.Forms.DragEventArgs"/> instance containing the event data.</param>
         private void imageMain_DragOver(object sender, DragEventArgs e)
         {
-            object fileNameW = e.Data.GetData("FileNameW");
+            var fileNameW = e.Data.GetData("FileNameW");
             if (fileNameW != null)
             {
-                string[] fileNames = (string[])fileNameW;
+                var fileNames = (string[])fileNameW;
                 if (fileNames.Length == 1)
                 {
                     string fileName = fileNames[0];

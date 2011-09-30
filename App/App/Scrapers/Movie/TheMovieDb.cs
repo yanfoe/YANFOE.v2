@@ -49,6 +49,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.TheMovieDB;
 
+            this.DefaultUrl = "http://www.themoviedb.org/";
+
             this.Urls = new Dictionary<string, string>
                 {
                     {

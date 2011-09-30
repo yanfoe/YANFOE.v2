@@ -42,6 +42,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.Impawards;
 
+            this.DefaultUrl = "http://www.impawards.com/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://http://www.impawards.com{0}" }

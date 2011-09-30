@@ -40,6 +40,8 @@ namespace YANFOE.Settings.UserSettings
             this.BuildWebEncodings();
 
             DownloadThreads = 8;
+
+            DefaultURLInBrowser = new Uri("http://www.imdb.com");
         }
 
         private void BuildWebEncodings()
@@ -64,6 +66,8 @@ namespace YANFOE.Settings.UserSettings
         #region Properties
 
         public Dictionary<string, Encoding> WebEncodings { get; set; }
+
+        public Uri DefaultURLInBrowser { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether EnableAddToBackgroundQue.

@@ -43,6 +43,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.FilmWeb;
 
+            this.DefaultUrl = "http://www.filmweb.pl/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://www.filmweb.pl/{0}" }
