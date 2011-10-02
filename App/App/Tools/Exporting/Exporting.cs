@@ -94,7 +94,7 @@ namespace YANFOE.Tools.Exporting
                     foreach (var episode in episodes)
                     {
                         
-                        if (!s.Seasons.ContainsKey(episode.GetSeason().SeasonNumber)
+                        if (!s.Seasons.ContainsKey(episode.GetSeason().SeasonNumber))
                         {
                             var season = Extensions.Clone(episode.GetSeason());
                             season.Episodes.Clear();
