@@ -411,7 +411,7 @@ namespace YANFOE.IO
                     //XWrite.WriteEnclosedElement(xmlWriter, "credits", episode.Credits);
 
                     // Director
-                    foreach (PersonModel director in movieModel.Director)
+                    foreach (PersonModel director in episode.Director)
                     {
                         XWrite.WriteEnclosedElement(xmlWriter, "director", director.Name);
                     }
