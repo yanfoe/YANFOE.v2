@@ -45,6 +45,18 @@ namespace YANFOE.Scrapers.Movie.Interfaces
         string HtmlBaseUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets the DefaultUrl.
+        /// </summary>
+        /// <value>
+        /// The default url is used for the internal webbrowser
+        /// </value>
+        string DefaultUrl { get; set; }
+
+        string IdRegexMatch { get; set; }
+
+        bool IncludeInWebIDList { get; set; }
+
+        /// <summary>
         /// Gets the name of the scraper.
         /// </summary>
         /// <value>The name of the scraper.</value>

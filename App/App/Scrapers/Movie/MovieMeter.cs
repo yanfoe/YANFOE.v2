@@ -38,6 +38,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.MovieMeter;
 
+            this.DefaultUrl = "http://www.moviemeter.nl/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "$$Internal_movieMeterHandler?moviemeterid={0}" },

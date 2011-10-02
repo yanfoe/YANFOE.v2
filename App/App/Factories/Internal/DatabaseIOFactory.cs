@@ -473,7 +473,11 @@ namespace YANFOE.Factories.Internal
                     JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
             }
 
-            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
+
+            bool tvDBLock = false;
+
+            var loadedSeries = new List<Series>();
 
             Parallel.ForEach(
                 files,
@@ -527,11 +531,20 @@ namespace YANFOE.Factories.Internal
                             }
                         }
 
-                        lock (TvDBFactory.TvDatabase)
+                        lock (loadedSeries)
                         {
-                            TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                            loadedSeries.Add(series);
                         }
                     });
+
+            foreach (var series in loadedSeries)
+            {
+                if (series.SeriesName != string.Empty)
+
+                {
+                    TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                }
+            }
 
             TvDBFactory.GeneratePictureGallery();
             TvDBFactory.GenerateMasterSeriesList();
@@ -770,10 +783,10 @@ namespace YANFOE.Factories.Internal
                 series =>
                     {
                         path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
-                        string title = FileNaming.RemoveIllegalChars(series.Value.SeriesName);
+                        var title = FileNaming.RemoveIllegalChars(series.Value.SeriesName);
 
                         writePath = path + title + ".Series";
-                        json = JsonConvert.SerializeObject(series);
+                        json = JsonConvert.SerializeObject(series.Value);
                         Gzip.CompressString(json, writePath + ".gz");
 
                         if (series.Value.SmallBanner != null)

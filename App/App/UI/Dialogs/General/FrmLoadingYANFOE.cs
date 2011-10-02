@@ -44,10 +44,13 @@
 
             this.bgw.RunWorkerAsync();
 
-            foreach (var file in Directory.GetFiles(Settings.Get.FileSystemPaths.PathDirTemp))
-            {
-                File.Delete(file);
-            }
+            //if (Directory.Exists(Settings.Get.FileSystemPaths.PathDirTemp))
+            //{
+            //    foreach (var file in Directory.GetFiles(Settings.Get.FileSystemPaths.PathDirTemp))
+            //    {
+            //        File.Delete(file);
+            //    }
+            //}
         }
 
         /// <summary>

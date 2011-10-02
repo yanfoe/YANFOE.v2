@@ -44,6 +44,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.FilmAffinity;
 
+            this.DefaultUrl = @"http://www.filmaffinity.com/es/";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://www.filmaffinity.com/es/film{0}.html" }

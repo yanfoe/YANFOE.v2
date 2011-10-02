@@ -140,7 +140,19 @@ namespace YANFOE.Scrapers.Movie
                                              where
                                                  t.GetInterfaces().Contains(typeof(IMovieScraper)) &&
                                                  t.GetConstructor(Type.EmptyTypes) != null
-                                             select Activator.CreateInstance(t) as IMovieScraper).ToList();
+                                             select Activator.CreateInstance(t) as IMovieScraper)
+                                             .ToList();
+
+            var sortedScrapers = new SortedDictionary<string, IMovieScraper>();
+
+            foreach (var s in instances)
+            {
+                sortedScrapers.Add(s.ScraperName.ToString(), s);
+            }
+
+            instances.Clear();
+
+            instances.AddRange(sortedScrapers.Select(s => s.Value));
 
             return instances;
         }

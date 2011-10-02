@@ -45,6 +45,9 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.Allocine;
 
+            this.DefaultUrl = @"http://www.allocine.fr/";
+            this.IdRegexMatch = "";
+
             this.Urls = new Dictionary<string, string>
                             {
                                 { "main", "http://www.allocine.fr/film/fichefilm_gen_cfilm={0}.html" },

@@ -40,6 +40,8 @@ namespace YANFOE.Scrapers.Movie
         {
             this.ScraperName = ScraperList.OFDB;
 
+            this.DefaultUrl = "http://www.moviemeter.nl/";
+
             this.Urls = new Dictionary<string, string>
                 {
                     { "main", "http://www.ofdb.de/film/{0}" },
