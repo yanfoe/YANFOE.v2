@@ -212,7 +212,7 @@ namespace YANFOE.Factories.Import
                     movieModel.AssociatedFiles.AddToMediaCollection(file);
 
                     // Does the movie exist in our current DB?
-                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim() && m.Year == movieModel.Year) select m).ToList();
+                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
                     if (result2.Count > 0)
                     {
                         if (movieModel.Year != null)
@@ -220,7 +220,7 @@ namespace YANFOE.Factories.Import
                             var r = (from m in result2 where m.Year == movieModel.Year select m).ToList();
                             if (r.Count > 0)
                             {
-                                // We already have a movie with that name and title, mark as dupe
+                                // We already have a movie with that name and year, mark as dupe
                                 ImportDuplicatesDatabase.Add(movieModel);
                             }
                         }
@@ -236,13 +236,16 @@ namespace YANFOE.Factories.Import
                 }
                 else
                 {
-                    // result[0].AssociatedFiles.GetMediaCollection().Clear();
-                    result[0].AssociatedFiles.AddToMediaCollection(file);
-
-                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)"))
+                    var r = (from m in result where m.Year == movieModel.Year select m).ToList();
+                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)") && r.Count > 0)
                     {
-                        // Dont count a disc or part as a dupe
+                        // Dont count a disc or part as a dupe or movies with different years
                         ImportDuplicatesDatabase.Add(movieModel);
+                    }
+                    else
+                    {
+                        // Only associate with an existing movie if its not a dupe
+                        result[0].AssociatedFiles.AddToMediaCollection(file);
                     }
                     // Add it to the list anyway, since there's no implementation of any action on duplicates.
                     ImportDatabase.Add(movieModel);
