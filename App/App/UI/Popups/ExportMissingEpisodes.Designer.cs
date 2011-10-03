@@ -40,6 +40,7 @@
             this.popupExportXML = new DevExpress.XtraBars.BarStaticItem();
             this.popupExportHTML = new DevExpress.XtraBars.BarStaticItem();
             this.popupExportPDF = new DevExpress.XtraBars.BarStaticItem();
+            this.subMenuTemplate = new DevExpress.XtraBars.BarSubItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar3 = new DevExpress.XtraBars.Bar();
@@ -47,6 +48,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuExportTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -162,6 +164,12 @@
             this.popupExportPDF.TextAlignment = System.Drawing.StringAlignment.Near;
             this.popupExportPDF.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMenuExportTo_ItemClick);
             // 
+            // subMenuTemplate
+            // 
+            this.subMenuTemplate.Caption = "Template";
+            this.subMenuTemplate.Id = 6;
+            this.subMenuTemplate.Name = "subMenuTemplate";
+            // 
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -175,9 +183,11 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.popupExportXML,
             this.popupExportHTML,
-            this.popupExportPDF});
+            this.popupExportPDF,
+            this.barButtonItem1,
+            this.subMenuTemplate});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 5;
+            this.barManager1.MaxItemId = 7;
             this.barManager1.StatusBar = this.bar3;
             // 
             // bar2
@@ -231,6 +241,12 @@
             this.barDockControlRight.Location = new System.Drawing.Point(800, 22);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 477);
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Template";
+            this.barButtonItem1.Id = 5;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
             // ExportMissingEpisodes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,6 +289,8 @@
         private DevExpress.XtraBars.BarStaticItem popupExportXML;
         private DevExpress.XtraBars.BarStaticItem popupExportHTML;
         private DevExpress.XtraBars.BarStaticItem popupExportPDF;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarSubItem subMenuTemplate;
 
     }
 }

@@ -71,11 +71,9 @@ namespace YANFOE.Tools.Exporting
                 ExportMissingEpisodes form = new ExportMissingEpisodes(missingEpisodes);
                 form.Show();
             }
-
-            //ExportMissingEpisodesTemplate("Default Tv Show Template");
         }
 
-        public static bool ExportMissingEpisodesTemplate(string tName)
+        public static bool ExportMissingEpisodesTemplate(string tName, string path = "")
         {
             var files = GetExportTemplates();
             var exportTemplate = (from s in files where s.name == tName select s).Single();
@@ -110,19 +108,25 @@ namespace YANFOE.Tools.Exporting
 
             template.Add("series", seriesList);
 
-            var form = new SimpleBrowseForm();
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
+            string ext = "";
+            if (path == "")
             {
-                var ext = Path.GetExtension(form.getInput());
-                if (ext == "") ext = exportTemplate.outputformat;
+                var form = new SimpleBrowseForm();
+                form.ShowDialog();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    path = form.getInput();
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
-                File.WriteAllText(Path.Combine(form.getInput(), "MissingEpisodesList." + ext), template.Render());
-            }
-            else
-            {
-                return false;
-            }
+            ext = Path.GetExtension(path);
+            if (ext == "") ext = exportTemplate.outputformat;
+
+            File.WriteAllText(Path.Combine(path, "MissingEpisodesList." + ext), template.Render());
 
             return true;
         }

@@ -24,12 +24,27 @@ namespace YANFOE.UI.Popups
     using System.IO;
 
     using DevExpress.XtraEditors;
+    using DevExpress.XtraBars;
+
+    using YANFOE.Tools.Exporting;
 
     public partial class ExportMissingEpisodes : DevExpress.XtraEditors.XtraForm
     {
         public ExportMissingEpisodes(List<MissingEpisodeTreeList> source)
         {
             InitializeComponent();
+            var templates = Exporting.GetExportTemplates();
+            if (templates.Count > 0)
+            {
+                var submenu = new BarSubItem(this.barManager1, "Templates");
+                foreach (var template in templates)
+                {
+                    var menu = new BarButtonItem(this.barManager1, template.name);
+                    menu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMenuExportTo_ItemClick);
+                    submenu.AddItem(menu);
+                }
+                this.popupMenuExportTo.AddItem(submenu);
+            }
             this.treeList1.DataSource = source;
             this.Text = string.Format("Missing Episodes List ({0})", source.Count);
         }
@@ -71,7 +86,8 @@ namespace YANFOE.UI.Popups
                         break;
                     default:
                         // Should never happen
-                        XtraMessageBox.Show("Selected method is not supported!", "Error!");
+                        //XtraMessageBox.Show("Selected method is not supported!", "Error!");
+                        Exporting.ExportMissingEpisodesTemplate(this.dropDownExportTo.Text, form.getInput());
                         break;
                 }
             }
