@@ -400,7 +400,7 @@ namespace YANFOE.IO
                     XWrite.WriteEnclosedElement(xmlWriter, "plot", episode.Overview);
 
                     // Thumb
-
+                    
                     // Playcount
                     //XWrite.WriteEnclosedElement(xmlWriter, "playcount", episode.PlayCount);
 
@@ -411,7 +411,10 @@ namespace YANFOE.IO
                     //XWrite.WriteEnclosedElement(xmlWriter, "credits", episode.Credits);
 
                     // Director
-                    XWrite.WriteEnclosedElement(xmlWriter, "director", episode.Director);
+                    foreach (PersonModel director in episode.Director)
+                    {
+                        XWrite.WriteEnclosedElement(xmlWriter, "director", director.Name);
+                    }
 
                     // Aired
                     XWrite.WriteEnclosedElement(xmlWriter, "aired", episode.FirstAired);
@@ -818,7 +821,62 @@ namespace YANFOE.IO
         /// </returns>
         public bool LoadEpisode(Episode episode)
         {
-            throw new NotImplementedException();
+            string episodeName = episode.EpisodeName;
+            string episodePath = episode.FilePath.FolderPath;
+
+            string nfo = Find.FindNFO(episodeName, episodePath);
+
+            if (string.IsNullOrEmpty(nfo))
+            {
+                return false;
+            }
+
+            XmlDocument doc = XRead.OpenPath(nfo);
+
+            episode.SeasonNumber = XRead.GetInt(doc, "season");
+            episode.EpisodeNumber = XRead.GetInt(doc, "episode");
+            episode.EpisodeName = XRead.GetString(doc, "title");
+            episode.Rating = XRead.GetDouble(doc, "rating");
+            episode.Overview = XRead.GetString(doc, "plot");
+            //episode.PlayCount = XRead.GetInt(doc, "playcount");
+            //episode.LastPlayed = XRead.GetString(doc, "lastplayed");
+            //episode.Credits = XRead.GetString(doc, "credits");
+            List<string> directorList = XRead.GetStrings(doc, "director");
+            foreach (string director in directorList)
+            {
+                episode.Director.Add(new PersonModel(director));
+            }
+            episode.FirstAired = XRead.GetDateTime(doc, "aired");
+            //episode.Premiered = XRead.GetString(doc, "premiered");
+            //episode.Studio = XRead.GetString(doc, "studio");
+            //episode.Mpaa = XRead.GetString(doc, "mpaa");
+            //episode.DisplayEpisode = XRead.GetInt(doc, "displayepisode");
+
+
+            // Actor
+            if (doc.GetElementsByTagName("actor").Count > 0)
+            {
+                episode.GuestStars = new BindingList<PersonModel>();
+
+                foreach (XmlNode actor in doc.GetElementsByTagName("actor"))
+                {
+                    string xmlActor = actor.InnerXml;
+
+                    XmlDocument docActor = XRead.OpenXml("<x>" + xmlActor + "</x>");
+
+                    string name = XRead.GetString(docActor, "name");
+                    string role = XRead.GetString(docActor, "role");
+                    string imageurl = XRead.GetString(docActor, "thumb");
+
+                    var personModel = new PersonModel(name, role, imageurl);
+
+                    episode.GuestStars.Add(personModel);
+                }
+            }
+
+            // Load fileinfo
+
+            return true;
         }
 
         /// <summary>
@@ -957,8 +1015,11 @@ namespace YANFOE.IO
             }
 
             // Director
-            string directorList = XRead.GetString(xmlReader, "director");
-            movieModel.DirectorAsString = directorList.Replace(" / ", ",");
+            List<string> directorList = XRead.GetStrings(xmlReader, "director");
+            foreach (string director in directorList)
+            {
+                movieModel.Director.Add(new PersonModel(director));
+            }
 
             // Country
             XmlNodeList countries = xmlReader.GetElementsByTagName("country");

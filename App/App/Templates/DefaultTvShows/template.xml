@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+  <author>
+    <name>Matthias Larsen</name>
+    <website>http://0510ml.dk/blog</website>
+    <email>0510ml@mail.dk</email>
+  </author>
+  <name>Default Tv Show Template</name>
+  <date>2011-09-30</date>
+  <templatefile>main.st</templatefile>
+  <description>Basic info about TV Shows in the database</description>
+  <outputformat>html</outputformat>
+</template>
