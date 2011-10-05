@@ -14,19 +14,18 @@ namespace YANFOE.Factories.Internal
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
-    using Newtonsoft.Json;
-
     using BitFactory.Logging;
-    using YANFOE.InternalApps.Logs;
-    using YANFOE.InternalApps.Logs.Enums;
+
+    using Newtonsoft.Json;
 
     using YANFOE.Factories.Import;
     using YANFOE.Factories.Media;
     using YANFOE.Factories.Sets;
+    using YANFOE.InternalApps.Logs;
+    using YANFOE.InternalApps.Logs.Enums;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.SetsModels;
@@ -473,9 +472,7 @@ namespace YANFOE.Factories.Internal
                     JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
             }
 
-            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
-
-            bool tvDBLock = false;
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
             var loadedSeries = new List<Series>();
 
@@ -531,20 +528,11 @@ namespace YANFOE.Factories.Internal
                             }
                         }
 
-                        lock (loadedSeries)
+                        lock (TvDBFactory.TvDatabase)
                         {
-                            loadedSeries.Add(series);
+                            TvDBFactory.TvDatabase.Add(series.SeriesName, series);
                         }
                     });
-
-            foreach (var series in loadedSeries)
-            {
-                if (series.SeriesName != string.Empty)
-
-                {
-                    TvDBFactory.TvDatabase.Add(series.SeriesName, series);
-                }
-            }
 
             TvDBFactory.GeneratePictureGallery();
             TvDBFactory.GenerateMasterSeriesList();
@@ -765,6 +753,7 @@ namespace YANFOE.Factories.Internal
             SavingCount++;
 
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
+
             Directory.CreateDirectory(path);
             Folders.DeleteFilesInFolder(path);
 
@@ -782,12 +771,11 @@ namespace YANFOE.Factories.Internal
                 parallelOptions,
                 series =>
                     {
-                        path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
                         var title = FileNaming.RemoveIllegalChars(series.Value.SeriesName);
+                        var seriesPath = string.Concat(Get.FileSystemPaths.PathDatabases, OutputName.TvDb, Path.DirectorySeparatorChar, title, ".Series.gz");
 
-                        writePath = path + title + ".Series";
                         json = JsonConvert.SerializeObject(series.Value);
-                        Gzip.CompressString(json, writePath + ".gz");
+                        Gzip.CompressString(json, seriesPath);
 
                         if (series.Value.SmallBanner != null)
                         {

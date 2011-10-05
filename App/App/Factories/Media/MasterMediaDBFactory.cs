@@ -173,13 +173,13 @@ namespace YANFOE.Factories.Media
         {
             masterTvMediaDatabase = new BindingList<string>();
 
-            foreach (var series in TvDBFactory.TvDatabase)
+            for (var i = 0; i < TvDBFactory.TvDatabase.Count; i++ )
             {
-                foreach (var season in series.Value.Seasons)
+                foreach (var season in TvDBFactory.TvDatabase.ElementAt(i).Value.Seasons)
                 {
                     foreach (var episode in season.Value.Episodes)
                     {
-                        if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename) && 
+                        if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename) &&
                             System.IO.File.Exists(episode.FilePath.PathAndFilename))
                         {
                             try

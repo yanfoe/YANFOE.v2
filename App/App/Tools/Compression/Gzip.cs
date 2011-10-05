@@ -78,6 +78,8 @@ namespace YANFOE.Tools.Compression
                         {
                             Pump(sourceStream, output);
                         }
+
+                        destinationStream.Close();
                     }
                 }
             }
