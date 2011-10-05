@@ -19,7 +19,7 @@ namespace YANFOE.UI.Popups
     using System.Linq;
     using System.Text;
 
-    public class MissingEpisodeTreeList
+    public class EpisodeTreeList
     {
         public int id { set; get; }
         public int parent { set; get; }

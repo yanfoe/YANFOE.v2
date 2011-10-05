@@ -552,7 +552,14 @@
     <Compile Include="UI\Popups\ExportMissingEpisodes.Designer.cs">
       <DependentUpon>ExportMissingEpisodes.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Popups\MissingEpisodeTreeList.cs" />
+    <Compile Include="UI\Popups\EpisodeTreeList.cs" />
+    <Compile Include="UI\Popups\ExportMovieList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Popups\ExportMovieList.Designer.cs">
+      <DependentUpon>ExportMovieList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Popups\MovieTreeList.cs" />
     <Compile Include="UI\Popups\SimpleBrowseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -810,6 +817,9 @@
     <EmbeddedResource Include="UI\Popups\ExportMissingEpisodes.resx">
       <DependentUpon>ExportMissingEpisodes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Popups\ExportMovieList.resx">
+      <DependentUpon>ExportMovieList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Popups\SimpleBrowseForm.resx">
       <DependentUpon>SimpleBrowseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -937,6 +947,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Templates\DefaultMovieList\main.st">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\DefaultTvShows\main.st">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1205,6 +1218,9 @@
     <None Include="Resources\up2.png" />
     <None Include="Resources\watched_red.png" />
     <None Include="Resources\watched_green.png" />
+    <Content Include="Templates\DefaultMovieList\template.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\DefaultTvShows\template.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1288,7 +1304,7 @@
   <Import Project="$(ProjectDir)..\App\Apps\Antlr\Antlr3.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
+      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

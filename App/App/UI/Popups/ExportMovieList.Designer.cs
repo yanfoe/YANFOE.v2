@@ -1,6 +1,6 @@
 ﻿namespace YANFOE.UI.Popups
 {
-    partial class ExportMissingEpisodes
+    partial class ExportMovieList
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.treeList1 = new DevExpress.XtraTreeList.TreeList();
-            this.SeriesName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.missingEpisodesCount = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.episodeName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.Title = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.Year = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.dropDownExportTo = new DevExpress.XtraEditors.DropDownButton();
@@ -60,9 +59,8 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.treeList1.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.SeriesName,
-            this.missingEpisodesCount,
-            this.episodeName});
+            this.Title,
+            this.Year});
             this.treeList1.KeyFieldName = "id";
             this.treeList1.Location = new System.Drawing.Point(12, 12);
             this.treeList1.Name = "treeList1";
@@ -72,34 +70,25 @@
             this.treeList1.Size = new System.Drawing.Size(776, 469);
             this.treeList1.TabIndex = 0;
             // 
-            // SeriesName
+            // Title
             // 
-            this.SeriesName.Caption = "Series Name";
-            this.SeriesName.FieldName = "seriesname";
-            this.SeriesName.Name = "SeriesName";
-            this.SeriesName.SortOrder = System.Windows.Forms.SortOrder.Ascending;
-            this.SeriesName.Visible = true;
-            this.SeriesName.VisibleIndex = 0;
-            this.SeriesName.Width = 337;
+            this.Title.Caption = "Title";
+            this.Title.FieldName = "name";
+            this.Title.Name = "Title";
+            this.Title.SortOrder = System.Windows.Forms.SortOrder.Ascending;
+            this.Title.Visible = true;
+            this.Title.VisibleIndex = 0;
+            this.Title.Width = 337;
             // 
-            // missingEpisodesCount
+            // Year
             // 
-            this.missingEpisodesCount.Caption = "Missing Episodes";
-            this.missingEpisodesCount.FieldName = "missingEpisodesCount";
-            this.missingEpisodesCount.Name = "missingEpisodesCount";
-            this.missingEpisodesCount.SortOrder = System.Windows.Forms.SortOrder.Ascending;
-            this.missingEpisodesCount.Visible = true;
-            this.missingEpisodesCount.VisibleIndex = 1;
-            this.missingEpisodesCount.Width = 300;
-            // 
-            // episodeName
-            // 
-            this.episodeName.Caption = "Episode Name";
-            this.episodeName.FieldName = "episodename";
-            this.episodeName.Name = "episodeName";
-            this.episodeName.Visible = true;
-            this.episodeName.VisibleIndex = 2;
-            this.episodeName.Width = 617;
+            this.Year.Caption = "Year";
+            this.Year.FieldName = "year";
+            this.Year.Name = "Year";
+            this.Year.SortOrder = System.Windows.Forms.SortOrder.Ascending;
+            this.Year.Visible = true;
+            this.Year.VisibleIndex = 1;
+            this.Year.Width = 300;
             // 
             // btnOk
             // 
@@ -119,7 +108,7 @@
             this.btnExport.Size = new System.Drawing.Size(75, 23);
             this.btnExport.TabIndex = 2;
             this.btnExport.Text = "Export list";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click_1);
             // 
             // dropDownExportTo
             // 
@@ -146,7 +135,6 @@
             this.popupExportXML.Id = 2;
             this.popupExportXML.Name = "popupExportXML";
             this.popupExportXML.TextAlignment = System.Drawing.StringAlignment.Near;
-            this.popupExportXML.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMenuExportTo_ItemClick);
             // 
             // popupExportHTML
             // 
@@ -154,7 +142,6 @@
             this.popupExportHTML.Id = 3;
             this.popupExportHTML.Name = "popupExportHTML";
             this.popupExportHTML.TextAlignment = System.Drawing.StringAlignment.Near;
-            this.popupExportHTML.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMenuExportTo_ItemClick);
             // 
             // popupExportPDF
             // 
@@ -162,7 +149,6 @@
             this.popupExportPDF.Id = 4;
             this.popupExportPDF.Name = "popupExportPDF";
             this.popupExportPDF.TextAlignment = System.Drawing.StringAlignment.Near;
-            this.popupExportPDF.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.popupMenuExportTo_ItemClick);
             // 
             // barManager1
             // 
@@ -212,28 +198,28 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(800, 22);
+            this.barDockControlTop.Size = new System.Drawing.Size(800, 18);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 499);
-            this.barDockControlBottom.Size = new System.Drawing.Size(800, 23);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 497);
+            this.barDockControlBottom.Size = new System.Drawing.Size(800, 25);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 22);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 477);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 18);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 479);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(800, 22);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 477);
+            this.barDockControlRight.Location = new System.Drawing.Point(800, 18);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 479);
             // 
             // barButtonItem1
             // 
@@ -247,7 +233,7 @@
             this.subMenuTemplate.Id = 6;
             this.subMenuTemplate.Name = "subMenuTemplate";
             // 
-            // ExportMissingEpisodes
+            // ExportMovieList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -260,8 +246,8 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "ExportMissingEpisodes";
-            this.Text = "ExportMissingEpisodes";
+            this.Name = "ExportMovieList";
+            this.Text = "ExportMovieList";
             ((System.ComponentModel.ISupportInitialize)(this.treeList1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuExportTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
@@ -272,9 +258,8 @@
         #endregion
 
         private DevExpress.XtraTreeList.TreeList treeList1;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn SeriesName;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn missingEpisodesCount;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn episodeName;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn Title;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn Year;
         private DevExpress.XtraEditors.SimpleButton btnOk;
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.DropDownButton dropDownExportTo;
@@ -291,6 +276,5 @@
         private DevExpress.XtraBars.BarStaticItem popupExportPDF;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.BarSubItem subMenuTemplate;
-
     }
 }

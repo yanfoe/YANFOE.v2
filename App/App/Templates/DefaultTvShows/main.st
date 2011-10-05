@@ -1,6 +1,4 @@
-﻿Test
-
-Test
+﻿\<h1>Missing Episodes List\</h1>
 <
 series:
  {
@@ -11,7 +9,7 @@ series:
     show.Seasons.values:
      {
       season|
-      \<li>Season <season.SeasonNumber> $season.SeasonNumber$ <season.PosterUrl>\</li>
+      \<li>Season <season.SeasonNumber>\</li>
 	  \<ul>
 		<
 		season.Episodes:

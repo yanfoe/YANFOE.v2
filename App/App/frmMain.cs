@@ -656,5 +656,15 @@ namespace YANFOE
         {
             YANFOE.Tools.Exporting.Exporting.ExportMissingTvShowEpisodes();
         }
+
+        private void mnuToolsExportMovieList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            YANFOE.Tools.Exporting.Exporting.ExportMovieList();
+        }
+
+        private void mnuToolsExportTvShowsList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            YANFOE.Tools.Exporting.Exporting.ExportTvShowList();
+        }
     }
 }

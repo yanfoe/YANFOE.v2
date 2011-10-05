@@ -21,6 +21,7 @@ namespace YANFOE.Tools.Exporting
     using System.IO;
     using System.Xml;
     using System.Windows.Forms;
+    using System.ComponentModel;
 
     using YANFOE.UI.Popups;
     using YANFOE.Factories;
@@ -29,6 +30,7 @@ namespace YANFOE.Tools.Exporting
     using YANFOE.Tools.Extentions;
 
     using DevExpress.XtraEditors;
+    using YANFOE.Models.MovieModels;
 
     using Antlr4.StringTemplate;
 
@@ -36,25 +38,29 @@ namespace YANFOE.Tools.Exporting
     {
         public static void ExportMissingTvShowEpisodes()
         {
-            var missingEpisodes = new List<MissingEpisodeTreeList>();
+            var missingEpisodes = new List<EpisodeTreeList>();
             int i = 1;
             foreach (var series in TvDBFactory.TvDatabase)
             {
                 if (series.Value.CountMissingEpisodes() > 0)
                 {
-                    var show = new MissingEpisodeTreeList();
-                    show.id = i++;
-                    show.seriesname = series.Value.SeriesName;
-                    show.parent = 0;
+                    var show = new EpisodeTreeList
+                    {
+                        id = i++,
+                        seriesname = series.Value.SeriesName,
+                        parent = 0
+                    };
                     missingEpisodes.Add(show);
                     var episodes = series.Value.GetMissingEpisodes();
                     foreach (var episode in episodes)
                     {
-                        var ep = new MissingEpisodeTreeList();
-                        ep.id = i++;
-                        ep.parent = show.id;
-                        ep.episodename = episode.EpisodeName;
-                        ep.seriesname = string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber);
+                        var ep = new EpisodeTreeList
+                        {
+                            id = i++,
+                            parent = show.id,
+                            episodename = episode.EpisodeName,
+                            seriesname = string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
+                        };
                         missingEpisodes.Add(ep);
 
                         show.missingEpisodesCount++;
@@ -71,6 +77,132 @@ namespace YANFOE.Tools.Exporting
                 ExportMissingEpisodes form = new ExportMissingEpisodes(missingEpisodes);
                 form.Show();
             }
+        }
+
+        public static void ExportMovieList()
+        {
+            BindingList<MovieModel> movies;
+            var list = new List<MovieTreeList>();
+
+            if (MovieDBFactory.IsMultiSelected)
+            {
+                movies = MovieDBFactory.MultiSelectedMovies;
+            }
+            else
+            {
+                movies = MovieDBFactory.MovieDatabase;
+            }
+
+            int i = 1;
+            foreach (var movie in movies)
+            {
+                var m = new MovieTreeList
+                {
+                    id = i++,
+                    name = movie.Title,
+                    year = movie.Year
+                };
+                list.Add(m);
+            }
+
+            if (list.Count == 0)
+            {
+                XtraMessageBox.Show("No movies found", "No result");
+            }
+            else
+            {
+                ExportMovieList form = new ExportMovieList(list);
+                form.Show();
+            }
+        }
+
+        public static void ExportTvShowList()
+        {
+            var list = new List<EpisodeTreeList>();
+            int i = 1;
+            foreach (var series in TvDBFactory.TvDatabase)
+            {
+                    var show = new EpisodeTreeList
+                    {
+                        id = i++,
+                        seriesname = series.Value.SeriesName,
+                        parent = 0
+                    };
+                    list.Add(show);
+                    var episodes = series.Value.GetMissingEpisodes();
+                    foreach (var episode in episodes)
+                    {
+                        if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+                        {
+                            continue;
+                        }
+
+                        var ep = new EpisodeTreeList
+                        {
+                            id = i++,
+                            parent = show.id,
+                            episodename = episode.EpisodeName,
+                            seriesname = string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
+                        };
+                        list.Add(ep);
+
+                        show.missingEpisodesCount++;
+                    }
+            }
+
+            if (list.Count == 0)
+            {
+                XtraMessageBox.Show("No movies found", "No result");
+            }
+            else
+            {
+                ExportMissingEpisodes form = new ExportMissingEpisodes(list, "Episode List ({0})");
+                form.Show();
+            }
+        }
+
+        public static bool ExportMoviesTemplate(string tName, string path = "")
+        {
+            var files = GetExportTemplates();
+            var exportTemplate = (from s in files where s.name == tName select s).Single();
+            string str = File.ReadAllText(exportTemplate.file);
+            var template = new Template(str);
+
+            BindingList<MovieModel> movies;
+            var list = new List<MovieTreeList>();
+
+            if (MovieDBFactory.IsMultiSelected)
+            {
+                movies = MovieDBFactory.MultiSelectedMovies;
+            }
+            else
+            {
+                movies = MovieDBFactory.MovieDatabase;
+            }
+
+            template.Add("movies", movies);
+
+            string ext = "";
+            if (path == "")
+            {
+                var form = new SimpleBrowseForm();
+                form.ShowDialog();
+                if (form.DialogResult == DialogResult.OK)
+                {
+                    path = form.getInput();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            ext = Path.GetExtension(path);
+            if (ext == "") ext = exportTemplate.outputformat;
+
+            File.WriteAllText(Path.Combine(path, "MovieList." + ext), template.Render());
+
+            return true;
         }
 
         public static bool ExportMissingEpisodesTemplate(string tName, string path = "")
@@ -131,7 +263,7 @@ namespace YANFOE.Tools.Exporting
             return true;
         }
 
-        public static List<ExportTemplate> GetExportTemplates()
+        public static List<ExportTemplate> GetExportTemplates(string type = "")
         {
             var tempInfo = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "Templates"), "template.xml", SearchOption.AllDirectories);
             var templates = new List<ExportTemplate>();
@@ -157,6 +289,11 @@ namespace YANFOE.Tools.Exporting
 
                     var xmlAuthor = xmlReader.GetElementsByTagName("author")[0].InnerXml;
                     XmlDocument temp = XRead.OpenXml("<x>" + xmlAuthor + "</x>");
+                    if (type != "")
+                    {
+                        if (XRead.GetString(xmlReader, "type") != type)
+                            continue;
+                    }
 
                     templates.Add(new ExportTemplate
                     {
@@ -165,6 +302,7 @@ namespace YANFOE.Tools.Exporting
                         file = Path.Combine(Path.GetDirectoryName(file), XRead.GetString(xmlReader, "templatefile")),
                         description = XRead.GetString(xmlReader, "description"),
                         outputformat = XRead.GetString(xmlReader, "outputformat"),
+                        type = XRead.GetString(xmlReader, "type"),
                         author = new ExportTemplate.Author
                         {
                             name = XRead.GetString(temp, "name"),
@@ -203,6 +341,7 @@ namespace YANFOE.Tools.Exporting
             public string file { get; set; }
             public string description { get; set; }
             public string outputformat { get; set; }
+            public string type { get; set; }
             public Author author { get; set; }
 
             public class Author

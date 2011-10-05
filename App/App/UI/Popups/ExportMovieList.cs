@@ -28,12 +28,12 @@ namespace YANFOE.UI.Popups
 
     using YANFOE.Tools.Exporting;
 
-    public partial class ExportMissingEpisodes : DevExpress.XtraEditors.XtraForm
+    public partial class ExportMovieList : DevExpress.XtraEditors.XtraForm
     {
-        public ExportMissingEpisodes(List<EpisodeTreeList> source, string title = null)
+        public ExportMovieList(List<MovieTreeList> source)
         {
-            InitializeComponent();
-            var templates = Exporting.GetExportTemplates("tv");
+            InitializeComponent(); 
+            var templates = Exporting.GetExportTemplates("movie");
             if (templates.Count > 0)
             {
                 var submenu = new BarSubItem(this.barManager1, "Templates");
@@ -46,7 +46,7 @@ namespace YANFOE.UI.Popups
                 this.popupMenuExportTo.AddItem(submenu);
             }
             this.treeList1.DataSource = source;
-            this.Text = string.Format(title ?? "Missing Episodes List ({0})", source.Count);
+            this.Text = string.Format("Movie List ({0})", source.Count);
         }
 
         private void popupMenuExportTo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -54,7 +54,12 @@ namespace YANFOE.UI.Popups
             this.dropDownExportTo.Text = e.Item.Caption;
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnExport_Click_1(object sender, EventArgs e)
         {
             if (this.dropDownExportTo.Text == "Export to ...")
             {
@@ -71,18 +76,18 @@ namespace YANFOE.UI.Popups
                 switch (this.dropDownExportTo.Text)
                 {
                     case "HTML":
-                        this.treeList1.ExportToHtml(ext ? form.getInput() : Path.Combine(form.getInput(), "MissingEpisodesList.html"));
+                        this.treeList1.ExportToHtml(ext ? form.getInput() : Path.Combine(form.getInput(), "MovieList.html"));
                         break;
                     case "PDF":
-                        this.treeList1.ExportToPdf(ext ? form.getInput() : Path.Combine(form.getInput(), "MissingEpisodesList.pdf"));
+                        this.treeList1.ExportToPdf(ext ? form.getInput() : Path.Combine(form.getInput(), "MovieList.pdf"));
                         break;
                     case "XML":
-                        this.treeList1.ExportToXml(ext ? form.getInput() : Path.Combine(form.getInput(), "MissingEpisodesList.xml"));
+                        this.treeList1.ExportToXml(ext ? form.getInput() : Path.Combine(form.getInput(), "MovieList.xml"));
                         break;
                     default:
                         // Should never happen
                         //XtraMessageBox.Show("Selected method is not supported!", "Error!");
-                        Exporting.ExportMissingEpisodesTemplate(this.dropDownExportTo.Text, form.getInput());
+                        Exporting.ExportMoviesTemplate(this.dropDownExportTo.Text, form.getInput());
                         break;
                 }
             }
@@ -90,11 +95,6 @@ namespace YANFOE.UI.Popups
             {
                 return;
             }
-        }
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
