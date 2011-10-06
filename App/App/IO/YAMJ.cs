@@ -559,8 +559,6 @@ namespace YANFOE.IO
             throw new NotImplementedException();
         }
 
-
-
         /// <summary>
         /// Loads the movie.
         /// </summary>
@@ -736,70 +734,89 @@ namespace YANFOE.IO
             string seriesName = series.SeriesName;
             string seriesPath = series.GetSeriesPath();
 
-            if (string.IsNullOrEmpty(seriesName) || string.IsNullOrEmpty(seriesPath))
+            if (!string.IsNullOrEmpty(seriesName) || !string.IsNullOrEmpty(seriesPath))
             {
-                return false;
-            }
 
-            var seriesNameHex = "Set_"
-                                +
-                                FileSystemCharChange.To(
-                                    seriesName,
-                                    FileSystemCharChange.ConvertArea.Tv,
-                                    FileSystemCharChange.ConvertType.Hex) + "_1";
+                var seriesNameHex = "Set_"
+                                    +
+                                    FileSystemCharChange.To(
+                                        seriesName,
+                                        FileSystemCharChange.ConvertArea.Tv,
+                                        FileSystemCharChange.ConvertType.Hex) + "_1";
 
-            var seriesNameChar = "Set_"
-                    +
-                    FileSystemCharChange.To(
-                        seriesName,
-                        FileSystemCharChange.ConvertArea.Tv,
-                        FileSystemCharChange.ConvertType.Char) + "_1";
+                var seriesNameChar = "Set_"
+                                     +
+                                     FileSystemCharChange.To(
+                                         seriesName,
+                                         FileSystemCharChange.ConvertArea.Tv,
+                                         FileSystemCharChange.ConvertType.Char) + "_1";
 
-            string nfo = Find.FindNFO("Set_" + seriesName + "_1", seriesPath);
-
-            if (string.IsNullOrEmpty(nfo))
-            {
-                nfo = Find.FindNFO(seriesNameHex, seriesPath);
+                string nfo = Find.FindNFO("Set_" + seriesName + "_1", seriesPath);
 
                 if (string.IsNullOrEmpty(nfo))
                 {
-                    nfo = Find.FindNFO(seriesNameChar, seriesPath);
+                    nfo = Find.FindNFO(seriesNameHex, seriesPath);
 
                     if (string.IsNullOrEmpty(nfo))
                     {
-                        return false;
+                        nfo = Find.FindNFO(seriesNameChar, seriesPath);
+
+                        if (!string.IsNullOrEmpty(nfo))
+                        {
+                            XmlDocument doc = XRead.OpenPath(nfo);
+
+                            series.SeriesName = XRead.GetString(doc, "title");
+                            series.SeriesID = XRead.GetUInt(doc, "id");
+                            series.Rating = XRead.GetDouble(doc, "rating");
+                            series.Overview = XRead.GetString(doc, "plot");
+                            series.ContentRating = XRead.GetString(doc, "certification");
+                            series.Genre = XRead.GetStrings(doc, "genre").ToBindingList();
+                            series.FirstAired = XRead.GetDateTime(doc, "premiered", "yyyy-MM-dd");
+                            series.Network = XRead.GetString(doc, "country");
+
+                            if (doc.GetElementsByTagName("actor").Count > 0)
+                            {
+                                series.Actors = new BindingList<PersonModel>();
+
+                                foreach (XmlNode actor in doc.GetElementsByTagName("actor"))
+                                {
+                                    string xmlActor = actor.InnerXml;
+
+                                    XmlDocument docActor = XRead.OpenXml("<x>" + xmlActor + "</x>");
+
+                                    string name = XRead.GetString(docActor, "name");
+                                    string role = XRead.GetString(docActor, "role");
+                                    string imageurl = XRead.GetString(docActor, "thumb");
+
+                                    var personModel = new PersonModel(name, imageurl, role);
+
+                                    series.Actors.Add(personModel);
+                                }
+                            }
+                        }
                     }
                 }
             }
 
-            XmlDocument doc = XRead.OpenPath(nfo);
-
-            series.SeriesName = XRead.GetString(doc, "title");
-            series.SeriesID = XRead.GetUInt(doc, "id");
-            series.Rating = XRead.GetDouble(doc, "rating");
-            series.Overview = XRead.GetString(doc, "plot");
-            series.ContentRating = XRead.GetString(doc, "certification");
-            series.Genre = XRead.GetStrings(doc, "genre").ToBindingList();
-            series.FirstAired = XRead.GetDateTime(doc, "premiered", "yyyy-MM-dd");
-            series.Network = XRead.GetString(doc, "country");
-
-            if (doc.GetElementsByTagName("actor").Count > 0)
+            foreach (var season in series.Seasons)
             {
-                series.Actors = new BindingList<PersonModel>();
-
-                foreach (XmlNode actor in doc.GetElementsByTagName("actor"))
+                foreach (var episode in season.Value.Episodes)
                 {
-                    string xmlActor = actor.InnerXml;
+                    if (File.Exists(episode.FilePath.PathAndFilename))
+                    {
+                        var nfoPath = Path.Combine(
+                            episode.FilePath.FolderPath, episode.FilePath.FilenameWithOutExt + ".nfo");
 
-                    XmlDocument docActor = XRead.OpenXml("<x>" + xmlActor + "</x>");
+                        if (File.Exists(nfoPath))
+                        {
+                            var doc = XRead.OpenPath(nfoPath);
 
-                    string name = XRead.GetString(docActor, "name");
-                    string role = XRead.GetString(docActor, "role");
-                    string imageurl = XRead.GetString(docActor, "thumb");
-
-                    var personModel = new PersonModel(name, imageurl, role);
-
-                    series.Actors.Add(personModel);
+                            episode.SeasonNumber = XRead.GetInt(doc, "season");
+                            episode.EpisodeNumber = XRead.GetInt(doc, "episode");
+                            episode.EpisodeName = XRead.GetString(doc, "title");
+                            episode.Overview = XRead.GetString(doc, "plot");
+                        }
+                    }
                 }
             }
 
