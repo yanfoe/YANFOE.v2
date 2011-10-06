@@ -237,6 +237,12 @@
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.Designer.cs">
       <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesRename.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesRename.Designer.cs">
+      <DependentUpon>UcSettingsMoviesRename.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -707,6 +713,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.resx">
       <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesRename.resx">
+      <DependentUpon>UcSettingsMoviesRename.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsScraperTvDB.resx">
       <DependentUpon>UcSettingsScraperTvDB.cs</DependentUpon>
@@ -1304,7 +1313,7 @@
   <Import Project="$(ProjectDir)..\App\Apps\Antlr\Antlr3.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

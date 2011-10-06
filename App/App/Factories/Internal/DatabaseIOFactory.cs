@@ -474,8 +474,6 @@ namespace YANFOE.Factories.Internal
 
             var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-            var loadedSeries = new List<Series>();
-
             Parallel.ForEach(
                 files,
                 parallelOptions,

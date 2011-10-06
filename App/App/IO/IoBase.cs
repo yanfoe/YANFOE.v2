@@ -89,7 +89,7 @@ namespace YANFOE.IO
             string firstEpisodePath = Path.GetDirectoryName(firstEpisodeFileNamePath);
             string firstEpisodeFileNameNoExt = Path.GetFileNameWithoutExtension(firstEpisodeFileNamePath);
 
-            string seriesName = FileSystemCharChange.To(series.SeriesName);
+            string seriesName = FileSystemCharChange.To(series.SeriesName, FileSystemCharChange.ConvertArea.Tv);
 
             value = value.Replace("<firstEpisodePath>", firstEpisodePath);
             value = value.Replace("<seriesName>", seriesName);
@@ -325,10 +325,10 @@ namespace YANFOE.IO
                         (from s in set.Movies where s.MovieUniqueId == movieModel.MovieUniqueId select s).
                             SingleOrDefault();
 
-                    string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", FileSystemCharChange.To(setName)).Replace(
+                    string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace(
                         "<ext>", "jpg");
 
-                    string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", FileSystemCharChange.To(setName)).Replace(
+                    string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace(
                         "<ext>", "jpg");
 
                     if (setObjectModel.Order == 1)

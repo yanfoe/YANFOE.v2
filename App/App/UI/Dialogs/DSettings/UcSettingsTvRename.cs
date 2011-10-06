@@ -44,6 +44,10 @@ namespace YANFOE.UI.Dialogs.DSettings
             this.txtEpisodeNumber1Template.Text = TvRenamerFactory.EpisodeNumber1Template;
             this.txtEpisodeNumber2Template.Text = TvRenamerFactory.EpisodeNumber2Template;
 
+            this.chkReplaceWithChar.DataBindings.Add("Checked", Get.InOutCollection, "TvIOReplaceWithChar");
+            this.chkReplaceWithHex.DataBindings.Add("Checked", Get.InOutCollection, "TvIOReplaceWithHex");
+            this.txtReplaceCharWith.DataBindings.Add("Text", Get.InOutCollection, "TvIOReplaceChar");
+
             this.chkEnableRename.DataBindings.Add("Checked", Get.InOutCollection, "RenameTV");
         }
 
@@ -67,10 +71,21 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void TxtRenameTemplate_TextChanged(object sender, EventArgs e)
         {
             Get.InOutCollection.EpisodeNamingTemplate = this.txtRenameTemplate.Text;
-
             this.UpdatePreview();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the chkReplaceWithChar control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void chkReplaceWithChar_CheckedChanged(object sender, EventArgs e)
+        {
+            txtReplaceCharWith.Enabled = chkReplaceWithChar.Checked;
+        }
+
         #endregion
+
+
     }
 }

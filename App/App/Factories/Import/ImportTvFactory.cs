@@ -29,6 +29,7 @@ namespace YANFOE.Factories.Import
     using YANFOE.Settings.ConstSettings;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Importing;
+    using YANFOE.Tools.Restructure;
 
     /// <summary>
     /// The factory for all Import TV functions
@@ -236,8 +237,9 @@ namespace YANFOE.Factories.Import
             {
                 series = Path.GetFileNameWithoutExtension(filePath);
             }
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Getting episode details for: {0}",
-                            series), logCategory);
+
+            InternalApps.Logs.Log.WriteToLog(
+                LogSeverity.Debug, 0, string.Format("Getting episode details for: {0}", series), logCategory);
 
             // Check if dir structure is <root>/<series>/<season>/<episodes>
             string dir = Directory.GetParent(filePath).Name;
@@ -247,8 +249,12 @@ namespace YANFOE.Factories.Import
                 // Looks like it. Qualified series guess
                 seriesGuess = Directory.GetParent(filePath).Parent.Name;
             }
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Qualified series name guess, based on folder: {0}",
-                            seriesGuess), logCategory);
+
+            InternalApps.Logs.Log.WriteToLog(
+                LogSeverity.Debug,
+                0,
+                string.Format("Qualified series name guess, based on folder: {0}", seriesGuess),
+                logCategory);
 
             var regex = Regex.Match(
                 series,
@@ -300,9 +306,10 @@ namespace YANFOE.Factories.Import
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
-                episodeDetails.SeriesName = Tools.Restructure.FileSystemCharChange.From(episodeDetails.SeriesName);
+                episodeDetails.SeriesName = Tools.Restructure.FileSystemCharChange.From(episodeDetails.SeriesName, FileSystemCharChange.ConvertArea.Tv);
 
             }
+
             var seasonMatch = Regex.Match(series, DefaultRegex.TvSeason, RegexOptions.IgnoreCase);
             if (seasonMatch.Success)
             {
@@ -338,11 +345,7 @@ namespace YANFOE.Factories.Import
                     InternalApps.Logs.Log.WriteToLog(
                         LogSeverity.Debug,
                         0,
-                        string.Format(
-                            "Extracted episode numbers ({0}): {1}",
-                            episodeDetails.SecondaryNumbers.Count,
-                            string.Join(", ", episodeDetails.SecondaryNumbers)),
-                        logCategory);
+                        string.Format("Extracted episode numbers ({0}): {1}",episodeDetails.SecondaryNumbers.Count,string.Join(", ", episodeDetails.SecondaryNumbers)),logCategory);
                 }
                 else
                 {
@@ -371,8 +374,8 @@ namespace YANFOE.Factories.Import
                 episodeDetails.SeriesName = check.SeriesName;
             }
 
-            InternalApps.Logs.Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Final series name: {0}",
-                    episodeDetails.SeriesName), logCategory);
+            InternalApps.Logs.Log.WriteToLog(
+                LogSeverity.Debug, 0, string.Format("Final series name: {0}", episodeDetails.SeriesName), logCategory);
 
             return episodeDetails;
         }

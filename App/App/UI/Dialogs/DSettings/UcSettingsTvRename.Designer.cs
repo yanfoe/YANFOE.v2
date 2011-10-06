@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            this.txtReplaceCharWith = new DevExpress.XtraEditors.TextEdit();
+            this.chkReplaceWithChar = new DevExpress.XtraEditors.CheckEdit();
+            this.chkReplaceWithHex = new DevExpress.XtraEditors.CheckEdit();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.txtPreview = new DevExpress.XtraEditors.TextEdit();
             this.txtEpisodeNumber2Template = new DevExpress.XtraEditors.TextEdit();
             this.txtEpisodeNumber1Template = new DevExpress.XtraEditors.TextEdit();
@@ -49,8 +58,20 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            this.layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReplaceCharWith.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkReplaceWithChar.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkReplaceWithHex.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPreview.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeNumber2Template.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeNumber1Template.Properties)).BeginInit();
@@ -71,10 +92,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.groupControl1);
             this.layoutControl1.Controls.Add(this.txtPreview);
             this.layoutControl1.Controls.Add(this.txtEpisodeNumber2Template);
             this.layoutControl1.Controls.Add(this.txtEpisodeNumber1Template);
@@ -87,11 +110,113 @@
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1259, 211, 250, 523);
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1138, 211, 435, 644);
             this.layoutControl1.Root = this.layoutControlGroup1;
             this.layoutControl1.Size = new System.Drawing.Size(782, 596);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // groupControl1
+            // 
+            this.groupControl1.Controls.Add(this.layoutControl2);
+            this.groupControl1.Location = new System.Drawing.Point(12, 199);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(758, 385);
+            this.groupControl1.TabIndex = 16;
+            this.groupControl1.Text = "Invalid IO Characters";
+            // 
+            // layoutControl2
+            // 
+            this.layoutControl2.Controls.Add(this.txtReplaceCharWith);
+            this.layoutControl2.Controls.Add(this.chkReplaceWithChar);
+            this.layoutControl2.Controls.Add(this.chkReplaceWithHex);
+            this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl2.Location = new System.Drawing.Point(2, 22);
+            this.layoutControl2.Name = "layoutControl2";
+            this.layoutControl2.Root = this.layoutControlGroup3;
+            this.layoutControl2.Size = new System.Drawing.Size(754, 361);
+            this.layoutControl2.TabIndex = 0;
+            this.layoutControl2.Text = "layoutControl2";
+            // 
+            // txtReplaceCharWith
+            // 
+            this.txtReplaceCharWith.Location = new System.Drawing.Point(243, 36);
+            this.txtReplaceCharWith.Name = "txtReplaceCharWith";
+            this.txtReplaceCharWith.Size = new System.Drawing.Size(499, 20);
+            this.txtReplaceCharWith.StyleController = this.layoutControl2;
+            this.txtReplaceCharWith.TabIndex = 6;
+            // 
+            // chkReplaceWithChar
+            // 
+            this.chkReplaceWithChar.Location = new System.Drawing.Point(12, 36);
+            this.chkReplaceWithChar.Name = "chkReplaceWithChar";
+            this.chkReplaceWithChar.Properties.Caption = "Replace with character";
+            this.chkReplaceWithChar.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+            this.chkReplaceWithChar.Properties.RadioGroupIndex = 1;
+            this.chkReplaceWithChar.Size = new System.Drawing.Size(203, 20);
+            this.chkReplaceWithChar.StyleController = this.layoutControl2;
+            this.chkReplaceWithChar.TabIndex = 5;
+            this.chkReplaceWithChar.CheckedChanged += new System.EventHandler(this.chkReplaceWithChar_CheckedChanged);
+            // 
+            // chkReplaceWithHex
+            // 
+            this.chkReplaceWithHex.Location = new System.Drawing.Point(12, 12);
+            this.chkReplaceWithHex.Name = "chkReplaceWithHex";
+            this.chkReplaceWithHex.Properties.Caption = "Replace with hex code";
+            this.chkReplaceWithHex.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+            this.chkReplaceWithHex.Properties.RadioGroupIndex = 1;
+            this.chkReplaceWithHex.Size = new System.Drawing.Size(730, 20);
+            this.chkReplaceWithHex.StyleController = this.layoutControl2;
+            this.chkReplaceWithHex.TabIndex = 4;
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.CustomizationFormText = "layoutControlGroup3";
+            this.layoutControlGroup3.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup3.GroupBordersVisible = false;
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem11,
+            this.layoutControlItem12,
+            this.layoutControlItem13});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(754, 361);
+            this.layoutControlGroup3.Text = "layoutControlGroup3";
+            this.layoutControlGroup3.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.chkReplaceWithHex;
+            this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(734, 24);
+            this.layoutControlItem11.Text = "layoutControlItem11";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem11.TextToControlDistance = 0;
+            this.layoutControlItem11.TextVisible = false;
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.Control = this.chkReplaceWithChar;
+            this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Size = new System.Drawing.Size(207, 317);
+            this.layoutControlItem12.Text = "layoutControlItem12";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem12.TextToControlDistance = 0;
+            this.layoutControlItem12.TextVisible = false;
+            // 
+            // layoutControlItem13
+            // 
+            this.layoutControlItem13.Control = this.txtReplaceCharWith;
+            this.layoutControlItem13.CustomizationFormText = "with";
+            this.layoutControlItem13.Location = new System.Drawing.Point(207, 24);
+            this.layoutControlItem13.Name = "layoutControlItem13";
+            this.layoutControlItem13.Size = new System.Drawing.Size(527, 317);
+            this.layoutControlItem13.Text = "with";
+            this.layoutControlItem13.TextSize = new System.Drawing.Size(20, 13);
             // 
             // txtPreview
             // 
@@ -190,7 +315,8 @@
             this.layoutControlItem2,
             this.layoutControlGroup2,
             this.layoutControlItem1,
-            this.layoutControlItem9});
+            this.layoutControlItem9,
+            this.layoutControlItem10});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(782, 596);
@@ -219,7 +345,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 71);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 505);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 116);
             this.layoutControlGroup2.Text = "Key";
             // 
             // layoutControlItem7
@@ -228,7 +354,7 @@
             this.layoutControlItem7.CustomizationFormText = "layoutControlItem7";
             this.layoutControlItem7.Location = new System.Drawing.Point(370, 48);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(368, 413);
+            this.layoutControlItem7.Size = new System.Drawing.Size(368, 24);
             this.layoutControlItem7.Text = "Episode Number (2 digits)";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(122, 13);
             // 
@@ -278,7 +404,7 @@
             this.layoutControlItem6.CustomizationFormText = "layoutControlItem6";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(370, 413);
+            this.layoutControlItem6.Size = new System.Drawing.Size(370, 24);
             this.layoutControlItem6.Text = "Episode Number (1 digit)";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(122, 13);
             // 
@@ -304,6 +430,18 @@
             this.layoutControlItem9.Text = "Preview";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(122, 13);
             // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.groupControl1;
+            this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 187);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(762, 389);
+            this.layoutControlItem10.Text = "layoutControlItem10";
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem10.TextToControlDistance = 0;
+            this.layoutControlItem10.TextVisible = false;
+            // 
             // UcSettingsTvRename
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,6 +451,17 @@
             this.Size = new System.Drawing.Size(782, 596);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            this.layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtReplaceCharWith.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkReplaceWithChar.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkReplaceWithHex.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPreview.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeNumber2Template.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeNumber1Template.Properties)).EndInit();
@@ -333,6 +482,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -360,5 +510,15 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.TextEdit txtPreview;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.TextEdit txtReplaceCharWith;
+        private DevExpress.XtraEditors.CheckEdit chkReplaceWithChar;
+        private DevExpress.XtraEditors.CheckEdit chkReplaceWithHex;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
     }
 }

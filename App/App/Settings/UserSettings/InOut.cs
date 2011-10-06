@@ -121,11 +121,30 @@ namespace YANFOE.Settings.UserSettings
             this.RenameTV = true;
 
             this.MinimumMovieSize = 104857600;
+
+            this.TvIOReplaceChar = "-";
+            this.TvIOReplaceWithHex = true;
+
+            this.MovieIOReplaceChar = "-";
+            this.MovieIOReplaceWithHex = true;
+
         }
 
         #endregion
 
         #region Properties
+
+        public bool TvIOReplaceWithHex { get; set; }
+
+        public bool TvIOReplaceWithChar { get; set; }
+
+        public string TvIOReplaceChar { get; set; }
+
+        public bool MovieIOReplaceWithHex { get; set; }
+
+        public bool MovieIOReplaceWithChar { get; set; }
+
+        public string MovieIOReplaceChar { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum size of the movie.

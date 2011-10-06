@@ -113,7 +113,7 @@ namespace YANFOE.Factories.Renamer
         /// </returns>
         public static string DoRename(string pathFrom, string renameTo)
         {
-            renameTo = FileSystemCharChange.To(renameTo);
+            renameTo = FileSystemCharChange.To(renameTo, FileSystemCharChange.ConvertArea.Tv);
 
             var fileName = Path.GetFileNameWithoutExtension(pathFrom);
             var filePath = Path.GetDirectoryName(pathFrom);

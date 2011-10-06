@@ -20,6 +20,7 @@ namespace YANFOE.Tools
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Tools.Importing;
+    using YANFOE.Tools.Restructure;
 
     public static class GeneratePath
     {
@@ -66,7 +67,7 @@ namespace YANFOE.Tools
             {
                 firstEpisodeFullPath = series.GetFirstEpisode();
 
-                seriesName = Tools.Restructure.FileSystemCharChange.To(series.SeriesName);
+                seriesName = Tools.Restructure.FileSystemCharChange.To(series.SeriesName, FileSystemCharChange.ConvertArea.Tv);
             }
 
             string firstEpisodePath;
@@ -142,7 +143,7 @@ namespace YANFOE.Tools
                 if (!settings)
                 {
                     firstEpisodeFullPath = season.GetFirstEpisode();
-                    seriesName = Restructure.FileSystemCharChange.To(season.GetSeries().SeriesName);
+                    seriesName = Restructure.FileSystemCharChange.To(season.GetSeries().SeriesName, FileSystemCharChange.ConvertArea.Tv);
                 }
 
                 if (MovieNaming.IsDVD(firstEpisodeFullPath))

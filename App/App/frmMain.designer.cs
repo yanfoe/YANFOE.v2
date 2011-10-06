@@ -36,21 +36,21 @@ namespace YANFOE
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -400,15 +400,15 @@ namespace YANFOE
             this.mnuDonate.Glyph = global::YANFOE.Properties.Resources.btn_donate_SM;
             this.mnuDonate.Id = 34;
             this.mnuDonate.Name = "mnuDonate";
-            toolTipTitleItem6.Text = "Donate to the YANFOE project.";
-            toolTipItem6.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem6.Appearance.Options.UseImage = true;
-            toolTipItem6.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
-            toolTipItem6.LeftIndent = 6;
-            toolTipItem6.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            superToolTip6.Items.Add(toolTipItem6);
-            this.mnuDonate.SuperTip = superToolTip6;
+            toolTipTitleItem1.Text = "Donate to the YANFOE project.";
+            toolTipItem1.Appearance.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.Appearance.Options.UseImage = true;
+            toolTipItem1.Image = global::YANFOE.Properties.Resources.dollar_currency_sign;
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Show your support for YANFOE and\r\nhelp fund future development.";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.mnuDonate.SuperTip = superToolTip1;
             this.mnuDonate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.mnuDonate_ItemClick);
             // 
             // barDockControlTop
@@ -524,16 +524,16 @@ namespace YANFOE
             this.tabMediaManager.Image = global::YANFOE.Properties.Resources.database24;
             this.tabMediaManager.Name = "tabMediaManager";
             this.tabMediaManager.Size = new System.Drawing.Size(986, 454);
-            superToolTip7.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            toolTipTitleItem7.Appearance.Image = global::YANFOE.Properties.Resources.database24;
-            toolTipTitleItem7.Appearance.Options.UseImage = true;
-            toolTipTitleItem7.Image = global::YANFOE.Properties.Resources.database24;
-            toolTipTitleItem7.Text = "Media Manager";
-            toolTipItem7.LeftIndent = 6;
-            toolTipItem7.Text = "Manage and import TV and Movie media.\r\n\r\n(#) - Total Media Paths";
-            superToolTip7.Items.Add(toolTipTitleItem7);
-            superToolTip7.Items.Add(toolTipItem7);
-            this.tabMediaManager.SuperTip = superToolTip7;
+            superToolTip2.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            toolTipTitleItem2.Appearance.Image = global::YANFOE.Properties.Resources.database24;
+            toolTipTitleItem2.Appearance.Options.UseImage = true;
+            toolTipTitleItem2.Image = global::YANFOE.Properties.Resources.database24;
+            toolTipTitleItem2.Text = "Media Manager";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "Manage and import TV and Movie media.\r\n\r\n(#) - Total Media Paths";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.tabMediaManager.SuperTip = superToolTip2;
             this.tabMediaManager.Text = "Media Manager";
             // 
             // mediaPathManager1
@@ -550,12 +550,12 @@ namespace YANFOE
             this.tabMovies.Image = global::YANFOE.Properties.Resources.video24;
             this.tabMovies.Name = "tabMovies";
             this.tabMovies.Size = new System.Drawing.Size(986, 454);
-            toolTipTitleItem8.Text = "Movies";
-            toolTipItem8.LeftIndent = 6;
-            toolTipItem8.Text = "(#) - Total Movies";
-            superToolTip8.Items.Add(toolTipTitleItem8);
-            superToolTip8.Items.Add(toolTipItem8);
-            this.tabMovies.SuperTip = superToolTip8;
+            toolTipTitleItem3.Text = "Movies";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "(#) - Total Movies";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.tabMovies.SuperTip = superToolTip3;
             this.tabMovies.Text = "Movies";
             // 
             // moviesUserControl1
@@ -576,12 +576,12 @@ namespace YANFOE
             this.tabTv.Image = global::YANFOE.Properties.Resources.television24;
             this.tabTv.Name = "tabTv";
             this.tabTv.Size = new System.Drawing.Size(986, 454);
-            toolTipTitleItem9.Text = "TV";
-            toolTipItem9.LeftIndent = 6;
-            toolTipItem9.Text = "(#) - Total Series";
-            superToolTip9.Items.Add(toolTipTitleItem9);
-            superToolTip9.Items.Add(toolTipItem9);
-            this.tabTv.SuperTip = superToolTip9;
+            toolTipTitleItem4.Text = "TV";
+            toolTipItem4.LeftIndent = 6;
+            toolTipItem4.Text = "(#) - Total Series";
+            superToolTip4.Items.Add(toolTipTitleItem4);
+            superToolTip4.Items.Add(toolTipItem4);
+            this.tabTv.SuperTip = superToolTip4;
             this.tabTv.Text = "TV";
             // 
             // tvUserControl1
@@ -598,12 +598,12 @@ namespace YANFOE
             this.tabDownloads.Image = global::YANFOE.Properties.Resources.download24;
             this.tabDownloads.Name = "tabDownloads";
             this.tabDownloads.Size = new System.Drawing.Size(986, 454);
-            toolTipTitleItem10.Text = "Downloads Manager\r\n";
-            toolTipItem10.LeftIndent = 6;
-            toolTipItem10.Text = "Downloads (Urgent Queue : Background Queue)";
-            superToolTip10.Items.Add(toolTipTitleItem10);
-            superToolTip10.Items.Add(toolTipItem10);
-            this.tabDownloads.SuperTip = superToolTip10;
+            toolTipTitleItem5.Text = "Downloads Manager\r\n";
+            toolTipItem5.LeftIndent = 6;
+            toolTipItem5.Text = "Downloads (Urgent Queue : Background Queue)";
+            superToolTip5.Items.Add(toolTipTitleItem5);
+            superToolTip5.Items.Add(toolTipItem5);
+            this.tabDownloads.SuperTip = superToolTip5;
             this.tabDownloads.Text = "Downloads";
             // 
             // downloadsUserControl1

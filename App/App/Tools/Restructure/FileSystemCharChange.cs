@@ -14,12 +14,44 @@
 
 namespace YANFOE.Tools.Restructure
 {
+    using System;
+
     /// <summary>
     /// The file system char change.
     /// </summary>
     public static class FileSystemCharChange
     {
         #region Public Methods
+
+        public enum ConvertArea
+        {
+           Movie,
+           Tv
+        }
+        
+        private enum ConvertType
+        {
+            Hex,
+            Char
+        }
+
+        private static string[,] replaceValues;
+
+        static FileSystemCharChange()
+        {
+            replaceValues = new[,]
+               {
+                   { ":", "$3A" }, 
+                   { "\"", "$22" }, 
+                   { "\\", "$5C" }, 
+                   { "<", "$3C" }, 
+                   { "/", "$2F" }, 
+                   { ">", "$3E" },
+                   { "|", "$7C" }, 
+                   { "*", "$2A" }, 
+                   { "?", "$3F" },
+               };
+        }
 
         /// <summary>
         /// File System Char Change - Convert From
@@ -30,19 +62,9 @@ namespace YANFOE.Tools.Restructure
         /// <returns>
         /// Processed string
         /// </returns>
-        public static string From(string value)
+        public static string From(string value, ConvertArea area)
         {
-            value = value.Replace("$3A", ":");
-            value = value.Replace("$22", "\"");
-            value = value.Replace("$5C", "\\");
-            value = value.Replace("$3C", "<");
-            value = value.Replace("$2F", "/");
-            value = value.Replace("$3E", ">");
-            value = value.Replace("$7C", "|");
-            value = value.Replace("$2A", "*");
-            value = value.Replace("$3F", "?");
-
-            return value;
+            return ReplaceByColumn(value, area, 1, 0);
         }
 
         /// <summary>
@@ -54,19 +76,78 @@ namespace YANFOE.Tools.Restructure
         /// <returns>
         /// Processed string
         /// </returns>
-        public static string To(string value)
+        public static string To(string value, ConvertArea area)
         {
-            value = value.Replace(":", "$3A");
-            value = value.Replace("\"", "$22");
-            value = value.Replace("<", "$3C");
-            value = value.Replace("\\", "$5C");
-            value = value.Replace("/", "$2F");
-            value = value.Replace(">", "$3E");
-            value = value.Replace("|", "$7C");
-            value = value.Replace("*", "$2A");
-            value = value.Replace("?", "$3F");
+            return ReplaceByColumn(value, area, 0, 1);
+        }
+
+        public static string ReplaceByColumn(string value, ConvertArea area, int column1, int column2)
+        {
+            var convertType = GetConvertType(area);
+
+            if (convertType == ConvertType.Hex)
+            {
+                for (var i = 0; i < replaceValues.Length; i++)
+                {
+                    value = value.Replace(replaceValues[i, column1], replaceValues[i, column2]);
+                }
+            }
+            else
+            {
+                var convertValue = GetConvertValue(area);
+
+                for (var i = 0; i < replaceValues.Length; i++)
+                {
+                    value = value.Replace(replaceValues[i, column1], convertValue);
+                }
+            }
 
             return value;
+        }
+
+        private static string GetConvertValue(ConvertArea area)
+        {
+            if (area == ConvertArea.Movie)
+            {
+                return Settings.Get.InOutCollection.MovieIOReplaceChar;
+            }
+
+            return Settings.Get.InOutCollection.TvIOReplaceChar;
+        }
+
+        private static ConvertType GetConvertType(ConvertArea area)
+        {
+            if (area == ConvertArea.Movie)
+            {
+                if (Settings.Get.InOutCollection.MovieIOReplaceWithChar)
+                {
+                    return ConvertType.Char;
+                }
+
+                if (Settings.Get.InOutCollection.MovieIOReplaceWithHex)
+                {
+                    return ConvertType.Hex;
+                }
+
+                throw new Exception();
+            }
+
+            if (area == ConvertArea.Tv)
+            {
+                if (Settings.Get.InOutCollection.TvIOReplaceWithChar)
+                {
+                    return ConvertType.Char;
+                }
+
+                if (Settings.Get.InOutCollection.TvIOReplaceWithHex)
+                {
+                    return ConvertType.Hex;
+                }
+
+                throw new Exception();
+            }
+
+            throw new Exception();
         }
 
         #endregion
