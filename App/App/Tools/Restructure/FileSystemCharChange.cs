@@ -85,24 +85,21 @@ namespace YANFOE.Tools.Restructure
 
         public static string ReplaceByColumn(string value, ConvertArea area, int column1, int column2, ConvertType convertType = ConvertType.None)
         {
-            if (convertType != ConvertType.None)
+            if (convertType == ConvertType.None)
             {
                 convertType = GetConvertType(area);
             }
 
-            if (convertType == ConvertType.Hex)
+            for (var i = 0; i < (replaceValues.Length / 2) - 1; i++)
             {
-                for (var i = 0; i < (replaceValues.Length / 2) - 1; i++)
+                if (convertType == ConvertType.Hex)
                 {
                     value = value.Replace(replaceValues[i, column1], replaceValues[i, column2]);
                 }
-            }
-            else
-            {
-                var convertValue = GetConvertValue(area);
-
-                for (var i = 0; i < (replaceValues.Length / 2) - 1; i++)
+                else
                 {
+                    var convertValue = GetConvertValue(area);
+
                     value = value.Replace(replaceValues[i, column1], convertValue);
                 }
             }

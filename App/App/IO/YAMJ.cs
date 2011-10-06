@@ -733,7 +733,7 @@ namespace YANFOE.IO
         /// </returns>
         public bool LoadSeries(Series series)
         {
-            string seriesName = series.GetSeriesNameOnDisk();
+            string seriesName = series.SeriesName;
             string seriesPath = series.GetSeriesPath();
 
             if (string.IsNullOrEmpty(seriesName) || string.IsNullOrEmpty(seriesPath))
@@ -741,11 +741,35 @@ namespace YANFOE.IO
                 return false;
             }
 
+            var seriesNameHex = "Set_"
+                                +
+                                FileSystemCharChange.To(
+                                    seriesName,
+                                    FileSystemCharChange.ConvertArea.Tv,
+                                    FileSystemCharChange.ConvertType.Hex) + "_1";
+
+            var seriesNameChar = "Set_"
+                    +
+                    FileSystemCharChange.To(
+                        seriesName,
+                        FileSystemCharChange.ConvertArea.Tv,
+                        FileSystemCharChange.ConvertType.Char) + "_1";
+
             string nfo = Find.FindNFO("Set_" + seriesName + "_1", seriesPath);
 
             if (string.IsNullOrEmpty(nfo))
             {
-                return false;
+                nfo = Find.FindNFO(seriesNameHex, seriesPath);
+
+                if (string.IsNullOrEmpty(nfo))
+                {
+                    nfo = Find.FindNFO(seriesNameChar, seriesPath);
+
+                    if (string.IsNullOrEmpty(nfo))
+                    {
+                        return false;
+                    }
+                }
             }
 
             XmlDocument doc = XRead.OpenPath(nfo);
@@ -773,7 +797,7 @@ namespace YANFOE.IO
                     string role = XRead.GetString(docActor, "role");
                     string imageurl = XRead.GetString(docActor, "thumb");
 
-                    var personModel = new PersonModel(name, role, imageurl);
+                    var personModel = new PersonModel(name, imageurl, role);
 
                     series.Actors.Add(personModel);
                 }
