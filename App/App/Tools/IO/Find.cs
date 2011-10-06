@@ -27,6 +27,7 @@ namespace YANFOE.Tools.IO
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Importing;
+    using YANFOE.Tools.Restructure;
     using YANFOE.Tools.ThirdParty;
 
     /// <summary>
@@ -132,16 +133,39 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds the season NFO.
         /// </summary>
-        /// <param name="seasonName">Name of the season.</param>
+        /// <param name="seriesName">Name of the season.</param>
         /// <param name="seasonPath">The season path.</param>
         /// <param name="fileList">The file list.</param>
         /// <returns>
         /// The found nfo.
         /// </returns>
-        public static string FindNFO(string seasonName, string seasonPath, string[] fileList = null)
+        public static string FindNFO(string seriesName, string seasonPath, string[] fileList = null)
         {
-            return FindCore(
-                seasonName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+            var find = FindCore(
+                seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+
+            if (!string.IsNullOrEmpty(find))
+            {
+                return find;
+            }
+
+            seriesName = FileSystemCharChange.To(seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Hex);
+            find = FindCore(seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+
+            if (!string.IsNullOrEmpty(find))
+            {
+                return find;
+            }
+
+            seriesName = FileSystemCharChange.To(seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
+            find = FindCore(seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+
+            if (!string.IsNullOrEmpty(find))
+            {
+                return find;
+            }
+
+            return string.Empty;
         }
 
         /// <summary>

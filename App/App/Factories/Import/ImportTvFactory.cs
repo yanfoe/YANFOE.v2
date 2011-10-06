@@ -306,8 +306,7 @@ namespace YANFOE.Factories.Import
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
-                episodeDetails.SeriesName = Tools.Restructure.FileSystemCharChange.From(episodeDetails.SeriesName, FileSystemCharChange.ConvertArea.Tv);
-
+                episodeDetails.SeriesName = FileSystemCharChange.From(episodeDetails.SeriesName, FileSystemCharChange.ConvertArea.Tv);
             }
 
             var seasonMatch = Regex.Match(series, DefaultRegex.TvSeason, RegexOptions.IgnoreCase);
@@ -343,9 +342,13 @@ namespace YANFOE.Factories.Import
                     }
 
                     InternalApps.Logs.Log.WriteToLog(
-                        LogSeverity.Debug,
-                        0,
-                        string.Format("Extracted episode numbers ({0}): {1}",episodeDetails.SecondaryNumbers.Count,string.Join(", ", episodeDetails.SecondaryNumbers)),logCategory);
+                        LogSeverity.Debug, 
+                        0, 
+                        string.Format(
+                            "Extracted episode numbers ({0}): {1}", 
+                            episodeDetails.SecondaryNumbers.Count, 
+                            string.Join(", ", episodeDetails.SecondaryNumbers)), 
+                        logCategory);
                 }
                 else
                 {
@@ -353,9 +356,9 @@ namespace YANFOE.Factories.Import
                     episodeDetails.EpisodeNumber = episodeMatch2.Groups[1].Value.GetNumber();
 
                     InternalApps.Logs.Log.WriteToLog(
-                        LogSeverity.Debug,
-                        0,
-                        string.Format("Extracted episode number: {0}", episodeDetails.EpisodeNumber),
+                        LogSeverity.Debug, 
+                        0, 
+                        string.Format("Extracted episode number: {0}", episodeDetails.EpisodeNumber), 
                         logCategory);
                 }
             }

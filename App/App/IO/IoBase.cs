@@ -71,6 +71,80 @@ namespace YANFOE.IO
             }
         }
 
+        public string GetEpisodeImage(Episode episode, string stringFormat)
+        {
+            if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+            {
+                return string.Empty;
+            }
+
+            return this.GetImageWithParse(episode.FilePath.FolderPath, episode.FilePath.FilenameWithOutExt, stringFormat);
+        }
+
+        public string GetSeasonImage(Season season, string stringFormat)
+        {
+            string firstEpisode = season.GetFirstEpisode();
+
+            if (string.IsNullOrEmpty(firstEpisode))
+            {
+                return string.Empty;
+            }
+
+            var path = Path.GetDirectoryName(firstEpisode);
+            var fileName = Path.GetFileNameWithoutExtension(firstEpisode);
+
+            return this.GetImageWithParse(path, fileName, stringFormat);
+        }
+
+        public string GetSeriesImage(Series series, string stringFormat)
+        {
+            string firstEpisode = series.GetFirstEpisode();
+
+            if (string.IsNullOrEmpty(firstEpisode))
+            {
+                return string.Empty;
+            }
+
+            var path = Path.GetDirectoryName(firstEpisode);
+            var fileName = series.SeriesName.Trim();
+
+            return this.GetImageWithParse(path, fileName, stringFormat);
+        }
+
+        private string GetImageWithParse(string path, string fileName, string stringFormat)
+        {
+            string hex = FileSystemCharChange.To(
+                fileName,
+                FileSystemCharChange.ConvertArea.Tv,
+                FileSystemCharChange.ConvertType.Hex);
+
+            string schar = FileSystemCharChange.To(
+                fileName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
+
+            string seriesNamePlain = string.Format(stringFormat, fileName);
+            string seriesNameHex = string.Format(stringFormat, hex);
+            string seriesNameChar = string.Format(stringFormat, schar);
+
+            string checkPathPlain = Path.Combine(path, seriesNamePlain);
+            string checkPathHex = Path.Combine(path, seriesNameHex);
+            string checkPathChar = Path.Combine(path, seriesNameChar);
+
+            if (File.Exists(checkPathPlain))
+            {
+                return checkPathPlain;
+            }
+            else if (File.Exists(checkPathHex))
+            {
+                return checkPathHex;
+            }
+            else if (File.Exists(checkPathChar))
+            {
+                return checkPathChar;
+            }
+
+            return string.Empty;
+        }
+
         /// <summary>
         /// Do series replace.
         /// </summary>

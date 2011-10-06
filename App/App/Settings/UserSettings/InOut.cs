@@ -124,9 +124,11 @@ namespace YANFOE.Settings.UserSettings
 
             this.TvIOReplaceChar = "-";
             this.TvIOReplaceWithHex = true;
+            this.TvIOReplaceWithChar = false;
 
             this.MovieIOReplaceChar = "-";
             this.MovieIOReplaceWithHex = true;
+            this.MovieIOReplaceWithChar = false;
 
         }
 

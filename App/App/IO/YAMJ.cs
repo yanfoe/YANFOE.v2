@@ -36,6 +36,7 @@ namespace YANFOE.IO
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.IO;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.Restructure;
     using YANFOE.Tools.Xml;
 
     /// <summary>
@@ -359,19 +360,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetEpisodeScreenshot(Episode episode)
         {
-            string fullPath = episode.FilePath.PathAndFilename;
-
-            string path = Path.GetDirectoryName(fullPath);
-            string fileName = Path.GetFileNameWithoutExtension(fullPath);
-
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".videoimage.jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+            return this.GetEpisodeImage(episode, "{0}.videoimage.jpg");
         }
 
         public string GetFileInfo(MovieModel movie = null, Episode episode = null)
@@ -471,24 +460,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeasonBanner(Season season)
         {
-            string firstEpisode = season.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-            string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
-
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".banner.jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+            return this.GetSeasonImage(season, "{0}.banner.jpg");
         }
 
         /// <summary>
@@ -500,24 +472,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeasonFanart(Season season)
         {
-            string firstEpisode = season.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-            string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
-
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".fanart.jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+            return this.GetSeasonImage(season, "{0}.fanart.jpg");
         }
 
         /// <summary>
@@ -529,24 +484,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeasonPoster(Season season)
         {
-            string firstEpisode = season.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-            string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
-
-            string checkPath = path + Path.DirectorySeparatorChar + fileName + ".jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+            return this.GetSeasonImage(season, "{0}.jpg");
         }
 
         /// <summary>
@@ -558,24 +496,7 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesBanner(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".banner.jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+            return this.GetSeriesImage(series, "Set_{0}_1.banner.jpg");
         }
 
         /// <summary>
@@ -587,25 +508,19 @@ namespace YANFOE.IO
         /// </returns>
         public string GetSeriesFanart(Series series)
         {
-            string firstEpisode = series.GetFirstEpisode();
+            return this.GetSeriesImage(series, "Set_{0}_1.fanart.jpg");
+        }
 
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".fanart.jpg";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
+        /// <summary>
+        /// Gets the series poster.
+        /// </summary>
+        /// <param name="series">The series.</param>
+        /// <returns>
+        /// Series poster path
+        /// </returns>
+        public string GetSeriesPoster(Series series)
+        {
+            return this.GetSeriesImage(series, "Set_{0}_1.jpg");
         }
 
         /// <summary>
@@ -623,35 +538,6 @@ namespace YANFOE.IO
             string fileName = Path.GetFileNameWithoutExtension(firstEpisode);
 
             string checkPath = path + Path.DirectorySeparatorChar + fileName + ".nfo";
-
-            if (File.Exists(checkPath))
-            {
-                return checkPath;
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Gets the series poster.
-        /// </summary>
-        /// <param name="series">The series.</param>
-        /// <returns>
-        /// Series poster path
-        /// </returns>
-        public string GetSeriesPoster(Series series)
-        {
-            string firstEpisode = series.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            string path = Path.GetDirectoryName(firstEpisode);
-            string seriesName = string.Format("Set_{0}_1", series.SeriesName.Trim());
-
-            string checkPath = path + Path.DirectorySeparatorChar + seriesName + ".jpg";
 
             if (File.Exists(checkPath))
             {
@@ -855,7 +741,7 @@ namespace YANFOE.IO
                 return false;
             }
 
-            string nfo = Find.FindNFO(seriesName, seriesPath);
+            string nfo = Find.FindNFO("Set_" + seriesName + "_1", seriesPath);
 
             if (string.IsNullOrEmpty(nfo))
             {

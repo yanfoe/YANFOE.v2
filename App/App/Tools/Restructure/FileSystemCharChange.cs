@@ -25,12 +25,14 @@ namespace YANFOE.Tools.Restructure
 
         public enum ConvertArea
         {
+           None,
            Movie,
            Tv
         }
         
-        private enum ConvertType
+        public enum ConvertType
         {
+            None,
             Hex,
             Char
         }
@@ -76,18 +78,21 @@ namespace YANFOE.Tools.Restructure
         /// <returns>
         /// Processed string
         /// </returns>
-        public static string To(string value, ConvertArea area)
+        public static string To(string value, ConvertArea area, ConvertType type = ConvertType.None)
         {
             return ReplaceByColumn(value, area, 0, 1);
         }
 
-        public static string ReplaceByColumn(string value, ConvertArea area, int column1, int column2)
+        public static string ReplaceByColumn(string value, ConvertArea area, int column1, int column2, ConvertType convertType = ConvertType.None)
         {
-            var convertType = GetConvertType(area);
+            if (convertType != ConvertType.None)
+            {
+                convertType = GetConvertType(area);
+            }
 
             if (convertType == ConvertType.Hex)
             {
-                for (var i = 0; i < replaceValues.Length; i++)
+                for (var i = 0; i < (replaceValues.Length / 2) - 1; i++)
                 {
                     value = value.Replace(replaceValues[i, column1], replaceValues[i, column2]);
                 }
@@ -96,7 +101,7 @@ namespace YANFOE.Tools.Restructure
             {
                 var convertValue = GetConvertValue(area);
 
-                for (var i = 0; i < replaceValues.Length; i++)
+                for (var i = 0; i < (replaceValues.Length / 2) - 1; i++)
                 {
                     value = value.Replace(replaceValues[i, column1], convertValue);
                 }
