@@ -211,9 +211,16 @@ namespace YANFOE.Factories.Media
                 if (filePath.Type == MediaPathFileModel.MediaPathFileType.Movie)
                 {
                     string p = filePath.Path.TrimEnd('\\');
-                    MovieDBFactory.MovieDatabase.Remove(
+                    if (!
+                        MovieDBFactory.MovieDatabase.Remove(
                         (from m in MovieDBFactory.MovieDatabase where m.GetBaseFilePath == p select m).
+                            SingleOrDefault())
+                        )
+                    {
+                        MovieDBFactory.HiddenMovieDatabase.Remove(
+                        (from m in MovieDBFactory.HiddenMovieDatabase where m.GetBaseFilePath == p select m).
                             SingleOrDefault());
+                    }
                 }
 
                 if (filePath.Type == MediaPathFileModel.MediaPathFileType.TV)

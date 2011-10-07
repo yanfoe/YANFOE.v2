@@ -206,10 +206,10 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            this.RemoteMediaPaths();
+            this.RemoveMediaPaths();
         }
 
-        private void RemoteMediaPaths()
+        private void RemoveMediaPaths()
         {
             DialogResult result = XtraMessageBox.Show(
                 this,
@@ -359,7 +359,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         {
             if (e.KeyCode == Keys.Delete && grdMediaPathList.Focused && grdViewMain.SelectedRowsCount > 0)
             {
-                RemoteMediaPaths();
+                RemoveMediaPaths();
             }
         }
 
