@@ -185,5 +185,11 @@ namespace YANFOE.UI.Dialogs.DSettings
             tabMain.SelectedTabPage = tabMovies;
             tabControlMovies.SelectedTabPage = this.tabMovieRename;
         }
+
+        private void navItemGeneralIO_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            tabMain.SelectedTabPage = tabGeneral;
+            tabControlGeneral.SelectedTabPage = this.tabGeneralIO;
+        }
     }
 }

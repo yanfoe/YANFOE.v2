@@ -19,16 +19,26 @@
 
 namespace YANFOE.IO
 {
-    using YANFOE.Factories.Apps.MediaInfo.Models;
+    using System;
+
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.TvModels.Show;
+    using YANFOE.Tools.Enums;
 
     /// <summary>
     /// Interface for all IO handlers
     /// </summary>
     public interface IoInterface
     {
+        NFOType Type { get; set; }
+
+        string IOHandlerName { get; set; }
+
+        string IOHandlerDescription { get; set; }
+
+        Uri IOHandlerUri { get; set; }
+
         /// <summary>
         /// Generates the movie output.
         /// </summary>

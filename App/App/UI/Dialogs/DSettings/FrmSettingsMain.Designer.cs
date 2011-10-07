@@ -50,6 +50,11 @@
             this.panelControl12 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit12 = new DevExpress.XtraEditors.PictureEdit();
+            this.tabGeneralIO = new DevExpress.XtraTab.XtraTabPage();
+            this.ucSettingsGeneralIO1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsGeneralIO();
+            this.panelControl16 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.pictureEdit16 = new DevExpress.XtraEditors.PictureEdit();
             this.tabMovies = new DevExpress.XtraTab.XtraTabPage();
             this.tabControlMovies = new DevExpress.XtraTab.XtraTabControl();
             this.tabMovieOut = new DevExpress.XtraTab.XtraTabPage();
@@ -68,6 +73,7 @@
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit13 = new DevExpress.XtraEditors.PictureEdit();
             this.tabMovieRename = new DevExpress.XtraTab.XtraTabPage();
+            this.ucSettingsMoviesRename1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsMoviesRename();
             this.panelControl15 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.pictureEdit15 = new DevExpress.XtraEditors.PictureEdit();
@@ -118,6 +124,7 @@
             this.navItemGeneralUI = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemGeneralWeb = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemGeneralFileInfo = new DevExpress.XtraNavBar.NavBarItem();
+            this.navItemGeneralIO = new DevExpress.XtraNavBar.NavBarItem();
             this.navGroupMovies = new DevExpress.XtraNavBar.NavBarGroup();
             this.navItemMovieIn = new DevExpress.XtraNavBar.NavBarItem();
             this.navItemMoviesOut = new DevExpress.XtraNavBar.NavBarItem();
@@ -139,7 +146,6 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
-            this.ucSettingsMoviesRename1 = new YANFOE.UI.Dialogs.DSettings.UcSettingsMoviesRename();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
@@ -159,6 +165,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl12)).BeginInit();
             this.panelControl12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit12.Properties)).BeginInit();
+            this.tabGeneralIO.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl16)).BeginInit();
+            this.panelControl16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit16.Properties)).BeginInit();
             this.tabMovies.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMovies)).BeginInit();
             this.tabControlMovies.SuspendLayout();
@@ -295,7 +305,8 @@
             this.tabControlGeneral.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabGeneralUi,
             this.tabGeneralWeb,
-            this.tabGeneralFileInfo});
+            this.tabGeneralFileInfo,
+            this.tabGeneralIO});
             // 
             // tabGeneralUi
             // 
@@ -358,7 +369,7 @@
             this.ucSettingsGeneralWeb1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsGeneralWeb1.LookAndFeel.SkinName = "Foggy";
             this.ucSettingsGeneralWeb1.Name = "ucSettingsGeneralWeb1";
-            this.ucSettingsGeneralWeb1.Size = new System.Drawing.Size(656, 502);
+            this.ucSettingsGeneralWeb1.Size = new System.Drawing.Size(658, 504);
             this.ucSettingsGeneralWeb1.TabIndex = 0;
             // 
             // panelControl2
@@ -368,7 +379,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(656, 52);
+            this.panelControl2.Size = new System.Drawing.Size(658, 52);
             this.panelControl2.TabIndex = 3;
             // 
             // labelControl2
@@ -405,7 +416,7 @@
             this.ucSettingsGeneralFileInfo1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsGeneralFileInfo1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsGeneralFileInfo1.Name = "ucSettingsGeneralFileInfo1";
-            this.ucSettingsGeneralFileInfo1.Size = new System.Drawing.Size(656, 502);
+            this.ucSettingsGeneralFileInfo1.Size = new System.Drawing.Size(658, 504);
             this.ucSettingsGeneralFileInfo1.TabIndex = 4;
             // 
             // panelControl12
@@ -415,7 +426,7 @@
             this.panelControl12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl12.Location = new System.Drawing.Point(0, 0);
             this.panelControl12.Name = "panelControl12";
-            this.panelControl12.Size = new System.Drawing.Size(656, 52);
+            this.panelControl12.Size = new System.Drawing.Size(658, 52);
             this.panelControl12.TabIndex = 3;
             // 
             // labelControl12
@@ -438,6 +449,53 @@
             this.pictureEdit12.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pictureEdit12.Size = new System.Drawing.Size(58, 48);
             this.pictureEdit12.TabIndex = 0;
+            // 
+            // tabGeneralIO
+            // 
+            this.tabGeneralIO.Controls.Add(this.ucSettingsGeneralIO1);
+            this.tabGeneralIO.Controls.Add(this.panelControl16);
+            this.tabGeneralIO.Name = "tabGeneralIO";
+            this.tabGeneralIO.Size = new System.Drawing.Size(658, 556);
+            this.tabGeneralIO.Text = "IO";
+            // 
+            // ucSettingsGeneralIO1
+            // 
+            this.ucSettingsGeneralIO1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSettingsGeneralIO1.Location = new System.Drawing.Point(0, 52);
+            this.ucSettingsGeneralIO1.Name = "ucSettingsGeneralIO1";
+            this.ucSettingsGeneralIO1.Size = new System.Drawing.Size(658, 504);
+            this.ucSettingsGeneralIO1.TabIndex = 5;
+            // 
+            // panelControl16
+            // 
+            this.panelControl16.Controls.Add(this.labelControl16);
+            this.panelControl16.Controls.Add(this.pictureEdit16);
+            this.panelControl16.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl16.Location = new System.Drawing.Point(0, 0);
+            this.panelControl16.Name = "panelControl16";
+            this.panelControl16.Size = new System.Drawing.Size(658, 52);
+            this.panelControl16.TabIndex = 4;
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl16.Location = new System.Drawing.Point(65, 9);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(205, 33);
+            this.labelControl16.TabIndex = 1;
+            this.labelControl16.Text = "General > In/Out";
+            // 
+            // pictureEdit16
+            // 
+            this.pictureEdit16.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureEdit16.EditValue = global::YANFOE.Properties.Resources.saveio1;
+            this.pictureEdit16.Location = new System.Drawing.Point(2, 2);
+            this.pictureEdit16.Name = "pictureEdit16";
+            this.pictureEdit16.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEdit16.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit16.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit16.Size = new System.Drawing.Size(58, 48);
+            this.pictureEdit16.TabIndex = 0;
             // 
             // tabMovies
             // 
@@ -520,7 +578,7 @@
             this.ucSettingsMovieIn1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsMovieIn1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsMovieIn1.Name = "ucSettingsMovieIn1";
-            this.ucSettingsMovieIn1.Size = new System.Drawing.Size(654, 500);
+            this.ucSettingsMovieIn1.Size = new System.Drawing.Size(658, 504);
             this.ucSettingsMovieIn1.TabIndex = 5;
             // 
             // panelControl9
@@ -530,7 +588,7 @@
             this.panelControl9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl9.Location = new System.Drawing.Point(0, 0);
             this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(654, 52);
+            this.panelControl9.Size = new System.Drawing.Size(658, 52);
             this.panelControl9.TabIndex = 4;
             // 
             // labelControl9
@@ -567,7 +625,7 @@
             this.ucSettingsMoviesLists1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsMoviesLists1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsMoviesLists1.Name = "ucSettingsMoviesLists1";
-            this.ucSettingsMoviesLists1.Size = new System.Drawing.Size(654, 500);
+            this.ucSettingsMoviesLists1.Size = new System.Drawing.Size(658, 504);
             this.ucSettingsMoviesLists1.TabIndex = 0;
             // 
             // panelControl13
@@ -577,7 +635,7 @@
             this.panelControl13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl13.Location = new System.Drawing.Point(0, 0);
             this.panelControl13.Name = "panelControl13";
-            this.panelControl13.Size = new System.Drawing.Size(654, 52);
+            this.panelControl13.Size = new System.Drawing.Size(658, 52);
             this.panelControl13.TabIndex = 4;
             // 
             // labelControl13
@@ -608,6 +666,14 @@
             this.tabMovieRename.Name = "tabMovieRename";
             this.tabMovieRename.Size = new System.Drawing.Size(658, 556);
             this.tabMovieRename.Text = "Rename";
+            // 
+            // ucSettingsMoviesRename1
+            // 
+            this.ucSettingsMoviesRename1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSettingsMoviesRename1.Location = new System.Drawing.Point(0, 52);
+            this.ucSettingsMoviesRename1.Name = "ucSettingsMoviesRename1";
+            this.ucSettingsMoviesRename1.Size = new System.Drawing.Size(658, 504);
+            this.ucSettingsMoviesRename1.TabIndex = 6;
             // 
             // panelControl15
             // 
@@ -653,7 +719,7 @@
             this.tabTvControl.Location = new System.Drawing.Point(0, 0);
             this.tabTvControl.Name = "tabTvControl";
             this.tabTvControl.SelectedTabPage = this.tabTvFileOut;
-            this.tabTvControl.Size = new System.Drawing.Size(660, 578);
+            this.tabTvControl.Size = new System.Drawing.Size(662, 580);
             this.tabTvControl.TabIndex = 0;
             this.tabTvControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabTvFileOut,
@@ -667,7 +733,7 @@
             this.tabTvFileOut.Controls.Add(this.ucSettingsTvIO1);
             this.tabTvFileOut.Controls.Add(this.panelControl7);
             this.tabTvFileOut.Name = "tabTvFileOut";
-            this.tabTvFileOut.Size = new System.Drawing.Size(656, 554);
+            this.tabTvFileOut.Size = new System.Drawing.Size(658, 556);
             this.tabTvFileOut.Text = "File Out";
             // 
             // ucSettingsTvIO1
@@ -675,7 +741,7 @@
             this.ucSettingsTvIO1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsTvIO1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsTvIO1.Name = "ucSettingsTvIO1";
-            this.ucSettingsTvIO1.Size = new System.Drawing.Size(654, 500);
+            this.ucSettingsTvIO1.Size = new System.Drawing.Size(658, 504);
             this.ucSettingsTvIO1.TabIndex = 5;
             // 
             // panelControl7
@@ -685,7 +751,7 @@
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl7.Location = new System.Drawing.Point(0, 0);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(654, 52);
+            this.panelControl7.Size = new System.Drawing.Size(658, 52);
             this.panelControl7.TabIndex = 4;
             // 
             // labelControl7
@@ -714,7 +780,7 @@
             this.tabTvRename.Controls.Add(this.ucSettingsTvRename1);
             this.tabTvRename.Controls.Add(this.panelControl8);
             this.tabTvRename.Name = "tabTvRename";
-            this.tabTvRename.Size = new System.Drawing.Size(656, 554);
+            this.tabTvRename.Size = new System.Drawing.Size(658, 556);
             this.tabTvRename.Text = "Rename";
             // 
             // ucSettingsTvRename1
@@ -722,7 +788,7 @@
             this.ucSettingsTvRename1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsTvRename1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsTvRename1.Name = "ucSettingsTvRename1";
-            this.ucSettingsTvRename1.Size = new System.Drawing.Size(654, 500);
+            this.ucSettingsTvRename1.Size = new System.Drawing.Size(656, 502);
             this.ucSettingsTvRename1.TabIndex = 5;
             // 
             // panelControl8
@@ -732,7 +798,7 @@
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl8.Location = new System.Drawing.Point(0, 0);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(654, 52);
+            this.panelControl8.Size = new System.Drawing.Size(656, 52);
             this.panelControl8.TabIndex = 4;
             // 
             // labelControl8
@@ -760,7 +826,7 @@
             // 
             this.tabTvUpdating.Controls.Add(this.panelControl10);
             this.tabTvUpdating.Name = "tabTvUpdating";
-            this.tabTvUpdating.Size = new System.Drawing.Size(656, 554);
+            this.tabTvUpdating.Size = new System.Drawing.Size(658, 556);
             this.tabTvUpdating.Text = "Updating";
             // 
             // panelControl10
@@ -770,7 +836,7 @@
             this.panelControl10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl10.Location = new System.Drawing.Point(0, 0);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(654, 52);
+            this.panelControl10.Size = new System.Drawing.Size(656, 52);
             this.panelControl10.TabIndex = 5;
             // 
             // labelControl10
@@ -798,7 +864,7 @@
             // 
             this.tabTvMisc.Controls.Add(this.panelControl11);
             this.tabTvMisc.Name = "tabTvMisc";
-            this.tabTvMisc.Size = new System.Drawing.Size(656, 554);
+            this.tabTvMisc.Size = new System.Drawing.Size(658, 556);
             this.tabTvMisc.Text = "Misc";
             // 
             // panelControl11
@@ -808,7 +874,7 @@
             this.panelControl11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl11.Location = new System.Drawing.Point(0, 0);
             this.panelControl11.Name = "panelControl11";
-            this.panelControl11.Size = new System.Drawing.Size(654, 52);
+            this.panelControl11.Size = new System.Drawing.Size(656, 52);
             this.panelControl11.TabIndex = 5;
             // 
             // labelControl11
@@ -837,7 +903,7 @@
             this.tabTvLists.Controls.Add(this.ucSettingsTvLists1);
             this.tabTvLists.Controls.Add(this.panelControl14);
             this.tabTvLists.Name = "tabTvLists";
-            this.tabTvLists.Size = new System.Drawing.Size(656, 554);
+            this.tabTvLists.Size = new System.Drawing.Size(658, 556);
             this.tabTvLists.Text = "Lists";
             // 
             // ucSettingsTvLists1
@@ -845,7 +911,7 @@
             this.ucSettingsTvLists1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSettingsTvLists1.Location = new System.Drawing.Point(0, 52);
             this.ucSettingsTvLists1.Name = "ucSettingsTvLists1";
-            this.ucSettingsTvLists1.Size = new System.Drawing.Size(654, 500);
+            this.ucSettingsTvLists1.Size = new System.Drawing.Size(656, 502);
             this.ucSettingsTvLists1.TabIndex = 6;
             // 
             // panelControl14
@@ -855,7 +921,7 @@
             this.panelControl14.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl14.Location = new System.Drawing.Point(0, 0);
             this.panelControl14.Name = "panelControl14";
-            this.panelControl14.Size = new System.Drawing.Size(654, 52);
+            this.panelControl14.Size = new System.Drawing.Size(656, 52);
             this.panelControl14.TabIndex = 5;
             // 
             // labelControl14
@@ -1063,7 +1129,8 @@
             this.navItemGeneralFileInfo,
             this.NavItemMoviesLists,
             this.NavItemTvLists,
-            this.navItemMovieRename});
+            this.navItemMovieRename,
+            this.navItemGeneralIO});
             this.navBarControl1.Location = new System.Drawing.Point(12, 12);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 177;
@@ -1078,7 +1145,8 @@
             this.navGroupGeneral.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralUI),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralWeb),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralFileInfo)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralFileInfo),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navItemGeneralIO)});
             this.navGroupGeneral.LargeImage = global::YANFOE.Properties.Resources.tools;
             this.navGroupGeneral.Name = "navGroupGeneral";
             // 
@@ -1103,11 +1171,17 @@
             this.navItemGeneralFileInfo.SmallImage = global::YANFOE.Properties.Resources.search1;
             this.navItemGeneralFileInfo.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemGeneralFileInfo_LinkClicked);
             // 
+            // navItemGeneralIO
+            // 
+            this.navItemGeneralIO.Caption = "IO";
+            this.navItemGeneralIO.Name = "navItemGeneralIO";
+            this.navItemGeneralIO.SmallImage = global::YANFOE.Properties.Resources.saveio;
+            this.navItemGeneralIO.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navItemGeneralIO_LinkClicked);
+            // 
             // navGroupMovies
             // 
             this.navGroupMovies.Caption = "Movies";
             this.navGroupMovies.Expanded = true;
-            this.navGroupMovies.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.SmallIconsText;
             this.navGroupMovies.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemMovieIn),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navItemMoviesOut),
@@ -1284,14 +1358,6 @@
             this.simpleSeparator1.Size = new System.Drawing.Size(2, 608);
             this.simpleSeparator1.Text = "simpleSeparator1";
             // 
-            // ucSettingsMoviesRename1
-            // 
-            this.ucSettingsMoviesRename1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucSettingsMoviesRename1.Location = new System.Drawing.Point(0, 52);
-            this.ucSettingsMoviesRename1.Name = "ucSettingsMoviesRename1";
-            this.ucSettingsMoviesRename1.Size = new System.Drawing.Size(658, 504);
-            this.ucSettingsMoviesRename1.TabIndex = 6;
-            // 
             // FrmSettingsMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1325,6 +1391,11 @@
             this.panelControl12.ResumeLayout(false);
             this.panelControl12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit12.Properties)).EndInit();
+            this.tabGeneralIO.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl16)).EndInit();
+            this.panelControl16.ResumeLayout(false);
+            this.panelControl16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit16.Properties)).EndInit();
             this.tabMovies.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMovies)).EndInit();
             this.tabControlMovies.ResumeLayout(false);
@@ -1518,6 +1589,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.PictureEdit pictureEdit15;
         private UcSettingsMoviesRename ucSettingsMoviesRename1;
+        private DevExpress.XtraTab.XtraTabPage tabGeneralIO;
+        private DevExpress.XtraNavBar.NavBarItem navItemGeneralIO;
+        private DevExpress.XtraEditors.PanelControl panelControl16;
+        private DevExpress.XtraEditors.LabelControl labelControl16;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit16;
+        private UcSettingsGeneralIO ucSettingsGeneralIO1;
 
     }
 }

@@ -179,6 +179,7 @@
     <Compile Include="InternalApps\DownloadManager\Download\InternalHandlers.cs" />
     <Compile Include="InternalApps\DownloadManager\Model\BackgroundQueObject.cs" />
     <Compile Include="IO\GenerateOutput.cs" />
+    <Compile Include="IO\IOHandler.cs" />
     <Compile Include="IO\IoInterface.cs" />
     <Compile Include="IO\StringWriterWithEncoding.cs" />
     <Compile Include="IO\XBMC.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Settings\UserSettings\LogSettings.cs" />
     <Compile Include="Settings\UserSettings\UiSettings.cs" />
     <Compile Include="Tools\Clean\FileCleanUp.cs" />
+    <Compile Include="Tools\Enums\NFOType.cs" />
     <Compile Include="Tools\Exporting\Exporting.cs" />
     <Compile Include="Tools\GeneratePath.cs" />
     <Compile Include="Tools\GenerateRandomID.cs" />
@@ -230,6 +232,12 @@
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.Designer.cs">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralIO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\DSettings\UcSettingsGeneralIO.Designer.cs">
+      <DependentUpon>UcSettingsGeneralIO.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.cs">
       <SubType>UserControl</SubType>
@@ -516,7 +524,6 @@
     <Compile Include="Tools\Enums\CountryAbbreviationLength.cs" />
     <Compile Include="Tools\Enums\ImageSizeType.cs" />
     <Compile Include="Tools\Enums\ImageUsageType.cs" />
-    <Compile Include="Tools\Enums\NFOType.cs" />
     <Compile Include="Tools\Enums\ScanType.cs" />
     <Compile Include="Tools\Enums\ScrapeFields.cs" />
     <Compile Include="Tools\Enums\ScraperList.cs" />
@@ -710,6 +717,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralFileInfo.resx">
       <DependentUpon>UcSettingsGeneralFileInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsGeneralIO.resx">
+      <DependentUpon>UcSettingsGeneralIO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Dialogs\DSettings\UcSettingsMoviesLists.resx">
       <DependentUpon>UcSettingsMoviesLists.cs</DependentUpon>
@@ -1115,6 +1125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Factories\Scraper\SupportClasses\" />
+    <Folder Include="IO\Handlers\" />
     <Folder Include="Movie\Cache\" />
     <Folder Include="Tools\Collections\" />
   </ItemGroup>
@@ -1313,7 +1324,7 @@
   <Import Project="$(ProjectDir)..\App\Apps\Antlr\Antlr3.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="1975/10/21" BuildVersion_ConfigurationName="Release" />
+      <UserProperties BuildVersion_ConfigurationName="Release" BuildVersion_StartDate="1975/10/21" BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

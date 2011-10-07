@@ -47,6 +47,32 @@ namespace YANFOE.IO
     {
         #region Public Methods
 
+        public NFOType Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the IO handler.
+        /// </summary>
+        /// <value>
+        /// The name of the IO handler.
+        /// </value>
+        public string IOHandlerName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the IO handler description.
+        /// </summary>
+        /// <value>
+        /// The IO handler description.
+        /// </value>
+        public string IOHandlerDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the IO handler URI.
+        /// </summary>
+        /// <value>
+        /// The IO handler URI.
+        /// </value>
+        public Uri IOHandlerUri { get; set; }
+
         /// <summary>
         /// Copy file.
         /// </summary>

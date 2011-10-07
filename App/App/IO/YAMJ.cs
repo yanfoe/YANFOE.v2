@@ -22,7 +22,6 @@ namespace YANFOE.IO
     using System.Text.RegularExpressions;
     using System.Xml;
 
-    using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Factories.Renamer;
     using YANFOE.Factories.Sets;
@@ -32,6 +31,7 @@ namespace YANFOE.IO
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Settings;
     using YANFOE.Tools;
+    using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.IO;
@@ -47,6 +47,18 @@ namespace YANFOE.IO
         #region Implemented Interfaces
 
         #region IoInterface
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YAMJ"/> class.
+        /// </summary>
+        public YAMJ()
+        {
+            Type = NFOType.YAMJ;
+
+            IOHandlerName = "YAMJ";
+            IOHandlerDescription = "IO Handler for YAMJ";
+            IOHandlerUri = new Uri("http://code.google.com/p/moviejukebox/");
+        }
 
         /// <summary>
         /// Generates the movie output.
