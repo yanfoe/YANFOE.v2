@@ -31,6 +31,8 @@ namespace YANFOE.IO
     /// </summary>
     public interface IoInterface
     {
+        bool ShowInSettings { get; set; }
+
         NFOType Type { get; set; }
 
         string IOHandlerName { get; set; }

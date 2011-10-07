@@ -53,7 +53,7 @@ namespace YANFOE.IO
         public XBMC()
         {
             Type = NFOType.XBMC;
-
+            ShowInSettings = true;
             IOHandlerName = "XBMC";
             IOHandlerDescription = "IO Handler for XMBC";
             IOHandlerUri = new Uri("http://xbmc.org/");

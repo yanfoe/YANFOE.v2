@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
 
     using DevExpress.XtraEditors.Controls;
-    using DevExpress.XtraEditors.Repository;
 
     using YANFOE.IO;
     using YANFOE.Tools.Enums;
@@ -25,8 +23,11 @@
 
             foreach (var handler in handlers)
             {
-                var radio = new RadioGroupItem(handler, handler.IOHandlerName);
-                radioHandlers.Properties.Items.Add(radio);
+                if (handler.ShowInSettings)
+                {
+                    var radio = new RadioGroupItem(handler, handler.IOHandlerName);
+                    radioHandlers.Properties.Items.Add(radio);
+                }
             }
 
             this.SetCurrentTypeInUI(Settings.Get.InOutCollection.IoType);

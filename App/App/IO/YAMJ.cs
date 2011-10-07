@@ -54,7 +54,7 @@ namespace YANFOE.IO
         public YAMJ()
         {
             Type = NFOType.YAMJ;
-
+            ShowInSettings = true;
             IOHandlerName = "YAMJ";
             IOHandlerDescription = "IO Handler for YAMJ";
             IOHandlerUri = new Uri("http://code.google.com/p/moviejukebox/");

@@ -49,6 +49,8 @@ namespace YANFOE.IO
 
         public NFOType Type { get; set; }
 
+        public bool ShowInSettings { get; set; }
+
         /// <summary>
         /// Gets or sets the name of the IO handler.
         /// </summary>
