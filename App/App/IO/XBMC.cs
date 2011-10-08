@@ -397,7 +397,7 @@ namespace YANFOE.IO
                     xmlWriter.WriteStartElement("episodedetails");
 
                     // Season
-                    XWrite.WriteEnclosedElement(xmlWriter, "season", episode.SeasonNumber);
+                    XWrite.WriteEnclosedElement(xmlWriter, "season", episode.SeasonNumber ?? 0);
 
                     // Episode
                     XWrite.WriteEnclosedElement(xmlWriter, "episode", episode.EpisodeNumber);
