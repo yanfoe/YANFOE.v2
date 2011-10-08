@@ -157,6 +157,12 @@ namespace YANFOE.UI.Dialogs.TV
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(this.txtSearch.Text))
+            {
+                XtraMessageBox.Show("Please enter a series to search for in the 'Add New Series' field.", "Empty search string");
+                return;
+            }
+
             this.btnSearch.Enabled = false;
             this.txtSearch.Enabled = false;
 
