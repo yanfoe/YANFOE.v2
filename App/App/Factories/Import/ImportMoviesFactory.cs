@@ -237,7 +237,7 @@ namespace YANFOE.Factories.Import
                 else
                 {
                     var r = (from m in result where m.Year == movieModel.Year select m).ToList();
-                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)") && r.Count > 0)
+                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)", RegexOptions.IgnoreCase) && r.Count > 0)
                     {
                         // Dont count a disc or part as a dupe or movies with different years
                         ImportDuplicatesDatabase.Add(movieModel);
