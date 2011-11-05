@@ -80,7 +80,7 @@ namespace YANFOE.Tools.Clean
                 Log.WriteToLog(LogSeverity.Debug, LoggerName.GeneralLog, LogCategory,
                            string.Format("Checking {0}", p));
 
-                var ext = Path.GetExtension(p).Replace(".",string.Empty);
+                var ext = Path.GetExtension(p).Replace(".",string.Empty).ToLower();
                 if (saveExts.Contains(ext))
                 {
                     Log.WriteToLog(LogSeverity.Debug, LoggerName.GeneralLog, LogCategory,
@@ -107,7 +107,7 @@ namespace YANFOE.Tools.Clean
                     {
                         if (force)
                         {
-                            if (!MoveFileEx("a.txt", null, MoveFileFlags.DelayUntilReboot))
+                            if (!MoveFileEx(p, null, MoveFileFlags.DelayUntilReboot))
                             {
                                 Log.WriteToLog(LogSeverity.Error, LoggerName.GeneralLog, LogCategory,
                                            string.Format("Unable to schedule a delete on reboot for file {0}", path));
