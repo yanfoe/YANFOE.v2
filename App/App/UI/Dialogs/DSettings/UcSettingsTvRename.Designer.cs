@@ -59,6 +59,14 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtEpisodeMultiTemplate = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtPreviewMulti = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txtMultiEpisodeFileTemplate = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -93,10 +101,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeMultiTemplate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPreviewMulti.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultiEpisodeFileTemplate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txtMultiEpisodeFileTemplate);
+            this.layoutControl1.Controls.Add(this.txtPreviewMulti);
+            this.layoutControl1.Controls.Add(this.txtEpisodeMultiTemplate);
             this.layoutControl1.Controls.Add(this.groupControl1);
             this.layoutControl1.Controls.Add(this.txtPreview);
             this.layoutControl1.Controls.Add(this.txtEpisodeNumber2Template);
@@ -119,9 +138,9 @@
             // groupControl1
             // 
             this.groupControl1.Controls.Add(this.layoutControl2);
-            this.groupControl1.Location = new System.Drawing.Point(12, 199);
+            this.groupControl1.Location = new System.Drawing.Point(12, 271);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(758, 385);
+            this.groupControl1.Size = new System.Drawing.Size(758, 313);
             this.groupControl1.TabIndex = 16;
             this.groupControl1.Text = "Invalid IO Characters";
             // 
@@ -134,13 +153,13 @@
             this.layoutControl2.Location = new System.Drawing.Point(2, 22);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.layoutControlGroup3;
-            this.layoutControl2.Size = new System.Drawing.Size(754, 361);
+            this.layoutControl2.Size = new System.Drawing.Size(754, 289);
             this.layoutControl2.TabIndex = 0;
             this.layoutControl2.Text = "layoutControl2";
             // 
             // txtReplaceCharWith
             // 
-            this.txtReplaceCharWith.Location = new System.Drawing.Point(243, 36);
+            this.txtReplaceCharWith.Location = new System.Drawing.Point(243, 35);
             this.txtReplaceCharWith.Name = "txtReplaceCharWith";
             this.txtReplaceCharWith.Size = new System.Drawing.Size(499, 20);
             this.txtReplaceCharWith.StyleController = this.layoutControl2;
@@ -148,14 +167,15 @@
             // 
             // chkReplaceWithChar
             // 
-            this.chkReplaceWithChar.Location = new System.Drawing.Point(12, 36);
+            this.chkReplaceWithChar.Location = new System.Drawing.Point(12, 35);
             this.chkReplaceWithChar.Name = "chkReplaceWithChar";
             this.chkReplaceWithChar.Properties.Caption = "Replace with character";
             this.chkReplaceWithChar.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.chkReplaceWithChar.Properties.RadioGroupIndex = 1;
-            this.chkReplaceWithChar.Size = new System.Drawing.Size(203, 20);
+            this.chkReplaceWithChar.Size = new System.Drawing.Size(203, 19);
             this.chkReplaceWithChar.StyleController = this.layoutControl2;
             this.chkReplaceWithChar.TabIndex = 5;
+            this.chkReplaceWithChar.TabStop = false;
             this.chkReplaceWithChar.CheckedChanged += new System.EventHandler(this.chkReplaceWithChar_CheckedChanged);
             // 
             // chkReplaceWithHex
@@ -165,9 +185,10 @@
             this.chkReplaceWithHex.Properties.Caption = "Replace with hex code";
             this.chkReplaceWithHex.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.chkReplaceWithHex.Properties.RadioGroupIndex = 1;
-            this.chkReplaceWithHex.Size = new System.Drawing.Size(730, 20);
+            this.chkReplaceWithHex.Size = new System.Drawing.Size(730, 19);
             this.chkReplaceWithHex.StyleController = this.layoutControl2;
             this.chkReplaceWithHex.TabIndex = 4;
+            this.chkReplaceWithHex.TabStop = false;
             // 
             // layoutControlGroup3
             // 
@@ -180,7 +201,7 @@
             this.layoutControlItem13});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(754, 361);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(754, 289);
             this.layoutControlGroup3.Text = "layoutControlGroup3";
             this.layoutControlGroup3.TextVisible = false;
             // 
@@ -190,7 +211,7 @@
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem11";
             this.layoutControlItem11.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(734, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(734, 23);
             this.layoutControlItem11.Text = "layoutControlItem11";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextToControlDistance = 0;
@@ -200,9 +221,9 @@
             // 
             this.layoutControlItem12.Control = this.chkReplaceWithChar;
             this.layoutControlItem12.CustomizationFormText = "layoutControlItem12";
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 24);
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 23);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(207, 317);
+            this.layoutControlItem12.Size = new System.Drawing.Size(207, 246);
             this.layoutControlItem12.Text = "layoutControlItem12";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextToControlDistance = 0;
@@ -212,9 +233,9 @@
             // 
             this.layoutControlItem13.Control = this.txtReplaceCharWith;
             this.layoutControlItem13.CustomizationFormText = "with";
-            this.layoutControlItem13.Location = new System.Drawing.Point(207, 24);
+            this.layoutControlItem13.Location = new System.Drawing.Point(207, 23);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(527, 317);
+            this.layoutControlItem13.Size = new System.Drawing.Size(527, 246);
             this.layoutControlItem13.Text = "with";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(20, 13);
             // 
@@ -230,7 +251,7 @@
             // txtEpisodeNumber2Template
             // 
             this.txtEpisodeNumber2Template.EditValue = "<episode2>";
-            this.txtEpisodeNumber2Template.Location = new System.Drawing.Point(520, 163);
+            this.txtEpisodeNumber2Template.Location = new System.Drawing.Point(520, 211);
             this.txtEpisodeNumber2Template.Name = "txtEpisodeNumber2Template";
             this.txtEpisodeNumber2Template.Properties.ReadOnly = true;
             this.txtEpisodeNumber2Template.Size = new System.Drawing.Size(238, 20);
@@ -240,7 +261,7 @@
             // txtEpisodeNumber1Template
             // 
             this.txtEpisodeNumber1Template.EditValue = "<episode1>";
-            this.txtEpisodeNumber1Template.Location = new System.Drawing.Point(150, 163);
+            this.txtEpisodeNumber1Template.Location = new System.Drawing.Point(150, 211);
             this.txtEpisodeNumber1Template.Name = "txtEpisodeNumber1Template";
             this.txtEpisodeNumber1Template.Properties.ReadOnly = true;
             this.txtEpisodeNumber1Template.Size = new System.Drawing.Size(240, 20);
@@ -250,7 +271,7 @@
             // txtEpisodeName
             // 
             this.txtEpisodeName.EditValue = "<episodename>";
-            this.txtEpisodeName.Location = new System.Drawing.Point(520, 115);
+            this.txtEpisodeName.Location = new System.Drawing.Point(520, 163);
             this.txtEpisodeName.Name = "txtEpisodeName";
             this.txtEpisodeName.Properties.ReadOnly = true;
             this.txtEpisodeName.Size = new System.Drawing.Size(238, 20);
@@ -260,7 +281,7 @@
             // txtSeasonNumber2Template
             // 
             this.txtSeasonNumber2Template.EditValue = "<season2>";
-            this.txtSeasonNumber2Template.Location = new System.Drawing.Point(520, 139);
+            this.txtSeasonNumber2Template.Location = new System.Drawing.Point(520, 187);
             this.txtSeasonNumber2Template.Name = "txtSeasonNumber2Template";
             this.txtSeasonNumber2Template.Properties.ReadOnly = true;
             this.txtSeasonNumber2Template.Size = new System.Drawing.Size(238, 20);
@@ -270,7 +291,7 @@
             // txtSeasonNumber1Template
             // 
             this.txtSeasonNumber1Template.EditValue = "<season1>";
-            this.txtSeasonNumber1Template.Location = new System.Drawing.Point(150, 139);
+            this.txtSeasonNumber1Template.Location = new System.Drawing.Point(150, 187);
             this.txtSeasonNumber1Template.Name = "txtSeasonNumber1Template";
             this.txtSeasonNumber1Template.Properties.ReadOnly = true;
             this.txtSeasonNumber1Template.Size = new System.Drawing.Size(240, 20);
@@ -280,7 +301,7 @@
             // txtSeriesNameTemplate
             // 
             this.txtSeriesNameTemplate.EditValue = "<seriesname>";
-            this.txtSeriesNameTemplate.Location = new System.Drawing.Point(150, 115);
+            this.txtSeriesNameTemplate.Location = new System.Drawing.Point(150, 163);
             this.txtSeriesNameTemplate.Name = "txtSeriesNameTemplate";
             this.txtSeriesNameTemplate.Properties.ReadOnly = true;
             this.txtSeriesNameTemplate.Size = new System.Drawing.Size(240, 20);
@@ -316,11 +337,13 @@
             this.layoutControlGroup2,
             this.layoutControlItem1,
             this.layoutControlItem9,
-            this.layoutControlItem10});
+            this.layoutControlItem10,
+            this.layoutControlItem14,
+            this.layoutControlItem17});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(782, 596);
-            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
@@ -342,10 +365,11 @@
             this.layoutControlItem8,
             this.layoutControlItem3,
             this.layoutControlItem5,
-            this.layoutControlItem6});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem6,
+            this.layoutControlItem18});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 119);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 116);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(762, 140);
             this.layoutControlGroup2.Text = "Key";
             // 
             // layoutControlItem7
@@ -434,13 +458,94 @@
             // 
             this.layoutControlItem10.Control = this.groupControl1;
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem10";
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 187);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 259);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(762, 389);
+            this.layoutControlItem10.Size = new System.Drawing.Size(762, 317);
             this.layoutControlItem10.Text = "layoutControlItem10";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextToControlDistance = 0;
             this.layoutControlItem10.TextVisible = false;
+            // 
+            // txtEpisodeMultiTemplate
+            // 
+            this.txtEpisodeMultiTemplate.EditValue = "";
+            this.txtEpisodeMultiTemplate.Location = new System.Drawing.Point(138, 83);
+            this.txtEpisodeMultiTemplate.Name = "txtEpisodeMultiTemplate";
+            this.txtEpisodeMultiTemplate.Size = new System.Drawing.Size(632, 20);
+            this.txtEpisodeMultiTemplate.StyleController = this.layoutControl1;
+            this.txtEpisodeMultiTemplate.TabIndex = 17;
+            this.txtEpisodeMultiTemplate.TextChanged += new System.EventHandler(this.TxtRenameTemplate_TextChanged);
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.txtEpisodeMultiTemplate;
+            this.layoutControlItem14.CustomizationFormText = "Multi-Episode File";
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(762, 24);
+            this.layoutControlItem14.Text = "Multi-Episode File";
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(122, 13);
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.txtPreview;
+            this.layoutControlItem15.CustomizationFormText = "Preview";
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem15.Name = "layoutControlItem9";
+            this.layoutControlItem15.Size = new System.Drawing.Size(762, 24);
+            this.layoutControlItem15.Text = "Preview";
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(122, 13);
+            this.layoutControlItem15.TextToControlDistance = 5;
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.txtPreview;
+            this.layoutControlItem16.CustomizationFormText = "Preview";
+            this.layoutControlItem16.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem16.Name = "layoutControlItem9";
+            this.layoutControlItem16.Size = new System.Drawing.Size(762, 24);
+            this.layoutControlItem16.Text = "Preview";
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(122, 13);
+            this.layoutControlItem16.TextToControlDistance = 5;
+            // 
+            // txtPreviewMulti
+            // 
+            this.txtPreviewMulti.Location = new System.Drawing.Point(138, 107);
+            this.txtPreviewMulti.Name = "txtPreviewMulti";
+            this.txtPreviewMulti.Properties.ReadOnly = true;
+            this.txtPreviewMulti.Size = new System.Drawing.Size(632, 20);
+            this.txtPreviewMulti.StyleController = this.layoutControl1;
+            this.txtPreviewMulti.TabIndex = 18;
+            // 
+            // layoutControlItem17
+            // 
+            this.layoutControlItem17.Control = this.txtPreviewMulti;
+            this.layoutControlItem17.CustomizationFormText = "layoutControlItem17";
+            this.layoutControlItem17.Location = new System.Drawing.Point(0, 95);
+            this.layoutControlItem17.Name = "layoutControlItem17";
+            this.layoutControlItem17.Size = new System.Drawing.Size(762, 24);
+            this.layoutControlItem17.Text = "Preview Multi Episodes";
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(122, 13);
+            // 
+            // txtMultiEpisodeFileTemplate
+            // 
+            this.txtMultiEpisodeFileTemplate.EditValue = "<multi>";
+            this.txtMultiEpisodeFileTemplate.Location = new System.Drawing.Point(150, 235);
+            this.txtMultiEpisodeFileTemplate.Name = "txtMultiEpisodeFileTemplate";
+            this.txtMultiEpisodeFileTemplate.Properties.ReadOnly = true;
+            this.txtMultiEpisodeFileTemplate.Size = new System.Drawing.Size(608, 20);
+            this.txtMultiEpisodeFileTemplate.StyleController = this.layoutControl1;
+            this.txtMultiEpisodeFileTemplate.TabIndex = 19;
+            // 
+            // layoutControlItem18
+            // 
+            this.layoutControlItem18.Control = this.txtMultiEpisodeFileTemplate;
+            this.layoutControlItem18.CustomizationFormText = "Multi Episode";
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem18.Name = "layoutControlItem18";
+            this.layoutControlItem18.Size = new System.Drawing.Size(738, 24);
+            this.layoutControlItem18.Text = "Multi Episode";
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(122, 13);
             // 
             // UcSettingsTvRename
             // 
@@ -483,6 +588,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEpisodeMultiTemplate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPreviewMulti.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMultiEpisodeFileTemplate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -520,5 +633,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraEditors.TextEdit txtEpisodeMultiTemplate;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraEditors.TextEdit txtPreviewMulti;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraEditors.TextEdit txtMultiEpisodeFileTemplate;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
     }
 }

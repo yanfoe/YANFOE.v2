@@ -44,6 +44,9 @@ namespace YANFOE.UI.Dialogs.DSettings
             this.txtEpisodeNumber1Template.Text = TvRenamerFactory.EpisodeNumber1Template;
             this.txtEpisodeNumber2Template.Text = TvRenamerFactory.EpisodeNumber2Template;
 
+            this.txtEpisodeMultiTemplate.Text = TvRenamerFactory.EpisodeMultiTemplate;
+            this.txtMultiEpisodeFileTemplate.Text = TvRenamerFactory.MultiEpisodeFileTemplate;
+
             this.chkReplaceWithChar.DataBindings.Add("Checked", Get.InOutCollection, "TvIOReplaceWithChar");
             this.chkReplaceWithHex.DataBindings.Add("Checked", Get.InOutCollection, "TvIOReplaceWithHex");
             this.txtReplaceCharWith.DataBindings.Add("Text", Get.InOutCollection, "TvIOReplaceChar");
@@ -61,6 +64,10 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void UpdatePreview()
         {
             this.txtPreview.Text = TvRenamerFactory.RenameEpisode(null);
+            this.txtPreviewMulti.Text = TvRenamerFactory.RenameEpisode(new Models.TvModels.Show.Episode()
+            {
+                ProductionCode = "dummy"
+            });
         }
 
         /// <summary>
@@ -71,6 +78,7 @@ namespace YANFOE.UI.Dialogs.DSettings
         private void TxtRenameTemplate_TextChanged(object sender, EventArgs e)
         {
             Get.InOutCollection.EpisodeNamingTemplate = this.txtRenameTemplate.Text;
+            Get.InOutCollection.EpisodeMultiTemplate = this.txtEpisodeMultiTemplate.Text;
             this.UpdatePreview();
         }
 

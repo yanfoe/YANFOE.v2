@@ -43,6 +43,9 @@ namespace YANFOE.Factories.Renamer
             EpisodeNameTemplate = "<episodename>";
             EpisodeNumber1Template = "<episode1>";
             EpisodeNumber2Template = "<episode2>";
+            EpisodeMultiTemplate = "e<episode2>";
+
+            MultiEpisodeFileTemplate = "<multi>";
 
             SeasonNumber1Template = "<season1>";
             SeasonNumber2Template = "<season2>";
@@ -70,6 +73,16 @@ namespace YANFOE.Factories.Renamer
         /// Gets or sets EpisodeNumber2Template.
         /// </summary>
         public static string EpisodeNumber2Template { get; set; }
+        
+        /// <summary>
+        /// Gets or sets MultiEpisodeTemplate.
+        /// </summary>
+        public static string EpisodeMultiTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets MultiEpisodeFileTemplate.
+        /// </summary>
+        public static string MultiEpisodeFileTemplate { get; set; }
 
         /// <summary>
         /// Gets or sets the season number1 template.
@@ -210,7 +223,7 @@ namespace YANFOE.Factories.Renamer
         /// </returns>
         public static string RenameEpisode(Episode episode)
         {
-            string seriesName;
+            string seriesName = "";
 
             string season1 = string.Empty;
             string season2 = string.Empty;
@@ -221,6 +234,37 @@ namespace YANFOE.Factories.Renamer
             string episodeName = string.Empty;
 
             bool doRename;
+            bool dummy = false;
+            List<Episode> episodesContaining = new List<Episode>();
+
+            if (episode != null && episode.ProductionCode == "dummy")
+            {
+                dummy = true;
+                seriesName = "Star Trek: Deep Space Nine";
+                episode = new Episode
+                {
+                    
+                    EpisodeNumber = 5,
+                    EpisodeName = "Cardassians",
+                    SeasonNumber = 2
+                };
+                Episode ep2 = new Episode
+                {
+                    EpisodeNumber = 6,
+                    EpisodeName = "Cardassians2",
+                    SeasonNumber = 2
+                }; 
+                Episode ep3 = new Episode
+                {
+                    EpisodeNumber = 7,
+                    EpisodeName = "Cardassians3",
+                    SeasonNumber = 2
+                };
+
+                episodesContaining.Add(episode);
+                episodesContaining.Add(ep2);
+                episodesContaining.Add(ep3);
+            }
 
             if (episode == null)
             {
@@ -239,10 +283,16 @@ namespace YANFOE.Factories.Renamer
                 episode1 = string.Empty;
                 episode2 = string.Empty;
 
-                seriesName = episode.GetSeriesName();
+                if (seriesName == "")
+                {
+                    seriesName = episode.GetSeriesName();
+                }
                 int? seasonNumber = episode.SeasonNumber;
 
-                List<Episode> episodesContaining = GetEpisodesContainingFile(episode);
+                if (episodesContaining.Count == 0)
+                {
+                    episodesContaining = GetEpisodesContainingFile(episode);
+                }
 
                 season1 = seasonNumber.ToString();
                 season2 = string.Format("{0:00}", seasonNumber);
@@ -259,6 +309,9 @@ namespace YANFOE.Factories.Renamer
                 else
                 {
                     int count = 0;
+                    string multiTemplate = Get.InOutCollection.EpisodeMultiTemplate;
+                    multiTemplate = multiTemplate.Replace(EpisodeNumber1Template, "{0}");
+                    multiTemplate = multiTemplate.Replace(EpisodeNumber2Template, "{0:00}");
 
                     foreach (Episode ep in episodesContaining)
                     {
@@ -267,12 +320,12 @@ namespace YANFOE.Factories.Renamer
                             doRename = true;
                         }
 
-                        episode1 += ep.EpisodeNumber;
-                        episode2 += string.Format("{0:00}", ep.EpisodeNumber);
+                        episode1 += string.Format(multiTemplate, ep.EpisodeNumber);
+                        episode2 += string.Format(multiTemplate, ep.EpisodeNumber);
 
-                        episodeName += string.Format("{0} ", ep.EpisodeName);
                         count++;
                     }
+                    episodeName = episode.EpisodeName;
                     episodeName = episodeName.TrimEnd();
                 }
 
@@ -285,14 +338,29 @@ namespace YANFOE.Factories.Renamer
             episodeTemplate = episodeTemplate.Replace(SeasonNumber1Template, season1);
             episodeTemplate = episodeTemplate.Replace(SeasonNumber2Template, season2);
 
-            episodeTemplate = episodeTemplate.Replace(EpisodeNumber1Template, episode1);
-            episodeTemplate = episodeTemplate.Replace(EpisodeNumber2Template, episode2);
+            if (episodesContaining.Count <= 1)
+            {
+                episodeTemplate = episodeTemplate.Replace(MultiEpisodeFileTemplate, EpisodeMultiTemplate);
+                episodeTemplate = episodeTemplate.Replace(EpisodeNumber1Template, episode1);
+                episodeTemplate = episodeTemplate.Replace(EpisodeNumber2Template, episode2);
+            }
+            else
+            {
+                if (EpisodeMultiTemplate.Contains(EpisodeNumber1Template))
+                {
+                    episodeTemplate = episodeTemplate.Replace(MultiEpisodeFileTemplate, episode1);
+                }
+                else
+                {
+                    episodeTemplate = episodeTemplate.Replace(MultiEpisodeFileTemplate, episode2);
+                }
+            }
 
             episodeTemplate = episodeTemplate.Replace(EpisodeNameTemplate, episodeName);
 
             if (episode != null)
             {
-                if (doRename)
+                if (doRename && !dummy)
                 {
                     string newPath = DoRename(episode.FilePath.PathAndFilename, episodeTemplate);
 

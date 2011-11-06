@@ -116,7 +116,9 @@ namespace YANFOE.Settings.UserSettings
             this.AddXBMCMoviesToDefault();
             this.AddXBMCTvToDefault();
 
-            this.EpisodeNamingTemplate = "<seriesname> s<season2>e<episode2> <episodename>";
+            this.EpisodeNamingTemplate = "<seriesname> s<season2><multi> <episodename>";
+            this.EpisodeMultiTemplate = "e<episode2>";
+            this.MultiEpisodeFileTemplate = "<multi>";
 
             this.RenameTV = true;
 
@@ -180,6 +182,16 @@ namespace YANFOE.Settings.UserSettings
         /// Gets or sets EpisodeNamingTemplate.
         /// </summary>
         public string EpisodeNamingTemplate { get; set; }
+        
+        /// <summary>
+        /// Gets or sets EpisodeMultiTemplate.
+        /// </summary>
+        public string EpisodeMultiTemplate { get; set; }
+
+        /// <summary>
+        /// Gets or sets MultiEpisodeFileTemplate.
+        /// </summary>
+        public string MultiEpisodeFileTemplate { get; set; }
 
         /// <summary>
         /// Gets or sets EpisodeTypes.
