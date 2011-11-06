@@ -324,6 +324,8 @@ namespace YANFOE.IO
                     // Plot
                     XWrite.WriteEnclosedElement(xmlWriter, "plot", episode.Overview);
 
+                    XWrite.WriteEnclosedElement(xmlWriter, "aired", episode.FirstAired);
+
                     XWrite.WriteEnclosedElement(xmlWriter, "fileinfo", "template");
 
                     xmlWriter.WriteEndElement();
