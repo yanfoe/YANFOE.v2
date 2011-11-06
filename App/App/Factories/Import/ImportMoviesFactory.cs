@@ -24,6 +24,7 @@ namespace YANFOE.Factories.Import
     using YANFOE.Models.MovieModels;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.Settings;
 
     /// <summary>
     /// The factory for the initial movie import routines
@@ -80,6 +81,30 @@ namespace YANFOE.Factories.Import
         public static void CancelMovieImport()
         {
             cancelImport = true;
+        }
+
+        public static string FindFilePath(string title, Models.GeneralModels.AssociatedFiles.MediaPathFileModel file, string setName = "")
+        {
+            string p = file.Path;
+            if (!Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate);
+            }
+            else if (!Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate);
+            }
+            else if (!Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate);
+            }
+            p = p.Replace("<path>", file.Path)
+                    .Replace("<filename>", file.FilenameWithOutExt)
+                    .Replace("<ext>", file.FilenameExt)
+                    .Replace("<setname>", setName)
+                    .Replace("<title>", title);
+
+            return p;
         }
 
         /// <summary>
@@ -176,15 +201,16 @@ namespace YANFOE.Factories.Import
                     }
                 }
 
+                string title = MovieNaming.GetMovieName(file.PathAndFileName, file.MediaPathType);
                 var movieModel = new MovieModel
                     {
-                        Title = MovieNaming.GetMovieName(file.PathAndFileName, file.MediaPathType),
+                        Title = title,
                         Year = MovieNaming.GetMovieYear(file.PathAndFileName),
                         ScraperGroup = file.ScraperGroup,
                         VideoSource = videoSource,
-                        NfoPathOnDisk = FindNFO(file.FilenameWithOutExt, file.Path, getFiles),
-                        PosterPathOnDisk = FindPoster(file.FilenameWithOutExt, file.Path, getFiles),
-                        FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, file.Path, getFiles)
+                        NfoPathOnDisk = FindNFO(file.FilenameWithOutExt, FindFilePath(title, file), getFiles),
+                        PosterPathOnDisk = FindPoster(file.FilenameWithOutExt, FindFilePath(title, file), getFiles),
+                        FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, FindFilePath(title, file), getFiles)
                     };
 
                 if (!string.IsNullOrEmpty(movieModel.NfoPathOnDisk))
@@ -237,18 +263,23 @@ namespace YANFOE.Factories.Import
                 else
                 {
                     var r = (from m in result where m.Year == movieModel.Year select m).ToList();
-                    if (!Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo)", RegexOptions.IgnoreCase) && r.Count > 0)
-                    {
-                        // Dont count a disc or part as a dupe or movies with different years
-                        ImportDuplicatesDatabase.Add(movieModel);
-                    }
-                    else
+                    if (Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo|bup)", RegexOptions.IgnoreCase))
                     {
                         // Only associate with an existing movie if its not a dupe
                         result[0].AssociatedFiles.AddToMediaCollection(file);
                     }
-                    // Add it to the list anyway, since there's no implementation of any action on duplicates.
-                    ImportDatabase.Add(movieModel);
+                    else if (r.Count == 0)
+                    {
+                        // Same title, different year
+                        ImportDatabase.Add(movieModel);
+                    }
+                    else
+                    {
+                        // Dont count a disc or part as a dupe or movies with different years
+                        ImportDuplicatesDatabase.Add(movieModel);
+                        // Add it to the list anyway, since there's no implementation of any action on duplicates.
+                        ImportDatabase.Add(movieModel);
+                    }
                 }
 
                 count++;
