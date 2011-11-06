@@ -829,6 +829,7 @@ namespace YANFOE.IO
                             episode.EpisodeNumber = XRead.GetInt(doc, "episode");
                             episode.EpisodeName = XRead.GetString(doc, "title");
                             episode.Overview = XRead.GetString(doc, "plot");
+                            episode.FirstAired = XRead.GetDateTime(doc, "aired");
                         }
                     }
                 }
