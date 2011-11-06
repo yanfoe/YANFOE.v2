@@ -313,7 +313,10 @@ namespace YANFOE.IO
                     xmlWriter.WriteStartElement("episodedetails");
 
                     // Season
-                    XWrite.WriteEnclosedElement(xmlWriter, "season", episode.SeasonNumber ?? 0);
+                    int? sn = episode.SeasonNumber;
+                    if (sn == null || sn < 0)
+                        sn = 0;
+                    XWrite.WriteEnclosedElement(xmlWriter, "season", sn);
 
                     // Episode
                     XWrite.WriteEnclosedElement(xmlWriter, "episode", episode.EpisodeNumber);
