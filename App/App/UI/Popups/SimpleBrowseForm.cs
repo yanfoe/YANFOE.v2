@@ -27,9 +27,11 @@ namespace YANFOE.UI.Popups
     public partial class SimpleBrowseForm : DevExpress.XtraEditors.XtraForm
     {
         private string _input;
+        private browseType _type;
 
-        public SimpleBrowseForm()
+        public SimpleBrowseForm(browseType type = browseType.Folder)
         {
+            _type = type;
             InitializeComponent();
         }
 
@@ -53,12 +55,30 @@ namespace YANFOE.UI.Popups
 
         private void btnBrowseDir_Click(object sender, EventArgs e)
         {
-            this.folderBrowserDialog1.ShowNewFolderButton = true;
-            this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-            if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (_type == browseType.Folder)
             {
-                this.textEdit1.Text = this.folderBrowserDialog1.SelectedPath;
+                this.folderBrowserDialog1.ShowNewFolderButton = true;
+                this.folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+                if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    this.textEdit1.Text = this.folderBrowserDialog1.SelectedPath;
+                }
             }
+            else
+            {
+                this.openFileDialog1.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
+                this.openFileDialog1.Multiselect = false;
+                if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    this.textEdit1.Text = this.openFileDialog1.FileName;
+                }
+            }
+        }
+
+        public enum browseType
+        {
+            Folder = 1,
+            File
         }
     }
 }

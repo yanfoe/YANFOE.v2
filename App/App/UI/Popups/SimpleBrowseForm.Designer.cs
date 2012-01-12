@@ -33,6 +33,7 @@
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnBrowseDir = new DevExpress.XtraEditors.SimpleButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,11 @@
             this.btnBrowseDir.Text = "Browse";
             this.btnBrowseDir.Click += new System.EventHandler(this.btnBrowseDir_Click);
             // 
-            // SingleInputForm
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // SimpleBrowseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +84,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.textEdit1);
-            this.Name = "SingleInputForm";
+            this.Name = "SimpleBrowseForm";
             this.Text = "Browse";
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -93,5 +98,6 @@
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private DevExpress.XtraEditors.SimpleButton btnBrowseDir;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

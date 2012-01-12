@@ -190,6 +190,7 @@
             superToolTip1.Items.Add(toolTipTitleItem1);
             this.btnChangeFanart.SuperTip = superToolTip1;
             this.btnChangeFanart.TabIndex = 9;
+            this.btnChangeFanart.Click += new System.EventHandler(this.btnChangeFanart_Click);
             // 
             // btnChangePoster
             // 
@@ -203,6 +204,7 @@
             superToolTip2.Items.Add(toolTipTitleItem2);
             this.btnChangePoster.SuperTip = superToolTip2;
             this.btnChangePoster.TabIndex = 8;
+            this.btnChangePoster.Click += new System.EventHandler(this.btnChangePoster_Click);
             // 
             // btnChangeNfo
             // 
@@ -216,6 +218,7 @@
             superToolTip3.Items.Add(toolTipTitleItem3);
             this.btnChangeNfo.SuperTip = superToolTip3;
             this.btnChangeNfo.TabIndex = 7;
+            this.btnChangeNfo.Click += new System.EventHandler(this.btnChangeNfo_Click);
             // 
             // txtFanart
             // 
@@ -412,8 +415,8 @@
             toolTipTitleItem4.Text = "IMDB MovieUniqueId #";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "This is the number used to identify a movie with the IMDB database.\r\n\r\nFor exampl" +
-    "e with the movie The Dark Night <b>http://www.imdb.com/title/tt0468569/</b> the " +
-    "id is <b>0468569</b>";
+                "e with the movie The Dark Night <b>http://www.imdb.com/title/tt0468569/</b> the " +
+                "id is <b>0468569</b>";
             superToolTip4.Items.Add(toolTipTitleItem4);
             superToolTip4.Items.Add(toolTipItem1);
             this.txtImdbID.SuperTip = superToolTip4;

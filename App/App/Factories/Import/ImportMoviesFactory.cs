@@ -24,7 +24,7 @@ namespace YANFOE.Factories.Import
     using YANFOE.Models.MovieModels;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.ThirdParty;
-    using YANFOE.Settings;
+
 
     /// <summary>
     /// The factory for the initial movie import routines
@@ -86,7 +86,7 @@ namespace YANFOE.Factories.Import
         public static string FindFilePath(string title, Models.GeneralModels.AssociatedFiles.MediaPathFileModel file, string setName = "")
         {
             string p = file.Path;
-            if (!Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate.Contains("<path>"))
+            /*if (!Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate.Contains("<path>"))
             {
                 p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate);
             }
@@ -97,7 +97,7 @@ namespace YANFOE.Factories.Import
             else if (!Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate.Contains("<path>"))
             {
                 p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate);
-            }
+            }*/
             p = p.Replace("<path>", file.Path)
                     .Replace("<filename>", file.FilenameWithOutExt)
                     .Replace("<ext>", file.FilenameExt)
@@ -294,10 +294,24 @@ namespace YANFOE.Factories.Import
         /// </summary>
         public static void MergeImportDatabaseWithMain()
         {
+            ValidateDatabaseExistance();
             MovieDBFactory.MergeWithDatabase(ImportDatabase);
             MasterMediaDBFactory.PopulateMasterMovieMediaDatabase();
             MovieDBFactory.MergeWithDatabase(ImportDuplicatesDatabase, MovieDBFactory.MovieDBTypes.Duplicates);
             MovieSetManager.ScanForSetImages();
+        }
+
+        public static void ValidateDatabaseExistance()
+        {
+            for (int i = 0; i < ImportDatabase.Count; i++)
+            {
+                var file = ImportDatabase[i];
+                if ( file.AssociatedFiles.Media.Count == 0 || ! File.Exists(file.AssociatedFiles.Media[0].PathAndFilename))
+                {
+                    ImportDatabase.Remove(file);
+                    continue;
+                }
+            }
         }
     }
 }

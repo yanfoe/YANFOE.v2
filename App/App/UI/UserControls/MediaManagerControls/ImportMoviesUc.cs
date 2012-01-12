@@ -32,6 +32,7 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
     using YANFOE.Models.MovieModels;
     using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools.Extentions;
+    using YANFOE.UI.Popups;
 
     public partial class ImportMoviesUc : DevExpress.XtraEditors.XtraForm
     {
@@ -524,6 +525,39 @@ namespace YANFOE.UI.UserControls.MediaManagerControls
         private void txtImdbID_EditValueChanged(object sender, EventArgs e)
         {
             ImportMoviesFactory.CurrentRecord.ImdbId = this.txtImdbID.Text;
+        }
+
+        private void btnChangeNfo_Click(object sender, EventArgs e)
+        {
+            var form = new SimpleBrowseForm(SimpleBrowseForm.browseType.File);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                this.txtNfo.Text = form.getInput();
+                ImportMoviesFactory.CurrentRecord.NfoPathOnDisk = this.txtNfo.Text;
+            }
+        }
+
+        private void btnChangePoster_Click(object sender, EventArgs e)
+        {
+            var form = new SimpleBrowseForm(SimpleBrowseForm.browseType.File);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                this.txtPoster.Text = form.getInput();
+                ImportMoviesFactory.CurrentRecord.PosterPathOnDisk = this.txtPoster.Text;
+            }
+        }
+
+        private void btnChangeFanart_Click(object sender, EventArgs e)
+        {
+            var form = new SimpleBrowseForm(SimpleBrowseForm.browseType.File);
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                this.txtFanart.Text = form.getInput();
+                ImportMoviesFactory.CurrentRecord.FanartPathOnDisk = this.txtFanart.Text;
+            }
         }
     }
 }
