@@ -75,7 +75,7 @@ namespace Testing
 
             query.Title = "Sin City";
 
-            var actual = MovieScrapeFactory.QuickSearchTmdb(query);
+            var actual = MovieScrapeFactory.QuickSearchTMDB(query);
 
             Assert.IsTrue(actual);
         }

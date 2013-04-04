@@ -10,6 +10,7 @@ namespace Testing
 
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
 
     /// <summary>
     ///This is a test class for YAMJTest and is intended
@@ -84,12 +85,12 @@ namespace Testing
             movieModel.Mpaa = "Rated G";
             movieModel.Certification = "USA:G";
             movieModel.SetStudio = "Fox Studios";
-            movieModel.Country = new BindingList<string> { "USA", "UK" };
-            movieModel.Genre = new BindingList<string> { "Comedy", "Drama" };
+            movieModel.Country = new ThreadedBindingList<string> { "USA", "UK" };
+            movieModel.Genre = new ThreadedBindingList<string> { "Comedy", "Drama" };
             var person1 = new PersonModel("Russell Lewis", role: "Actors person");
-            movieModel.Writers = new BindingList<PersonModel> { person1, person1 };
-            movieModel.Director = new BindingList<PersonModel> { person1 };
-            movieModel.Cast = new BindingList<PersonModel> { person1, person1 };
+            movieModel.Writers = new ThreadedBindingList<PersonModel> { person1, person1 };
+            movieModel.Director = new ThreadedBindingList<PersonModel> { person1 };
+            movieModel.Cast = new ThreadedBindingList<PersonModel> { person1, person1 };
             movieModel.CurrentPosterImageUrl = "http://cf1.themoviedb.org/posters/011/4cdb8b335e73d605e6000011/toy-story-3-cover.jpg";
             movieModel.CurrentFanartImageUrl = "http://cf1.themoviedb.org/backdrops/0bf/4bc92cb5017a3c57fe0120bf/toy-story-3-thumb.jpg";
 

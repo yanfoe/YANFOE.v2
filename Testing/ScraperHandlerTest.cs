@@ -38,7 +38,7 @@ namespace Testing
         public void GetScrapersSupportingScrapeTest()
         {
             const ScrapeFields ScrapeFields = new ScrapeFields();
-            var actual = MovieScraperHandler.GetScrapersSupporting(ScrapeFields);
+            var actual = MovieScraperHandler.Instance.GetScrapersSupporting(ScrapeFields);
             Assert.IsTrue(actual.Count > 0);
         }
 
@@ -48,7 +48,7 @@ namespace Testing
         [TestMethod]
         public void ReturnScrapersTest()
         {
-            var actual = MovieScraperHandler.ReturnAllScrapers();
+            var actual = MovieScraperHandler.Instance.ReturnAllScrapers();
             Assert.IsTrue(actual.Count > 0);
         }
 
@@ -58,7 +58,7 @@ namespace Testing
         [TestMethod]
         public void GetScrapersAsStringListTest()
         {
-            var actual = MovieScraperHandler.GetScrapersAsStringList(ScrapeFields.Title, false);
+            var actual = MovieScraperHandler.Instance.GetScrapersAsStringList(ScrapeFields.Title, false);
             Assert.IsTrue(actual.Count > 0);
         }
     }

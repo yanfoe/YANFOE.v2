@@ -18,6 +18,7 @@ namespace Testing
     using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
 
     /// <summary>
     /// This is a test class for TheMovieDbTest and is intended
@@ -44,7 +45,7 @@ namespace Testing
         public void SearchSiteTest()
         {
             var target = new TheMovieDb();
-            var query = new Query { Results = new BindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
+            var query = new Query { Results = new ThreadedBindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
             const int ThreadID = 0;
             var actual = target.SearchSite(query, ThreadID, string.Empty);
             Assert.IsTrue(actual);
@@ -57,7 +58,7 @@ namespace Testing
         public void SearchViaBingTest()
         {
             var target = new TheMovieDb();
-            var query = new Query { Results = new BindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
+            var query = new Query { Results = new ThreadedBindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
             const int ThreadID = 0;
             var actual = target.SearchViaBing(query, ThreadID, string.Empty);
             Assert.IsTrue(actual);
@@ -70,7 +71,7 @@ namespace Testing
         public void SearchYANFOETest()
         {
             var target = new TheMovieDb();
-            var query = new Query { Results = new BindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
+            var query = new Query { Results = new ThreadedBindingList<QueryResult>(), Title = "Transformers", Year = "2007" };
             const int ThreadID = 0;
             var actual = target.SearchYANFOE(query, ThreadID, string.Empty);
             Assert.IsTrue(actual);
@@ -85,7 +86,7 @@ namespace Testing
             var target = new TheMovieDb();
             string output;
 
-            BindingList<string> alternatives;
+            ThreadedBindingList<string> alternatives;
 
             var result = target.ScrapeTitle(ID, 0, out output, out alternatives, string.Empty);
             Assert.IsTrue(result);
@@ -131,7 +132,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             var result = target.ScrapeDirector(ID, 0, out output, string.Empty);
 
@@ -176,7 +177,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             var result = target.ScrapeCountry(ID, 0, out output, string.Empty);
 
@@ -192,7 +193,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             var result = target.ScrapeLanguage(ID, 0, out output, string.Empty);
 
@@ -208,7 +209,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             var result = target.ScrapeCast(ID, 0, out output, string.Empty);
 
@@ -240,7 +241,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             var result = target.ScrapeStudio(ID, 0, out output, string.Empty);
 
@@ -256,7 +257,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             var result = target.ScrapeWriters(ID, 0, out output, string.Empty);
 
@@ -271,7 +272,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<ImageDetailsModel> output;
+            ThreadedBindingList<ImageDetailsModel> output;
 
             var result = target.ScrapePoster(ID, 0, out output, string.Empty);
 
@@ -287,7 +288,7 @@ namespace Testing
         {
             var target = new TheMovieDb();
 
-            BindingList<ImageDetailsModel> output;
+            ThreadedBindingList<ImageDetailsModel> output;
 
             var result = target.ScrapeFanart(ID, 0, out output, string.Empty);
 

@@ -30,7 +30,7 @@ namespace Testing
             const string NfoFullPath = @"C:\tests\movies\this is a movie\movie.avi";
             const string NfoPath = @"C:\tests\movies\this is a movie\";
 
-            string actual = ImportMoviesFactory.FindNFO("this is a movie file.avi", NfoPath);
+            string actual = ImportMoviesFactory.Instance.FindNFO("this is a movie file.avi", NfoPath);
             Assert.IsTrue(actual == NfoFullPath);
         }
 
@@ -43,7 +43,7 @@ namespace Testing
             const string NfoFullPath = @"C:\tests\movies\this is a movie\this is a movie file.jpg";
             const string NfoPath = @"C:\tests\movies\this is a movie\";
 
-            string actual = ImportMoviesFactory.FindPoster("this is a movie file.avi", NfoPath);
+            string actual = ImportMoviesFactory.Instance.FindPoster("this is a movie file.avi", NfoPath);
             Assert.IsTrue(actual == NfoFullPath);
         }
 
@@ -56,7 +56,7 @@ namespace Testing
             const string NfoFullPath = @"C:\tests\movies\this is a movie\this is a movie file-fanart.jpg";
             const string NfoPath = @"C:\tests\movies\this is a movie\";
 
-            string actual = ImportMoviesFactory.FindFanart("this is a movie file.avi", NfoPath);
+            string actual = ImportMoviesFactory.Instance.FindFanart("this is a movie file.avi", NfoPath);
             Assert.IsTrue(actual == NfoFullPath);
         }
     }
