@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YANFOE", "App\App\YANFOE.csproj", "{DC3EB796-A043-4FB2-B443-84D574B48340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YANFOE.Testing", "App\Testing\YANFOE.Testing.csproj", "{C6B441C0-9774-4A79-A7A3-999F54D3D6DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YANFOE.Testing", "Testing\YANFOE.Testing.csproj", "{C6B441C0-9774-4A79-A7A3-999F54D3D6DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
