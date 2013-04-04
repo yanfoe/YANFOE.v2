@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.DownloadControls.DownloadStatusUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="860" BorderThickness="1">
+    <Grid>
+        <GroupBox Header="groupBox1" Name="groupControl" BorderThickness="0">
+            <Grid Name="baseGrid">
+                <Label Height="23" Name="txtStatus" VerticalAlignment="Top" Content="{Binding Path=Message}" />
+                <ProgressBar Margin="-6,23,-6,-6" Name="prgBar" Value="{Binding Path=Percent}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

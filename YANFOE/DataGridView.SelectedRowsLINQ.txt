@@ -1,0 +1,71 @@
+﻿http://elegantcode.com/2009/07/03/wpf-multithreading-using-the-backgroundworker-and-reporting-the-progress-to-the-ui/
+
+MultiThreading Using Background Worker.
+
+
+
+
+
+
+
+
+
+
+
+--------------------------
+
+http://social.msdn.microsoft.com/Forums/en-US/linqprojectgeneral/thread/b206d457-2e1c-4909-ac80-a5f81762439f/
+
+
+Hmm, looking at the DataGridView's SelectedRows property:
+
+http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridview.selectedrows.aspx
+
+ 
+
+Ah, it's a DataGridRowSelectedRowCollection...
+
+http://msdn.microsoft.com/en-us/library/system.windows.forms.datagridviewselectedrowcollection.aspx
+
+ 
+
+This class implements
+
+BaseCollection, IList, ICollection, IEnumerable
+
+but it does not implement IEnumerable<T> (the generic IEnumerable), so it doesn't get extension methods that target IEnumerable<T>
+
+ 
+
+Here is the class the holds those extension methods.  This class is really important!!
+
+http://msdn.microsoft.com/en-us/library/system.linq.enumerable.aspx
+
+ 
+
+ 
+
+We're still left with the mystery of why the query comprehesion syntax work against (nongeneric) IEnumerable.  My theory is that the compiler is sneaking in a call to Enumerable.Cast<T>, which takes a (non-generic) IEnumerable.  Cast<T> can use the type you provided - DataGridViewRow as T.
+
+http://msdn.microsoft.com/en-us/library/bb341406.aspx
+
+ 
+
+So, the way out is to do this:
+
+Code Snippet
+var myrows = dgv.SelectedRows.Cast<DataGridViewRow>().Select(x => x);
+
+ 
+
+ 
+
+ 
+
+In case you find yourself looking for the -other- Select extension method targetting IQueryable<T> (which is used in LinqToSQL), that is kept here:
+
+http://msdn.microsoft.com/en-us/library/system.linq.queryable_members.aspx
+
+ 
+
+Yes, it's all insane.

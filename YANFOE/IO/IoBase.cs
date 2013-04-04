@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IoBase.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="IoBase.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Generic IO Handler methods
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.IO
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -40,49 +44,55 @@ namespace YANFOE.IO
     using YANFOE.Tools.Restructure;
     using YANFOE.Tools.Text;
 
+    #endregion
+
     /// <summary>
-    /// Generic IO Handler methods
+    ///   Generic IO Handler methods
     /// </summary>
     public abstract class IoBase
     {
-        #region Public Methods
-
-        public NFOType Type { get; set; }
-
-        public bool ShowInSettings { get; set; }
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the name of the IO handler.
+        ///   Gets or sets the IO handler description.
         /// </summary>
-        /// <value>
-        /// The name of the IO handler.
-        /// </value>
-        public string IOHandlerName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the IO handler description.
-        /// </summary>
-        /// <value>
-        /// The IO handler description.
-        /// </value>
+        /// <value> The IO handler description. </value>
         public string IOHandlerDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the IO handler URI.
+        ///   Gets or sets the name of the IO handler.
         /// </summary>
-        /// <value>
-        /// The IO handler URI.
-        /// </value>
+        /// <value> The name of the IO handler. </value>
+        public string IOHandlerName { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the IO handler URI.
+        /// </summary>
+        /// <value> The IO handler URI. </value>
         public Uri IOHandlerUri { get; set; }
+
+        /// <summary>
+        ///   Gets or sets a value indicating whether show in settings.
+        /// </summary>
+        public bool ShowInSettings { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the type.
+        /// </summary>
+        public NFOType Type { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// Copy file.
         /// </summary>
         /// <param name="pathFrom">
-        /// The path from.
+        /// The path from. 
         /// </param>
         /// <param name="pathTo">
-        /// The path to.
+        /// The path to. 
         /// </param>
         public void CopyFile(string pathFrom, string pathTo)
         {
@@ -99,91 +109,17 @@ namespace YANFOE.IO
             }
         }
 
-        public string GetEpisodeImage(Episode episode, string stringFormat)
-        {
-            if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
-            {
-                return string.Empty;
-            }
-
-            return this.GetImageWithParse(episode.FilePath.FolderPath, episode.FilePath.FilenameWithOutExt, stringFormat);
-        }
-
-        public string GetSeasonImage(Season season, string stringFormat)
-        {
-            string firstEpisode = season.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            var path = Path.GetDirectoryName(firstEpisode);
-            var fileName = Path.GetFileNameWithoutExtension(firstEpisode);
-
-            return this.GetImageWithParse(path, fileName, stringFormat);
-        }
-
-        public string GetSeriesImage(Series series, string stringFormat)
-        {
-            string firstEpisode = series.GetFirstEpisode();
-
-            if (string.IsNullOrEmpty(firstEpisode))
-            {
-                return string.Empty;
-            }
-
-            var path = Path.GetDirectoryName(firstEpisode);
-            var fileName = series.SeriesName.Trim();
-
-            return this.GetImageWithParse(path, fileName, stringFormat);
-        }
-
-        private string GetImageWithParse(string path, string fileName, string stringFormat)
-        {
-            string hex = FileSystemCharChange.To(
-                fileName,
-                FileSystemCharChange.ConvertArea.Tv,
-                FileSystemCharChange.ConvertType.Hex);
-
-            string schar = FileSystemCharChange.To(
-                fileName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
-
-            string seriesNamePlain = string.Format(stringFormat, fileName);
-            string seriesNameHex = string.Format(stringFormat, hex);
-            string seriesNameChar = string.Format(stringFormat, schar);
-
-            string checkPathPlain = Path.Combine(path, seriesNamePlain);
-            string checkPathHex = Path.Combine(path, seriesNameHex);
-            string checkPathChar = Path.Combine(path, seriesNameChar);
-
-            if (File.Exists(checkPathPlain))
-            {
-                return checkPathPlain;
-            }
-            else if (File.Exists(checkPathHex))
-            {
-                return checkPathHex;
-            }
-            else if (File.Exists(checkPathChar))
-            {
-                return checkPathChar;
-            }
-
-            return string.Empty;
-        }
-
         /// <summary>
         /// Do series replace.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
         /// <returns>
-        /// The do series replace.
+        /// The do series replace. 
         /// </returns>
         public string DoSeriesReplace(Series series, string value)
         {
@@ -202,13 +138,36 @@ namespace YANFOE.IO
         }
 
         /// <summary>
+        /// The get episode image.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        /// <param name="stringFormat">
+        /// The string format. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> . 
+        /// </returns>
+        public string GetEpisodeImage(Episode episode, string stringFormat)
+        {
+            if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+            {
+                return string.Empty;
+            }
+
+            return this.GetImageWithParse(
+                episode.FilePath.FolderPath, episode.FilePath.FilenameWithOutExt, stringFormat);
+        }
+
+        /// <summary>
         /// Get folder name.
         /// </summary>
         /// <param name="path">
-        /// The path to extract folder name
+        /// The path to extract folder name 
         /// </param>
         /// <returns>
-        /// The get folder name.
+        /// The get folder name. 
         /// </returns>
         public string GetFolderName(string path)
         {
@@ -217,11 +176,63 @@ namespace YANFOE.IO
         }
 
         /// <summary>
-        /// Get settings.
+        /// The get season image.
         /// </summary>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        /// <param name="stringFormat">
+        /// The string format. 
+        /// </param>
         /// <returns>
-        /// XmlWriterSettings settings
+        /// The <see cref="string"/> . 
         /// </returns>
+        public string GetSeasonImage(Season season, string stringFormat)
+        {
+            string firstEpisode = season.GetFirstEpisode();
+
+            if (string.IsNullOrEmpty(firstEpisode))
+            {
+                return string.Empty;
+            }
+
+            var path = Path.GetDirectoryName(firstEpisode);
+            var fileName = Path.GetFileNameWithoutExtension(firstEpisode);
+
+            return this.GetImageWithParse(path, fileName, stringFormat);
+        }
+
+        /// <summary>
+        /// The get series image.
+        /// </summary>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        /// <param name="stringFormat">
+        /// The string format. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> . 
+        /// </returns>
+        public string GetSeriesImage(Series series, string stringFormat)
+        {
+            string firstEpisode = series.GetFirstEpisode();
+
+            if (string.IsNullOrEmpty(firstEpisode))
+            {
+                return string.Empty;
+            }
+
+            var path = Path.GetDirectoryName(firstEpisode);
+            var fileName = series.SeriesName.Trim();
+
+            return this.GetImageWithParse(path, fileName, stringFormat);
+        }
+
+        /// <summary>
+        ///   Get settings.
+        /// </summary>
+        /// <returns> XmlWriterSettings settings </returns>
         public XmlWriterSettings GetSettings()
         {
             return new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true, };
@@ -231,10 +242,10 @@ namespace YANFOE.IO
         /// Process rating.
         /// </summary>
         /// <param name="rating">
-        /// The rating.
+        /// The rating. 
         /// </param>
         /// <returns>
-        /// The processed rating.
+        /// The processed rating. 
         /// </returns>
         public string ProcessRating(double? rating)
         {
@@ -253,10 +264,10 @@ namespace YANFOE.IO
         /// Process release date.
         /// </summary>
         /// <param name="releaseDate">
-        /// The release date.
+        /// The release date. 
         /// </param>
         /// <returns>
-        /// The processed release date.
+        /// The processed release date. 
         /// </returns>
         public string ProcessReleaseDate(DateTime? releaseDate)
         {
@@ -272,25 +283,25 @@ namespace YANFOE.IO
 
             if (Get.Scraper.Generic.FormatDateTime)
             {
-                return String.Format("{0:" + Get.Scraper.Generic.FormatDateTimeValue + "}", releaseDate);
+                return string.Format("{0:" + Get.Scraper.Generic.FormatDateTimeValue + "}", releaseDate);
             }
 
-            return String.Format("{0:d}", releaseDate);
+            return string.Format("{0:d}", releaseDate);
         }
 
         /// <summary>
         /// Process runtime.
         /// </summary>
         /// <param name="runtimeMins">
-        /// The runtime mins.
+        /// The runtime minutes. 
         /// </param>
-        /// <param name="runtimeAsHM">
-        /// The runtime as hm.
+        /// <param name="runtimeAsHm">
+        /// The runtime as HM. 
         /// </param>
         /// <returns>
-        /// The process runtime.
+        /// The process runtime. 
         /// </returns>
-        public string ProcessRuntime(int? runtimeMins, string runtimeAsHM)
+        public string ProcessRuntime(int? runtimeMins, string runtimeAsHm)
         {
             if (runtimeMins == null)
             {
@@ -299,7 +310,7 @@ namespace YANFOE.IO
 
             if (Get.Scraper.Generic.FormatRuntime == RuntimeType.Hh_MMm)
             {
-                return runtimeAsHM;
+                return runtimeAsHm;
             }
 
             return runtimeMins.ToString();
@@ -309,7 +320,7 @@ namespace YANFOE.IO
         /// Saves the movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
         public void SaveMovie(MovieModel movieModel)
         {
@@ -325,19 +336,15 @@ namespace YANFOE.IO
                                  ? actualFilePath
                                  : movieSaveSettings.NfoPath;
 
-            var posterPathFrom = string.Empty;
+            string posterPathFrom = string.IsNullOrEmpty(movieModel.PosterPathOnDisk)
+                                        ? Downloader.ProcessDownload(
+                                            movieModel.CurrentPosterImageUrl, DownloadType.Binary, Section.Movies)
+                                        : movieModel.PosterPathOnDisk;
 
-            posterPathFrom = string.IsNullOrEmpty(movieModel.PosterPathOnDisk)
-                             ? Downloader.ProcessDownload(
-                                 movieModel.CurrentPosterImageUrl, DownloadType.Binary, Section.Movies)
-                             : movieModel.PosterPathOnDisk;
-
-            string fanartPathFrom = string.Empty;
-
-            fanartPathFrom = string.IsNullOrEmpty(movieModel.FanartPathOnDisk)
-                                 ? Downloader.ProcessDownload(
-                                     movieModel.CurrentFanartImageUrl, DownloadType.Binary, Section.Movies)
-                                 : movieModel.FanartPathOnDisk;
+            string fanartPathFrom = string.IsNullOrEmpty(movieModel.FanartPathOnDisk)
+                                        ? Downloader.ProcessDownload(
+                                            movieModel.CurrentFanartImageUrl, DownloadType.Binary, Section.Movies)
+                                        : movieModel.FanartPathOnDisk;
 
             string trailerPathFrom = Downloader.ProcessDownload(
                 movieModel.CurrentTrailerUrl, DownloadType.AppleBinary, Section.Movies);
@@ -388,7 +395,7 @@ namespace YANFOE.IO
             if (!string.IsNullOrEmpty(currentTrailerUrl))
             {
                 actualTrailerFileName = currentTrailerUrl.Substring(
-                    currentTrailerUrl.LastIndexOf('/') + 1,
+                    currentTrailerUrl.LastIndexOf('/') + 1, 
                     currentTrailerUrl.LastIndexOf('.') - currentTrailerUrl.LastIndexOf('/') - 1);
 
                 actualTrailerFileNameExt = currentTrailerUrl.Substring(currentTrailerUrl.LastIndexOf('.') + 1);
@@ -424,16 +431,17 @@ namespace YANFOE.IO
                     MovieSetModel set = MovieSetManager.GetSet(setName);
 
                     MovieSetObjectModel setObjectModel =
-                        (from s in set.Movies where s.MovieUniqueId == movieModel.MovieUniqueId select s).
-                            SingleOrDefault();
+                        (from s in set.Movies where s.MovieUniqueId == movieModel.MovieUniqueId select s).SingleOrDefault();
 
-                    string currentSetPosterPath = setPosterOutputPath.Replace("<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace(
-                        "<ext>", "jpg");
+                    string currentSetPosterPath =
+                        setPosterOutputPath.Replace(
+                            "<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace("<ext>", "jpg");
 
-                    string currentSetFanartPath = setFanartOutputPath.Replace("<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace(
-                        "<ext>", "jpg");
+                    string currentSetFanartPath =
+                        setFanartOutputPath.Replace(
+                            "<setname>", FileSystemCharChange.To(setName, FileSystemCharChange.ConvertArea.Movie)).Replace("<ext>", "jpg");
 
-                    if (setObjectModel.Order == 1)
+                    if (setObjectModel != null && setObjectModel.Order == 1)
                     {
                         if (File.Exists(set.PosterUrl))
                         {
@@ -475,8 +483,8 @@ namespace YANFOE.IO
                 }
             }
 
-            if (movieSaveSettings.IoType == MovieIOType.All || movieSaveSettings.IoType == MovieIOType.Poster ||
-                movieSaveSettings.IoType == MovieIOType.Images)
+            if (movieSaveSettings.IoType == MovieIOType.All || movieSaveSettings.IoType == MovieIOType.Poster
+                || movieSaveSettings.IoType == MovieIOType.Images)
             {
                 try
                 {
@@ -497,8 +505,8 @@ namespace YANFOE.IO
                 }
             }
 
-            if (movieSaveSettings.IoType == MovieIOType.All || movieSaveSettings.IoType == MovieIOType.Fanart ||
-                movieSaveSettings.IoType == MovieIOType.Images)
+            if (movieSaveSettings.IoType == MovieIOType.All || movieSaveSettings.IoType == MovieIOType.Fanart
+                || movieSaveSettings.IoType == MovieIOType.Images)
             {
                 try
                 {
@@ -528,9 +536,9 @@ namespace YANFOE.IO
                         this.CopyFile(trailerPathFrom, trailerOutputName);
                         movieModel.ChangedTrailer = false;
                         Log.WriteToLog(
-                            LogSeverity.Info,
-                            0,
-                            "Trailer Saved To Disk for " + movieModel.Title,
+                            LogSeverity.Info, 
+                            0, 
+                            "Trailer Saved To Disk for " + movieModel.Title, 
                             trailerPathFrom + " -> " + trailerOutputName);
                     }
                 }
@@ -545,27 +553,28 @@ namespace YANFOE.IO
         /// TV path image get.
         /// </summary>
         /// <param name="path">
-        /// The image path
+        /// The image path 
         /// </param>
         /// <returns>
-        /// The tv path image get.
+        /// The TV path image get. 
         /// </returns>
-        public string TvPathImageGet(string path)
+        public string TVPathImageGet(string path)
         {
-            return Downloader.ProcessDownload(
-                path.ToLower().Contains("http://") ? path : TvDBFactory.GetImageUrl(path), 
-                DownloadType.Binary, 
-                Section.Tv);
+            return
+                Downloader.ProcessDownload(
+                    path.ToLower().Contains("http://") ? path : TVDBFactory.Instance.GetImageUrl(path), 
+                    DownloadType.Binary, 
+                    Section.Tv);
         }
 
         /// <summary>
-        /// The write nfo.
+        /// The write NFO.
         /// </summary>
         /// <param name="xml">
-        /// The xml to write
+        /// The xml to write 
         /// </param>
         /// <param name="path">
-        /// The path to write too
+        /// The path to write too 
         /// </param>
         public void WriteNFO(string xml, string path)
         {
@@ -575,10 +584,60 @@ namespace YANFOE.IO
         /// <summary>
         /// The xml writer start.
         /// </summary>
-        /// <param name="xmlWriter">The xml writer.</param>
+        /// <param name="xmlWriter">
+        /// The xml writer. 
+        /// </param>
         public void XmlWriterStart(XmlWriter xmlWriter)
         {
             xmlWriter.WriteStartDocument();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The get image with parse.
+        /// </summary>
+        /// <param name="path">
+        /// The path. 
+        /// </param>
+        /// <param name="fileName">
+        /// The file name. 
+        /// </param>
+        /// <param name="stringFormat">
+        /// The string format. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> . 
+        /// </returns>
+        private string GetImageWithParse(string path, string fileName, string stringFormat)
+        {
+            string hex = FileSystemCharChange.To(
+                fileName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Hex);
+
+            string schar = FileSystemCharChange.To(
+                fileName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
+
+            string seriesNamePlain = string.Format(stringFormat, fileName);
+            string seriesNameHex = string.Format(stringFormat, hex);
+            string seriesNameChar = string.Format(stringFormat, schar);
+
+            string checkPathPlain = Path.Combine(path, seriesNamePlain);
+            string checkPathHex = Path.Combine(path, seriesNameHex);
+            string checkPathChar = Path.Combine(path, seriesNameChar);
+
+            if (File.Exists(checkPathPlain))
+            {
+                return checkPathPlain;
+            }
+
+            if (File.Exists(checkPathHex))
+            {
+                return checkPathHex;
+            }
+
+            return File.Exists(checkPathChar) ? checkPathChar : string.Empty;
         }
 
         #endregion

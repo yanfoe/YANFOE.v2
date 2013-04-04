@@ -1,29 +1,32 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieNFO.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieNFO.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
 // <summary>
 //   The movie nfo model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.NFOModels
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
 
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// The movie nfo model.
+    ///   The movie nfo model.
     /// </summary>
     [Serializable]
     public class MovieNFOModel
@@ -31,7 +34,7 @@ namespace YANFOE.Models.NFOModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieNFOModel"/> class.
+        ///   Initializes a new instance of the <see cref="MovieNFOModel" /> class.
         /// </summary>
         public MovieNFOModel()
         {
@@ -69,157 +72,157 @@ namespace YANFOE.Models.NFOModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Actors.
+        ///   Gets or sets Actors.
         /// </summary>
         public List<PersonModel> Actors { get; set; }
 
         /// <summary>
-        /// Gets or sets Certification.
+        ///   Gets or sets Certification.
         /// </summary>
         public string Certification { get; set; }
 
         /// <summary>
-        /// Gets or sets Company.
+        ///   Gets or sets Company.
         /// </summary>
         public string Company { get; set; }
 
         /// <summary>
-        /// Gets or sets Credits.
+        ///   Gets or sets Credits.
         /// </summary>
         public List<PersonModel> Credits { get; set; }
 
         // Writers
 
         /// <summary>
-        /// Gets or sets Directors.
+        ///   Gets or sets Directors.
         /// </summary>
         public List<PersonModel> Directors { get; set; }
 
         /// <summary>
-        /// Gets or sets Fanart.
+        ///   Gets or sets Fanart.
         /// </summary>
         public List<string> Fanart { get; set; }
 
         /// <summary>
-        /// Gets or sets FileInfoModel.
+        ///   Gets or sets FileInfoModel.
         /// </summary>
         public FileInfoModel FileInfoModel { get; set; }
 
         /// <summary>
-        /// Gets or sets FileLastChanged.
+        ///   Gets or sets FileLastChanged.
         /// </summary>
         public DateTime FileLastChanged { get; set; }
 
         /// <summary>
-        /// Gets or sets FileName.
+        ///   Gets or sets FileName.
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// Gets or sets FileNameAndPath.
+        ///   Gets or sets FileNameAndPath.
         /// </summary>
         public string FileNameAndPath { get; set; }
 
         /// <summary>
-        /// Gets or sets FilePath.
+        ///   Gets or sets FilePath.
         /// </summary>
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets Genre.
+        ///   Gets or sets Genre.
         /// </summary>
         public List<string> Genre { get; set; }
 
         /// <summary>
-        /// Gets or sets Ids.
+        ///   Gets or sets Ids.
         /// </summary>
         public Dictionary<string, string> Ids { get; set; }
 
         /// <summary>
-        /// Gets or sets Mpaa.
+        ///   Gets or sets Mpaa.
         /// </summary>
         public string Mpaa { get; set; }
 
         /// <summary>
-        /// Gets or sets OriginalTitle.
+        ///   Gets or sets OriginalTitle.
         /// </summary>
         public string OriginalTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets Outline.
+        ///   Gets or sets Outline.
         /// </summary>
         public string Outline { get; set; }
 
         /// <summary>
-        /// Gets or sets Playcount.
+        ///   Gets or sets Playcount.
         /// </summary>
         public int Playcount { get; set; }
 
         /// <summary>
-        /// Gets or sets Plot.
+        ///   Gets or sets Plot.
         /// </summary>
         public string Plot { get; set; }
 
         /// <summary>
-        /// Gets or sets Premiered.
+        ///   Gets or sets Premiered.
         /// </summary>
         public DateTime Premiered { get; set; }
 
         /// <summary>
-        /// Gets or sets Rating.
+        ///   Gets or sets Rating.
         /// </summary>
         public double Rating { get; set; }
 
         /// <summary>
-        /// Gets or sets Runtime.
+        ///   Gets or sets Runtime.
         /// </summary>
         public int Runtime { get; set; }
 
         /// <summary>
-        /// Gets or sets Sets.
+        ///   Gets or sets Sets.
         /// </summary>
         public Dictionary<int, string> Sets { get; set; }
 
         /// <summary>
-        /// Gets or sets Studio.
+        ///   Gets or sets Studio.
         /// </summary>
         public string Studio { get; set; }
 
         /// <summary>
-        /// Gets or sets Tagline.
+        ///   Gets or sets Tagline.
         /// </summary>
         public string Tagline { get; set; }
 
         /// <summary>
-        /// Gets or sets Thumb.
+        ///   Gets or sets Thumb.
         /// </summary>
         public List<string> Thumb { get; set; }
 
         /// <summary>
-        /// Gets or sets Title.
+        ///   Gets or sets Title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets Top250.
+        ///   Gets or sets Top250.
         /// </summary>
         public int Top250 { get; set; }
 
         /// <summary>
-        /// Gets or sets Trailer.
+        ///   Gets or sets Trailer.
         /// </summary>
         public List<string> Trailer { get; set; }
 
         /// <summary>
-        /// Gets or sets Votes.
+        ///   Gets or sets Votes.
         /// </summary>
         public int Votes { get; set; }
 
         /// <summary>
-        /// Gets or sets Watched.
+        ///   Gets or sets Watched.
         /// </summary>
         public string Watched { get; set; }
 

@@ -1,78 +1,85 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Downloader.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Downloader.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The manager.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.DownloadManager
 {
+    #region Required Namespaces
+
     using System;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Threading;
-    using System.Windows.Forms;
 
     using BitFactory.Logging;
 
+    using YANFOE.Factories.UI;
     using YANFOE.InternalApps.DownloadManager.Cache;
     using YANFOE.InternalApps.DownloadManager.Download;
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.InternalApps.Logs;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
+    using YANFOE.Tools.UI;
 
-    using Timer = System.Windows.Forms.Timer;
+    using Timer = System.Timers.Timer;
+
+    #endregion
 
     /// <summary>
-    /// The manager.
+    ///   The manager.
     /// </summary>
     public static class Downloader
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The background workers.
+        ///   The background workers.
         /// </summary>
-        private static readonly BindingList<BackgroundWorker> BackgroundWorkers;
+        private static readonly ThreadedBindingList<BackgroundWorker> BackgroundWorkers;
 
         /// <summary>
-        /// The current queue count.
+        ///   The current queue count.
         /// </summary>
-        private static Object currentQueueLock;
+        private static readonly object CurrentQueueLock;
 
         /// <summary>
-        /// The current queue count.
+        ///   The UI timer.
+        /// </summary>
+        private static readonly Timer UITimer;
+
+        /// <summary>
+        ///   The current queue count.
         /// </summary>
         private static int currentQueue;
-
-        /// <summary>
-        /// The ui timer.
-        /// </summary>
-        private static readonly Timer uiTimer;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="Downloader"/> class. 
+        ///   Initializes static members of the <see cref="Downloader" /> class.
         /// </summary>
         static Downloader()
         {
-            currentQueueLock = new Object();
-            CurrentQue = 0;
-            Progress = new BindingList<Progress>();
-            BackgroundWorkers = new BindingList<BackgroundWorker>();
+            CurrentQueueLock = new object();
+            CurrentQueue = 0;
+            Progress = new ThreadedBindingList<Progress>();
+            BackgroundWorkers = new ThreadedBindingList<BackgroundWorker>();
 
             for (int i = 0; i < Get.Web.DownloadThreads; i++)
             {
@@ -82,13 +89,13 @@ namespace YANFOE.InternalApps.DownloadManager
                 BackgroundWorkers[i].RunWorkerCompleted += BackgroundWorkerRunWorkerCompleted;
             }
 
-            uiTimer = new Timer { Interval = 100 };
-            uiTimer.Tick += UITimer_Tick;
-            uiTimer.Start();
+            UITimer = new Timer { Interval = 100 };
+            UITimer.Elapsed += UITimerTick;
+            UITimer.Start();
 
-            BackgroundDownloadQue = new BindingList<DownloadItem>();
+            BackgroundDownloadQue = new ThreadedBindingList<DownloadItem>();
 
-            Downloading = new BindingList<string>();
+            Downloading = new ThreadedBindingList<string>();
 
             var backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
@@ -97,31 +104,30 @@ namespace YANFOE.InternalApps.DownloadManager
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets BackgroundDownloadQue.
+        ///   Gets BackgroundDownloadQueue.
         /// </summary>
-        public static BindingList<DownloadItem> BackgroundDownloadQue { get; set; }
+        public static ThreadedBindingList<DownloadItem> BackgroundDownloadQue { get; private set; }
 
         /// <summary>
-        /// Gets or sets the current que.
+        ///   Gets or sets the current queue.
         /// </summary>
-        /// <value>
-        /// The current que.
-        /// </value>
-        public static int CurrentQue
+        /// <value> The current queue. </value>
+        public static int CurrentQueue
         {
             get
             {
-                lock (currentQueueLock)
+                lock (CurrentQueueLock)
                 {
                     return currentQueue;
                 }
             }
+
             set
             {
-                lock (currentQueueLock)
+                lock (CurrentQueueLock)
                 {
                     currentQueue = value;
                 }
@@ -129,26 +135,30 @@ namespace YANFOE.InternalApps.DownloadManager
         }
 
         /// <summary>
-        /// Gets or sets Downloading.
+        ///   Gets or sets Downloading.
         /// </summary>
-        public static BindingList<string> Downloading { get; set; }
+        public static ThreadedBindingList<string> Downloading { get; set; }
 
         /// <summary>
-        /// Gets or sets Progress indicators.
+        ///   Gets or sets Progress indicators.
         /// </summary>
-        public static BindingList<Progress> Progress { get; set; }
+        public static ThreadedBindingList<Progress> Progress { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Add downloaditem to background que
+        /// Add download item to background queue
         /// </summary>
         /// <param name="downloadItem">
-        /// The download item.
+        /// The download item. 
         /// </param>
-        public static void AddToBackgroundQue(DownloadItem downloadItem, DownloadPriority downloadPriority = DownloadPriority.Normal)
+        /// <param name="downloadPriority">
+        /// The download Priority. 
+        /// </param>
+        public static void AddToBackgroundQueue(
+            DownloadItem downloadItem, DownloadPriority downloadPriority = DownloadPriority.Normal)
         {
             if (Get.Web.EnableAddToBackgroundQue == false)
             {
@@ -161,7 +171,8 @@ namespace YANFOE.InternalApps.DownloadManager
             {
                 lock (BackgroundDownloadQue)
                 {
-                    var check = (from d in BackgroundDownloadQue where d.Url == downloadItem.Url select d).SingleOrDefault();
+                    var check =
+                        (from d in BackgroundDownloadQue where d.Url == downloadItem.Url select d).SingleOrDefault();
 
                     if (check == null)
                     {
@@ -173,28 +184,21 @@ namespace YANFOE.InternalApps.DownloadManager
         }
 
         /// <summary>
-        /// Check if url exists in the background que
+        /// Check if url exists in the background queue
         /// </summary>
         /// <param name="url">
-        /// The url to check
+        /// The url to check 
         /// </param>
         /// <returns>
-        /// The in background que.
+        /// The in background queue. 
         /// </returns>
-        public static bool InBackgroundQue(string url)
+        public static bool InBackgroundQueue(string url)
         {
             var count = 0;
 
             lock (BackgroundDownloadQue)
             {
-                for (int index = 0; index < BackgroundDownloadQue.Count; index++)
-                {
-                    var item = BackgroundDownloadQue[index];
-                    if (item != null && item.Url == url)
-                    {
-                        count++;
-                    }
-                }
+                count += BackgroundDownloadQue.Count(item => item != null && item.Url == url);
             }
 
             return count > 0;
@@ -204,28 +208,28 @@ namespace YANFOE.InternalApps.DownloadManager
         /// Downloads the specified URL.
         /// </summary>
         /// <param name="url">
-        /// The download URL.
+        /// The download URL. 
         /// </param>
         /// <param name="type">
-        /// The download type.
+        /// The download type. 
         /// </param>
         /// <param name="section">
-        /// The section.
+        /// The section. 
         /// </param>
         /// <param name="skipCache">
-        /// if set to <c>true</c> [skip cache].
+        /// if set to <c>true</c> [skip cache]. 
         /// </param>
         /// <param name="cookieContainer">
-        /// The cookie container.
+        /// The cookie container. 
         /// </param>
         /// <returns>
-        /// The process download.
+        /// The process download. 
         /// </returns>
         public static string ProcessDownload(
-            string url,
-            DownloadType type,
-            Section section,
-            bool skipCache = false,
+            string url, 
+            DownloadType type, 
+            Section section, 
+            bool skipCache = false, 
             CookieContainer cookieContainer = null)
         {
             bool found = false;
@@ -236,13 +240,13 @@ namespace YANFOE.InternalApps.DownloadManager
             }
 
             var item = new DownloadItem
-            {
-                Type = type,
-                Url = url,
-                Section = section,
-                IgnoreCache = skipCache,
-                CookieContainer = cookieContainer
-            };
+                {
+                    Type = type, 
+                    Url = url, 
+                    Section = section, 
+                    IgnoreCache = skipCache, 
+                    CookieContainer = cookieContainer
+                };
 
             if (WebCache.CheckIfDownloadItemExistsInCache(item, true))
             {
@@ -251,16 +255,16 @@ namespace YANFOE.InternalApps.DownloadManager
 
             try
             {
-                lock (currentQueueLock)
+                lock (CurrentQueueLock)
                 {
                     currentQueue++;
                 }
 
                 Downloading.Add(url);
 
-                if (InBackgroundQue(url))
+                if (InBackgroundQueue(url))
                 {
-                    RemoveFromBackgroundQue(url);
+                    RemoveFromBackgroundQueue(url);
                 }
             }
             catch (Exception ex)
@@ -284,8 +288,8 @@ namespace YANFOE.InternalApps.DownloadManager
 
                             do
                             {
-                                Application.DoEvents();
                                 Thread.Sleep(50);
+                                YANFOEApplication.DoEvents();
                             }
                             while (BackgroundWorkers[i].IsBusy);
 
@@ -294,7 +298,7 @@ namespace YANFOE.InternalApps.DownloadManager
                                 Downloading.Remove(url);
                             }
 
-                            lock (currentQueueLock)
+                            lock (CurrentQueueLock)
                             {
                                 currentQueue--;
                             }
@@ -303,18 +307,17 @@ namespace YANFOE.InternalApps.DownloadManager
                         }
                         catch (Exception ex)
                         {
-                            Log.WriteToLog(LogSeverity.Error, 0, string.Format("Thread {0} Downloading {1}", i, url), ex.Message);
+                            Log.WriteToLog(
+                                LogSeverity.Error, 0, string.Format("Thread {0} Downloading {1}", i, url), ex.Message);
                         }
                     }
-
                 }
 
-                Application.DoEvents();
                 Thread.Sleep(50);
             }
             while (found == false);
 
-            lock (currentQueueLock)
+            lock (CurrentQueueLock)
             {
                 currentQueue--;
             }
@@ -323,12 +326,12 @@ namespace YANFOE.InternalApps.DownloadManager
         }
 
         /// <summary>
-        /// The remove from background que.
+        /// The remove from background queue.
         /// </summary>
         /// <param name="url">
-        /// The url to remove.
+        /// The url to remove. 
         /// </param>
-        public static void RemoveFromBackgroundQue(string url)
+        public static void RemoveFromBackgroundQueue(string url)
         {
             lock (BackgroundDownloadQue)
             {
@@ -351,29 +354,33 @@ namespace YANFOE.InternalApps.DownloadManager
         /// Backgrounds the worker do work.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        /// The sender. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
         private static void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
             var downloadItem = e.Argument as DownloadItem;
 
-            downloadItem.Progress.Message = "Downloading " + downloadItem.Url;
-            ProcessDownload(downloadItem);
+            if (downloadItem != null)
+            {
+                downloadItem.Progress.Message = "Downloading " + downloadItem.Url;
+                downloadItem.Progress.IsBusy = true;
+                ProcessDownload(downloadItem);
 
-            e.Result = downloadItem;
+                e.Result = downloadItem;
+            }
         }
 
         /// <summary>
         /// Backgrounds the worker run worker completed.
         /// </summary>
         /// <param name="sender">
-        /// The sender.
+        /// The sender. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
         private static void BackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -382,6 +389,7 @@ namespace YANFOE.InternalApps.DownloadManager
             if (downloadItem != null)
             {
                 downloadItem.Progress.Message = string.Empty;
+                downloadItem.Progress.IsBusy = false;
                 downloadItem.Progress.Percent = 0;
             }
         }
@@ -389,56 +397,64 @@ namespace YANFOE.InternalApps.DownloadManager
         /// <summary>
         /// Handles the DoWork event of the BackgroundWorker control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
+        /// </param>
         private static void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            // TODO: Make this background worker properly end when the application is closing.
             do
             {
-                if (CurrentQue < 4 && Get.Web.EnableBackgroundQueProcessing)
+                if (CurrentQueue < 4 && Get.Web.EnableBackgroundQueProcessing)
                 {
                     lock (BackgroundDownloadQue)
                     {
                         if (BackgroundDownloadQue.Count > 0)
                         {
-                            var orderedQue = (from q in BackgroundDownloadQue orderby q.Priority descending select q).ToList();
+                            var orderedQue =
+                                (from q in BackgroundDownloadQue orderby q.Priority descending select q).ToList();
 
                             DownloadItem item = orderedQue[0];
                             BackgroundDownloadQue.Remove(item);
 
                             var bgw = new BackgroundWorker();
-                            bgw.DoWork += Bgw_DoWork;
+                            bgw.DoWork += BgwDoWork;
                             bgw.RunWorkerAsync(item);
                         }
                     }
                 }
 
                 Thread.Sleep(100);
-                Application.DoEvents();
             }
             while (true);
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgw control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void Bgw_DoWork(object sender, DoWorkEventArgs e)
+        private static void BgwDoWork(object sender, DoWorkEventArgs e)
         {
             var item = e.Argument as DownloadItem;
-            ProcessDownload(item.Url, item.Type, item.Section, item.IgnoreCache, item.CookieContainer);
+            if (item != null)
+            {
+                ProcessDownload(item.Url, item.Type, item.Section, item.IgnoreCache, item.CookieContainer);
+            }
         }
 
         /// <summary>
         /// Processes the download.
         /// </summary>
         /// <param name="downloadItem">
-        /// The download item.
+        /// The download item. 
         /// </param>
         private static void ProcessDownload(DownloadItem downloadItem)
         {
@@ -461,16 +477,17 @@ namespace YANFOE.InternalApps.DownloadManager
         /// Progresses the manage.
         /// </summary>
         /// <param name="progress">
-        /// The progress.
+        /// The progress. 
         /// </param>
         /// <param name="threadID">
-        /// The thread MovieUniqueId.
+        /// The thread MovieUniqueId. 
         /// </param>
         private static void ProgressManage(Progress progress, int threadID)
         {
             if (string.IsNullOrEmpty(progress.Message))
             {
                 progress.Message = threadID + ": Idle.";
+                progress.IsBusy = false;
                 progress.Percent = 0;
             }
         }
@@ -479,12 +496,12 @@ namespace YANFOE.InternalApps.DownloadManager
         /// Handles the Tick event of the UITimer control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        private static void UITimer_Tick(object sender, EventArgs e)
+        private static void UITimerTick(object sender, EventArgs e)
         {
             for (int i = 0; i < Get.Web.DownloadThreads; i++)
             {
@@ -495,18 +512,16 @@ namespace YANFOE.InternalApps.DownloadManager
         #endregion
 
         /// <summary>
-        /// The progress status.
+        ///   The progress status.
         /// </summary>
         public class ProgressStatus
         {
-            #region Properties
+            #region Public Properties
 
             /// <summary>
-            /// Gets or sets a value indicating whether this <see cref="ProgressStatus"/> is busy.
+            ///   Gets or sets a value indicating whether this <see cref="ProgressStatus" /> is busy.
             /// </summary>
-            /// <value>
-            ///   <c>true</c> if busy; otherwise, <c>false</c>.
-            /// </value>
+            /// <value> <c>true</c> if busy; otherwise, <c>false</c> . </value>
             public bool Busy { get; set; }
 
             #endregion

@@ -1,0 +1,214 @@
+﻿<Window xmlns:my5="clr-namespace:YANFOE.UI.UserControls.CommonControls"  x:Class="YANFOE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="YANFOE 2" Height="585" Width="1008" Closing="Window_Closing" Closed="Window_Closed" Icon="/YANFOE;component/y.ico" xmlns:my="clr-namespace:YANFOE.UI.UserControls.LogControls" xmlns:my1="clr-namespace:YANFOE.UI.UserControls.DownloadControls" Loaded="Window_Loaded" xmlns:my2="clr-namespace:YANFOE.UI.UserControls.MediaManagerControls" xmlns:my3="clr-namespace:YANFOE.UI.UserControls.MovieControls" xmlns:my4="clr-namespace:YANFOE.UI.UserControls.TvControls"
+        xmlns:DownloadManager="clr-namespace:YANFOE.InternalApps.DownloadManager">
+    <Grid>
+        <Menu Height="23" Name="menu1" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Save Database" Click="mnuFileSaveDatabase_ItemClick" Name="mnuFileSaveDatabase" />
+                <Separator />
+                <MenuItem Header="Exit" Click="mnuFileExit_ItemClick" Name="mnuFileExit" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Settings" Click="mnuEditSettings_ItemClick" />
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="Movie Scraper Group Manager" Click="mnuToolsMovieScraperGroupManager_ItemClick" />
+                <MenuItem Header="Export">
+                    <MenuItem Header="Missing Episodes List" Click="mnuToolsExportMissingEpisodesList_ItemClick" />
+                    <MenuItem Header="Movie List" Click="mnuToolsExportMovieList_ItemClick" />
+                    <MenuItem Header="TV Show List" Click="mnuToolsExportTvShowsList_ItemClick" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Report Issues" Click="mnuHelpReportIssues_ItemClick" />
+                <MenuItem Header="Source Code" Click="mnuHelpSourceCode_ItemClick" />
+                <MenuItem Header="Wiki" Click="mnuHelpWiki_ItemClick" />
+                <Separator />
+                <MenuItem Header="Homepage" Click="mnuHelpHomepage_ItemClick" />
+            </MenuItem>
+        </Menu>
+        <StatusBar Name="statusBar1" Height="23" VerticalAlignment="Bottom" />
+        <TabControl Margin="12,29" Name="tabControl1">
+            <TabItem Name="tabItem1" IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/database.png" Width="20" Height="20" />
+                        <Label Content="Media Manager" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <my2:MediaPathManager Margin="6,6,6,6" x:Name="mediaPathManager1" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem2">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/video.png" Width="20" Height="20" />
+                        <Label Content="Movies" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <my3:MoviesUserControl x:Name="moviesUserControl1" Margin="6,6,6,6" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem3">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/television1.png" Width="20" Height="20" />
+                        <Label Content="TV" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <my4:TvUserControl Margin="7,6,6,6" x:Name="tvUserControl1" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem4">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/download.png" Width="20" Height="20" />
+                        <Label Content="Downloads" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <my1:DownloadsUserControl Margin="7,6,6,0" x:Name="downloadsUserControl1" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem5">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/books.png" Width="20" Height="20" />
+                        <Label Content="Logs" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <my:LogsUserControl Margin="6" x:Name="logsUserControl1" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItem6">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/YANFOE;component/Resources/info.png" Width="20" Height="20" />
+                        <Label Content="About" VerticalContentAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid />
+            </TabItem>
+        </TabControl>
+        <Image Height="24" HorizontalAlignment="Left" Margin="0,0,0,0" Name="picThread1" Stretch="Fill" VerticalAlignment="Bottom" Width="24">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[0].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[0].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="24,0,0,0" Name="picThread2" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[1].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[1].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="48,0,0,0" Name="picThread3" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[2].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[2].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="72,0,0,0" Name="picThread4" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[3].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[3].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="96,0,0,0" Name="picThread5" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[4].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[4].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="120,0,0,0" Name="picThread6" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[5].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[5].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="144,0,0,0" Name="picThread7" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[6].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[6].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image Height="24" HorizontalAlignment="Left" Margin="168,0,0,0" Name="picThread8" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/globe_faded.png">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[7].IsBusy}" Value="True">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Source={x:Static DownloadManager:Downloader.Progress}, Path=[7].IsBusy}" Value="False">
+                            <Setter Property="Source" Value="/YANFOE;component/Resources/globe_faded.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label Content="Label" Height="23" HorizontalAlignment="Left" Margin="198,0,0,0" Name="lblDownloadStatus" VerticalAlignment="Bottom" />
+        <Image Height="24" HorizontalAlignment="Right" Name="picUpdateStatus" Stretch="Fill" VerticalAlignment="Bottom" Width="24" Source="/YANFOE;component/Resources/accept1.png" />
+    </Grid>
+</Window>

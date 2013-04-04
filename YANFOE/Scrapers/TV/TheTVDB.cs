@@ -1,34 +1,36 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TheTvdb.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="TheTVDB.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <summary>
-//   Defines the TheTvdb type.
-// </summary>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
-//
 //   See this page: http://www.yanfoe.com/license
-//   
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The the tvdb.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Scrapers.TV
 {
+    #region Required Namespaces
+
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading;
+    using System.Windows;
     using System.Xml;
 
     using Ionic.Zip;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Import;
+    using YANFOE.Factories.UI;
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Download;
     using YANFOE.InternalApps.DownloadManager.Model;
@@ -39,18 +41,21 @@ namespace YANFOE.Scrapers.TV
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.IO;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
     using YANFOE.UI.Dialogs.TV;
 
+    #endregion
+
     /// <summary>
-    /// The the tvdb.
+    ///   The the tvdb.
     /// </summary>
     public class TheTvdb
     {
-        #region Constants and Fields
+        #region Constants
 
         /// <summary>
-        /// The tvdb api.
+        ///   The tvdb api.
         /// </summary>
         public const string TvdbApi = "71F9C54F38B71B4F";
 
@@ -59,7 +64,7 @@ namespace YANFOE.Scrapers.TV
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TheTvdb"/> class.
+        ///   Initializes a new instance of the <see cref="TheTvdb" /> class.
         /// </summary>
         public TheTvdb()
         {
@@ -73,63 +78,71 @@ namespace YANFOE.Scrapers.TV
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Mirrors.
+        ///   Gets or sets Mirrors.
         /// </summary>
         public List<Mirrors> Mirrors { get; set; }
 
         /// <summary>
-        /// Gets or sets ServerTime.
+        ///   Gets or sets ServerTime.
         /// </summary>
         public string ServerTime { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Returns the banner download path.
         /// </summary>
-        /// <param name="filename">The filename.</param>
+        /// <param name="filename">
+        /// The filename. 
+        /// </param>
+        /// <param name="useCache">
+        /// The use Cache.
+        /// </param>
         /// <returns>
-        /// The return banner download path.
+        /// The return banner download path. 
         /// </returns>
         public static string ReturnBannerDownloadPath(string filename, bool useCache = false)
         {
             if (useCache)
             {
-                return string.Format(@"http://www.thetvdb.com/banners/_cache/{0}", filename); 
+                return string.Format(@"http://www.thetvdb.com/banners/_cache/{0}", filename);
             }
 
             return string.Format(@"http://www.thetvdb.com/banners/{0}", filename);
         }
 
         /// <summary>
-        /// Apply the scan to the current tv db.
+        ///   Apply the scan to the current tv db.
         /// </summary>
         public void ApplyScan()
         {
-            foreach (var series in ImportTvFactory.Scan)
+            foreach (var series in ImportTvFactory.Instance.Scan)
             {
                 if (!string.IsNullOrEmpty(series.Key))
                 {
                     KeyValuePair<string, ScanSeries> series1 = series;
                     string checkScanSeriesPick =
-                        (from s in ImportTvFactory.ScanSeriesPicks
+                        (from s in ImportTvFactory.Instance.ScanSeriesPicks
                          where s.SearchString == series1.Key
                          select s.SeriesName).SingleOrDefault();
 
                     string seriesKey = checkScanSeriesPick ?? series.Key;
 
-                    foreach (var season in ImportTvFactory.Scan[series.Key].Seasons)
+                    foreach (var season in ImportTvFactory.Instance.Scan[series.Key].Seasons)
                     {
-                        foreach (var episode in ImportTvFactory.Scan[series.Key].Seasons[season.Key].Episodes)
+                        foreach (var episode in ImportTvFactory.Instance.Scan[series.Key].Seasons[season.Key].Episodes)
                         {
                             try
                             {
-                                foreach (Episode s in TvDBFactory.TvDatabase[seriesKey].Seasons[season.Key].Episodes)
+                                foreach (
+                                    Episode s in
+                                        TVDBFactory.Instance.TVDatabase.First(x => x.SeriesName == seriesKey).Seasons.
+                                            First(x => x.SeasonNumber == season.Key).Episodes)
                                 {
                                     if (s.EpisodeNumber == episode.Key)
                                     {
@@ -141,8 +154,8 @@ namespace YANFOE.Scrapers.TV
                             }
                             catch
                             {
-                                ImportTvFactory.NotCatagorized.Add(
-                                    new ScanNotCatagorized { FilePath = episode.Value.FilePath });
+                                ImportTvFactory.Instance.NotCategorized.Add(
+                                    new ScanNotCategorized { FilePath = episode.Value.FilePath });
                             }
                         }
                     }
@@ -153,11 +166,20 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Checks if the series needs updating, and if so returns an updated series.
         /// </summary>
-        /// <param name="seriesId">The series id.</param>
-        /// <param name="seriesLanguage">The series language.</param>
-        /// <param name="lastUpdated">The last updated value</param>
+        /// <param name="seriesId">
+        /// The series id. 
+        /// </param>
+        /// <param name="seriesLanguage">
+        /// The series language. 
+        /// </param>
+        /// <param name="lastUpdated">
+        /// The last updated value 
+        /// </param>
+        /// <param name="force">
+        /// The force.
+        /// </param>
         /// <returns>
-        /// Updated series object, or NULL value if no update was found.
+        /// Updated series object, or NULL value if no update was found. 
         /// </returns>
         public Series CheckForUpdate(uint? seriesId, string seriesLanguage, string lastUpdated, bool force = false)
         {
@@ -172,13 +194,17 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Searches TvDB using plain text string.
         /// </summary>
-        /// <param name="name">The show name to search.</param>
+        /// <param name="name">
+        /// The show name to search. 
+        /// </param>
         /// <returns>
-        /// Found series name.
+        /// Found series name. 
         /// </returns>
         public string DoFullSearch(string name)
         {
-            List<SearchDetails> searchResults = this.SeriesSearch(name); // open initial object and do search
+            ThreadedBindingList<SearchDetails> searchResults = this.SeriesSearch(name);
+                
+                // open initial object and do search
             SearchDetails selectResult = this.ProcessSearchResults(searchResults, name);
 
             // process results, and allow user to choose alternative options
@@ -188,10 +214,10 @@ namespace YANFOE.Scrapers.TV
             }
 
             Series series = this.OpenNewSeries(selectResult); // download series details
-            
-            if (!TvDBFactory.TvDatabase.ContainsKey(series.SeriesName))
+
+            if (!TVDBFactory.Instance.TVDatabase.Any(x => x.SeriesName == series.SeriesName))
             {
-                TvDBFactory.TvDatabase.Add(series.SeriesName, series); // add series to db
+                TVDBFactory.Instance.TVDatabase.Add(series); // add series to db
             }
 
             return series.SeriesName;
@@ -200,11 +226,17 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Gets the series details.
         /// </summary>
-        /// <param name="seriesId">The series ID.</param>
-        /// <param name="language">The language ID.</param>
-        /// <param name="skipCache">if set to <c>true</c> [skip cache].</param>
+        /// <param name="seriesId">
+        /// The series ID. 
+        /// </param>
+        /// <param name="language">
+        /// The language ID. 
+        /// </param>
+        /// <param name="skipCache">
+        /// if set to <c>true</c> [skip cache]. 
+        /// </param>
         /// <returns>
-        /// Series XML collection
+        /// Series XML collection 
         /// </returns>
         public SeriesXml GetSeriesDetails(string seriesId, string language, bool skipCache = false)
         {
@@ -225,8 +257,8 @@ namespace YANFOE.Scrapers.TV
                 zipFile = ZipFile.Read(path);
             }
 
-            string temp = Get.FileSystemPaths.PathDirTemp + Path.DirectorySeparatorChar + seriesId +
-                          Path.DirectorySeparatorChar;
+            string temp = Get.FileSystemPaths.PathDirTemp + Path.DirectorySeparatorChar + seriesId
+                          + Path.DirectorySeparatorChar;
 
             foreach (ZipEntry e in zipFile)
             {
@@ -236,7 +268,8 @@ namespace YANFOE.Scrapers.TV
 
                 if (e.FileName == Get.Scraper.TvDBLanguageAbbr + ".xml")
                 {
-                    output.En = File.ReadAllText(temp + string.Format("{0}.xml", Get.Scraper.TvDBLanguageAbbr), Encoding.UTF8);
+                    output.En = File.ReadAllText(
+                        temp + string.Format("{0}.xml", Get.Scraper.TvDBLanguageAbbr), Encoding.UTF8);
                 }
                 else
                 {
@@ -260,9 +293,11 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Populate series search details into object.
         /// </summary>
-        /// <param name="seriesSearchDetails">The series Search Details.</param>
+        /// <param name="seriesSearchDetails">
+        /// The series Search Details. 
+        /// </param>
         /// <returns>
-        /// The series object.
+        /// The series object. 
         /// </returns>
         public Series OpenNewSeries(SearchDetails seriesSearchDetails)
         {
@@ -286,23 +321,36 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Processes the search results.
         /// </summary>
-        /// <param name="seriesResults">The series results.</param>
-        /// <param name="searchTerm">The search term.</param>
+        /// <param name="seriesResults">
+        /// The series results. 
+        /// </param>
+        /// <param name="searchTerm">
+        /// The search term. 
+        /// </param>
         /// <returns>
-        /// The process search results.
+        /// The process search results. 
         /// </returns>
-        public SearchDetails ProcessSearchResults(List<SearchDetails> seriesResults, string searchTerm)
+        public SearchDetails ProcessSearchResults(ThreadedBindingList<SearchDetails> seriesResults, string searchTerm)
         {
             if (seriesResults.Count > 1 || seriesResults.Count == 0)
             {
-                Factories.UI.Windows7UIFactory.PauseProgressState();
+                WndSelectSeries frmSelectSeriesName;
+                SearchDetails selectedSeries = null;
 
-                var frmSelectSeriesName = new FrmSelectSeries(seriesResults, searchTerm);
-                frmSelectSeriesName.ShowDialog();
+                Application.Current.Dispatcher.Invoke(
+                    (ThreadStart)delegate
+                        {
+                            Windows7UIFactory.PauseProgressState();
 
-                Factories.UI.Windows7UIFactory.PauseProgressState();
-                
-                return frmSelectSeriesName.SelectedSeries;
+                            frmSelectSeriesName = new WndSelectSeries(seriesResults, searchTerm);
+                            frmSelectSeriesName.ShowDialog();
+
+                            Windows7UIFactory.PauseProgressState();
+
+                            selectedSeries = frmSelectSeriesName.SelectedSeries;
+                        });
+
+                return selectedSeries;
             }
 
             if (seriesResults.Count == 1)
@@ -316,13 +364,15 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Search tMDB using the value
         /// </summary>
-        /// <param name="value">The Search results</param>
+        /// <param name="value">
+        /// The Search results 
+        /// </param>
         /// <returns>
-        /// The series search.
+        /// The series search. 
         /// </returns>
-        public List<SearchDetails> SeriesSearch(string value)
+        public ThreadedBindingList<SearchDetails> SeriesSearch(string value)
         {
-            var seriesResults = new List<SearchDetails>();
+            var seriesResults = new ThreadedBindingList<SearchDetails>();
 
             string searchXml =
                 Downloader.ProcessDownload(
@@ -362,11 +412,17 @@ namespace YANFOE.Scrapers.TV
         /// <summary>
         /// Download Series Zip from Server.
         /// </summary>
-        /// <param name="seriesId">The series ID.</param>
-        /// <param name="language">The language.</param>
-        /// <param name="skipCache">if set to <c>true</c> [skip cache].</param>
+        /// <param name="seriesId">
+        /// The series ID. 
+        /// </param>
+        /// <param name="language">
+        /// The language. 
+        /// </param>
+        /// <param name="skipCache">
+        /// if set to <c>true</c> [skip cache]. 
+        /// </param>
         /// <returns>
-        /// The path to the downloaded series zip.
+        /// The path to the downloaded series zip. 
         /// </returns>
         private static string DownloadSeriesZip(string seriesId, string language, bool skipCache = false)
         {
@@ -377,17 +433,14 @@ namespace YANFOE.Scrapers.TV
         }
 
         /// <summary>
-        /// Download Server Time for TheTVDB.
+        ///   Download Server Time for TheTVDB.
         /// </summary>
-        /// <returns>
-        /// The current server time. Useful for updates.
-        /// </returns>
+        /// <returns> The current server time. Useful for updates. </returns>
         private static string DownloadServerTime()
         {
             var downloadItem = new DownloadItem
                 {
-                    Url = "http://www.thetvdb.com/api/Updates.php?type=none",
-                    Type = DownloadType.Html 
+                   Url = "http://www.thetvdb.com/api/Updates.php?type=none", Type = DownloadType.Html 
                 };
 
             var html = new Html();

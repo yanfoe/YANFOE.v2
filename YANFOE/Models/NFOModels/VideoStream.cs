@@ -1,51 +1,54 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="VideoStream.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="VideoStream.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
-// <summary>
-//   Defines the VideoStream type.
-// </summary>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Contains VideoStream information from an NFO.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.NFOModels
 {
+    #region Required Namespaces
+
     using System;
 
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// Contains VideoStream information from an NFO.
+    ///   Contains VideoStream information from an NFO.
     /// </summary>
     [Serializable]
     public class VideoStream : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// Aspect Ratio Backing Field
+        ///   Aspect Ratio Backing Field
         /// </summary>
         private string aspect;
 
         /// <summary>
-        /// Codec Backing Field.
+        ///   Codec Backing Field.
         /// </summary>
         private string codec;
 
         /// <summary>
-        /// Height Backing Field
+        ///   Height Backing Field
         /// </summary>
         private int? height;
 
         /// <summary>
-        /// Width Backing Field
+        ///   Width Backing Field
         /// </summary>
         private int? width;
 
@@ -54,7 +57,7 @@ namespace YANFOE.Models.NFOModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VideoStream"/> class.
+        ///   Initializes a new instance of the <see cref="VideoStream" /> class.
         /// </summary>
         public VideoStream()
         {
@@ -66,12 +69,12 @@ namespace YANFOE.Models.NFOModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the aspect.
+        ///   Gets or sets the aspect.
         /// </summary>
-        /// <value>The aspect.</value>
+        /// <value> The aspect. </value>
         public string Aspect
         {
             get
@@ -87,7 +90,7 @@ namespace YANFOE.Models.NFOModels
         }
 
         /// <summary>
-        /// Gets or sets Codec.
+        ///   Gets or sets Codec.
         /// </summary>
         public string Codec
         {
@@ -104,9 +107,9 @@ namespace YANFOE.Models.NFOModels
         }
 
         /// <summary>
-        /// Gets or sets the height.
+        ///   Gets or sets the height.
         /// </summary>
-        /// <value>The height.</value>
+        /// <value> The height. </value>
         public int? Height
         {
             get
@@ -122,7 +125,7 @@ namespace YANFOE.Models.NFOModels
         }
 
         /// <summary>
-        /// Gets or sets Width.
+        ///   Gets or sets Width.
         /// </summary>
         public int? Width
         {

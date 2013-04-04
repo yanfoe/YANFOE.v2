@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="VersionUpdateFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="VersionUpdateFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The version update factory.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Versioning
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -21,51 +25,88 @@ namespace YANFOE.Factories.Versioning
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    using DevExpress.Utils;
-
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Properties;
+    using YANFOE.Settings.ConstSettings;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
+    using YANFOE.UI.UserControls.CommonControls;
 
+    #endregion
+
+    /// <summary>
+    /// The version update factory.
+    /// </summary>
     public static class VersionUpdateFactory
     {
-        private static Image imageStatus;
+        #region Static Fields
 
-        public static SuperToolTip UpdateTip = new SuperToolTip();
-
+        /// <summary>
+        /// The update link.
+        /// </summary>
         public static string UpdateLink = string.Empty;
 
-        public static Image ImageStatus
-        {
-            get
-            {
-                return imageStatus;
-            }
+        /// <summary>
+        /// The update tip.
+        /// </summary>
+        public static SuperToolTip UpdateTip = new SuperToolTip();
 
-            set
-            {
-                imageStatus = value;
-            }
-        }
+        #endregion
 
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes static members of the <see cref="VersionUpdateFactory"/> class.
+        /// </summary>
         static VersionUpdateFactory()
         {
-            ImageStatus = Resources.accept24;
+            ImageStatus = Resources.accept32;
             UpdateTip.Items.AddTitle("YANFOE has not checked for an update.");
         }
 
+        #endregion
+
+        #region Public Events
+
         /// <summary>
-        /// Occurs when [version update changed].
+        ///   Occurs when [version update changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler VersionUpdateChanged = delegate { };
 
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Gets or sets the image status.
+        /// </summary>
+        public static Image ImageStatus { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The check for update.
+        /// </summary>
+        public static void CheckForUpdate()
+        {
+            InvokeVersionUpdateChanged(new EventArgs());
+
+            var bgwUpdate = new BackgroundWorker();
+            bgwUpdate.DoWork += BgwUpdateDoWork;
+            bgwUpdate.RunWorkerCompleted += BgwUpdateRunWorkerCompleted;
+            bgwUpdate.RunWorkerAsync();
+        }
+
         /// <summary>
         /// Invokes the version update changed.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
+        /// </param>
         public static void InvokeVersionUpdateChanged(EventArgs e)
         {
             EventHandler handler = VersionUpdateChanged;
@@ -75,23 +116,98 @@ namespace YANFOE.Factories.Versioning
             }
         }
 
-        public static void CheckForUpdate()
+        /// <summary>
+        /// The update available.
+        /// </summary>
+        /// <param name="foundReleases">
+        /// The found releases.
+        /// </param>
+        public static void UpdateAvailable(FoundReleases foundReleases)
         {
+            ImageStatus = Resources.new24;
             InvokeVersionUpdateChanged(new EventArgs());
-
-            var bgwUpdate = new BackgroundWorker();
-            bgwUpdate.DoWork += bgwUpdate_DoWork;
-            bgwUpdate.RunWorkerCompleted += bgwUpdate_RunWorkerCompleted;
-            bgwUpdate.RunWorkerAsync();
+            UpdateTip = new SuperToolTip();
+            UpdateTip.Items.AddTitle("New Update Available!");
+            UpdateTip.Items.Add("Double click to download the latest release build.");
+            UpdateLink = string.Format(
+                "https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", 
+                foundReleases.Major, 
+                foundReleases.Minor, 
+                foundReleases.Milestone, 
+                foundReleases.BuildNumber);
         }
 
-        private static void bgwUpdate_DoWork(object sender, DoWorkEventArgs e)
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The check for update failed.
+        /// </summary>
+        private static void CheckForUpdateFailed()
+        {
+            ImageStatus = Resources.delete32;
+            InvokeVersionUpdateChanged(new EventArgs());
+            UpdateTip = new SuperToolTip();
+            UpdateTip.Items.AddTitle("Update Search Failed.");
+            UpdateTip.Items.Add("Double click to manually check for update");
+            UpdateLink = "https://github.com/yanfoe/YANFOE.v2/downloads";
+        }
+
+        /// <summary>
+        /// The no new update.
+        /// </summary>
+        /// <param name="foundReleases">
+        /// The found releases.
+        /// </param>
+        private static void NoNewUpdate(FoundReleases foundReleases)
+        {
+            ImageStatus = Resources.accept32;
+            InvokeVersionUpdateChanged(new EventArgs());
+            UpdateTip = new SuperToolTip();
+            UpdateTip.Items.AddTitle("You are using the latest build of YANFOE.");
+            UpdateTip.Items.Add("Current build: " + foundReleases.BuildNumber);
+            UpdateLink = string.Empty;
+        }
+
+        /// <summary>
+        /// The using unreleased version.
+        /// </summary>
+        /// <param name="foundReleases">
+        /// The found releases.
+        /// </param>
+        private static void UsingUnreleasedVersion(FoundReleases foundReleases)
+        {
+            ImageStatus = Resources.warning24;
+            InvokeVersionUpdateChanged(new EventArgs());
+            UpdateTip = new SuperToolTip();
+            UpdateTip.Items.AddTitle(
+                string.Format("You are using an unofficial build of YANFOE ({0}).", Application.ApplicationBuild));
+            UpdateTip.Items.Add(string.Format("Double click to download build {0}", foundReleases.BuildNumber));
+            UpdateLink = string.Format(
+                "https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", 
+                foundReleases.Major, 
+                foundReleases.Minor, 
+                foundReleases.Milestone, 
+                foundReleases.BuildNumber);
+        }
+
+        /// <summary>
+        /// The update_ do work.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private static void BgwUpdateDoWork(object sender, DoWorkEventArgs e)
         {
             var downloads = Downloader.ProcessDownload(
                 "https://github.com/yanfoe/YANFOE.v2/downloads", DownloadType.Html, Section.Movies, true);
 
             var matches = Regex.Matches(
-                downloads,
+                downloads, 
                 @"YANFOE\.v(?<major>\d)\.(?<minor>\d{1,2})-(?<milestone>.*?)\.Build\.(?<buildnumber>\d+?)\.zip");
 
             var releases = new List<FoundReleases>();
@@ -100,16 +216,16 @@ namespace YANFOE.Factories.Versioning
             {
                 var buildNumber = match.Groups["buildnumber"].Value;
 
-                var check = releases.Where(c => c.BuildNumber == buildNumber).SingleOrDefault();
+                var check = releases.SingleOrDefault(c => c.BuildNumber == buildNumber);
 
                 if (check == null)
                 {
                     releases.Add(
                         new FoundReleases
                             {
-                                Major = match.Groups["major"].Value.ToInt(),
-                                Minor = match.Groups["minor"].Value.ToInt(),
-                                BuildNumber = match.Groups["buildnumber"].Value,
+                                Major = match.Groups["major"].Value.ToInt(), 
+                                Minor = match.Groups["minor"].Value.ToInt(), 
+                                BuildNumber = match.Groups["buildnumber"].Value, 
                                 Milestone = match.Groups["milestone"].Value
                             });
                 }
@@ -123,7 +239,16 @@ namespace YANFOE.Factories.Versioning
             }
         }
 
-        private static void bgwUpdate_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// The update_ run worker completed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private static void BgwUpdateRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             var result = e.Result as FoundReleases;
 
@@ -131,70 +256,50 @@ namespace YANFOE.Factories.Versioning
             {
                 CheckForUpdateFailed();
             }
-            else if (YANFOE.Settings.ConstSettings.Application.ApplicationBuild == result.BuildNumber)
+            else if (Application.ApplicationBuild == result.BuildNumber)
             {
                 NoNewUpdate(result);
             }
-            else if (YANFOE.Settings.ConstSettings.Application.ApplicationBuild.ToInt() > result.BuildNumber.ToInt())
+            else if (Application.ApplicationBuild.ToInt() > result.BuildNumber.ToInt())
             {
                 UsingUnreleasedVersion(result);
             }
             else
             {
                 UpdateAvailable(result);
-
             }
         }
 
-        private static void CheckForUpdateFailed()
-        {
-            ImageStatus = Resources.delete32;
-            InvokeVersionUpdateChanged(new EventArgs());
-            UpdateTip = new SuperToolTip();
-            UpdateTip.Items.AddTitle("Update Search Failed.");
-            UpdateTip.Items.Add("Double click to manually check for update");
-            UpdateLink = "https://github.com/yanfoe/YANFOE.v2/downloads";
-        }
+        #endregion
 
-        private static void NoNewUpdate(FoundReleases foundReleases)
-        {
-            ImageStatus = Resources.accept24;
-            InvokeVersionUpdateChanged(new EventArgs());
-            UpdateTip = new SuperToolTip();
-            UpdateTip.Items.AddTitle("You are using the latest build of YANFOE.");
-            UpdateTip.Items.Add("Current build: " + foundReleases.BuildNumber);
-            UpdateLink = string.Empty;
-        }
-
-        private static void UsingUnreleasedVersion(FoundReleases foundReleases)
-        {
-            ImageStatus = Resources.warning24;
-            InvokeVersionUpdateChanged(new EventArgs());
-            UpdateTip = new SuperToolTip();
-            UpdateTip.Items.AddTitle(string.Format("You are using an unofficial build of YANFOE ({0}).", YANFOE.Settings.ConstSettings.Application.ApplicationBuild));
-            UpdateTip.Items.Add(string.Format("Double click to download build {0}", foundReleases.BuildNumber));
-            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
-        }
-
-        public static void UpdateAvailable(FoundReleases foundReleases)
-        {
-            ImageStatus = Resources.new24;
-            InvokeVersionUpdateChanged(new EventArgs());
-            UpdateTip = new SuperToolTip();
-            UpdateTip.Items.AddTitle("New Update Available!");
-            UpdateTip.Items.Add("Double click to download the latest release build.");
-            UpdateLink = string.Format("https://github.com/yanfoe/YANFOE.v2/downloads/YANFOE.v{0}.{1}-{2}.Build.{3}.zip", foundReleases.Major, foundReleases.Minor, foundReleases.Milestone, foundReleases.BuildNumber);
-        }
-
+        /// <summary>
+        /// The found releases.
+        /// </summary>
         public class FoundReleases
         {
+            #region Public Properties
+
+            /// <summary>
+            /// Gets or sets the build number.
+            /// </summary>
+            public string BuildNumber { get; set; }
+
+            /// <summary>
+            /// Gets or sets the major.
+            /// </summary>
             public int Major { get; set; }
 
-            public int Minor { get; set; }
-
+            /// <summary>
+            /// Gets or sets the milestone.
+            /// </summary>
             public string Milestone { get; set; }
 
-            public string BuildNumber { get; set; }
+            /// <summary>
+            /// Gets or sets the minor.
+            /// </summary>
+            public int Minor { get; set; }
+
+            #endregion
         }
     }
 }

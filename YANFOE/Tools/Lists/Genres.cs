@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Genres.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Genres.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The genres.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Lists
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -21,15 +25,17 @@ namespace YANFOE.Tools.Lists
 
     using YANFOE.Tools.Enums;
 
+    #endregion
+
     /// <summary>
-    /// The genres.
+    ///   The genres.
     /// </summary>
     public static class Genres
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The genres collection.
+        ///   The genres collection.
         /// </summary>
         private static readonly Dictionary<ScraperList, List<string>> GenresCollection;
 
@@ -38,7 +44,7 @@ namespace YANFOE.Tools.Lists
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="Genres"/> class.
+        ///   Initializes static members of the <see cref="Genres" /> class.
         /// </summary>
         static Genres()
         {
@@ -53,32 +59,32 @@ namespace YANFOE.Tools.Lists
 
             GenreFilmUp = new List<string>
                 {
-                    "Azione",
-                    "Avventura",
-                    "Animazione",
-                    "Biografia",
-                    "Comedy",
-                    "Crime",
-                    "Documentario",
-                    "Drammatico",
-                    "Family",
-                    "Fantasy",
-                    "Film-Noir",
-                    "Game-Show",
-                    "Storia",
-                    "Horror",
-                    "Music",
-                    "Musical",
-                    "Mistero",
-                    "News",
-                    "Reality-TV",
-                    "Romance",
-                    "la fantascienza",
-                    "Short ",
-                    "Sport",
-                    "Talk-Show",
-                    "Thriller",
-                    "Guerra",
+                    "Azione", 
+                    "Avventura", 
+                    "Animazione", 
+                    "Biografia", 
+                    "Comedy", 
+                    "Crime", 
+                    "Documentario", 
+                    "Drammatico", 
+                    "Family", 
+                    "Fantasy", 
+                    "Film-Noir", 
+                    "Game-Show", 
+                    "Storia", 
+                    "Horror", 
+                    "Music", 
+                    "Musical", 
+                    "Mistero", 
+                    "News", 
+                    "Reality-TV", 
+                    "Romance", 
+                    "la fantascienza", 
+                    "Short ", 
+                    "Sport", 
+                    "Talk-Show", 
+                    "Thriller", 
+                    "Guerra", 
                     "Western"
                 };
 
@@ -86,230 +92,230 @@ namespace YANFOE.Tools.Lists
 
             GenreFilmWeb = new List<string>
                 {
-                    "Akcja",
-                    "Animacja",
-                    "Anime",
-                    "Baśń",
-                    "Biblijny",
-                    "Biograficzny",
-                    "Czarna komedia",
-                    "Dla dzieci",
-                    "Dla młodzieży",
-                    "Dokumentalizowany",
-                    "Dokumentalny",
-                    "Dramat",
-                    "Dramat historyczny",
-                    "Dramat obyczajowy",
-                    "Dramat sądowy",
-                    "Dramat społeczny",
-                    "Dreszczowiec",
-                    "Edukacyjny",
-                    "Erotyczny",
-                    "Etiuda",
-                    "Fabularyzowany dok.",
-                    "Familijny",
-                    "Fantasy",
-                    "Film-Noir",
-                    "Gangsterski",
-                    "Groteska filmowa",
-                    "Historyczny",
-                    "Horror",
-                    "Karate",
-                    "Katastroficzny",
-                    "Komedia",
-                    "Komedia dokumentalna",
-                    "Komedia kryminalna",
-                    "Komedia obycz.",
-                    "Komedia rom.",
-                    "Kostiumowy",
-                    "Kr&oacute;tkometrażowy",
-                    "Kryminał",
-                    "Melodramat",
-                    "Musical",
-                    "Muzyczny",
-                    "Niemy",
-                    "Nowele filmowe",
-                    "Obyczajowy",
-                    "Poetycki",
-                    "Polityczny",
-                    "Prawniczy",
-                    "Przygodowy",
-                    "Przyrodniczy",
-                    "Psychologiczny",
-                    "Płaszcza i szpady",
-                    "Religijny",
-                    "Romans",
-                    "Satyra",
-                    "Sci-Fi",
-                    "Sensacyjny",
-                    "Sportowy",
-                    "Surreallistyczny",
-                    "Szpiegowski",
-                    "Sztuki walki",
-                    "Thriller",
-                    "Western",
-                    "Wojenny",
+                    "Akcja", 
+                    "Animacja", 
+                    "Anime", 
+                    "Baśń", 
+                    "Biblijny", 
+                    "Biograficzny", 
+                    "Czarna komedia", 
+                    "Dla dzieci", 
+                    "Dla młodzieży", 
+                    "Dokumentalizowany", 
+                    "Dokumentalny", 
+                    "Dramat", 
+                    "Dramat historyczny", 
+                    "Dramat obyczajowy", 
+                    "Dramat sądowy", 
+                    "Dramat społeczny", 
+                    "Dreszczowiec", 
+                    "Edukacyjny", 
+                    "Erotyczny", 
+                    "Etiuda", 
+                    "Fabularyzowany dok.", 
+                    "Familijny", 
+                    "Fantasy", 
+                    "Film-Noir", 
+                    "Gangsterski", 
+                    "Groteska filmowa", 
+                    "Historyczny", 
+                    "Horror", 
+                    "Karate", 
+                    "Katastroficzny", 
+                    "Komedia", 
+                    "Komedia dokumentalna", 
+                    "Komedia kryminalna", 
+                    "Komedia obycz.", 
+                    "Komedia rom.", 
+                    "Kostiumowy", 
+                    "Kr&oacute;tkometrażowy", 
+                    "Kryminał", 
+                    "Melodramat", 
+                    "Musical", 
+                    "Muzyczny", 
+                    "Niemy", 
+                    "Nowele filmowe", 
+                    "Obyczajowy", 
+                    "Poetycki", 
+                    "Polityczny", 
+                    "Prawniczy", 
+                    "Przygodowy", 
+                    "Przyrodniczy", 
+                    "Psychologiczny", 
+                    "Płaszcza i szpady", 
+                    "Religijny", 
+                    "Romans", 
+                    "Satyra", 
+                    "Sci-Fi", 
+                    "Sensacyjny", 
+                    "Sportowy", 
+                    "Surreallistyczny", 
+                    "Szpiegowski", 
+                    "Sztuki walki", 
+                    "Thriller", 
+                    "Western", 
+                    "Wojenny", 
                     "XXX"
                 };
 
             GenreOfdb = new List<string>
                 {
-                    "Abenteuer",
-                    "Action",
-                    "Amateur",
-                    "Animation",
-                    "Biographie",
-                    "Dokumentation",
-                    "Drama",
-                    "Eastern",
-                    "Erotik",
-                    "Experimentalfilm",
-                    "Fantasy",
-                    "Grusel",
-                    "Hardcore",
-                    "Heimatfilm",
-                    "Historienfilm",
-                    "Horror",
-                    "Kampfsport",
-                    "Katastrophen",
-                    "Kinder-/Familienfilm",
-                    "Komödie",
-                    "Krieg",
-                    "Krimi",
-                    "Kurzfilm",
-                    "Liebe/Romantik",
-                    "Manga/Anime",
-                    "Mondo",
-                    "Musikfilm",
-                    "Mystery",
-                    "Science-Fiction",
-                    "Sex",
-                    "Splatter",
-                    "Sportfilm",
-                    "TV-Mini-Serie",
-                    "TV-Serie",
-                    "Thriller",
-                    "Tierfilm",
-                    "Trash",
+                    "Abenteuer", 
+                    "Action", 
+                    "Amateur", 
+                    "Animation", 
+                    "Biographie", 
+                    "Dokumentation", 
+                    "Drama", 
+                    "Eastern", 
+                    "Erotik", 
+                    "Experimentalfilm", 
+                    "Fantasy", 
+                    "Grusel", 
+                    "Hardcore", 
+                    "Heimatfilm", 
+                    "Historienfilm", 
+                    "Horror", 
+                    "Kampfsport", 
+                    "Katastrophen", 
+                    "Kinder-/Familienfilm", 
+                    "Komödie", 
+                    "Krieg", 
+                    "Krimi", 
+                    "Kurzfilm", 
+                    "Liebe/Romantik", 
+                    "Manga/Anime", 
+                    "Mondo", 
+                    "Musikfilm", 
+                    "Mystery", 
+                    "Science-Fiction", 
+                    "Sex", 
+                    "Splatter", 
+                    "Sportfilm", 
+                    "TV-Mini-Serie", 
+                    "TV-Serie", 
+                    "Thriller", 
+                    "Tierfilm", 
+                    "Trash", 
                     "Western"
                 };
 
             GenreImdb = new List<string>
                 {
-                    "Action",
-                    "Adventure",
-                    "Animation",
-                    "Biography",
-                    "Comedy",
-                    "Crime",
-                    "Documentary",
-                    "Drama",
-                    "Family",
-                    "Fantasy",
-                    "Film-Noir",
-                    "Game-Show",
-                    "History",
-                    "Horror",
-                    "Music",
-                    "Musical",
-                    "Mystery",
-                    "News",
-                    "Reality-TV",
-                    "Romance",
-                    "Sci-Fi",
-                    "Short",
-                    "Sport",
-                    "Talk-Show",
-                    "Thriller",
-                    "War",
+                    "Action", 
+                    "Adventure", 
+                    "Animation", 
+                    "Biography", 
+                    "Comedy", 
+                    "Crime", 
+                    "Documentary", 
+                    "Drama", 
+                    "Family", 
+                    "Fantasy", 
+                    "Film-Noir", 
+                    "Game-Show", 
+                    "History", 
+                    "Horror", 
+                    "Music", 
+                    "Musical", 
+                    "Mystery", 
+                    "News", 
+                    "Reality-TV", 
+                    "Romance", 
+                    "Sci-Fi", 
+                    "Short", 
+                    "Sport", 
+                    "Talk-Show", 
+                    "Thriller", 
+                    "War", 
                     "Western"
                 };
 
             GenreKinopoisk = new List<string>
                 {
-                    "аниме",
-                    "биография",
-                    "боевик",
-                    "вестерн",
-                    "военный",
-                    "детектив",
-                    "детский",
-                    "для взрослых",
-                    "документальный",
-                    "драма",
-                    "игра",
-                    "история",
-                    "комедия",
-                    "концерт",
-                    "короткометражка",
-                    "криминал",
-                    "мелодрама",
-                    "музыка",
-                    "мультфильм",
-                    "мюзикл",
-                    "новости",
-                    "приключения",
-                    "реальное ТВ",
-                    "семейный",
-                    "спорт",
-                    "ток-шоу",
-                    "триллер",
-                    "ужасы",
-                    "фантастика",
-                    "фильм-нуар",
+                    "аниме", 
+                    "биография", 
+                    "боевик", 
+                    "вестерн", 
+                    "военный", 
+                    "детектив", 
+                    "детский", 
+                    "для взрослых", 
+                    "документальный", 
+                    "драма", 
+                    "игра", 
+                    "история", 
+                    "комедия", 
+                    "концерт", 
+                    "короткометражка", 
+                    "криминал", 
+                    "мелодрама", 
+                    "музыка", 
+                    "мультфильм", 
+                    "мюзикл", 
+                    "новости", 
+                    "приключения", 
+                    "реальное ТВ", 
+                    "семейный", 
+                    "спорт", 
+                    "ток-шоу", 
+                    "триллер", 
+                    "ужасы", 
+                    "фантастика", 
+                    "фильм-нуар", 
                     "фэнтези"
                 };
 
             GenreMovieMeter = new List<string>
                 {
-                    "Actie",
-                    "Animatie",
-                    "Avontuur",
-                    "Documentaire",
-                    "Drama",
-                    "Familie",
-                    "Fantasy",
-                    "Film-Noir",
-                    "Horror",
-                    "Komedie",
-                    "Mini-series",
-                    "Misdaad",
-                    "Muziek",
-                    "Mystery",
-                    "Oorlog",
-                    "Roadmovie",
-                    "Romantiek",
-                    "Science-Fiction",
-                    "Thriller",
+                    "Actie", 
+                    "Animatie", 
+                    "Avontuur", 
+                    "Documentaire", 
+                    "Drama", 
+                    "Familie", 
+                    "Fantasy", 
+                    "Film-Noir", 
+                    "Horror", 
+                    "Komedie", 
+                    "Mini-series", 
+                    "Misdaad", 
+                    "Muziek", 
+                    "Mystery", 
+                    "Oorlog", 
+                    "Roadmovie", 
+                    "Romantiek", 
+                    "Science-Fiction", 
+                    "Thriller", 
                     "Western"
                 };
 
             GenreSratim = new List<string>
                 {
-                    "הלועפ",
-                    "םירגובמ",
-                    "תואקתפרה",
-                    "היצמינא",
-                    "היפרגויב",
-                    "הידמוק",
-                    "עשפ",
-                    "ידועית",
-                    "המרד",
-                    "החפשמ",
-                    "היזטנפ",
-                    "לפא",
-                    "ןועושעש",
-                    "הירוטסיה",
-                    "המיא",
-                    "הקיזומ",
-                    "רמזחמ",
-                    "ןירותסימ",
-                    "תושדח",
-                    "יטילאיר",
-                    "הקיטנמור",
-                    "ינוידב עדמ",
-                    "רצק",
-                    "טרופס",
+                    "הלועפ", 
+                    "םירגובמ", 
+                    "תואקתפרה", 
+                    "היצמינא", 
+                    "היפרגויב", 
+                    "הידמוק", 
+                    "עשפ", 
+                    "ידועית", 
+                    "המרד", 
+                    "החפשמ", 
+                    "היזטנפ", 
+                    "לפא", 
+                    "ןועושעש", 
+                    "הירוטסיה", 
+                    "המיא", 
+                    "הקיזומ", 
+                    "רמזחמ", 
+                    "ןירותסימ", 
+                    "תושדח", 
+                    "יטילאיר", 
+                    "הקיטנמור", 
+                    "ינוידב עדמ", 
+                    "רצק", 
+                    "טרופס", 
                     "חוריא"
                 };
         }
@@ -319,77 +325,77 @@ namespace YANFOE.Tools.Lists
         #region Properties
 
         /// <summary>
-        /// Gets or sets the genre list for Allocine.
+        ///   Gets or sets the genre list for Allocine.
         /// </summary>
-        /// <value>The Allocine genre collection.</value>
+        /// <value> The Allocine genre collection. </value>
         private static List<string> GenreAllocine { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for FilmAffinity.
+        ///   Gets or sets the genre list for FilmAffinity.
         /// </summary>
-        /// <value>The FilmAffinity genre collection.</value>
+        /// <value> The FilmAffinity genre collection. </value>
         private static List<string> GenreFilmAffinity { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for FilmDelta.
+        ///   Gets or sets the genre list for FilmDelta.
         /// </summary>
-        /// <value>The FilmDelta genre collection.</value>
+        /// <value> The FilmDelta genre collection. </value>
         private static List<string> GenreFilmDelta { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for FilmUp.
+        ///   Gets or sets the genre list for FilmUp.
         /// </summary>
-        /// <value>The FilmUp genre collection.</value>
+        /// <value> The FilmUp genre collection. </value>
         private static List<string> GenreFilmUp { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for FilmWeb.
+        ///   Gets or sets the genre list for FilmWeb.
         /// </summary>
-        /// <value>The FilmWeb genre collection.</value>
+        /// <value> The FilmWeb genre collection. </value>
         private static List<string> GenreFilmWeb { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for IMDB.
+        ///   Gets or sets the genre list for IMDB.
         /// </summary>
-        /// <value>The IMDB genre collection.</value>
+        /// <value> The IMDB genre collection. </value>
         private static List<string> GenreImdb { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for Kinopoisk.
+        ///   Gets or sets the genre list for Kinopoisk.
         /// </summary>
-        /// <value>The Kinopoisk genre collection.</value>
+        /// <value> The Kinopoisk genre collection. </value>
         private static List<string> GenreKinopoisk { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for MovieMeter.
+        ///   Gets or sets the genre list for MovieMeter.
         /// </summary>
-        /// <value>The MovieMeter genre collection.</value>
+        /// <value> The MovieMeter genre collection. </value>
         private static List<string> GenreMovieMeter { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for OFDB.
+        ///   Gets or sets the genre list for OFDB.
         /// </summary>
-        /// <value>The OFDB genre collection.</value>
+        /// <value> The OFDB genre collection. </value>
         private static List<string> GenreOfdb { get; set; }
 
         /// <summary>
-        /// Gets or sets the genre list for Sratim.
+        ///   Gets or sets the genre list for Sratim.
         /// </summary>
-        /// <value>The Sratim genre collection.</value>
+        /// <value> The Sratim genre collection. </value>
         private static List<string> GenreSratim { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Get genre list.
         /// </summary>
         /// <param name="scraperList">
-        /// The scraper list.
+        /// The scraper list. 
         /// </param>
         /// <returns>
-        /// Scraper list genres
+        /// Scraper list genres 
         /// </returns>
         public static List<string> GetGenreList(ScraperList scraperList = ScraperList.Imdb)
         {
@@ -405,10 +411,10 @@ namespace YANFOE.Tools.Lists
         /// Reads the genre from XML.
         /// </summary>
         /// <param name="scraperListType">
-        /// Type of the scraper list.
+        /// Type of the scraper list. 
         /// </param>
         /// <returns>
-        /// Genre collection
+        /// Genre collection 
         /// </returns>
         public static List<string> ReadGenreFromXml(ScraperList scraperListType)
         {

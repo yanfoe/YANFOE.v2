@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MediaPathFileModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MediaPathFileModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The media path file model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
+    #region Required Namespaces
+
     using System;
 
     using Newtonsoft.Json;
@@ -21,42 +25,44 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// The media path file model.
+    ///   The media path file model.
     /// </summary>
     [Serializable]
     [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class MediaPathFileModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The added.
+        ///   The added.
         /// </summary>
         private DateTime added;
 
         /// <summary>
-        /// The default video source.
+        ///   The default video source.
         /// </summary>
         private string defaultVideoSource;
 
         /// <summary>
-        /// The media path type.
+        ///   The media path type.
         /// </summary>
         private AddFolderType mediaPathType;
 
         /// <summary>
-        /// The path and filename
+        ///   The path and filename
         /// </summary>
         private string pathAndFileName;
 
         /// <summary>
-        /// The scraper group.
+        ///   The scraper group.
         /// </summary>
         private string scraperGroup;
 
         /// <summary>
-        /// The MediaPathFileType type.
+        ///   The MediaPathFileType type.
         /// </summary>
         private MediaPathFileType type;
 
@@ -65,7 +71,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MediaPathFileModel"/> class.
+        ///   Initializes a new instance of the <see cref="MediaPathFileModel" /> class.
         /// </summary>
         public MediaPathFileModel()
         {
@@ -81,57 +87,57 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         #region Enums
 
         /// <summary>
-        /// The media path file type.
+        ///   The media path file type.
         /// </summary>
         public enum MediaPathFileType
         {
             /// <summary>
-            /// MediaPathFileType: unknown.
+            ///   MediaPathFileType: unknown.
             /// </summary>
             Unknown = 0, 
 
             /// <summary>
-            /// MediaPathFileType: tv.
+            ///   MediaPathFileType: TV.
             /// </summary>
             TV = 1, 
 
             /// <summary>
-            /// MediaPathFileType: movie.
+            ///   MediaPathFileType: movie.
             /// </summary>
             Movie = 2, 
 
             /// <summary>
-            /// MediaPathFileType: image.
+            ///   MediaPathFileType: image.
             /// </summary>
             Image = 3, 
 
             /// <summary>
-            /// MediaPathFileType: nfo.
+            ///   MediaPathFileType: NFO.
             /// </summary>
             NFO = 4, 
 
             /// <summary>
-            /// MediaPathFileType: music.
+            ///   MediaPathFileType: music.
             /// </summary>
             Music = 5, 
 
             /// <summary>
-            /// MediaPathFileType: video.
+            ///   MediaPathFileType: video.
             /// </summary>
             Video = 6, 
 
             /// <summary>
-            /// MediaPathFileType: sample.
+            ///   MediaPathFileType: sample.
             /// </summary>
             Sample = 7
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Added.
+        ///   Gets or sets Added.
         /// </summary>
         public DateTime Added
         {
@@ -148,7 +154,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets DefaultVideoSource.
+        ///   Gets or sets DefaultVideoSource.
         /// </summary>
         public string DefaultVideoSource
         {
@@ -164,6 +170,9 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             }
         }
 
+        /// <summary>
+        /// Gets the filename.
+        /// </summary>
         [JsonIgnore]
         public string Filename
         {
@@ -174,7 +183,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets FilenameExt.
+        ///   Gets FilenameExt.
         /// </summary>
         [JsonIgnore]
         public string FilenameExt
@@ -186,7 +195,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets FilenameWithOutExt.
+        ///   Gets FilenameWithOutExt.
         /// </summary>
         [JsonIgnore]
         public string FilenameWithOutExt
@@ -198,7 +207,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets MediaPathType.
+        ///   Gets or sets MediaPathType.
         /// </summary>
         public AddFolderType MediaPathType
         {
@@ -215,7 +224,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets Path.
+        ///   Gets Path.
         /// </summary>
         [JsonIgnore]
         public string Path
@@ -227,7 +236,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets Path.
+        ///   Gets or sets Path.
         /// </summary>
         public string PathAndFileName
         {
@@ -244,7 +253,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets ScraperGroup.
+        ///   Gets or sets ScraperGroup.
         /// </summary>
         public string ScraperGroup
         {
@@ -261,7 +270,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets Type.
+        ///   Gets or sets Type.
         /// </summary>
         public MediaPathFileType Type
         {
@@ -279,17 +288,29 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Build a MediaPathFileModel
         /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="type">The MediaPathFileType type.</param>
-        /// <param name="nameBy">The AddFolderType name by.</param>
-        /// <param name="scraperGroup">The scraper Group.</param>
-        /// <param name="defaultSource">The default Source.</param>
-        /// <returns>MediaPathFileModel object</returns>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="type">
+        /// The MediaPathFileType type. 
+        /// </param>
+        /// <param name="nameBy">
+        /// The AddFolderType name by. 
+        /// </param>
+        /// <param name="scraperGroup">
+        /// The scraper Group. 
+        /// </param>
+        /// <param name="defaultSource">
+        /// The default Source. 
+        /// </param>
+        /// <returns>
+        /// MediaPathFileModel object 
+        /// </returns>
         public static MediaPathFileModel Add(
             string path, MediaPathFileType type, AddFolderType nameBy, string scraperGroup, string defaultSource)
         {

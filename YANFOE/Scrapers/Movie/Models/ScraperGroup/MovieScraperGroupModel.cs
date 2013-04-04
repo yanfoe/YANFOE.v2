@@ -1,155 +1,165 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieScraperGroupModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieScraperGroupModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie scraper group model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
 {
+    #region Required Namespaces
+
     using System;
 
-    using DevExpress.XtraEditors.DXErrorProvider;
-
+    using YANFOE.Tools.Error;
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// The movie scraper group model.
+    ///   The movie scraper group model.
     /// </summary>
     [Serializable]
-    public class MovieScraperGroupModel : ModelBase, IDXDataErrorInfo
+    public class MovieScraperGroupModel : ModelBase, IMyDataErrorInfo
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The cast field.
+        ///   The cast field.
         /// </summary>
         private string cast;
 
         /// <summary>
-        /// The certification.
+        ///   The certification.
         /// </summary>
         private string certification;
 
         /// <summary>
-        /// The country.
+        ///   The country.
         /// </summary>
         private string country;
 
         /// <summary>
-        /// The director.
+        ///   The director.
         /// </summary>
         private string director;
 
         /// <summary>
-        /// The fanart.
+        ///   The fanart.
         /// </summary>
         private string fanart;
 
         /// <summary>
-        /// The genre.
+        ///   The genre.
         /// </summary>
         private string genre;
 
         /// <summary>
-        /// The language.
+        /// The is dirty.
+        /// </summary>
+        private bool isDirty;
+
+        /// <summary>
+        ///   The language.
         /// </summary>
         private string language;
 
         /// <summary>
-        /// The mpaa field.
+        ///   The mpaa field.
         /// </summary>
         private string mpaa;
 
         /// <summary>
-        /// The Original title.
+        ///   The Original title.
         /// </summary>
         private string originalTitle;
 
         /// <summary>
-        /// The outline.
+        ///   The outline.
         /// </summary>
         private string outline;
 
         /// <summary>
-        /// The plot field.
+        ///   The plot field.
         /// </summary>
         private string plot;
 
         /// <summary>
-        /// The poster.
+        ///   The poster.
         /// </summary>
         private string poster;
 
         /// <summary>
-        /// The rating.
+        ///   The rating.
         /// </summary>
         private string rating;
 
         /// <summary>
-        /// The release date.
+        ///   The release date.
         /// </summary>
         private string releaseDate;
 
         /// <summary>
-        /// The runtime.
+        ///   The runtime.
         /// </summary>
         private string runtime;
 
         /// <summary>
-        /// The scraper description.
+        ///   The scraper description.
         /// </summary>
         private string scraperDescription;
 
         /// <summary>
-        /// The scraper name.
+        ///   The scraper name.
         /// </summary>
         private string scraperName;
 
         /// <summary>
-        /// The studio.
+        ///   The studio.
         /// </summary>
         private string studio;
 
         /// <summary>
-        /// The tagline.
+        ///   The tagline.
         /// </summary>
         private string tagline;
 
         /// <summary>
-        /// The title.
+        ///   The title.
         /// </summary>
         private string title;
 
         /// <summary>
-        /// The top 250.
+        ///   The top 250.
         /// </summary>
         private string top250;
 
         /// <summary>
-        /// The trailer.
+        ///   The trailer.
         /// </summary>
         private string trailer;
 
         /// <summary>
-        /// The votes.
+        ///   The votes.
         /// </summary>
         private string votes;
 
         /// <summary>
-        /// The writers.
+        ///   The writers.
         /// </summary>
         private string writers;
 
         /// <summary>
-        /// The year field.
+        ///   The year field.
         /// </summary>
         private string year;
 
@@ -158,7 +168,7 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieScraperGroupModel"/> class.
+        ///   Initializes a new instance of the <see cref="MovieScraperGroupModel" /> class.
         /// </summary>
         public MovieScraperGroupModel()
         {
@@ -185,16 +195,16 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
             this.fanart = string.Empty;
             this.poster = string.Empty;
             this.trailer = string.Empty;
-
             this.ClearScrapers();
+            this.IsDirty = false;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Cast.
+        ///   Gets or sets Cast.
         /// </summary>
         public string Cast
         {
@@ -208,13 +218,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.cast != value)
                 {
                     this.cast = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Cast");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Certification.
+        ///   Gets or sets Certification.
         /// </summary>
         public string Certification
         {
@@ -228,13 +239,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.certification != value)
                 {
                     this.certification = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Certification");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Country.
+        ///   Gets or sets Country.
         /// </summary>
         public string Country
         {
@@ -248,13 +260,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.country != value)
                 {
                     this.country = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Country");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Director.
+        ///   Gets or sets Director.
         /// </summary>
         public string Director
         {
@@ -268,13 +281,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.Director != value)
                 {
                     this.director = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Director");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Fanart.
+        ///   Gets or sets Fanart.
         /// </summary>
         public string Fanart
         {
@@ -288,13 +302,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.fanart != value)
                 {
                     this.fanart = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Fanart");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Genre.
+        ///   Gets or sets Genre.
         /// </summary>
         public string Genre
         {
@@ -308,13 +323,31 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.genre != value)
                 {
                     this.genre = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("genre");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Language.
+        /// Gets or sets a value indicating whether is dirty.
+        /// </summary>
+        public bool IsDirty
+        {
+            get
+            {
+                return this.isDirty;
+            }
+
+            set
+            {
+                this.isDirty = value;
+                this.OnPropertyChanged("IsDirty");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets Language.
         /// </summary>
         public string Language
         {
@@ -328,13 +361,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.language != value)
                 {
                     this.language = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Language");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Mpaa.
+        ///   Gets or sets Mpaa.
         /// </summary>
         public string Mpaa
         {
@@ -348,13 +382,35 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.mpaa != value)
                 {
                     this.mpaa = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Mpaa");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Outline.
+        /// Gets or sets the original title.
+        /// </summary>
+        public string OriginalTitle
+        {
+            get
+            {
+                return this.originalTitle;
+            }
+
+            set
+            {
+                if (this.originalTitle != value)
+                {
+                    this.originalTitle = value;
+                    this.IsDirty = true;
+                    this.OnPropertyChanged("OriginalTitle");
+                }
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets Outline.
         /// </summary>
         public string Outline
         {
@@ -368,30 +424,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.outline != value)
                 {
                     this.outline = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Outline");
                 }
             }
         }
 
-        public string OriginalTitle
-        {
-            get
-            {
-                return this.originalTitle;
-            }
-
-            set
-            {
-                if (this.originalTitle != value)
-                {
-                    this.originalTitle = value;
-                    this.OnPropertyChanged("OriginalTitle");
-                }
-            }
-        }
-
         /// <summary>
-        /// Gets or sets Plot.
+        ///   Gets or sets Plot.
         /// </summary>
         public string Plot
         {
@@ -405,13 +445,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.plot != value)
                 {
                     this.plot = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Plot");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Poster.
+        ///   Gets or sets Poster.
         /// </summary>
         public string Poster
         {
@@ -425,13 +466,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.poster != value)
                 {
                     this.poster = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Poster");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Rating.
+        ///   Gets or sets Rating.
         /// </summary>
         public string Rating
         {
@@ -445,13 +487,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.rating != value)
                 {
                     this.rating = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Rating");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets ReleaseDate.
+        ///   Gets or sets ReleaseDate.
         /// </summary>
         public string ReleaseDate
         {
@@ -465,13 +508,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.releaseDate != value)
                 {
                     this.releaseDate = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("ReleaseDate");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Runtime.
+        ///   Gets or sets Runtime.
         /// </summary>
         public string Runtime
         {
@@ -485,13 +529,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.runtime != value)
                 {
                     this.runtime = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Runtime");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets ScraperDescription.
+        ///   Gets or sets ScraperDescription.
         /// </summary>
         public string ScraperDescription
         {
@@ -505,13 +550,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.scraperDescription != value)
                 {
                     this.scraperDescription = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("ScraperDescription");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets FilePath.
+        ///   Gets or sets FilePath.
         /// </summary>
         public string ScraperName
         {
@@ -525,13 +571,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.scraperName != value)
                 {
                     this.scraperName = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("ScraperName");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Studio.
+        ///   Gets or sets Studio.
         /// </summary>
         public string Studio
         {
@@ -545,13 +592,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.studio != value)
                 {
                     this.studio = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Studio");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Tagline.
+        ///   Gets or sets Tagline.
         /// </summary>
         public string Tagline
         {
@@ -565,13 +613,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.tagline != value)
                 {
                     this.tagline = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Tagline");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Title.
+        ///   Gets or sets Title.
         /// </summary>
         public string Title
         {
@@ -585,13 +634,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.title != value)
                 {
                     this.title = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Title");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Top250.
+        ///   Gets or sets Top250.
         /// </summary>
         public string Top250
         {
@@ -605,13 +655,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.top250 != value)
                 {
                     this.top250 = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Top250");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Trailer.
+        ///   Gets or sets Trailer.
         /// </summary>
         public string Trailer
         {
@@ -625,13 +676,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.trailer != value)
                 {
                     this.trailer = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Trailer");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Votes.
+        ///   Gets or sets Votes.
         /// </summary>
         public string Votes
         {
@@ -643,12 +695,13 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
             set
             {
                 this.votes = value;
+                this.IsDirty = true;
                 this.OnPropertyChanged("Votes");
             }
         }
 
         /// <summary>
-        /// Gets or sets Writers.
+        ///   Gets or sets Writers.
         /// </summary>
         public string Writers
         {
@@ -662,13 +715,14 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.writers != value)
                 {
                     this.writers = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Writers");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets Year.
+        ///   Gets or sets Year.
         /// </summary>
         public string Year
         {
@@ -682,6 +736,7 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                 if (this.year != value)
                 {
                     this.year = value;
+                    this.IsDirty = true;
                     this.OnPropertyChanged("Year");
                 }
             }
@@ -689,10 +744,10 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The clear scrapers.
+        ///   The clear scrapers.
         /// </summary>
         public void ClearScrapers()
         {
@@ -722,16 +777,12 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
             this.Trailer = string.Empty;
         }
 
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IDXDataErrorInfo
-
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a business object.
         /// </summary>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
+        /// <param name="info">
+        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error. 
+        /// </param>
         public void GetError(ErrorInfo info)
         {
         }
@@ -739,8 +790,12 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a specific business object's property.
         /// </summary>
-        /// <param name="propertyName">A string that identifies the name of the property for which information on an error is to be returned.</param>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
+        /// <param name="propertyName">
+        /// A string that identifies the name of the property for which information on an error is to be returned. 
+        /// </param>
+        /// <param name="info">
+        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error. 
+        /// </param>
         public void GetPropertyError(string propertyName, ErrorInfo info)
         {
             switch (propertyName)
@@ -764,8 +819,6 @@ namespace YANFOE.Scrapers.Movie.Models.ScraperGroup
                     break;
             }
         }
-
-        #endregion
 
         #endregion
     }

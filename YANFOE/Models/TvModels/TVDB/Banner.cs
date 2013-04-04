@@ -1,104 +1,110 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Banner.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Banner.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The banner type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels.TVDB
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.Xml;
 
     using YANFOE.Tools.Xml;
 
+    #endregion
+
     /// <summary>
-    /// The banner type.
+    ///   The banner type.
     /// </summary>
     public enum BannerType
     {
         /// <summary>
-        /// The fanart.
+        ///   The fanart.
         /// </summary>
         Fanart, 
 
         /// <summary>
-        /// The poster.
+        ///   The poster.
         /// </summary>
         Poster, 
 
         /// <summary>
-        /// The season.
+        ///   The season.
         /// </summary>
         Season, 
 
         /// <summary>
-        /// The series.
+        ///   The series.
         /// </summary>
         Series, 
 
         /// <summary>
-        /// No type specified.
+        ///   No type specified.
         /// </summary>
         None
     }
 
     /// <summary>
-    /// The banner type 2.
+    ///   The banner type 2.
     /// </summary>
     public enum BannerType2
     {
         /// <summary>
-        /// Resolution 1920 x 1080.
+        ///   Resolution 1920 x 1080.
         /// </summary>
         r1920x1080, 
 
         /// <summary>
-        /// Resolution 1280 x 720.
+        ///   Resolution 1280 x 720.
         /// </summary>
         r1280x720, 
 
         /// <summary>
-        /// Resolution 680 x 1000.
+        ///   Resolution 680 x 1000.
         /// </summary>
         r680x1000, 
 
         /// <summary>
-        /// Season type.
+        ///   Season type.
         /// </summary>
         season, 
 
         /// <summary>
-        /// Seasonwide type.
+        ///   Seasonwide type.
         /// </summary>
         seasonwide, 
 
         /// <summary>
-        /// Graphical type.
+        ///   Graphical type.
         /// </summary>
         graphical, 
 
         /// <summary>
-        /// Text type.
+        ///   Text type.
         /// </summary>
         text, 
 
         /// <summary>
-        /// Blank type.
+        ///   Blank type.
         /// </summary>
         blank
     }
 
     /// <summary>
-    /// The banner.
+    ///   The banner.
     /// </summary>
     [Serializable]
     public class Banner
@@ -106,7 +112,7 @@ namespace YANFOE.Models.TvModels.TVDB
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Banner"/> class.
+        ///   Initializes a new instance of the <see cref="Banner" /> class.
         /// </summary>
         public Banner()
         {
@@ -118,36 +124,38 @@ namespace YANFOE.Models.TvModels.TVDB
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Fanart.
+        ///   Gets or sets Fanart.
         /// </summary>
         public List<BannerDetails> Fanart { get; set; }
 
         /// <summary>
-        /// Gets or sets Poster.
+        ///   Gets or sets Poster.
         /// </summary>
         public List<BannerDetails> Poster { get; set; }
 
         /// <summary>
-        /// Gets or sets Season.
+        ///   Gets or sets Season.
         /// </summary>
         public List<BannerDetails> Season { get; set; }
 
         /// <summary>
-        /// Gets or sets Series.
+        ///   Gets or sets Series.
         /// </summary>
         public List<BannerDetails> Series { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Populates the object with specified XML.
         /// </summary>
-        /// <param name="xml">The XML used to populate the object..</param>
+        /// <param name="xml">
+        /// The XML used to populate the object.. 
+        /// </param>
         public void Populate(string xml)
         {
             this.Fanart.Clear();
@@ -174,8 +182,8 @@ namespace YANFOE.Models.TvModels.TVDB
                         SeriesName = XRead.GetString(doc, "SeriesName"), 
                         ThumbnailPath = XRead.GetString(doc, "ThumbnailPath"), 
                         VignettePath = XRead.GetString(doc, "VignettePath"), 
-                        Season = XRead.GetString(doc, "Season"),
-                        Rating = XRead.GetString(doc, "Rating"),
+                        Season = XRead.GetString(doc, "Season"), 
+                        Rating = XRead.GetString(doc, "Rating"), 
                         RatingCount = XRead.GetString(doc, "RatingCount")
                     };
 

@@ -1,22 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="XRead.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="XRead.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   XmlDocument helper class to read from XmlDocument object.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Xml
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -25,25 +28,28 @@ namespace YANFOE.Tools.Xml
 
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// XmlDocument helper class to read from XmlDocument object.
+    ///   XmlDocument helper class to read from XmlDocument object.
     /// </summary>
     public static class XRead
     {
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The get bool.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <returns>
-        /// The get bool.
+        /// The get bool. 
         /// </returns>
         public static bool GetBool(XmlDocument doc, string tag)
         {
@@ -57,12 +63,13 @@ namespace YANFOE.Tools.Xml
         /// Gets a date time value from an XmlDocument.
         /// </summary>
         /// <param name="doc">
-        /// The XMlDocument Object
+        /// The XMlDocument Object 
         /// </param>
         /// <param name="tag">
-        /// The tag to extract
+        /// The tag to extract 
         /// </param>
         /// <returns>
+        /// The <see cref="DateTime"/>.
         /// </returns>
         public static DateTime GetDateTime(XmlDocument doc, string tag)
         {
@@ -82,15 +89,16 @@ namespace YANFOE.Tools.Xml
         /// The get date time.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <param name="format">
-        /// The format.
+        /// The format. 
         /// </param>
         /// <returns>
+        /// The <see cref="DateTime"/>.
         /// </returns>
         public static DateTime GetDateTime(XmlDocument doc, string tag, string format)
         {
@@ -111,13 +119,13 @@ namespace YANFOE.Tools.Xml
         /// Gets a double value from an XmlDocument.
         /// </summary>
         /// <param name="doc">
-        /// The XMlDocument Object
+        /// The XMlDocument Object 
         /// </param>
         /// <param name="tag">
-        /// The tag to extract
+        /// The tag to extract 
         /// </param>
         /// <returns>
-        /// The get double.
+        /// The get double. 
         /// </returns>
         public static double GetDouble(XmlDocument doc, string tag)
         {
@@ -131,13 +139,13 @@ namespace YANFOE.Tools.Xml
         /// The get dynamic.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <returns>
-        /// The get dynamic.
+        /// The get dynamic. 
         /// </returns>
         public static dynamic GetDynamic(XmlDocument doc, string tag)
         {
@@ -150,13 +158,13 @@ namespace YANFOE.Tools.Xml
         /// Gets a int value from an XmlDocument.
         /// </summary>
         /// <param name="doc">
-        /// The XMlDocument Object
+        /// The XMlDocument Object 
         /// </param>
         /// <param name="tag">
-        /// The tag to extract
+        /// The tag to extract 
         /// </param>
         /// <returns>
-        /// The get int.
+        /// The get int. 
         /// </returns>
         public static int GetInt(XmlDocument doc, string tag)
         {
@@ -170,13 +178,13 @@ namespace YANFOE.Tools.Xml
         /// The get long.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <returns>
-        /// The get long.
+        /// The get long. 
         /// </returns>
         public static long GetLong(XmlDocument doc, string tag)
         {
@@ -190,17 +198,18 @@ namespace YANFOE.Tools.Xml
         /// The get person list.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <param name="delimiter">
-        /// The delimiter.
+        /// The delimiter. 
         /// </param>
         /// <returns>
+        /// The <see cref="ThreadedBindingList"/>.
         /// </returns>
-        public static BindingList<PersonModel> GetPersonList(XmlDocument doc, string tag, char delimiter = ',')
+        public static ThreadedBindingList<PersonModel> GetPersonList(XmlDocument doc, string tag, char delimiter = ',')
         {
             string value = GetString(doc, tag);
             return value.ToPersonList(delimiter);
@@ -210,16 +219,16 @@ namespace YANFOE.Tools.Xml
         /// Gets a string object from an XmlDocument.
         /// </summary>
         /// <param name="doc">
-        /// The XMlDocument Object
+        /// The XMlDocument Object 
         /// </param>
         /// <param name="tag">
-        /// The tag to extract
+        /// The tag to extract 
         /// </param>
         /// <param name="index">
-        /// The index of the tag (Default = 0)
+        /// The index of the tag (Default = 0) 
         /// </param>
         /// <returns>
-        /// The get string.
+        /// The get string. 
         /// </returns>
         public static string GetString(XmlDocument doc, string tag, int index = 0)
         {
@@ -240,12 +249,13 @@ namespace YANFOE.Tools.Xml
         /// The get strings.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <returns>
+        /// The <see cref="List"/>.
         /// </returns>
         public static List<string> GetStrings(XmlDocument doc, string tag)
         {
@@ -256,12 +266,13 @@ namespace YANFOE.Tools.Xml
         /// The get u int.
         /// </summary>
         /// <param name="doc">
-        /// The doc.
+        /// The doc. 
         /// </param>
         /// <param name="tag">
-        /// The tag.
+        /// The tag. 
         /// </param>
         /// <returns>
+        /// The <see cref="uint?"/>.
         /// </returns>
         public static uint? GetUInt(XmlDocument doc, string tag)
         {
@@ -275,9 +286,10 @@ namespace YANFOE.Tools.Xml
         /// The open path.
         /// </summary>
         /// <param name="path">
-        /// The path.
+        /// The path. 
         /// </param>
         /// <returns>
+        /// The <see cref="XmlDocument"/>.
         /// </returns>
         public static XmlDocument OpenPath(string path)
         {
@@ -298,9 +310,10 @@ namespace YANFOE.Tools.Xml
         /// The open xml.
         /// </summary>
         /// <param name="xml">
-        /// The xml.
+        /// The xml. 
         /// </param>
         /// <returns>
+        /// The <see cref="XmlDocument"/>.
         /// </returns>
         public static XmlDocument OpenXml(string xml)
         {

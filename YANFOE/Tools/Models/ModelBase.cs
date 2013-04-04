@@ -1,41 +1,48 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ModelBase.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="ModelBase.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The Model Base Class
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Models
 {
+    #region Required Namespaces
+
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
 
     using YANFOE.Factories.Internal;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The Model Base Class
+    ///   The Model Base Class
     /// </summary>
     [Serializable]
     public abstract class ModelBase : INotifyPropertyChanged, IDisposable
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The disposed.
+        ///   The disposed.
         /// </summary>
         private bool disposed;
 
         /// <summary>
-        /// The handle.
+        ///   The handle.
         /// </summary>
         private IntPtr handle;
 
@@ -44,55 +51,47 @@ namespace YANFOE.Tools.Models
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelBase"/> class.
+        ///   Initializes a new instance of the <see cref="ModelBase" /> class.
         /// </summary>
         public ModelBase()
         {
-            this.ChangedValues = new BindingList<string>();
+            this.ChangedValues = new ThreadedBindingList<string>();
         }
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
-        /// Occurs when a property value changes.
+        ///   Occurs when a property value changes.
         /// </summary>
         [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the changed values.
+        ///   Gets or sets the changed values.
         /// </summary>
-        /// <value>
-        /// The changed values.
-        /// </value>
-        public BindingList<string> ChangedValues { get; set; }
+        /// <value> The changed values. </value>
+        public ThreadedBindingList<string> ChangedValues { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The clear changes.
+        ///   The clear changes.
         /// </summary>
         public void ClearChanges()
         {
             this.ChangedValues.Clear();
         }
 
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IDisposable
-
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {
@@ -102,15 +101,13 @@ namespace YANFOE.Tools.Models
 
         #endregion
 
-        #endregion
-
         #region Methods
 
         /// <summary>
         /// The dispose.
         /// </summary>
         /// <param name="disposing">
-        /// The disposing.
+        /// The disposing. 
         /// </param>
         protected virtual void Dispose(bool disposing)
         {
@@ -128,7 +125,10 @@ namespace YANFOE.Tools.Models
         /// Called when [property changed].
         /// </summary>
         /// <param name="name">
-        /// The name of the changed variable
+        /// The name of the changed variable 
+        /// </param>
+        /// <param name="databaseDirty">
+        /// The database Dirty.
         /// </param>
         protected void OnPropertyChanged(string name, bool databaseDirty = false)
         {
@@ -161,10 +161,10 @@ namespace YANFOE.Tools.Models
         /// The close handle.
         /// </summary>
         /// <param name="handle">
-        /// The handle.
+        /// The handle. 
         /// </param>
         /// <returns>
-        /// bool value
+        /// bool value 
         /// </returns>
         [DllImport("Kernel32")]
         private static extern bool CloseHandle(IntPtr handle);

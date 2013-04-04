@@ -1,75 +1,147 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieScraperGroupFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieScraperGroupFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Factory for all Movie Scraper Group functionality
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Scraper
 {
+    #region Required Namespaces
+
     using System;
-    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Xml.Serialization;
 
     using BitFactory.Logging;
-
-    using DevExpress.XtraEditors;
 
     using Newtonsoft.Json;
 
     using YANFOE.InternalApps.Logs;
     using YANFOE.Scrapers.Movie.Models.ScraperGroup;
     using YANFOE.Settings;
+    using YANFOE.Tools;
     using YANFOE.Tools.Compression;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// Factory for all Movie Scraper Group functionality
+    ///   Factory for all Movie Scraper Group functionality
     /// </summary>
-    public static class MovieScraperGroupFactory
+    public class MovieScraperGroupFactory : FactoryBase
     {
+        #region Static Fields
+
+        /// <summary>
+        /// The instance.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Implements Singleton.")]
+        public static MovieScraperGroupFactory Instance = new MovieScraperGroupFactory();
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="MovieScraperGroupFactory"/> class.
+        /// Prevents a default instance of the <see cref="MovieScraperGroupFactory"/> class from being created. 
+        ///   Initializes static members of the <see cref="MovieScraperGroupFactory"/> class.
         /// </summary>
-        static MovieScraperGroupFactory()
+        private MovieScraperGroupFactory()
         {
-            ScraperGroup = new BindingList<string>();
+            this.ScraperGroup = new ThreadedBindingList<string>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the scraper group.
+        ///   Gets or sets the scraper group.
         /// </summary>
-        /// <value>
-        /// The scraper group.
-        /// </value>
-        public static BindingList<string> ScraperGroup { get; set; }
+        /// <value> The scraper group. </value>
+        public ThreadedBindingList<string> ScraperGroup { get; set; }
+
+        /// <summary>
+        /// Gets the scraper groups on disk.
+        /// </summary>
+        public ThreadedBindingList<MovieScraperGroupModel> ScraperGroupsOnDisk
+        {
+            get
+            {
+                var list = new ThreadedBindingList<MovieScraperGroupModel>();
+
+                string path = Get.FileSystemPaths.PathDirScraperGroupsMovies;
+
+                try
+                {
+                    string[] scraperGroupList =
+                        FileHelper.GetFilesRecursive(Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.gz").ToArray();
+
+                    foreach (string f in scraperGroupList)
+                    {
+                        list.Add(this.GetScaperGroupModel(Path.GetFileNameWithoutExtension(f)));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteToLog(
+                        LogSeverity.Error, 
+                        0, 
+                        "Could not load scrapers from disk", 
+                        path + Environment.NewLine + ex.Message);
+                }
+
+                return list;
+            }
+        }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The delete scraper group.
+        /// </summary>
+        /// <param name="scraperGroupModel">
+        /// The scraper group model.
+        /// </param>
+        public void DeleteScraperGroup(MovieScraperGroupModel scraperGroupModel)
+        {
+            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupModel.ScraperName;
+
+            try
+            {
+                File.Delete(path + ".gz");
+                this.OnPropertyChanged("ScraperGroupsOnDisk");
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog(
+                    LogSeverity.Error, 0, "Could not delete scraper group", path + Environment.NewLine + ex.Message);
+            }
+        }
 
         /// <summary>
         /// Deserialize xml.
         /// </summary>
-        /// <param name="scraperGroupName">The scraper group name</param>
+        /// <param name="scraperGroupName">
+        /// The scraper group name 
+        /// </param>
         /// <returns>
-        /// A MovieScraperGroupModel object
+        /// A MovieScraperGroupModel object 
         /// </returns>
-        public static MovieScraperGroupModel DeserializeXml(string scraperGroupName)
+        public MovieScraperGroupModel DeserializeXml(string scraperGroupName)
         {
             string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".gz";
 
@@ -79,8 +151,9 @@ namespace YANFOE.Factories.Scraper
                 {
                     string json = Gzip.Decompress(path);
 
-                    var scraperGroupModel = JsonConvert.DeserializeObject(json, typeof(MovieScraperGroupModel)) as MovieScraperGroupModel;
-
+                    var scraperGroupModel =
+                        JsonConvert.DeserializeObject(json, typeof(MovieScraperGroupModel)) as MovieScraperGroupModel;
+                    scraperGroupModel.IsDirty = false;
                     return scraperGroupModel;
                 }
             }
@@ -94,17 +167,21 @@ namespace YANFOE.Factories.Scraper
         }
 
         /// <summary>
-        /// Gets the scaper group model.
+        /// Gets the scraper group model.
         /// </summary>
-        /// <param name="scraperGroupName">The scraper group name.</param>
-        /// <returns>The scaper group model.</returns>
-        public static MovieScraperGroupModel GetScaperGroupModel(string scraperGroupName)
+        /// <param name="scraperGroupName">
+        /// The scraper group name. 
+        /// </param>
+        /// <returns>
+        /// The scraper group model. 
+        /// </returns>
+        public MovieScraperGroupModel GetScaperGroupModel(string scraperGroupName)
         {
             string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupName + ".gz";
 
             if (File.Exists(path))
             {
-                return DeserializeXml(scraperGroupName);
+                return this.DeserializeXml(scraperGroupName);
             }
 
             Log.WriteToLog(LogSeverity.Error, 0, "Could not load scraper group", path);
@@ -112,69 +189,22 @@ namespace YANFOE.Factories.Scraper
             return new MovieScraperGroupModel();
         }
 
-        public static BindingList<string> GetScraperGroupsOnDisk()
-        {
-            return GetScraperGroupsOnDisk(null);
-        }
-
-        /// <summary>
-        /// Populates a combobox with scraper groups
-        /// </summary>
-        /// <param name="cmbScraperGroupList">The combobox.</param>
-        /// <returns>Scraper group list</returns>
-        public static BindingList<string> GetScraperGroupsOnDisk(ComboBoxEdit cmbScraperGroupList)
-        {
-            var list = new BindingList<string>();
-
-            string path = Get.FileSystemPaths.PathDirScraperGroupsMovies;
-
-            try
-            {
-                if (cmbScraperGroupList != null)
-                {
-                    cmbScraperGroupList.Properties.Items.Clear();
-                }
-
-                string[] scraperGroupList =
-                    FileHelper.GetFilesRecursive(
-                        Get.FileSystemPaths.PathDirScraperGroupsMovies, "*.gz").ToArray();
-
-                foreach (string f in scraperGroupList)
-                {
-                    if (cmbScraperGroupList != null)
-                    {
-                        cmbScraperGroupList.Properties.Items.Add(Path.GetFileNameWithoutExtension(f));
-                    }
-
-                    list.Add(Path.GetFileNameWithoutExtension(f));
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.WriteToLog(
-                    LogSeverity.Error, 0, "Could not load scrapers from disk", path + Environment.NewLine + ex.Message);
-            }
-
-            return list;
-        }
-
         /// <summary>
         /// The serialize to xml.
         /// </summary>
-        /// <param name="movie">The movie.</param>
-        public static void SerializeToXml(MovieScraperGroupModel scraperGroupModel)
+        /// <param name="scraperGroupModel">
+        /// The scraper Group Model.
+        /// </param>
+        public void SerializeToXml(MovieScraperGroupModel scraperGroupModel)
         {
             string path = Get.FileSystemPaths.PathDirScraperGroupsMovies + scraperGroupModel.ScraperName;
 
             try
             {
-                if (scraperGroupModel == null)
-                {
-                    scraperGroupModel = new MovieScraperGroupModel();
-                }
-
                 string json = JsonConvert.SerializeObject(scraperGroupModel);
                 Gzip.CompressString(json, path + ".gz");
+                scraperGroupModel.IsDirty = false;
+                this.OnPropertyChanged("ScraperGroupsOnDisk");
             }
             catch (Exception ex)
             {

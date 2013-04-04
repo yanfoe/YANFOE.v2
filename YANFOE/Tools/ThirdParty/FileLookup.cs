@@ -1,10 +1,47 @@
-﻿namespace YANFOE.Tools.ThirdParty
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="The YANFOE Project" file="FileLookup.cs">
+//   Copyright 2011 The YANFOE Project
+// </copyright>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
+// </license>
+// <summary>
+//   The file helper.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace YANFOE.Tools.ThirdParty
 {
-    using System.IO;
-    using System.Collections.Generic;
+    #region Required Namespaces
 
-    static class FileHelper
+    using System.Collections.Generic;
+    using System.IO;
+
+    #endregion
+
+    /// <summary>
+    /// The file helper.
+    /// </summary>
+    internal static class FileHelper
     {
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The get files recursive.
+        /// </summary>
+        /// <param name="b">
+        /// The b.
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
         public static List<string> GetFilesRecursive(string b, string pattern = "*.*")
         {
             // 1.
@@ -46,7 +83,10 @@
                     // Could not open the directory
                 }
             }
+
             return result;
         }
+
+        #endregion
     }
 }

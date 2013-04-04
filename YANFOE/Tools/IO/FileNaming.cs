@@ -1,43 +1,49 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileNaming.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="FileNaming.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The file naming.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.IO
 {
+    #region Required Namespaces
+
     using System;
     using System.IO;
     using System.Linq;
 
+    #endregion
+
     /// <summary>
-    /// The file naming.
+    ///   The file naming.
     /// </summary>
     public static class FileNaming
     {
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Remove illegal chars.
         /// </summary>
         /// <param name="filename">
-        /// The filename.
+        /// The filename. 
         /// </param>
         /// <returns>
-        /// Processed string
+        /// Processed string 
         /// </returns>
         public static string RemoveIllegalChars(string filename)
         {
             string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            return invalid.Aggregate(filename, (current, c) => current.Replace(c.ToString(), String.Empty));
+            return invalid.Aggregate(filename, (current, c) => current.Replace(c.ToString(), string.Empty));
         }
 
         #endregion

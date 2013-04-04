@@ -1,31 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Series.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Series.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The series.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels.Show
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Xml;
     using System.Xml.Linq;
-
-    using DevExpress.Utils;
-    using DevExpress.XtraBars.Ribbon;
 
     using Newtonsoft.Json;
 
@@ -35,179 +35,195 @@ namespace YANFOE.Models.TvModels.Show
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Properties;
+    using YANFOE.Settings;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
+    using YANFOE.UI.UserControls.CommonControls;
+
+    #endregion
 
     /// <summary>
-    /// The series.
+    ///   The series.
     /// </summary>
     [Serializable]
     [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class Series : ModelBase, IComparer
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The airs day of week.
+        ///   The airs day of week.
         /// </summary>
         private readonly string airsDayOfWeek;
 
         /// <summary>
-        /// The objects guid.
+        ///   The objects guid.
         /// </summary>
         private readonly string guid;
 
         /// <summary>
-        /// The added.
+        ///   The added.
         /// </summary>
         private string added;
 
         /// <summary>
-        /// The added by.
+        ///   The added by.
         /// </summary>
         private string addedBy;
 
         /// <summary>
-        /// The airs time.
+        ///   The airs time.
         /// </summary>
         private string airsTime;
 
         /// <summary>
-        /// The changed banner.
+        ///   The changed banner.
         /// </summary>
         private bool changedBanner;
 
         /// <summary>
-        /// The changed fanart.
+        ///   The changed fanart.
         /// </summary>
         private bool changedFanart;
 
         /// <summary>
-        /// The changed poster.
+        ///   The changed poster.
         /// </summary>
         private bool changedPoster;
 
         /// <summary>
-        /// The changed text.
+        ///   The changed text.
         /// </summary>
         private bool changedText;
 
         /// <summary>
-        /// The content rating.
+        ///   The content rating.
         /// </summary>
         private string contentRating;
 
         /// <summary>
-        /// The country.
+        ///   The country.
         /// </summary>
         private string country;
 
         /// <summary>
-        /// The fanart path.
+        ///   The fanart path.
         /// </summary>
         private string fanartPath;
 
         /// <summary>
-        /// The fanart.
+        ///   The fanart.
         /// </summary>
         private string fanartUrl;
 
         /// <summary>
-        /// The first aired.
+        ///   The first aired.
         /// </summary>
         private DateTime? firstAired;
 
         /// <summary>
-        /// The id value.
+        ///   The id value.
         /// </summary>
         private uint? id;
 
         /// <summary>
-        /// The imdb id.
+        ///   The imdb id.
         /// </summary>
         private string imdbId;
 
         /// <summary>
-        /// The language.
+        ///   The is locked.
+        /// </summary>
+        private bool isLocked;
+
+        /// <summary>
+        ///   The language.
         /// </summary>
         private string language;
 
         /// <summary>
-        /// The lastupdated.
+        ///   The lastupdated.
         /// </summary>
         private string lastupdated;
 
         /// <summary>
-        /// The network.
+        ///   The network.
         /// </summary>
         private string network;
 
         /// <summary>
-        /// The network id.
+        ///   The network id.
         /// </summary>
         private string networkID;
 
         /// <summary>
-        /// The overview.
+        ///   The overview.
         /// </summary>
         private string overview;
 
         /// <summary>
-        /// The poster path.
+        ///   The poster path.
         /// </summary>
         private string posterPath;
 
         /// <summary>
-        /// The poster.
+        ///   The poster.
         /// </summary>
         private string posterUrl;
 
         /// <summary>
-        /// The rating.
+        ///   The rating.
         /// </summary>
         private double? rating;
 
         /// <summary>
-        /// The runtime.
+        ///   The runtime.
         /// </summary>
         private int? runtime;
 
         /// <summary>
-        /// The series banner path.
+        ///   Gets or sets the seasons.
+        /// </summary>
+        /// <value> The seasons object. </value>
+        private ThreadedBindingList<Season> seasons;
+
+        /// <summary>
+        ///   The series banner path.
         /// </summary>
         private string seriesBannerPath;
 
         /// <summary>
-        /// The banner 1.
+        ///   The banner 1.
         /// </summary>
         private string seriesBannerUrl;
 
         /// <summary>
-        /// The series id.
+        ///   The series id.
         /// </summary>
         private uint? seriesID;
 
         /// <summary>
-        /// The series name.
+        ///   The series name.
         /// </summary>
         private string seriesName;
 
         /// <summary>
-        /// The small banner.
+        ///   The small banner.
         /// </summary>
         private Image smallBanner;
 
         /// <summary>
-        /// The status.
+        ///   The status.
         /// </summary>
         private string status;
 
         /// <summary>
-        /// The zap 2 it id.
+        ///   The zap 2 it id.
         /// </summary>
         private string zap2ItID;
 
@@ -216,7 +232,7 @@ namespace YANFOE.Models.TvModels.Show
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Series"/> class.
+        ///   Initializes a new instance of the <see cref="Series" /> class.
         /// </summary>
         public Series()
         {
@@ -226,7 +242,7 @@ namespace YANFOE.Models.TvModels.Show
             this.AirsDayOfWeek = string.Empty;
             this.ContentRating = string.Empty;
             this.FirstAired = null;
-            this.Genre = new BindingList<string>();
+            this.Genre = new ThreadedBindingList<string>();
             this.ImdbId = string.Empty;
             this.Language = string.Empty;
             this.Network = string.Empty;
@@ -246,33 +262,23 @@ namespace YANFOE.Models.TvModels.Show
             this.Zap2It_Id = string.Empty;
             this.airsDayOfWeek = string.Empty;
 
-            this.Actors = new BindingList<PersonModel>();
+            this.Actors = new ThreadedBindingList<PersonModel>();
             this.Banner = new Banner();
-            this.Seasons = new SortedList<int, Season>();
+            this.Seasons = new ThreadedBindingList<Season>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether [database saved].
+        ///   Gets or sets the actors.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
-        /// </value>
-        public bool DatabaseSaved { get; set; }
+        /// <value> The actors object </value>
+        public ThreadedBindingList<PersonModel> Actors { get; set; }
 
         /// <summary>
-        /// Gets or sets the actors.
-        /// </summary>
-        /// <value>
-        /// The actors object
-        /// </value>
-        public BindingList<PersonModel> Actors { get; set; }
-
-        /// <summary>
-        /// Gets or sets Added.
+        ///   Gets or sets Added.
         /// </summary>
         public string Added
         {
@@ -293,7 +299,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets AddedBy.
+        ///   Gets or sets AddedBy.
         /// </summary>
         public string AddedBy
         {
@@ -314,7 +320,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets AirsDayOfWeek.
+        ///   Gets or sets AirsDayOfWeek.
         /// </summary>
         public string AirsDayOfWeek
         {
@@ -335,7 +341,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets AirsTime.
+        ///   Gets or sets AirsTime.
         /// </summary>
         public string AirsTime
         {
@@ -356,15 +362,13 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the banner object
+        ///   Gets or sets the banner object
         /// </summary>
-        /// <value>
-        /// The banner object
-        /// </value>
+        /// <value> The banner object </value>
         public Banner Banner { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedBanner.
+        ///   Gets or sets a value indicating whether ChangedBanner.
         /// </summary>
         public bool ChangedBanner
         {
@@ -385,7 +389,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedFanart.
+        ///   Gets or sets a value indicating whether ChangedFanart.
         /// </summary>
         public bool ChangedFanart
         {
@@ -406,7 +410,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedPoster.
+        ///   Gets or sets a value indicating whether ChangedPoster.
         /// </summary>
         public bool ChangedPoster
         {
@@ -427,7 +431,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedText.
+        ///   Gets or sets a value indicating whether ChangedText.
         /// </summary>
         public bool ChangedText
         {
@@ -448,7 +452,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets ContentRating.
+        ///   Gets or sets ContentRating.
         /// </summary>
         public string ContentRating
         {
@@ -469,7 +473,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Country.
+        ///   Gets or sets Country.
         /// </summary>
         public string Country
         {
@@ -490,7 +494,43 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets FanartPath.
+        ///   Gets or sets a value indicating whether [database saved].
+        /// </summary>
+        /// <value> <c>true</c> if [database saved]; otherwise, <c>false</c> . </value>
+        public bool DatabaseSaved { get; set; }
+
+        /// <summary>
+        ///   Gets the fanart image.
+        /// </summary>
+        [JsonIgnore]
+        public Image FanartImage
+        {
+            get
+            {
+                string url;
+
+                if (string.IsNullOrEmpty(this.FanartPath))
+                {
+                    url = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(this.FanartUrl), DownloadType.Binary, Section.Movies);
+                    this.FanartPath = url;
+                }
+                else
+                {
+                    url = this.FanartPath;
+                }
+
+                if (!File.Exists(url))
+                {
+                    return null;
+                }
+
+                return ImageHandler.LoadImage(url);
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets FanartPath.
         /// </summary>
         public string FanartPath
         {
@@ -518,7 +558,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Fanart.
+        ///   Gets or sets Fanart.
         /// </summary>
         public string FanartUrl
         {
@@ -539,7 +579,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (!string.IsNullOrEmpty(this.fanartUrl))
                     {
                         string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.fanartUrl, true), Section.Tv);
+                            TVDBFactory.Instance.GetImageUrl(this.fanartUrl, true), Section.Tv);
                         this.SmallFanart = ImageHandler.LoadImage(url, 100, 60);
                         this.fanartPath = string.Empty;
                     }
@@ -548,7 +588,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets FirstAired.
+        ///   Gets or sets FirstAired.
         /// </summary>
         public DateTime? FirstAired
         {
@@ -569,12 +609,12 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Genre.
+        ///   Gets or sets Genre.
         /// </summary>
-        public BindingList<string> Genre { get; set; }
+        public ThreadedBindingList<string> Genre { get; set; }
 
         /// <summary>
-        /// Gets or sets GenreAsString.
+        ///   Gets or sets GenreAsString.
         /// </summary>
         public string GenreAsString
         {
@@ -595,7 +635,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets Guid.
+        ///   Gets Guid.
         /// </summary>
         public string Guid
         {
@@ -606,7 +646,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets MovieUniqueId.
+        ///   Gets or sets MovieUniqueId.
         /// </summary>
         public uint? ID
         {
@@ -626,7 +666,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets ImdbId.
+        ///   Gets or sets ImdbId.
         /// </summary>
         public string ImdbId
         {
@@ -646,10 +686,8 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
-        private bool isLocked;
-
         /// <summary>
-        /// Gets or sets a value indicating whether IsLocked.
+        ///   Gets or sets a value indicating whether IsLocked.
         /// </summary>
         public bool IsLocked
         {
@@ -667,33 +705,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets a value indicating whether [not locked].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [not locked]; otherwise, <c>false</c>.
-        /// </value>
-        public bool NotLocked
-        {
-            get
-            {
-                return !this.isLocked;
-            }
-        }
-
-        /// <summary>
-        /// Gets the locked image.
-        /// </summary>
-        [JsonIgnore]
-        public Image LockedImage
-        {
-            get
-            {
-                return this.IsLocked ? Resources.locked32 : Resources.unlock32;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets Language.
+        ///   Gets or sets Language.
         /// </summary>
         public string Language
         {
@@ -714,7 +726,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Lastupdated.
+        ///   Gets or sets Lastupdated.
         /// </summary>
         public string Lastupdated
         {
@@ -735,12 +747,24 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets MediaPaths.
+        ///   Gets the locked image.
         /// </summary>
-        public BindingList<string> MediaPaths { get; set; }
+        [JsonIgnore]
+        public Image LockedImage
+        {
+            get
+            {
+                return this.IsLocked ? Resources.locked32 : Resources.unlock32;
+            }
+        }
 
         /// <summary>
-        /// Gets or sets Network.
+        ///   Gets or sets MediaPaths.
+        /// </summary>
+        public ThreadedBindingList<string> MediaPaths { get; set; }
+
+        /// <summary>
+        ///   Gets or sets Network.
         /// </summary>
         public string Network
         {
@@ -761,7 +785,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets NetworkID.
+        ///   Gets or sets NetworkID.
         /// </summary>
         public string NetworkID
         {
@@ -782,7 +806,19 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Overview.
+        ///   Gets a value indicating whether [not locked].
+        /// </summary>
+        /// <value> <c>true</c> if [not locked]; otherwise, <c>false</c> . </value>
+        public bool NotLocked
+        {
+            get
+            {
+                return !this.isLocked;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets Overview.
         /// </summary>
         public string Overview
         {
@@ -803,7 +839,37 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets PosterPath.
+        ///   Gets the poster image.
+        /// </summary>
+        [JsonIgnore]
+        public Image PosterImage
+        {
+            get
+            {
+                string url;
+
+                if (string.IsNullOrEmpty(this.PosterPath))
+                {
+                    url = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(this.PosterUrl), DownloadType.Binary, Section.Movies);
+                    this.PosterPath = url;
+                }
+                else
+                {
+                    url = this.PosterPath;
+                }
+
+                if (!File.Exists(url))
+                {
+                    return null;
+                }
+
+                return ImageHandler.LoadImage(url);
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets PosterPath.
         /// </summary>
         public string PosterPath
         {
@@ -831,7 +897,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Poster.
+        ///   Gets or sets Poster.
         /// </summary>
         public string PosterUrl
         {
@@ -852,7 +918,7 @@ namespace YANFOE.Models.TvModels.Show
                     if (!string.IsNullOrEmpty(this.posterUrl))
                     {
                         string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.posterUrl, true), Section.Tv);
+                            TVDBFactory.Instance.GetImageUrl(this.posterUrl, true), Section.Tv);
                         this.SmallPoster = ImageHandler.LoadImage(url, 100, 150);
                         this.posterPath = string.Empty;
                     }
@@ -861,7 +927,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Rating.
+        ///   Gets or sets Rating.
         /// </summary>
         public double? Rating
         {
@@ -882,7 +948,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Runtime.
+        ///   Gets or sets Runtime.
         /// </summary>
         public int? Runtime
         {
@@ -903,20 +969,98 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the seasons.
+        ///   Gets or sets the seasons.
         /// </summary>
-        /// <value>
-        /// The seasons object.
-        /// </value>
-        public SortedList<int, Season> Seasons { get; set; }
+        public ThreadedBindingList<Season> Seasons
+        {
+            get
+            {
+                return this.seasons;
+            }
+
+            set
+            {
+                this.seasons = value;
+                this.OnPropertyChanged("Seasons");
+            }
+        }
 
         /// <summary>
-        /// Gets or sets SeriesBannerPath.
+        ///   Gets the series banner alt gallery.
+        /// </summary>
+        [JsonIgnore]
+        public GalleryItemGroup SeriesBannerAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+
+                var images = from i in this.Banner.Series
+                             where i.BannerType2 == BannerType2.graphical
+                             orderby i.Rating descending
+                             select i;
+
+                foreach (var image in images)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, Get.Ui.PictureThumbnailBanner);
+
+                        var superTip = new SuperToolTip { AllowHtmlText = true };
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                               Tag = "tvSeriesBanner|" + image.BannerPath, SuperTip = superTip 
+                            };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        /// <summary>
+        ///   Gets the series banner image.
+        /// </summary>
+        [JsonIgnore]
+        public Image SeriesBannerImage
+        {
+            get
+            {
+                string url;
+
+                if (string.IsNullOrEmpty(this.SeriesBannerPath))
+                {
+                    url = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(this.SeriesBannerUrl), DownloadType.Binary, Section.Movies);
+                    this.SeriesBannerPath = url;
+                }
+                else
+                {
+                    url = this.SeriesBannerPath;
+                }
+
+                if (!File.Exists(url))
+                {
+                    return null;
+                }
+
+                return ImageHandler.LoadImage(url);
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets SeriesBannerPath.
         /// </summary>
         public string SeriesBannerPath
         {
-
-
             get
             {
                 return this.seriesBannerPath;
@@ -940,7 +1084,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets banner.
+        ///   Gets or sets banner.
         /// </summary>
         public string SeriesBannerUrl
         {
@@ -960,8 +1104,9 @@ namespace YANFOE.Models.TvModels.Show
 
                     if (!string.IsNullOrEmpty(this.seriesBannerUrl))
                     {
-                        string url = WebCache.GetPathFromUrl(
-                            TvDBFactory.GetImageUrl(this.seriesBannerUrl, true), Section.Tv);
+                        string url =
+                            WebCache.GetPathFromUrl(
+                                TVDBFactory.Instance.GetImageUrl(this.seriesBannerUrl, true), Section.Tv);
                         this.SmallFanart = ImageHandler.LoadImage(url, 100, 30);
                         this.seriesBannerPath = string.Empty;
                     }
@@ -970,7 +1115,45 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SeriesID.
+        ///   Gets the series fanart alt gallery.
+        /// </summary>
+        [JsonIgnore]
+        public GalleryItemGroup SeriesFanartAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+                var images = from i in this.Banner.Fanart orderby i.Rating descending select i;
+
+                foreach (var image in images)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, Get.Ui.PictureThumbnailFanart);
+
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = true;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                               Tag = "tvSeriesFanart|" + image.BannerPath, SuperTip = superTip 
+                            };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets SeriesID.
         /// </summary>
         public uint? SeriesID
         {
@@ -991,7 +1174,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SeriesName.
+        ///   Gets or sets SeriesName.
         /// </summary>
         public string SeriesName
         {
@@ -1007,14 +1190,13 @@ namespace YANFOE.Models.TvModels.Show
                     if (this.seriesName != null)
                     {
                         var seriesIndex =
-                            (from s in TvDBFactory.MasterSeriesNameList
-                             where s.SeriesGuid == this.guid
-                             select s).SingleOrDefault();
+                            (from s in TVDBFactory.Instance.MasterSeriesList where s.SeriesGuid == this.guid select s).
+                                SingleOrDefault();
 
                         if (seriesIndex != null)
                         {
                             seriesIndex.SeriesName = value;
-                            TvDBFactory.InvokeMasterSeriesNameListChanged(new EventArgs());
+                            TVDBFactory.Instance.InvokeMasterSeriesNameListChanged(new EventArgs());
                         }
                     }
 
@@ -1026,7 +1208,45 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SmallBanner.
+        ///   Gets the series poster alt gallery.
+        /// </summary>
+        [JsonIgnore]
+        public GalleryItemGroup SeriesPosterAltGallery
+        {
+            get
+            {
+                var gallery = new GalleryItemGroup();
+                var images = from i in this.Banner.Poster orderby i.Rating descending select i;
+
+                foreach (var image in images)
+                {
+                    string path = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
+
+                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
+                    {
+                        Image resizedimage = ImageHandler.LoadImage(path, Get.Ui.PictureThumbnailPoster);
+
+                        var superTip = new SuperToolTip();
+                        superTip.AllowHtmlText = true;
+                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
+                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
+
+                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
+                            {
+                               Tag = "tvSeriesPoster|" + image.BannerPath, SuperTip = superTip 
+                            };
+
+                        gallery.Items.Add(galleryItem);
+                    }
+                }
+
+                return gallery;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets SmallBanner.
         /// </summary>
         [JsonIgnore]
         public Image SmallBanner
@@ -1047,7 +1267,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SmallFanart.
+        ///   Gets or sets SmallFanart.
         /// </summary>
         [JsonIgnore]
         public Image SmallFanart
@@ -1068,7 +1288,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SmallPoster.
+        ///   Gets or sets SmallPoster.
         /// </summary>
         [JsonIgnore]
         public Image SmallPoster
@@ -1089,7 +1309,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Status.
+        ///   Gets or sets Status.
         /// </summary>
         public string Status
         {
@@ -1110,7 +1330,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets zap2it_id.
+        ///   Gets or sets zap2it_id.
         /// </summary>
         public string Zap2It_Id
         {
@@ -1132,50 +1352,127 @@ namespace YANFOE.Models.TvModels.Show
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Counts the missing episodes in the series
+        /// The add high priority to background queue.
         /// </summary>
-        /// <returns>Total episodes without a filepath</returns>
+        /// <param name="url">
+        /// The url. 
+        /// </param>
+        public void AddHighPriorityToBackgroundQueue(string url)
+        {
+            Downloader.AddToBackgroundQueue(
+                new DownloadItem
+                    {
+                        Priority = DownloadPriority.High, 
+                        Section = Section.Tv, 
+                        Type = DownloadType.Binary, 
+                        Url = TVDBFactory.Instance.GetImageUrl(url)
+                    });
+        }
+
+        /// <summary>
+        /// The add high priority to background queue cache only.
+        /// </summary>
+        /// <param name="url">
+        /// The url. 
+        /// </param>
+        public void AddHighPriorityToBackgroundQueueCacheOnly(string url)
+        {
+            Downloader.AddToBackgroundQueue(
+                new DownloadItem
+                    {
+                        Priority = DownloadPriority.High, 
+                        Section = Section.Tv, 
+                        Type = DownloadType.Binary, 
+                        Url = TVDBFactory.Instance.GetImageUrl(url, true)
+                    });
+        }
+
+        /// <summary>
+        /// The add high priority to background queue with cache.
+        /// </summary>
+        /// <param name="url">
+        /// The url. 
+        /// </param>
+        public void AddHighPriorityToBackgroundQueueWithCache(string url)
+        {
+            this.AddHighPriorityToBackgroundQueue(url);
+            this.AddHighPriorityToBackgroundQueueCacheOnly(url);
+        }
+
+        /// <summary>
+        /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+        /// </summary>
+        /// <param name="x">
+        /// The first object to compare. 
+        /// </param>
+        /// <param name="y">
+        /// The second object to compare. 
+        /// </param>
+        /// <returns>
+        /// A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/> , as shown in the following table.Value Meaning Less than zero <paramref name="x"/> is less than <paramref name="y"/> . Zero <paramref name="x"/> equals <paramref name="y"/> . Greater than zero <paramref name="x"/> is greater than <paramref name="y"/> . 
+        /// </returns>
+        /// <exception cref="T:System.ArgumentException">
+        /// Neither
+        ///   <paramref name="x"/>
+        ///   nor
+        ///   <paramref name="y"/>
+        ///   implements the
+        ///   <see cref="T:System.IComparable"/>
+        ///   interface.-or-
+        ///   <paramref name="x"/>
+        ///   and
+        ///   <paramref name="y"/>
+        ///   are of different types and neither one can handle comparisons with the other.
+        /// </exception>
+        public int Compare(object x, object y)
+        {
+            var x0 = (Series)x;
+            var y0 = (Series)y;
+            return x0.SeriesName.CompareTo(y0.SeriesName);
+        }
+
+        /// <summary>
+        ///   Counts the missing episodes in the series
+        /// </summary>
+        /// <returns> Total episodes without a filepath </returns>
         public int CountMissingEpisodes()
         {
-            return
-                this.Seasons.Values.SelectMany(s => s.Episodes).Count(
-                    e => string.IsNullOrEmpty(e.FilePath.PathAndFilename));
+            return this.Seasons.SelectMany(s => s.Episodes).Count(e => string.IsNullOrEmpty(e.FilePath.PathAndFilename));
         }
 
         /// <summary>
-        /// Counts the total amount of episodes in the series
+        ///   Counts the total amount of episodes in the series
         /// </summary>
-        /// <returns>Total episodes without a filepath</returns>
+        /// <returns> Total episodes without a filepath </returns>
         public int CountTotalEpisodes()
         {
-            return
-                this.Seasons.Values.SelectMany(s => s.Episodes).Count(
-                    e => !string.IsNullOrEmpty(e.FilePath.PathAndFilename));
+            return this.Seasons.SelectMany(s => s.Episodes).Count(
+                e => !string.IsNullOrEmpty(e.FilePath.PathAndFilename));
         }
 
         /// <summary>
-        /// Gets the missing episodes in the series
+        ///   Gets the missing episodes in the series
         /// </summary>
-        /// <returns>Total episodes without a filepath</returns>
+        /// <returns> Total episodes without a filepath </returns>
         public List<Episode> GetMissingEpisodes()
         {
             return
-                this.Seasons.Values.SelectMany(s => s.Episodes).Where(
-                    e => string.IsNullOrEmpty(e.FilePath.PathAndFilename)).ToList();
+                this.Seasons.SelectMany(s => s.Episodes).Where(e => string.IsNullOrEmpty(e.FilePath.PathAndFilename)).
+                    ToList();
         }
 
         /// <summary>
-        /// Gets the series name on disk.
+        ///   Gets the series name on disk.
         /// </summary>
-        /// <returns>The series name on disk.</returns>
+        /// <returns> The series name on disk. </returns>
         public string GetSeriesNameOnDisk()
         {
             foreach (var season in this.Seasons)
             {
-                foreach (Episode episode in season.Value.Episodes)
+                foreach (Episode episode in season.Episodes)
                 {
                     if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
@@ -1193,14 +1490,14 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets the series path.
+        ///   Gets the series path.
         /// </summary>
-        /// <returns>The Series path</returns>
+        /// <returns> The Series path </returns>
         public string GetSeriesPath()
         {
             foreach (var seasons in this.Seasons)
             {
-                foreach (Episode episode in seasons.Value.Episodes)
+                foreach (Episode episode in seasons.Episodes)
                 {
                     if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
@@ -1237,7 +1534,9 @@ namespace YANFOE.Models.TvModels.Show
         /// <summary>
         /// Populates the the series object with details from a series xml object.
         /// </summary>
-        /// <param name="xml">The series xml.</param>
+        /// <param name="xml">
+        /// The series xml. 
+        /// </param>
         public void PopulateFullDetails(SeriesXml xml)
         {
             var docList = new XmlDocument();
@@ -1299,7 +1598,7 @@ namespace YANFOE.Models.TvModels.Show
 
                 if (!string.IsNullOrEmpty(image))
                 {
-                    image = TvDBFactory.GetImageUrl(image);
+                    image = TVDBFactory.Instance.GetImageUrl(image);
                 }
 
                 var m = new PersonModel(a.Element("Name").Value, image, a.Element("Role").Value);
@@ -1314,21 +1613,19 @@ namespace YANFOE.Models.TvModels.Show
 
             for (int i = 0; i < count2 + 1; i++)
             {
-                var season = new Season
-                    {
-                        SeasonNumber = i
-                    };
+                var season = new Season { SeasonNumber = i };
 
                 List<string> seasonBanner = (from p in this.Banner.Season
                                              where
-                                                 p.BannerType2 == BannerType2.seasonwide &&
-                                                 p.Season == season.SeasonNumber.ToString()
+                                                 p.BannerType2 == BannerType2.seasonwide
+                                                 && p.Season == season.SeasonNumber.ToString()
                                              select p.BannerPath).ToList();
 
                 if (seasonBanner.Count > 0)
                 {
                     season.BannerUrl = seasonBanner[0];
-                    //this.AddHighPriorityToBackgroundQueueWithCache(season.BannerUrl);
+
+                    // this.AddHighPriorityToBackgroundQueueWithCache(season.BannerUrl);
                 }
 
                 List<string> seasonPoster =
@@ -1338,7 +1635,8 @@ namespace YANFOE.Models.TvModels.Show
                 if (this.posterUrl != null && seasonPoster.Count > 0)
                 {
                     season.PosterUrl = seasonPoster[0];
-                    //this.AddHighPriorityToBackgroundQueueWithCache(season.PosterUrl);
+
+                    // this.AddHighPriorityToBackgroundQueueWithCache(season.PosterUrl);
                 }
 
                 List<BannerDetails> seasonFanart = (from p in this.Banner.Fanart select p).ToList();
@@ -1354,10 +1652,10 @@ namespace YANFOE.Models.TvModels.Show
 
                 if (!string.IsNullOrEmpty(season.FanartUrl))
                 {
-                    //this.AddHighPriorityToBackgroundQueueWithCache(season.FanartUrl);
+                    // this.AddHighPriorityToBackgroundQueueWithCache(season.FanartUrl);
                 }
 
-                this.Seasons.Add(i, season);
+                this.Seasons.Add(season);
             }
 
             foreach (XmlNode node in nodes)
@@ -1377,73 +1675,53 @@ namespace YANFOE.Models.TvModels.Show
             this.PreCacheSeriesThumbs();
         }
 
-        public void AddHighPriorityToBackgroundQueue(string url)
-        {
-            Downloader.AddToBackgroundQue(
-                new DownloadItem
-                {
-                    Priority = DownloadPriority.High,
-                    Section = Section.Tv,
-                    Type = DownloadType.Binary,
-                    Url = TvDBFactory.GetImageUrl(url)
-                });
-        }
-
-        public void AddHighPriorityToBackgroundQueueCacheOnly(string url)
-        {
-            Downloader.AddToBackgroundQue(
-                new DownloadItem
-                    {
-                        Priority = DownloadPriority.High,
-                        Section = Section.Tv,
-                        Type = DownloadType.Binary,
-                        Url = TvDBFactory.GetImageUrl(url, true)
-                    });
-        }
-
-        public void AddHighPriorityToBackgroundQueueWithCache(string url)
-        {
-            AddHighPriorityToBackgroundQueue(url);
-            AddHighPriorityToBackgroundQueueCacheOnly(url);
-        }
-
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IComparer
-
         /// <summary>
-        /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+        ///   The pre cache series thumbs.
         /// </summary>
-        /// <param name="x">The first object to compare.</param>
-        /// <param name="y">The second object to compare.</param>
-        /// <returns>
-        /// A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/>, as shown in the following table.Value Meaning Less than zero <paramref name="x"/> is less than <paramref name="y"/>. Zero <paramref name="x"/> equals <paramref name="y"/>. Greater than zero <paramref name="x"/> is greater than <paramref name="y"/>.
-        /// </returns>
-        /// <exception cref="T:System.ArgumentException">Neither <paramref name="x"/> nor <paramref name="y"/> implements the <see cref="T:System.IComparable"/> interface.-or- <paramref name="x"/> and <paramref name="y"/> are of different types and neither one can handle comparisons with the other. </exception>
-        public int Compare(object x, object y)
+        public void PreCacheSeriesThumbs()
         {
-            var x0 = (Series)x;
-            var y0 = (Series)y;
-            return x0.SeriesName.CompareTo(y0.SeriesName);
-        }
+            var imagesFanart = from i in this.Banner.Fanart select i;
 
-        #endregion
+            foreach (var image in imagesFanart)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesPoster = from i in this.Banner.Poster orderby i.Rating descending select i;
+
+            foreach (var image in imagesPoster)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesSeries = from i in this.Banner.Series orderby i.Rating descending select i;
+
+            foreach (var image in imagesSeries)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+
+            var imagesSeason = from i in this.Banner.Season orderby i.Rating descending select i;
+
+            foreach (var image in imagesSeason)
+            {
+                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
+            }
+        }
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Gets the first episode in the series.
+        ///   Gets the first episode in the series.
         /// </summary>
-        /// <returns>The first episode in the series.</returns>
+        /// <returns> The first episode in the series. </returns>
         internal string GetFirstEpisode()
         {
             foreach (var season in this.Seasons)
             {
-                foreach (Episode episode in season.Value.Episodes)
+                foreach (Episode episode in season.Episodes)
                 {
                     if (!string.IsNullOrEmpty(episode.CurrentFilenameAndPath))
                     {
@@ -1453,158 +1731,6 @@ namespace YANFOE.Models.TvModels.Show
             }
 
             return string.Empty;
-        }
-
-        [JsonIgnore]
-        public GalleryItemGroup SeriesBannerAltGallery
-        {
-            get
-            {
-                var gallery = new GalleryItemGroup();
-
-                var images = from i in this.Banner.Series
-                             where i.BannerType2 == BannerType2.graphical
-                             orderby i.Rating descending
-                             select i;
-
-                foreach (var image in images)
-                {
-                    string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
-
-                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
-                    {
-                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailBanner);
-
-                        var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
-                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
-                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
-
-                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                        {
-                            Tag = "tvSeriesBanner|" + image.BannerPath, SuperTip = superTip
-                        };
-
-                        gallery.Items.Add(galleryItem);
-                    }
-                }
-
-                return gallery;
-            }
-        }
-
-        [JsonIgnore]
-        public GalleryItemGroup SeriesPosterAltGallery
-        {
-            get
-            {
-                var gallery = new GalleryItemGroup();
-                var images = from i in this.Banner.Poster 
-                             orderby i.Rating descending 
-                             select i;
-
-                foreach (var image in images)
-                {
-                    string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
-
-                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
-                    {
-                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailPoster);
-
-                        var superTip = new SuperToolTip();
-                        superTip.AllowHtmlText = DefaultBoolean.True;
-                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
-                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
-
-                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                        {
-                            Tag = "tvSeriesPoster|" + image.BannerPath, SuperTip = superTip
-                        };
-
-                        gallery.Items.Add(galleryItem);
-                    }
-                }
-
-                return gallery;
-            }
-        }
-
-        public void PreCacheSeriesThumbs()
-        {
-            var imagesFanart = from i in this.Banner.Fanart
-                               select i;
-
-            foreach (var image in imagesFanart)
-            {
-                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
-            }
-
-            var imagesPoster = from i in this.Banner.Poster
-                         orderby i.Rating descending
-                         select i;
-
-            foreach (var image in imagesPoster)
-            {
-                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
-            }
-
-            var imagesSeries = from i in this.Banner.Series
-                                orderby i.Rating descending
-                                select i;
-
-            foreach (var image in imagesSeries)
-            {
-                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
-            }
-
-            var imagesSeason = from i in this.Banner.Season
-                               orderby i.Rating descending
-                               select i;
-
-            foreach (var image in imagesSeason)
-            {
-                this.AddHighPriorityToBackgroundQueueCacheOnly(image.BannerPath);
-            }
-
-
-        }
-
-        [JsonIgnore]
-        public GalleryItemGroup SeriesFanartAltGallery
-        {
-            get
-            {
-                var gallery = new GalleryItemGroup();
-                var images = from i in this.Banner.Fanart 
-                             orderby i.Rating descending 
-                             select i;
-
-                foreach (var image in images)
-                {
-                    string path = Downloader.ProcessDownload(
-                        TvDBFactory.GetImageUrl(image.BannerPath, true), DownloadType.Binary, Section.Tv);
-
-                    if (File.Exists(path) && !Downloader.Downloading.Contains(path))
-                    {
-                        Image resizedimage = ImageHandler.LoadImage(path, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
-
-                        var superTip = new SuperToolTip();
-                        superTip.AllowHtmlText = DefaultBoolean.True;
-                        superTip.Items.Add("<b>Rating:</b> " + image.Rating);
-                        superTip.Items.Add("<b>Rating count:</b> " + image.RatingCount);
-
-                        var galleryItem = new GalleryItem(resizedimage, string.Empty, image.BannerType2.ToString())
-                            {
-                                Tag = "tvSeriesFanart|" + image.BannerPath, SuperTip = superTip 
-                            };
-
-                        gallery.Items.Add(galleryItem);
-                    }
-                }
-
-                return gallery;
-            }
         }
 
         #endregion

@@ -1,49 +1,55 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RestructureAction.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="RestructureAction.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The restructure type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels
 {
+    #region Required Namespaces
+
     using System;
 
+    #endregion
+
     /// <summary>
-    /// The restructure type.
+    ///   The restructure type.
     /// </summary>
     public enum RestructureType
     {
         /// <summary>
-        /// Create a New Folder
+        ///   Create a New Folder
         /// </summary>
         CreateFolder, 
 
         /// <summary>
-        /// Copy a File
+        ///   Copy a File
         /// </summary>
         Copy, 
 
         /// <summary>
-        /// Move a File
+        ///   Move a File
         /// </summary>
         Move, 
 
         /// <summary>
-        /// Delete a File.
+        ///   Delete a File.
         /// </summary>
         DeleteFile, 
     }
 
     /// <summary>
-    /// The restructure action.
+    ///   The restructure action.
     /// </summary>
     [Serializable]
     public class RestructureAction
@@ -51,7 +57,7 @@ namespace YANFOE.Models.TvModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RestructureAction"/> class.
+        ///   Initializes a new instance of the <see cref="RestructureAction" /> class.
         /// </summary>
         public RestructureAction()
         {
@@ -62,20 +68,20 @@ namespace YANFOE.Models.TvModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets ActionType.
+        ///   Gets or sets ActionType.
         /// </summary>
         public RestructureType ActionType { get; set; }
 
         /// <summary>
-        /// Gets or sets From.
+        ///   Gets or sets From.
         /// </summary>
         public string From { get; set; }
 
         /// <summary>
-        /// Gets or sets To.
+        ///   Gets or sets To.
         /// </summary>
         public string To { get; set; }
 

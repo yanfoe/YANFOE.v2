@@ -1,34 +1,56 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SearchDetails.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="SearchDetails.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The search details.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels.TVDB
 {
+    #region Required Namespaces
+
     using System;
+    using System.Drawing;
     using System.Xml;
 
+    using YANFOE.InternalApps.DownloadManager;
+    using YANFOE.InternalApps.DownloadManager.Model;
+    using YANFOE.Scrapers.TV;
+    using YANFOE.Tools;
+    using YANFOE.Tools.Enums;
+    using YANFOE.Tools.Models;
     using YANFOE.Tools.Xml;
 
+    #endregion
+
     /// <summary>
-    /// The search details.
+    ///   The search details.
     /// </summary>
     [Serializable]
-    public class SearchDetails
+    public class SearchDetails : ModelBase
     {
+        #region Fields
+
+        /// <summary>
+        ///   Gets or sets Banner.
+        /// </summary>
+        private string banner;
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SearchDetails"/> class.
+        ///   Initializes a new instance of the <see cref="SearchDetails" /> class.
         /// </summary>
         public SearchDetails()
         {
@@ -46,66 +68,102 @@ namespace YANFOE.Models.TvModels.TVDB
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Banner.
+        /// Gets or sets the banner.
         /// </summary>
-        public string Banner { get; set; }
+        public string Banner
+        {
+            get
+            {
+                return this.banner;
+            }
+
+            set
+            {
+                this.banner = value;
+                this.OnPropertyChanged("Banner");
+                this.OnPropertyChanged("BannerImage");
+            }
+        }
 
         /// <summary>
-        /// Gets or sets Banners.
+        /// Gets the banner image.
+        /// </summary>
+        public Image BannerImage
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Banner))
+                {
+                    string url = this.Banner;
+                    url = TheTvdb.ReturnBannerDownloadPath(url, true);
+
+                    string path = Downloader.ProcessDownload(url, DownloadType.Binary, Section.Tv);
+
+                    return ImageHandler.LoadImage(path);
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets Banners.
         /// </summary>
         public Banner Banners { get; set; }
 
         /// <summary>
-        /// Gets or sets FirstAired.
+        ///   Gets or sets FirstAired.
         /// </summary>
         public DateTime? FirstAired { get; set; }
 
         /// <summary>
-        /// Gets or sets ID.
+        ///   Gets or sets ID.
         /// </summary>
         public string ID { get; set; }
 
         /// <summary>
-        /// Gets or sets Imdbid.
+        ///   Gets or sets Imdbid.
         /// </summary>
         public string Imdbid { get; set; }
 
         /// <summary>
-        /// Gets or sets Language.
+        ///   Gets or sets Language.
         /// </summary>
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets OverView.
+        ///   Gets or sets OverView.
         /// </summary>
         public string OverView { get; set; }
 
         /// <summary>
-        /// Gets or sets SeriesID.
+        ///   Gets or sets SeriesID.
         /// </summary>
         public string SeriesID { get; set; }
 
         /// <summary>
-        /// Gets or sets SeriesName.
+        ///   Gets or sets SeriesName.
         /// </summary>
         public string SeriesName { get; set; }
 
         /// <summary>
-        /// Gets or sets UseId.
+        ///   Gets or sets UseId.
         /// </summary>
         public string UseId { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Populates the series detail.
         /// </summary>
-        /// <param name="doc">The xml document</param>
+        /// <param name="doc">
+        /// The xml document 
+        /// </param>
         public void PopulateSeriesDetail(XmlDocument doc)
         {
             this.SeriesID = XRead.GetString(doc, "seriesid");

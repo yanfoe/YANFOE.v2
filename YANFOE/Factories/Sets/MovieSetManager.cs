@@ -1,95 +1,101 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieSetManager.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieSetManager.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie set manager.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Sets
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
-
-    using DevExpress.XtraEditors;
+    using System.Windows;
 
     using YANFOE.Models.MovieModels;
     using YANFOE.Models.SetsModels;
     using YANFOE.Settings;
     using YANFOE.Tools.Restructure;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The movie set manager.
+    ///   The movie set manager.
     /// </summary>
     [Serializable]
     public static class MovieSetManager
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The current set.
+        ///   The current set.
         /// </summary>
         private static MovieSetModel currentSet;
 
         /// <summary>
-        /// The movie set database.
+        ///   The movie set database.
         /// </summary>
-        private static BindingList<MovieSetModel> database;
+        private static ThreadedBindingList<MovieSetModel> database;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="MovieSetManager"/> class.
+        ///   Initializes static members of the <see cref="MovieSetManager" /> class.
         /// </summary>
         static MovieSetManager()
         {
-            database = new BindingList<MovieSetModel>();
+            database = new ThreadedBindingList<MovieSetModel>();
             currentSet = new MovieSetModel();
 
-            database.ListChanged += Database_ListChanged;
+            database.ListChanged += DatabaseListChanged;
         }
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
-        /// Occurs when [current set changed].
+        ///   Occurs when [current set changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler CurrentSetChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [current set movies changed].
+        ///   Occurs when [current set movies changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler CurrentSetMoviesChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [set list changed].
+        ///   Occurs when [set list changed].
         /// </summary>
         [field: NonSerialized]
         public static event EventHandler SetListChanged = delegate { };
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets CurrentDatabase.
+        ///   Gets or sets CurrentDatabase.
         /// </summary>
-        public static BindingList<MovieSetModel> CurrentDatabase
+        public static ThreadedBindingList<MovieSetModel> CurrentDatabase
         {
             get
             {
@@ -103,7 +109,7 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// Gets GetCurrentSet.
+        ///   Gets GetCurrentSet.
         /// </summary>
         public static MovieSetModel GetCurrentSet
         {
@@ -115,12 +121,14 @@ namespace YANFOE.Factories.Sets
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Adds the movie to current set.
         /// </summary>
-        /// <param name="movie">The movie to add to set</param>
+        /// <param name="movie">
+        /// The movie to add to set 
+        /// </param>
         public static void AddMovieToCurrentSet(MovieModel movie)
         {
             MovieSetObjectModel check =
@@ -128,7 +136,7 @@ namespace YANFOE.Factories.Sets
 
             if (check != null)
             {
-                XtraMessageBox.Show(string.Format("{0} already exists in set {1}", movie.Title, currentSet.SetName));
+                MessageBox.Show(string.Format("{0} already exists in set {1}", movie.Title, currentSet.SetName));
                 return;
             }
 
@@ -139,9 +147,15 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// The add movie to set.
         /// </summary>
-        /// <param name="movie">The movie.</param>
-        /// <param name="setName">The set name.</param>
-        /// <param name="order">The order.</param>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        /// <param name="setName">
+        /// The set name. 
+        /// </param>
+        /// <param name="order">
+        /// The order. 
+        /// </param>
         public static void AddMovieToSet(MovieModel movie, string setName, int? order = null)
         {
             MovieSetModel check = (from m in database where m.SetName == setName select m).SingleOrDefault();
@@ -175,7 +189,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Add new set.
         /// </summary>
-        /// <param name="response">The response.</param>
+        /// <param name="response">
+        /// The response. 
+        /// </param>
         public static void AddNewSet(string response)
         {
             var newSetModel = new MovieSetModel { SetName = response };
@@ -184,30 +200,16 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// Checks existence of a set with a particular name
-        /// </summary>
-        /// <param name="response">The response.</param>
-        /// <returns></returns>
-        public static bool HasSetWithName(string response)
-        {
-            MovieSetModel find = (from s in database where s.SetName.ToLower() == response.ToLower() select s).SingleOrDefault();
-
-            if (find == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// The change current set fanart.
         /// </summary>
-        /// <param name="path">The path to change fanart</param>
+        /// <param name="path">
+        /// The path to change fanart 
+        /// </param>
         public static void ChangeCurrentSetFanart(string path)
         {
-            var newPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + FileSystemCharChange.To(GetCurrentSet.SetName, FileSystemCharChange.ConvertArea.Movie) +
-                             Path.GetExtension(path);
+            var newPath = Get.FileSystemPaths.PathMoviesSets + "fanart."
+                          + FileSystemCharChange.To(GetCurrentSet.SetName, FileSystemCharChange.ConvertArea.Movie)
+                          + Path.GetExtension(path);
 
             File.Copy(path, newPath, true);
 
@@ -219,11 +221,14 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// The change current set poster.
         /// </summary>
-        /// <param name="path">The path to process the poster change</param>
+        /// <param name="path">
+        /// The path to process the poster change 
+        /// </param>
         public static void ChangeCurrentSetPoster(string path)
         {
-            var newPath = Get.FileSystemPaths.PathMoviesSets + "poster." + FileSystemCharChange.To(GetCurrentSet.SetName, FileSystemCharChange.ConvertArea.Movie) +
-                             Path.GetExtension(path);
+            var newPath = Get.FileSystemPaths.PathMoviesSets + "poster."
+                          + FileSystemCharChange.To(GetCurrentSet.SetName, FileSystemCharChange.ConvertArea.Movie)
+                          + Path.GetExtension(path);
 
             File.Copy(path, newPath, true);
 
@@ -233,7 +238,7 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// Clear current set fanart.
+        ///   Clear current set fanart.
         /// </summary>
         public static void ClearCurrentSetFanart()
         {
@@ -247,7 +252,7 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// Clear current set poster.
+        ///   Clear current set poster.
         /// </summary>
         public static void ClearCurrentSetPoster()
         {
@@ -263,20 +268,31 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Returns the movies in sets.
         /// </summary>
-        /// <param name="movieSetModel">The movie set model.</param>
-        /// <returns>Collection of movies in a set</returns>
+        /// <param name="movieSetModel">
+        /// The movie set model. 
+        /// </param>
+        /// <returns>
+        /// Collection of movies in a set 
+        /// </returns>
         public static List<MovieModel> GetMoviesInSets(MovieSetModel movieSetModel)
         {
-            return movieSetModel.Movies.Select(movieSetObect => MovieDBFactory.GetMovie(movieSetObect.MovieUniqueId)).Where(movie => movie != null).ToList();
+            return
+                movieSetModel.Movies.Select(
+                    movieSetObect => MovieDBFactory.Instance.GetMovie(movieSetObect.MovieUniqueId)).Where(
+                        movie => movie != null).ToList();
         }
 
         /// <summary>
         /// Gets the order of movie in set.
         /// </summary>
-        /// <param name="setName">The movie set model name.</param>
-        /// <param name="movieModel">The movie model.</param>
+        /// <param name="setName">
+        /// The movie set model name. 
+        /// </param>
+        /// <param name="movieModel">
+        /// The movie model. 
+        /// </param>
         /// <returns>
-        /// The order the movie falls in the set
+        /// The order the movie falls in the set 
         /// </returns>
         public static int? GetOrderOfMovieInSet(string setName, MovieModel movieModel)
         {
@@ -287,9 +303,10 @@ namespace YANFOE.Factories.Sets
                 return null;
             }
 
-            var check = (from m in movieSetModel.Movies where m.MovieUniqueId == movieModel.MovieUniqueId select m.Order).ToList();
+            var check =
+                (from m in movieSetModel.Movies where m.MovieUniqueId == movieModel.MovieUniqueId select m.Order).ToList();
 
-            if (check.Count() > 0)
+            if (check.Any())
             {
                 return check[0];
             }
@@ -300,8 +317,12 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// The get set using set name
         /// </summary>
-        /// <param name="setName">The set name.</param>
-        /// <returns>A MovieSetModel object</returns>
+        /// <param name="setName">
+        /// The set name. 
+        /// </param>
+        /// <returns>
+        /// A MovieSetModel object 
+        /// </returns>
         public static MovieSetModel GetSet(string setName)
         {
             return (from s in database where s.SetName == setName select s).SingleOrDefault();
@@ -310,20 +331,29 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Gets the set return list for output handlers.
         /// </summary>
-        /// <param name="movieModel">The movie model.</param>
-        /// <returns>SetReturnModel Collection</returns>
+        /// <param name="movieModel">
+        /// The movie model. 
+        /// </param>
+        /// <returns>
+        /// SetReturnModel Collection 
+        /// </returns>
         public static List<SetReturnModel> GetSetReturnList(MovieModel movieModel)
         {
             var sets = GetSetsContainingMovie(movieModel);
 
-            return sets.Select(set => new SetReturnModel { SetName = set, Order = GetOrderOfMovieInSet(set, movieModel) }).ToList();
+            return
+                sets.Select(set => new SetReturnModel { SetName = set, Order = GetOrderOfMovieInSet(set, movieModel) }).ToList();
         }
 
         /// <summary>
         /// Finds the sets containing movie.
         /// </summary>
-        /// <param name="movie">The movie.</param>
-        /// <returns>Collection of sets containing a movie</returns>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        /// <returns>
+        /// Collection of sets containing a movie 
+        /// </returns>
         public static List<string> GetSetsContainingMovie(MovieModel movie)
         {
             return GetSetsContainingMovie(movie.MovieUniqueId);
@@ -332,17 +362,45 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Finds the sets containing movie by ID
         /// </summary>
-        /// <param name="id">The ID to search</param>
-        /// <returns>Collection of set names.</returns>
+        /// <param name="id">
+        /// The ID to search 
+        /// </param>
+        /// <returns>
+        /// Collection of set names. 
+        /// </returns>
         public static List<string> GetSetsContainingMovie(string id)
         {
             return (from m in database where m.ContainsMovie(id) select m.SetName).ToList();
         }
 
         /// <summary>
+        /// Checks existence of a set with a particular name
+        /// </summary>
+        /// <param name="response">
+        /// The response. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public static bool HasSetWithName(string response)
+        {
+            MovieSetModel find =
+                (from s in database where s.SetName.ToLower() == response.ToLower() select s).SingleOrDefault();
+
+            if (find == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Invokes the current set changed.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
+        /// </param>
         public static void InvokeCurrentSetChanged(EventArgs e)
         {
             EventHandler handler = CurrentSetChanged;
@@ -355,7 +413,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Invokes the current set movies changed.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
+        /// </param>
         public static void InvokeCurrentSetMoviesChanged(EventArgs e)
         {
             EventHandler handler = CurrentSetMoviesChanged;
@@ -368,7 +428,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Invokes the set list changed.
         /// </summary>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
+        /// </param>
         public static void InvokeSetListChanged(EventArgs e)
         {
             EventHandler handler = SetListChanged;
@@ -381,7 +443,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Removes from set.
         /// </summary>
-        /// <param name="id">The id of the set to remove</param>
+        /// <param name="id">
+        /// The id of the set to remove 
+        /// </param>
         public static void RemoveFromSet(string id)
         {
             MovieSetObjectModel setObj =
@@ -396,7 +460,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Removes the set.
         /// </summary>
-        /// <param name="setName">The Set Name.</param>
+        /// <param name="setName">
+        /// The Set Name. 
+        /// </param>
         public static void RemoveSet(string setName)
         {
             MovieSetModel find = (from s in database where s.SetName == setName select s).SingleOrDefault();
@@ -416,7 +482,7 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// The scan for set images.
+        ///   The scan for set images.
         /// </summary>
         public static void ScanForSetImages()
         {
@@ -429,15 +495,23 @@ namespace YANFOE.Factories.Sets
                 {
                     if (movie.GetMovieModel() != null)
                     {
-                        string posterPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie) + "_1.jpg";
+                        string posterPath = movie.GetMovieModel().GetBaseFilePath + "Set_"
+                                            +
+                                            FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie)
+                                            + "_1.jpg";
 
-                        string fanartPath = movie.GetMovieModel().GetBaseFilePath + "Set_" + FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie) +
-                                            "_1.fanart.jpg";
+                        string fanartPath = movie.GetMovieModel().GetBaseFilePath + "Set_"
+                                            +
+                                            FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie)
+                                            + "_1.fanart.jpg";
 
                         if (File.Exists(posterPath))
                         {
-                            string newPosterPath = Get.FileSystemPaths.PathMoviesSets + "poster." + FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie) +
-                                                   Path.GetExtension(posterPath);
+                            string newPosterPath = Get.FileSystemPaths.PathMoviesSets + "poster."
+                                                   +
+                                                   FileSystemCharChange.To(
+                                                       set.SetName, FileSystemCharChange.ConvertArea.Movie)
+                                                   + Path.GetExtension(posterPath);
                             File.Copy(posterPath, newPosterPath, true);
                             set.PosterUrl = newPosterPath;
                             posterFound = true;
@@ -445,8 +519,11 @@ namespace YANFOE.Factories.Sets
 
                         if (File.Exists(fanartPath))
                         {
-                            string newFanartPath = Get.FileSystemPaths.PathMoviesSets + "fanart." + FileSystemCharChange.To(set.SetName, FileSystemCharChange.ConvertArea.Movie) +
-                                                   Path.GetExtension(fanartPath);
+                            string newFanartPath = Get.FileSystemPaths.PathMoviesSets + "fanart."
+                                                   +
+                                                   FileSystemCharChange.To(
+                                                       set.SetName, FileSystemCharChange.ConvertArea.Movie)
+                                                   + Path.GetExtension(fanartPath);
                             File.Copy(fanartPath, newFanartPath, true);
                             set.FanartUrl = newFanartPath;
                             fanartFound = true;
@@ -464,7 +541,7 @@ namespace YANFOE.Factories.Sets
         }
 
         /// <summary>
-        /// The set all movies changed in current set.
+        ///   The set all movies changed in current set.
         /// </summary>
         public static void SetAllMoviesChangedInCurrentSet()
         {
@@ -474,7 +551,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Sets the current set.
         /// </summary>
-        /// <param name="movieSetModel">The movie set model.</param>
+        /// <param name="movieSetModel">
+        /// The movie set model. 
+        /// </param>
         public static void SetCurrentSet(MovieSetModel movieSetModel)
         {
             currentSet = movieSetModel;
@@ -484,7 +563,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Sets the current set.
         /// </summary>
-        /// <param name="setName">Name of the set.</param>
+        /// <param name="setName">
+        /// Name of the set. 
+        /// </param>
         public static void SetCurrentSet(string setName)
         {
             var movieSetModel = (from s in database where s.SetName == setName select s).SingleOrDefault();
@@ -495,26 +576,14 @@ namespace YANFOE.Factories.Sets
             }
         }
 
-
         /// <summary>
-        /// Validates the sets to ensure all movies are in database.
+        ///   Validates the sets to ensure all movies are in database.
         /// </summary>
         public static void ValidateSets()
         {
             foreach (var set in CurrentDatabase)
             {
-                var removeIndex = new List<string>();
-
-                for (int index = 0; index < set.Movies.Count; index++)
-                {
-                    var movie = set.Movies[index];
-                    var check = MovieDBFactory.GetMovie(movie.MovieUniqueId);
-
-                    if (check == null)
-                    {
-                        removeIndex.Add(movie.MovieUniqueId);
-                    }
-                }
+                var removeIndex = (from movie in set.Movies let check = MovieDBFactory.Instance.GetMovie(movie.MovieUniqueId) where check == null select movie.MovieUniqueId).ToList();
 
                 foreach (var i in removeIndex)
                 {
@@ -538,9 +607,13 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// Handles the ListChanged event of the Database control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private static void Database_ListChanged(object sender, ListChangedEventArgs e)
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data. 
+        /// </param>
+        private static void DatabaseListChanged(object sender, ListChangedEventArgs e)
         {
             InvokeSetListChanged(new EventArgs());
         }
@@ -548,7 +621,9 @@ namespace YANFOE.Factories.Sets
         /// <summary>
         /// The set all movies changed in set.
         /// </summary>
-        /// <param name="set">The set to alter.</param>
+        /// <param name="set">
+        /// The set to alter. 
+        /// </param>
         private static void SetAllMoviesChangedInSet(MovieSetModel set)
         {
             var movies = GetMoviesInSets(set);

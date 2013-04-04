@@ -1,25 +1,28 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Html.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Html.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Download Html.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.DownloadManager.Download
 {
+    #region Required Namespaces
+
     using System;
     using System.Globalization;
     using System.IO;
     using System.Net;
     using System.Text;
-    using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
 
@@ -30,18 +33,28 @@ namespace YANFOE.InternalApps.DownloadManager.Download
     using YANFOE.Tools.Compression;
     using YANFOE.Tools.IO;
 
+    #endregion
+
     /// <summary>
-    /// Download Html.
+    ///   Download Html.
     /// </summary>
     public class Html
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// Gets the specified download item.
         /// </summary>
-        /// <param name="downloadItem">The download item.</param>
+        /// <param name="downloadItem">
+        /// The download item. 
+        /// </param>
         public void Get(DownloadItem downloadItem)
         {
-            Log.WriteToLog(LogSeverity.Info, downloadItem.ThreadID, string.Format("Processing HTML Started"), string.Format("{0}", downloadItem.Url));
+            Log.WriteToLog(
+                LogSeverity.Info, 
+                downloadItem.ThreadID, 
+                string.Format("Processing HTML Started"), 
+                string.Format("{0}", downloadItem.Url));
 
             downloadItem.Result = new HtmlResult();
 
@@ -55,11 +68,14 @@ namespace YANFOE.InternalApps.DownloadManager.Download
             {
                 if (File.Exists(cachePath + ".txt.gz"))
                 {
-                    Log.WriteToLog(LogSeverity.Info, downloadItem.ThreadID, string.Format(CultureInfo.CurrentCulture, "Url Found in Cache"), string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
+                    Log.WriteToLog(
+                        LogSeverity.Info, 
+                        downloadItem.ThreadID, 
+                        string.Format(CultureInfo.CurrentCulture, "Url Found in Cache"), 
+                        string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
                     downloadItem.Result = new HtmlResult
                         {
-                            Result = Gzip.Decompress(cachePath + ".txt.gz"), 
-                            Success = true
+                           Result = Gzip.Decompress(cachePath + ".txt.gz"), Success = true 
                         };
 
                     return;
@@ -75,21 +91,21 @@ namespace YANFOE.InternalApps.DownloadManager.Download
             try
             {
                 Log.WriteToLog(
-                    LogSeverity.Info,
-                    downloadItem.ThreadID,
-                    string.Format(CultureInfo.CurrentCulture, "Downloading"),
+                    LogSeverity.Info, 
+                    downloadItem.ThreadID, 
+                    string.Format(CultureInfo.CurrentCulture, "Downloading"), 
                     string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
-                
+
                 downloadItem.Url = downloadItem.Url.Replace(" ", "+").Replace("%20", "+");
 
-                var webClient = new WebClient
-                    {
-                        Proxy = null
-                    };
+                var webClient = new WebClient { Proxy = null };
 
                 if (Settings.Get.Web.EnableProxy)
                 {
-                    webClient.Proxy = new WebProxy(Settings.Get.Web.ProxyUserName, (int)Settings.Get.Web.ProxyPort);
+                    if (Settings.Get.Web.ProxyPort != null)
+                    {
+                        webClient.Proxy = new WebProxy(Settings.Get.Web.ProxyUserName, (int)Settings.Get.Web.ProxyPort);
+                    }
                 }
 
                 webClient.Headers.Add("user-agent", Settings.Get.Web.UserAgent);
@@ -110,9 +126,9 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                 var outputString = webClient.DownloadString(downloadItem.Url);
 
                 Log.WriteToLog(
-                    LogSeverity.Info,
-                    downloadItem.ThreadID,
-                    string.Format(CultureInfo.CurrentCulture, "Download Complete. Saving to Cache"),
+                    LogSeverity.Info, 
+                    downloadItem.ThreadID, 
+                    string.Format(CultureInfo.CurrentCulture, "Download Complete. Saving to Cache"), 
                     string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
 
                 if (encode != Encoding.UTF8)
@@ -129,21 +145,24 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                 File.Delete(cachePath + ".txt.tmp");
 
                 Log.WriteToLog(
-                    LogSeverity.Info,
-                    downloadItem.ThreadID,
-                    string.Format(CultureInfo.CurrentCulture, "Process Complete."),
+                    LogSeverity.Info, 
+                    downloadItem.ThreadID, 
+                    string.Format(CultureInfo.CurrentCulture, "Process Complete."), 
                     string.Format(CultureInfo.CurrentCulture, "{0}", downloadItem.Url));
-
 
                 downloadItem.Result.Result = outputString;
                 downloadItem.Result.Success = true;
-                return;
             }
             catch (Exception ex)
             {
-                Log.WriteToLog(LogSeverity.Error, LoggerName.GeneralLog, string.Format("Download Html {0}", downloadItem.Url), ex.Message);
-                return;
+                Log.WriteToLog(
+                    LogSeverity.Error, 
+                    LoggerName.GeneralLog, 
+                    string.Format("Download Html {0}", downloadItem.Url), 
+                    ex.Message);
             }
         }
+
+        #endregion
     }
 }

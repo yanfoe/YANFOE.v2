@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.DownloadControls.DownloadsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="442" d:DesignWidth="607" xmlns:my="clr-namespace:YANFOE.UI.UserControls.DownloadControls"
+             xmlns:DownloadManager="clr-namespace:YANFOE.InternalApps.DownloadManager">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="302*" />
+            <ColumnDefinition Width="305*" />
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" Name="dataGrid1" DataContext="{Binding Source={x:Static DownloadManager:Downloader.BackgroundDownloadQue}}" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Url}" Header="Url" />
+                <DataGridComboBoxColumn Header="Section" SelectedItemBinding="{Binding Path=Section}" />
+                <DataGridComboBoxColumn Header="Type" SelectedItemBinding="{Binding Path=Type}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <my:DownloadStatusUserControl Height="50" Margin="16,0,12,0" x:Name="ucDownloadThread1" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,56,12,0" x:Name="ucDownloadThread2" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,112,12,0" x:Name="ucDownloadThread3" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,168,12,0" x:Name="ucDownloadThread4" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,224,12,0" x:Name="ucDownloadThread5" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,280,12,0" x:Name="ucDownloadThread6" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,336,12,0" x:Name="ucDownloadThread7" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <my:DownloadStatusUserControl Height="50" Margin="16,392,12,0" x:Name="ucDownloadThread8" VerticalAlignment="Top" BorderThickness="1" Grid.Column="1" />
+        <GridSplitter HorizontalAlignment="Left" Name="gridSplitter1" Width="16" ResizeBehavior="BasedOnAlignment" Grid.Column="1" />
+    </Grid>
+</UserControl>

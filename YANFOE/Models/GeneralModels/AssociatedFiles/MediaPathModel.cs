@@ -1,88 +1,93 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MediaPathModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MediaPathModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The media path model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
+    #region Required Namespaces
+
     using System;
-    using System.ComponentModel;
     using System.IO;
 
-    using DevExpress.XtraEditors.DXErrorProvider;
-
     using YANFOE.Tools.Enums;
+    using YANFOE.Tools.Error;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The media path model.
+    ///   The media path model.
     /// </summary>
     [Serializable]
-    public class MediaPathModel : ModelBase, IDXDataErrorInfo
+    public class MediaPathModel : ModelBase, IMyDataErrorInfo
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The contains movies.
+        ///   The contains movies.
         /// </summary>
         private bool containsMovies;
 
         /// <summary>
-        /// The contains tv.
+        ///   The contains TV.
         /// </summary>
-        private bool containsTv;
+        private bool containsTV;
 
         /// <summary>
-        /// The default source.
+        ///   The default source.
         /// </summary>
         private string defaultSource;
 
         /// <summary>
-        /// The file collection.
+        ///   The file collection.
         /// </summary>
-        private BindingList<MediaPathFileModel> fileCollection;
+        private ThreadedBindingList<MediaPathFileModel> fileCollection;
 
         /// <summary>
-        /// The found files.
+        ///   The found files.
         /// </summary>
         private long foundFiles;
 
         /// <summary>
-        /// The import using file name.
+        ///   The import using file name.
         /// </summary>
         private bool importUsingFileName;
 
         /// <summary>
-        /// The import using parent folder name.
+        ///   The import using parent folder name.
         /// </summary>
         private bool importUsingParentFolderName = true;
 
         /// <summary>
-        /// The last scanned time.
+        ///   The last scanned time.
         /// </summary>
         private DateTime lastScannedTime;
 
         /// <summary>
-        /// The media path.
+        ///   The media path.
         /// </summary>
         private string mediaPath;
 
         /// <summary>
-        /// The recursive scan.
+        ///   The recursive scan.
         /// </summary>
         private bool recursiveScan;
 
         /// <summary>
-        /// The scraper group.
+        ///   The scraper group.
         /// </summary>
         private string scraperGroup;
 
@@ -91,23 +96,44 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MediaPathModel"/> class.
+        ///   Initializes a new instance of the <see cref="MediaPathModel" /> class.
         /// </summary>
         public MediaPathModel()
         {
             this.mediaPath = string.Empty;
 
-            this.fileCollection = new BindingList<MediaPathFileModel>();
+            this.fileCollection = new ThreadedBindingList<MediaPathFileModel>();
             this.defaultSource = string.Empty;
             this.scraperGroup = string.Empty;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether ContainsMovies.
+        ///   Gets Contains.
+        /// </summary>
+        public string Contains
+        {
+            get
+            {
+                if (this.ContainsMovies)
+                {
+                    return "Movies";
+                }
+
+                if (this.ContainsTV)
+                {
+                    return "TV";
+                }
+
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets a value indicating whether ContainsMovies.
         /// </summary>
         public bool ContainsMovies
         {
@@ -121,31 +147,33 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                 if (this.containsMovies != value)
                 {
                     this.containsMovies = value;
+                    this.OnPropertyChanged("Contains", true);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ContainsTv.
+        ///   Gets or sets a value indicating whether ContainsTV.
         /// </summary>
-        public bool ContainsTv
+        public bool ContainsTV
         {
             get
             {
-                return this.containsTv;
+                return this.containsTV;
             }
 
             set
             {
-                if (this.containsTv != value)
+                if (this.containsTV != value)
                 {
-                    this.containsTv = value;
+                    this.containsTV = value;
+                    this.OnPropertyChanged("Contains", true);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets DefaultSource.
+        ///   Gets or sets DefaultSource.
         /// </summary>
         public string DefaultSource
         {
@@ -162,9 +190,9 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets FileCollection.
+        ///   Gets or sets FileCollection.
         /// </summary>
-        public BindingList<MediaPathFileModel> FileCollection
+        public ThreadedBindingList<MediaPathFileModel> FileCollection
         {
             get
             {
@@ -179,7 +207,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets FileCount.
+        ///   Gets FileCount.
         /// </summary>
         public int FileCount
         {
@@ -187,7 +215,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             {
                 if (this.FileCollection == null)
                 {
-                    this.FileCollection = new BindingList<MediaPathFileModel>();
+                    this.FileCollection = new ThreadedBindingList<MediaPathFileModel>();
                 }
 
                 return this.FileCollection.Count;
@@ -195,7 +223,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets FoundFiles.
+        ///   Gets or sets FoundFiles.
         /// </summary>
         public long FoundFiles
         {
@@ -212,7 +240,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ImportUsingFileName.
+        ///   Gets or sets a value indicating whether ImportUsingFileName.
         /// </summary>
         public bool ImportUsingFileName
         {
@@ -233,7 +261,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ImportUsingParentFolderName.
+        ///   Gets or sets a value indicating whether ImportUsingParentFolderName.
         /// </summary>
         public bool ImportUsingParentFolderName
         {
@@ -254,28 +282,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets Contains.
-        /// </summary>
-        public string Contains
-        {
-            get
-            {
-                if (this.ContainsMovies)
-                {
-                    return "Movies";
-                }
-
-                if (this.ContainsTv)
-                {
-                    return "TV";
-                }
-
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets LastScannedTime.
+        ///   Gets or sets LastScannedTime.
         /// </summary>
         public DateTime LastScannedTime
         {
@@ -292,7 +299,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets MediaPath.
+        ///   Gets or sets MediaPath.
         /// </summary>
         public string MediaPath
         {
@@ -310,7 +317,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets NameFileBy.
+        ///   Gets NameFileBy.
         /// </summary>
         public AddFolderType NameFileBy
         {
@@ -321,7 +328,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether RecursiveScan.
+        ///   Gets or sets a value indicating whether RecursiveScan.
         /// </summary>
         public bool RecursiveScan
         {
@@ -338,7 +345,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets ScraperGroup.
+        ///   Gets or sets ScraperGroup.
         /// </summary>
         public string ScraperGroup
         {
@@ -356,14 +363,14 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
         #endregion
 
-        #region Implemented Interfaces
-
-        #region IDXDataErrorInfo
+        #region Public Methods and Operators
 
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a business object.
         /// </summary>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
+        /// <param name="info">
+        /// An <see cref="ErrorInfo"/> object that contains information on an error. 
+        /// </param>
         public void GetError(ErrorInfo info)
         {
         }
@@ -371,8 +378,12 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a specific business object's property.
         /// </summary>
-        /// <param name="propertyName">A string that identifies the name of the property for which information on an error is to be returned.</param>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
+        /// <param name="propertyName">
+        /// A string that identifies the name of the property for which information on an error is to be returned. 
+        /// </param>
+        /// <param name="info">
+        /// An <see cref="ErrorInfo"/> object that contains information on an error. 
+        /// </param>
         public void GetPropertyError(string propertyName, ErrorInfo info)
         {
             switch (propertyName)
@@ -393,8 +404,6 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                     break;
             }
         }
-
-        #endregion
 
         #endregion
     }

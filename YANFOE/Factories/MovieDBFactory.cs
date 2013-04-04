@@ -1,29 +1,29 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieDBFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieDBFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Data access layer for all movie related data.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories
 {
+    #region Required Namespaces
+
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.IO;
     using System.Linq;
-
-    using DevExpress.Utils;
-    using DevExpress.XtraBars.Ribbon;
 
     using YANFOE.Factories.Internal;
     using YANFOE.Factories.Media;
@@ -33,289 +33,454 @@ namespace YANFOE.Factories
     using YANFOE.Models.MovieModels;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
-    using YANFOE.UI.Dialogs.General;
+    using YANFOE.Tools.UI;
+    using YANFOE.UI.UserControls.CommonControls;
+
+    #endregion
 
     /// <summary>
-    /// Data access layer for all movie related data.
+    ///   Data access layer for all movie related data.
     /// </summary>
-    public static class MovieDBFactory
+    public class MovieDBFactory : FactoryBase
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The gallery group.
+        ///   The instance.
         /// </summary>
-        private static readonly GalleryItemGroup galleryGroup;
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", 
+            Justification = "Implements Singleton.")]
+        public static MovieDBFactory Instance = new MovieDBFactory();
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
-        /// The in gallery.
+        ///   The gallery group.
         /// </summary>
-        private static readonly BindingList<string> inGallery;
+        private readonly GalleryItemGroup galleryGroup;
 
         /// <summary>
-        /// The current movie present in the main movie window.
+        ///   The in gallery.
         /// </summary>
-        private static MovieModel currentMovie;
+        private readonly ThreadedBindingList<string> inGallery;
 
         /// <summary>
-        /// The is multi selected.
+        ///   The current movie present in the main movie window.
         /// </summary>
-        private static bool isMultiSelected;
+        private MovieModel currentMovie;
 
         /// <summary>
-        /// The multi select.
+        ///   Gets or sets the database of duplicated movies.
         /// </summary>
-        private static MovieModel multiSelect;
+        /// <value> The database of duplicated movies. </value>
+        private ThreadedBindingList<MovieModel> duplicatedMoviesDatabase;
 
         /// <summary>
-        /// The multi selected movies.
+        ///   The hidden movie database.
         /// </summary>
-        private static BindingList<MovieModel> multiSelectedMovies;
+        private ThreadedBindingList<MovieModel> hiddenMovieDatabase;
 
-        public static string TempScraperGroup { get; set; }
+        /// <summary>
+        ///   The ignore multi select.
+        /// </summary>
+        private bool ignoreMultiSelect;
+
+        /// <summary>
+        ///   Gets or sets ImportProgressCurrent.
+        /// </summary>
+        private int importProgressCurrent;
+
+        /// <summary>
+        ///   Gets or sets ImportProgressMaximum.
+        /// </summary>
+        private int importProgressMaximum;
+
+        /// <summary>
+        ///   Gets or sets ImportProgressStatus.
+        /// </summary>
+        private string importProgressStatus;
+
+        /// <summary>
+        ///   The is multi selected.
+        /// </summary>
+        private bool isMultiSelected;
+
+        /// <summary>
+        ///   Gets or sets the movie database.
+        /// </summary>
+        /// <value> The movie database. </value>
+        private ThreadedBindingList<MovieModel> movieDatabase;
+
+        /// <summary>
+        ///   The multi select.
+        /// </summary>
+        private MovieModel multiSelect;
+
+        /// <summary>
+        ///   The multi selected movies.
+        /// </summary>
+        private ThreadedBindingList<MovieModel> multiSelectedMovies;
+
+        /// <summary>
+        ///   The temp scraper group.
+        /// </summary>
+        private string tempScraperGroup;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="MovieDBFactory"/> class. 
+        ///   Prevents a default instance of the <see cref="MovieDBFactory" /> class from being created. 
+        ///   Initializes static members of the <see cref="MovieDBFactory" /> class.
         /// </summary>
-        static MovieDBFactory()
+        private MovieDBFactory()
         {
-            MovieDatabase = new BindingList<MovieModel>();
-            HiddenMovieDatabase = new BindingList<MovieModel>();
-            DuplicatedMoviesDatabase = new BindingList<MovieModel>();
-            currentMovie = new MovieModel();
-            galleryGroup = new GalleryItemGroup();
-            multiSelectedMovies = new BindingList<MovieModel>();
-            TempScraperGroup = string.Empty;
+            this.MovieDatabase = new ThreadedBindingList<MovieModel>();
+            this.HiddenMovieDatabase = new ThreadedBindingList<MovieModel>();
+            this.DuplicatedMoviesDatabase = new ThreadedBindingList<MovieModel>();
+            this.currentMovie = new MovieModel();
+            this.galleryGroup = new GalleryItemGroup();
+            this.multiSelectedMovies = new ThreadedBindingList<MovieModel>();
+            this.TempScraperGroup = string.Empty;
 
-            inGallery = new BindingList<string>();
+            this.inGallery = new ThreadedBindingList<string>();
 
-            MovieDatabase.ListChanged += MovieDatabase_ListChanged;
+            this.MovieDatabase.ListChanged += this.MovieDatabaseListChanged;
 
-            multiSelectedMovies.ListChanged += MultiSelectedMovies_ListChanged;
-            MovieDatabase.ListChanged += MovieDB_ListChanged;
-        }
-
-        static void MovieDatabase_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            DatabaseChanged(sender, e);
+            this.multiSelectedMovies.ListChanged += this.MultiSelectedMoviesListChanged;
+            this.MovieDatabase.ListChanged += this.MovieDBListChanged;
         }
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
-        /// Occurs when [current movie changed].
+        ///   Occurs when [current movie changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler CurrentMovieChanged = delegate { };
+        public event EventHandler CurrentMovieChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [current movie value changed].
+        ///   Occurs when [current movie value changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler CurrentMovieValueChanged = delegate { };
+        public event EventHandler CurrentMovieValueChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [movie database changed].
+        ///   Occurs when [movie database changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler DatabaseChanged = delegate { };
+        public event EventHandler DatabaseChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [displayed database values require refresh].
+        ///   Occurs when [displayed database values require refresh].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler DatabaseValuesRefreshRequired = delegate { };
+        public event EventHandler DatabaseValuesRefreshRequired = delegate { };
 
         /// <summary>
-        /// Occurs when [fanart loaded].
+        ///   Occurs when [fanart loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler FanartLoaded = delegate { };
+        public event EventHandler FanartLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [fanart loading].
+        ///   Occurs when [fanart loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler FanartLoading = delegate { };
+        public event EventHandler FanartLoading = delegate { };
 
         /// <summary>
-        /// Occurs when [movie gallery changed].
+        ///   Occurs when [movie gallery changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler GalleryChanged = delegate { };
+        public event EventHandler GalleryChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [multi selected values changed].
+        ///   Occurs when [multi selected values changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler MultiSelectedValuesChanged = delegate { };
+        public event EventHandler MultiSelectedValuesChanged = delegate { };
 
         /// <summary>
-        /// Occurs when [poster loaded].
+        ///   Occurs when [poster loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler PosterLoaded = delegate { };
+        public event EventHandler PosterLoaded = delegate { };
 
         /// <summary>
-        /// Occurs when [poster loading].
+        ///   Occurs when [poster loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler PosterLoading = delegate { };
+        public event EventHandler PosterLoading = delegate { };
 
         #endregion
 
-        #region Properties
+        #region Enums
 
         /// <summary>
-        /// Gets or sets ImportProgressCurrent.
+        ///   The movie DB types.
         /// </summary>
-        public static int ImportProgressCurrent { get; set; }
+        public enum MovieDBTypes
+        {
+            /// <summary>
+            ///   The movies.
+            /// </summary>
+            Movies = 0, 
+
+            /// <summary>
+            ///   The duplicates.
+            /// </summary>
+            Duplicates
+        }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets ImportProgressMaximum.
+        ///   Gets or sets the duplicated movies database.
         /// </summary>
-        public static int ImportProgressMaximum { get; set; }
-
-        /// <summary>
-        /// Gets or sets ImportProgressStatus.
-        /// </summary>
-        public static string ImportProgressStatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether IsMultiSelected.
-        /// </summary>
-        public static bool IsMultiSelected
+        public ThreadedBindingList<MovieModel> DuplicatedMoviesDatabase
         {
             get
             {
-                multiSelect = new MovieModel { Title = "Multiple Movies Selected" };
-
-                return isMultiSelected;
+                return this.duplicatedMoviesDatabase;
             }
 
             set
             {
-                isMultiSelected = value;
+                this.duplicatedMoviesDatabase = value;
+                this.OnPropertyChanged("DuplicatedMoviesDatabase");
             }
         }
 
-        public static bool IgnoreMultiSelect { get; set; }
-
         /// <summary>
-        /// Gets or sets the movie database.
+        ///   Gets or sets the hidden movie database.
         /// </summary>
-        /// <value>
-        /// The movie database.
-        /// </value>
-        public static BindingList<MovieModel> MovieDatabase { get; set; }
-
-        public static BindingList<MovieModel> HiddenMovieDatabase { get; set; }
-
-        /// <summary>
-        /// Gets or sets MultiSelectedMovies.
-        /// </summary>
-        public static BindingList<MovieModel> MultiSelectedMovies
+        public ThreadedBindingList<MovieModel> HiddenMovieDatabase
         {
             get
             {
-                return multiSelectedMovies;
+                return this.hiddenMovieDatabase;
             }
 
             set
             {
-                multiSelectedMovies = value;
-                MultiSelectedValuesChanged(null, new EventArgs());
+                this.hiddenMovieDatabase = value;
+                this.OnPropertyChanged("HiddenMovieDatabase");
             }
         }
 
         /// <summary>
-        /// Gets or sets the database of duplicated movies.
+        ///   Gets or sets a value indicating whether ignore multi select.
         /// </summary>
-        /// <value>
-        /// The database of duplicated movies.
-        /// </value>
-        public static BindingList<MovieModel> DuplicatedMoviesDatabase { get; set; }
+        public bool IgnoreMultiSelect
+        {
+            get
+            {
+                return this.ignoreMultiSelect;
+            }
+
+            set
+            {
+                this.ignoreMultiSelect = value;
+                this.OnPropertyChanged("IgnoreMultiSelect");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the import progress current.
+        /// </summary>
+        public int ImportProgressCurrent
+        {
+            get
+            {
+                return this.importProgressCurrent;
+            }
+
+            set
+            {
+                this.importProgressCurrent = value;
+                this.OnPropertyChanged("ImportProgressCurrent");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the import progress maximum.
+        /// </summary>
+        public int ImportProgressMaximum
+        {
+            get
+            {
+                return this.importProgressMaximum;
+            }
+
+            set
+            {
+                this.importProgressMaximum = value;
+                this.OnPropertyChanged("ImportProgressMaximum");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the import progress status.
+        /// </summary>
+        public string ImportProgressStatus
+        {
+            get
+            {
+                return this.importProgressStatus;
+            }
+
+            set
+            {
+                this.importProgressStatus = value;
+                this.OnPropertyChanged("ImportProgressStatus");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets a value indicating whether IsMultiSelected.
+        /// </summary>
+        public bool IsMultiSelected
+        {
+            get
+            {
+                this.multiSelect = new MovieModel { Title = "Multiple Movies Selected" };
+                return this.isMultiSelected;
+            }
+
+            set
+            {
+                this.isMultiSelected = value;
+                this.OnPropertyChanged("IsMultiSelected");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the movie database.
+        /// </summary>
+        public ThreadedBindingList<MovieModel> MovieDatabase
+        {
+            get
+            {
+                return this.movieDatabase;
+            }
+
+            set
+            {
+                this.movieDatabase = value;
+                this.OnPropertyChanged("MovieDatabase");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets MultiSelectedMovies.
+        /// </summary>
+        public ThreadedBindingList<MovieModel> MultiSelectedMovies
+        {
+            get
+            {
+                return this.multiSelectedMovies;
+            }
+
+            set
+            {
+                this.multiSelectedMovies = value;
+                this.OnPropertyChanged("MultiSelectedMovies");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the temp scraper group.
+        /// </summary>
+        public string TempScraperGroup
+        {
+            get
+            {
+                return this.tempScraperGroup;
+            }
+
+            set
+            {
+                this.tempScraperGroup = value;
+                this.OnPropertyChanged("TempScraperGroup");
+            }
+        }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Check if Fanart has downloaded.
+        ///   Check if Fanart has downloaded.
         /// </summary>
-        /// <returns>
-        /// Downloaded status
-        /// </returns>
-        public static bool FanartDownloaded()
+        /// <returns> Downloaded status </returns>
+        public bool FanartDownloaded()
         {
-            string url = currentMovie.CurrentFanartImageUrl;
+            string url = this.currentMovie.CurrentFanartImageUrl;
             string urlCache = WebCache.GetPathFromUrl(url, Section.Movies);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Gets the current movie.
+        ///   Gets the current movie.
         /// </summary>
-        /// <returns>
-        /// The current movie
-        /// </returns>
-        public static MovieModel GetCurrentMovie()
+        /// <returns> The current movie </returns>
+        public MovieModel GetCurrentMovie()
         {
-            return currentMovie;
+            return this.currentMovie;
         }
 
         /// <summary>
-        /// Download fanart
+        ///   Download fanart
         /// </summary>
-        public static void GetFanart()
+        public void GetFanart()
         {
-            if (FanartDownloaded())
+            if (this.FanartDownloaded())
             {
-                InvokeFanartLoaded(new EventArgs());
+                this.InvokeFanartLoaded(new EventArgs());
                 return;
             }
 
-            InvokeFanartLoading(new EventArgs());
+            this.InvokeFanartLoading(new EventArgs());
 
             var bgwFanart = new BackgroundWorker();
 
-            bgwFanart.DoWork += BgwFanart_DoWork;
-            bgwFanart.RunWorkerCompleted += BgwFanart_RunWorkerCompleted;
-            bgwFanart.RunWorkerAsync(currentMovie.CurrentFanartImageUrl);
+            bgwFanart.DoWork += this.BgwFanart_DoWork;
+            bgwFanart.RunWorkerCompleted += this.BgwFanartRunWorkerCompleted;
+            bgwFanart.RunWorkerAsync(this.currentMovie.CurrentFanartImageUrl);
         }
 
         /// <summary>
-        /// Get gallery group.
+        ///   Get gallery group.
         /// </summary>
-        /// <returns>
-        /// The gallery group.
-        /// </returns>
-        public static GalleryItemGroup GetGalleryGroup()
+        /// <returns> The gallery group. </returns>
+        public GalleryItemGroup GetGalleryGroup()
         {
-            return galleryGroup;
+            return this.galleryGroup;
         }
 
         /// <summary>
         /// Gets the movie based on its Id
         /// </summary>
         /// <param name="id">
-        /// The Id value.
+        /// The Id value. 
         /// </param>
         /// <returns>
-        /// A movie object.
+        /// A movie object. 
         /// </returns>
-        public static MovieModel GetMovie(string id)
+        public MovieModel GetMovie(string id)
         {
             try
             {
-                return (from m in MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
+                return (from m in this.MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
             }
             catch
             {
@@ -324,51 +489,81 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The get poster.
+        ///   The get poster.
         /// </summary>
-        public static void GetPoster()
+        public void GetPoster()
         {
-            if (PosterDownloaded())
+            if (this.PosterDownloaded())
             {
-                InvokePosterLoaded(new EventArgs());
+                this.InvokePosterLoaded(new EventArgs());
                 return;
             }
 
-            InvokePosterLoading(new EventArgs());
+            this.InvokePosterLoading(new EventArgs());
 
             var bgwPoster = new BackgroundWorker();
 
-            bgwPoster.DoWork += BgwPoster_DoWork;
-            bgwPoster.RunWorkerCompleted += BgwPoster_RunWorkerCompleted;
-            bgwPoster.RunWorkerAsync(currentMovie.CurrentPosterImageUrl);
+            bgwPoster.DoWork += this.BgwPoster_DoWork;
+            bgwPoster.RunWorkerCompleted += this.BgwPosterRunWorkerCompleted;
+            bgwPoster.RunWorkerAsync(this.currentMovie.CurrentPosterImageUrl);
+        }
+
+        /// <summary>
+        /// The hide movie.
+        /// </summary>
+        /// <param name="movieModel">
+        /// The movie model. 
+        /// </param>
+        public void HideMovie(MovieModel movieModel)
+        {
+            this.HiddenMovieDatabase.Add(movieModel);
+            movieModel.Hidden = true;
+            this.MovieDatabase.Remove(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         /// <summary>
         /// Invokes the current movie changed.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeCurrentMovieChanged(EventArgs e)
+        public void InvokeCurrentMovieChanged(EventArgs e)
         {
-            EventHandler handler = CurrentMovieChanged;
+            EventHandler handler = this.CurrentMovieChanged;
             if (handler != null)
             {
                 handler(null, e);
             }
 
-            currentMovie.PropertyChanged += MultiSelect_PropertyChanged;
+            this.currentMovie.PropertyChanged += this.MultiSelectPropertyChanged;
         }
 
         /// <summary>
         /// Invokes the current movie value changed.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeCurrentMovieValueChanged(EventArgs e)
+        public void InvokeCurrentMovieValueChanged(EventArgs e)
         {
-            EventHandler handler = CurrentMovieValueChanged;
+            EventHandler handler = this.CurrentMovieValueChanged;
+            if (handler != null)
+            {
+                handler(null, e);
+            }
+        }
+
+        /// <summary>
+        /// The invoke database changed.
+        /// </summary>
+        /// <param name="e">
+        /// The e. 
+        /// </param>
+        public void InvokeDatabaseChanged(EventArgs e)
+        {
+            EventHandler handler = this.DatabaseChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -379,11 +574,11 @@ namespace YANFOE.Factories
         /// Invokes the fanart loaded.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeFanartLoaded(EventArgs e)
+        public void InvokeFanartLoaded(EventArgs e)
         {
-            EventHandler handler = FanartLoaded;
+            EventHandler handler = this.FanartLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -394,20 +589,11 @@ namespace YANFOE.Factories
         /// Invokes the fanart loading.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeFanartLoading(EventArgs e)
+        public void InvokeFanartLoading(EventArgs e)
         {
-            EventHandler handler = FanartLoading;
-            if (handler != null)
-            {
-                handler(null, e);
-            }
-        }
-
-        public static void InvokeDatabaseChanged(EventArgs e)
-        {
-            EventHandler handler = DatabaseChanged;
+            EventHandler handler = this.FanartLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -418,11 +604,11 @@ namespace YANFOE.Factories
         /// Invokes the poster loaded.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokePosterLoaded(EventArgs e)
+        public void InvokePosterLoaded(EventArgs e)
         {
-            EventHandler handler = PosterLoaded;
+            EventHandler handler = this.PosterLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -433,11 +619,11 @@ namespace YANFOE.Factories
         /// Invokes the poster loading.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokePosterLoading(EventArgs e)
+        public void InvokePosterLoading(EventArgs e)
         {
-            EventHandler handler = PosterLoading;
+            EventHandler handler = this.PosterLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -448,30 +634,29 @@ namespace YANFOE.Factories
         /// Is same as current movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
         /// <returns>
-        /// The is same as current movie.
+        /// The is same as current movie. 
         /// </returns>
-        public static bool IsSameAsCurrentMovie(MovieModel movieModel)
+        public bool IsSameAsCurrentMovie(MovieModel movieModel)
         {
-            return movieModel.MovieUniqueId == currentMovie.MovieUniqueId;
+            return movieModel.MovieUniqueId == this.currentMovie.MovieUniqueId;
         }
 
         /// <summary>
-        /// The load fanart.
+        ///   The load fanart.
         /// </summary>
-        /// <returns>
-        /// Image object of fanart
-        /// </returns>
-        public static Image LoadFanart()
+        /// <returns> Image object of fanart </returns>
+        public Image LoadFanart()
         {
-            if (!string.IsNullOrEmpty(currentMovie.FanartPathOnDisk) && File.Exists(currentMovie.FanartPathOnDisk))
+            if (!string.IsNullOrEmpty(this.currentMovie.FanartPathOnDisk)
+                && File.Exists(this.currentMovie.FanartPathOnDisk))
             {
-                return ImageHandler.LoadImage(currentMovie.FanartPathOnDisk);
+                return ImageHandler.LoadImage(this.currentMovie.FanartPathOnDisk);
             }
 
-            string url = currentMovie.CurrentFanartImageUrl;
+            string url = this.currentMovie.CurrentFanartImageUrl;
             string urlCache = WebCache.GetPathFromUrl(url, Section.Movies);
 
             if (!File.Exists(urlCache) || Downloader.Downloading.Contains(url))
@@ -483,21 +668,20 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The load poster.
+        ///   The load poster.
         /// </summary>
-        /// <returns>
-        /// Image object of poster
-        /// </returns>
-        public static Image LoadPoster()
+        /// <returns> Image object of poster </returns>
+        public Image LoadPoster()
         {
-            if (!string.IsNullOrEmpty(currentMovie.PosterPathOnDisk) && File.Exists(currentMovie.PosterPathOnDisk))
+            if (!string.IsNullOrEmpty(this.currentMovie.PosterPathOnDisk)
+                && File.Exists(this.currentMovie.PosterPathOnDisk))
             {
-                return ImageHandler.LoadImage(currentMovie.PosterPathOnDisk);
+                return ImageHandler.LoadImage(this.currentMovie.PosterPathOnDisk);
             }
 
-            string urlCache = WebCache.GetPathFromUrl(currentMovie.CurrentPosterImageUrl, Section.Movies);
+            string urlCache = WebCache.GetPathFromUrl(this.currentMovie.CurrentPosterImageUrl, Section.Movies);
 
-            if (!File.Exists(urlCache) || Downloader.Downloading.Contains(currentMovie.CurrentPosterImageUrl))
+            if (!File.Exists(urlCache) || Downloader.Downloading.Contains(this.currentMovie.CurrentPosterImageUrl))
             {
                 return null;
             }
@@ -509,10 +693,13 @@ namespace YANFOE.Factories
         /// The merge with database.
         /// </summary>
         /// <param name="importDatabase">
-        /// The import database.
+        /// The import database. 
         /// </param>
-        public static void MergeWithDatabase(
-            BindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
+        /// <param name="type">
+        /// The type. 
+        /// </param>
+        public void MergeWithDatabase(
+            ThreadedBindingList<MovieModel> importDatabase, MovieDBTypes type = MovieDBTypes.Movies)
         {
             foreach (MovieModel movie in importDatabase)
             {
@@ -524,20 +711,18 @@ namespace YANFOE.Factories
                 switch (type)
                 {
                     case MovieDBTypes.Movies:
-                        MovieDatabase.Add(movie);
+                        this.MovieDatabase.Add(movie);
                         break;
                     case MovieDBTypes.Duplicates:
-                        DuplicatedMoviesDatabase.Add(movie);
-                        break;
-                    default:
+                        this.DuplicatedMoviesDatabase.Add(movie);
                         break;
                 }
             }
 
             if (type == MovieDBTypes.Movies)
             {
-                MediaPathDBFactory.GetMediaPathMoviesUnsorted().Clear();
-                GeneratePictureGallery();
+                MediaPathDBFactory.Instance.MediaPathMoviesUnsorted.Clear();
+                this.GeneratePictureGallery();
             }
         }
 
@@ -545,51 +730,51 @@ namespace YANFOE.Factories
         /// Handles the PropertyChanged event of the MultiSelect control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data. 
         /// </param>
-        public static void MultiSelect_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void MultiSelectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (isMultiSelected && !IgnoreMultiSelect)
+            if (this.isMultiSelected && !this.IgnoreMultiSelect)
             {
-                foreach (MovieModel movie in multiSelectedMovies)
+                foreach (MovieModel movie in this.multiSelectedMovies)
                 {
                     if (e.PropertyName == "Marked")
                     {
-                        if (currentMovie.Marked != movie.Marked)
+                        if (this.currentMovie.Marked != movie.Marked)
                         {
-                            movie.Marked = currentMovie.Marked;
+                            movie.Marked = this.currentMovie.Marked;
                         }
                     }
 
                     if (e.PropertyName == "Locked")
                     {
-                        if (currentMovie.Locked != movie.Locked)
+                        if (this.currentMovie.Locked != movie.Locked)
                         {
-                            movie.Locked = currentMovie.Locked;
+                            movie.Locked = this.currentMovie.Locked;
                         }
                     }
 
                     if (e.PropertyName == "Year")
                     {
-                        if (currentMovie.Year != movie.Year)
+                        if (this.currentMovie.Year != movie.Year)
                         {
-                            movie.Year = currentMovie.Year;
+                            movie.Year = this.currentMovie.Year;
                         }
                     }
 
                     if (e.PropertyName == "Plot")
                     {
-                        if (currentMovie.Plot != movie.Plot)
+                        if (this.currentMovie.Plot != movie.Plot)
                         {
-                            movie.Plot = currentMovie.Plot;
+                            movie.Plot = this.currentMovie.Plot;
                         }
                     }
                 }
 
-                DatabaseValuesRefreshRequired(null, null);
+                this.DatabaseValuesRefreshRequired(null, null);
             }
         }
 
@@ -597,40 +782,80 @@ namespace YANFOE.Factories
         /// The overwrite database.
         /// </summary>
         /// <param name="database">
-        /// The database.
+        /// The database. 
         /// </param>
-        public static void OverwriteDatabase(BindingList<MovieModel> database)
+        public void OverwriteDatabase(ThreadedBindingList<MovieModel> database)
         {
-            MovieDatabase = database;
-            DatabaseChanged(null, null);
+            this.MovieDatabase = database;
+            this.DatabaseChanged(null, null);
         }
 
         /// <summary>
-        /// Check if Poster has downloaded.
+        ///   Check if Poster has downloaded.
         /// </summary>
-        /// <returns>
-        /// Downloaded status
-        /// </returns>
-        public static bool PosterDownloaded()
+        /// <returns> Downloaded status </returns>
+        public bool PosterDownloaded()
         {
-            string url = currentMovie.CurrentPosterImageUrl;
+            string url = this.currentMovie.CurrentPosterImageUrl;
             string urlCache = WebCache.GetPathFromUrl(url, Section.Movies);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
+        ///   The remove missing movies.
+        /// </summary>
+        public void RemoveMissingMovies()
+        {
+            var toDelete =
+                this.MovieDatabase.Where(
+                    movie => movie.AssociatedFiles.Media.Any(file => !File.Exists(file.PathAndFilename))).ToList();
+
+            if (toDelete.Count > 0)
+            {
+                // var frmMissingFilesMovies = new FrmMissingFilesMovies(toDelete);
+                // frmMissingFilesMovies.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// The remove movie.
+        /// </summary>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        public void RemoveMovie(MovieModel movie)
+        {
+            foreach (var file in movie.AssociatedFiles.Media)
+            {
+                var fileEntry =
+                    (from f in MasterMediaDBFactory.MasterMovieMediaDatabase
+                     where f.PathAndFilename == file.PathAndFilename
+                     select f).SingleOrDefault();
+
+                if (fileEntry != null)
+                {
+                    MasterMediaDBFactory.MasterMovieMediaDatabase.Remove(fileEntry);
+                }
+            }
+
+            this.MovieDatabase.Remove(movie);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        /// <summary>
         /// The replace movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
-        public static void ReplaceMovie(MovieModel movieModel)
+        public void ReplaceMovie(MovieModel movieModel)
         {
-            lock (MovieDatabase)
+            lock (this.MovieDatabase)
             {
                 var getMovieInDatabase =
-                    MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
+                    this.MovieDatabase.ToList().FindIndex(w => w.MovieUniqueId == movieModel.MovieUniqueId);
 
                 if (getMovieInDatabase == -1)
                 {
@@ -640,53 +865,72 @@ namespace YANFOE.Factories
                 movieModel.IsBusy = false;
 
                 movieModel.IsBusy = false;
-                MovieDatabase[getMovieInDatabase] = movieModel;
 
-                if (movieModel.MovieUniqueId == currentMovie.MovieUniqueId)
+                // TODO: This causes a weird bug where you can't just replace the movie in the database or it doesn't allow you to select the movie in the list anymore.
+                this.MovieDatabase.RemoveAt(getMovieInDatabase);
+                this.MovieDatabase.Insert(getMovieInDatabase, movieModel);
+
+                // MovieDatabase[getMovieInDatabase] = movieModel
+                if (movieModel.MovieUniqueId == this.currentMovie.MovieUniqueId)
                 {
-                    SetCurrentMovie(movieModel);
-                    InvokeCurrentMovieChanged(new EventArgs());
+                    this.SetCurrentMovie(movieModel);
+                    this.InvokeCurrentMovieChanged(new EventArgs());
                 }
             }
+        }
+
+        /// <summary>
+        /// The restore hidden movie.
+        /// </summary>
+        /// <param name="movieModel">
+        /// The movie model. 
+        /// </param>
+        public void RestoreHiddenMovie(MovieModel movieModel)
+        {
+            this.HiddenMovieDatabase.Remove(movieModel);
+            movieModel.Hidden = false;
+            this.MovieDatabase.Add(movieModel);
+
+            DatabaseIOFactory.DatabaseDirty = true;
         }
 
         /// <summary>
         /// The set current movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
-        public static void SetCurrentMovie(MovieModel movieModel)
+        public void SetCurrentMovie(MovieModel movieModel)
         {
             if (movieModel.MultiSelectModel)
             {
-                PopulateMultiSelectMovieModel(movieModel);
+                this.PopulateMultiSelectMovieModel(movieModel);
             }
 
-            currentMovie = movieModel;
-            InvokeCurrentMovieChanged(new EventArgs());
+            this.currentMovie = movieModel;
+            this.InvokeCurrentMovieChanged(new EventArgs());
         }
 
         /// <summary>
         /// The set current movie.
         /// </summary>
         /// <param name="id">
-        /// The movie ID
+        /// The movie ID 
         /// </param>
-        public static void SetCurrentMovie(string id)
+        public void SetCurrentMovie(string id)
         {
-            if (IsMultiSelected)
+            if (this.IsMultiSelected)
             {
-                currentMovie = multiSelect;
-                currentMovie.PropertyChanged += MultiSelectMovie_PropertyChanged;
+                this.currentMovie = this.multiSelect;
+                this.currentMovie.PropertyChanged += this.MultiSelectMoviePropertyChanged;
             }
             else
             {
-                MovieModel movie = (from m in MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
+                MovieModel movie = (from m in this.MovieDatabase where m.MovieUniqueId == id select m).SingleOrDefault();
 
                 if (movie != null)
                 {
-                    SetCurrentMovie(movie);
+                    this.SetCurrentMovie(movie);
                 }
             }
         }
@@ -696,15 +940,29 @@ namespace YANFOE.Factories
         #region Methods
 
         /// <summary>
-        /// Handles the DoWork event of the bgwFanart control.
+        /// Handles the RunWorkerCompleted event of the Fanart control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwFanart_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwFanartRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.InvokeFanartLoaded(new EventArgs());
+        }
+
+        /// <summary>
+        /// Handles the DoWork event of the Fanart control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
+        /// </param>
+        private void BgwFanart_DoWork(object sender, DoWorkEventArgs e)
         {
             var url = e.Argument as string;
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
@@ -717,29 +975,29 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwFanart control.
+        /// Handles the RunWorkerCompleted event of the Poster control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwFanart_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwPosterRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeFanartLoaded(new EventArgs());
+            this.InvokePosterLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwPoster control.
+        /// Handles the DoWork event of the Poster control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwPoster_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwPoster_DoWork(object sender, DoWorkEventArgs e)
         {
             var url = e.Argument as string;
             string urlCache = WebCache.GetPathFromUrl(url, Section.Movies);
@@ -752,35 +1010,21 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwPoster control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void BgwPoster_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            InvokePosterLoaded(new EventArgs());
-        }
-
-        /// <summary>
-        /// Check if a value matches multiselected movies
+        /// Check if a value matches multi-selected movies
         /// </summary>
         /// <param name="scraperGroupBaseValue">
-        /// The scraper group base value.
+        /// The scraper group base value. 
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
         /// <param name="scraperGroupIsSame">
-        /// The scraper group is same.
+        /// The scraper group is same. 
         /// </param>
         /// <returns>
-        /// Datetime value
+        /// Date time value 
         /// </returns>
-        private static DateTime? CheckMultiSelectDateValue(
+        private DateTime? CheckMultiSelectDateValue(
             DateTime? scraperGroupBaseValue, DateTime? value, out bool scraperGroupIsSame)
         {
             scraperGroupIsSame = true;
@@ -801,21 +1045,21 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Check if a value matches multiselected movies
+        /// Check if a value matches multi-selected movies
         /// </summary>
         /// <param name="scraperGroupBaseValue">
-        /// The scraper group base value.
+        /// The scraper group base value. 
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
         /// <param name="scraperGroupIsSame">
-        /// The scraper group is same.
+        /// The scraper group is same. 
         /// </param>
         /// <returns>
-        /// Double value
+        /// Double value 
         /// </returns>
-        private static double? CheckMultiSelectDoubleValue(
+        private double? CheckMultiSelectDoubleValue(
             double? scraperGroupBaseValue, double? value, out bool scraperGroupIsSame)
         {
             scraperGroupIsSame = true;
@@ -836,22 +1080,21 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Secondary method for PopulateMultiSelectMovieModel for compairing int collections
+        /// Secondary method for PopulateMultiSelectMovieModel for comparing integer collections
         /// </summary>
         /// <param name="scraperGroupBaseValue">
-        /// The scraper Group Base Value.
+        /// The scraper Group Base Value. 
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
         /// <param name="scraperGroupIsSame">
-        /// The scraper Group Is Same.
+        /// The scraper Group Is Same. 
         /// </param>
         /// <returns>
-        /// Returned Int value
+        /// Returned Integer value 
         /// </returns>
-        private static int? CheckMultiSelectIntValue(
-            int? scraperGroupBaseValue, int? value, out bool scraperGroupIsSame)
+        private int? CheckMultiSelectIntValue(int? scraperGroupBaseValue, int? value, out bool scraperGroupIsSame)
         {
             scraperGroupIsSame = true;
 
@@ -871,21 +1114,21 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Secondary method for PopulateMultiSelectMovieModel for compairing string collections
+        /// Secondary method for PopulateMultiSelectMovieModel for comparing string collections
         /// </summary>
         /// <param name="scraperGroupBaseValue">
-        /// The scraper Group Base Value.
+        /// The scraper Group Base Value. 
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
         /// <param name="scraperGroupIsSame">
-        /// The scraper Group Is Same.
+        /// The scraper Group Is Same. 
         /// </param>
         /// <returns>
-        /// The check multi select string value.
+        /// The check multi select string value. 
         /// </returns>
-        private static string CheckMultiSelectStringValue(
+        private string CheckMultiSelectStringValue(
             string scraperGroupBaseValue, string value, out bool scraperGroupIsSame)
         {
             scraperGroupIsSame = true;
@@ -906,30 +1149,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The generate picture gallery.
+        ///   The generate picture gallery.
         /// </summary>
-        private static void GeneratePictureGallery()
+        private void GeneratePictureGallery()
         {
             bool changed = false;
 
-            for (int index = 0; index < MovieDatabase.Count; index++)
+            foreach (MovieModel movie in this.MovieDatabase)
             {
-                MovieModel movie = MovieDatabase[index];
-                if (!inGallery.Contains(movie.MovieUniqueId))
+                if (!this.inGallery.Contains(movie.MovieUniqueId))
                 {
                     if (movie.SmallPoster != null)
                     {
-                        var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+                        var superTip = new SuperToolTip { AllowHtmlText = true };
 
                         superTip.Items.AddTitle(string.Format("{0} ({1})", movie.Title, movie.Year));
 
                         var galleryItem = new GalleryItem(movie.SmallPoster, movie.Title, string.Empty)
-                            { Tag = movie.MovieUniqueId, SuperTip = superTip };
+                            {
+                               Tag = movie.MovieUniqueId, SuperTip = superTip 
+                            };
 
-                        if (!galleryGroup.Items.Contains(galleryItem))
+                        if (!this.galleryGroup.Items.Contains(galleryItem))
                         {
-                            galleryGroup.Items.Add(galleryItem);
-                            inGallery.Add(movie.MovieUniqueId);
+                            this.galleryGroup.Items.Add(galleryItem);
+                            this.inGallery.Add(movie.MovieUniqueId);
 
                             changed = true;
                         }
@@ -939,7 +1183,7 @@ namespace YANFOE.Factories
 
             if (changed)
             {
-                GalleryChanged(null, null);
+                this.GalleryChanged(null, null);
             }
         }
 
@@ -947,56 +1191,70 @@ namespace YANFOE.Factories
         /// Handles the ListChanged event of the MovieDB control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void MovieDB_ListChanged(object sender, ListChangedEventArgs e)
+        private void MovieDBListChanged(object sender, ListChangedEventArgs e)
         {
             if (DatabaseIOFactory.AppLoading)
             {
                 return;
             }
 
-            GeneratePictureGallery();
+            this.GeneratePictureGallery();
+        }
+
+        /// <summary>
+        /// The movie database_ list changed.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender. 
+        /// </param>
+        /// <param name="e">
+        /// The e. 
+        /// </param>
+        private void MovieDatabaseListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.DatabaseChanged(sender, e);
         }
 
         /// <summary>
         /// Handles the PropertyChanged event of the MultiSelectMovie control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void MultiSelectMovie_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MultiSelectMoviePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            MultiSelectedValuesChanged(null, new EventArgs());
+            this.MultiSelectedValuesChanged(null, new EventArgs());
         }
 
         /// <summary>
         /// Handles the ListChanged event of the MultiSelectedMovies control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void MultiSelectedMovies_ListChanged(object sender, ListChangedEventArgs e)
+        private void MultiSelectedMoviesListChanged(object sender, ListChangedEventArgs e)
         {
-            MultiSelectedValuesChanged(null, new EventArgs());
+            this.MultiSelectedValuesChanged(null, new EventArgs());
         }
 
         /// <summary>
-        /// Fills a multi select moviemodel object with items that are the same from SelectedMovies collection
+        /// Fills a multi select movie model object with items that are the same from SelectedMovies collection
         /// </summary>
         /// <param name="movieModel">
-        /// The movie Model.
+        /// The movie Model. 
         /// </param>
-        private static void PopulateMultiSelectMovieModel(MovieModel movieModel)
+        private void PopulateMultiSelectMovieModel(MovieModel movieModel)
         {
             bool scraperGroupIsSame = true;
             string scraperGroupBaseValue = string.Empty;
@@ -1013,8 +1271,8 @@ namespace YANFOE.Factories
             bool taglineGroupIsSame = true;
             string taglineGroupBaseValue = string.Empty;
 
-            bool OriginalTitleGroupIsSame;
-            string OriginalTitleGroupBaseValue = string.Empty;
+            bool originalTitleGroupIsSame;
+            string originalTitleGroupBaseValue = string.Empty;
 
             bool studioGroupIsSame = true;
             string studioGroupBaseValue = string.Empty;
@@ -1055,42 +1313,44 @@ namespace YANFOE.Factories
             bool top250GroupIsSame = true;
             int? top250GroupBaseValue = null;
 
-            foreach (MovieModel movie in MultiSelectedMovies)
+            foreach (MovieModel movie in this.MultiSelectedMovies)
             {
-                scraperGroupBaseValue = CheckMultiSelectStringValue(
+                scraperGroupBaseValue = this.CheckMultiSelectStringValue(
                     scraperGroupBaseValue, movie.ScraperGroup, out scraperGroupIsSame);
-                yearGroupBaseValue = CheckMultiSelectIntValue(yearGroupBaseValue, movie.Year, out yearGroupIsSame);
-                plotGroupBaseValue = CheckMultiSelectStringValue(plotGroupBaseValue, movie.Plot, out plotGroupIsSame);
-                outlineGroupBaseValue = CheckMultiSelectStringValue(
+                yearGroupBaseValue = this.CheckMultiSelectIntValue(yearGroupBaseValue, movie.Year, out yearGroupIsSame);
+                plotGroupBaseValue = this.CheckMultiSelectStringValue(
+                    plotGroupBaseValue, movie.Plot, out plotGroupIsSame);
+                outlineGroupBaseValue = this.CheckMultiSelectStringValue(
                     outlineGroupBaseValue, movie.Outline, out outlineGroupIsSame);
-                taglineGroupBaseValue = CheckMultiSelectStringValue(
+                taglineGroupBaseValue = this.CheckMultiSelectStringValue(
                     taglineGroupBaseValue, movie.Tagline, out taglineGroupIsSame);
-                OriginalTitleGroupBaseValue = CheckMultiSelectStringValue(
-                    OriginalTitleGroupBaseValue, movie.OriginalTitle, out OriginalTitleGroupIsSame);
-                studioGroupBaseValue = CheckMultiSelectStringValue(
+                originalTitleGroupBaseValue = this.CheckMultiSelectStringValue(
+                    originalTitleGroupBaseValue, movie.OriginalTitle, out originalTitleGroupIsSame);
+                studioGroupBaseValue = this.CheckMultiSelectStringValue(
                     studioGroupBaseValue, movie.SetStudio, out studioGroupIsSame);
-                releasedGroupBaseValue = CheckMultiSelectDateValue(
+                releasedGroupBaseValue = this.CheckMultiSelectDateValue(
                     releasedGroupBaseValue, movie.ReleaseDate, out releasedGroupIsSame);
-                directorsGroupBaseValue = CheckMultiSelectStringValue(
+                directorsGroupBaseValue = this.CheckMultiSelectStringValue(
                     directorsGroupBaseValue, movie.DirectorAsString, out directorsGroupIsSame);
-                writersGroupBaseValue = CheckMultiSelectStringValue(
+                writersGroupBaseValue = this.CheckMultiSelectStringValue(
                     writersGroupBaseValue, movie.WritersAsString, out writersGroupIsSame);
-                genreGroupBaseValue = CheckMultiSelectStringValue(
+                genreGroupBaseValue = this.CheckMultiSelectStringValue(
                     genreGroupBaseValue, movie.GenreAsString, out genreGroupIsSame);
-                languagesGroupBaseValue = CheckMultiSelectStringValue(
+                languagesGroupBaseValue = this.CheckMultiSelectStringValue(
                     languagesGroupBaseValue, movie.LanguageAsString, out languagesGroupIsSame);
-                countryGroupBaseValue = CheckMultiSelectStringValue(
+                countryGroupBaseValue = this.CheckMultiSelectStringValue(
                     countryGroupBaseValue, movie.CountryAsString, out countryGroupIsSame);
-                runtimeGroupBaseValue = CheckMultiSelectStringValue(
+                runtimeGroupBaseValue = this.CheckMultiSelectStringValue(
                     runtimeGroupBaseValue, movie.RuntimeInHourMin, out runtimeGroupIsSame);
-                ratingGroupBaseValue = CheckMultiSelectDoubleValue(
+                ratingGroupBaseValue = this.CheckMultiSelectDoubleValue(
                     ratingGroupBaseValue, movie.Rating, out ratingGroupIsSame);
-                mpaaGroupBaseValue = CheckMultiSelectStringValue(mpaaGroupBaseValue, movie.Mpaa, out mpaaGroupIsSame);
-                sourceGroupBaseValue = CheckMultiSelectStringValue(
+                mpaaGroupBaseValue = this.CheckMultiSelectStringValue(
+                    mpaaGroupBaseValue, movie.Mpaa, out mpaaGroupIsSame);
+                sourceGroupBaseValue = this.CheckMultiSelectStringValue(
                     sourceGroupBaseValue, movie.VideoSource, out sourceGroupIsSame);
-                certGroupBaseValue = CheckMultiSelectStringValue(
+                certGroupBaseValue = this.CheckMultiSelectStringValue(
                     sourceGroupBaseValue, movie.Certification, out certGroupIsSame);
-                top250GroupBaseValue = CheckMultiSelectIntValue(
+                top250GroupBaseValue = this.CheckMultiSelectIntValue(
                     top250GroupBaseValue, movie.Top250, out top250GroupIsSame);
             }
 
@@ -1186,76 +1446,5 @@ namespace YANFOE.Factories
         }
 
         #endregion
-
-        public static void RemoveMissingMovies()
-        {
-            var toDelete = new List<MovieModel>();
-
-            for (int index = 0; index < MovieDatabase.Count; index++)
-            {
-                var movie = MovieDatabase[index];
-
-                foreach (var file in movie.AssociatedFiles.Media)
-                {
-                    if (!File.Exists(file.PathAndFilename))
-                    {
-                        toDelete.Add(movie);
-                        break;
-                    }
-                }
-            }
-
-            if (toDelete.Count > 0)
-            {
-                var frmMissingFilesMovies = new FrmMissingFilesMovies(toDelete);
-                frmMissingFilesMovies.ShowDialog();
-            }
-        }
-
-        public enum MovieDBTypes
-        {
-            Movies = 0,
-
-            Duplicates
-        }
-
-        public static void RemoveMovie(MovieModel movie)
-        {
-            foreach (var file in movie.AssociatedFiles.Media)
-            {
-                var fileEntry =
-                    (from f in MasterMediaDBFactory.MasterMovieMediaDatabase
-                     where f.PathAndFilename == file.PathAndFilename
-                     select f).SingleOrDefault();
-                    
-
-                if (fileEntry != null)
-                {
-                    MasterMediaDBFactory.MasterMovieMediaDatabase.Remove(fileEntry);
-                }
-            }
-
-            MovieDatabase.Remove(movie);
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
-
-        public static void HideMovie(MovieModel movieModel)
-        {
-            HiddenMovieDatabase.Add(movieModel);
-            movieModel.Hidden = true;
-            MovieDatabase.Remove(movieModel);
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
-
-        public static void RestoreHiddenMovie(MovieModel movieModel)
-        {
-            HiddenMovieDatabase.Remove(movieModel);
-            movieModel.Hidden = false;
-            MovieDatabase.Add(movieModel);
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
     }
 }

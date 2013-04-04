@@ -1,25 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MiResponseModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MiResponseModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
+// </license>
 // <summary>
 //   The mi response model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Apps.MediaInfo.Models
 {
+    #region Required Namespaces
+
     using System;
-    using System.ComponentModel;
     using System.Xml;
 
     using BitFactory.Logging;
 
     using YANFOE.InternalApps.Logs;
     using YANFOE.Tools.Extentions;
+    using YANFOE.Tools.Text;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The mi response model.
+    ///   The mi response model.
     /// </summary>
     [Serializable]
     public class MiResponseModel
@@ -27,11 +39,11 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         #region Constructors and Destructors
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "MiResponseModel" /> class.
+        ///   Initializes a new instance of the <see cref="MiResponseModel" /> class.
         /// </summary>
         public MiResponseModel()
         {
-            this.UniqueID = string.Empty;
+            this.UniqueId = string.Empty;
             this.CompleteName = string.Empty;
             this.Format = string.Empty;
             this.FileSize = string.Empty;
@@ -43,30 +55,19 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
             this.WritingApplication = string.Empty;
             this.WritingLibrary = string.Empty;
 
-            this.VideoStreams = new BindingList<MiVideoStreamModel>();
-            this.AudioStreams = new BindingList<MiAudioStreamModel>();
-            this.SubtitleStreams = new BindingList<MiSubtitleStreamModel>();
+            this.VideoStreams = new ThreadedBindingList<MiVideoStreamModel>();
+            this.AudioStreams = new ThreadedBindingList<MiAudioStreamModel>();
+            this.SubtitleStreams = new ThreadedBindingList<MiSubtitleStreamModel>();
         }
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the scan XML.
-        /// </summary>
-        public string ScanXML
-        {
-            get
-            {
-                return Tools.Text.IO.ReadTextFromFile(this.CompleteName + ".mediainfo");
-            }
-        }
+        #region Public Properties
 
         /// <summary>
         ///   Gets or sets AudioStreams.
         /// </summary>
-        public BindingList<MiAudioStreamModel> AudioStreams { get; set; }
+        public ThreadedBindingList<MiAudioStreamModel> AudioStreams { get; set; }
 
         /// <summary>
         ///   Gets or sets the name of the complete.
@@ -94,16 +95,6 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         public string EncodedLibrary { get; set; }
 
         /// <summary>
-        /// Gets or sets the writing application.
-        /// </summary>
-        public string WritingApplication { get; set; }
-
-        /// <summary>
-        /// Gets or sets the writing library.
-        /// </summary>
-        public string WritingLibrary { get; set; }
-
-        /// <summary>
         ///   Gets or sets the full size string.
         /// </summary>
         public string FileSize { get; set; }
@@ -119,34 +110,55 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         public string OverallBitRate { get; set; }
 
         /// <summary>
+        ///   Gets the scan XML.
+        /// </summary>
+        public string ScanXml
+        {
+            get
+            {
+                return IO.ReadTextFromFile(this.CompleteName + ".mediainfo");
+            }
+        }
+
+        /// <summary>
         ///   Gets or sets the subtitle streams.
         /// </summary>
-        public BindingList<MiSubtitleStreamModel> SubtitleStreams { get; set; }
+        public ThreadedBindingList<MiSubtitleStreamModel> SubtitleStreams { get; set; }
 
         /// <summary>
         ///   Gets or sets the unique ID.
         /// </summary>
-        public string UniqueID { get; set; }
+        public string UniqueId { get; set; }
 
         /// <summary>
         ///   Gets or sets the subtitle streams.
         /// </summary>
-        public BindingList<MiVideoStreamModel> VideoStreams { get; set; }
+        public ThreadedBindingList<MiVideoStreamModel> VideoStreams { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the writing application.
+        /// </summary>
+        public string WritingApplication { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the writing library.
+        /// </summary>
+        public string WritingLibrary { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Populates all values based on inputted xml.
         /// </summary>
         /// <param name="xml">
-        /// The xml.
+        /// The xml. 
         /// </param>
         /// <returns>
-        /// Succeeded without error
+        /// Succeeded without error 
         /// </returns>
-        public bool PopulateFromXML(string xml)
+        public bool PopulateFromXml(string xml)
         {
             try
             {
@@ -200,7 +212,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// The populate audio streams.
         /// </summary>
         /// <param name="result">
-        /// The result.
+        /// The result. 
         /// </param>
         private void PopulateAudioStreams(XmlNode result)
         {
@@ -211,7 +223,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                 switch (xmlNode.Name)
                 {
                     case "ID":
-                        audioStream.ID = xmlNode.InnerText.ToInt();
+                        audioStream.Id = xmlNode.InnerText.ToInt();
                         break;
 
                     case "Format":
@@ -223,11 +235,11 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         break;
 
                     case "Mode_extension":
-                        audioStream.FormatSEttingsModeExtension = xmlNode.InnerText;
+                        audioStream.FormatSettingsModeExtension = xmlNode.InnerText;
                         break;
 
                     case "Codec_ID":
-                        audioStream.CodecID = xmlNode.InnerText;
+                        audioStream.CodecId = xmlNode.InnerText;
                         break;
 
                     case "Duration":
@@ -275,7 +287,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// Populates the general details
         /// </summary>
         /// <param name="result">
-        /// The result.
+        /// The result. 
         /// </param>
         private void PopulateGeneral(XmlNode result)
         {
@@ -284,7 +296,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                 switch (xmlNode.Name)
                 {
                     case "Unique_ID":
-                        this.UniqueID = xmlNode.InnerText;
+                        this.UniqueId = xmlNode.InnerText;
                         break;
 
                     case "Complete_name":
@@ -334,7 +346,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// The populate subtitle streams.
         /// </summary>
         /// <param name="result">
-        /// The result.
+        /// The result. 
         /// </param>
         private void PopulateSubtitleStreams(XmlNode result)
         {
@@ -345,16 +357,16 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                 switch (xmlNode.Name)
                 {
                     case "ID":
-                        subtitleStream.ID = xmlNode.InnerText.ToInt();
+                        subtitleStream.Id = xmlNode.InnerText.ToInt();
                         break;
                     case "Format":
                         subtitleStream.Format = xmlNode.InnerText;
                         break;
                     case "Codec_ID":
-                        subtitleStream.CodecID = xmlNode.InnerText;
+                        subtitleStream.CodecId = xmlNode.InnerText;
                         break;
                     case "Codec_ID_Info":
-                        subtitleStream.CodecIDInfo = xmlNode.InnerText;
+                        subtitleStream.CodecIdInfo = xmlNode.InnerText;
                         break;
                     case "Language":
                         subtitleStream.Language = xmlNode.InnerText;
@@ -369,7 +381,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
         /// The populate video streams.
         /// </summary>
         /// <param name="result">
-        /// The result.
+        /// The result. 
         /// </param>
         private void PopulateVideoStreams(XmlNode result)
         {
@@ -380,7 +392,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                 switch (xmlNode.Name)
                 {
                     case "ID":
-                        videoStream.ID = xmlNode.InnerText.ToInt();
+                        videoStream.Id = xmlNode.InnerText.ToInt();
                         break;
 
                     case "Format":
@@ -396,7 +408,7 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         break;
 
                     case "Format_settings__CABAC":
-                        videoStream.FormatSettingsCABAC = xmlNode.InnerText;
+                        videoStream.FormatSettingsCabac = xmlNode.InnerText;
                         break;
 
                     case "Format_settings__ReFrames":
@@ -404,11 +416,11 @@ namespace YANFOE.Factories.Apps.MediaInfo.Models
                         break;
 
                     case "Format_Settings_GOP":
-                        videoStream.FormatSettingsGOP = xmlNode.InnerText;
+                        videoStream.FormatSettingsGop = xmlNode.InnerText;
                         break;
 
                     case "Codec_ID":
-                        videoStream.CodecID = xmlNode.InnerText;
+                        videoStream.CodecId = xmlNode.InnerText;
                         break;
 
                     case "Duration":

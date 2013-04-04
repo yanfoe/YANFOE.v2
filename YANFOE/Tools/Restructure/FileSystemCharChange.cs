@@ -1,68 +1,136 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileSystemCharChange.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="FileSystemCharChange.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The file system char change.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Restructure
 {
+    #region Required Namespaces
+
     using System;
 
+    using YANFOE.Settings;
+
+    #endregion
+
     /// <summary>
-    /// The file system char change.
+    ///   The file system char change.
     /// </summary>
     public static class FileSystemCharChange
     {
-        #region Public Methods
+        #region Static Fields
 
-        public enum ConvertArea
-        {
-           None,
-           Movie,
-           Tv
-        }
-        
-        public enum ConvertType
-        {
-            None,
-            Hex,
-            Char
-        }
+        /// <summary>
+        /// The replace values.
+        /// </summary>
+        private static readonly string[,] replaceValues;
 
-        private static string[,] replaceValues;
+        #endregion
 
+        #region Constructors and Destructors
+
+        /// <summary>
+        /// Initializes static members of the <see cref="FileSystemCharChange"/> class.
+        /// </summary>
         static FileSystemCharChange()
         {
             replaceValues = new[,]
-               {
-                   { ":", "$3A" }, 
-                   { "\"", "$22" }, 
-                   { "\\", "$5C" }, 
-                   { "<", "$3C" }, 
-                   { "/", "$2F" }, 
-                   { ">", "$3E" },
-                   { "|", "$7C" }, 
-                   { "*", "$2A" }, 
-                   { "?", "$3F" },
-               };
+                {
+                    {
+                       ":", "$3A" 
+                    }, {
+                          "\"", "$22" 
+                       }, {
+                             "\\", "$5C" 
+                          }, {
+                                "<", "$3C" 
+                             }, {
+                                   "/", "$2F" 
+                                }, {
+                                      ">", "$3E" 
+                                   }, 
+                    {
+                       "|", "$7C" 
+                    }, {
+                          "*", "$2A" 
+                       }, {
+                             "?", "$3F" 
+                          }, 
+                };
         }
+
+        #endregion
+
+        #region Enums
+
+        /// <summary>
+        /// The convert area.
+        /// </summary>
+        public enum ConvertArea
+        {
+            /// <summary>
+            /// The none.
+            /// </summary>
+            None, 
+
+            /// <summary>
+            /// The movie.
+            /// </summary>
+            Movie, 
+
+            /// <summary>
+            /// The tv.
+            /// </summary>
+            Tv
+        }
+
+        /// <summary>
+        /// The convert type.
+        /// </summary>
+        public enum ConvertType
+        {
+            /// <summary>
+            /// The none.
+            /// </summary>
+            None, 
+
+            /// <summary>
+            /// The hex.
+            /// </summary>
+            Hex, 
+
+            /// <summary>
+            /// The char.
+            /// </summary>
+            Char
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// File System Char Change - Convert From
         /// </summary>
         /// <param name="value">
-        /// The value.
+        /// The value. 
+        /// </param>
+        /// <param name="area">
+        /// The area.
         /// </param>
         /// <returns>
-        /// Processed string
+        /// Processed string 
         /// </returns>
         public static string From(string value, ConvertArea area)
         {
@@ -70,20 +138,28 @@ namespace YANFOE.Tools.Restructure
         }
 
         /// <summary>
-        /// File System Char Change - Convert Too
+        /// The replace by column.
         /// </summary>
         /// <param name="value">
         /// The value.
         /// </param>
+        /// <param name="area">
+        /// The area.
+        /// </param>
+        /// <param name="column1">
+        /// The column 1.
+        /// </param>
+        /// <param name="column2">
+        /// The column 2.
+        /// </param>
+        /// <param name="convertType">
+        /// The convert type.
+        /// </param>
         /// <returns>
-        /// Processed string
+        /// The <see cref="string"/>.
         /// </returns>
-        public static string To(string value, ConvertArea area, ConvertType type = ConvertType.None)
-        {
-            return ReplaceByColumn(value, area, 0, 1);
-        }
-
-        public static string ReplaceByColumn(string value, ConvertArea area, int column1, int column2, ConvertType convertType = ConvertType.None)
+        public static string ReplaceByColumn(
+            string value, ConvertArea area, int column1, int column2, ConvertType convertType = ConvertType.None)
         {
             if (convertType == ConvertType.None)
             {
@@ -107,26 +183,51 @@ namespace YANFOE.Tools.Restructure
             return value;
         }
 
-        private static string GetConvertValue(ConvertArea area)
+        /// <summary>
+        /// File System Char Change - Convert Too
+        /// </summary>
+        /// <param name="value">
+        /// The value. 
+        /// </param>
+        /// <param name="area">
+        /// The area.
+        /// </param>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// Processed string 
+        /// </returns>
+        public static string To(string value, ConvertArea area, ConvertType type = ConvertType.None)
         {
-            if (area == ConvertArea.Movie)
-            {
-                return Settings.Get.InOutCollection.MovieIOReplaceChar;
-            }
-
-            return Settings.Get.InOutCollection.TvIOReplaceChar;
+            return ReplaceByColumn(value, area, 0, 1);
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The get convert type.
+        /// </summary>
+        /// <param name="area">
+        /// The area.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ConvertType"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// </exception>
         private static ConvertType GetConvertType(ConvertArea area)
         {
             if (area == ConvertArea.Movie)
             {
-                if (Settings.Get.InOutCollection.MovieIOReplaceWithChar)
+                if (Get.InOutCollection.MovieIOReplaceWithChar)
                 {
                     return ConvertType.Char;
                 }
 
-                if (Settings.Get.InOutCollection.MovieIOReplaceWithHex)
+                if (Get.InOutCollection.MovieIOReplaceWithHex)
                 {
                     return ConvertType.Hex;
                 }
@@ -136,12 +237,12 @@ namespace YANFOE.Tools.Restructure
 
             if (area == ConvertArea.Tv)
             {
-                if (Settings.Get.InOutCollection.TvIOReplaceWithChar)
+                if (Get.InOutCollection.TvIOReplaceWithChar)
                 {
                     return ConvertType.Char;
                 }
 
-                if (Settings.Get.InOutCollection.TvIOReplaceWithHex)
+                if (Get.InOutCollection.TvIOReplaceWithHex)
                 {
                     return ConvertType.Hex;
                 }
@@ -150,6 +251,25 @@ namespace YANFOE.Tools.Restructure
             }
 
             throw new Exception();
+        }
+
+        /// <summary>
+        /// The get convert value.
+        /// </summary>
+        /// <param name="area">
+        /// The area.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private static string GetConvertValue(ConvertArea area)
+        {
+            if (area == ConvertArea.Movie)
+            {
+                return Get.InOutCollection.MovieIOReplaceChar;
+            }
+
+            return Get.InOutCollection.TvIOReplaceChar;
         }
 
         #endregion

@@ -1,29 +1,30 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieScraperHandler.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieScraperHandler.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie scraper handler.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Scrapers.Movie
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
-    using System.Windows.Forms;
+    using System.Windows;
 
     using BitFactory.Logging;
-
-    using DevExpress.XtraEditors;
 
     using YANFOE.Factories;
     using YANFOE.Factories.Scraper;
@@ -34,56 +35,354 @@ namespace YANFOE.Scrapers.Movie
     using YANFOE.Scrapers.Movie.Models.Search;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The movie scraper handler.
+    ///   The movie scraper handler.
     /// </summary>
-    public static class MovieScraperHandler
+    public class MovieScraperHandler
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The scrapers.
+        /// The instance.
         /// </summary>
-        private static List<IMovieScraper> scrapers;
+        public static MovieScraperHandler Instance = new MovieScraperHandler();
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        ///   The scrapers.
+        /// </summary>
+        private List<IMovieScraper> scrapers;
+
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieScraperHandler"/> class.
+        /// Prevents a default instance of the <see cref="MovieScraperHandler"/> class from being created. 
+        ///   Initializes a new instance of the <see cref="MovieScraperHandler"/> class.
         /// </summary>
-        static MovieScraperHandler()
+        private MovieScraperHandler()
         {
-            scrapers = ReturnAllScrapers();
+            this.scrapers = this.ReturnAllScrapers();
         }
-
 
         #endregion
 
-        #region Public Methods
+        #region Public Properties
+
+        /// <summary>
+        ///   The return all scrapers as string list.
+        /// </summary>
+        /// <returns> Scraper collection </returns>
+        public ThreadedBindingList<string> AllScrapersAsStringList
+        {
+            get
+            {
+                List<IMovieScraper> scrapers = this.ReturnAllScrapers();
+
+                var tempSortedList = new SortedList<string, string>();
+
+                foreach (IMovieScraper scraper in scrapers)
+                {
+                    tempSortedList.Add(scraper.ScraperName.ToString(), null);
+                }
+
+                var output = new ThreadedBindingList<string>();
+
+                foreach (var scraper in tempSortedList)
+                {
+                    output.Add(scraper.Key);
+                }
+
+                return output;
+            }
+        }
+
+        /// <summary>
+        /// Gets the cast scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> CastScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Cast, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the certification scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> CertificationScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Certification, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the country scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> CountryScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Country, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the director scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> DirectorScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Director, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the fanart scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> FanartScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Fanart, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the genre scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> GenreScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Genre, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the language scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> LanguageScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Language, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the mpaa scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> MpaaScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Mpaa, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the original title scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> OriginalTitleScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.OriginalTitle, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the outline scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> OutlineScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Outline, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the plot scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> PlotScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Plot, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the poster scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> PosterScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Poster, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the rating scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> RatingScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Rating, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the release date scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> ReleaseDateScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.ReleaseDate, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the runtime scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> RuntimeScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Runtime, true, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the studio scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> StudioScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Studio, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the tagline scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> TaglineScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Tagline, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the title scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> TitleScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Title, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the top 250 scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> Top250ScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Top250, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the trailer scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> TrailerScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Trailer, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the votes scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> VotesScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Votes, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the writers scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> WritersScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Writers, true);
+            }
+        }
+
+        /// <summary>
+        /// Gets the year scrapers as string list.
+        /// </summary>
+        public ThreadedBindingList<string> YearScrapersAsStringList
+        {
+            get
+            {
+                return this.GetScrapersAsStringList(ScrapeFields.Year, true);
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// Gets the scrapers as string list.
         /// </summary>
         /// <param name="scrapeField">
-        /// The scrape field.
+        /// The scrape field. 
         /// </param>
         /// <param name="addNoneFirst">
-        /// if set to <c>true</c> [add none first].
+        /// if set to <c>true</c> [add none first]. 
         /// </param>
         /// <param name="addMediaInfo">
-        /// if set to <c>true</c> [add media info].
+        /// if set to <c>true</c> [add media info]. 
         /// </param>
         /// <returns>
-        /// Scrapers collection
+        /// Scrapers collection 
         /// </returns>
-        public static BindingList<string> GetScrapersAsStringList(
+        public ThreadedBindingList<string> GetScrapersAsStringList(
             ScrapeFields scrapeField, bool addNoneFirst = false, bool addMediaInfo = false)
         {
-            var output = new BindingList<string>();
+            var output = new ThreadedBindingList<string>();
 
-            List<IMovieScraper> scrapers = GetScrapersSupporting(scrapeField);
+            List<IMovieScraper> scrapers = this.GetScrapersSupporting(scrapeField);
 
             var tempSortedList = new SortedList<string, string>();
 
@@ -114,14 +413,14 @@ namespace YANFOE.Scrapers.Movie
         /// Get scrapers supporting.
         /// </summary>
         /// <param name="scrapeFields">
-        /// The scrape fields.
+        /// The scrape fields. 
         /// </param>
         /// <returns>
-        /// Scraper collection
+        /// Scraper collection 
         /// </returns>
-        public static List<IMovieScraper> GetScrapersSupporting(ScrapeFields scrapeFields)
+        public List<IMovieScraper> GetScrapersSupporting(ScrapeFields scrapeFields)
         {
-            List<IMovieScraper> scrapers = ReturnAllScrapers();
+            List<IMovieScraper> scrapers = this.ReturnAllScrapers();
 
             return
                 (from s in scrapers where s.AvailableScrapeMethods.Contains(scrapeFields) orderby s.ScraperName select s)
@@ -129,19 +428,16 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// Return all scrapers.
+        ///   Return all scrapers.
         /// </summary>
-        /// <returns>
-        /// Scraper collection
-        /// </returns>
-        public static List<IMovieScraper> ReturnAllScrapers()
+        /// <returns> Scraper collection </returns>
+        public List<IMovieScraper> ReturnAllScrapers()
         {
             List<IMovieScraper> instances = (from t in Assembly.GetExecutingAssembly().GetTypes()
                                              where
-                                                 t.GetInterfaces().Contains(typeof(IMovieScraper)) &&
-                                                 t.GetConstructor(Type.EmptyTypes) != null
-                                             select Activator.CreateInstance(t) as IMovieScraper)
-                                             .ToList();
+                                                 t.GetInterfaces().Contains(typeof(IMovieScraper))
+                                                 && t.GetConstructor(Type.EmptyTypes) != null
+                                             select Activator.CreateInstance(t) as IMovieScraper).ToList();
 
             var sortedScrapers = new SortedDictionary<string, IMovieScraper>();
 
@@ -158,53 +454,27 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// The return all scrapers as string list.
-        /// </summary>
-        /// <returns>
-        /// Scraper collection
-        /// </returns>
-        public static BindingList<string> ReturnAllScrapersAsStringList()
-        {
-            List<IMovieScraper> scrapers = ReturnAllScrapers();
-
-            var tempSortedList = new SortedList<string, string>();
-
-            foreach (IMovieScraper scraper in scrapers)
-            {
-                tempSortedList.Add(scraper.ScraperName.ToString(), null);
-            }
-
-            var output = new BindingList<string>();
-
-            foreach (var scraper in tempSortedList)
-            {
-                output.Add(scraper.Key);
-            }
-
-            return output;
-        }
-
-        /// <summary>
         /// Runs the single scrape.
         /// </summary>
         /// <param name="movie">
-        /// The model.
+        /// The model. 
         /// </param>
         /// <param name="testmode">
-        /// if set to <c>true</c> [testmode].
+        /// if set to <c>true</c> [testmode]. 
         /// </param>
         /// <returns>
-        /// The run single scrape.
+        /// The run single scrape. 
         /// </returns>
-        public static bool RunSingleScrape(MovieModel movie, bool testmode = false)
+        public bool RunSingleScrape(MovieModel movie, bool testmode = false)
         {
-            scrapers.Clear();
-            scrapers = ReturnAllScrapers();
+            this.scrapers.Clear();
+            this.scrapers = this.ReturnAllScrapers();
 
-            if (string.IsNullOrEmpty(movie.ScraperGroup) && string.IsNullOrEmpty(MovieDBFactory.TempScraperGroup))
+            if (string.IsNullOrEmpty(movie.ScraperGroup)
+                && string.IsNullOrEmpty(MovieDBFactory.Instance.TempScraperGroup))
             {
-                XtraMessageBox.Show(
-                    "No Scraper Group Selected", "Select a Scraper Group", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(
+                    "No Scraper Group Selected", "Select a Scraper Group", MessageBoxButton.OK, MessageBoxImage.Hand);
 
                 Log.WriteToLog(
                     LogSeverity.Error, 0, "No Scraper Group Selected", "No scraper group selected for " + movie.Title);
@@ -242,13 +512,14 @@ namespace YANFOE.Scrapers.Movie
             }
             else
             {
-                if (!string.IsNullOrEmpty(MovieDBFactory.TempScraperGroup))
+                if (!string.IsNullOrEmpty(MovieDBFactory.Instance.TempScraperGroup))
                 {
-                    scraperGroup = MovieScraperGroupFactory.GetScaperGroupModel(MovieDBFactory.TempScraperGroup);
+                    scraperGroup =
+                        MovieScraperGroupFactory.Instance.GetScaperGroupModel(MovieDBFactory.Instance.TempScraperGroup);
                 }
                 else
                 {
-                    scraperGroup = MovieScraperGroupFactory.GetScaperGroupModel(movie.ScraperGroup);
+                    scraperGroup = MovieScraperGroupFactory.Instance.GetScaperGroupModel(movie.ScraperGroup);
                 }
             }
 
@@ -256,45 +527,53 @@ namespace YANFOE.Scrapers.Movie
 
             var noneValue = "<None>";
 
-            outResult = GetOutResult(ScrapeFields.Title, scraperGroup.Title, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.OriginalTitle, scraperGroup.OriginalTitle, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Year, scraperGroup.Year, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Top250, scraperGroup.Top250, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Cast, scraperGroup.Cast, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Certification, scraperGroup.Certification, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Mpaa, scraperGroup.Mpaa, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Country, scraperGroup.Country, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Director, scraperGroup.Director, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Fanart, scraperGroup.Fanart, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Genre, scraperGroup.Genre, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Language, scraperGroup.Language, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Outline, scraperGroup.Outline, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Plot, scraperGroup.Plot, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Rating, scraperGroup.Rating, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.ReleaseDate, scraperGroup.ReleaseDate, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Runtime, scraperGroup.Runtime, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Studio, scraperGroup.Studio, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Tagline, scraperGroup.Tagline, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Votes, scraperGroup.Votes, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Writers, scraperGroup.Writers, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Poster, scraperGroup.Poster, movie, noneValue, scraperGroup, outResult);
-            outResult = GetOutResult(ScrapeFields.Trailer, scraperGroup.Trailer, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Title, scraperGroup.Title, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.OriginalTitle, scraperGroup.OriginalTitle, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Year, scraperGroup.Year, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Top250, scraperGroup.Top250, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Cast, scraperGroup.Cast, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Certification, scraperGroup.Certification, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Mpaa, scraperGroup.Mpaa, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Country, scraperGroup.Country, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Director, scraperGroup.Director, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Fanart, scraperGroup.Fanart, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Genre, scraperGroup.Genre, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Language, scraperGroup.Language, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Outline, scraperGroup.Outline, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Plot, scraperGroup.Plot, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Rating, scraperGroup.Rating, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.ReleaseDate, scraperGroup.ReleaseDate, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Runtime, scraperGroup.Runtime, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Studio, scraperGroup.Studio, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Tagline, scraperGroup.Tagline, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Votes, scraperGroup.Votes, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Writers, scraperGroup.Writers, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Poster, scraperGroup.Poster, movie, noneValue, scraperGroup, outResult);
+            outResult = this.GetOutResult(
+                ScrapeFields.Trailer, scraperGroup.Trailer, movie, noneValue, scraperGroup, outResult);
 
-            return outResult;
-        }
-
-        private static bool GetOutResult(ScrapeFields scrapeFields, string scrapeGroup, MovieModel movie, string noneValue, MovieScraperGroupModel scraperGroup, bool outResult)
-        {
-            if (!string.IsNullOrEmpty(scrapeGroup) && scrapeGroup != noneValue)
-            {
-                bool result;
-                ScrapeValues(movie, scrapeGroup, scrapeFields, out result);
-
-                if (!result)
-                {
-                    outResult = false;
-                }
-            }
             return outResult;
         }
 
@@ -306,37 +585,83 @@ namespace YANFOE.Scrapers.Movie
         /// The create log catagory.
         /// </summary>
         /// <param name="title">
-        /// The log title.
+        /// The log title. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <returns>
-        /// Log catagory
+        /// Log catagory 
         /// </returns>
-        private static string CreateLogCatagory(string title, ScrapeFields type)
+        private string CreateLogCatagory(string title, ScrapeFields type)
         {
             return "Scrape > " + type + " > " + title;
         }
 
         /// <summary>
-        /// The get scraper id.
+        /// The get out result.
         /// </summary>
-        /// <param name="scraperName">
-        /// The scraper name.
+        /// <param name="scrapeFields">
+        /// The scrape fields.
+        /// </param>
+        /// <param name="scrapeGroup">
+        /// The scrape group.
         /// </param>
         /// <param name="movie">
         /// The movie.
         /// </param>
+        /// <param name="noneValue">
+        /// The none value.
+        /// </param>
+        /// <param name="scraperGroup">
+        /// The scraper group.
+        /// </param>
+        /// <param name="outResult">
+        /// The out result.
+        /// </param>
         /// <returns>
-        /// The scraper id
+        /// The <see cref="bool"/>.
         /// </returns>
-        private static string GetScraperID(string scraperNameString, MovieModel movie)
+        private bool GetOutResult(
+            ScrapeFields scrapeFields, 
+            string scrapeGroup, 
+            MovieModel movie, 
+            string noneValue, 
+            MovieScraperGroupModel scraperGroup, 
+            bool outResult)
         {
-            var results = new BindingList<QueryResult>();
+            if (!string.IsNullOrEmpty(scrapeGroup) && scrapeGroup != noneValue)
+            {
+                bool result;
+                this.ScrapeValues(movie, scrapeGroup, scrapeFields, out result);
+
+                if (!result)
+                {
+                    outResult = false;
+                }
+            }
+
+            return outResult;
+        }
+
+        /// <summary>
+        /// The get scraper id.
+        /// </summary>
+        /// <param name="scraperNameString">
+        /// The scraper Name String.
+        /// </param>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        /// <returns>
+        /// The scraper id 
+        /// </returns>
+        private string GetScraperID(string scraperNameString, MovieModel movie)
+        {
+            var results = new ThreadedBindingList<QueryResult>();
             var query = new Query
                 {
-                    Results = results, Title = movie.Title, Year = movie.Year.ToString(), ImdbId = movie.ImdbId 
+                   Results = results, Title = movie.Title, Year = movie.Year.ToString(), ImdbId = movie.ImdbId 
                 };
 
             var scraperName = (ScraperList)Enum.Parse(typeof(ScraperList), scraperNameString);
@@ -345,7 +670,7 @@ namespace YANFOE.Scrapers.Movie
             {
                 if (string.IsNullOrEmpty(movie.ImdbId) || string.IsNullOrEmpty(movie.TmdbId))
                 {
-                    MovieScrapeFactory.QuickSearchTmdb(query);
+                    MovieScrapeFactory.QuickSearchTMDB(query);
 
                     if (query.Results.Count > 0)
                     {
@@ -375,7 +700,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.AllocineId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.Allocine select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.Allocine select s).
+                                SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -392,7 +718,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.FilmAffinityId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.FilmAffinity select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.FilmAffinity select s).
+                                SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -408,7 +735,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.FilmDeltaId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.FilmDelta select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.FilmDelta select s).
+                                SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -424,7 +752,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.FilmUpId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.FilmUp select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.FilmUp select s).SingleOrDefault
+                                ();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -440,7 +769,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.FilmWebId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.FilmWeb select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.FilmWeb select s).
+                                SingleOrDefault();
 
                         scraper.SearchSite(query, 0, string.Empty);
 
@@ -458,7 +788,8 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.MovieMeterId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.MovieMeter select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.MovieMeter select s).
+                                SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -474,7 +805,7 @@ namespace YANFOE.Scrapers.Movie
                     if (string.IsNullOrEmpty(movie.OfdbId))
                     {
                         var scraper =
-                            (from s in scrapers where s.ScraperName == ScraperList.OFDB select s).SingleOrDefault();
+                            (from s in this.scrapers where s.ScraperName == ScraperList.OFDB select s).SingleOrDefault();
 
                         scraper.SearchViaBing(query, 0, string.Empty);
 
@@ -501,27 +832,30 @@ namespace YANFOE.Scrapers.Movie
         /// Scrape 250.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool Scrape250(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool Scrape250(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             int output;
 
             bool scrapeSuccess = scraper.ScrapeTop250(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -539,27 +873,30 @@ namespace YANFOE.Scrapers.Movie
         /// Scrape cast.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeCast(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeCast(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             bool scrapeSuccess = scraper.ScrapeCast(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -577,28 +914,30 @@ namespace YANFOE.Scrapers.Movie
         /// Scrape certification.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeCertification(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeCertification(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
 
             bool scrapeSuccess = scraper.ScrapeCertification(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -616,28 +955,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape country.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeCountry(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeCountry(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             bool scrapeSuccess = scraper.ScrapeCountry(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -655,28 +996,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape director.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeDirector(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeDirector(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             bool scrapeSuccess = scraper.ScrapeDirector(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -694,27 +1037,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape fanart.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeFanart(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeFanart(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<ImageDetailsModel> output;
+            ThreadedBindingList<ImageDetailsModel> output;
 
             bool scrapeSuccess = scraper.ScrapeFanart(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -737,28 +1083,31 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape genre.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeGenre(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeGenre(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
 
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             bool scrapeSuccess = scraper.ScrapeGenre(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -776,28 +1125,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape language.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeLanguage(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeLanguage(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             bool scrapeSuccess = scraper.ScrapeLanguage(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -815,27 +1166,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape mpaa.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeMpaa(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeMpaa(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
 
             bool scrapeSuccess = scraper.ScrapeMpaa(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -850,7 +1204,7 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
-        /// The scrape outline.
+        /// The scrape original title.
         /// </summary>
         /// <param name="scraper">
         /// The scraper.
@@ -859,22 +1213,64 @@ namespace YANFOE.Scrapers.Movie
         /// The scraper name.
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The type.
         /// </param>
         /// <param name="movie">
         /// The movie.
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// The <see cref="bool"/>.
         /// </returns>
-        private static bool ScrapeOutline(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeOriginalTitle(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        {
+            bool result = true;
+            string output;
+            bool scrapeSuccess = scraper.ScrapeOriginalTitle(
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
+
+            if (scrapeSuccess)
+            {
+                movie.OriginalTitle = output;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// The scrape outline.
+        /// </summary>
+        /// <param name="scraper">
+        /// The scraper. 
+        /// </param>
+        /// <param name="scraperName">
+        /// The scraper name. 
+        /// </param>
+        /// <param name="type">
+        /// The ScrapeFields type. 
+        /// </param>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        /// <returns>
+        /// Scrape successful 
+        /// </returns>
+        private bool ScrapeOutline(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
 
             bool scrapeSuccess = scraper.ScrapeOutline(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -892,27 +1288,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape plot.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapePlot(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapePlot(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
 
             bool scrapeSuccess = scraper.ScrapePlot(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -930,27 +1329,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape poster.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapePoster(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapePoster(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<ImageDetailsModel> output;
+            ThreadedBindingList<ImageDetailsModel> output;
 
             bool scrapeSuccess = scraper.ScrapePoster(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -973,27 +1375,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape rating.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeRating(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeRating(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             double output;
 
             bool scrapeSuccess = scraper.ScrapeRating(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1011,28 +1416,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape release date.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeReleaseDate(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeReleaseDate(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             DateTime output;
 
             bool scrapeSuccess = scraper.ScrapeReleaseDate(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1050,28 +1457,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape runtime.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeRuntime(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeRuntime(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             int output;
 
             bool scrapeSuccess = scraper.ScrapeRuntime(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1089,27 +1498,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape studio.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeStudio(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeStudio(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<string> output;
+            ThreadedBindingList<string> output;
 
             bool scrapeSuccess = scraper.ScrapeStudio(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1127,28 +1539,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape tagline.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeTagline(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeTagline(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
 
             bool scrapeSuccess = scraper.ScrapeTagline(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1166,32 +1580,32 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape title.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeTitle(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeTitle(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             string output;
-            BindingList<string> altOutput;
+            ThreadedBindingList<string> altOutput;
 
             bool scrapeSuccess = scraper.ScrapeTitle(
-                GetScraperID(scraperName, movie), 
+                this.GetScraperID(scraperName, movie), 
                 0, 
                 out output, 
                 out altOutput, 
-                CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1205,54 +1619,34 @@ namespace YANFOE.Scrapers.Movie
             return result;
         }
 
-        private static bool ScrapeOriginalTitle(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
-        {
-            bool result = true;
-            string output;
-            bool scrapeSuccess = scraper.ScrapeOriginalTitle(
-                GetScraperID(scraperName, movie),
-                0,
-                out output,
-                CreateLogCatagory(scraper.ScraperName.ToString(), type));
-
-            if (scrapeSuccess)
-            {
-                movie.OriginalTitle = output;
-            }
-            else
-            {
-                result = false;
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// The scrape trailer.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeTrailer(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeTrailer(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<TrailerDetailsModel> output;
+            ThreadedBindingList<TrailerDetailsModel> output;
 
             bool scrapeSuccess = scraper.ScrapeTrailer(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1267,30 +1661,197 @@ namespace YANFOE.Scrapers.Movie
         }
 
         /// <summary>
+        /// The scrape values.
+        /// </summary>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
+        /// <param name="scraperName">
+        /// The scraper name. 
+        /// </param>
+        /// <param name="type">
+        /// The ScrapeFields type. 
+        /// </param>
+        /// <param name="result">
+        /// The result. 
+        /// </param>
+        private void ScrapeValues(MovieModel movie, string scraperName, ScrapeFields type, out bool result)
+        {
+            result = true;
+
+            for (int index = 0; index < this.scrapers.Count; index++)
+            {
+                IMovieScraper scraper = this.scrapers[index];
+                if (scraper.ScraperName.ToString() == scraperName)
+                {
+                    if (type == ScrapeFields.Title)
+                    {
+                        result = this.ScrapeTitle(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.OriginalTitle)
+                    {
+                        result = this.ScrapeOriginalTitle(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Year)
+                    {
+                        result = this.ScrapeYear(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Top250)
+                    {
+                        result = this.Scrape250(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Cast)
+                    {
+                        result = this.ScrapeCast(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Certification)
+                    {
+                        result = this.ScrapeCertification(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Country)
+                    {
+                        result = this.ScrapeCountry(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Director)
+                    {
+                        result = this.ScrapeDirector(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Genre)
+                    {
+                        result = this.ScrapeGenre(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Language)
+                    {
+                        result = this.ScrapeLanguage(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Outline)
+                    {
+                        result = this.ScrapeOutline(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Plot)
+                    {
+                        result = this.ScrapePlot(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Rating)
+                    {
+                        result = this.ScrapeRating(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.ReleaseDate)
+                    {
+                        result = this.ScrapeReleaseDate(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Runtime)
+                    {
+                        result = this.ScrapeRuntime(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Studio)
+                    {
+                        result = this.ScrapeStudio(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Tagline)
+                    {
+                        result = this.ScrapeTagline(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Votes)
+                    {
+                        result = this.ScrapeVotes(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Writers)
+                    {
+                        result = this.ScrapeWriters(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Mpaa)
+                    {
+                        result = this.ScrapeMpaa(scraper, scraperName, type, movie);
+                    }
+
+                    if (type == ScrapeFields.Poster)
+                    {
+                        result = this.ScrapePoster(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Fanart)
+                    {
+                        result = this.ScrapeFanart(scraper, scraperName, type, movie);
+                        break;
+                    }
+
+                    if (type == ScrapeFields.Trailer)
+                    {
+                        result = this.ScrapeTrailer(scraper, scraperName, type, movie);
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// The scrape votes.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeVotes(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeVotes(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             int output;
 
             bool scrapeSuccess = scraper.ScrapeVotes(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1308,28 +1869,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape writers.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeWriters(
-            IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeWriters(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
-            BindingList<PersonModel> output;
+            ThreadedBindingList<PersonModel> output;
 
             bool scrapeSuccess = scraper.ScrapeWriters(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1347,27 +1910,30 @@ namespace YANFOE.Scrapers.Movie
         /// The scrape year.
         /// </summary>
         /// <param name="scraper">
-        /// The scraper.
+        /// The scraper. 
         /// </param>
         /// <param name="scraperName">
-        /// The scraper name.
+        /// The scraper name. 
         /// </param>
         /// <param name="type">
-        /// The ScrapeFields type.
+        /// The ScrapeFields type. 
         /// </param>
         /// <param name="movie">
-        /// The movie.
+        /// The movie. 
         /// </param>
         /// <returns>
-        /// Scrape successful
+        /// Scrape successful 
         /// </returns>
-        private static bool ScrapeYear(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
+        private bool ScrapeYear(IMovieScraper scraper, string scraperName, ScrapeFields type, MovieModel movie)
         {
             bool result = true;
             int output;
 
             bool scrapeSuccess = scraper.ScrapeYear(
-                GetScraperID(scraperName, movie), 0, out output, CreateLogCatagory(scraper.ScraperName.ToString(), type));
+                this.GetScraperID(scraperName, movie), 
+                0, 
+                out output, 
+                this.CreateLogCatagory(scraper.ScraperName.ToString(), type));
 
             if (scrapeSuccess)
             {
@@ -1379,170 +1945,6 @@ namespace YANFOE.Scrapers.Movie
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// The scrape values.
-        /// </summary>
-        /// <param name="movie">
-        /// The movie.
-        /// </param>
-        /// <param name="scraperName">
-        /// The scraper name.
-        /// </param>
-        /// <param name="type">
-        /// The ScrapeFields type.
-        /// </param>
-        /// <param name="result">
-        /// The result.
-        /// </param>
-        private static void ScrapeValues(MovieModel movie, string scraperName, ScrapeFields type, out bool result)
-        {
-            result = true;
-
-            for (int index = 0; index < scrapers.Count; index++)
-            {
-                IMovieScraper scraper = scrapers[index];
-                if (scraper.ScraperName.ToString() == scraperName)
-                {
-                    if (type == ScrapeFields.Title)
-                    {
-                        result = ScrapeTitle(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.OriginalTitle)
-                    {
-                        result = ScrapeOriginalTitle(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Year)
-                    {
-                        result = ScrapeYear(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Top250)
-                    {
-                        result = Scrape250(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Cast)
-                    {
-                        result = ScrapeCast(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Certification)
-                    {
-                        result = ScrapeCertification(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Country)
-                    {
-                        result = ScrapeCountry(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Director)
-                    {
-                        result = ScrapeDirector(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Genre)
-                    {
-                        result = ScrapeGenre(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Language)
-                    {
-                        result = ScrapeLanguage(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Outline)
-                    {
-                        result = ScrapeOutline(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Plot)
-                    {
-                        result = ScrapePlot(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Rating)
-                    {
-                        result = ScrapeRating(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.ReleaseDate)
-                    {
-                        result = ScrapeReleaseDate(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Runtime)
-                    {
-                        result = ScrapeRuntime(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Studio)
-                    {
-                        result = ScrapeStudio(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Tagline)
-                    {
-                        result = ScrapeTagline(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Votes)
-                    {
-                        result = ScrapeVotes(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Writers)
-                    {
-                        result = ScrapeWriters(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Mpaa)
-                    {
-                        result = ScrapeMpaa(scraper, scraperName, type, movie);
-                    }
-
-                    if (type == ScrapeFields.Poster)
-                    {
-                        result = ScrapePoster(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Fanart)
-                    {
-                        result = ScrapeFanart(scraper, scraperName, type, movie);
-                        break;
-                    }
-
-                    if (type == ScrapeFields.Trailer)
-                    {
-                        result = ScrapeTrailer(scraper, scraperName, type, movie);
-                        break;
-                    }
-                }
-            }
         }
 
         #endregion

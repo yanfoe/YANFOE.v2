@@ -1,66 +1,68 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LoggerName.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="LoggerName.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   An enumeration of logs.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.Logs.Enums
 {
     /// <summary>
-    /// An enumeration of logs.
+    ///   An enumeration of logs.
     /// </summary>
     public enum LoggerName
     {
         /// <summary>
-        /// The main YANFOE log.
+        ///   The main YANFOE log.
         /// </summary>
-        GeneralLog = 0,
+        GeneralLog = 0, 
 
         /// <summary>
-        /// Downloader 1 thread log
+        ///   Downloader 1 thread log
         /// </summary>
-        Downloader1 = 1,
+        Downloader1 = 1, 
 
         /// <summary>
-        /// Downloader 2 thread log
+        ///   Downloader 2 thread log
         /// </summary>
-        Downloader2 = 2,
+        Downloader2 = 2, 
 
         /// <summary>
-        /// Downloader 3 thread log
+        ///   Downloader 3 thread log
         /// </summary>
-        Downloader3 = 3,
+        Downloader3 = 3, 
 
         /// <summary>
-        /// Downloader 4 thread log
+        ///   Downloader 4 thread log
         /// </summary>
-        Downloader4 = 4,
+        Downloader4 = 4, 
 
         /// <summary>
-        /// Downloader 5 thread log
+        ///   Downloader 5 thread log
         /// </summary>
-        Downloader5 = 5,
+        Downloader5 = 5, 
 
         /// <summary>
-        /// Downloader 6 thread log
+        ///   Downloader 6 thread log
         /// </summary>
-        Downloader6 = 6,
+        Downloader6 = 6, 
 
         /// <summary>
-        /// Downloader 7 thread log
+        ///   Downloader 7 thread log
         /// </summary>
-        Downloader7 = 7,
+        Downloader7 = 7, 
 
         /// <summary>
-        /// Downloader 8 thread log
+        ///   Downloader 8 thread log
         /// </summary>
         Downloader8 = 8
     }

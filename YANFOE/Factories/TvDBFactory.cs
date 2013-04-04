@@ -1,32 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TvDBFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="TvDBFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
+// </license>
 // <summary>
-//   The tv db factory.
+//   The TV DB factory.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories
 {
-    #region Usings
+    #region Required Namespaces
 
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using System.Windows.Forms;
     using System.Xml;
 
     using BitFactory.Logging;
 
-    using DevExpress.Utils;
-    using DevExpress.XtraBars.Ribbon;
+    using Microsoft.Win32;
 
     using YANFOE.Factories.InOut;
     using YANFOE.Factories.Internal;
@@ -40,368 +45,401 @@ namespace YANFOE.Factories
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Models.TvModels.TVDB;
     using YANFOE.Scrapers.TV;
+    using YANFOE.Settings;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
     using YANFOE.UI.Dialogs.TV;
+    using YANFOE.UI.UserControls.CommonControls;
 
     #endregion
 
     /// <summary>
-    /// The tv db factory.
+    ///   The TV DB factory.
     /// </summary>
     [Serializable]
-    public class TvDBFactory
+    public class TVDBFactory : FactoryBase
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        ///   The current season.
+        ///   The instance.
         /// </summary>
-        public static Season CurrentSeason;
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", 
+            Justification = "Implements Singleton.")]
+        public static TVDBFactory Instance = new TVDBFactory();
+
+        #endregion
+
+        #region Fields
 
         /// <summary>
         ///   The gallery group.
         /// </summary>
-        private static readonly GalleryItemGroup galleryGroup;
+        private readonly GalleryItemGroup galleryGroup;
+
+        /// <summary>
+        ///   The current season.
+        /// </summary>
+        private Season currentSeason;
 
         /// <summary>
         ///   The current selected episode.
         /// </summary>
-        private static List<Episode> currentSelectedEpisode;
+        private List<Episode> currentSelectedEpisode;
 
         /// <summary>
         ///   The current selected season.
         /// </summary>
-        private static List<Season> currentSelectedSeason;
+        private List<Season> currentSelectedSeason;
 
         /// <summary>
         ///   The current selected series.
         /// </summary>
-        private static List<Series> currentSelectedSeries;
+        private List<Series> currentSelectedSeries;
 
         /// <summary>
         ///   The master series name list.
         /// </summary>
-        private static BindingList<MasterSeriesListModel> masterSeriesNameList;
+        private ThreadedBindingList<MasterSeriesListModel> masterSeriesNameList;
 
         /// <summary>
-        ///   The tv database.
+        ///   The TV database.
         /// </summary>
-        private static SortedList<string, Series> tvDatabase;
+        private ThreadedBindingList<Series> tvDatabase;
 
-        public static BindingList<Series> HiddenTvDatabase; 
+        /// <summary>
+        ///   Gets or sets UpdateStatus.
+        /// </summary>
+        private string updateStatus;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///   Initializes static members of the <see cref = "TvDBFactory" /> class.
+        ///   Prevents a default instance of the <see cref="TVDBFactory" /> class from being created. 
+        ///   Initializes members of the <see cref="TVDBFactory" /> class.
         /// </summary>
-        static TvDBFactory()
+        private TVDBFactory()
         {
-            tvDatabase = new SortedList<string, Series>();
+            this.TVDatabase = new ThreadedBindingList<Series>();
 
-            HiddenTvDatabase = new BindingList<Series>();
+            this.HiddenTVDB = new ThreadedBindingList<Series>();
 
-            CurrentSeries = new Series();
-            CurrentSeason = new Season();
-            CurrentEpisode = new Episode();
+            this.CurrentSeries = new Series();
+            this.currentSeason = new Season();
+            this.CurrentEpisode = new Episode();
 
-            galleryGroup = new GalleryItemGroup();
+            this.galleryGroup = new GalleryItemGroup();
 
-            masterSeriesNameList = new BindingList<MasterSeriesListModel>();
+            this.masterSeriesNameList = new ThreadedBindingList<MasterSeriesListModel>();
 
-            currentSelectedSeries = new List<Series>();
-            currentSelectedSeason = new List<Season>();
-            currentSelectedEpisode = new List<Episode>();
+            this.currentSelectedSeries = new List<Series>();
+            this.currentSelectedSeason = new List<Season>();
+            this.currentSelectedEpisode = new List<Episode>();
 
-            masterSeriesNameList.ListChanged += masterSeriesNameList_ListChanged;
+            this.masterSeriesNameList.ListChanged += this.MasterSeriesNameListListChanged;
         }
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
         ///   Occurs when [current episode changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler CurrentEpisodeChanged = delegate { };
+        public event EventHandler CurrentEpisodeChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [current season changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler CurrentSeasonChanged = delegate { };
+        public event EventHandler CurrentSeasonChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [current series changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler CurrentSeriesChanged = delegate { };
+        public event EventHandler CurrentSeriesChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [episode loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler EpisodeLoaded = delegate { };
+        public event EventHandler EpisodeLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [episode loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler EpisodeLoading = delegate { };
+        public event EventHandler EpisodeLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [gallery changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler GalleryChanged = delegate { };
+        public event EventHandler GalleryChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [master series name list changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler MasterSeriesNameListChanged = delegate { };
+        public event EventHandler MasterSeriesNameListChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [redraw layout].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler RedrawLayout = delegate { };
+        public event EventHandler RedrawLayout = delegate { };
 
         /// <summary>
         ///   Occurs when [season banner loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonBannerLoaded = delegate { };
+        public event EventHandler SeasonBannerLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [season banner loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonBannerLoading = delegate { };
+        public event EventHandler SeasonBannerLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [season fanart loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonFanartLoaded = delegate { };
+        public event EventHandler SeasonFanartLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [season fanart loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonFanartLoading = delegate { };
+        public event EventHandler SeasonFanartLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [season poster loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonPosterLoaded = delegate { };
+        public event EventHandler SeasonPosterLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [season poster loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeasonPosterLoading = delegate { };
+        public event EventHandler SeasonPosterLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [series banner loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesBannerLoaded = delegate { };
+        public event EventHandler SeriesBannerLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [series banner loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesBannerLoading = delegate { };
+        public event EventHandler SeriesBannerLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [series fanart loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesFanartLoaded = delegate { };
+        public event EventHandler SeriesFanartLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [series fanart loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesFanartLoading = delegate { };
+        public event EventHandler SeriesFanartLoading = delegate { };
 
         /// <summary>
         ///   Occurs when [series poster loaded].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesPosterLoaded = delegate { };
+        public event EventHandler SeriesPosterLoaded = delegate { };
 
         /// <summary>
         ///   Occurs when [series poster loading].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler SeriesPosterLoading = delegate { };
+        public event EventHandler SeriesPosterLoading = delegate { };
 
         /// <summary>
-        ///   Occurs when [tv db changed].
+        ///   Occurs when [TV DB changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler TvDbChanged = delegate { };
+        public event EventHandler TVDBChanged = delegate { };
 
         /// <summary>
         ///   Occurs when [update progress changed].
         /// </summary>
         [field: NonSerialized]
-        public static event EventHandler UpdateProgressChanged = delegate { };
+        public event EventHandler UpdateProgressChanged = delegate { };
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        ///   The current episode.
+        ///   Gets or sets the current episode.
         /// </summary>
-        public static Episode CurrentEpisode { get; set; }
+        public Episode CurrentEpisode { get; set; }
 
         /// <summary>
         ///   Gets or sets CurrentSelectedEpisode.
         /// </summary>
-        public static List<Episode> CurrentSelectedEpisode
+        public List<Episode> CurrentSelectedEpisode
         {
             get
             {
-                return currentSelectedEpisode;
+                return this.currentSelectedEpisode;
             }
 
             set
             {
-                currentSelectedEpisode = value;
+                this.currentSelectedEpisode = value;
             }
         }
 
         /// <summary>
         ///   Gets or sets CurrentSelectedSeason.
         /// </summary>
-        public static List<Season> CurrentSelectedSeason
+        public List<Season> CurrentSelectedSeason
         {
             get
             {
-                return currentSelectedSeason;
+                return this.currentSelectedSeason;
             }
 
             set
             {
-                currentSelectedSeason = value;
+                this.currentSelectedSeason = value;
             }
         }
 
         /// <summary>
         ///   Gets or sets CurrentSelectedSeries.
         /// </summary>
-        public static List<Series> CurrentSelectedSeries
+        public List<Series> CurrentSelectedSeries
         {
             get
             {
-                return currentSelectedSeries;
+                return this.currentSelectedSeries;
             }
 
             set
             {
-                currentSelectedSeries = value;
+                this.currentSelectedSeries = value;
             }
         }
 
         /// <summary>
-        ///   The current series.
+        ///   Gets or sets The current series.
         /// </summary>
-        public static Series CurrentSeries { get; set; }
+        public Series CurrentSeries { get; set; }
 
         /// <summary>
         ///   Gets GetCurrentSeasonsList.
         /// </summary>
-        public static List<Season> GetCurrentSeasonsList
+        public List<Season> GetCurrentSeasonsList
         {
             get
             {
-                if (!Settings.Get.Ui.HideSeasonZero)
+                if (!Get.Ui.HideSeasonZero)
                 {
-                    return (from s in CurrentSeries.Seasons where s.Value.SeasonNumber != 0 select s.Value).ToList();
+                    return (from s in this.CurrentSeries.Seasons where s.SeasonNumber != 0 select s).ToList();
                 }
-                else
-                {
-                    return (from s in CurrentSeries.Seasons select s.Value).ToList();
-                }
+
+                return (from s in this.CurrentSeries.Seasons select s).ToList();
             }
         }
+
+        /// <summary>
+        ///   Gets or sets the hidden TVDB.
+        /// </summary>
+        public ThreadedBindingList<Series> HiddenTVDB { get; set; }
 
         /// <summary>
         ///   Gets or sets the series name list.
         /// </summary>
-        /// <value>The series name list.</value>
-        public static BindingList<MasterSeriesListModel> MasterSeriesNameList
+        /// <value> The series name list. </value>
+        public ThreadedBindingList<MasterSeriesListModel> MasterSeriesList
         {
             get
             {
-                return masterSeriesNameList;
+                return this.masterSeriesNameList;
             }
 
             set
             {
-                masterSeriesNameList = value;
+                this.masterSeriesNameList = value;
+                this.OnPropertyChanged("MasterSeriesList");
             }
         }
 
         /// <summary>
-        ///   Gets or sets the tv database.
+        ///   Gets or sets the TV database.
         /// </summary>
-        /// <value>The tv database.</value>
-        public static SortedList<string, Series> TvDatabase
+        /// <value> The TV database. </value>
+        public ThreadedBindingList<Series> TVDatabase
         {
             get
             {
-                return tvDatabase;
+                return this.tvDatabase;
             }
 
             set
             {
-                tvDatabase = value;
+                this.tvDatabase = value;
+                this.OnPropertyChanged("TVDatabase");
             }
         }
 
         /// <summary>
-        ///   Gets or sets UpdateStatus.
+        ///   Gets or sets the update status.
         /// </summary>
-        public static string UpdateStatus { get; set; }
+        public string UpdateStatus
+        {
+            get
+            {
+                return this.updateStatus;
+            }
+
+            set
+            {
+                this.updateStatus = value;
+                this.OnPropertyChanged("UpdateStatus");
+            }
+        }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The add custom series.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
-        public static void AddCustomSeries(Series series)
+        public void AddCustomSeries(Series series)
         {
-            tvDatabase.Add(series.SeriesName, series);
-            GenerateMasterSeriesList();
-            InvokeMasterSeriesNameListChanged(new EventArgs());
+            this.TVDatabase.Add(series);
+            this.GenerateMasterSeriesList();
+            this.InvokeMasterSeriesNameListChanged(new EventArgs());
         }
 
         /// <summary>
-        /// Check if banner downloaded.
+        ///   Check if banner downloaded.
         /// </summary>
-        /// <returns>
-        /// Downloaded status
-        /// </returns>
-        public static bool BannerDownloaded()
+        /// <returns> Downloaded status </returns>
+        public bool BannerDownloaded()
         {
-            string url = GetImageUrl(CurrentSeries.SeriesBannerUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.SeriesBannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
@@ -411,33 +449,33 @@ namespace YANFOE.Factories
         /// The change update status.
         /// </summary>
         /// <param name="value">
-        /// The value.
+        /// The value. 
         /// </param>
-        public static void ChangeUpdateStatus(string value)
+        public void ChangeUpdateStatus(string value)
         {
-            UpdateStatus = value;
-            InvokeUpdateProgressChanged(new EventArgs());
+            this.UpdateStatus = value;
+            this.InvokeUpdateProgressChanged(new EventArgs());
         }
 
         /// <summary>
-        /// Show the "Add Custom Series" dialog.
+        ///   Show the "Add Custom Series" dialog.
         /// </summary>
-        public static void CreateCustomSeries()
+        public void CreateCustomSeries()
         {
-            var addCustomSeries = new FrmAddCustomSeries();
+            var addCustomSeries = new WndAddCustomSeries();
             addCustomSeries.ShowDialog();
         }
 
         /// <summary>
-        /// The default current episode.
+        ///   The default current episode.
         /// </summary>
-        public static void DefaultCurrentEpisode()
+        public void DefaultCurrentEpisode()
         {
-            foreach (var season in CurrentSeries.Seasons)
+            foreach (var season in this.CurrentSeries.Seasons)
             {
-                foreach (Episode episode in season.Value.Episodes)
+                foreach (Episode episode in season.Episodes)
                 {
-                    SetCurrentEpisode(episode.Guid);
+                    this.SetCurrentEpisode(episode.Guid);
                     break;
                 }
 
@@ -446,19 +484,19 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The default current season and episode.
+        ///   The default current season and episode.
         /// </summary>
-        public static void DefaultCurrentSeasonAndEpisode()
+        public void DefaultCurrentSeasonAndEpisode()
         {
-            foreach (var season in CurrentSeries.Seasons)
+            foreach (var season in this.CurrentSeries.Seasons)
             {
-                if (YANFOE.Settings.Get.Ui.HideSeasonZero && season.Value.SeasonNumber != 0)
+                if (Get.Ui.HideSeasonZero && season.SeasonNumber != 0)
                 {
-                    SetCurrentSeason(season.Value.Guid);
+                    this.SetCurrentSeason(season.Guid);
 
-                    foreach (Episode episode in season.Value.Episodes)
+                    foreach (Episode episode in season.Episodes)
                     {
-                        SetCurrentEpisode(episode.Guid);
+                        this.SetCurrentEpisode(episode.Guid);
                         break;
                     }
 
@@ -468,141 +506,174 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Check if episode screenshot downloaded.
+        /// The delete series.
         /// </summary>
-        /// <returns>
-        /// Downloaded status
-        /// </returns>
-        public static bool EpisodeDownloaded()
+        /// <param name="masterSeriesList">
+        /// The master series list. 
+        /// </param>
+        public void DeleteSeries(MasterSeriesListModel masterSeriesList)
         {
-            string url = GetImageUrl(CurrentEpisode.EpisodeScreenshotUrl);
+            var series = this.MasterSeriesList.Single(c => c.SeriesName == masterSeriesList.SeriesName);
+            this.masterSeriesNameList.Remove(series);
+
+            var s = this.TVDatabase.First(x => x.SeriesName == series.SeriesName);
+
+            foreach (var season in s.Seasons)
+            {
+                foreach (var episode in season.Episodes)
+                {
+                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
+                    {
+                        var files =
+                            MasterMediaDBFactory.MasterTVMediaDatabase.Where(f => f == episode.FilePath.PathAndFilename)
+                                .ToList();
+
+                        foreach (var f in files)
+                        {
+                            MasterMediaDBFactory.MasterTVMediaDatabase.Remove(f);
+                        }
+                    }
+                }
+            }
+
+            this.TVDatabase.Remove(this.TVDatabase.First(x => x.SeriesName == series.SeriesName));
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        /// <summary>
+        ///   Check if episode screenshot downloaded.
+        /// </summary>
+        /// <returns> Downloaded status </returns>
+        public bool EpisodeDownloaded()
+        {
+            string url = this.GetImageUrl(this.CurrentEpisode.EpisodeScreenshotUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Check if fanart downloaded.
+        ///   Check if fanart downloaded.
         /// </summary>
-        /// <returns>
-        /// Downloaded status
-        /// </returns>
-        public static bool FanartDownloaded()
+        /// <returns> Downloaded status </returns>
+        public bool FanartDownloaded()
         {
-            string url = GetImageUrl(CurrentSeries.FanartUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Generates the master series list.
+        ///   Generates the master series list.
         /// </summary>
-        public static void GenerateMasterSeriesList()
+        public void GenerateMasterSeriesList()
         {
-            BindingList<MasterSeriesListModel> list = (from s in tvDatabase
-                                                       select
-                                                           new MasterSeriesListModel
-                                                               {
-                                                                   SeriesName = s.Value.SeriesName, 
-                                                                   BannerPath = s.Value.SeriesBannerUrl, 
-                                                                   SeriesGuid = s.Value.Guid
-                                                               }).ToBindingList();
+            ThreadedBindingList<MasterSeriesListModel> list = (from s in this.TVDatabase
+                                                               select
+                                                                   new MasterSeriesListModel
+                                                                       {
+                                                                           SeriesName = s.SeriesName, 
+                                                                           BannerPath = s.SeriesBannerUrl, 
+                                                                           SeriesGuid = s.Guid
+                                                                       }).ToThreadedBindingList();
 
-            masterSeriesNameList.Clear();
+            this.masterSeriesNameList.Clear();
 
             foreach (MasterSeriesListModel v in list)
             {
                 if (!string.IsNullOrEmpty(v.SeriesName.Trim()))
                 {
-                    masterSeriesNameList.Add(v);
+                    this.masterSeriesNameList.Add(v);
                 }
             }
 
-            MasterMediaDBFactory.PopulateMasterTvMediaDatabase();
+            MasterMediaDBFactory.PopulateMasterTVMediaDatabase();
         }
 
         /// <summary>
-        /// The generate picture gallery.
+        ///   The generate picture gallery.
         /// </summary>
-        public static void GeneratePictureGallery()
+        public void GeneratePictureGallery()
         {
-            galleryGroup.Items.Clear();
+            this.galleryGroup.Items.Clear();
 
-            foreach (var series in tvDatabase)
+            foreach (var series in this.TVDatabase)
             {
-                if (series.Value.SmallBanner == null && !string.IsNullOrEmpty(series.Value.SeriesBannerPath))
+                if (series.SmallBanner == null && !string.IsNullOrEmpty(series.SeriesBannerPath))
                 {
-                    if (File.Exists(series.Value.SeriesBannerPath))
+                    if (File.Exists(series.SeriesBannerPath))
                     {
-                        Image banner = ImageHandler.LoadImage(series.Value.SeriesBannerPath);
-                        series.Value.SmallBanner = ImageHandler.ResizeImage(banner, 300, 55);
+                        Image banner = ImageHandler.LoadImage(series.SeriesBannerPath);
+                        series.SmallBanner = ImageHandler.ResizeImage(banner, 300, 55);
                     }
                 }
 
-                if (series.Value.SmallBanner != null)
+                if (series.SmallBanner != null)
                 {
-                    var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+                    var superTip = new SuperToolTip { AllowHtmlText = true };
 
-                    superTip.Items.AddTitle(
-                        string.Format("{0} ({1})", series.Value.SeriesName, series.Value.FirstAired.Value.Year));
+                    if (series.FirstAired != null)
+                    {
+                        superTip.Items.AddTitle(
+                            string.Format("{0} ({1})", series.SeriesName, series.FirstAired.Value.Year));
+                    }
 
-                    var galleryItem = new GalleryItem(series.Value.SmallBanner, series.Value.SeriesName, string.Empty)
+                    var galleryItem = new GalleryItem(series.SmallBanner, series.SeriesName, string.Empty)
                         {
-                           Tag = series.Value.Guid, SuperTip = superTip 
+                           Tag = series.Guid, SuperTip = superTip 
                         };
 
-                    if (!galleryGroup.Items.Contains(galleryItem))
+                    if (!this.galleryGroup.Items.Contains(galleryItem))
                     {
-                        galleryGroup.Items.Add(galleryItem);
+                        this.galleryGroup.Items.Add(galleryItem);
                     }
                 }
             }
 
-            InvokeGalleryChanged(new EventArgs());
+            this.InvokeGalleryChanged(new EventArgs());
         }
 
         /// <summary>
-        /// Get collection of episodes in current seasons
+        ///   Get collection of episodes in current seasons
         /// </summary>
-        /// <returns>
-        /// Collection of episodes in current seasons
-        /// </returns>
-        public static List<Episode> GetCurrentEpisodeList()
+        /// <returns> Collection of episodes in current seasons </returns>
+        public List<Episode> GetCurrentEpisodeList()
         {
-            return (from s in CurrentSeason.Episodes select s).ToList();
+            return (from s in this.currentSeason.Episodes select s).ToList();
         }
 
         /// <summary>
-        /// The get episode.
+        ///   The get episode.
         /// </summary>
-        public static void GetEpisode()
+        public void GetEpisode()
         {
-            if (EpisodeDownloaded())
+            if (this.EpisodeDownloaded())
             {
-                InvokeEpisodeLoaded(new EventArgs());
+                this.InvokeEpisodeLoaded(new EventArgs());
                 return;
             }
 
-            InvokeEpisodeLoading(new EventArgs());
+            this.InvokeEpisodeLoading(new EventArgs());
 
             var bgwEpisode = new BackgroundWorker();
 
-            bgwEpisode.DoWork += BgwEpisode_DoWork;
-            bgwEpisode.RunWorkerCompleted += BgwEpisode_RunWorkerCompleted;
-            bgwEpisode.RunWorkerAsync(CurrentEpisode.EpisodeScreenshotUrl);
+            bgwEpisode.DoWork += this.BgwEpisodeDoWork;
+            bgwEpisode.RunWorkerCompleted += this.BgwEpisodeRunWorkerCompleted;
+            bgwEpisode.RunWorkerAsync(this.CurrentEpisode.EpisodeScreenshotUrl);
         }
 
         /// <summary>
         /// Get episode super tip.
         /// </summary>
         /// <param name="episode">
-        /// The episode.
+        /// The episode. 
         /// </param>
         /// <returns>
-        /// Return episode super tool tip
+        /// Return episode super tool tip 
         /// </returns>
-        public static SuperToolTip GetEpisodeSuperTip(Episode episode)
+        public SuperToolTip GetEpisodeSuperTip(Episode episode)
         {
             if (episode == null)
             {
@@ -615,7 +686,7 @@ namespace YANFOE.Factories
 
             if (!string.IsNullOrEmpty(episode.EpisodeScreenshotUrl))
             {
-                string url = GetImageUrl(episode.EpisodeScreenshotUrl);
+                string url = this.GetImageUrl(episode.EpisodeScreenshotUrl);
                 string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
                 if (File.Exists(urlCache) && !Downloader.Downloading.Contains(url))
@@ -644,26 +715,21 @@ namespace YANFOE.Factories
         /// The get gallery group.
         /// </summary>
         /// <returns>
-        /// GalleryGroup galleryitemgroup
+        /// GalleryGroup gallery item group 
         /// </returns>
-        public static GalleryItemGroup GetGalleryGroup()
-        {
-            return galleryGroup;
-        }
-
         /// <summary>
         /// Get TvDB image url.
         /// </summary>
         /// <param name="value">
-        /// The image value.
+        /// The image value. 
         /// </param>
         /// <param name="smallVersion">
-        /// The small Version.
+        /// The small Version. 
         /// </param>
         /// <returns>
-        /// The get image url.
+        /// The get image url. 
         /// </returns>
-        public static string GetImageUrl(string value, bool smallVersion = false)
+        public string GetImageUrl(string value, bool smallVersion = false)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -675,96 +741,96 @@ namespace YANFOE.Factories
                 return value;
             }
 
-            var startPath = string.Empty;
-
-            startPath = smallVersion ? "http://www.thetvdb.com/banners/_cache/" : "http://www.thetvdb.com/banners/";
+            string startPath = smallVersion
+                                   ? "http://www.thetvdb.com/banners/_cache/"
+                                   : "http://www.thetvdb.com/banners/";
 
             return startPath + value;
         }
 
         /// <summary>
-        /// The get season banner.
+        ///   The get season banner.
         /// </summary>
-        public static void GetSeasonBanner()
+        public void GetSeasonBanner()
         {
-            if (SeasonBannerDownloaded())
+            if (this.SeasonBannerDownloaded())
             {
-                InvokeSeasonBannerLoaded(new EventArgs());
+                this.InvokeSeasonBannerLoaded(new EventArgs());
                 return;
             }
 
-            InvokeSeasonBannerLoading(new EventArgs());
+            this.InvokeSeasonBannerLoading(new EventArgs());
 
             var bgwSeasonBanner = new BackgroundWorker();
 
-            bgwSeasonBanner.DoWork += BgwSeasonBanner_DoWork;
+            bgwSeasonBanner.DoWork += this.BgwSeasonBannerDoWork;
 
-            bgwSeasonBanner.RunWorkerCompleted += BgwSeasonBanner_RunWorkerCompleted;
+            bgwSeasonBanner.RunWorkerCompleted += this.BgwSeasonBannerRunWorkerCompleted;
 
-            bgwSeasonBanner.RunWorkerAsync(CurrentSeason.BannerUrl);
+            bgwSeasonBanner.RunWorkerAsync(this.currentSeason.BannerUrl);
         }
 
         /// <summary>
-        /// The get season fanart.
+        ///   The get season fanart.
         /// </summary>
-        public static void GetSeasonFanart()
+        public void GetSeasonFanart()
         {
-            if (SeasonFanartDownloaded())
+            if (this.SeasonFanartDownloaded())
             {
-                InvokeSeasonFanartLoaded(new EventArgs());
+                this.InvokeSeasonFanartLoaded(new EventArgs());
                 return;
             }
 
-            InvokeSeasonFanartLoading(new EventArgs());
+            this.InvokeSeasonFanartLoading(new EventArgs());
 
             var bgwSeasonFanart = new BackgroundWorker();
 
-            bgwSeasonFanart.DoWork += BgwSeasonFanart_DoWork;
+            bgwSeasonFanart.DoWork += this.BgwSeasonFanartDoWork;
 
-            bgwSeasonFanart.RunWorkerCompleted += BgwSeasonFanart_RunWorkerCompleted;
+            bgwSeasonFanart.RunWorkerCompleted += this.BgwSeasonFanartRunWorkerCompleted;
 
-            bgwSeasonFanart.RunWorkerAsync(CurrentSeason.FanartUrl);
+            bgwSeasonFanart.RunWorkerAsync(this.currentSeason.FanartUrl);
         }
 
         /// <summary>
-        /// The get season poster.
+        ///   The get season poster.
         /// </summary>
-        public static void GetSeasonPoster()
+        public void GetSeasonPoster()
         {
-            if (SeasonPosterDownloaded())
+            if (this.SeasonPosterDownloaded())
             {
-                InvokeSeasonPosterLoaded(new EventArgs());
+                this.InvokeSeasonPosterLoaded(new EventArgs());
                 return;
             }
 
-            InvokeSeasonPosterLoading(new EventArgs());
+            this.InvokeSeasonPosterLoading(new EventArgs());
 
             var bgwSeasonPoster = new BackgroundWorker();
 
-            bgwSeasonPoster.DoWork += BgwSeasonPoster_DoWork;
+            bgwSeasonPoster.DoWork += this.BgwSeasonPosterDoWork;
 
-            bgwSeasonPoster.RunWorkerCompleted += BgwSeasonPoster_RunWorkerCompleted;
+            bgwSeasonPoster.RunWorkerCompleted += this.BgwSeasonPosterRunWorkerCompleted;
 
-            bgwSeasonPoster.RunWorkerAsync(CurrentSeason.PosterUrl);
+            bgwSeasonPoster.RunWorkerAsync(this.currentSeason.PosterUrl);
         }
 
         /// <summary>
         /// Get season super tip.
         /// </summary>
         /// <param name="season">
-        /// The season.
+        /// The season. 
         /// </param>
         /// <returns>
-        /// The season super tip.
+        /// The season super tip. 
         /// </returns>
-        public static SuperToolTip GetSeasonSuperTip(Season season)
+        public SuperToolTip GetSeasonSuperTip(Season season)
         {
             if (season == null)
             {
                 return new SuperToolTip();
             }
 
-            var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+            var superTip = new SuperToolTip { AllowHtmlText = true };
 
             superTip.Items.AddTitle(string.Format("Season {0}", season.SeasonNumber));
 
@@ -785,106 +851,106 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The get series banner.
+        ///   The get series banner.
         /// </summary>
-        public static void GetSeriesBanner()
+        public void GetSeriesBanner()
         {
-            if (BannerDownloaded())
+            if (this.BannerDownloaded())
             {
-                InvokeBannerLoaded(new EventArgs());
+                this.InvokeBannerLoaded(new EventArgs());
                 return;
             }
 
-            InvokeBannerLoading(new EventArgs());
+            this.InvokeBannerLoading(new EventArgs());
 
             var bgwBanner = new BackgroundWorker();
 
-            bgwBanner.DoWork += BgwBanner_DoWork;
-            bgwBanner.RunWorkerCompleted += BgwBanner_RunWorkerCompleted;
-            bgwBanner.RunWorkerAsync(CurrentSeries.SeriesBannerUrl);
+            bgwBanner.DoWork += this.BgwBannerDoWork;
+            bgwBanner.RunWorkerCompleted += this.BgwBannerRunWorkerCompleted;
+            bgwBanner.RunWorkerAsync(this.CurrentSeries.SeriesBannerUrl);
         }
 
         /// <summary>
-        /// The get series fanart.
+        ///   The get series fanart.
         /// </summary>
-        public static void GetSeriesFanart()
+        public void GetSeriesFanart()
         {
-            if (FanartDownloaded())
+            if (this.FanartDownloaded())
             {
-                InvokeFanartLoaded(new EventArgs());
+                this.InvokeFanartLoaded(new EventArgs());
                 return;
             }
 
-            InvokeSeriesFanartLoading(new EventArgs());
+            this.InvokeSeriesFanartLoading(new EventArgs());
 
             var bgwFanart = new BackgroundWorker();
 
-            bgwFanart.DoWork += BgwFanart_DoWork;
-            bgwFanart.RunWorkerCompleted += BgwFanart_RunWorkerCompleted;
-            bgwFanart.RunWorkerAsync(CurrentSeries.FanartUrl);
+            bgwFanart.DoWork += this.BgwFanartDoWork;
+            bgwFanart.RunWorkerCompleted += this.BgwFanartRunWorkerCompleted;
+            bgwFanart.RunWorkerAsync(this.CurrentSeries.FanartUrl);
         }
 
         /// <summary>
-        /// Get series using series guid.
+        /// Get series using series GUID.
         /// </summary>
         /// <param name="guid">
-        /// The series guid.
+        /// The series GUID. 
         /// </param>
         /// <returns>
-        /// Series object
+        /// Series object 
         /// </returns>
-        public static Series GetSeriesFromGuid(string guid)
+        public Series GetSeriesFromGUID(string guid)
         {
-            return (from e in tvDatabase where e.Value.Guid == guid select e.Value).SingleOrDefault();
+            return (from e in this.TVDatabase where e.Guid == guid select e).SingleOrDefault();
         }
 
         /// <summary>
         /// Get series using series name.
         /// </summary>
         /// <param name="seriesName">
-        /// The series name.
+        /// The series name. 
         /// </param>
         /// <returns>
-        /// Series object
+        /// Series object 
         /// </returns>
-        public static Series GetSeriesFromName(string seriesName)
+        public Series GetSeriesFromName(string seriesName)
         {
-            return (from s in tvDatabase where s.Key == seriesName select s.Value).SingleOrDefault();
+            return (from s in this.TVDatabase where s.SeriesName == seriesName select s).SingleOrDefault();
         }
 
         /// <summary>
-        /// Get series poster.
+        ///   Get series poster.
         /// </summary>
-        public static void GetSeriesPoster()
+        public void GetSeriesPoster()
         {
-            if (SeriesPosterDownloaded())
+            if (this.SeriesPosterDownloaded())
             {
-                InvokeSeriesPosterLoaded(new EventArgs());
+                this.InvokeSeriesPosterLoaded(new EventArgs());
                 return;
             }
 
-            InvokeSeriesPosterLoading(new EventArgs());
+            this.InvokeSeriesPosterLoading(new EventArgs());
 
             var bgwSeriesPoster = new BackgroundWorker();
-            bgwSeriesPoster.DoWork += BgwSeriesPoster_DoWork;
-            bgwSeriesPoster.RunWorkerCompleted += BgwSeriesPoster_RunWorkerCompleted;
-            bgwSeriesPoster.RunWorkerAsync(CurrentSeries.PosterUrl);
+            bgwSeriesPoster.DoWork += this.BgwSeriesPosterDoWork;
+            bgwSeriesPoster.RunWorkerCompleted += this.BgwSeriesPosterRunWorkerCompleted;
+            bgwSeriesPoster.RunWorkerAsync(this.CurrentSeries.PosterUrl);
         }
 
         /// <summary>
         /// Get series super tip.
         /// </summary>
         /// <param name="seriesguid">
-        /// The series guid.
+        /// The series GUID. 
         /// </param>
         /// <returns>
-        /// Series super tip.
+        /// Series super tip. 
         /// </returns>
-        public static SuperToolTip GetSeriesSuperTip(string seriesguid)
+        public SuperToolTip GetSeriesSuperTip(string seriesguid)
         {
-            Series series = GetSeriesFromGuid(seriesguid);
+            Series series = this.GetSeriesFromGUID(seriesguid);
 
-            var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+            var superTip = new SuperToolTip { AllowHtmlText = true };
 
             superTip.Items.AddTitle(series.SeriesName);
             var smallBanner = new ToolTipTitleItem { Image = series.SmallBanner };
@@ -894,8 +960,8 @@ namespace YANFOE.Factories
 
             var sb = new StringBuilder();
             sb.Append("<b>Total Seasons</b>: " + series.Seasons.Count + Environment.NewLine);
-            sb.Append("<b>Total Episodes</b>: " + GetTotalEpisodes(series) + Environment.NewLine);
-            sb.Append("<b>Total Missing Episodes</b>: " + GetTotalEpisodes(series, true) + Environment.NewLine);
+            sb.Append("<b>Total Episodes</b>: " + this.GetTotalEpisodes(series) + Environment.NewLine);
+            sb.Append("<b>Total Missing Episodes</b>: " + this.GetTotalEpisodes(series, true) + Environment.NewLine);
 
             smallPoster.Text = sb.ToString();
 
@@ -910,15 +976,15 @@ namespace YANFOE.Factories
         /// Get total episodes.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
         /// <param name="missingOnly">
-        /// The missing only.
+        /// The missing only. 
         /// </param>
         /// <returns>
-        /// Total episodes.
+        /// Total episodes. 
         /// </returns>
-        public static int GetTotalEpisodes(Series series, bool missingOnly = false)
+        public int GetTotalEpisodes(Series series, bool missingOnly = false)
         {
             int count = 0;
 
@@ -926,12 +992,11 @@ namespace YANFOE.Factories
             {
                 if (missingOnly == false)
                 {
-                    count += season.Value.Episodes.Count;
+                    count += season.Episodes.Count;
                 }
                 else
                 {
-                    count +=
-                        season.Value.Episodes.Count(episode => string.IsNullOrEmpty(episode.FilePath.PathAndFilename));
+                    count += season.Episodes.Count(episode => string.IsNullOrEmpty(episode.FilePath.PathAndFilename));
                 }
             }
 
@@ -939,14 +1004,39 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
+        /// The hide episode.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        /// <exception cref="NotImplementedException">
+        /// . da
+        /// </exception>
+        public void HideEpisode(Episode episode)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The hide season.
+        /// </summary>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        public void HideSeason(Season season)
+        {
+            // TODO: Hide season
+        }
+
+        /// <summary>
         /// Invokes the BannerLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeBannerLoaded(EventArgs e)
+        public void InvokeBannerLoaded(EventArgs e)
         {
-            EventHandler handler = SeriesBannerLoaded;
+            EventHandler handler = this.SeriesBannerLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -957,11 +1047,11 @@ namespace YANFOE.Factories
         /// Invokes the BannerLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeBannerLoading(EventArgs e)
+        public void InvokeBannerLoading(EventArgs e)
         {
-            EventHandler handler = SeriesBannerLoading;
+            EventHandler handler = this.SeriesBannerLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -972,11 +1062,11 @@ namespace YANFOE.Factories
         /// Invokes the CurrentEpisodeChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeCurrentEpisodeChanged(EventArgs e)
+        public void InvokeCurrentEpisodeChanged(EventArgs e)
         {
-            EventHandler handler = CurrentEpisodeChanged;
+            EventHandler handler = this.CurrentEpisodeChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -987,11 +1077,11 @@ namespace YANFOE.Factories
         /// Invokes the CurrentSeasonChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeCurrentSeasonChanged(EventArgs e)
+        public void InvokeCurrentSeasonChanged(EventArgs e)
         {
-            EventHandler handler = CurrentSeasonChanged;
+            EventHandler handler = this.CurrentSeasonChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1002,11 +1092,11 @@ namespace YANFOE.Factories
         /// Invokes the CurrentSeriesChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeCurrentSeriesChanged(EventArgs e)
+        public void InvokeCurrentSeriesChanged(EventArgs e)
         {
-            EventHandler handler = CurrentSeriesChanged;
+            EventHandler handler = this.CurrentSeriesChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1017,11 +1107,11 @@ namespace YANFOE.Factories
         /// Invokes the EpisodeLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeEpisodeLoaded(EventArgs e)
+        public void InvokeEpisodeLoaded(EventArgs e)
         {
-            EventHandler handler = EpisodeLoaded;
+            EventHandler handler = this.EpisodeLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1032,11 +1122,11 @@ namespace YANFOE.Factories
         /// Invokes the EpisodeLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeEpisodeLoading(EventArgs e)
+        public void InvokeEpisodeLoading(EventArgs e)
         {
-            EventHandler handler = EpisodeLoading;
+            EventHandler handler = this.EpisodeLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1047,11 +1137,11 @@ namespace YANFOE.Factories
         /// Invokes the FanartLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeFanartLoaded(EventArgs e)
+        public void InvokeFanartLoaded(EventArgs e)
         {
-            EventHandler handler = SeriesFanartLoaded;
+            EventHandler handler = this.SeriesFanartLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1062,11 +1152,11 @@ namespace YANFOE.Factories
         /// Invokes the GalleryChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeGalleryChanged(EventArgs e)
+        public void InvokeGalleryChanged(EventArgs e)
         {
-            EventHandler handler = GalleryChanged;
+            EventHandler handler = this.GalleryChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1077,11 +1167,11 @@ namespace YANFOE.Factories
         /// Invokes the GalleryEpisodeChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeGalleryEpisodeChanged(EventArgs e)
+        public void InvokeGalleryEpisodeChanged(EventArgs e)
         {
-            EventHandler handler = CurrentEpisodeChanged;
+            EventHandler handler = this.CurrentEpisodeChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1092,11 +1182,11 @@ namespace YANFOE.Factories
         /// Invokes the master series name list changed.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeMasterSeriesNameListChanged(EventArgs e)
+        public void InvokeMasterSeriesNameListChanged(EventArgs e)
         {
-            EventHandler handler = MasterSeriesNameListChanged;
+            EventHandler handler = this.MasterSeriesNameListChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1107,11 +1197,11 @@ namespace YANFOE.Factories
         /// Invokes the redraw layout.
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeRedrawLayout(EventArgs e)
+        public void InvokeRedrawLayout(EventArgs e)
         {
-            EventHandler handler = RedrawLayout;
+            EventHandler handler = this.RedrawLayout;
             if (handler != null)
             {
                 handler(null, e);
@@ -1122,11 +1212,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonBannerLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonBannerLoaded(EventArgs e)
+        public void InvokeSeasonBannerLoaded(EventArgs e)
         {
-            EventHandler handler = SeasonBannerLoaded;
+            EventHandler handler = this.SeasonBannerLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1137,11 +1227,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonBannerLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonBannerLoading(EventArgs e)
+        public void InvokeSeasonBannerLoading(EventArgs e)
         {
-            EventHandler handler = SeasonBannerLoading;
+            EventHandler handler = this.SeasonBannerLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1152,11 +1242,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonFanartLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonFanartLoaded(EventArgs e)
+        public void InvokeSeasonFanartLoaded(EventArgs e)
         {
-            EventHandler handler = SeasonFanartLoaded;
+            EventHandler handler = this.SeasonFanartLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1167,11 +1257,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonFanartLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonFanartLoading(EventArgs e)
+        public void InvokeSeasonFanartLoading(EventArgs e)
         {
-            EventHandler handler = SeasonFanartLoading;
+            EventHandler handler = this.SeasonFanartLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1182,11 +1272,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonPosterLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonPosterLoaded(EventArgs e)
+        public void InvokeSeasonPosterLoaded(EventArgs e)
         {
-            EventHandler handler = SeasonPosterLoaded;
+            EventHandler handler = this.SeasonPosterLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1197,11 +1287,11 @@ namespace YANFOE.Factories
         /// Invokes the SeasonPosterLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeasonPosterLoading(EventArgs e)
+        public void InvokeSeasonPosterLoading(EventArgs e)
         {
-            EventHandler handler = SeasonPosterLoading;
+            EventHandler handler = this.SeasonPosterLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1212,11 +1302,11 @@ namespace YANFOE.Factories
         /// Invokes the SeriesBannerLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeriesBannerLoaded(EventArgs e)
+        public void InvokeSeriesBannerLoaded(EventArgs e)
         {
-            EventHandler handler = SeriesBannerLoaded;
+            EventHandler handler = this.SeriesBannerLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1227,11 +1317,11 @@ namespace YANFOE.Factories
         /// Invokes the SeriesFanartLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeriesFanartLoaded(EventArgs e)
+        public void InvokeSeriesFanartLoaded(EventArgs e)
         {
-            EventHandler handler = SeriesFanartLoaded;
+            EventHandler handler = this.SeriesFanartLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1242,11 +1332,11 @@ namespace YANFOE.Factories
         /// Invokes the SeriesFanartLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeriesFanartLoading(EventArgs e)
+        public void InvokeSeriesFanartLoading(EventArgs e)
         {
-            EventHandler handler = SeriesFanartLoading;
+            EventHandler handler = this.SeriesFanartLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1257,11 +1347,11 @@ namespace YANFOE.Factories
         /// Invokes the SeriesPosterLoaded event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeriesPosterLoaded(EventArgs e)
+        public void InvokeSeriesPosterLoaded(EventArgs e)
         {
-            EventHandler handler = SeriesPosterLoaded;
+            EventHandler handler = this.SeriesPosterLoaded;
             if (handler != null)
             {
                 handler(null, e);
@@ -1272,11 +1362,11 @@ namespace YANFOE.Factories
         /// Invokes the SeriesPosterLoading event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeSeriesPosterLoading(EventArgs e)
+        public void InvokeSeriesPosterLoading(EventArgs e)
         {
-            EventHandler handler = SeriesPosterLoading;
+            EventHandler handler = this.SeriesPosterLoading;
             if (handler != null)
             {
                 handler(null, e);
@@ -1284,14 +1374,14 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Invokes the TvDbChanged event
+        /// Invokes the TVDBChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeTvDbChanged(EventArgs e)
+        public void InvokeTVDBChanged(EventArgs e)
         {
-            EventHandler handler = TvDbChanged;
+            EventHandler handler = this.TVDBChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1302,11 +1392,11 @@ namespace YANFOE.Factories
         /// Invokes the UpdateProgressChanged event
         /// </summary>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The <see cref="System.EventArgs"/> instance containing the event data. 
         /// </param>
-        public static void InvokeUpdateProgressChanged(EventArgs e)
+        public void InvokeUpdateProgressChanged(EventArgs e)
         {
-            EventHandler handler = UpdateProgressChanged;
+            EventHandler handler = this.UpdateProgressChanged;
             if (handler != null)
             {
                 handler(null, e);
@@ -1314,20 +1404,18 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Load episode screenshot
+        ///   Load episode screenshot
         /// </summary>
-        /// <returns>
-        /// Episode image
-        /// </returns>
-        public static Image LoadEpisode()
+        /// <returns> Episode image </returns>
+        public Image LoadEpisode()
         {
-            if (!string.IsNullOrEmpty(CurrentEpisode.EpisodeScreenshotPath)
-                && File.Exists(CurrentEpisode.EpisodeScreenshotPath))
+            if (!string.IsNullOrEmpty(this.CurrentEpisode.EpisodeScreenshotPath)
+                && File.Exists(this.CurrentEpisode.EpisodeScreenshotPath))
             {
-                return ImageHandler.LoadImage(CurrentEpisode.EpisodeScreenshotPath);
+                return ImageHandler.LoadImage(this.CurrentEpisode.EpisodeScreenshotPath);
             }
 
-            string url = GetImageUrl(CurrentEpisode.EpisodeScreenshotUrl);
+            string url = this.GetImageUrl(this.CurrentEpisode.EpisodeScreenshotUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -1344,19 +1432,17 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Load season banner.
+        ///   Load season banner.
         /// </summary>
-        /// <returns>
-        /// Season Banner image
-        /// </returns>
-        public static Image LoadSeasonBanner()
+        /// <returns> Season Banner image </returns>
+        public Image LoadSeasonBanner()
         {
-            if (!string.IsNullOrEmpty(CurrentSeason.BannerPath) && File.Exists(CurrentSeason.BannerPath))
+            if (!string.IsNullOrEmpty(this.currentSeason.BannerPath) && File.Exists(this.currentSeason.BannerPath))
             {
-                return ImageHandler.LoadImage(CurrentSeason.BannerPath);
+                return ImageHandler.LoadImage(this.currentSeason.BannerPath);
             }
 
-            string url = GetImageUrl(CurrentSeason.BannerUrl);
+            string url = this.GetImageUrl(this.currentSeason.BannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1366,28 +1452,26 @@ namespace YANFOE.Factories
 
             Image image = ImageHandler.LoadImage(urlCache);
 
-            if (CurrentSeries.SmallBanner == null)
+            if (this.CurrentSeries.SmallBanner == null)
             {
-                CurrentSeries.SmallBanner = ImageHandler.ResizeImage(image, 100, 30);
+                this.CurrentSeries.SmallBanner = ImageHandler.ResizeImage(image, 100, 30);
             }
 
             return image;
         }
 
         /// <summary>
-        /// Load season fanart.
+        ///   Load season fanart.
         /// </summary>
-        /// <returns>
-        /// Season fanart image
-        /// </returns>
-        public static Image LoadSeasonFanart()
+        /// <returns> Season fanart image </returns>
+        public Image LoadSeasonFanart()
         {
-            if (!string.IsNullOrEmpty(CurrentSeason.FanartPath) && File.Exists(CurrentSeason.FanartPath))
+            if (!string.IsNullOrEmpty(this.currentSeason.FanartPath) && File.Exists(this.currentSeason.FanartPath))
             {
-                return ImageHandler.LoadImage(CurrentSeason.FanartPath);
+                return ImageHandler.LoadImage(this.currentSeason.FanartPath);
             }
 
-            string url = GetImageUrl(CurrentSeason.FanartUrl);
+            string url = this.GetImageUrl(this.currentSeason.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1399,9 +1483,9 @@ namespace YANFOE.Factories
             {
                 Image image = ImageHandler.LoadImage(urlCache);
 
-                if (CurrentSeries.SmallPoster == null)
+                if (this.CurrentSeries.SmallPoster == null)
                 {
-                    CurrentSeries.SmallPoster = ImageHandler.ResizeImage(image, 100, 60);
+                    this.CurrentSeries.SmallPoster = ImageHandler.ResizeImage(image, 100, 60);
                 }
 
                 return image;
@@ -1415,19 +1499,17 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The load season poster.
+        ///   The load season poster.
         /// </summary>
-        /// <returns>
-        /// Season poster image
-        /// </returns>
-        public static Image LoadSeasonPoster()
+        /// <returns> Season poster image </returns>
+        public Image LoadSeasonPoster()
         {
-            if (!string.IsNullOrEmpty(CurrentSeason.PosterPath) && File.Exists(CurrentSeason.PosterPath))
+            if (!string.IsNullOrEmpty(this.currentSeason.PosterPath) && File.Exists(this.currentSeason.PosterPath))
             {
-                return ImageHandler.LoadImage(CurrentSeason.PosterPath);
+                return ImageHandler.LoadImage(this.currentSeason.PosterPath);
             }
 
-            string url = GetImageUrl(CurrentSeason.PosterUrl);
+            string url = this.GetImageUrl(this.currentSeason.PosterUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1450,19 +1532,18 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// The load series banner.
+        ///   The load series banner.
         /// </summary>
-        /// <returns>
-        /// Series banner image
-        /// </returns>
-        public static Image LoadSeriesBanner()
+        /// <returns> Series banner image </returns>
+        public Image LoadSeriesBanner()
         {
-            if (!string.IsNullOrEmpty(CurrentSeries.SeriesBannerPath) && File.Exists(CurrentSeries.SeriesBannerPath))
+            if (!string.IsNullOrEmpty(this.CurrentSeries.SeriesBannerPath)
+                && File.Exists(this.CurrentSeries.SeriesBannerPath))
             {
-                return ImageHandler.LoadImage(CurrentSeries.SeriesBannerPath);
+                return ImageHandler.LoadImage(this.CurrentSeries.SeriesBannerPath);
             }
 
-            string url = GetImageUrl(CurrentSeries.SeriesBannerUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.SeriesBannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1485,19 +1566,17 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Load series fanart.
+        ///   Load series fanart.
         /// </summary>
-        /// <returns>
-        /// Series Fanart image
-        /// </returns>
-        public static Image LoadSeriesFanart()
+        /// <returns> Series Fanart image </returns>
+        public Image LoadSeriesFanart()
         {
-            if (!string.IsNullOrEmpty(CurrentSeries.FanartPath) && File.Exists(CurrentSeries.FanartPath))
+            if (!string.IsNullOrEmpty(this.CurrentSeries.FanartPath) && File.Exists(this.CurrentSeries.FanartPath))
             {
-                return ImageHandler.LoadImage(CurrentSeries.FanartPath);
+                return ImageHandler.LoadImage(this.CurrentSeries.FanartPath);
             }
 
-            string url = GetImageUrl(CurrentSeries.FanartUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (Downloader.Downloading.Contains(url))
@@ -1516,28 +1595,26 @@ namespace YANFOE.Factories
                 Log.WriteToLog(LogSeverity.Error, 0, "Failed loading image from cache : LoadSeasonPoster", ex.Message);
             }
 
-            if (CurrentSeries.SmallFanart == null)
+            if (this.CurrentSeries.SmallFanart == null)
             {
-                CurrentSeries.SmallFanart = ImageHandler.ResizeImage(image, 100, 60);
+                this.CurrentSeries.SmallFanart = ImageHandler.ResizeImage(image, 100, 60);
             }
 
             return image;
         }
 
         /// <summary>
-        /// Load series poster.
+        ///   Load series poster.
         /// </summary>
-        /// <returns>
-        /// Series Poster image
-        /// </returns>
-        public static Image LoadSeriesPoster()
+        /// <returns> Series Poster image </returns>
+        public Image LoadSeriesPoster()
         {
-            if (!string.IsNullOrEmpty(CurrentSeries.PosterPath) && File.Exists(CurrentSeries.PosterPath))
+            if (!string.IsNullOrEmpty(this.CurrentSeries.PosterPath) && File.Exists(this.CurrentSeries.PosterPath))
             {
-                return ImageHandler.LoadImage(CurrentSeries.PosterPath);
+                return ImageHandler.LoadImage(this.CurrentSeries.PosterPath);
             }
 
-            string url = GetImageUrl(CurrentSeries.PosterUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.PosterUrl);
 
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
@@ -1562,153 +1639,328 @@ namespace YANFOE.Factories
                 Log.WriteToLog(LogSeverity.Error, 0, "Failed loading image from cache : LoadSeasonPoster", ex.Message);
             }
 
-            if (CurrentSeries.SmallPoster == null)
+            if (this.CurrentSeries.SmallPoster == null)
             {
-                CurrentSeries.SmallPoster = ImageHandler.ResizeImage(image, 100, 150);
+                this.CurrentSeries.SmallPoster = ImageHandler.ResizeImage(image, 100, 150);
             }
 
             return image;
         }
 
         /// <summary>
-        /// The process database update.
+        /// The lock episode.
         /// </summary>
-        public static void ProcessDatabaseUpdate()
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void LockEpisode(Episode episode)
         {
-            GenerateMasterSeriesList();
-            AddImagesToBackgroundDownload();
-            LoadSeriesNFOs();
+            episode.IsLocked = true;
         }
 
         /// <summary>
-        /// Check if season banner has downloaded
+        /// The lock season.
         /// </summary>
-        /// <returns>
-        /// Return value
-        /// </returns>
-        public static bool SeasonBannerDownloaded()
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        public void LockSeason(Season season)
         {
-            string url = GetImageUrl(CurrentSeason.BannerUrl);
+            season.IsLocked = true;
+        }
+
+        /// <summary>
+        /// The open episode file.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void OpenEpisodeFile(Episode episode)
+        {
+            if (File.Exists(episode.FilePath.PathAndFilename))
+            {
+                Process.Start(episode.FilePath.PathAndFilename);
+            }
+        }
+
+        /// <summary>
+        /// The open episode folder.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void OpenEpisodeFolder(Episode episode)
+        {
+            string argument = string.Format(
+                @"/select,""{0}""", 
+                File.Exists(episode.FilePath.PathAndFilename)
+                    ? episode.FilePath.PathAndFilename
+                    : episode.FilePath.FolderPath);
+
+            Process.Start("explorer.exe", argument);
+        }
+
+        /// <summary>
+        ///   The process database update.
+        /// </summary>
+        public void ProcessDatabaseUpdate()
+        {
+            this.GenerateMasterSeriesList();
+            this.AddImagesToBackgroundDownload();
+            this.LoadSeriesNFO();
+        }
+
+        /// <summary>
+        /// The restore hidden series.
+        /// </summary>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        public void RestoreHiddenSeries(Series series)
+        {
+            this.masterSeriesNameList.Add(
+                new MasterSeriesListModel
+                    {
+                        BannerPath = series.SeriesBannerPath, 
+                        Locked = false, 
+                        SeriesGuid = series.Guid, 
+                        SeriesName = series.SeriesName
+                    });
+
+            this.TVDatabase.Add(series);
+
+            this.HiddenTVDB.Remove(series);
+
+            this.InvokeTVDBChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        /// <summary>
+        /// The search default show database.
+        /// </summary>
+        /// <param name="showName">
+        /// The show name. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="ThreadedBindingList"/> . 
+        /// </returns>
+        public ThreadedBindingList<SearchDetails> SearchDefaultShowDatabase(string showName)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "TV", "Defaults", "DefaultShows.xml");
+
+            if (!File.Exists(path))
+            {
+                return new ThreadedBindingList<SearchDetails>();
+            }
+
+            var xml = XRead.OpenPath(path);
+            var shows = xml.GetElementsByTagName("show");
+
+            var returnList = new ThreadedBindingList<SearchDetails>();
+
+            foreach (XmlNode show in shows)
+            {
+                if (show.Attributes != null)
+                {
+                    if (show.Attributes["name"].Value.Equals(showName, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        var searchDetails = new SearchDetails
+                            {
+                               SeriesName = show.Attributes["name"].Value, SeriesID = show.Attributes["id"].Value 
+                            };
+
+                        returnList.Add(searchDetails);
+
+                        return returnList;
+                    }
+                }
+            }
+
+            return new ThreadedBindingList<SearchDetails>();
+        }
+
+        /// <summary>
+        ///   Check if season banner has downloaded
+        /// </summary>
+        /// <returns> Return value </returns>
+        public bool SeasonBannerDownloaded()
+        {
+            string url = this.GetImageUrl(this.currentSeason.BannerUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Check if season fanart has downloaded
+        ///   Check if season fanart has downloaded
         /// </summary>
-        /// <returns>
-        /// Return value
-        /// </returns>
-        public static bool SeasonFanartDownloaded()
+        /// <returns> Return value </returns>
+        public bool SeasonFanartDownloaded()
         {
-            string url = GetImageUrl(CurrentSeason.FanartUrl);
+            string url = this.GetImageUrl(this.currentSeason.FanartUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Check if season poster has downloaded
+        ///   Check if season poster has downloaded
         /// </summary>
-        /// <returns>
-        /// Return value
-        /// </returns>
-        public static bool SeasonPosterDownloaded()
+        /// <returns> Return value </returns>
+        public bool SeasonPosterDownloaded()
         {
-            string url = GetImageUrl(CurrentSeason.PosterUrl);
+            string url = this.GetImageUrl(this.currentSeason.PosterUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Check if series poster has downloaded
+        ///   Check if series poster has downloaded
         /// </summary>
-        /// <returns>
-        /// Return value
-        /// </returns>
-        public static bool SeriesPosterDownloaded()
+        /// <returns> Return value </returns>
+        public bool SeriesPosterDownloaded()
         {
-            string url = GetImageUrl(CurrentSeries.PosterUrl);
+            string url = this.GetImageUrl(this.CurrentSeries.PosterUrl);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             return File.Exists(urlCache);
         }
 
         /// <summary>
-        /// Set current episode by guid
+        /// Set current episode by GUID
         /// </summary>
         /// <param name="guid">
-        /// The guid value
+        /// The GUID value 
         /// </param>
-        public static void SetCurrentEpisode(string guid)
+        public void SetCurrentEpisode(string guid)
         {
-            Episode episode = (from e in CurrentSeason.Episodes where e.Guid == guid select e).SingleOrDefault();
+            Episode episode = (from e in this.currentSeason.Episodes where e.Guid == guid select e).SingleOrDefault();
 
             if (episode != null)
             {
-                CurrentEpisode = episode;
-                InvokeGalleryEpisodeChanged(new EventArgs());
+                this.CurrentEpisode = episode;
+                this.InvokeGalleryEpisodeChanged(new EventArgs());
             }
         }
 
         /// <summary>
-        /// Set current season by guid
+        /// Set current season by GUID
         /// </summary>
         /// <param name="guid">
-        /// The guid value
+        /// The GUID value 
         /// </param>
-        public static void SetCurrentSeason(string guid)
+        public void SetCurrentSeason(string guid)
         {
-            Season season =
-                (from e in CurrentSeries.Seasons where e.Value.Guid == guid select e.Value).SingleOrDefault();
+            Season season = (from e in this.CurrentSeries.Seasons where e.Guid == guid select e).SingleOrDefault();
 
             if (season != null)
             {
-                CurrentSeason = season;
-                InvokeCurrentSeasonChanged(new EventArgs());
-                InvokeCurrentEpisodeChanged(new EventArgs());
+                this.currentSeason = season;
+                this.InvokeCurrentSeasonChanged(new EventArgs());
+                this.InvokeCurrentEpisodeChanged(new EventArgs());
             }
         }
 
         /// <summary>
-        /// Set current series by guid
+        /// Set current series by GUID
         /// </summary>
         /// <param name="guid">
-        /// The guid value
+        /// The GUID value 
         /// </param>
-        public static void SetCurrentSeries(string guid)
+        public void SetCurrentSeries(string guid)
         {
-            Series series = GetSeriesFromGuid(guid);
+            Series series = this.GetSeriesFromGUID(guid);
 
             if (series != null)
             {
-                CurrentSeries = series;
-                InvokeCurrentSeriesChanged(new EventArgs());
+                this.CurrentSeries = series;
+                this.InvokeCurrentSeriesChanged(new EventArgs());
             }
+        }
+
+        /// <summary>
+        /// The set episode unwatched.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void SetEpisodeUnwatched(Episode episode)
+        {
+            episode.Watched = false;
+        }
+
+        /// <summary>
+        /// The set episode watched.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void SetEpisodeWatched(Episode episode)
+        {
+            episode.Watched = true;
+        }
+
+        /// <summary>
+        /// The set series hide.
+        /// </summary>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        public void SetSeriesHide(MasterSeriesListModel series)
+        {
+            this.HideSeries(series.SeriesName);
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        /// <summary>
+        /// The unlock episode.
+        /// </summary>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        public void UnlockEpisode(Episode episode)
+        {
+            episode.IsLocked = false;
+        }
+
+        /// <summary>
+        /// The unlock season.
+        /// </summary>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        public void UnlockSeason(Season season)
+        {
+            season.IsLocked = false;
         }
 
         /// <summary>
         /// Update episode.
         /// </summary>
         /// <param name="season">
-        /// The season to update
+        /// The season to update 
         /// </param>
         /// <param name="newEpisode">
-        /// The new episode.
+        /// The new episode. 
         /// </param>
-        public static void UpdateEpisode(Season season, Episode newEpisode, bool force = false)
+        /// <param name="force">
+        /// The force. 
+        /// </param>
+        public void UpdateEpisode(Season season, Episode newEpisode, bool force = false)
         {
-            InternalApps.Logs.Log.WriteToLog(
-                        LogSeverity.Debug,
-                        0,
-                        "Factories > TvDBFactory > UpdateEpisode",
-                        string.Format(
-                            "Updating episode {0} in season {1} ({2}). Forced: {3}",
-                            newEpisode.EpisodeNumber, newEpisode.SeasonNumber, newEpisode.GetSeriesName(), force ? "true" : "false"
-                        )
-            );
+            Log.WriteToLog(
+                LogSeverity.Debug, 
+                0, 
+                "Factories > TVDBFactory > UpdateEpisode", 
+                string.Format(
+                    "Updating episode {0} in season {1} ({2}). Forced: {3}", 
+                    newEpisode.EpisodeNumber, 
+                    newEpisode.SeasonNumber, 
+                    newEpisode.GetSeriesName(), 
+                    force ? "true" : "false"));
 
             Episode episode =
                 (from e in season.Episodes where e.EpisodeNumber == newEpisode.EpisodeNumber select e).SingleOrDefault();
@@ -1754,25 +2006,25 @@ namespace YANFOE.Factories
         /// The update episode file.
         /// </summary>
         /// <param name="move">
-        /// if set to <c>true</c> [move].
+        /// if set to <c>true</c> [move]. 
         /// </param>
-        public static void UpdateEpisodeFile(bool move)
+        public void UpdateEpisodeFile(bool move)
         {
             var fileDialog = new OpenFileDialog();
 
-            string series = CurrentSeries.SeriesName;
-            int season = CurrentSeason.SeasonNumber;
-            string episode = CurrentEpisode.EpisodeName;
+            string series = this.CurrentSeries.SeriesName;
+            int season = this.currentSeason.SeasonNumber;
+            string episode = this.CurrentEpisode.EpisodeName;
 
             fileDialog.Title = string.Format("Assign a file to {0} > {1} > {2}", series, season, episode);
-            fileDialog.InitialDirectory = CurrentSeason.GetSeasonPath();
+            fileDialog.InitialDirectory = this.currentSeason.GetSeasonPath();
 
-            DialogResult dialogResult = fileDialog.ShowDialog();
+            bool? dialogResult = fileDialog.ShowDialog();
 
-            if (dialogResult == DialogResult.OK)
+            if (dialogResult == true)
             {
-                CurrentEpisode.FilePath.PathAndFilename = fileDialog.FileName;
-                InvokeCurrentEpisodeChanged(new EventArgs());
+                this.CurrentEpisode.FilePath.PathAndFilename = fileDialog.FileName;
+                this.InvokeCurrentEpisodeChanged(new EventArgs());
             }
         }
 
@@ -1780,26 +2032,32 @@ namespace YANFOE.Factories
         /// The update season.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
         /// <param name="newSeason">
-        /// The new season.
+        /// The new season. 
         /// </param>
-        public static void UpdateSeason(Series series, Season newSeason, int? episodeNumber = null, bool force = false)
+        /// <param name="episodeNumber">
+        /// The episode Number. 
+        /// </param>
+        /// <param name="force">
+        /// The force. 
+        /// </param>
+        public void UpdateSeason(Series series, Season newSeason, int? episodeNumber = null, bool force = false)
         {
-            InternalApps.Logs.Log.WriteToLog(
-                        LogSeverity.Debug,
-                        0,
-                        "Factories > TvDBFactory > UpdateSeason",
-                        string.Format(
-                            "Called with episodeNumber {0} ({1}). Forced: {2}",
-                            episodeNumber.GetValueOrDefault(0), series.SeriesName, force ? "true" : "false"
-                        )
-            );
+            Log.WriteToLog(
+                LogSeverity.Debug, 
+                0, 
+                "Factories > TVDBFactory > UpdateSeason", 
+                string.Format(
+                    "Called with episodeNumber {0} ({1}). Forced: {2}", 
+                    episodeNumber.GetValueOrDefault(0), 
+                    series.SeriesName, 
+                    force ? "true" : "false"));
 
-            if (!series.Seasons.ContainsKey(newSeason.SeasonNumber))
+            if (series.Seasons.All(x => x.SeasonNumber != newSeason.SeasonNumber))
             {
-                series.Seasons.Add(newSeason.SeasonNumber, newSeason);
+                series.Seasons.Add(newSeason);
                 return;
             }
 
@@ -1822,39 +2080,46 @@ namespace YANFOE.Factories
                     season.PosterPath = newSeason.PosterUrl;
                 }
             }
-            
+
             foreach (Episode episode in newSeason.Episodes)
             {
                 if (episodeNumber == null)
                 {
-                    UpdateEpisode(season, episode, force);
+                    this.UpdateEpisode(season, episode, force);
                 }
                 else if (episode.EpisodeNumber == episodeNumber)
                 {
-                    UpdateEpisode(season, episode, true);
+                    this.UpdateEpisode(season, episode, true);
                 }
             }
         }
 
         /// <summary>
-        /// Update series from TvDB database.
+        /// Update series from TVDB database.
         /// </summary>
         /// <param name="seriesId">
-        /// The series id.
+        /// The series id. 
         /// </param>
-        public static void UpdateSeries(uint? seriesId, int? seasonNumber = null, int? episodeNumber = null)
+        /// <param name="seasonNumber">
+        /// The season Number. 
+        /// </param>
+        /// <param name="episodeNumber">
+        /// The episode Number. 
+        /// </param>
+        public void UpdateSeries(uint? seriesId, int? seasonNumber = null, int? episodeNumber = null)
         {
-            Series seriesObj = GetSeriesFromSeriesId(seriesId);
+            Series seriesObj = this.GetSeriesFromSeriesID(seriesId);
 
-            InternalApps.Logs.Log.WriteToLog(
-                        LogSeverity.Debug,
-                        0,
-                        "Factories > TvDBFactory > UpdateSeries",
-                        string.Format(
-                            "Called with seriesId {0}({1}), seasonNumber {2}, episodeNumber {3}",
-                            seriesId.GetValueOrDefault(0), seriesObj.SeriesName, seasonNumber.GetValueOrDefault(0), episodeNumber.GetValueOrDefault(0)
-                        )
-            );
+            Log.WriteToLog(
+                LogSeverity.Debug, 
+                0, 
+                "Factories > TVDBFactory > UpdateSeries", 
+                string.Format(
+                    "Called with seriesId {0}({1}), seasonNumber {2}, episodeNumber {3}", 
+                    seriesId.GetValueOrDefault(0), 
+                    seriesObj.SeriesName, 
+                    seasonNumber.GetValueOrDefault(0), 
+                    episodeNumber.GetValueOrDefault(0)));
 
             var tvdb = new TheTvdb();
 
@@ -1901,11 +2166,11 @@ namespace YANFOE.Factories
             {
                 if (seasonNumber == null)
                 {
-                    UpdateSeason(seriesObj, season.Value, episodeNumber);
+                    this.UpdateSeason(seriesObj, season, episodeNumber);
                 }
-                else if (season.Value.SeasonNumber == seasonNumber)
+                else if (season.SeasonNumber == seasonNumber)
                 {
-                    UpdateSeason(seriesObj, season.Value, episodeNumber, true);
+                    this.UpdateSeason(seriesObj, season, episodeNumber, true);
                 }
             }
         }
@@ -1915,40 +2180,40 @@ namespace YANFOE.Factories
         #region Methods
 
         /// <summary>
-        /// The add images to background download.
+        ///   The add images to background download.
         /// </summary>
-        private static void AddImagesToBackgroundDownload()
+        private void AddImagesToBackgroundDownload()
         {
-            foreach (var series in tvDatabase)
+            foreach (var series in this.TVDatabase)
             {
-                UpdateStatus = "Process Images for " + series.Value.SeriesName;
+                this.UpdateStatus = "Process Images for " + series.SeriesName;
 
-                ProcessSeriesToBackground(series.Value);
+                this.ProcessSeriesToBackground(series);
 
-                foreach (var season in series.Value.Seasons)
+                foreach (var season in series.Seasons)
                 {
-                    ProcessSeasonToBackground(season.Value);
+                    this.ProcessSeasonToBackground(season);
 
-                    foreach (Episode episode in season.Value.Episodes)
+                    foreach (Episode episode in season.Episodes)
                     {
-                        ProcessEpisodeToBackground(episode);
+                        this.ProcessEpisodeToBackground(episode);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwBanner control.
+        /// Handles the DoWork event of the Banner control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwBanner_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwBannerDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -1959,31 +2224,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwBanner control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwBanner_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwBannerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeBannerLoaded(new EventArgs());
+            this.InvokeBannerLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwEpisode control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwEpisode_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwEpisodeDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -1994,31 +2259,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwEpisode control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwEpisode_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwEpisodeRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeEpisodeLoaded(new EventArgs());
+            this.InvokeEpisodeLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwFanart control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwFanart_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwFanartDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -2029,31 +2294,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwFanart control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwFanart_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwFanartRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeFanartLoaded(new EventArgs());
+            this.InvokeFanartLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSeasonBanner control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonBanner_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwSeasonBannerDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -2064,31 +2329,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSeasonBanner control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonBanner_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwSeasonBannerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeSeasonBannerLoaded(new EventArgs());
+            this.InvokeSeasonBannerLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSeasonFanart control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonFanart_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwSeasonFanartDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -2099,31 +2364,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSeasonFanart control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonFanart_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwSeasonFanartRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeSeasonFanartLoaded(new EventArgs());
+            this.InvokeSeasonFanartLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSeasonPoster control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonPoster_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwSeasonPosterDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -2134,31 +2399,31 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSeasonPoster control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeasonPoster_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwSeasonPosterRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeSeasonPosterLoaded(new EventArgs());
+            this.InvokeSeasonPosterLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSeriesPoster control.
+        /// Handles the DoWork event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeriesPoster_DoWork(object sender, DoWorkEventArgs e)
+        private void BgwSeriesPosterDoWork(object sender, DoWorkEventArgs e)
         {
-            string url = GetImageUrl(e.Argument as string);
+            string url = this.GetImageUrl(e.Argument as string);
             string urlCache = WebCache.GetPathFromUrl(url, Section.Tv);
 
             if (!File.Exists(urlCache))
@@ -2169,56 +2434,89 @@ namespace YANFOE.Factories
         }
 
         /// <summary>
-        /// Handles the RunWorkerCompleted event of the bgwSeriesPoster control.
+        /// Handles the RunWorkerCompleted event of the control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
         /// </param>
-        private static void BgwSeriesPoster_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BgwSeriesPosterRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            InvokeSeriesPosterLoaded(new EventArgs());
+            this.InvokeSeriesPosterLoaded(new EventArgs());
         }
 
         /// <summary>
-        /// Gno wet series from series id.
+        /// Get series from series id.
         /// </summary>
         /// <param name="seriesId">
-        /// The series id.
+        /// The series id. 
         /// </param>
         /// <returns>
-        /// Return Series object
+        /// Return Series object 
         /// </returns>
-        private static Series GetSeriesFromSeriesId(uint? seriesId)
+        private Series GetSeriesFromSeriesID(uint? seriesId)
         {
-            return (from s in tvDatabase where s.Value.SeriesID == seriesId select s.Value).SingleOrDefault();
+            return (from s in this.TVDatabase where s.SeriesID == seriesId select s).SingleOrDefault();
         }
 
         /// <summary>
-        /// The load series NFO
+        /// The hide series.
         /// </summary>
-        private static void LoadSeriesNFOs()
+        /// <param name="seriesName">
+        /// The series name. 
+        /// </param>
+        private void HideSeries(string seriesName)
         {
-            foreach (var series in tvDatabase)
+            var series = this.MasterSeriesList.Single(c => c.SeriesName == seriesName);
+            this.masterSeriesNameList.Remove(series);
+
+            this.HiddenTVDB.Add(this.TVDatabase.First(x => x.SeriesName == seriesName));
+            this.TVDatabase.Remove(this.TVDatabase.First(x => x.SeriesName == seriesName));
+
+            this.InvokeTVDBChanged(new EventArgs());
+
+            DatabaseIOFactory.DatabaseDirty = true;
+        }
+
+        /// <summary>
+        ///   The load series NFO
+        /// </summary>
+        private void LoadSeriesNFO()
+        {
+            foreach (var series in this.TVDatabase)
             {
-                UpdateStatus = "Loading Series: " + series.Value.SeriesName;
-                OutFactory.LoadSeries(series.Value);
+                this.UpdateStatus = "Loading Series: " + series.SeriesName;
+                OutFactory.LoadSeries(series);
             }
+        }
+
+        /// <summary>
+        /// Handles the ListChanged event of the masterSeriesNameList control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data. 
+        /// </param>
+        private void MasterSeriesNameListListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.InvokeTVDBChanged(new EventArgs());
         }
 
         /// <summary>
         /// The process episode to background.
         /// </summary>
         /// <param name="episode">
-        /// The episode.
+        /// The episode. 
         /// </param>
-        private static void ProcessEpisodeToBackground(Episode episode)
+        private void ProcessEpisodeToBackground(Episode episode)
         {
             if (!string.IsNullOrEmpty(episode.CurrentFilenameAndPath))
             {
-                var current = GenerateOutput.AccessCurrentIOHandler() as IoInterface;
+                var current = GenerateOutput.AccessCurrentIOHandler();
 
                 if (current == null)
                 {
@@ -2231,12 +2529,12 @@ namespace YANFOE.Factories
                 {
                     var downloadItem = new DownloadItem
                         {
-                            Url = TvDBFactory.GetImageUrl(episode.EpisodeScreenshotUrl), 
+                            Url = this.GetImageUrl(episode.EpisodeScreenshotUrl), 
                             Type = DownloadType.Binary, 
                             Section = Section.Tv
                         };
 
-                    Downloader.AddToBackgroundQue(downloadItem);
+                    Downloader.AddToBackgroundQueue(downloadItem);
                 }
                 else
                 {
@@ -2249,13 +2547,13 @@ namespace YANFOE.Factories
         /// Processes the season to the background queue.
         /// </summary>
         /// <param name="season">
-        /// The season.
+        /// The season. 
         /// </param>
-        private static void ProcessSeasonToBackground(Season season)
+        private void ProcessSeasonToBackground(Season season)
         {
             if (season.ContainsEpisodesWithFiles())
             {
-                var current = GenerateOutput.AccessCurrentIOHandler() as IoInterface;
+                var current = GenerateOutput.AccessCurrentIOHandler();
 
                 if (current == null)
                 {
@@ -2268,12 +2566,10 @@ namespace YANFOE.Factories
                 {
                     var downloadItem = new DownloadItem
                         {
-                            Url = TvDBFactory.GetImageUrl(season.BannerUrl), 
-                            Type = DownloadType.Binary, 
-                            Section = Section.Tv
+                           Url = this.GetImageUrl(season.BannerUrl), Type = DownloadType.Binary, Section = Section.Tv 
                         };
 
-                    Downloader.AddToBackgroundQue(downloadItem);
+                    Downloader.AddToBackgroundQueue(downloadItem);
                 }
                 else
                 {
@@ -2286,12 +2582,10 @@ namespace YANFOE.Factories
                 {
                     var downloadItem = new DownloadItem
                         {
-                            Url = TvDBFactory.GetImageUrl(season.PosterUrl), 
-                            Type = DownloadType.Binary, 
-                            Section = Section.Tv
+                           Url = this.GetImageUrl(season.PosterUrl), Type = DownloadType.Binary, Section = Section.Tv 
                         };
 
-                    Downloader.AddToBackgroundQue(downloadItem);
+                    Downloader.AddToBackgroundQueue(downloadItem);
                 }
                 else
                 {
@@ -2304,12 +2598,10 @@ namespace YANFOE.Factories
                 {
                     var downloadItem = new DownloadItem
                         {
-                            Url = TvDBFactory.GetImageUrl(season.FanartUrl), 
-                            Type = DownloadType.Binary, 
-                            Section = Section.Tv
+                           Url = this.GetImageUrl(season.FanartUrl), Type = DownloadType.Binary, Section = Section.Tv 
                         };
 
-                    Downloader.AddToBackgroundQue(downloadItem);
+                    Downloader.AddToBackgroundQueue(downloadItem);
                 }
                 else
                 {
@@ -2322,11 +2614,11 @@ namespace YANFOE.Factories
         /// The process series to background.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
-        private static void ProcessSeriesToBackground(Series series)
+        private void ProcessSeriesToBackground(Series series)
         {
-            var current = GenerateOutput.AccessCurrentIOHandler() as IoInterface;
+            var current = GenerateOutput.AccessCurrentIOHandler();
 
             if (current == null)
             {
@@ -2353,185 +2645,6 @@ namespace YANFOE.Factories
             }
         }
 
-        /// <summary>
-        /// Handles the ListChanged event of the masterSeriesNameList control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void masterSeriesNameList_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            InvokeTvDbChanged(new EventArgs());
-        }
-
-        public static List<SearchDetails> SearchDefaultShowDatabase(string showName)
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "TV", "Defaults", "DefaultShows.xml");
-
-            if (!File.Exists(path))
-            {
-                return new List<SearchDetails>();
-            }
-
-            var xml = XRead.OpenPath(path);
-            var shows = xml.GetElementsByTagName("show");
-
-            var returnList = new List<SearchDetails>();
-
-            foreach (XmlNode show in shows)
-            {
-                if (show.Attributes != null)
-                {
-                    if (show.Attributes["name"].Value.Equals(showName, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var searchDetails = new SearchDetails();
-
-                        searchDetails.SeriesName = show.Attributes["name"].Value;
-                        searchDetails.SeriesID = show.Attributes["id"].Value;
-
-                        returnList.Add(searchDetails);
-
-                        return returnList;
-                    }
-                }
-            }
-
-            return new List<SearchDetails>();
-        }
-
         #endregion
-
-        public static void LockSeason(Season season)
-        {
-            season.IsLocked = true;
-        }
-
-        public static void UnlockSeason(Season season)
-        {
-            season.IsLocked = false;
-        }
-
-        public static void HideSeason(Season season)
-        {
-            // TODO: Hide season
-        }
-
-        public static void LockEpisode(Episode episode)
-        {
-            episode.IsLocked = true;
-        }
-
-        public static void UnlockEpisode(Episode episode)
-        {
-            episode.IsLocked = false;
-        }
-
-        public static void HideEpisode(Episode episode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void SetEpisodeWatched(Episode episode)
-        {
-            episode.Watched = true;
-        }
-
-        public static void SetEpisodeUnwatched(Episode episode)
-        {
-            episode.Watched = false;
-        }
-
-        public static void OpenEpisodeFile(Episode episode)
-        {
-            if (File.Exists(episode.FilePath.PathAndFilename))
-            {
-                Process.Start(episode.FilePath.PathAndFilename);
-            }
-        }
-
-        public static void OpenEpisodeFolder(Episode episode)
-        {
-            string argument = string.Format(
-                @"/select,""{0}""",
-                File.Exists(episode.FilePath.PathAndFilename)
-                    ? episode.FilePath.PathAndFilename
-                    : episode.FilePath.FolderPath);
-
-            Process.Start("explorer.exe", argument);
-        }
-
-        public static void SetSeriesHide(MasterSeriesListModel series)
-        {
-            TvDBFactory.HideSeries(series.SeriesName);
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
-
-        private static void HideSeries(string seriesName)
-        {
-            var series = MasterSeriesNameList.Where(c => c.SeriesName == seriesName).Single();
-            TvDBFactory.masterSeriesNameList.Remove(series);
-
-            TvDBFactory.HiddenTvDatabase.Add(TvDBFactory.tvDatabase[seriesName]);
-            TvDBFactory.tvDatabase.Remove(seriesName);
-
-            TvDBFactory.InvokeTvDbChanged(new EventArgs());
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
-
-        public static void RestoreHiddenSeries(Series series)
-        {
-            TvDBFactory.masterSeriesNameList.Add(
-                new MasterSeriesListModel
-                    {
-                        BannerPath = series.SeriesBannerPath,
-                        Locked = false,
-                        SeriesGuid = series.Guid,
-                        SeriesName = series.SeriesName
-                    });
-
-            TvDBFactory.tvDatabase.Add(series.SeriesName, series);
-
-            TvDBFactory.HiddenTvDatabase.Remove(series);
-
-            TvDBFactory.InvokeTvDbChanged(new EventArgs());
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
-
-        public static void DeleteSeries(MasterSeriesListModel masterSeriesList)
-        {
-            var series = MasterSeriesNameList.Where(c => c.SeriesName == masterSeriesList.SeriesName).Single();
-            TvDBFactory.masterSeriesNameList.Remove(series);
-
-            var s = TvDBFactory.tvDatabase[series.SeriesName];
-
-            foreach (var season in s.Seasons)
-            {
-                foreach (var episode in season.Value.Episodes)
-                {
-                    if (!string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
-                    {
-                        var files =
-                            (MasterMediaDBFactory.MasterTvMediaDatabase.Where(
-                                f => f == episode.FilePath.PathAndFilename)).ToList();
-
-                        for (int index = 0; index < files.Count; index++)
-                        {
-                            var f = files[index];
-                            MasterMediaDBFactory.MasterTvMediaDatabase.Remove(f);
-                        }
-                    }
-                }
-            }
-
-            TvDBFactory.tvDatabase.Remove(series.SeriesName);
-
-            DatabaseIOFactory.DatabaseDirty = true;
-        }
     }
 }

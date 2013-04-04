@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.TvControls.TvTopMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="159" d:DesignWidth="604">
+
+    <Grid>
+        <Button HorizontalAlignment="Left" Width="52" Name="btnUpdate" Click="btnUpdate_Click">
+            <Image Source="/YANFOE;component/Resources/globe.png" />
+        </Button>
+        <Button Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="52" Margin="52,0,0,0">
+            <Image Source="/YANFOE;component/Resources/save.png" />
+        </Button>
+        <Button Grid.Column="1" HorizontalAlignment="Left" Width="52" Margin="104,0,0,0">
+            <Image Source="/YANFOE;component/Resources/saveseries.png" />
+        </Button>
+        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,0,0">
+            <Image Source="/YANFOE;component/Resources/greendrive.png" />
+        </Button>
+        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,52,0">
+            <Image Source="/YANFOE;component/Resources/unlock.png" />
+        </Button>
+        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,104,0">
+            <Image Source="/YANFOE;component/Resources/watched_red.png" />
+        </Button>
+        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,156,0">
+            <Image Source="/YANFOE;component/Resources/searchred.png" />
+        </Button>
+    </Grid>
+</UserControl>

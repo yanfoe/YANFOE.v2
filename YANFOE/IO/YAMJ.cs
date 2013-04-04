@@ -1,22 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="YAMJ.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="YAMJ.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   YAMJ IO Handler
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.IO
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
@@ -37,35 +40,42 @@ namespace YANFOE.IO
     using YANFOE.Tools.IO;
     using YANFOE.Tools.Models;
     using YANFOE.Tools.Restructure;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
 
-    /// <summary>
-    /// YAMJ IO Handler
-    /// </summary>
-    public class YAMJ : IoBase, IoInterface
-    {
-        #region Implemented Interfaces
+    #endregion
 
-        #region IoInterface
+    /// <summary>
+    ///   YAMJ IO Handler
+    /// </summary>
+    public class YAMJ : IoBase, IOInterface
+    {
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="YAMJ"/> class.
+        ///   Initializes a new instance of the <see cref="YAMJ" /> class.
         /// </summary>
         public YAMJ()
         {
-            Type = NFOType.YAMJ;
-            ShowInSettings = true;
-            IOHandlerName = "YAMJ";
-            IOHandlerDescription = "IO Handler for YAMJ";
-            IOHandlerUri = new Uri("http://code.google.com/p/moviejukebox/");
+            this.Type = NFOType.YAMJ;
+            this.ShowInSettings = true;
+            this.IOHandlerName = "YAMJ";
+            this.IOHandlerDescription = "IO Handler for YAMJ";
+            this.IOHandlerUri = new Uri("http://code.google.com/p/moviejukebox/");
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// Generates the movie output.
         /// </summary>
-        /// <param name="movieModel">The movie model.</param>
+        /// <param name="movieModel">
+        /// The movie model. 
+        /// </param>
         /// <returns>
-        /// Generates a Movie NFO
+        /// Generates a Movie NFO 
         /// </returns>
         public string GenerateMovieOutput(MovieModel movieModel)
         {
@@ -91,7 +101,8 @@ namespace YANFOE.IO
                         xmlWriter, "releasedate", this.ProcessReleaseDate(movieModel.ReleaseDate));
 
                     // Rating
-                    XWrite.WriteEnclosedElement(xmlWriter, "rating", this.ProcessRating(movieModel.Rating).Replace(",", "."));
+                    XWrite.WriteEnclosedElement(
+                        xmlWriter, "rating", this.ProcessRating(movieModel.Rating).Replace(",", "."));
 
                     // Votes
                     XWrite.WriteEnclosedElement(xmlWriter, "votes", movieModel.Votes);
@@ -213,16 +224,19 @@ namespace YANFOE.IO
                     xmlWriter.WriteEndElement();
                 }
 
-                return stringWriter.ToString().Replace("<fileinfo>template</fileinfo>", this.GetFileInfo(movie: movieModel));
+                return stringWriter.ToString().Replace(
+                    "<fileinfo>template</fileinfo>", this.GetFileInfo(movieModel));
             }
         }
 
         /// <summary>
         /// Generates the series output.
         /// </summary>
-        /// <param name="series">The series.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
         /// <returns>
-        /// Generates a XML output
+        /// Generates a XML output 
         /// </returns>
         public string GenerateSeriesOutput(Series series)
         {
@@ -294,10 +308,14 @@ namespace YANFOE.IO
         /// <summary>
         /// Generates the single episode output.
         /// </summary>
-        /// <param name="episode">The episode.</param>
-        /// <param name="writeDocumentTags">if set to <c>true</c> [write document tags].</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        /// <param name="writeDocumentTags">
+        /// if set to <c>true</c> [write document tags]. 
+        /// </param>
         /// <returns>
-        /// Episode Output
+        /// Episode Output 
         /// </returns>
         public string GenerateSingleEpisodeOutput(Episode episode, bool writeDocumentTags)
         {
@@ -315,7 +333,10 @@ namespace YANFOE.IO
                     // Season
                     int? sn = episode.SeasonNumber;
                     if (sn == null || sn < 0)
+                    {
                         sn = 0;
+                    }
+
                     XWrite.WriteEnclosedElement(xmlWriter, "season", sn);
 
                     // Episode
@@ -337,19 +358,21 @@ namespace YANFOE.IO
                     {
                         xmlWriter.WriteEndDocument();
                     }
-
                 }
 
-                return stringWriter.ToString().Replace("<fileinfo>template</fileinfo>", this.GetFileInfo(episode: episode));
+                return stringWriter.ToString().Replace(
+                    "<fileinfo>template</fileinfo>", this.GetFileInfo(episode: episode));
             }
         }
 
         /// <summary>
         /// Gets the episode NFO.
         /// </summary>
-        /// <param name="episode">The episode.</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
         /// <returns>
-        /// Episode NFO path
+        /// Episode NFO path 
         /// </returns>
         public string GetEpisodeNFO(Episode episode)
         {
@@ -371,15 +394,29 @@ namespace YANFOE.IO
         /// <summary>
         /// Gets the episode screenshot.
         /// </summary>
-        /// <param name="episode">The episode.</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
         /// <returns>
-        /// Episode Screenshot path
+        /// Episode Screenshot path 
         /// </returns>
         public string GetEpisodeScreenshot(Episode episode)
         {
             return this.GetEpisodeImage(episode, "{0}.videoimage.jpg");
         }
 
+        /// <summary>
+        /// The get file info.
+        /// </summary>
+        /// <param name="movie">
+        /// The movie.
+        /// </param>
+        /// <param name="episode">
+        /// The episode.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public string GetFileInfo(MovieModel movie = null, Episode episode = null)
         {
             FileInfoModel fileInfoModel;
@@ -404,10 +441,9 @@ namespace YANFOE.IO
                 using (var xmlWriter = XmlWriter.Create(stringWriter, this.GetSettings()))
                 {
                     XWrite.WriteEnclosedElement(xmlWriter, "videooutput", Get.MediaInfo.DoReplace(fileInfoModel));
-
                 }
 
-                output = stringWriter.ToString() + Environment.NewLine;
+                output = stringWriter + Environment.NewLine;
             }
 
             using (var stringWriter = new StringWriterWithEncoding(Encoding.UTF8))
@@ -437,7 +473,7 @@ namespace YANFOE.IO
                         xmlWriter.WriteStartElement("audio");
 
                         // Codec
-                        XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.CodecID);
+                        XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.CodecId);
 
                         // Language
                         XWrite.WriteEnclosedElement(xmlWriter, "codec", audioStream.Language);
@@ -458,22 +494,23 @@ namespace YANFOE.IO
                         xmlWriter.WriteEndElement();
                     }
 
-
                     xmlWriter.WriteEndElement();
                 }
 
-                return Regex.Replace(output + stringWriter, @"\<\?xml.*?\>", string.Empty)
-                    .Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine)
-                    .Trim();
+                return
+                    Regex.Replace(output + stringWriter, @"\<\?xml.*?\>", string.Empty).Replace(
+                        Environment.NewLine + Environment.NewLine, Environment.NewLine).Trim();
             }
         }
 
         /// <summary>
         /// Gets the season banner.
         /// </summary>
-        /// <param name="season">The season.</param>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
         /// <returns>
-        /// Season banner path
+        /// Season banner path 
         /// </returns>
         public string GetSeasonBanner(Season season)
         {
@@ -483,9 +520,11 @@ namespace YANFOE.IO
         /// <summary>
         /// Gets the season fanart.
         /// </summary>
-        /// <param name="season">The season.</param>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
         /// <returns>
-        /// Season fanart path
+        /// Season fanart path 
         /// </returns>
         public string GetSeasonFanart(Season season)
         {
@@ -495,9 +534,11 @@ namespace YANFOE.IO
         /// <summary>
         /// Gets the season poster.
         /// </summary>
-        /// <param name="season">The season.</param>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
         /// <returns>
-        /// Season Poster path
+        /// Season Poster path 
         /// </returns>
         public string GetSeasonPoster(Season season)
         {
@@ -507,9 +548,11 @@ namespace YANFOE.IO
         /// <summary>
         /// Gets the series banner.
         /// </summary>
-        /// <param name="series">The series.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
         /// <returns>
-        /// Series Banner path
+        /// Series Banner path 
         /// </returns>
         public string GetSeriesBanner(Series series)
         {
@@ -519,9 +562,11 @@ namespace YANFOE.IO
         /// <summary>
         /// Gets the series fanart.
         /// </summary>
-        /// <param name="series">The series.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
         /// <returns>
-        /// Series Fanart path
+        /// Series Fanart path 
         /// </returns>
         public string GetSeriesFanart(Series series)
         {
@@ -529,23 +574,13 @@ namespace YANFOE.IO
         }
 
         /// <summary>
-        /// Gets the series poster.
-        /// </summary>
-        /// <param name="series">The series.</param>
-        /// <returns>
-        /// Series poster path
-        /// </returns>
-        public string GetSeriesPoster(Series series)
-        {
-            return this.GetSeriesImage(series, "Set_{0}_1.jpg");
-        }
-
-        /// <summary>
         /// Gets the series NFO.
         /// </summary>
-        /// <param name="series">The series.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
         /// <returns>
-        /// Series NFO path
+        /// Series NFO path 
         /// </returns>
         public string GetSeriesNFO(Series series)
         {
@@ -565,11 +600,27 @@ namespace YANFOE.IO
         }
 
         /// <summary>
+        /// Gets the series poster.
+        /// </summary>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        /// <returns>
+        /// Series poster path 
+        /// </returns>
+        public string GetSeriesPoster(Series series)
+        {
+            return this.GetSeriesImage(series, "Set_{0}_1.jpg");
+        }
+
+        /// <summary>
         /// Loads the episode.
         /// </summary>
-        /// <param name="episode">The episode.</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
         /// <returns>
-        /// Episode Object
+        /// Episode Object 
         /// </returns>
         public bool LoadEpisode(Episode episode)
         {
@@ -580,7 +631,7 @@ namespace YANFOE.IO
         /// Loads the movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
         public void LoadMovie(MovieModel movieModel)
         {
@@ -727,10 +778,10 @@ namespace YANFOE.IO
         /// Loads the season.
         /// </summary>
         /// <param name="season">
-        /// The season.
+        /// The season. 
         /// </param>
         /// <returns>
-        /// Season object
+        /// Season object 
         /// </returns>
         public bool LoadSeason(Season season)
         {
@@ -741,10 +792,10 @@ namespace YANFOE.IO
         /// Loads the series.
         /// </summary>
         /// <param name="series">
-        /// The series.
+        /// The series. 
         /// </param>
         /// <returns>
-        /// Loaded succeeded
+        /// Loaded succeeded 
         /// </returns>
         public bool LoadSeries(Series series)
         {
@@ -753,19 +804,18 @@ namespace YANFOE.IO
 
             if (!string.IsNullOrEmpty(seriesName) || !string.IsNullOrEmpty(seriesPath))
             {
-
                 var seriesNameHex = "Set_"
                                     +
                                     FileSystemCharChange.To(
-                                        seriesName,
-                                        FileSystemCharChange.ConvertArea.Tv,
+                                        seriesName, 
+                                        FileSystemCharChange.ConvertArea.Tv, 
                                         FileSystemCharChange.ConvertType.Hex) + "_1";
 
                 var seriesNameChar = "Set_"
                                      +
                                      FileSystemCharChange.To(
-                                         seriesName,
-                                         FileSystemCharChange.ConvertArea.Tv,
+                                         seriesName, 
+                                         FileSystemCharChange.ConvertArea.Tv, 
                                          FileSystemCharChange.ConvertType.Char) + "_1";
 
                 string nfo = Find.FindNFO("Set_" + seriesName + "_1", seriesPath);
@@ -787,13 +837,13 @@ namespace YANFOE.IO
                             series.Rating = XRead.GetDouble(doc, "rating");
                             series.Overview = XRead.GetString(doc, "plot");
                             series.ContentRating = XRead.GetString(doc, "certification");
-                            series.Genre = XRead.GetStrings(doc, "genre").ToBindingList();
+                            series.Genre = XRead.GetStrings(doc, "genre").ToThreadedBindingList();
                             series.FirstAired = XRead.GetDateTime(doc, "premiered", "yyyy-MM-dd");
                             series.Network = XRead.GetString(doc, "country");
 
                             if (doc.GetElementsByTagName("actor").Count > 0)
                             {
-                                series.Actors = new BindingList<PersonModel>();
+                                series.Actors = new ThreadedBindingList<PersonModel>();
 
                                 foreach (XmlNode actor in doc.GetElementsByTagName("actor"))
                                 {
@@ -817,7 +867,7 @@ namespace YANFOE.IO
 
             foreach (var season in series.Seasons)
             {
-                foreach (var episode in season.Value.Episodes)
+                foreach (var episode in season.Episodes)
                 {
                     if (File.Exists(episode.FilePath.PathAndFilename))
                     {
@@ -844,8 +894,12 @@ namespace YANFOE.IO
         /// <summary>
         /// Saves the episode.
         /// </summary>
-        /// <param name="episode">The episode.</param>
-        /// <param name="type">The EpisodeIOType type.</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        /// <param name="type">
+        /// The EpisodeIOType type. 
+        /// </param>
         public void SaveEpisode(Episode episode, EpisodeIOType type)
         {
             if (episode.Secondary)
@@ -893,14 +947,14 @@ namespace YANFOE.IO
                 {
                     string screenshotPathFrom;
 
-                    if (!string.IsNullOrEmpty(episode.EpisodeScreenshotPath) &&
-                        File.Exists(episode.EpisodeScreenshotPath))
+                    if (!string.IsNullOrEmpty(episode.EpisodeScreenshotPath)
+                        && File.Exists(episode.EpisodeScreenshotPath))
                     {
                         screenshotPathFrom = episode.EpisodeScreenshotPath;
                     }
                     else
                     {
-                        screenshotPathFrom = this.TvPathImageGet(episode.EpisodeScreenshotUrl);
+                        screenshotPathFrom = this.TVPathImageGet(episode.EpisodeScreenshotUrl);
                     }
 
                     string screenshotPathTo = GeneratePath.TvEpisode(episode, screenshotTemplate, screenshotPathFrom);
@@ -914,8 +968,12 @@ namespace YANFOE.IO
         /// <summary>
         /// Saves the season.
         /// </summary>
-        /// <param name="season">The season.</param>
-        /// <param name="type">The SeasonIOType type.</param>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        /// <param name="type">
+        /// The SeasonIOType type. 
+        /// </param>
         public void SaveSeason(Season season, SeasonIOType type)
         {
             if (season.HasEpisodeWithPath())
@@ -958,7 +1016,7 @@ namespace YANFOE.IO
                         }
                         else
                         {
-                            posterPathFrom = this.TvPathImageGet(season.PosterUrl);
+                            posterPathFrom = this.TVPathImageGet(season.PosterUrl);
                         }
 
                         string posterPathTo = GeneratePath.TvSeason(season, posterTemplate, posterPathFrom);
@@ -981,7 +1039,7 @@ namespace YANFOE.IO
                         }
                         else
                         {
-                            fanartPathFrom = this.TvPathImageGet(season.FanartUrl);
+                            fanartPathFrom = this.TVPathImageGet(season.FanartUrl);
                         }
 
                         string fanartPathTo = GeneratePath.TvSeason(season, fanartTemplate, fanartPathFrom);
@@ -1004,7 +1062,7 @@ namespace YANFOE.IO
                         }
                         else
                         {
-                            bannerPathFrom = this.TvPathImageGet(season.BannerUrl);
+                            bannerPathFrom = this.TVPathImageGet(season.BannerUrl);
                         }
 
                         string bannerPathTo = GeneratePath.TvSeason(season, bannerTemplate, bannerPathFrom);
@@ -1019,8 +1077,12 @@ namespace YANFOE.IO
         /// <summary>
         /// Saves the series.
         /// </summary>
-        /// <param name="series">The series.</param>
-        /// <param name="type">The SeriesIOType type.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        /// <param name="type">
+        /// The SeriesIOType type. 
+        /// </param>
         public void SaveSeries(Series series, SeriesIOType type)
         {
             string path = series.GetSeriesPath();
@@ -1038,7 +1100,7 @@ namespace YANFOE.IO
 
             if (Get.InOutCollection.RenameTV)
             {
-                TvRenamerFactory.RenameSeries(series);
+                TVRenameFactory.RenameSeries(series);
             }
 
             if (MovieNaming.IsBluRay(firstEpisodePath))
@@ -1085,7 +1147,7 @@ namespace YANFOE.IO
                     }
                     else
                     {
-                        posterPathFrom = this.TvPathImageGet(series.PosterUrl);
+                        posterPathFrom = this.TVPathImageGet(series.PosterUrl);
                     }
 
                     string posterPathTo = GeneratePath.TvSeries(series, posterTemplate, posterPathFrom);
@@ -1108,7 +1170,7 @@ namespace YANFOE.IO
                     }
                     else
                     {
-                        fanartPathFrom = this.TvPathImageGet(series.FanartUrl);
+                        fanartPathFrom = this.TVPathImageGet(series.FanartUrl);
                     }
 
                     string fanartPathTo = GeneratePath.TvSeries(series, fanartTemplate, fanartPathFrom);
@@ -1131,7 +1193,7 @@ namespace YANFOE.IO
                     }
                     else
                     {
-                        bannerPathFrom = this.TvPathImageGet(series.SeriesBannerUrl);
+                        bannerPathFrom = this.TVPathImageGet(series.SeriesBannerUrl);
                     }
 
                     string bannerPathTo = GeneratePath.TvSeries(series, bannerTemplate, bannerPathFrom);
@@ -1141,8 +1203,6 @@ namespace YANFOE.IO
                 }
             }
         }
-
-        #endregion
 
         #endregion
     }

@@ -1,23 +1,24 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieMeterApiHandler.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieMeterApiHandler.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie meter api handler.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.ThirdParty
 {
+    #region Required Namespaces
+
     using System;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
     using System.Xml;
 
     using CookComputing.XmlRpc;
@@ -25,16 +26,212 @@ namespace YANFOE.Tools.ThirdParty
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.IO;
     using YANFOE.Scrapers.Movie;
+    using YANFOE.Settings.ConstSettings;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Xml;
 
+    #endregion
+
+    /// <summary>
+    /// The movie meter api handler.
+    /// </summary>
     public class MovieMeterApiHandler
     {
+        #region Static Fields
+
+        /// <summary>
+        /// The api proxy.
+        /// </summary>
         private static IMMApi apiProxy;
 
-        private static string sessionKey = "";
-        private static int sessionValidTill = 0;
+        /// <summary>
+        /// The session key.
+        /// </summary>
+        private static string sessionKey = string.Empty;
 
+        /// <summary>
+        /// The session valid till.
+        /// </summary>
+        private static int sessionValidTill;
+
+        #endregion
+
+        #region Interfaces
+
+        /// <summary>
+        ///   The XmlRpcMethod representation of the available methods
+        /// </summary>
+        [XmlRpcUrl("http://www.moviemeter.nl/ws")]
+        public interface IMMApi : IXmlRpcProxy
+        {
+            #region Public Methods and Operators
+
+            /// <summary>
+            /// The close session.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <returns>
+            /// The <see cref="bool"/>.
+            /// </returns>
+            [XmlRpcMethod("api.closeSession")]
+            bool CloseSession(string sessionkey);
+
+            /// <summary>
+            /// The director retrieve details.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="directorId">
+            /// The director id.
+            /// </param>
+            /// <returns>
+            /// The <see cref="DirectorDetail"/>.
+            /// </returns>
+            [XmlRpcMethod("director.retrieveDetails")]
+            DirectorDetail DirectorRetrieveDetails(string sessionkey, int directorId);
+
+            /// <summary>
+            /// The director retrieve films.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="directorId">
+            /// The director id.
+            /// </param>
+            /// <returns>
+            /// The <see cref="DirectorFilm[]"/>.
+            /// </returns>
+            [XmlRpcMethod("director.retrieveFilms")]
+            DirectorFilm[] DirectorRetrieveFilms(string sessionkey, int directorId);
+
+            /// <summary>
+            /// The director search.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="search">
+            /// The search.
+            /// </param>
+            /// <returns>
+            /// The <see cref="Director[]"/>.
+            /// </returns>
+            [XmlRpcMethod("director.search")]
+            Director[] DirectorSearch(string sessionkey, string search);
+
+            /// <summary>
+            /// The retrieve by imdb.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="imdb_code">
+            /// The imdb_code.
+            /// </param>
+            /// <returns>
+            /// The <see cref="string"/>.
+            /// </returns>
+            [XmlRpcMethod("film.retrieveByImdb")]
+            string RetrieveByImdb(string sessionkey, string imdb_code);
+
+            /// <summary>
+            /// The retrieve details.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="filmId">
+            /// The film id.
+            /// </param>
+            /// <returns>
+            /// The <see cref="FilmDetail"/>.
+            /// </returns>
+            [XmlRpcMethod("film.retrieveDetails")]
+            FilmDetail RetrieveDetails(string sessionkey, int filmId);
+
+            /// <summary>
+            /// The retrieve imdb.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="filmId">
+            /// The film id.
+            /// </param>
+            /// <returns>
+            /// The <see cref="FilmImdb"/>.
+            /// </returns>
+            [XmlRpcMethod("film.retrieveImdb")]
+            FilmImdb RetrieveImdb(string sessionkey, int filmId);
+
+            /// <summary>
+            /// The retrieve score.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="filmId">
+            /// The film id.
+            /// </param>
+            /// <returns>
+            /// The <see cref="FilmScore"/>.
+            /// </returns>
+            [XmlRpcMethod("film.retrieveScore")]
+            FilmScore RetrieveScore(string sessionkey, int filmId);
+
+            /// <summary>
+            /// The search.
+            /// </summary>
+            /// <param name="sessionkey">
+            /// The sessionkey.
+            /// </param>
+            /// <param name="search">
+            /// The search.
+            /// </param>
+            /// <returns>
+            /// The <see cref="Film[]"/>.
+            /// </returns>
+            [XmlRpcMethod("film.search")]
+            Film[] Search(string sessionkey, string search);
+
+            /// <summary>
+            /// The start session.
+            /// </summary>
+            /// <param name="apikey">
+            /// The apikey.
+            /// </param>
+            /// <returns>
+            /// The <see cref="ApiStartSession"/>.
+            /// </returns>
+            [XmlRpcMethod("api.startSession")]
+            ApiStartSession StartSession(string apikey);
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The generate movie meter xml.
+        /// </summary>
+        /// <param name="downloadItem">
+        /// The download item.
+        /// </param>
+        /// <param name="idType">
+        /// The id type.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         public static string GenerateMovieMeterXml(DownloadItem downloadItem, string idType, string value)
         {
             var apiProxy = (IMMApi)XmlRpcProxyGen.Create(typeof(IMMApi));
@@ -112,17 +309,21 @@ namespace YANFOE.Tools.ThirdParty
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Requests for a new sessionkey of it's not initialized yet or not valid anymore
-        /// otherwise the known sessionkey will be used
+        ///   Requests for a new sessionkey of it's not initialized yet or not valid anymore
+        ///   otherwise the known sessionkey will be used
         /// </summary>
-        /// <returns>String with a valid sessionkey</returns>
+        /// <returns> String with a valid sessionkey </returns>
         private static string getSessionKey()
         {
             if ((new DateTime(1970, 1, 1)).AddSeconds(sessionValidTill) < DateTime.Now.ToUniversalTime())
             {
                 apiProxy = (IMMApi)XmlRpcProxyGen.Create(typeof(IMMApi));
-                ApiStartSession s = apiProxy.StartSession(Settings.ConstSettings.Application.MovieMeterApi);
+                ApiStartSession s = apiProxy.StartSession(Application.MovieMeterApi);
                 sessionKey = s.session_key;
                 sessionValidTill = s.valid_till;
             }
@@ -130,168 +331,487 @@ namespace YANFOE.Tools.ThirdParty
             return sessionKey;
         }
 
+        #endregion
 
         /// <summary>
-        /// Definitions for the method-results
-        /// In these classes more functionality can be added (like conversion to int or date)
+        /// The api error.
+        /// </summary>
+        public class ApiError
+        {
+            #region Fields
+
+            /// <summary>
+            /// The fault code.
+            /// </summary>
+            public string faultCode;
+
+            /// <summary>
+            /// The fault string.
+            /// </summary>
+            public string faultString;
+
+            #endregion
+        }
+
+        /// <summary>
+        ///   Definitions for the method-results
+        ///   In these classes more functionality can be added (like conversion to int or date)
         /// </summary>
         public class ApiStartSession
         {
-            public string session_key;
-            public int valid_till;
+            #region Fields
+
+            /// <summary>
+            /// The disclaimer.
+            /// </summary>
             public string disclaimer;
-        }
 
-        public class ApiError
-        {
-            public string faultCode;
-            public string faultString;
-        }
+            /// <summary>
+            /// The session_key.
+            /// </summary>
+            public string session_key;
 
-        public class Film
-        {
-            public string filmId;
-            public string url;
-            public string title;
-            public string alternative_title;
-            public string year;
-            public string average;
-            public string votes_count;
-            public string similarity;
-        }
+            /// <summary>
+            /// The valid_till.
+            /// </summary>
+            public int valid_till;
 
-        public class FilmScore
-        {
-            public string votes;
-            public string total;
-            public string average;
-        }
-
-        public class FilmImdb
-        {
-            public string code;
-            public string url;
-            public string score;
-            public int votes;
-        }
-
-        public class FilmDetail
-        {
-            public string url;
-            public string thumbnail;
-            public string title;
-            public Title[] alternative_titles;
-            public string year;
-            public string imdb;
-            public string plot;
-            public string duration;
-            public Duration[] durations;
-            public Actor[] actors;
-            public string actors_text;
-            public Director[] directors;
-            public string directors_text;
-            public Country[] countries;
-            public string countries_text;
-            public string[] genres;
-            public string genres_text;
-            public Date[] dates_cinema;
-            public Date[] dates_video;
-            public string average;
-            public string votes_count;
-            public int filmId;
-
-            public class Duration
-            {
-                public string duration;
-                public string description;
-            }
-
-            public class Actor
-            {
-                public string name;
-                public string voice;
-            }
-            public class Director
-            {
-                public string id;
-                public string name;
-            }
-            public class Country
-            {
-                public string iso_3166_1;
-                public string name;
-            }
-            public class Date
-            {
-                public string date;
-            }
-            public class Title
-            {
-                public string title;
-            }
-        }
-
-        public class Director
-        {
-            public string directorId;
-            public string url;
-            public string name;
-            public string similarity;
-        }
-
-        public class DirectorDetail
-        {
-            public string url;
-            public string thumbnail;
-            public string name;
-            public string born;
-            public string deceased;
-        }
-
-        public class DirectorFilm
-        {
-            public string filmId;
-            public string url;
-            public string title;
-            public string alternative_title;
-            public string year;
+            #endregion
         }
 
         /// <summary>
-        /// The XmlRpcMethod representation of the available methods
+        /// The director.
         /// </summary>
-        [XmlRpcUrl("http://www.moviemeter.nl/ws")]
-        public interface IMMApi : IXmlRpcProxy
+        public class Director
         {
-            [XmlRpcMethod("api.startSession")]
-            ApiStartSession StartSession(string apikey);
+            #region Fields
 
-            [XmlRpcMethod("api.closeSession")]
-            bool CloseSession(string sessionkey);
+            /// <summary>
+            /// The director id.
+            /// </summary>
+            public string directorId;
 
-            [XmlRpcMethod("film.search")]
-            Film[] Search(string sessionkey, string search);
+            /// <summary>
+            /// The name.
+            /// </summary>
+            public string name;
 
-            [XmlRpcMethod("film.retrieveScore")]
-            FilmScore RetrieveScore(string sessionkey, int filmId);
+            /// <summary>
+            /// The similarity.
+            /// </summary>
+            public string similarity;
 
-            [XmlRpcMethod("film.retrieveImdb")]
-            FilmImdb RetrieveImdb(string sessionkey, int filmId);
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
 
-            [XmlRpcMethod("film.retrieveByImdb")]
-            string RetrieveByImdb(string sessionkey, string imdb_code);
+            #endregion
+        }
 
-            [XmlRpcMethod("film.retrieveDetails")]
-            FilmDetail RetrieveDetails(string sessionkey, int filmId);
+        /// <summary>
+        /// The director detail.
+        /// </summary>
+        public class DirectorDetail
+        {
+            #region Fields
 
-            [XmlRpcMethod("director.search")]
-            Director[] DirectorSearch(string sessionkey, string search);
+            /// <summary>
+            /// The born.
+            /// </summary>
+            public string born;
 
-            [XmlRpcMethod("director.retrieveDetails")]
-            DirectorDetail DirectorRetrieveDetails(string sessionkey, int directorId);
+            /// <summary>
+            /// The deceased.
+            /// </summary>
+            public string deceased;
 
-            [XmlRpcMethod("director.retrieveFilms")]
-            DirectorFilm[] DirectorRetrieveFilms(string sessionkey, int directorId);
+            /// <summary>
+            /// The name.
+            /// </summary>
+            public string name;
+
+            /// <summary>
+            /// The thumbnail.
+            /// </summary>
+            public string thumbnail;
+
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
+
+            #endregion
+        }
+
+        /// <summary>
+        /// The director film.
+        /// </summary>
+        public class DirectorFilm
+        {
+            #region Fields
+
+            /// <summary>
+            /// The alternative_title.
+            /// </summary>
+            public string alternative_title;
+
+            /// <summary>
+            /// The film id.
+            /// </summary>
+            public string filmId;
+
+            /// <summary>
+            /// The title.
+            /// </summary>
+            public string title;
+
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
+
+            /// <summary>
+            /// The year.
+            /// </summary>
+            public string year;
+
+            #endregion
+        }
+
+        /// <summary>
+        /// The film.
+        /// </summary>
+        public class Film
+        {
+            #region Fields
+
+            /// <summary>
+            /// The alternative_title.
+            /// </summary>
+            public string alternative_title;
+
+            /// <summary>
+            /// The average.
+            /// </summary>
+            public string average;
+
+            /// <summary>
+            /// The film id.
+            /// </summary>
+            public string filmId;
+
+            /// <summary>
+            /// The similarity.
+            /// </summary>
+            public string similarity;
+
+            /// <summary>
+            /// The title.
+            /// </summary>
+            public string title;
+
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
+
+            /// <summary>
+            /// The votes_count.
+            /// </summary>
+            public string votes_count;
+
+            /// <summary>
+            /// The year.
+            /// </summary>
+            public string year;
+
+            #endregion
+        }
+
+        /// <summary>
+        /// The film detail.
+        /// </summary>
+        public class FilmDetail
+        {
+            #region Fields
+
+            /// <summary>
+            /// The actors.
+            /// </summary>
+            public Actor[] actors;
+
+            /// <summary>
+            /// The actors_text.
+            /// </summary>
+            public string actors_text;
+
+            /// <summary>
+            /// The alternative_titles.
+            /// </summary>
+            public Title[] alternative_titles;
+
+            /// <summary>
+            /// The average.
+            /// </summary>
+            public string average;
+
+            /// <summary>
+            /// The countries.
+            /// </summary>
+            public Country[] countries;
+
+            /// <summary>
+            /// The countries_text.
+            /// </summary>
+            public string countries_text;
+
+            /// <summary>
+            /// The dates_cinema.
+            /// </summary>
+            public Date[] dates_cinema;
+
+            /// <summary>
+            /// The dates_video.
+            /// </summary>
+            public Date[] dates_video;
+
+            /// <summary>
+            /// The directors.
+            /// </summary>
+            public Director[] directors;
+
+            /// <summary>
+            /// The directors_text.
+            /// </summary>
+            public string directors_text;
+
+            /// <summary>
+            /// The duration.
+            /// </summary>
+            public string duration;
+
+            /// <summary>
+            /// The durations.
+            /// </summary>
+            public Duration[] durations;
+
+            /// <summary>
+            /// The film id.
+            /// </summary>
+            public int filmId;
+
+            /// <summary>
+            /// The genres.
+            /// </summary>
+            public string[] genres;
+
+            /// <summary>
+            /// The genres_text.
+            /// </summary>
+            public string genres_text;
+
+            /// <summary>
+            /// The imdb.
+            /// </summary>
+            public string imdb;
+
+            /// <summary>
+            /// The plot.
+            /// </summary>
+            public string plot;
+
+            /// <summary>
+            /// The thumbnail.
+            /// </summary>
+            public string thumbnail;
+
+            /// <summary>
+            /// The title.
+            /// </summary>
+            public string title;
+
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
+
+            /// <summary>
+            /// The votes_count.
+            /// </summary>
+            public string votes_count;
+
+            /// <summary>
+            /// The year.
+            /// </summary>
+            public string year;
+
+            #endregion
+
+            /// <summary>
+            /// The actor.
+            /// </summary>
+            public class Actor
+            {
+                #region Fields
+
+                /// <summary>
+                /// The name.
+                /// </summary>
+                public string name;
+
+                /// <summary>
+                /// The voice.
+                /// </summary>
+                public string voice;
+
+                #endregion
+            }
+
+            /// <summary>
+            /// The country.
+            /// </summary>
+            public class Country
+            {
+                #region Fields
+
+                /// <summary>
+                /// The iso_3166_1.
+                /// </summary>
+                public string iso_3166_1;
+
+                /// <summary>
+                /// The name.
+                /// </summary>
+                public string name;
+
+                #endregion
+            }
+
+            /// <summary>
+            /// The date.
+            /// </summary>
+            public class Date
+            {
+                #region Fields
+
+                /// <summary>
+                /// The date.
+                /// </summary>
+                public string date;
+
+                #endregion
+            }
+
+            /// <summary>
+            /// The director.
+            /// </summary>
+            public class Director
+            {
+                #region Fields
+
+                /// <summary>
+                /// The id.
+                /// </summary>
+                public string id;
+
+                /// <summary>
+                /// The name.
+                /// </summary>
+                public string name;
+
+                #endregion
+            }
+
+            /// <summary>
+            /// The duration.
+            /// </summary>
+            public class Duration
+            {
+                #region Fields
+
+                /// <summary>
+                /// The description.
+                /// </summary>
+                public string description;
+
+                /// <summary>
+                /// The duration.
+                /// </summary>
+                public string duration;
+
+                #endregion
+            }
+
+            /// <summary>
+            /// The title.
+            /// </summary>
+            public class Title
+            {
+                #region Fields
+
+                /// <summary>
+                /// The title.
+                /// </summary>
+                public string title;
+
+                #endregion
+            }
+        }
+
+        /// <summary>
+        /// The film imdb.
+        /// </summary>
+        public class FilmImdb
+        {
+            #region Fields
+
+            /// <summary>
+            /// The code.
+            /// </summary>
+            public string code;
+
+            /// <summary>
+            /// The score.
+            /// </summary>
+            public string score;
+
+            /// <summary>
+            /// The url.
+            /// </summary>
+            public string url;
+
+            /// <summary>
+            /// The votes.
+            /// </summary>
+            public int votes;
+
+            #endregion
+        }
+
+        /// <summary>
+        /// The film score.
+        /// </summary>
+        public class FilmScore
+        {
+            #region Fields
+
+            /// <summary>
+            /// The average.
+            /// </summary>
+            public string average;
+
+            /// <summary>
+            /// The total.
+            /// </summary>
+            public string total;
+
+            /// <summary>
+            /// The votes.
+            /// </summary>
+            public string votes;
+
+            #endregion
         }
     }
 }

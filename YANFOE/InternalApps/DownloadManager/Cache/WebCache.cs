@@ -1,71 +1,66 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WebCache.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="WebCache.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Deals will all Web Cache
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.DownloadManager.Cache
 {
-    using System;
+    #region Required Namespaces
+
+    using System.Globalization;
     using System.IO;
+    using System.Linq;
 
     using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
 
+    #endregion
+
     /// <summary>
-    /// Deals will all Web Cache
+    ///   Deals will all Web Cache
     /// </summary>
     public static class WebCache
     {
-        /// <summary>
-        /// Gets the path from URL.
-        /// </summary>
-        /// <param name="url">The URL to download from</param>
-        /// <param name="section">The section (Movies/TV)</param>
-        /// <returns>A full path</returns>
-        public static string GetPathFromUrl(string url, Section section)
-        {
-            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
-            foreach (char c in invalid)
-            {
-                url = url.Replace(c.ToString(), "");
-            }
-            return GetSectionPath(section) + Path.DirectorySeparatorChar + UrlToFileName(url);
-        }
-
-        /// <summary>
-        /// Checks if URL is too long.
-        /// </summary>
-        /// <param name="downloadUrl">The download URL.</param>
-        /// <returns>A bool value</returns>
-        public static bool CheckIfUrlIsTooLong(string downloadUrl)
-        {
-            return downloadUrl.Length <= 200;
-        }
+        #region Public Methods and Operators
 
         /// <summary>
         /// Checks if cache path exists.
         /// </summary>
         /// <param name="cachePath">
-        /// The cache path.
+        /// The cache path. 
         /// </param>
         /// <returns>
-        /// Check if cache path exists.
+        /// Check if cache path exists. 
         /// </returns>
         public static bool CheckIfCachePathExists(string cachePath)
         {
             return File.Exists(cachePath);
         }
 
+        /// <summary>
+        /// The check if download item exists in cache.
+        /// </summary>
+        /// <param name="downloadItem">
+        /// The download item.
+        /// </param>
+        /// <param name="populateReturn">
+        /// The populate return.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public static bool CheckIfDownloadItemExistsInCache(DownloadItem downloadItem, bool populateReturn)
         {
             var path = GetPathFromUrl(downloadItem.Url, downloadItem.Section);
@@ -88,13 +83,52 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
         }
 
         /// <summary>
+        /// Checks if URL is too long.
+        /// </summary>
+        /// <param name="downloadUrl">
+        /// The download URL. 
+        /// </param>
+        /// <returns>
+        /// A boolean value 
+        /// </returns>
+        public static bool CheckIfUrlIsTooLong(string downloadUrl)
+        {
+            return downloadUrl.Length <= 200;
+        }
+
+        /// <summary>
+        /// Gets the path from URL.
+        /// </summary>
+        /// <param name="url">
+        /// The URL to download from 
+        /// </param>
+        /// <param name="section">
+        /// The section (Movies/TV) 
+        /// </param>
+        /// <returns>
+        /// A full path 
+        /// </returns>
+        public static string GetPathFromUrl(string url, Section section)
+        {
+            string invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+            url = invalid.Aggregate(url, (current, c) => current.Replace(c.ToString(CultureInfo.InvariantCulture), string.Empty));
+
+            return GetSectionPath(section) + Path.DirectorySeparatorChar + UrlToFileName(url);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
         /// Gets the section path.
         /// </summary>
         /// <param name="section">
-        /// The section.
+        /// The section. 
         /// </param>
         /// <returns>
-        /// The get section path.
+        /// The get section path. 
         /// </returns>
         private static string GetSectionPath(Section section)
         {
@@ -107,10 +141,14 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
         }
 
         /// <summary>
-        /// Returns an "Known value replacement encoded" version of a URL  
+        /// Returns an "Known value replacement encoded" version of a URL
         /// </summary>
-        /// <param name="url">The url to encode.</param>
-        /// <returns>The processed filename</returns>
+        /// <param name="url">
+        /// The url to encode. 
+        /// </param>
+        /// <returns>
+        /// The processed filename 
+        /// </returns>
         private static string UrlToFileName(string url)
         {
             if (string.IsNullOrEmpty(url))
@@ -144,7 +182,10 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
             // Allocine
             url = url.Replace(@"allocine.fr", "[al]");
             url = url.Replace(@"galerievignette_gen_cfilm=", "[gv]");
-            url = url.Replace(@"a69.g.akamai.net[f]n[f]69[f]10688[f]v1[f]img5.[al][f]acmedia[f]rsz[f]434[f]x[f]x[f]x[f]medias[f]nmedia", "[ai]");
+            url =
+                url.Replace(
+                    @"a69.g.akamai.net[f]n[f]69[f]10688[f]v1[f]img5.[al][f]acmedia[f]rsz[f]434[f]x[f]x[f]x[f]medias[f]nmedia", 
+                    "[ai]");
 
             // Ofdb
             url = url.Replace(@"www.ofdb.com", "[ofdb]");
@@ -163,5 +204,7 @@ namespace YANFOE.InternalApps.DownloadManager.Cache
 
             return url;
         }
+
+        #endregion
     }
 }

@@ -1,183 +1,200 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ImportMoviesFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="ImportMoviesFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The factory for the initial movie import routines
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Import
 {
-    using System.ComponentModel;
+    #region Required Namespaces
+
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using YANFOE.Factories.InOut;
     using YANFOE.Factories.Media;
     using YANFOE.Factories.Sets;
+    using YANFOE.Factories.UI;
+    using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.MovieModels;
+    using YANFOE.Tools;
     using YANFOE.Tools.Importing;
+    using YANFOE.Tools.IO;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.Tools.UI;
 
+    #endregion
 
     /// <summary>
-    /// The factory for the initial movie import routines
+    ///   The factory for the initial movie import routines
     /// </summary>
-    public static class ImportMoviesFactory
+    public class ImportMoviesFactory : FactoryBase
     {
-        
+        #region Static Fields
 
         /// <summary>
-        /// Initializes static members of the <see cref="ImportMoviesFactory"/> class. 
+        ///   The instance.
         /// </summary>
-        static ImportMoviesFactory()
+        [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:FieldsMustBePrivate", Justification = "Reviewed. Suppression is OK here.")]
+        public static ImportMoviesFactory Instance = new ImportMoviesFactory();
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        ///   The cancel import.
+        /// </summary>
+        private bool cancelImport;
+
+        /// <summary>
+        ///   Gets or sets the current record.
+        /// </summary>
+        /// <value> The current record. </value>
+        private MovieModel currentRecord;
+
+        /// <summary>
+        ///   Gets or sets the import database.
+        /// </summary>
+        /// <value> The import database. </value>
+        private ThreadedBindingList<MovieModel> importDatabase;
+
+        /// <summary>
+        ///   Gets or sets the import duplicates database.
+        /// </summary>
+        /// <value> The import duplicates database. </value>
+        private ThreadedBindingList<MovieModel> importDuplicatesDatabase;
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        /// <summary>
+        ///   Prevents a default instance of the <see cref="ImportMoviesFactory" /> class from being created. 
+        ///   Initializes static members of the <see cref="ImportMoviesFactory" /> class.
+        /// </summary>
+        private ImportMoviesFactory()
         {
-            ImportDatabase = new BindingList<MovieModel>();
-            ImportDuplicatesDatabase = new BindingList<MovieModel>();
-            CurrentRecord = new MovieModel();
+            this.ImportDatabase = new ThreadedBindingList<MovieModel>();
+            this.ImportDuplicatesDatabase = new ThreadedBindingList<MovieModel>();
+            this.CurrentRecord = new MovieModel();
         }
 
-        private static bool cancelImport;
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the current record.
+        ///   Gets or sets the current record.
         /// </summary>
-        /// <value>
-        /// The current record.
-        /// </value>
-        public static MovieModel CurrentRecord { get; set; }
-
-        /// <summary>
-        /// Gets or sets the import database.
-        /// </summary>
-        /// <value>
-        /// The import database.
-        /// </value>
-        public static BindingList<MovieModel> ImportDatabase { get; set; }
-
-        /// <summary>
-        /// Gets or sets the import duplicates database.
-        /// </summary>
-        /// <value>
-        /// The import duplicates database.
-        /// </value>
-        public static BindingList<MovieModel> ImportDuplicatesDatabase { get; set; }
-
-        /// <summary>
-        /// Gets the import movie database.
-        /// </summary>
-        /// <returns>The current ImportDatabase</returns>
-        public static BindingList<MovieModel> GetImportMovieDatabase()
+        public MovieModel CurrentRecord
         {
-            return ImportDatabase;
-        }
-
-        public static void CancelMovieImport()
-        {
-            cancelImport = true;
-        }
-
-        public static string FindFilePath(string title, Models.GeneralModels.AssociatedFiles.MediaPathFileModel file, string setName = "")
-        {
-            string p = file.Path;
-            /*if (!Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate.Contains("<path>"))
+            get
             {
-                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate);
+                return this.currentRecord;
             }
-            else if (!Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate.Contains("<path>"))
+
+            set
             {
-                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate);
+                this.currentRecord = value;
+                this.OnPropertyChanged("CurrentRecord");
             }
-            else if (!Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate.Contains("<path>"))
+        }
+
+        /// <summary>
+        ///   Gets or sets the import database.
+        /// </summary>
+        public ThreadedBindingList<MovieModel> ImportDatabase
+        {
+            get
             {
-                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate);
-            }*/
-            p = p.Replace("<path>", file.Path)
-                    .Replace("<filename>", file.FilenameWithOutExt)
-                    .Replace("<ext>", file.FilenameExt)
-                    .Replace("<setname>", setName)
-                    .Replace("<title>", title);
+                return this.importDatabase;
+            }
 
-            return p;
+            set
+            {
+                this.importDatabase = value;
+                this.OnPropertyChanged("ImportDatabase");
+            }
         }
 
         /// <summary>
-        /// Finds NFO on disk
+        ///   Gets or sets the import duplicates database.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
-        /// <returns>Found file or string.Empty</returns>
-        public static string FindNFO(string fileName, string path, string[] fileList = null)
+        public ThreadedBindingList<MovieModel> ImportDuplicatesDatabase
         {
-            return Tools.IO.Find.FindMovieNFO(fileName, path, fileList);
+            get
+            {
+                return this.importDuplicatesDatabase;
+            }
+
+            set
+            {
+                this.importDuplicatesDatabase = value;
+                this.OnPropertyChanged("ImportDuplicatesDatabase");
+            }
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        ///   The cancel movie import.
+        /// </summary>
+        public void CancelMovieImport()
+        {
+            this.cancelImport = true;
         }
 
         /// <summary>
-        /// Finds poster on disk
+        ///   Converts the media path import database into a MovieModel DB.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
-        /// <returns>Found file or string.Empty</returns>
-        public static string FindPoster(string fileName, string path, string[] fileList = null)
+        public void ConvertMediaPathImportToDB()
         {
-            return Tools.IO.Find.FindMoviePoster(fileName, path, fileList);
-        }
+            this.cancelImport = false;
 
-        /// <summary>
-        /// Finds fanart on disk
-        /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
-        /// <returns>Found file or string.Empty</returns>
-        public static string FindFanart(string fileName, string path, string[] fileList = null)
-        {
-            return Tools.IO.Find.FindMovieFanart(fileName, path, fileList);
-        }
-
-        /// <summary>
-        /// Converts the media path import database into a MovieModel DB.
-        /// </summary>
-        public static void ConvertMediaPathImportToDB()
-        {
-            cancelImport = false;
-
-            var db = MediaPathDBFactory.GetMediaPathMoviesUnsorted();
+            var db = MediaPathDBFactory.Instance.MediaPathMoviesUnsorted;
 
             var count = 0;
 
-            MovieDBFactory.ImportProgressMaximum = db.Count;
+            MovieDBFactory.Instance.ImportProgressMaximum = db.Count;
 
-            ImportDatabase.Clear();
-            ImportDuplicatesDatabase.Clear();
+            this.ImportDatabase.Clear();
+            this.ImportDuplicatesDatabase.Clear();
 
             var getFiles = new string[1];
             var currentGetPathFiles = string.Empty;
 
-            UI.Windows7UIFactory.StartProgressState(db.Count);
-            
+            Windows7UIFactory.StartProgressState(db.Count);
+
             foreach (var file in db)
             {
-                if (cancelImport)
+                if (this.cancelImport)
                 {
                     break;
                 }
 
-                MovieDBFactory.ImportProgressCurrent = count;
+                MovieDBFactory.Instance.ImportProgressCurrent = count;
 
-                MovieDBFactory.ImportProgressStatus = string.Format("Processing: " + file.PathAndFileName.Replace("{", "{{").Replace("}", "}}"));
+                MovieDBFactory.Instance.ImportProgressStatus =
+                    string.Format("Processing: " + file.PathAndFileName.Replace("{", "{{").Replace("}", "}}"));
 
                 if (file.Path != currentGetPathFiles)
                 {
-                    getFiles = FileHelper.GetFilesRecursive(file.Path, "*.*").ToArray();
+                    getFiles = FileHelper.GetFilesRecursive(file.Path).ToArray();
                     currentGetPathFiles = file.Path;
                 }
 
@@ -193,7 +210,7 @@ namespace YANFOE.Factories.Import
                 }
                 else
                 {
-                    var detect = Tools.IO.DetectType.FindVideoSource(file.PathAndFileName);
+                    var detect = DetectType.FindVideoSource(file.PathAndFileName);
 
                     if (!string.IsNullOrEmpty(detect))
                     {
@@ -204,22 +221,27 @@ namespace YANFOE.Factories.Import
                 string title = MovieNaming.GetMovieName(file.PathAndFileName, file.MediaPathType);
                 var movieModel = new MovieModel
                     {
-                        Title = title,
-                        Year = MovieNaming.GetMovieYear(file.PathAndFileName),
-                        ScraperGroup = file.ScraperGroup,
-                        VideoSource = videoSource,
-                        NfoPathOnDisk = FindNFO(file.FilenameWithOutExt, FindFilePath(title, file), getFiles),
-                        PosterPathOnDisk = FindPoster(file.FilenameWithOutExt, FindFilePath(title, file), getFiles),
-                        FanartPathOnDisk = FindFanart(file.FilenameWithOutExt, FindFilePath(title, file), getFiles)
+                        Title = title, 
+                        Year = MovieNaming.GetMovieYear(file.PathAndFileName), 
+                        ScraperGroup = file.ScraperGroup, 
+                        VideoSource = videoSource, 
+                        NfoPathOnDisk = this.FindNFO(file.FilenameWithOutExt, this.FindFilePath(title, file), getFiles), 
+                        PosterPathOnDisk =
+                            this.FindPoster(file.FilenameWithOutExt, this.FindFilePath(title, file), getFiles), 
+                        FanartPathOnDisk =
+                            this.FindFanart(file.FilenameWithOutExt, this.FindFilePath(title, file), getFiles)
                     };
 
                 if (!string.IsNullOrEmpty(movieModel.NfoPathOnDisk))
                 {
-                    InOut.OutFactory.LoadMovie(movieModel);
+                    OutFactory.LoadMovie(movieModel);
                     movieModel.ChangedText = false;
                 }
 
-                var result = (from m in ImportDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
+                var result =
+                    (from m in this.ImportDatabase
+                     where m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()
+                     select m).ToList();
 
                 if (result.Count == 0)
                 {
@@ -238,7 +260,9 @@ namespace YANFOE.Factories.Import
                     movieModel.AssociatedFiles.AddToMediaCollection(file);
 
                     // Does the movie exist in our current DB?
-                    var result2 = (from m in MovieDBFactory.MovieDatabase where (m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()) select m).ToList();
+                    var result2 = (from m in MovieDBFactory.Instance.MovieDatabase
+                                   where m.Title.ToLower().Trim() == movieModel.Title.ToLower().Trim()
+                                   select m).ToList();
                     if (result2.Count > 0)
                     {
                         if (movieModel.Year != null)
@@ -247,23 +271,24 @@ namespace YANFOE.Factories.Import
                             if (r.Count > 0)
                             {
                                 // We already have a movie with that name and year, mark as dupe
-                                ImportDuplicatesDatabase.Add(movieModel);
+                                this.ImportDuplicatesDatabase.Add(movieModel);
                             }
                         }
                         else
                         {
                             // No year, so we can't ensure it's a dupe
-                            ImportDuplicatesDatabase.Add(movieModel);
+                            this.ImportDuplicatesDatabase.Add(movieModel);
                         }
                     }
-                    
+
                     // Add it to the list anyway, since there's no implementation of any action on duplicates.
-                    ImportDatabase.Add(movieModel);
+                    this.ImportDatabase.Add(movieModel);
                 }
                 else
                 {
                     var r = (from m in result where m.Year == movieModel.Year select m).ToList();
-                    if (Regex.IsMatch(file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo|bup)", RegexOptions.IgnoreCase))
+                    if (Regex.IsMatch(
+                        file.PathAndFileName.ToLower(), @"(disc|disk|part|cd|vob|ifo|bup)", RegexOptions.IgnoreCase))
                     {
                         // Only associate with an existing movie if its not a dupe
                         result[0].AssociatedFiles.AddToMediaCollection(file);
@@ -271,47 +296,152 @@ namespace YANFOE.Factories.Import
                     else if (r.Count == 0)
                     {
                         // Same title, different year
-                        ImportDatabase.Add(movieModel);
+                        this.ImportDatabase.Add(movieModel);
                     }
                     else
                     {
                         // Dont count a disc or part as a dupe or movies with different years
-                        ImportDuplicatesDatabase.Add(movieModel);
+                        this.ImportDuplicatesDatabase.Add(movieModel);
+
                         // Add it to the list anyway, since there's no implementation of any action on duplicates.
-                        ImportDatabase.Add(movieModel);
+                        this.ImportDatabase.Add(movieModel);
                     }
                 }
 
                 count++;
-                UI.Windows7UIFactory.SetProgressValue(count);
+                Windows7UIFactory.SetProgressValue(count);
             }
 
-            UI.Windows7UIFactory.StopProgressState();
+            Windows7UIFactory.StopProgressState();
         }
 
         /// <summary>
-        /// Merges the import database with main movie database
+        /// Finds fanart on disk
         /// </summary>
-        public static void MergeImportDatabaseWithMain()
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
+        /// <returns>
+        /// Found file or string.Empty 
+        /// </returns>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+        public string FindFanart(string fileName, string path, string[] fileList = null)
         {
-            ValidateDatabaseExistance();
-            MovieDBFactory.MergeWithDatabase(ImportDatabase);
+            return Find.FindMovieFanart(fileName, path, fileList);
+        }
+
+        /// <summary>
+        /// The find file path.
+        /// </summary>
+        /// <param name="title">
+        /// The title. 
+        /// </param>
+        /// <param name="file">
+        /// The file. 
+        /// </param>
+        /// <param name="setName">
+        /// The set name. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> . 
+        /// </returns>
+        public string FindFilePath(string title, MediaPathFileModel file, string setName = "")
+        {
+            string p = file.Path;
+
+            /*if (!Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.BlurayPosterNameTemplate);
+            }
+            else if (!Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.DvdPosterNameTemplate);
+            }
+            else if (!Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate.Contains("<path>"))
+            {
+                p = Path.GetDirectoryName(Get.InOutCollection.CurrentMovieSaveSettings.NormalPosterNameTemplate);
+            }*/
+            p =
+                p.Replace("<path>", file.Path).Replace("<filename>", file.FilenameWithOutExt).Replace(
+                    "<ext>", file.FilenameExt).Replace("<setname>", setName).Replace("<title>", title);
+
+            return p;
+        }
+
+        /// <summary>
+        /// Finds NFO on disk
+        /// </summary>
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
+        /// <returns>
+        /// Found file or string.Empty 
+        /// </returns>
+        public string FindNFO(string fileName, string path, string[] fileList = null)
+        {
+            return Find.FindMovieNFO(fileName, path, fileList);
+        }
+
+        /// <summary>
+        /// Finds poster on disk
+        /// </summary>
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
+        /// <returns>
+        /// Found file or string.Empty 
+        /// </returns>
+        public string FindPoster(string fileName, string path, string[] fileList = null)
+        {
+            return Find.FindMoviePoster(fileName, path, fileList);
+        }
+
+        /// <summary>
+        ///   Merges the import database with main movie database
+        /// </summary>
+        public void MergeImportDatabaseWithMain()
+        {
+            this.ValidateDatabaseExistence();
+            MovieDBFactory.Instance.MergeWithDatabase(this.ImportDatabase);
             MasterMediaDBFactory.PopulateMasterMovieMediaDatabase();
-            MovieDBFactory.MergeWithDatabase(ImportDuplicatesDatabase, MovieDBFactory.MovieDBTypes.Duplicates);
+            MovieDBFactory.Instance.MergeWithDatabase(
+                this.ImportDuplicatesDatabase, MovieDBFactory.MovieDBTypes.Duplicates);
             MovieSetManager.ScanForSetImages();
         }
 
-        public static void ValidateDatabaseExistance()
+        /// <summary>
+        ///   The validate database existence.
+        /// </summary>
+        public void ValidateDatabaseExistence()
         {
-            for (int i = 0; i < ImportDatabase.Count; i++)
+            for (int i = 0; i < this.ImportDatabase.Count; i++)
             {
-                var file = ImportDatabase[i];
-                if ( file.AssociatedFiles.Media.Count == 0 || ! File.Exists(file.AssociatedFiles.Media[0].PathAndFilename))
+                var file = this.ImportDatabase[i];
+                if (file.AssociatedFiles.Media.Count == 0 || !File.Exists(file.AssociatedFiles.Media[0].PathAndFilename))
                 {
-                    ImportDatabase.Remove(file);
-                    continue;
+                    this.ImportDatabase.Remove(file);
                 }
             }
         }
+
+        #endregion
     }
 }

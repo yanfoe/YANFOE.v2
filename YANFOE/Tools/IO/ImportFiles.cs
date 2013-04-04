@@ -1,55 +1,57 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ImportFiles.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="ImportFiles.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
 // <summary>
 //   The import files.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.IO
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.IO;
     using System.Linq;
     using System.Threading;
-    using System.Windows.Forms;
 
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The import files.
+    ///   The import files.
     /// </summary>
     public class ImportFiles
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The import in progress.
+        ///   The import in progress.
         /// </summary>
         private static bool importInProgress;
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Scans the media path.
         /// </summary>
         /// <param name="mediaPathModel">
-        /// The media path model.
+        /// The media path model. 
         /// </param>
         public static void ScanMediaPath(MediaPathModel mediaPathModel)
         {
@@ -65,7 +67,6 @@ namespace YANFOE.Tools.IO
             do
             {
                 Thread.Sleep(50);
-                Application.DoEvents();
             }
             while (importInProgress);
         }
@@ -78,10 +79,10 @@ namespace YANFOE.Tools.IO
         /// Adds the new entries.
         /// </summary>
         /// <param name="mediaPathModel">
-        /// The media path model.
+        /// The media path model. 
         /// </param>
         /// <param name="files">
-        /// The files.
+        /// The files. 
         /// </param>
         private static void AddNewEntries(MediaPathModel mediaPathModel, string[] files)
         {
@@ -93,7 +94,7 @@ namespace YANFOE.Tools.IO
             foreach (string f in files)
             {
                 MediaPathFileModel.MediaPathFileType type = DetectType.FindType(
-                    f, mediaPathModel.ContainsTv, mediaPathModel.ContainsMovies);
+                    f, mediaPathModel.ContainsTV, mediaPathModel.ContainsMovies);
 
                 AddFolderType importType;
 
@@ -113,7 +114,6 @@ namespace YANFOE.Tools.IO
 
                 try
                 {
-
                     var check = mediaPathModel.FileCollection.Any(file => file.PathAndFileName == f1);
 
                     if (!check)
@@ -123,17 +123,19 @@ namespace YANFOE.Tools.IO
                 }
                 catch
                 {
-                    
                 }
             }
         }
 
-
         /// <summary>
         /// Handles the DoWork event of the Bgw control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
+        /// </param>
         private static void Bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             var mediaPathModel = e.Argument as MediaPathModel;
@@ -148,8 +150,12 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Handles the RunWorkerCompleted event of the Bgw control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
+        /// </param>
         private static void Bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             var returnCollection = e.Result as List<object>;
@@ -157,7 +163,7 @@ namespace YANFOE.Tools.IO
             var mediaPathModel = returnCollection[0] as MediaPathModel;
             var files = returnCollection[1] as string[];
 
-            mediaPathModel.FileCollection = new BindingList<MediaPathFileModel>();
+            mediaPathModel.FileCollection = new ThreadedBindingList<MediaPathFileModel>();
 
             AddNewEntries(mediaPathModel, files);
 
@@ -165,6 +171,5 @@ namespace YANFOE.Tools.IO
         }
 
         #endregion
-
     }
 }

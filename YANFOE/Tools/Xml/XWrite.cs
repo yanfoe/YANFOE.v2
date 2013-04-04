@@ -1,37 +1,43 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="XWrite.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="XWrite.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   XmlDocument helper class to write to an Xmldocument object.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Xml
 {
+    #region Required Namespaces
+
     using System;
     using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Xml;
 
+    #endregion
+
     /// <summary>
-    /// XmlDocument helper class to write to an Xmldocument object.
+    ///   XmlDocument helper class to write to an Xmldocument object.
     /// </summary>
     public static class XWrite
     {
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Writes the end of the xml document.
         /// </summary>
         /// <param name="xmlTextWriter">
-        /// The XmlTextWriter Object..
+        /// The XmlTextWriter Object.. 
         /// </param>
         public static void EndDocument(XmlWriter xmlTextWriter)
         {
@@ -42,17 +48,20 @@ namespace YANFOE.Tools.Xml
         /// Writes the start of the xml document.
         /// </summary>
         /// <param name="type">
-        /// The type.
+        /// The type. 
         /// </param>
         /// <param name="softwareName">
-        /// Name of the software.
+        /// Name of the software. 
         /// </param>
         /// <param name="versionNumber">
-        /// The version number.
+        /// The version number. 
         /// </param>
         /// <param name="encoding">
-        /// The XML encoding type (Default = UTF-8)
+        /// The XML encoding type (Default = UTF-8) 
         /// </param>
+        /// <returns>
+        /// The <see cref="XmlWriter"/>.
+        /// </returns>
         public static XmlWriter StartDocument(
             string type, string softwareName, string versionNumber, string encoding = "UTF-8")
         {
@@ -78,25 +87,25 @@ namespace YANFOE.Tools.Xml
         /// Writes the enclosed element.
         /// </summary>
         /// <param name="xmlTextWriter">
-        /// The XmlTextWriter object
+        /// The XmlTextWriter object 
         /// </param>
         /// <param name="name">
-        /// The XML item name
+        /// The XML item name 
         /// </param>
         /// <param name="value">
-        /// The XML item value
+        /// The XML item value 
         /// </param>
         /// <param name="attributeName">
-        /// Name of an attribute (Can be null).
+        /// Name of an attribute (Can be null). 
         /// </param>
         /// <param name="attributeValue">
-        /// The attribute value (Can be null).
+        /// The attribute value (Can be null). 
         /// </param>
         /// <param name="writeEmptyTags">
-        /// if set to <c>true</c> [write empty tags].
+        /// if set to <c>true</c> [write empty tags]. 
         /// </param>
         /// <param name="emptyIfValueIs">
-        /// The empty If Value Is.
+        /// The empty If Value Is. 
         /// </param>
         public static void WriteEnclosedElement(
             XmlWriter xmlTextWriter, 

@@ -1,79 +1,85 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SaveProgressModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="SaveProgressModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The save progress model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.InOut.Model
 {
+    #region Required Namespaces
+
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// The save progress model.
+    ///   The save progress model.
     /// </summary>
     public class SaveProgressModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The episode current.
+        ///   The episode current.
         /// </summary>
         private int episodeCurrent;
 
         /// <summary>
-        /// The episode total.
+        ///   The episode total.
         /// </summary>
         private int episodeTotal;
 
         /// <summary>
-        /// The season current.
+        ///   The season current.
         /// </summary>
         private int seasonCurrent;
 
         /// <summary>
-        /// The season total.
+        ///   The season total.
         /// </summary>
         private int seasonTotal;
 
         /// <summary>
-        /// The series current.
+        ///   The series current.
         /// </summary>
         private int seriesCurrent;
 
         /// <summary>
-        /// The series total.
+        ///   The series total.
         /// </summary>
         private int seriesTotal;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether EnableEpisode.
+        ///   Gets or sets a value indicating whether EnableEpisode.
         /// </summary>
         public bool EnableEpisode { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether EnableSeason.
+        ///   Gets or sets a value indicating whether EnableSeason.
         /// </summary>
         public bool EnableSeason { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether EnableSeries.
+        ///   Gets or sets a value indicating whether EnableSeries.
         /// </summary>
         public bool EnableSeries { get; set; }
 
         /// <summary>
-        /// Gets or sets EpisodeCurrent.
+        ///   Gets or sets EpisodeCurrent.
         /// </summary>
         public int EpisodeCurrent
         {
@@ -90,15 +96,13 @@ namespace YANFOE.Factories.InOut.Model
         }
 
         /// <summary>
-        /// Gets or sets the episode text.
+        ///   Gets or sets the episode text.
         /// </summary>
-        /// <value>
-        /// The episode text.
-        /// </value>
+        /// <value> The episode text. </value>
         public string EpisodeText { get; set; }
 
         /// <summary>
-        /// Gets or sets EpisodeTotal.
+        ///   Gets or sets EpisodeTotal.
         /// </summary>
         public int EpisodeTotal
         {
@@ -115,7 +119,7 @@ namespace YANFOE.Factories.InOut.Model
         }
 
         /// <summary>
-        /// Gets or sets SeasonCurrent.
+        ///   Gets or sets SeasonCurrent.
         /// </summary>
         public int SeasonCurrent
         {
@@ -132,15 +136,13 @@ namespace YANFOE.Factories.InOut.Model
         }
 
         /// <summary>
-        /// Gets or sets the season text.
+        ///   Gets or sets the season text.
         /// </summary>
-        /// <value>
-        /// The season text.
-        /// </value>
+        /// <value> The season text. </value>
         public string SeasonText { get; set; }
 
         /// <summary>
-        /// Gets or sets SeasonTotal.
+        ///   Gets or sets SeasonTotal.
         /// </summary>
         public int SeasonTotal
         {
@@ -157,7 +159,7 @@ namespace YANFOE.Factories.InOut.Model
         }
 
         /// <summary>
-        /// Gets or sets SeriesCurrent.
+        ///   Gets or sets SeriesCurrent.
         /// </summary>
         public int SeriesCurrent
         {
@@ -174,15 +176,13 @@ namespace YANFOE.Factories.InOut.Model
         }
 
         /// <summary>
-        /// Gets or sets the series text.
+        ///   Gets or sets the series text.
         /// </summary>
-        /// <value>
-        /// The series text.
-        /// </value>
+        /// <value> The series text. </value>
         public string SeriesText { get; set; }
 
         /// <summary>
-        /// Gets or sets SeriesTotal.
+        ///   Gets or sets SeriesTotal.
         /// </summary>
         public int SeriesTotal
         {

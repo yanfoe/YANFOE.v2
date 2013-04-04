@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.MediaManagerControls.MediaPathManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Media="clr-namespace:YANFOE.Factories.Media" mc:Ignorable="d" 
+             d:DesignHeight="492" d:DesignWidth="734">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="439*" />
+            <RowDefinition Height="29" />
+            <RowDefinition Height="24" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="370*" />
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="340*" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter ResizeDirection="Columns" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Name="gridSplitter1" />
+        <ProgressBar Grid.Row="2" Name="progressBarControl" Grid.ColumnSpan="3" />
+        <Label Content="Label" Grid.Row="1" Name="label1" Grid.ColumnSpan="3" Margin="0,0,0,1" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="78*" />
+                <ColumnDefinition Width="82*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="82*" />
+                <ColumnDefinition Width="48*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="363*" />
+                <RowDefinition Height="41" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Media Paths" Name="groupBox1" Grid.ColumnSpan="5">
+            <Grid>
+                    <DataGrid AutoGenerateColumns="False" Name="mediaPathList" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathDB}" ItemsSource="{Binding}" CanUserAddRows="false" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=MediaPath}" Header="Media Path" IsReadOnly="True" Width="50*" />
+                            <DataGridTextColumn Binding="{Binding Path=FileCount, Mode=OneWay}" Header="Files" IsReadOnly="True" Width="50" />
+                            <DataGridTextColumn Header="Name By" IsReadOnly="True" Binding="{Binding Path=NameFileBy, Mode=OneWay}" Width="80" />
+                            <DataGridTextColumn Binding="{Binding Path=Contains, Mode=OneWay}" Header="Contains" IsReadOnly="True" Width="60" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+        <Button Name="button1" Margin="0,0,3,0" Grid.Row="1" Click="BtnAdd_Click">
+            <Image Source="/YANFOE;component/Resources/add.png" />
+        </Button>
+        <Button Margin="3,0,4,0" Name="button2" Grid.Row="1" Grid.Column="1" Click="btnEdit_Click">
+            <Image Source="/YANFOE;component/Resources/pencil.png" />
+        </Button>
+        <Button Margin="2,0,3,0" Name="button3" Grid.Row="1" Grid.Column="2" Click="BtnDelete_Click">
+            <Image Source="/YANFOE;component/Resources/trash.png" />
+        </Button>
+        <Button Margin="3,0,4,0" Name="button4" Grid.Row="1" Grid.Column="3" Click="btnClean_Click">
+            <Image Source="/YANFOE;component/Resources/remove2.png" />
+        </Button>
+        <Button Margin="1,0,0,0" Name="button5" Grid.Row="1" Grid.Column="4" Click="ButRefresh_Click">
+            <Image Source="/YANFOE;component/Resources/refresh.png" />
+        </Button>
+        </Grid>
+        <Grid Grid.Column="2" Name="grid1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="222*" />
+                <RowDefinition Height="12*" />
+                <RowDefinition Height="217*" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Unsorted Movies" Name="groupBox2" Margin="0,0,-2,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="158*" />
+                        <RowDefinition Height="35" />
+                    </Grid.RowDefinitions>
+                    <Button Height="34" Name="button8" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessMovies_Click">
+                        <Image Source="/YANFOE;component/Resources/next.png" />
+                    </Button>
+                    <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="dataGrid1" Margin="0,0,0,2" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathMoviesUnsorted}" ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=PathAndFileName}" Header="File Path" IsReadOnly="True" Width="80*" />
+                            <DataGridTextColumn Binding="{Binding Path=Added}" Header="Added" IsReadOnly="True" Width="125" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="2" Header="Unsorted TV" Margin="0,0,-2,0" Name="groupBox3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="151*" />
+                        <RowDefinition Height="37" />
+                    </Grid.RowDefinitions>
+                    <Button Name="button7" Height="34" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessTv_Click">
+                        <Image Source="/YANFOE;component/Resources/next.png" />
+                    </Button>
+                    <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="dataGrid2" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathTvUnsorted}" ItemsSource="{Binding}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=PathAndFileName}" Header="File Path" IsReadOnly="True" Width="80*" />
+                            <DataGridTextColumn Binding="{Binding Path=Added}" Header="Added" IsReadOnly="True" Width="125" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" ResizeDirection="Rows" />
+        </Grid>
+    </Grid>
+</UserControl>

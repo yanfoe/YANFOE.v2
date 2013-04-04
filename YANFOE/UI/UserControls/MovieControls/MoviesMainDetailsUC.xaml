@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.MovieControls.MoviesMainDetailsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Scraper="clr-namespace:YANFOE.Factories.Scraper" xmlns:Settings="clr-namespace:YANFOE.Settings"
+             mc:Ignorable="d" 
+             d:DesignHeight="437" d:DesignWidth="852">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="472*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="162*" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Name="gridSplitter1" VerticalAlignment="Stretch" />
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="200*" Name="multiEditRow" />
+                <RowDefinition Height="237*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Name="multiEditGrid" />
+            <Grid Name="grid3" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="116*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="198*" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <DataGrid AutoGenerateColumns="False" Name="dataGrid1" Grid.ColumnSpan="3" DataContext="{Binding Path=Cast}" ItemsSource="{Binding}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" Width="50*" />
+                        <DataGridTextColumn Binding="{Binding Path=Role}" Header="Role" Width="50*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="1" Name="btnActorUp">
+                    <Image Source="/YANFOE;component/Resources/up.png" />
+                </Button>
+                <Button Grid.Column="1" Grid.Row="1" Name="btnActorDown">
+                    <Image Source="/YANFOE;component/Resources/down.png" />
+                </Button>
+                <Button Grid.Column="2" Grid.Row="1" Name="btnActorTrash" Click="btnActorTrash_Click">
+                    <Image Source="/YANFOE;component/Resources/trash1.png" />
+                </Button>
+            </Grid>
+            <ComboBox Name="cmbScraperGroup" Text="{Binding ScraperGroup}" ItemsSource="{Binding Source={x:Static Scraper:MovieScraperGroupFactory.Instance}, Path=ScraperGroupsOnDisk}" DisplayMemberPath="ScraperName" />
+        </Grid>
+        <Grid Name="grid1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26" />
+                <RowDefinition Height="100*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="100*" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter2" VerticalAlignment="Stretch" ResizeDirection="Rows" Grid.ColumnSpan="8" />
+            <Label Content="Title" Name="label1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Plot" Name="label2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="1" />
+            <Label Content="Outline" Name="label3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="3" />
+            <Label Content="Tagline" Name="label4" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="4" />
+            <Label Content="Studio" Name="label5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" />
+            <Label Content="Directors" Name="label6" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="6" />
+            <Label Content="Genre" Name="label7" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="7" />
+            <Label Content="Country" Name="label8" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="8" />
+            <Label Content="MPAA" Name="label9" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="9" />
+
+
+            <Label Content="Original Title" Name="label10" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="4"  />
+            <Label Content="Released" Name="label11" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="4" />
+            <Label Content="Writers" Name="labe12" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="4" />
+            <Label Content="Language" Name="label13" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="7" Grid.Column="4" />
+            <Label Content="Runtime" Name="label14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="8" Grid.Column="4" />
+            <Label Content="Cert" Name="label15" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="9" Grid.Column="4" />
+
+            <Label Content="Source" Name="label16" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="9" Grid.Column="2" />
+            <Label Content="Rating" Name="label17" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="8" Grid.Column="6" />
+            <Label Content="Top 250" Name="label18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="9" Grid.Column="6" />
+            <TextBox Grid.Column="1" Grid.ColumnSpan="6" Text="{Binding Title}" />
+            <TextBox Grid.Column="7" Text="{Binding Year}" />
+            <ScrollViewer Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1">
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Plot}" TextWrapping="WrapWithOverflow" />
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3">
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Outline}" TextWrapping="WrapWithOverflow" />
+            </ScrollViewer>
+            <TextBox Grid.Column="5" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding OriginalTitle}" />
+            <TextBox Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="3" Text="{Binding ReleaseDate}" />
+            <TextBox Grid.Column="5" Grid.Row="6" Grid.ColumnSpan="3" Text="{Binding WritersAsString}" />
+            <TextBox Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding LanguageAsString}" />
+            <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Text="{Binding Tagline}" />
+            <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="3" Text="{Binding DirectorAsString}" />
+            <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Text="{Binding GenreAsString}" />
+            <TextBox Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Text="{Binding CountryAsString}" />
+            <TextBox Grid.Column="7" Grid.Row="9" Text="{Binding Top250}" />
+            <TextBox Grid.Column="5" Grid.Row="9" Text="{Binding Certification}" />
+            <TextBox Grid.Column="7" Grid.Row="8" Text="{Binding RuntimeInHourMin}" />
+            <TextBox Grid.Column="5" Grid.Row="8" Text="{Binding Rating}" />
+
+            <ComboBox Grid.Column="3" Grid.Row="9" Name="cmbSource" Text="{Binding VideoSource}" ItemsSource="{Binding Source={x:Static Settings:Get.Keywords}, Path=Sources.Keys}"/>
+            <ComboBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="3" Name="cmbStudio" Text="{Binding SetStudio}" />
+            <ComboBox Grid.Column="1" Grid.Row="9" Name="cmbMpaa" Text="{Binding Mpaa}" />
+
+
+
+        </Grid>
+    </Grid>
+</UserControl>

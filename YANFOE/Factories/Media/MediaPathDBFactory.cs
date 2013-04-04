@@ -12,6 +12,10 @@
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using YANFOE.Tools;
+using YANFOE.Tools.Models;
+using YANFOE.Tools.UI;
+
 namespace YANFOE.Factories.Media
 {
     using System;
@@ -33,19 +37,20 @@ namespace YANFOE.Factories.Media
     /// <summary>
     /// The media path db factory.
     /// </summary>
-    public static class MediaPathDBFactory
+    public class MediaPathDBFactory : FactoryBase
     {
+        public static MediaPathDBFactory Instance = new MediaPathDBFactory();
         #region Constants and Fields
 
         /// <summary>
         /// MediaPathMoviesUnsorted collection.
         /// </summary>
-        private static BindingList<MediaPathFileModel> mediaPathMoviesUnsorted;
+        private ThreadedBindingList<MediaPathFileModel> mediaPathMoviesUnsorted;
 
         /// <summary>
         /// MediaPathTvUnsorted collection.
         /// </summary>
-        private static BindingList<MediaPathFileModel> mediaPathTvUnsorted;
+        private ThreadedBindingList<MediaPathFileModel> mediaPathTvUnsorted;
 
         #endregion
 
@@ -54,11 +59,11 @@ namespace YANFOE.Factories.Media
         /// <summary>
         /// Initializes static members of the <see cref="MediaPathDBFactory"/> class.
         /// </summary>
-        static MediaPathDBFactory()
+        private MediaPathDBFactory()
         {
-            MediaPathDB = new BindingList<MediaPathModel>();
-            mediaPathTvUnsorted = new BindingList<MediaPathFileModel>();
-            mediaPathMoviesUnsorted = new BindingList<MediaPathFileModel>();
+            MediaPathDB = new ThreadedBindingList<MediaPathModel>();
+            MediaPathTvUnsorted = new ThreadedBindingList<MediaPathFileModel>();
+            MediaPathMoviesUnsorted = new ThreadedBindingList<MediaPathFileModel>();
 
             MediaPathDB.ListChanged += MediaPathDB_ListChanged;
         }
@@ -70,17 +75,50 @@ namespace YANFOE.Factories.Media
         /// <summary>
         /// Gets or sets CurrentMediaPath.
         /// </summary>
-        public static MediaPathModel CurrentMediaPath { get; set; }
+        private MediaPathModel currentMediaPath;
+        public MediaPathModel CurrentMediaPath
+        {
+            get { return currentMediaPath; } 
+            set { currentMediaPath = value; OnPropertyChanged("CurrentMediaPath"); }
+        }
 
         /// <summary>
         /// Gets or sets CurrentMediaPathEdit.
         /// </summary>
-        public static MediaPathModel CurrentMediaPathEdit { get; set; }
+        private MediaPathModel currentMediaPathEdit;
+        public MediaPathModel CurrentMediaPathEdit
+        {
+            get { return currentMediaPathEdit; } 
+            set { currentMediaPathEdit = value; OnPropertyChanged("CurrentMediaPathEdit"); }
+        }
 
         /// <summary>
         /// Gets or sets MediaPathDB.
         /// </summary>
-        public static BindingList<MediaPathModel> MediaPathDB { get; set; }
+        private ThreadedBindingList<MediaPathModel> mediaPathDB;
+        public ThreadedBindingList<MediaPathModel> MediaPathDB
+        {
+            get { return mediaPathDB; } 
+            set { mediaPathDB = value; OnPropertyChanged("MediaPathDB"); }
+        }
+
+        /// <summary>
+        /// MediaPathMoviesUnsorted collection.
+        /// </summary>
+        public ThreadedBindingList<MediaPathFileModel> MediaPathMoviesUnsorted
+        {
+            get { return mediaPathMoviesUnsorted; }
+            set { mediaPathMoviesUnsorted = value; OnPropertyChanged("MediaPathMoviesUnsorted"); }
+        }
+
+        /// <summary>
+        /// MediaPathTvUnsorted collection.
+        /// </summary>
+        public ThreadedBindingList<MediaPathFileModel> MediaPathTvUnsorted
+        {
+            get { return mediaPathTvUnsorted; }
+            set { mediaPathTvUnsorted = value; OnPropertyChanged("MediaPathTvUnsorted"); }
+        }
 
         #endregion
 
@@ -90,11 +128,11 @@ namespace YANFOE.Factories.Media
         /// <summary>
         /// Ensure media path database exists.
         /// </summary>
-        public static void EnsureMediaPathDatabaseExists()
+        public void EnsureMediaPathDatabaseExists()
         {
             if (MediaPathDB == null)
             {
-                MediaPathDB = new BindingList<MediaPathModel>();
+                MediaPathDB = new ThreadedBindingList<MediaPathModel>();
             }
         }
 
@@ -102,10 +140,10 @@ namespace YANFOE.Factories.Media
         /// Generatate unsorted list.
         /// </summary>
         /// <param name="progress"></param>
-        public static void GeneratateUnsortedList(Progress progress)
+        public void GeneratateUnsortedList(Progress progress)
         {
-            mediaPathTvUnsorted.Clear();
-            mediaPathMoviesUnsorted.Clear();
+            MediaPathTvUnsorted.Clear();
+            MediaPathMoviesUnsorted.Clear();
 
             
             var count = 0;
@@ -126,16 +164,16 @@ namespace YANFOE.Factories.Media
                             {
                                 if (!MasterMediaDBFactory.MovieDatabaseContains(filePath.PathAndFileName))
                                 {
-                                    mediaPathMoviesUnsorted.Add(filePath);
+                                    MediaPathMoviesUnsorted.Add(filePath);
                                 }
                             }
                         }
 
                         if (filePath.Type == MediaPathFileModel.MediaPathFileType.TV)
                         {
-                            if (!MasterMediaDBFactory.TvDatabaseContains(filePath.PathAndFileName))
+                            if (!MasterMediaDBFactory.TVDatabaseContains(filePath.PathAndFileName))
                             {
-                                mediaPathTvUnsorted.Add(filePath);
+                                MediaPathTvUnsorted.Add(filePath);
                             }
                         }
 
@@ -152,34 +190,12 @@ namespace YANFOE.Factories.Media
                 Log.WriteToLog(LogSeverity.Error, 0, "Could not Generated Unsorted List", ex.Message);
             }
         }
-
-        /// <summary>
-        /// Get mediaPathMoviesUnsorted
-        /// </summary>
-        /// <returns>
-        /// The mediaPathMoviesUnsorted collection.
-        /// </returns>
-        public static BindingList<MediaPathFileModel> GetMediaPathMoviesUnsorted()
-        {
-            return mediaPathMoviesUnsorted ?? (mediaPathMoviesUnsorted = new BindingList<MediaPathFileModel>());
-        }
-
-        /// <summary>
-        /// Get mediaPathTvUnsorted
-        /// </summary>
-        /// <returns>
-        /// The mediaPathTvUnsorted collection
-        /// </returns>
-        public static BindingList<MediaPathFileModel> GetMediaPathTvUnsorted()
-        {
-            return mediaPathTvUnsorted ?? (mediaPathTvUnsorted = new BindingList<MediaPathFileModel>());
-        }
-
+        
         /// <summary>
         /// Refresh the files found from the mediapaths.
         /// </summary>
         /// <param name="progress">The progress.</param>
-        public static void RefreshFiles(Progress progress)
+        public void RefreshFiles(Progress progress)
         {
             foreach (MediaPathModel mediaPath in MediaPathDB)
             {
@@ -199,7 +215,7 @@ namespace YANFOE.Factories.Media
         /// Remove a MediaPathModel from the MediaPathDB
         /// </summary>
         /// <param name="mediaPathModel">The media path model.</param>
-        public static void RemoveFromDatabase(MediaPathModel mediaPathModel)
+        public void RemoveFromDatabase(MediaPathModel mediaPathModel)
         {
             EnsureMediaPathDatabaseExists();
             // Remove movies from db
@@ -212,22 +228,22 @@ namespace YANFOE.Factories.Media
                 {
                     string p = filePath.Path.TrimEnd('\\');
                     if (!
-                        MovieDBFactory.MovieDatabase.Remove(
-                        (from m in MovieDBFactory.MovieDatabase where m.GetBaseFilePath == p select m).
+                        MovieDBFactory.Instance.MovieDatabase.Remove(
+                        (from m in MovieDBFactory.Instance.MovieDatabase where m.GetBaseFilePath == p select m).
                             SingleOrDefault())
                         )
                     {
-                        MovieDBFactory.HiddenMovieDatabase.Remove(
-                        (from m in MovieDBFactory.HiddenMovieDatabase where m.GetBaseFilePath == p select m).
+                        MovieDBFactory.Instance.HiddenMovieDatabase.Remove(
+                        (from m in MovieDBFactory.Instance.HiddenMovieDatabase where m.GetBaseFilePath == p select m).
                             SingleOrDefault());
                     }
                 }
 
                 if (filePath.Type == MediaPathFileModel.MediaPathFileType.TV)
                 {
-                    if (MasterMediaDBFactory.TvDatabaseContains(filePath.PathAndFileName))
+                    if (MasterMediaDBFactory.TVDatabaseContains(filePath.PathAndFileName))
                     {
-                        MasterMediaDBFactory.MasterTvMediaDatabase.Remove(filePath.PathAndFileName);
+                        MasterMediaDBFactory.MasterTVMediaDatabase.Remove(filePath.PathAndFileName);
                     }
                 }
             }
@@ -248,7 +264,7 @@ namespace YANFOE.Factories.Media
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.ComponentModel.ListChangedEventArgs"/> instance containing the event data.</param>
-        private static void MediaPathDB_ListChanged(object sender, ListChangedEventArgs e)
+        private void MediaPathDB_ListChanged(object sender, ListChangedEventArgs e)
         {
             SaveMediaPathDB();
         }
@@ -256,7 +272,7 @@ namespace YANFOE.Factories.Media
         /// <summary>
         /// The save media path db.
         /// </summary>
-        private static void SaveMediaPathDB()
+        private void SaveMediaPathDB()
         {
             DatabaseIOFactory.Save(DatabaseIOFactory.OutputName.MediaPathDb);
         }

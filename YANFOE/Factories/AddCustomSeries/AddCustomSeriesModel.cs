@@ -1,34 +1,52 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AddCustomSeriesModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="AddCustomSeriesModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
+// </license>
+// <summary>
+//   The add custom series model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.AddCustomSeries
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
 
-    using DevExpress.XtraEditors.DXErrorProvider;
-
+    using YANFOE.Tools.Error;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The add custom series model.
+    ///   The add custom series model.
     /// </summary>
-    public class AddCustomSeriesModel : ModelBase, IDXDataErrorInfo
+    public class AddCustomSeriesModel : ModelBase, IMyDataErrorInfo
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The add series zero.
+        ///   The add series zero.
         /// </summary>
         private bool addSeriesZero;
 
         /// <summary>
-        /// The series.
+        ///   The new series name.
+        /// </summary>
+        private string newSeriesName;
+
+        /// <summary>
+        ///   The series.
         /// </summary>
         private int series;
 
@@ -37,28 +55,24 @@ namespace YANFOE.Factories.AddCustomSeries
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddCustomSeriesModel"/> class.
+        ///   Initializes a new instance of the <see cref="AddCustomSeriesModel" /> class.
         /// </summary>
         public AddCustomSeriesModel()
         {
-            this.SeriesList = new BindingList<string>();
+            this.SeriesList = new ThreadedBindingList<string>();
             this.NewSeriesName = string.Empty;
-            this.startAt = 1;
-            this.Files = new Dictionary<int, BindingList<AddCustomSeriesFilesModel>>();
+            this.StartAt = 1;
+            this.Files = new Dictionary<int, ThreadedBindingList<AddCustomSeriesFilesModel>>();
         }
 
         #endregion
 
-        #region Properties
-
-        public Dictionary<int, BindingList<AddCustomSeriesFilesModel>> Files { get; set; }
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether [add series zero].
+        ///   Gets or sets a value indicating whether [add series zero].
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if [add series zero]; otherwise, <c>false</c>.
-        /// </value>
+        /// <value> <c>true</c> if [add series zero]; otherwise, <c>false</c> . </value>
         public bool AddSeriesZero
         {
             get
@@ -69,19 +83,20 @@ namespace YANFOE.Factories.AddCustomSeries
             set
             {
                 this.addSeriesZero = value;
-                this.startAt = this.addSeriesZero ? 0 : 1;
+                this.StartAt = this.addSeriesZero ? 0 : 1;
                 this.GenerateSeriesList();
             }
         }
 
-        private string newSeriesName;
+        /// <summary>
+        ///   Gets or sets the files.
+        /// </summary>
+        public Dictionary<int, ThreadedBindingList<AddCustomSeriesFilesModel>> Files { get; set; }
 
         /// <summary>
-        /// Gets or sets the new name of the series.
+        ///   Gets or sets the new name of the series.
         /// </summary>
-        /// <value>
-        /// The new name of the series.
-        /// </value>
+        /// <value> The new name of the series. </value>
         public string NewSeriesName
         {
             get
@@ -97,12 +112,12 @@ namespace YANFOE.Factories.AddCustomSeries
         }
 
         /// <summary>
-        /// Gets or sets SelectedSeries.
+        ///   Gets or sets SelectedSeries.
         /// </summary>
         public int SelectedSeries { get; set; }
 
         /// <summary>
-        /// Gets or sets Series.
+        ///   Gets or sets Series.
         /// </summary>
         public int Series
         {
@@ -122,44 +137,43 @@ namespace YANFOE.Factories.AddCustomSeries
         }
 
         /// <summary>
-        /// Gets or sets the series list.
+        ///   Gets or sets the series list.
         /// </summary>
-        /// <value>
-        /// The series list.
-        /// </value>
-        public BindingList<string> SeriesList { get; set; }
-
-        /// <summary>
-        /// Gets or sets startAt.
-        /// </summary>
-        private int startAt { get; set; }
+        /// <value> The series list. </value>
+        public ThreadedBindingList<string> SeriesList { get; set; }
 
         #endregion
 
-        #region Methods
+        #region Properties
 
         /// <summary>
-        /// Generates the series list.
+        ///   Gets or sets startAt.
         /// </summary>
-        private void GenerateSeriesList()
+        private int StartAt { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// When implemented by a class, this method returns information on an error associated with a business object.
+        /// </summary>
+        /// <param name="info">
+        /// An <see cref="ErrorInfo"/> object that contains information on an error. 
+        /// </param>
+        public void GetError(ErrorInfo info)
         {
-            this.SeriesList.Clear();
-
-            for (int i = this.startAt; i < this.series + 1; i++)
-            {
-                this.SeriesList.Add(string.Format("Series {0}", i));
-            }
-
-            AddCustomSeriesFactory.InvokeUpdateSeriesList(new EventArgs());
         }
-
-        #endregion
 
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a specific business object's property.
         /// </summary>
-        /// <param name="propertyName">A string that identifies the name of the property for which information on an error is to be returned.</param>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
+        /// <param name="propertyName">
+        /// A string that identifies the name of the property for which information on an error is to be returned. 
+        /// </param>
+        /// <param name="info">
+        /// An <see cref="ErrorInfo"/> object that contains information on an error. 
+        /// </param>
         public void GetPropertyError(string propertyName, ErrorInfo info)
         {
             switch (propertyName)
@@ -171,9 +185,11 @@ namespace YANFOE.Factories.AddCustomSeries
                         info.ErrorType = ErrorType.Critical;
                     }
 
-                    var check = from s in TvDBFactory.MasterSeriesNameList where s.SeriesName == this.NewSeriesName select s;
+                    var check = from s in TVDBFactory.Instance.MasterSeriesList
+                                where s.SeriesName == this.NewSeriesName
+                                select s;
 
-                    if (check.Count() > 0)
+                    if (check.Any())
                     {
                         info.ErrorText += "Series name already exists";
                         info.ErrorType = ErrorType.Critical;
@@ -183,12 +199,25 @@ namespace YANFOE.Factories.AddCustomSeries
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// When implemented by a class, this method returns information on an error associated with a business object.
+        ///   Generates the series list.
         /// </summary>
-        /// <param name="info">An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.</param>
-        public void GetError(ErrorInfo info)
+        private void GenerateSeriesList()
         {
+            this.SeriesList.Clear();
+
+            for (int i = this.StartAt; i < this.series + 1; i++)
+            {
+                this.SeriesList.Add(string.Format("Series {0}", i));
+            }
+
+            AddCustomSeriesFactory.InvokeUpdateSeriesList(new EventArgs());
         }
+
+        #endregion
     }
 }

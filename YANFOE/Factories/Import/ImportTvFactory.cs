@@ -1,21 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ImportTvFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="ImportTvFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The factory for all Import TV functions
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Import
 {
+    #region Required Namespaces
+
     using System.Collections.Generic;
-    using System.ComponentModel;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -23,6 +27,7 @@ namespace YANFOE.Factories.Import
     using BitFactory.Logging;
 
     using YANFOE.Factories.Media;
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Models.TvModels;
     using YANFOE.Models.TvModels.Scan;
     using YANFOE.Settings;
@@ -30,92 +35,128 @@ namespace YANFOE.Factories.Import
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Importing;
     using YANFOE.Tools.Restructure;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The factory for all Import TV functions
+    ///   The factory for all Import TV functions
     /// </summary>
-    public static class ImportTvFactory
+    public class ImportTvFactory
     {
+        #region Static Fields
+
+        /// <summary>
+        ///   The instance.
+        /// </summary>
+        private static ImportTvFactory instance = new ImportTvFactory();
+
+        #endregion
+
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="ImportTvFactory"/> class. 
+        ///   Prevents a default instance of the <see cref="ImportTvFactory" /> class from being created. 
+        ///   Initializes static members of the <see cref="ImportTvFactory" /> class.
         /// </summary>
-        static ImportTvFactory()
+        private ImportTvFactory()
         {
-            Scan = new SortedDictionary<string, ScanSeries>();
+            this.Scan = new SortedDictionary<string, ScanSeries>();
 
-            NotCatagorized = new BindingList<ScanNotCatagorized>();
+            this.NotCategorized = new ThreadedBindingList<ScanNotCategorized>();
 
-            ScanSeriesPicks = new BindingList<ScanSeriesPick>();
+            this.ScanSeriesPicks = new ThreadedBindingList<ScanSeriesPick>();
 
-            SeriesNameList = new BindingList<SeriesListModel>();
+            this.SeriesList = new ThreadedBindingList<SeriesListModel>();
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets NotCatagorized.
+        ///   Gets or sets the instance.
         /// </summary>
-        public static BindingList<ScanNotCatagorized> NotCatagorized { get; set; }
+        public static ImportTvFactory Instance
+        {
+            get
+            {
+                return instance;
+            }
+
+            set
+            {
+                instance = value;
+            }
+        }
 
         /// <summary>
-        /// Gets or sets Scan.
+        ///   Gets or sets NotCategorized.
         /// </summary>
-        public static SortedDictionary<string, ScanSeries> Scan { get; set; }
+        public ThreadedBindingList<ScanNotCategorized> NotCategorized { get; set; }
 
         /// <summary>
-        /// Gets or sets ScanSeriesPicks.
+        ///   Gets or sets Scan.
         /// </summary>
-        public static BindingList<ScanSeriesPick> ScanSeriesPicks { get; set; }
+        public SortedDictionary<string, ScanSeries> Scan { get; set; }
 
         /// <summary>
-        /// Gets or sets SeriesNameList.
+        ///   Gets or sets ScanSeriesPicks.
         /// </summary>
-        public static BindingList<SeriesListModel> SeriesNameList { get; set; }
+        public ThreadedBindingList<ScanSeriesPick> ScanSeriesPicks { get; set; }
+
+        /// <summary>
+        ///   Gets or sets SeriesNameList.
+        /// </summary>
+        public ThreadedBindingList<SeriesListModel> SeriesList { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Add scan result.
         /// </summary>
         /// <param name="episodeDetails">
-        /// The episode details.
+        /// The episode details. 
         /// </param>
-        public static void AddScanResult(EpisodeDetails episodeDetails)
+        public void AddScanResult(EpisodeDetails episodeDetails)
         {
             var seriesName = episodeDetails.SeriesName;
 
             var name = seriesName;
-            var check1 = (from s in Scan where s.Key.ToLower() == name.ToLower() select s.Key).SingleOrDefault();
+            var check1 = (from s in this.Scan where s.Key.ToLower() == name.ToLower() select s.Key).SingleOrDefault();
 
             // Process Series
             if (check1 == null)
             {
-                Scan.Add(seriesName, new ScanSeries());
+                this.Scan.Add(seriesName, new ScanSeries());
 
-                var check2 = (from s in SeriesNameList where s.SeriesName.ToLower() == seriesName.ToLower() select s.SeriesName.ToLower()).ToList();
+                var check2 =
+                    (from s in this.SeriesList
+                     where s.SeriesName.ToLower() == seriesName.ToLower()
+                     select s.SeriesName.ToLower()).ToList();
 
                 if (!check2.Contains(seriesName.ToLower()) && !string.IsNullOrEmpty(seriesName))
                 {
                     string dir = Directory.GetParent(episodeDetails.FilePath).Name;
                     string path = string.Empty;
-                    if (dir.StartsWith("season", true, System.Globalization.CultureInfo.CurrentCulture))
+                    if (dir.StartsWith("season", true, CultureInfo.CurrentCulture))
                     {
                         // Looks like it. Qualified series guess
-                        path = Directory.GetParent(episodeDetails.FilePath).Parent.FullName;
+                        var directoryInfo = Directory.GetParent(episodeDetails.FilePath).Parent;
+                        if (directoryInfo != null)
+                        {
+                            path = directoryInfo.FullName;
+                        }
                     }
                     else
                     {
                         // Best guess
                         path = Directory.GetParent(episodeDetails.FilePath).FullName;
                     }
-                    
-                    SeriesNameList.Add(
+
+                    this.SeriesList.Add(
                         new SeriesListModel { WaitingForScan = true, SeriesName = seriesName, SeriesPath = path });
                 }
             }
@@ -125,103 +166,101 @@ namespace YANFOE.Factories.Import
             }
 
             // Process Series
-            if (!Scan[seriesName].Seasons.ContainsKey(episodeDetails.SeasonNumber))
+            if (!this.Scan[seriesName].Seasons.ContainsKey(episodeDetails.SeasonNumber))
             {
-                Scan[seriesName].Seasons.Add(episodeDetails.SeasonNumber, new ScanSeason());
+                this.Scan[seriesName].Seasons.Add(episodeDetails.SeasonNumber, new ScanSeason());
             }
 
             if (
-                !Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.ContainsKey(
+                !this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.ContainsKey(
                     episodeDetails.EpisodeNumber))
             {
-                Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.Add(
+                this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.Add(
                     episodeDetails.EpisodeNumber, new ScanEpisode());
             }
 
-            Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[episodeDetails.EpisodeNumber].
-                FilePath = episodeDetails.FilePath;
+            this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[episodeDetails.EpisodeNumber].FilePath =
+                episodeDetails.FilePath;
 
             if (episodeDetails.SecondaryNumbers.Count > 0)
             {
                 foreach (int secondary in episodeDetails.SecondaryNumbers)
                 {
-                    if (
-                        !Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.ContainsKey(
-                            secondary))
+                    if (!this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.ContainsKey(secondary))
                     {
-                        Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.Add(
+                        this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes.Add(
                             secondary, new ScanEpisode());
                     }
 
-                    Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].FilePath =
+                    this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].FilePath =
                         episodeDetails.FilePath;
-                    Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].Secondary =
-                        true;
-                    Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].SecondaryTo
-                        = episodeDetails.EpisodeNumber;
+                    this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].Secondary = true;
+                    this.Scan[seriesName].Seasons[episodeDetails.SeasonNumber].Episodes[secondary].SecondaryTo =
+                        episodeDetails.EpisodeNumber;
                 }
             }
 
             var findList =
-                (from s in MediaPathDBFactory.GetMediaPathTvUnsorted()
+                (from s in MediaPathDBFactory.Instance.MediaPathTvUnsorted
                  where s.PathAndFileName == episodeDetails.FilePath
                  select s).ToList();
 
             foreach (var path in findList)
             {
-                MediaPathDBFactory.GetMediaPathTvUnsorted().Remove(path);
+                MediaPathDBFactory.Instance.MediaPathTvUnsorted.Remove(path);
             }
         }
 
         /// <summary>
-        /// The do import scan.
+        ///   The do import scan.
         /// </summary>
-        public static void DoImportScan()
+        public void DoImportScan()
         {
-            SeriesNameList = new BindingList<SeriesListModel>();
-            Scan = new SortedDictionary<string, ScanSeries>();
+            this.SeriesList = new ThreadedBindingList<SeriesListModel>();
+            this.Scan = new SortedDictionary<string, ScanSeries>();
 
             // Get file list
             var filters = Get.InOutCollection.VideoExtentions;
 
-            var paths = MediaPathDBFactory.GetMediaPathTvUnsorted();
+            var paths = MediaPathDBFactory.Instance.MediaPathTvUnsorted;
 
-            var filteredFiles = (from file in paths
-                                 let pathAndFileName = Path.GetExtension(file.PathAndFileName).ToLower()
-                                 where filters.Any(filter => pathAndFileName.ToLower() == "." + filter.ToLower())
-                                 select file.PathAndFileName).ToList();
+            var filteredFiles = paths.Select(
+                file => new { file, pathAndFileName = Path.GetExtension(file.PathAndFileName).ToLower() }).Where(
+                    @t => filters.Any(filter => @t.pathAndFileName.ToLower() == "." + filter.ToLower())).Select(
+                        @t => @t.file.PathAndFileName).ToList();
 
             // Process each file and add to ScanDB);
             foreach (var f in filteredFiles)
             {
-                var episodeDetails = GetEpisodeDetails(f);
+                var episodeDetails = this.GetEpisodeDetails(f);
 
                 if (episodeDetails.TvMatchSuccess)
                 {
-                    AddScanResult(episodeDetails);
+                    this.AddScanResult(episodeDetails);
                 }
                 else
                 {
-                    NotCatagorized.Add(new ScanNotCatagorized { FilePath = f });
+                    this.NotCategorized.Add(new ScanNotCategorized { FilePath = f });
                 }
             }
 
-            MasterMediaDBFactory.PopulateMasterTvMediaDatabase();
+            MasterMediaDBFactory.PopulateMasterTVMediaDatabase();
         }
 
         /// <summary>
         /// Gets the episode details.
         /// </summary>
-        /// <param name="filePath">The file path.</param>
-        /// <returns>The episode details.</returns>
-        public static EpisodeDetails GetEpisodeDetails(string filePath)
+        /// <param name="filePath">
+        /// The file path. 
+        /// </param>
+        /// <returns>
+        /// The episode details. 
+        /// </returns>
+        public EpisodeDetails GetEpisodeDetails(string filePath)
         {
-            string logCategory = "ImportTvFactory > GetEpisodeDetails";
+            const string LogCategory = "ImportTvFactory > GetEpisodeDetails";
 
-            var episodeDetails = new EpisodeDetails
-                {
-                    FilePath = filePath
-                };
+            var episodeDetails = new EpisodeDetails { FilePath = filePath };
 
             string series;
 
@@ -238,40 +277,39 @@ namespace YANFOE.Factories.Import
                 series = Path.GetFileNameWithoutExtension(filePath);
             }
 
-            InternalApps.Logs.Log.WriteToLog(
-                LogSeverity.Debug, 0, string.Format("Getting episode details for: {0}", series), logCategory);
+            Log.WriteToLog(LogSeverity.Debug, 0, string.Format("Getting episode details for: {0}", series), LogCategory);
 
             // Check if dir structure is <root>/<series>/<season>/<episodes>
             string dir = Directory.GetParent(filePath).Name;
             string seriesGuess = string.Empty;
-            if (dir.StartsWith("season", true, System.Globalization.CultureInfo.CurrentCulture))
+            if (dir.StartsWith("season", true, CultureInfo.CurrentCulture))
             {
                 // Looks like it. Qualified series guess
-                seriesGuess = Directory.GetParent(filePath).Parent.Name;
+                var directoryInfo = Directory.GetParent(filePath).Parent;
+                if (directoryInfo != null)
+                {
+                    seriesGuess = directoryInfo.Name;
+                }
             }
 
-            InternalApps.Logs.Log.WriteToLog(
-                LogSeverity.Debug,
-                0,
-                string.Format("Qualified series name guess, based on folder: {0}", seriesGuess),
-                logCategory);
+            Log.WriteToLog(
+                LogSeverity.Debug, 
+                0, 
+                string.Format("Qualified series name guess, based on folder: {0}", seriesGuess), 
+                LogCategory);
 
-            var regex = Regex.Match(
-                series,
-                "(?<seriesName>.*?)" + DefaultRegex.Tv,
-                RegexOptions.IgnoreCase);
-            
-            string rawSeriesName;
+            var regex = Regex.Match(series, "(?<seriesName>.*?)" + DefaultRegex.Tv, RegexOptions.IgnoreCase);
+
             if (regex.Success)
             {
-                rawSeriesName = regex.Groups["seriesName"].Value.Trim();
-                InternalApps.Logs.Log.WriteToLog(
-                    LogSeverity.Debug, 0, string.Format("Series name from file: {0}", rawSeriesName), logCategory);
+                string rawSeriesName = regex.Groups["seriesName"].Value.Trim();
+                Log.WriteToLog(
+                    LogSeverity.Debug, 0, string.Format("Series name from file: {0}", rawSeriesName), LogCategory);
 
-                var result = (from r in ScanSeriesPicks where r.SearchString == rawSeriesName select r)
-                    .SingleOrDefault();
+                var result =
+                    (from r in this.ScanSeriesPicks where r.SearchString == rawSeriesName select r).SingleOrDefault();
 
-                string rawSeriesGuess = rawSeriesName.Replace(new string[] { ".", "_", "-" }, " ").Trim();
+                string rawSeriesGuess = rawSeriesName.Replace(new[] { ".", "_", "-" }, " ").Trim();
 
                 if (seriesGuess != string.Empty)
                 {
@@ -285,8 +323,11 @@ namespace YANFOE.Factories.Import
                         // Regex might've picked up some random crap between series name and s01e01
                         rawSeriesName = seriesGuess;
                     }
-                    else if (rawSeriesName.Length > 0 && (rawSeriesName.Substring(0, 1) == seriesGuess.Substring(0, 1) ||
-                        rawSeriesGuess.ToLower().Replace("and", "&") == seriesGuess.ToLower().Replace("and", "&")))
+                    else if (rawSeriesName.Length > 0
+                             &&
+                             (rawSeriesName.Substring(0, 1) == seriesGuess.Substring(0, 1)
+                              ||
+                              rawSeriesGuess.ToLower().Replace("and", "&") == seriesGuess.ToLower().Replace("and", "&")))
                     {
                         // Regex might've picked up an acronym for the series
                         // TGaaG = Two Guys and a Girl
@@ -301,12 +342,13 @@ namespace YANFOE.Factories.Import
                     rawSeriesName = rawSeriesGuess;
                 }
 
-                InternalApps.Logs.Log.WriteToLog(
-                    LogSeverity.Debug, 0, string.Format("Best series guess: {0}", rawSeriesName), logCategory);
+                Log.WriteToLog(
+                    LogSeverity.Debug, 0, string.Format("Best series guess: {0}", rawSeriesName), LogCategory);
 
                 episodeDetails.SeriesName = result != null ? result.SeriesName : rawSeriesName;
 
-                episodeDetails.SeriesName = FileSystemCharChange.From(episodeDetails.SeriesName, FileSystemCharChange.ConvertArea.Tv);
+                episodeDetails.SeriesName = FileSystemCharChange.From(
+                    episodeDetails.SeriesName, FileSystemCharChange.ConvertArea.Tv);
             }
 
             var seasonMatch = Regex.Match(series, DefaultRegex.TvSeason, RegexOptions.IgnoreCase);
@@ -315,11 +357,11 @@ namespace YANFOE.Factories.Import
                 episodeDetails.SeasonNumber = seasonMatch.Groups[1].Value.GetNumber();
             }
 
-            InternalApps.Logs.Log.WriteToLog(
-                LogSeverity.Debug,
-                0,
-                string.Format("Extracted season number: {0}", episodeDetails.SeasonNumber),
-                logCategory);
+            Log.WriteToLog(
+                LogSeverity.Debug, 
+                0, 
+                string.Format("Extracted season number: {0}", episodeDetails.SeasonNumber), 
+                LogCategory);
 
             var episodeMatch = Regex.Matches(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
             if (episodeMatch.Count > 0)
@@ -341,25 +383,25 @@ namespace YANFOE.Factories.Import
                         }
                     }
 
-                    InternalApps.Logs.Log.WriteToLog(
+                    Log.WriteToLog(
                         LogSeverity.Debug, 
                         0, 
                         string.Format(
                             "Extracted episode numbers ({0}): {1}", 
                             episodeDetails.SecondaryNumbers.Count, 
                             string.Join(", ", episodeDetails.SecondaryNumbers)), 
-                        logCategory);
+                        LogCategory);
                 }
                 else
                 {
                     var episodeMatch2 = Regex.Match(series, DefaultRegex.TvEpisode, RegexOptions.IgnoreCase);
                     episodeDetails.EpisodeNumber = episodeMatch2.Groups[1].Value.GetNumber();
 
-                    InternalApps.Logs.Log.WriteToLog(
+                    Log.WriteToLog(
                         LogSeverity.Debug, 
                         0, 
                         string.Format("Extracted episode number: {0}", episodeDetails.EpisodeNumber), 
-                        logCategory);
+                        LogCategory);
                 }
             }
 
@@ -370,15 +412,15 @@ namespace YANFOE.Factories.Import
             }
 
             var check =
-                (from s in ScanSeriesPicks where s.SearchString == episodeDetails.SeriesName select s).SingleOrDefault();
+                (from s in this.ScanSeriesPicks where s.SearchString == episodeDetails.SeriesName select s).SingleOrDefault();
 
             if (check != null)
             {
                 episodeDetails.SeriesName = check.SeriesName;
             }
 
-            InternalApps.Logs.Log.WriteToLog(
-                LogSeverity.Debug, 0, string.Format("Final series name: {0}", episodeDetails.SeriesName), logCategory);
+            Log.WriteToLog(
+                LogSeverity.Debug, 0, string.Format("Final series name: {0}", episodeDetails.SeriesName), LogCategory);
 
             return episodeDetails;
         }

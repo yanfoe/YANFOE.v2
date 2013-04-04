@@ -1,23 +1,24 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FastDirectoryEnumerator.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="FastDirectoryEnumerator.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
-// <summery>
-// This file is taken and copyright http://www.codeproject.com/KB/files/FastDirectoryEnumerator.aspx
-// Under The Code Project Open License (CPOL) 1.02
-// </summery>
+// <summary>
+//   Contains information about a file returned by the
+//   <see cref="FastDirectoryEnumerator" /> class.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.ThirdParty
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -30,47 +31,49 @@ namespace YANFOE.Tools.ThirdParty
 
     using Microsoft.Win32.SafeHandles;
 
+    #endregion
+
     /// <summary>
-    /// Contains information about a file returned by the 
-    /// <see cref="FastDirectoryEnumerator"/> class.
+    ///   Contains information about a file returned by the 
+    ///   <see cref="FastDirectoryEnumerator" /> class.
     /// </summary>
     [Serializable]
     public class FileData
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// Attributes of the file.
+        ///   Attributes of the file.
         /// </summary>
         public readonly FileAttributes Attributes;
 
         /// <summary>
-        /// File creation time in UTC
+        ///   File creation time in UTC
         /// </summary>
         public readonly DateTime CreationTimeUtc;
 
         /// <summary>
-        /// File last access time in UTC
+        ///   File last access time in UTC
         /// </summary>
         public readonly DateTime LastAccessTimeUtc;
 
         /// <summary>
-        /// File last write time in UTC
+        ///   File last write time in UTC
         /// </summary>
         public readonly DateTime LastWriteTimeUtc;
 
         /// <summary>
-        /// Name of the file
+        ///   Name of the file
         /// </summary>
         public readonly string Name;
 
         /// <summary>
-        /// Full path to the file.
+        ///   Full path to the file.
         /// </summary>
         public readonly string Path;
 
         /// <summary>
-        /// Size of the file in bytes
+        ///   Size of the file in bytes
         /// </summary>
         public readonly long Size;
 
@@ -82,11 +85,10 @@ namespace YANFOE.Tools.ThirdParty
         /// Initializes a new instance of the <see cref="FileData"/> class.
         /// </summary>
         /// <param name="dir">
-        /// The directory that the file is stored at
+        /// The directory that the file is stored at 
         /// </param>
         /// <param name="findData">
-        /// WIN32_FIND_DATA structure that this
-        /// object wraps.
+        /// WIN32_FIND_DATA structure that this object wraps. 
         /// </param>
         internal FileData(string dir, WIN32_FIND_DATA findData)
         {
@@ -109,10 +111,10 @@ namespace YANFOE.Tools.ThirdParty
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets CreationTime.
+        ///   Gets CreationTime.
         /// </summary>
         public DateTime CreationTime
         {
@@ -123,7 +125,7 @@ namespace YANFOE.Tools.ThirdParty
         }
 
         /// <summary>
-        /// Gets the last access time in local time.
+        ///   Gets the last access time in local time.
         /// </summary>
         public DateTime LastAccesTime
         {
@@ -134,7 +136,7 @@ namespace YANFOE.Tools.ThirdParty
         }
 
         /// <summary>
-        /// Gets the last access time in local time.
+        ///   Gets the last access time in local time.
         /// </summary>
         public DateTime LastWriteTime
         {
@@ -146,14 +148,12 @@ namespace YANFOE.Tools.ThirdParty
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
         /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
+        /// <returns> A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" /> . </returns>
         public override string ToString()
         {
             return this.Name;
@@ -167,13 +167,13 @@ namespace YANFOE.Tools.ThirdParty
         /// The combine high low ints.
         /// </summary>
         /// <param name="high">
-        /// The high.
+        /// The high. 
         /// </param>
         /// <param name="low">
-        /// The low.
+        /// The low. 
         /// </param>
         /// <returns>
-        /// The combine high low ints.
+        /// The combine high low ints. 
         /// </returns>
         private static long CombineHighLowInts(uint high, uint low)
         {
@@ -184,12 +184,13 @@ namespace YANFOE.Tools.ThirdParty
         /// The convert date time.
         /// </summary>
         /// <param name="high">
-        /// The high.
+        /// The high. 
         /// </param>
         /// <param name="low">
-        /// The low.
+        /// The low. 
         /// </param>
         /// <returns>
+        /// The <see cref="DateTime"/>.
         /// </returns>
         private static DateTime ConvertDateTime(uint high, uint low)
         {
@@ -202,15 +203,14 @@ namespace YANFOE.Tools.ThirdParty
             {
                 return DateTime.FromFileTimeUtc(fileTime);
             }
-            
         }
 
         #endregion
     }
 
     /// <summary>
-    /// Contains information about the file that is found 
-    /// by the FindFirstFile or FindNextFile functions.
+    ///   Contains information about the file that is found 
+    ///   by the FindFirstFile or FindNextFile functions.
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
@@ -218,78 +218,76 @@ namespace YANFOE.Tools.ThirdParty
     internal class WIN32_FIND_DATA
     {
         /// <summary>
-        /// The dw file attributes.
+        ///   The dw file attributes.
         /// </summary>
         public FileAttributes dwFileAttributes;
 
         /// <summary>
-        /// The ft creation time_dw low date time.
+        ///   The ft creation time_dw low date time.
         /// </summary>
         public uint ftCreationTime_dwLowDateTime;
 
         /// <summary>
-        /// The ft creation time_dw high date time.
+        ///   The ft creation time_dw high date time.
         /// </summary>
         public uint ftCreationTime_dwHighDateTime;
 
         /// <summary>
-        /// The ft last access time_dw low date time.
+        ///   The ft last access time_dw low date time.
         /// </summary>
         public uint ftLastAccessTime_dwLowDateTime;
 
         /// <summary>
-        /// The ft last access time_dw high date time.
+        ///   The ft last access time_dw high date time.
         /// </summary>
         public uint ftLastAccessTime_dwHighDateTime;
 
         /// <summary>
-        /// The ft last write time_dw low date time.
+        ///   The ft last write time_dw low date time.
         /// </summary>
         public uint ftLastWriteTime_dwLowDateTime;
 
         /// <summary>
-        /// The ft last write time_dw high date time.
+        ///   The ft last write time_dw high date time.
         /// </summary>
         public uint ftLastWriteTime_dwHighDateTime;
 
         /// <summary>
-        /// The n file size high.
+        ///   The n file size high.
         /// </summary>
         public uint nFileSizeHigh;
 
         /// <summary>
-        /// The n file size low.
+        ///   The n file size low.
         /// </summary>
         public uint nFileSizeLow;
 
         /// <summary>
-        /// The dw reserved 0.
+        ///   The dw reserved 0.
         /// </summary>
         public int dwReserved0;
 
         /// <summary>
-        /// The dw reserved 1.
+        ///   The dw reserved 1.
         /// </summary>
         public int dwReserved1;
 
         /// <summary>
-        /// The c file name.
+        ///   The c file name.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
         public string cFileName;
 
         /// <summary>
-        /// The c alternate file name.
+        ///   The c alternate file name.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
         public string cAlternateFileName;
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.
         /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
+        /// <returns> A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" /> . </returns>
         public override string ToString()
         {
             return "File name=" + this.cFileName;
@@ -297,32 +295,33 @@ namespace YANFOE.Tools.ThirdParty
     }
 
     /// <summary>
-    /// A fast enumerator of files in a directory.  Use this if you need to get attributes for 
-    /// all files in a directory.
+    ///   A fast enumerator of files in a directory.  Use this if you need to get attributes for 
+    ///   all files in a directory.
     /// </summary>
     /// <remarks>
-    /// This enumerator is substantially faster than using <see cref="FastDirectoryEnumerator.EnumarateFilesPathList(string)"/>
-    /// and then creating a new FileInfo object for each path.  Use this version when you 
-    /// will need to look at the attibutes of each file returned (for example, you need
-    /// to check each file in a directory to see if it was modified after a specific date).
+    ///   This enumerator is substantially faster than using <see cref="FastDirectoryEnumerator.EnumarateFilesPathList(string)" />
+    ///   and then creating a new FileInfo object for each path.  Use this version when you 
+    ///   will need to look at the attibutes of each file returned (for example, you need
+    ///   to check each file in a directory to see if it was modified after a specific date).
     /// </remarks>
     public static class FastDirectoryEnumerator2
     {
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The enumarate files path list.
         /// </summary>
         /// <param name="path">
-        /// The path.
+        /// The path. 
         /// </param>
         /// <param name="searchPattern">
-        /// The search pattern.
+        /// The search pattern. 
         /// </param>
         /// <param name="searchOption">
-        /// The search option.
+        /// The search option. 
         /// </param>
         /// <returns>
+        /// The <see cref="string[]"/>.
         /// </returns>
         public static string[] EnumarateFilesPathList(
             string path, string searchPattern = null, SearchOption searchOption = SearchOption.TopDirectoryOnly)
@@ -341,14 +340,14 @@ namespace YANFOE.Tools.ThirdParty
         /// Gets <see cref="FileData"/> for all the files in a directory.
         /// </summary>
         /// <param name="path">
-        /// The path to search.
+        /// The path to search. 
         /// </param>
         /// <returns>
-        /// An object that implements <see cref="IEnumerable{FileData}"/> and 
-        /// allows you to enumerate the files in the given directory.
+        /// An object that implements <see cref="IEnumerable{FileData}"/> and allows you to enumerate the files in the given directory. 
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="path"/> is a null reference (Nothing in VB)
+        /// <paramref name="path"/>
+        ///   is a null reference (Nothing in VB)
         /// </exception>
         public static IEnumerable<FileData> EnumerateFiles(string path)
         {
@@ -357,20 +356,20 @@ namespace YANFOE.Tools.ThirdParty
 
         /// <summary>
         /// Gets <see cref="FileData"/> for all the files in a directory that match a 
-        /// specific filter.
+        ///   specific filter.
         /// </summary>
         /// <param name="path">
-        /// The path to search.
+        /// The path to search. 
         /// </param>
         /// <param name="searchPattern">
-        /// The search string to match against files in the path.
+        /// The search string to match against files in the path. 
         /// </param>
         /// <returns>
-        /// An object that implements <see cref="IEnumerable{FileData}"/> and 
-        /// allows you to enumerate the files in the given directory.
+        /// An object that implements <see cref="IEnumerable{FileData}"/> and allows you to enumerate the files in the given directory. 
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="path"/> is a null reference (Nothing in VB)
+        /// <paramref name="path"/>
+        ///   is a null reference (Nothing in VB)
         /// </exception>
         public static IEnumerable<FileData> EnumerateFiles(string path, string searchPattern)
         {
@@ -379,28 +378,29 @@ namespace YANFOE.Tools.ThirdParty
 
         /// <summary>
         /// Gets <see cref="FileData"/> for all the files in a directory that 
-        /// match a specific filter, optionally including all sub directories.
+        ///   match a specific filter, optionally including all sub directories.
         /// </summary>
         /// <param name="path">
-        /// The path to search.
+        /// The path to search. 
         /// </param>
         /// <param name="searchPattern">
-        /// The search string to match against files in the path.
+        /// The search string to match against files in the path. 
         /// </param>
         /// <param name="searchOption">
-        /// One of the SearchOption values that specifies whether the search 
-        /// operation should include all subdirectories or only the current directory.
+        /// One of the SearchOption values that specifies whether the search operation should include all subdirectories or only the current directory. 
         /// </param>
         /// <returns>
-        /// An object that implements <see cref="IEnumerable{FileData}"/> and 
-        /// allows you to enumerate the files in the given directory.
+        /// An object that implements <see cref="IEnumerable{FileData}"/> and allows you to enumerate the files in the given directory. 
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="path"/> is a null reference (Nothing in VB)
+        /// <paramref name="path"/>
+        ///   is a null reference (Nothing in VB)
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="searchOption"/> is not one of the valid values of the
-        /// <see cref="System.IO.SearchOption"/> enumeration.
+        /// <paramref name="searchOption"/>
+        ///   is not one of the valid values of the
+        ///   <see cref="System.IO.SearchOption"/>
+        ///   enumeration.
         /// </exception>
         public static IEnumerable<FileData> EnumerateFiles(string path, string searchPattern, SearchOption searchOption)
         {
@@ -426,23 +426,23 @@ namespace YANFOE.Tools.ThirdParty
 
         /// <summary>
         /// Gets <see cref="FileData"/> for all the files in a directory that match a 
-        /// specific filter.
+        ///   specific filter.
         /// </summary>
         /// <param name="path">
-        /// The path to search.
+        /// The path to search. 
         /// </param>
         /// <param name="searchPattern">
-        /// The search string to match against files in the path.
+        /// The search string to match against files in the path. 
         /// </param>
         /// <param name="searchOption">
-        /// The search Option.
+        /// The search Option. 
         /// </param>
         /// <returns>
-        /// An object that implements <see cref="IEnumerable{FileData}"/> and 
-        /// allows you to enumerate the files in the given directory.
+        /// An object that implements <see cref="IEnumerable{FileData}"/> and allows you to enumerate the files in the given directory. 
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="path"/> is a null reference (Nothing in VB)
+        /// <paramref name="path"/>
+        ///   is a null reference (Nothing in VB)
         /// </exception>
         public static FileData[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
@@ -458,25 +458,25 @@ namespace YANFOE.Tools.ThirdParty
         #endregion
 
         /// <summary>
-        /// Provides the implementation of the 
-        /// <see cref="T:System.Collections.Generic.IEnumerable`1"/> interface
+        ///   Provides the implementation of the 
+        ///   <see cref="T:System.Collections.Generic.IEnumerable`1" /> interface
         /// </summary>
         private class FileEnumerable : IEnumerable<FileData>
         {
-            #region Constants and Fields
+            #region Fields
 
             /// <summary>
-            /// The m_filter.
+            ///   The m_filter.
             /// </summary>
             private readonly string m_filter;
 
             /// <summary>
-            /// The m_path.
+            ///   The m_path.
             /// </summary>
             private readonly string m_path;
 
             /// <summary>
-            /// The m_search option.
+            ///   The m_search option.
             /// </summary>
             private readonly SearchOption m_searchOption;
 
@@ -488,14 +488,13 @@ namespace YANFOE.Tools.ThirdParty
             /// Initializes a new instance of the <see cref="FileEnumerable"/> class.
             /// </summary>
             /// <param name="path">
-            /// The path to search.
+            /// The path to search. 
             /// </param>
             /// <param name="filter">
-            /// The search string to match against files in the path.
+            /// The search string to match against files in the path. 
             /// </param>
             /// <param name="searchOption">
-            /// One of the SearchOption values that specifies whether the search 
-            /// operation should include all subdirectories or only the current directory.
+            /// One of the SearchOption values that specifies whether the search operation should include all subdirectories or only the current directory. 
             /// </param>
             public FileEnumerable(string path, string filter, SearchOption searchOption)
             {
@@ -506,33 +505,12 @@ namespace YANFOE.Tools.ThirdParty
 
             #endregion
 
-            #region Implemented Interfaces
-
-            #region IEnumerable
+            #region Public Methods and Operators
 
             /// <summary>
-            /// Returns an enumerator that iterates through a collection.
+            ///   Returns an enumerator that iterates through the collection.
             /// </summary>
-            /// <returns>
-            /// An <see cref="T:System.Collections.IEnumerator"/> object that can be 
-            /// used to iterate through the collection.
-            /// </returns>
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return new FileEnumerator(this.m_path, this.m_filter, this.m_searchOption);
-            }
-
-            #endregion
-
-            #region IEnumerable<FileData>
-
-            /// <summary>
-            /// Returns an enumerator that iterates through the collection.
-            /// </summary>
-            /// <returns>
-            /// A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can 
-            /// be used to iterate through the collection.
-            /// </returns>
+            /// <returns> A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection. </returns>
             public IEnumerator<FileData> GetEnumerator()
             {
                 return new FileEnumerator(this.m_path, this.m_filter, this.m_searchOption);
@@ -540,50 +518,61 @@ namespace YANFOE.Tools.ThirdParty
 
             #endregion
 
+            #region Explicit Interface Methods
+
+            /// <summary>
+            ///   Returns an enumerator that iterates through a collection.
+            /// </summary>
+            /// <returns> An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection. </returns>
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return new FileEnumerator(this.m_path, this.m_filter, this.m_searchOption);
+            }
+
             #endregion
         }
 
         /// <summary>
-        /// Provides the implementation of the 
-        /// <see cref="T:System.Collections.Generic.IEnumerator`1"/> interface
+        ///   Provides the implementation of the 
+        ///   <see cref="T:System.Collections.Generic.IEnumerator`1" /> interface
         /// </summary>
         [SuppressUnmanagedCodeSecurity]
         private class FileEnumerator : IEnumerator<FileData>
         {
-            #region Constants and Fields
+            #region Fields
 
             /// <summary>
-            /// The m_context stack.
+            ///   The m_context stack.
             /// </summary>
             private readonly Stack<SearchContext> m_contextStack;
 
             /// <summary>
-            /// The m_filter.
+            ///   The m_filter.
             /// </summary>
             private readonly string m_filter;
 
             /// <summary>
-            /// The m_search option.
+            ///   The m_search option.
             /// </summary>
             private readonly SearchOption m_searchOption;
 
             /// <summary>
-            /// The m_win_find_data.
+            ///   The m_win_find_data.
             /// </summary>
             private readonly WIN32_FIND_DATA m_win_find_data = new WIN32_FIND_DATA();
 
             /// <summary>
-            /// The m_current context.
+            ///   The m_current context.
             /// </summary>
             private SearchContext m_currentContext;
 
             /// <summary>
-            /// The m_hnd find file.
+            ///   The m_hnd find file.
             /// </summary>
             private SafeFindHandle m_hndFindFile;
 
             /// <summary>
-            /// The m_path.
+            ///   The m_path.
             /// </summary>
             private string m_path;
 
@@ -595,14 +584,13 @@ namespace YANFOE.Tools.ThirdParty
             /// Initializes a new instance of the <see cref="FileEnumerator"/> class.
             /// </summary>
             /// <param name="path">
-            /// The path to search.
+            /// The path to search. 
             /// </param>
             /// <param name="filter">
-            /// The search string to match against files in the path.
+            /// The search string to match against files in the path. 
             /// </param>
             /// <param name="searchOption">
-            /// One of the SearchOption values that specifies whether the search 
-            /// operation should include all subdirectories or only the current directory.
+            /// One of the SearchOption values that specifies whether the search operation should include all subdirectories or only the current directory. 
             /// </param>
             public FileEnumerator(string path, string filter, SearchOption searchOption)
             {
@@ -619,15 +607,13 @@ namespace YANFOE.Tools.ThirdParty
 
             #endregion
 
-            #region Properties
+            #region Public Properties
 
             /// <summary>
-            /// Gets the element in the collection at the current position of the enumerator.
+            ///   Gets the element in the collection at the current position of the enumerator.
             /// </summary>
-            /// <value></value>
-            /// <returns>
-            /// The element in the collection at the current position of the enumerator.
-            /// </returns>
+            /// <value> </value>
+            /// <returns> The element in the collection at the current position of the enumerator. </returns>
             public FileData Current
             {
                 get
@@ -636,13 +622,15 @@ namespace YANFOE.Tools.ThirdParty
                 }
             }
 
+            #endregion
+
+            #region Explicit Interface Properties
+
             /// <summary>
-            /// Gets the element in the collection at the current position of the enumerator.
+            ///   Gets the element in the collection at the current position of the enumerator.
             /// </summary>
-            /// <value></value>
-            /// <returns>
-            /// The element in the collection at the current position of the enumerator.
-            /// </returns>
+            /// <value> </value>
+            /// <returns> The element in the collection at the current position of the enumerator. </returns>
             object IEnumerator.Current
             {
                 get
@@ -653,13 +641,11 @@ namespace YANFOE.Tools.ThirdParty
 
             #endregion
 
-            #region Implemented Interfaces
-
-            #region IDisposable
+            #region Public Methods and Operators
 
             /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, 
-            /// or resetting unmanaged resources.
+            ///   Performs application-defined tasks associated with freeing, releasing, 
+            ///   or resetting unmanaged resources.
             /// </summary>
             public void Dispose()
             {
@@ -669,20 +655,11 @@ namespace YANFOE.Tools.ThirdParty
                 }
             }
 
-            #endregion
-
-            #region IEnumerator
-
             /// <summary>
-            /// Advances the enumerator to the next element of the collection.
+            ///   Advances the enumerator to the next element of the collection.
             /// </summary>
-            /// <returns>
-            /// true if the enumerator was successfully advanced to the next element; 
-            /// false if the enumerator has passed the end of the collection.
-            /// </returns>
-            /// <exception cref="T:System.InvalidOperationException">
-            /// The collection was modified after the enumerator was created.
-            /// </exception>
+            /// <returns> true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection. </returns>
+            /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
             public bool MoveNext()
             {
                 bool retval = false;
@@ -768,17 +745,13 @@ namespace YANFOE.Tools.ThirdParty
             }
 
             /// <summary>
-            /// Sets the enumerator to its initial position, which is before the first element in the collection.
+            ///   Sets the enumerator to its initial position, which is before the first element in the collection.
             /// </summary>
-            /// <exception cref="T:System.InvalidOperationException">
-            /// The collection was modified after the enumerator was created.
-            /// </exception>
+            /// <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
             public void Reset()
             {
                 this.m_hndFindFile = null;
             }
-
-            #endregion
 
             #endregion
 
@@ -788,12 +761,13 @@ namespace YANFOE.Tools.ThirdParty
             /// The find first file.
             /// </summary>
             /// <param name="fileName">
-            /// The file name.
+            /// The file name. 
             /// </param>
             /// <param name="data">
-            /// The data.
+            /// The data. 
             /// </param>
             /// <returns>
+            /// The <see cref="SafeFindHandle"/>.
             /// </returns>
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             private static extern SafeFindHandle FindFirstFile(string fileName, [In] [Out] WIN32_FIND_DATA data);
@@ -802,13 +776,13 @@ namespace YANFOE.Tools.ThirdParty
             /// The find next file.
             /// </summary>
             /// <param name="hndFindFile">
-            /// The hnd find file.
+            /// The hnd find file. 
             /// </param>
             /// <param name="lpFindFileData">
-            /// The lp find file data.
+            /// The lp find file data. 
             /// </param>
             /// <returns>
-            /// The find next file.
+            /// The find next file. 
             /// </returns>
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             private static extern bool FindNextFile(
@@ -818,19 +792,19 @@ namespace YANFOE.Tools.ThirdParty
             #endregion
 
             /// <summary>
-            /// Hold context information about where we current are in the directory search.
+            ///   Hold context information about where we current are in the directory search.
             /// </summary>
             private class SearchContext
             {
-                #region Constants and Fields
+                #region Fields
 
                 /// <summary>
-                /// The path.
+                ///   The path.
                 /// </summary>
                 public readonly string Path;
 
                 /// <summary>
-                /// The subdirectories to process.
+                ///   The subdirectories to process.
                 /// </summary>
                 public Stack<string> SubdirectoriesToProcess;
 
@@ -842,7 +816,7 @@ namespace YANFOE.Tools.ThirdParty
                 /// Initializes a new instance of the <see cref="SearchContext"/> class.
                 /// </summary>
                 /// <param name="path">
-                /// The path.
+                /// The path. 
                 /// </param>
                 public SearchContext(string path)
                 {
@@ -854,14 +828,14 @@ namespace YANFOE.Tools.ThirdParty
         }
 
         /// <summary>
-        /// Wraps a FindFirstFile handle.
+        ///   Wraps a FindFirstFile handle.
         /// </summary>
         private sealed class SafeFindHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
             #region Constructors and Destructors
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="SafeFindHandle"/> class.
+            ///   Initializes a new instance of the <see cref="SafeFindHandle" /> class.
             /// </summary>
             [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
             internal SafeFindHandle()
@@ -874,13 +848,9 @@ namespace YANFOE.Tools.ThirdParty
             #region Methods
 
             /// <summary>
-            /// When overridden in a derived class, executes the code required to free the handle.
+            ///   When overridden in a derived class, executes the code required to free the handle.
             /// </summary>
-            /// <returns>
-            /// true if the handle is released successfully; otherwise, in the 
-            /// event of a catastrophic failure, false. In this case, it 
-            /// generates a releaseHandleFailed MDA Managed Debugging Assistant.
-            /// </returns>
+            /// <returns> true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a releaseHandleFailed MDA Managed Debugging Assistant. </returns>
             protected override bool ReleaseHandle()
             {
                 return FindClose(base.handle);
@@ -890,10 +860,10 @@ namespace YANFOE.Tools.ThirdParty
             /// The find close.
             /// </summary>
             /// <param name="handle">
-            /// The handle.
+            /// The handle. 
             /// </param>
             /// <returns>
-            /// The find close.
+            /// The find close. 
             /// </returns>
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             [DllImport("kernel32.dll")]

@@ -1,104 +1,112 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Get.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Get.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Collection of settings avalable to YANFOE.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Settings
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.IO;
 
     using BitFactory.Logging;
 
-    using DevExpress.XtraEditors;
-
     using Newtonsoft.Json;
 
     using YANFOE.InternalApps.Logs;
     using YANFOE.Settings.UserSettings;
+    using YANFOE.Tools.Enums;
     using YANFOE.Tools.Text;
 
+    #endregion
+
     /// <summary>
-    /// Collection of settings avalable to YANFOE.
+    ///   Collection of settings avalable to YANFOE.
     /// </summary>
     public static class Get
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The countries settings
+        ///   The countries settings
         /// </summary>
         private static Countries countries;
 
         /// <summary>
-        /// The file system paths settings
+        ///   The file system paths settings
         /// </summary>
         private static FileSystemPaths fileSystemPaths;
 
         /// <summary>
-        /// The genres settings
+        ///   The genres settings
         /// </summary>
         private static Genres genres;
 
         /// <summary>
-        /// The image settings
+        ///   The image settings
         /// </summary>
         private static Image image;
 
         /// <summary>
-        /// The in out collection settings
+        ///   The in out collection settings
         /// </summary>
         private static InOut inOutCollection;
 
         /// <summary>
-        /// The keywords settings
+        ///   The keywords settings
         /// </summary>
         private static Keywords keywords;
 
         /// <summary>
-        /// The localization settings
+        ///   The localization settings
         /// </summary>
         private static Localization localization;
 
         /// <summary>
-        /// The log settings
+        ///   The log settings
         /// </summary>
         private static LogSettings logSettings;
 
         /// <summary>
-        /// The look and feel settings
+        ///   The look and feel settings
         /// </summary>
         private static LookAndFeel lookAndFeel;
 
         /// <summary>
-        /// The media settings
+        ///   The media settings
         /// </summary>
         private static Media media;
 
+        /// <summary>
+        /// The media info.
+        /// </summary>
         private static MediaInfoSettings mediaInfo;
 
         /// <summary>
-        /// The scraper settings
+        ///   The scraper settings
         /// </summary>
         private static Scraper scraper;
 
         /// <summary>
-        /// The UiSettings settings
+        ///   The UiSettings settings
         /// </summary>
         private static UiSettings ui;
 
         /// <summary>
-        /// The web settings
+        ///   The web settings
         /// </summary>
         private static WebSettings web;
 
@@ -107,7 +115,7 @@ namespace YANFOE.Settings
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="Get"/> class.
+        ///   Initializes static members of the <see cref="Get" /> class.
         /// </summary>
         static Get()
         {
@@ -116,10 +124,10 @@ namespace YANFOE.Settings
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Countries.
+        ///   Gets or sets Countries.
         /// </summary>
         public static Countries Countries
         {
@@ -135,9 +143,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets a collection of IO paths.
+        ///   Gets or sets a collection of IO paths.
         /// </summary>
-        /// <value>The file system paths.</value>
+        /// <value> The file system paths. </value>
         public static FileSystemPaths FileSystemPaths
         {
             get
@@ -152,7 +160,7 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets Genres.
+        ///   Gets or sets Genres.
         /// </summary>
         public static Genres Genres
         {
@@ -168,9 +176,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets settings relating to images.
+        ///   Gets or sets settings relating to images.
         /// </summary>
-        /// <value>The image.</value>
+        /// <value> The image. </value>
         public static Image Image
         {
             get
@@ -185,9 +193,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets the in out collection.
+        ///   Gets or sets the in out collection.
         /// </summary>
-        /// <value>The in out collection.</value>
+        /// <value> The in out collection. </value>
         public static InOut InOutCollection
         {
             get
@@ -202,9 +210,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets keywords that will be used for filtering.
+        ///   Gets or sets keywords that will be used for filtering.
         /// </summary>
-        /// <value>The keywords.</value>
+        /// <value> The keywords. </value>
         public static Keywords Keywords
         {
             get
@@ -219,9 +227,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets the localization.
+        ///   Gets or sets the localization.
         /// </summary>
-        /// <value>The localization.</value>
+        /// <value> The localization. </value>
         public static Localization Localization
         {
             get
@@ -235,6 +243,9 @@ namespace YANFOE.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets the log settings.
+        /// </summary>
         public static LogSettings LogSettings
         {
             get
@@ -249,7 +260,7 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets LookAndFeel.
+        ///   Gets or sets LookAndFeel.
         /// </summary>
         public static LookAndFeel LookAndFeel
         {
@@ -265,7 +276,7 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets Media.
+        ///   Gets or sets Media.
         /// </summary>
         public static Media Media
         {
@@ -280,6 +291,9 @@ namespace YANFOE.Settings
             }
         }
 
+        /// <summary>
+        /// Gets or sets the media info.
+        /// </summary>
         public static MediaInfoSettings MediaInfo
         {
             get
@@ -294,7 +308,7 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets Scraper.
+        ///   Gets or sets Scraper.
         /// </summary>
         public static Scraper Scraper
         {
@@ -310,7 +324,7 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets Ui.
+        ///   Gets or sets Ui.
         /// </summary>
         public static UiSettings Ui
         {
@@ -326,9 +340,9 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Gets or sets settings related to web.
+        ///   Gets or sets settings related to web.
         /// </summary>
-        /// <value>The web settings object</value>
+        /// <value> The web settings object </value>
         public static WebSettings Web
         {
             get
@@ -344,10 +358,10 @@ namespace YANFOE.Settings
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The load all.
+        ///   The load all.
         /// </summary>
         public static void LoadAll()
         {
@@ -368,15 +382,15 @@ namespace YANFOE.Settings
         }
 
         /// <summary>
-        /// Save all settings
+        ///   Save all settings
         /// </summary>
         public static void SaveAll()
         {
             SaveSettings(
                 new dynamic[]
                     {
-                        Countries, FileSystemPaths, Genres, Image, InOutCollection, Keywords, Localization, LogSettings, LookAndFeel, 
-                        Media, MediaInfo, Scraper, Ui, Web
+                        Countries, FileSystemPaths, Genres, Image, InOutCollection, Keywords, Localization, LogSettings, 
+                        LookAndFeel, Media, MediaInfo, Scraper, Ui, Web
                     });
         }
 
@@ -385,7 +399,7 @@ namespace YANFOE.Settings
         #region Methods
 
         /// <summary>
-        /// The load country setting.
+        ///   The load country setting.
         /// </summary>
         private static void LoadCountrySetting()
         {
@@ -403,13 +417,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Countries settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Countries settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load file system paths settings.
+        ///   The load file system paths settings.
         /// </summary>
         private static void LoadFileSystemPathsSettings()
         {
@@ -428,13 +442,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load FileSystemPaths settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load FileSystemPaths settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load genres settings.
+        ///   The load genres settings.
         /// </summary>
         private static void LoadGenresSettings()
         {
@@ -453,13 +467,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Genres settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Genres settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load image settings.
+        ///   The load image settings.
         /// </summary>
         private static void LoadImageSettings()
         {
@@ -478,13 +492,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Image settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Image settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load in out collection settings.
+        ///   The load in out collection settings.
         /// </summary>
         private static void LoadInOutCollectionSettings()
         {
@@ -495,7 +509,7 @@ namespace YANFOE.Settings
                 if (!File.Exists(path))
                 {
                     inOutCollection = new InOut();
-                    inOutCollection.SetCurrentSettings(YANFOE.Tools.Enums.NFOType.YAMJ);
+                    inOutCollection.SetCurrentSettings(NFOType.YAMJ);
                     return;
                 }
 
@@ -505,13 +519,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load InOut settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load InOut settings. Please check log for more info." + exception.Message);
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load keywords settings.
+        ///   The load keywords settings.
         /// </summary>
         private static void LoadKeywordsSettings()
         {
@@ -530,13 +544,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Keywords settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Keywords settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load localization settings.
+        ///   The load localization settings.
         /// </summary>
         private static void LoadLocalizationSettings()
         {
@@ -555,11 +569,14 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Localization settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Localization settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
+        /// <summary>
+        /// The load log settings.
+        /// </summary>
         private static void LoadLogSettings()
         {
             try
@@ -577,13 +594,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load log settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load log settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load look and feel settings.
+        ///   The load look and feel settings.
         /// </summary>
         private static void LoadLookAndFeelSettings()
         {
@@ -602,11 +619,14 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load LookAndFeel settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load LookAndFeel settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
+        /// <summary>
+        /// The load media info settings.
+        /// </summary>
         private static void LoadMediaInfoSettings()
         {
             try
@@ -624,13 +644,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load LookAndFeel settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load LookAndFeel settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load media settings.
+        ///   The load media settings.
         /// </summary>
         private static void LoadMediaSettings()
         {
@@ -649,13 +669,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Media settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Media settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load scraper settings.
+        ///   The load scraper settings.
         /// </summary>
         private static void LoadScraperSettings()
         {
@@ -674,13 +694,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Scraper settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Scraper settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load ui settings.
+        ///   The load ui settings.
         /// </summary>
         private static void LoadUiSettings()
         {
@@ -699,13 +719,13 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load UiSettings settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load UiSettings settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
 
         /// <summary>
-        /// The load web settings.
+        ///   The load web settings.
         /// </summary>
         private static void LoadWebSettings()
         {
@@ -724,7 +744,7 @@ namespace YANFOE.Settings
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to load Web settings. Please check log for more info.");
+                // MessageBox.Show("Failed to load Web settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }
@@ -732,22 +752,24 @@ namespace YANFOE.Settings
         /// <summary>
         /// The save settings.
         /// </summary>
-        /// <param name="objs">The object to save</param>
+        /// <param name="objs">
+        /// The object to save 
+        /// </param>
         private static void SaveSettings(IEnumerable<dynamic> objs)
         {
             try
             {
                 foreach (dynamic obj in objs)
                 {
-                    dynamic path = FileSystemPaths.PathSettings +
-                                   obj.GetType().ToString().Replace("YANFOE.Settings.UserSettings.", string.Empty) +
-                                   ".txt";
+                    dynamic path = FileSystemPaths.PathSettings
+                                   + obj.GetType().ToString().Replace("YANFOE.Settings.UserSettings.", string.Empty)
+                                   + ".txt";
                     IO.WriteTextToFile(path, JsonConvert.SerializeObject(obj));
                 }
             }
             catch (Exception exception)
             {
-                XtraMessageBox.Show("Failed to save settings. Please check log for more info.");
+                // MessageBox.Show("Failed to save settings. Please check log for more info.");
                 Log.WriteToLog(LogSeverity.Error, 0, exception.Message, exception.StackTrace);
             }
         }

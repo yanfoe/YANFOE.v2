@@ -1,23 +1,29 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Localization.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Localization.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Localization related settings.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Settings.UserSettings
 {
+    #region Required Namespaces
+
     using System;
 
+    #endregion
+
     /// <summary>
-    /// Localization related settings.
+    ///   Localization related settings.
     /// </summary>
     [Serializable]
     public class Localization
@@ -25,7 +31,7 @@ namespace YANFOE.Settings.UserSettings
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Localization"/> class.
+        ///   Initializes a new instance of the <see cref="Localization" /> class.
         /// </summary>
         public Localization()
         {
@@ -34,12 +40,12 @@ namespace YANFOE.Settings.UserSettings
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the current application language.
+        ///   Gets or sets the current application language.
         /// </summary>
-        /// <value>The app lang.</value>
+        /// <value> The app lang. </value>
         public string AppLang { get; set; }
 
         #endregion
@@ -47,7 +53,7 @@ namespace YANFOE.Settings.UserSettings
         #region Methods
 
         /// <summary>
-        /// Contructs the default values.
+        ///   Contructs the default values.
         /// </summary>
         private void ContructDefaultValues()
         {

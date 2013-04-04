@@ -1,21 +1,24 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Gzip.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Gzip.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Handles compression and decompression of files using Gzip
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Compression
 {
+    #region Required Namespaces
+
     using System;
-    using System.Globalization;
     using System.IO;
     using System.IO.Compression;
     using System.Text;
@@ -25,16 +28,24 @@ namespace YANFOE.Tools.Compression
     using YANFOE.InternalApps.Logs;
     using YANFOE.InternalApps.Logs.Enums;
 
+    #endregion
+
     /// <summary>
-    /// Handles compression and decompression of files using Gzip
+    ///   Handles compression and decompression of files using Gzip
     /// </summary>
     public static class Gzip
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// Compresses the specified source file name.
         /// </summary>
-        /// <param name="sourceFileName">Name of the source file.</param>
-        /// <param name="destinationFileName">Name of the destination file.</param>
+        /// <param name="sourceFileName">
+        /// Name of the source file. 
+        /// </param>
+        /// <param name="destinationFileName">
+        /// Name of the destination file. 
+        /// </param>
         public static void Compress(string sourceFileName, string destinationFileName)
         {
             const string LogCatagory = "Gzip Compression";
@@ -61,16 +72,19 @@ namespace YANFOE.Tools.Compression
         /// <summary>
         /// Compresses the string to file
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="destinationFileName">Name of the destination file.</param>
+        /// <param name="value">
+        /// The value. 
+        /// </param>
+        /// <param name="destinationFileName">
+        /// Name of the destination file. 
+        /// </param>
         public static void CompressString(string value, string destinationFileName)
         {
             const string LogCatagory = "Gzip String Compression";
 
             try
             {
-                using (var sourceStream = new MemoryStream(
-                    Encoding.UTF8.GetBytes(value)))
+                using (var sourceStream = new MemoryStream(Encoding.UTF8.GetBytes(value)))
                 {
                     using (var destinationStream = new FileStream(destinationFileName, FileMode.Create))
                     {
@@ -92,8 +106,12 @@ namespace YANFOE.Tools.Compression
         /// <summary>
         /// Decompresses the specified file path.
         /// </summary>
-        /// <param name="filePath">The file path.</param>
-        /// <returns>Decompressed file path</returns>
+        /// <param name="filePath">
+        /// The file path. 
+        /// </param>
+        /// <returns>
+        /// Decompressed file path 
+        /// </returns>
         public static string Decompress(string filePath)
         {
             const string LogCatagory = "Gzip Decompression";
@@ -161,11 +179,19 @@ namespace YANFOE.Tools.Compression
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Pumps the specified input.
         /// </summary>
-        /// <param name="input">The input.</param>
-        /// <param name="output">The output.</param>
+        /// <param name="input">
+        /// The input. 
+        /// </param>
+        /// <param name="output">
+        /// The output. 
+        /// </param>
         private static void Pump(Stream input, Stream output)
         {
             const string LogCatagory = "Gzip Pump";
@@ -184,5 +210,7 @@ namespace YANFOE.Tools.Compression
                 Log.WriteToLog(LogSeverity.Error, LoggerName.GeneralLog, LogCatagory, ex.Message);
             }
         }
+
+        #endregion
     }
 }

@@ -1,66 +1,145 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Exporting.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Exporting.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The exporting.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Exporting
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.IO;
+    using System.Linq;
+    using System.Windows;
     using System.Xml;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-
-    using YANFOE.UI.Popups;
-    using YANFOE.Factories;
-    using YANFOE.Tools.Xml;
-    using YANFOE.Models.TvModels.Show;
-    using YANFOE.Tools.Extentions;
-
-    using DevExpress.XtraEditors;
-    using YANFOE.Models.MovieModels;
 
     using Antlr4.StringTemplate;
 
-    class Exporting
+    using YANFOE.Factories;
+    using YANFOE.Models.MovieModels;
+    using YANFOE.Models.TvModels.Show;
+    using YANFOE.Tools.Extentions;
+    using YANFOE.Tools.UI;
+    using YANFOE.Tools.Xml;
+    using YANFOE.UI.Popups;
+
+    #endregion
+
+    /// <summary>
+    /// The exporting.
+    /// </summary>
+    internal class Exporting
     {
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The export missing episodes template.
+        /// </summary>
+        /// <param name="tName">
+        /// The t name.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public static bool ExportMissingEpisodesTemplate(string tName, string path = "")
+        {
+            var files = GetExportTemplates();
+            var exportTemplate = (from s in files where s.name == tName select s).Single();
+            var template = new Template(File.ReadAllText(exportTemplate.file));
+
+            var seriesList = new List<Series>();
+            foreach (var series in TVDBFactory.Instance.TVDatabase)
+            {
+                if (series.CountMissingEpisodes() > 0)
+                {
+                    var s = series.Clone();
+                    s.Seasons.Clear();
+                    seriesList.Add(s);
+
+                    var episodes = series.GetMissingEpisodes();
+                    foreach (var episode in episodes)
+                    {
+                        if (s.Seasons.All(x => x.SeasonNumber != episode.SeasonNumber))
+                        {
+                            var season = episode.GetSeason().Clone();
+                            season.Episodes.Clear();
+                            s.Seasons.Add(season);
+                        }
+
+                        var ep = episode.Clone();
+
+                        s.Seasons[episode.GetSeason().SeasonNumber].Episodes.Add(ep);
+                    }
+                }
+            }
+
+            template.Add("series", seriesList);
+
+            string ext = string.Empty;
+            if (path == string.Empty)
+            {
+                var form = new WndSimpleBrowse();
+                form.ShowDialog();
+                if (form.DialogResult == true)
+                {
+                    path = form.getInput();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            ext = Path.GetExtension(path);
+            if (ext == string.Empty)
+            {
+                ext = exportTemplate.outputformat;
+            }
+
+            File.WriteAllText(Path.Combine(path, "MissingEpisodesList." + ext), template.Render());
+
+            return true;
+        }
+
+        /// <summary>
+        /// The export missing tv show episodes.
+        /// </summary>
         public static void ExportMissingTvShowEpisodes()
         {
             var missingEpisodes = new List<EpisodeTreeList>();
             int i = 1;
-            foreach (var series in TvDBFactory.TvDatabase)
+            foreach (var series in TVDBFactory.Instance.TVDatabase)
             {
-                if (series.Value.CountMissingEpisodes() > 0)
+                if (series.CountMissingEpisodes() > 0)
                 {
-                    var show = new EpisodeTreeList
-                    {
-                        id = i++,
-                        seriesname = series.Value.SeriesName,
-                        parent = 0
-                    };
+                    var show = new EpisodeTreeList { id = i++, seriesname = series.SeriesName, parent = 0 };
                     missingEpisodes.Add(show);
-                    var episodes = series.Value.GetMissingEpisodes();
+                    var episodes = series.GetMissingEpisodes();
                     foreach (var episode in episodes)
                     {
                         var ep = new EpisodeTreeList
-                        {
-                            id = i++,
-                            parent = show.id,
-                            episodename = episode.EpisodeName,
-                            seriesname = string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
-                        };
+                            {
+                                id = i++, 
+                                parent = show.id, 
+                                episodename = episode.EpisodeName, 
+                                seriesname =
+                                    string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
+                            };
                         missingEpisodes.Add(ep);
 
                         show.missingEpisodesCount++;
@@ -70,97 +149,62 @@ namespace YANFOE.Tools.Exporting
 
             if (missingEpisodes.Count == 0)
             {
-                XtraMessageBox.Show("No missing episodes found", "No result");
+                MessageBox.Show("No missing episodes found", "No result");
             }
             else
             {
-                ExportMissingEpisodes form = new ExportMissingEpisodes(missingEpisodes);
-                form.Show();
+                // ExportMissingEpisodes form = new ExportMissingEpisodes(missingEpisodes);
+                // form.Show();
             }
         }
 
+        /// <summary>
+        /// The export movie list.
+        /// </summary>
         public static void ExportMovieList()
         {
-            BindingList<MovieModel> movies;
+            ThreadedBindingList<MovieModel> movies;
             var list = new List<MovieTreeList>();
 
-            if (MovieDBFactory.IsMultiSelected)
+            if (MovieDBFactory.Instance.IsMultiSelected)
             {
-                movies = MovieDBFactory.MultiSelectedMovies;
+                movies = MovieDBFactory.Instance.MultiSelectedMovies;
             }
             else
             {
-                movies = MovieDBFactory.MovieDatabase;
+                movies = MovieDBFactory.Instance.MovieDatabase;
             }
 
             int i = 1;
             foreach (var movie in movies)
             {
-                var m = new MovieTreeList
-                {
-                    id = i++,
-                    name = movie.Title,
-                    year = movie.Year
-                };
+                var m = new MovieTreeList { id = i++, name = movie.Title, year = movie.Year };
                 list.Add(m);
             }
 
             if (list.Count == 0)
             {
-                XtraMessageBox.Show("No movies found", "No result");
+                MessageBox.Show("No movies found", "No result");
             }
             else
             {
-                ExportMovieList form = new ExportMovieList(list);
-                form.Show();
+                // ExportMovieList form = new ExportMovieList(list);
+                // form.Show();
             }
         }
 
-        public static void ExportTvShowList()
-        {
-            var list = new List<EpisodeTreeList>();
-            int i = 1;
-            foreach (var series in TvDBFactory.TvDatabase)
-            {
-                    var show = new EpisodeTreeList
-                    {
-                        id = i++,
-                        seriesname = series.Value.SeriesName,
-                        parent = 0
-                    };
-                    list.Add(show);
-                    var episodes = series.Value.GetMissingEpisodes();
-                    foreach (var episode in episodes)
-                    {
-                        if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
-                        {
-                            continue;
-                        }
-
-                        var ep = new EpisodeTreeList
-                        {
-                            id = i++,
-                            parent = show.id,
-                            episodename = episode.EpisodeName,
-                            seriesname = string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
-                        };
-                        list.Add(ep);
-
-                        show.missingEpisodesCount++;
-                    }
-            }
-
-            if (list.Count == 0)
-            {
-                XtraMessageBox.Show("No movies found", "No result");
-            }
-            else
-            {
-                ExportMissingEpisodes form = new ExportMissingEpisodes(list, "Episode List ({0})");
-                form.Show();
-            }
-        }
-
+        /// <summary>
+        /// The export movies template.
+        /// </summary>
+        /// <param name="tName">
+        /// The t name.
+        /// </param>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public static bool ExportMoviesTemplate(string tName, string path = "")
         {
             var files = GetExportTemplates();
@@ -168,26 +212,26 @@ namespace YANFOE.Tools.Exporting
             string str = File.ReadAllText(exportTemplate.file);
             var template = new Template(str);
 
-            BindingList<MovieModel> movies;
+            ThreadedBindingList<MovieModel> movies;
             var list = new List<MovieTreeList>();
 
-            if (MovieDBFactory.IsMultiSelected)
+            if (MovieDBFactory.Instance.IsMultiSelected)
             {
-                movies = MovieDBFactory.MultiSelectedMovies;
+                movies = MovieDBFactory.Instance.MultiSelectedMovies;
             }
             else
             {
-                movies = MovieDBFactory.MovieDatabase;
+                movies = MovieDBFactory.Instance.MovieDatabase;
             }
 
             template.Add("movies", movies);
 
-            string ext = "";
-            if (path == "")
+            string ext = string.Empty;
+            if (path == string.Empty)
             {
-                var form = new SimpleBrowseForm();
+                var form = new WndSimpleBrowse();
                 form.ShowDialog();
-                if (form.DialogResult == DialogResult.OK)
+                if (form.DialogResult == true)
                 {
                     path = form.getInput();
                 }
@@ -198,74 +242,75 @@ namespace YANFOE.Tools.Exporting
             }
 
             ext = Path.GetExtension(path);
-            if (ext == "") ext = exportTemplate.outputformat;
+            if (ext == string.Empty)
+            {
+                ext = exportTemplate.outputformat;
+            }
 
             File.WriteAllText(Path.Combine(path, "MovieList." + ext), template.Render());
 
             return true;
         }
 
-        public static bool ExportMissingEpisodesTemplate(string tName, string path = "")
+        /// <summary>
+        /// The export tv show list.
+        /// </summary>
+        public static void ExportTvShowList()
         {
-            var files = GetExportTemplates();
-            var exportTemplate = (from s in files where s.name == tName select s).Single();
-            var template = new Template(File.ReadAllText(exportTemplate.file).ToString());
-            
-            var seriesList = new List<Series>();
-            foreach (var series in TvDBFactory.TvDatabase)
+            var list = new List<EpisodeTreeList>();
+            int i = 1;
+            foreach (var series in TVDBFactory.Instance.TVDatabase)
             {
-                if (series.Value.CountMissingEpisodes() > 0)
+                var show = new EpisodeTreeList { id = i++, seriesname = series.SeriesName, parent = 0 };
+                list.Add(show);
+                var episodes = series.GetMissingEpisodes();
+                foreach (var episode in episodes)
                 {
-                    var s = Extensions.Clone(series.Value);
-                    s.Seasons.Clear();
-                    seriesList.Add(s);
-                    
-                    var episodes = series.Value.GetMissingEpisodes();
-                    foreach (var episode in episodes)
+                    if (string.IsNullOrEmpty(episode.FilePath.PathAndFilename))
                     {
-                        
-                        if (!s.Seasons.ContainsKey(episode.GetSeason().SeasonNumber))
-                        {
-                            var season = Extensions.Clone(episode.GetSeason());
-                            season.Episodes.Clear();
-                            s.Seasons.Add(season.SeasonNumber, season);
-                        }
-
-                        var ep = Extensions.Clone(episode);
-                        
-                        s.Seasons[episode.GetSeason().SeasonNumber].Episodes.Add(ep);
+                        continue;
                     }
+
+                    var ep = new EpisodeTreeList
+                        {
+                            id = i++, 
+                            parent = show.id, 
+                            episodename = episode.EpisodeName, 
+                            seriesname =
+                                string.Format("{0}x{1:00}", episode.GetSeason().SeasonNumber, episode.EpisodeNumber)
+                        };
+                    list.Add(ep);
+
+                    show.missingEpisodesCount++;
                 }
             }
 
-            template.Add("series", seriesList);
-
-            string ext = "";
-            if (path == "")
+            if (list.Count == 0)
             {
-                var form = new SimpleBrowseForm();
-                form.ShowDialog();
-                if (form.DialogResult == DialogResult.OK)
-                {
-                    path = form.getInput();
-                }
-                else
-                {
-                    return false;
-                }
+                MessageBox.Show("No movies found", "No result");
             }
-
-            ext = Path.GetExtension(path);
-            if (ext == "") ext = exportTemplate.outputformat;
-
-            File.WriteAllText(Path.Combine(path, "MissingEpisodesList." + ext), template.Render());
-
-            return true;
+            else
+            {
+                // ExportMissingEpisodes form = new ExportMissingEpisodes(list, "Episode List ({0})");
+                // form.Show();
+            }
         }
 
+        /// <summary>
+        /// The get export templates.
+        /// </summary>
+        /// <param name="type">
+        /// The type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="List"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// </exception>
         public static List<ExportTemplate> GetExportTemplates(string type = "")
         {
-            var tempInfo = Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "Templates"), "template.xml", SearchOption.AllDirectories);
+            var tempInfo = Directory.GetFiles(
+                Path.Combine(Environment.CurrentDirectory, "Templates"), "template.xml", SearchOption.AllDirectories);
             var templates = new List<ExportTemplate>();
 
             foreach (var file in tempInfo)
@@ -273,14 +318,11 @@ namespace YANFOE.Tools.Exporting
                 XmlDocument xmlReader = XRead.OpenPath(file);
                 if (xmlReader == null)
                 {
-                    XtraMessageBox.Show(
-                        string.Format(
-                            "The template configuration file '{0}' is invalid!",
-                            Path.GetFileName(file)
-                        ), 
-                        "Invalid Export Template"
-                    );
+                    MessageBox.Show(
+                        string.Format("The template configuration file '{0}' is invalid!", Path.GetFileName(file)), 
+                        "Invalid Export Template");
                 }
+
                 var templateName = XRead.GetString(xmlReader, "name", 1);
 
                 try
@@ -289,66 +331,119 @@ namespace YANFOE.Tools.Exporting
 
                     var xmlAuthor = xmlReader.GetElementsByTagName("author")[0].InnerXml;
                     XmlDocument temp = XRead.OpenXml("<x>" + xmlAuthor + "</x>");
-                    if (type != "")
+                    if (type != string.Empty)
                     {
                         if (XRead.GetString(xmlReader, "type") != type)
+                        {
                             continue;
+                        }
                     }
 
-                    templates.Add(new ExportTemplate
-                    {
-                        name = templateName,
-                        date = XRead.GetString(xmlReader, "date"),
-                        file = Path.Combine(Path.GetDirectoryName(file), XRead.GetString(xmlReader, "templatefile")),
-                        description = XRead.GetString(xmlReader, "description"),
-                        outputformat = XRead.GetString(xmlReader, "outputformat"),
-                        type = XRead.GetString(xmlReader, "type"),
-                        author = new ExportTemplate.Author
-                        {
-                            name = XRead.GetString(temp, "name"),
-                            website = XRead.GetString(temp, "website"),
-                            email = XRead.GetString(temp, "email")
-                        }
-                    });
+                    templates.Add(
+                        new ExportTemplate
+                            {
+                                name = templateName, 
+                                date = XRead.GetString(xmlReader, "date"), 
+                                file =
+                                    Path.Combine(Path.GetDirectoryName(file), XRead.GetString(xmlReader, "templatefile")), 
+                                description = XRead.GetString(xmlReader, "description"), 
+                                outputformat = XRead.GetString(xmlReader, "outputformat"), 
+                                type = XRead.GetString(xmlReader, "type"), 
+                                author =
+                                    new ExportTemplate.Author
+                                        {
+                                            name = XRead.GetString(temp, "name"), 
+                                            website = XRead.GetString(temp, "website"), 
+                                            email = XRead.GetString(temp, "email")
+                                        }
+                            });
                 }
                 catch (Exception e)
                 {
                     if (e is XmlException || e is InvalidOperationException)
                     {
-                        XtraMessageBox.Show(
-                            string.Format(
-                                "The template '{0}' is invalid!", 
-                                templateName
-                            ), 
-                            "Invalid Export Template"
-                        );
+                        MessageBox.Show(
+                            string.Format("The template '{0}' is invalid!", templateName), "Invalid Export Template");
                     }
                     else
                     {
                         throw e;
                     }
                 }
-
             }
 
             return templates;
         }
 
+        #endregion
+
+        /// <summary>
+        /// The export template.
+        /// </summary>
         public class ExportTemplate
         {
-            public string name { get; set; }
-            public string date { get; set; }
-            public string file { get; set; }
-            public string description { get; set; }
-            public string outputformat { get; set; }
-            public string type { get; set; }
+            #region Public Properties
+
+            /// <summary>
+            /// Gets or sets the author.
+            /// </summary>
             public Author author { get; set; }
 
+            /// <summary>
+            /// Gets or sets the date.
+            /// </summary>
+            public string date { get; set; }
+
+            /// <summary>
+            /// Gets or sets the description.
+            /// </summary>
+            public string description { get; set; }
+
+            /// <summary>
+            /// Gets or sets the file.
+            /// </summary>
+            public string file { get; set; }
+
+            /// <summary>
+            /// Gets or sets the name.
+            /// </summary>
+            public string name { get; set; }
+
+            /// <summary>
+            /// Gets or sets the outputformat.
+            /// </summary>
+            public string outputformat { get; set; }
+
+            /// <summary>
+            /// Gets or sets the type.
+            /// </summary>
+            public string type { get; set; }
+
+            #endregion
+
+            /// <summary>
+            /// The author.
+            /// </summary>
             public class Author
             {
-                public string name { get; set; }
-                public string website { get; set; }
+                #region Public Properties
+
+                /// <summary>
+                /// Gets or sets the email.
+                /// </summary>
                 public string email { get; set; }
+
+                /// <summary>
+                /// Gets or sets the name.
+                /// </summary>
+                public string name { get; set; }
+
+                /// <summary>
+                /// Gets or sets the website.
+                /// </summary>
+                public string website { get; set; }
+
+                #endregion
             }
         }
     }

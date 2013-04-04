@@ -1,53 +1,59 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SubtitleStreamModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="SubtitleStreamModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   A Subtitle stream model for use attached to a MediaScanOutput
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.GeneralModels
 {
+    #region Required Namespaces
+
     using System;
 
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// A Subtitle stream model for use attached to a MediaScanOutput
+    ///   A Subtitle stream model for use attached to a MediaScanOutput
     /// </summary>
     [Serializable]
     public class SubtitleStreamModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// Backing field for CodecID
+        ///   Backing field for CodecID
         /// </summary>
         private string codecID;
 
         /// <summary>
-        /// Backing field for CodecIDInfo
+        ///   Backing field for CodecIDInfo
         /// </summary>
         private string codecIDInfo;
 
         /// <summary>
-        /// Backing field for Format
+        ///   Backing field for Format
         /// </summary>
         private string format;
 
         /// <summary>
-        /// Backing field for MovieUniqueId
+        ///   Backing field for MovieUniqueId
         /// </summary>
         private int id;
 
         /// <summary>
-        /// Backing field for Language
+        ///   Backing field for Language
         /// </summary>
         private string language;
 
@@ -56,7 +62,7 @@ namespace YANFOE.Models.GeneralModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubtitleStreamModel"/> class.
+        ///   Initializes a new instance of the <see cref="SubtitleStreamModel" /> class.
         /// </summary>
         public SubtitleStreamModel()
         {
@@ -68,12 +74,12 @@ namespace YANFOE.Models.GeneralModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the codec MovieUniqueId.
+        ///   Gets or sets the codec MovieUniqueId.
         /// </summary>
-        /// <value>The codec MovieUniqueId.</value>
+        /// <value> The codec MovieUniqueId. </value>
         public string CodecID
         {
             get
@@ -89,9 +95,9 @@ namespace YANFOE.Models.GeneralModels
         }
 
         /// <summary>
-        /// Gets or sets the codec MovieUniqueId info.
+        ///   Gets or sets the codec MovieUniqueId info.
         /// </summary>
-        /// <value>The codec MovieUniqueId info.</value>
+        /// <value> The codec MovieUniqueId info. </value>
         public string CodecIDInfo
         {
             get
@@ -107,9 +113,9 @@ namespace YANFOE.Models.GeneralModels
         }
 
         /// <summary>
-        /// Gets or sets the format.
+        ///   Gets or sets the format.
         /// </summary>
-        /// <value>The format.</value>
+        /// <value> The format. </value>
         public string Format
         {
             get
@@ -125,7 +131,7 @@ namespace YANFOE.Models.GeneralModels
         }
 
         /// <summary>
-        /// Gets or sets MovieUniqueId.
+        ///   Gets or sets MovieUniqueId.
         /// </summary>
         public int ID
         {
@@ -142,9 +148,9 @@ namespace YANFOE.Models.GeneralModels
         }
 
         /// <summary>
-        /// Gets or sets the language.
+        ///   Gets or sets the language.
         /// </summary>
-        /// <value>The language.</value>
+        /// <value> The language. </value>
         public string Language
         {
             get

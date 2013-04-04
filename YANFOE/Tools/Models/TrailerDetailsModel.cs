@@ -1,55 +1,57 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TrailerDetailsModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="TrailerDetailsModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The trailer details model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Models
 {
+    #region Required Namespaces
+
     using System;
 
-    using YANFOE.InternalApps.DownloadManager;
-    using YANFOE.InternalApps.DownloadManager.Model;
-    using YANFOE.Tools.Enums;
+    #endregion
 
     /// <summary>
-    /// The trailer details model.
+    ///   The trailer details model.
     /// </summary>
     [Serializable]
     public class TrailerDetailsModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The resolution.
+        ///   The resolution.
         /// </summary>
         private string resolution;
 
         /// <summary>
-        /// The trailer movie title.
-        /// </summary>
-        private string trailerMovieTitle;
-
-        /// <summary>
-        /// The trailer type.
-        /// </summary>
-        private string trailerType;
-
-        /// <summary>
-        /// The selectedtrailer indicator.
+        ///   The selectedtrailer indicator.
         /// </summary>
         private bool selectedTrailer;
 
         /// <summary>
-        /// The uri full.
+        ///   The trailer movie title.
+        /// </summary>
+        private string trailerMovieTitle;
+
+        /// <summary>
+        ///   The trailer type.
+        /// </summary>
+        private string trailerType;
+
+        /// <summary>
+        ///   The uri full.
         /// </summary>
         private Uri uriFull;
 
@@ -58,7 +60,7 @@ namespace YANFOE.Tools.Models
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrailerDetailsModel"/> class.
+        ///   Initializes a new instance of the <see cref="TrailerDetailsModel" /> class.
         /// </summary>
         public TrailerDetailsModel()
         {
@@ -73,21 +75,22 @@ namespace YANFOE.Tools.Models
         /// Initializes a new instance of the <see cref="TrailerDetailsModel"/> class.
         /// </summary>
         /// <param name="url">
-        /// The url.
+        /// The url. 
         /// </param>
         /// <param name="res">
-        /// The res.
+        /// The res. 
         /// </param>
         /// <param name="trailertype">
-        /// The trailertype.
+        /// The trailertype. 
         /// </param>
         /// <param name="trailermovietitle">
-        /// The trailermovietitle.
+        /// The trailermovietitle. 
         /// </param>
         /// <param name="selectedtrailer">
-        /// The selectedtrailer. (Defaults to false)
+        /// The selectedtrailer. (Defaults to false) 
         /// </param>
-        public TrailerDetailsModel(string url, string res, string trailertype, string trailermovietitle, bool selectedtrailer = false)
+        public TrailerDetailsModel(
+            string url, string res, string trailertype, string trailermovietitle, bool selectedtrailer = false)
         {
             this.uriFull = new Uri(url);
             this.resolution = res;
@@ -98,10 +101,10 @@ namespace YANFOE.Tools.Models
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Resolution.
+        ///   Gets or sets Resolution.
         /// </summary>
         public string Resolution
         {
@@ -118,41 +121,7 @@ namespace YANFOE.Tools.Models
         }
 
         /// <summary>
-        /// Gets or sets TrailerMovieTitle.
-        /// </summary>
-        public string TrailerMovieTitle
-        {
-            get
-            {
-                return this.trailerMovieTitle;
-            }
-
-            set
-            {
-                this.trailerMovieTitle = value;
-                this.OnPropertyChanged("TrailerMovieTitle");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets TrailerType.
-        /// </summary>
-        public string TrailerType
-        {
-            get
-            {
-                return this.trailerType;
-            }
-
-            set
-            {
-                this.trailerType = value;
-                this.OnPropertyChanged("TrailerType");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets SelectedTrailer attribute.
+        ///   Gets or sets SelectedTrailer attribute.
         /// </summary>
         public bool SelectedTrailer
         {
@@ -169,9 +138,43 @@ namespace YANFOE.Tools.Models
         }
 
         /// <summary>
-        /// Gets or sets the URL.
+        ///   Gets or sets TrailerMovieTitle.
         /// </summary>
-        /// <value>The image URL.</value>
+        public string TrailerMovieTitle
+        {
+            get
+            {
+                return this.trailerMovieTitle;
+            }
+
+            set
+            {
+                this.trailerMovieTitle = value;
+                this.OnPropertyChanged("TrailerMovieTitle");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets TrailerType.
+        /// </summary>
+        public string TrailerType
+        {
+            get
+            {
+                return this.trailerType;
+            }
+
+            set
+            {
+                this.trailerType = value;
+                this.OnPropertyChanged("TrailerType");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the URL.
+        /// </summary>
+        /// <value> The image URL. </value>
         public Uri UriFull
         {
             get

@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DiskUtils.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="DiskUtils.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The disk utils.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.WrappedTools
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -24,29 +28,31 @@ namespace YANFOE.Tools.WrappedTools
     using DiscUtils.Iso9660;
     using DiscUtils.Udf;
 
+    #endregion
+
     /// <summary>
-    /// The disk utils.
+    ///   The disk utils.
     /// </summary>
     public class DiskUtils
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The files.
+        ///   The files.
         /// </summary>
         public List<DiscUtilFile> Files = new List<DiscUtilFile>();
 
         /// <summary>
-        /// The iso path.
+        ///   The iso path.
         /// </summary>
         public string IsoPath = string.Empty;
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The dispose.
+        ///   The dispose.
         /// </summary>
         public void Dispose()
         {
@@ -57,10 +63,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The file count.
         /// </summary>
         /// <param name="regex">
-        /// The regex.
+        /// The regex. 
         /// </param>
         /// <returns>
-        /// The file count.
+        /// The file count. 
         /// </returns>
         public int FileCount(string regex)
         {
@@ -82,10 +88,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The find biggest.
         /// </summary>
         /// <param name="regex">
-        /// The regex.
+        /// The regex. 
         /// </param>
         /// <returns>
-        /// The find biggest.
+        /// The find biggest. 
         /// </returns>
         public string FindBiggest(string regex)
         {
@@ -101,10 +107,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The find file.
         /// </summary>
         /// <param name="text">
-        /// The text.
+        /// The text. 
         /// </param>
         /// <returns>
-        /// The find file.
+        /// The find file. 
         /// </returns>
         public int FindFile(string text)
         {
@@ -124,7 +130,7 @@ namespace YANFOE.Tools.WrappedTools
         }
 
         /// <summary>
-        /// The get files.
+        ///   The get files.
         /// </summary>
         public void GetFiles()
         {
@@ -151,13 +157,13 @@ namespace YANFOE.Tools.WrappedTools
         /// The save file.
         /// </summary>
         /// <param name="FindText">
-        /// The find text.
+        /// The find text. 
         /// </param>
         /// <param name="output">
-        /// The output.
+        /// The output. 
         /// </param>
         /// <returns>
-        /// The save file.
+        /// The save file. 
         /// </returns>
         public int SaveFile(string FindText, string output)
         {
@@ -175,10 +181,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The save file.
         /// </summary>
         /// <param name="fileID">
-        /// The file id.
+        /// The file id. 
         /// </param>
         /// <param name="output">
-        /// The output.
+        /// The output. 
         /// </param>
         public void SaveFile(int fileID, string output)
         {
@@ -203,10 +209,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The pump streams.
         /// </summary>
         /// <param name="inStream">
-        /// The in stream.
+        /// The in stream. 
         /// </param>
         /// <param name="outStream">
-        /// The out stream.
+        /// The out stream. 
         /// </param>
         private static void PumpStreams(Stream inStream, Stream outStream)
         {
@@ -223,9 +229,10 @@ namespace YANFOE.Tools.WrappedTools
         /// The recursive files.
         /// </summary>
         /// <param name="path">
-        /// The path.
+        /// The path. 
         /// </param>
         /// <returns>
+        /// The <see cref="List"/>.
         /// </returns>
         private static List<DiscUtilFile> RecursiveFiles(DiscDirectoryInfo path)
         {
@@ -246,12 +253,13 @@ namespace YANFOE.Tools.WrappedTools
         /// The recursive folders.
         /// </summary>
         /// <param name="reader">
-        /// The reader.
+        /// The reader. 
         /// </param>
         /// <param name="path">
-        /// The path.
+        /// The path. 
         /// </param>
         /// <returns>
+        /// The <see cref="List"/>.
         /// </returns>
         private static List<DiscUtilFile> RecursiveFolders(DiscFileSystem reader, string path)
         {
@@ -273,14 +281,14 @@ namespace YANFOE.Tools.WrappedTools
     }
 
     /// <summary>
-    /// The disc util file.
+    ///   The disc util file.
     /// </summary>
     public class DiscUtilFile
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DiscUtilFile"/> class.
+        ///   Initializes a new instance of the <see cref="DiscUtilFile" /> class.
         /// </summary>
         public DiscUtilFile()
         {
@@ -290,15 +298,15 @@ namespace YANFOE.Tools.WrappedTools
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets FileName.
+        ///   Gets or sets FileName.
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// Gets or sets FileSize.
+        ///   Gets or sets FileSize.
         /// </summary>
         public long FileSize { get; set; }
 
@@ -306,14 +314,14 @@ namespace YANFOE.Tools.WrappedTools
     }
 
     /// <summary>
-    /// The tsg roup.
+    ///   The tsg roup.
     /// </summary>
     public class TSGRoup
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TSGRoup"/> class.
+        ///   Initializes a new instance of the <see cref="TSGRoup" /> class.
         /// </summary>
         public TSGRoup()
         {
@@ -323,15 +331,15 @@ namespace YANFOE.Tools.WrappedTools
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets FileName.
+        ///   Gets or sets FileName.
         /// </summary>
         public string FileName { get; set; }
 
         /// <summary>
-        /// Gets or sets TotalFileSize.
+        ///   Gets or sets TotalFileSize.
         /// </summary>
         public long TotalFileSize { get; set; }
 

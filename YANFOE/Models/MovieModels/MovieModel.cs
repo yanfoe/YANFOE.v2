@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The model used for the main movie object.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.MovieModels
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -22,10 +26,6 @@ namespace YANFOE.Models.MovieModels
     using System.IO;
     using System.Text;
     using System.Text.RegularExpressions;
-
-    using DevExpress.Utils;
-    using DevExpress.XtraBars.Ribbon;
-    using DevExpress.XtraEditors.DXErrorProvider;
 
     using Newtonsoft.Json;
 
@@ -38,251 +38,275 @@ namespace YANFOE.Models.MovieModels
     using YANFOE.Models.GeneralModels.AssociatedFiles;
     using YANFOE.Models.NFOModels;
     using YANFOE.Properties;
-    using YANFOE.Scrapers.Movie;
-    using YANFOE.Scrapers.Movie.Interfaces;
+    using YANFOE.Settings;
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
+    using YANFOE.Tools.Error;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.Text;
+    using YANFOE.Tools.UI;
+    using YANFOE.Tools.Xml;
+    using YANFOE.UI.UserControls.CommonControls;
 
-    using ErrorInfo = DevExpress.XtraEditors.DXErrorProvider.ErrorInfo;
+    #endregion
 
     /// <summary>
-    /// The model used for the main movie object.
+    ///   The model used for the main movie object.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     [Serializable]
-    public class MovieModel : ModelBase, IDXDataErrorInfo
+    public class MovieModel : ModelBase, IMyDataErrorInfo
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The change list.
+        ///   The change list.
         /// </summary>
-        private readonly BindingList<string> changeList;
+        private readonly ThreadedBindingList<string> changeList;
 
         /// <summary>
-        /// The allocine id.
+        ///   The allocine id.
         /// </summary>
         private string allocineId;
 
         /// <summary>
-        /// Busy backing field
+        ///   Busy backing field
         /// </summary>
         private bool busy;
 
         /// <summary>
-        /// Certification backing field
+        ///   Certification backing field
         /// </summary>
         private string certification;
 
         /// <summary>
-        /// Changed Poster back field
+        ///   Changed Poster back field
         /// </summary>
         private bool changedFanart;
 
         /// <summary>
-        /// Changed Poster back field
+        ///   Changed Poster back field
         /// </summary>
         private bool changedPoster;
 
         /// <summary>
-        /// Changed Text backing field
+        ///   Changed Text backing field
         /// </summary>
         private bool changedText;
 
         /// <summary>
-        /// Changed Trailer back field
+        ///   Changed Trailer back field
         /// </summary>
         private bool changedTrailer;
 
         /// <summary>
-        /// The current fanart image url.
+        ///   The current fanart image url.
         /// </summary>
         private string currentFanartImageUrl;
 
         /// <summary>
-        /// The current poster image url.
+        ///   The current poster image url.
         /// </summary>
         private string currentPosterImageUrl;
 
         /// <summary>
-        /// The current trailer url.
+        ///   The current trailer url.
         /// </summary>
         private string currentTrailerUrl;
 
         /// <summary>
-        /// The fanart path on disk.
+        ///   The fanart path on disk.
         /// </summary>
         private string fanartPathOnDisk;
 
         /// <summary>
-        /// The film affinity id.
+        ///   The film affinity id.
         /// </summary>
         private string filmAffinityId;
 
         /// <summary>
-        /// The film delta id.
+        ///   The film delta id.
         /// </summary>
         private string filmDeltaId;
 
         /// <summary>
-        /// The film up id.
+        ///   The film up id.
         /// </summary>
         private string filmUpId;
 
         /// <summary>
-        /// The film web id.
+        ///   The film web id.
         /// </summary>
         private string filmWebId;
 
         /// <summary>
-        /// The imdb id.
+        ///   The imdb id.
         /// </summary>
         private string imdbId;
 
         /// <summary>
-        /// The impawards id.
+        ///   The impawards id.
         /// </summary>
         private string impawardsId;
 
         /// <summary>
-        /// The is new.
+        ///   The is new.
         /// </summary>
         private bool isNew;
 
         /// <summary>
-        /// The kinopoisk id.
+        ///   The kinopoisk id.
         /// </summary>
         private string kinopoiskId;
 
         /// <summary>
-        /// The locked.
+        ///   The locked.
         /// </summary>
         private bool locked;
 
         /// <summary>
-        /// The marked.
+        ///   The marked.
         /// </summary>
         private bool marked;
 
         /// <summary>
-        /// The mpaa backing field
+        /// The movie meter id.
+        /// </summary>
+        private string movieMeterId;
+
+        /// <summary>
+        ///   The mpaa backing field
         /// </summary>
         private string mpaa;
 
         /// <summary>
-        /// The multi select model.
+        ///   The multi select model.
         /// </summary>
         private bool multiSelectModel;
 
         /// <summary>
-        /// The nfo path.
+        ///   The nfo path.
         /// </summary>
         private string nfoPathOnDisk;
 
         /// <summary>
-        /// Original Title backing field
+        /// The ofdbb id.
+        /// </summary>
+        private string ofdbbId;
+
+        /// <summary>
+        ///   Original Title backing field
         /// </summary>
         private string originalTitle;
 
         /// <summary>
-        /// Outline backing field
+        ///   Outline backing field
         /// </summary>
         private string outline;
 
         /// <summary>
-        /// Plot backing field
+        ///   Plot backing field
         /// </summary>
         private string plot;
 
         /// <summary>
-        /// The poster path on disk.
+        ///   The poster path on disk.
         /// </summary>
         private string posterPathOnDisk;
 
         /// <summary>
-        /// Rating backing field
+        ///   Rating backing field
         /// </summary>
         private double? rating;
 
         /// <summary>
-        /// Release Date backing field
+        ///   Release Date backing field
         /// </summary>
         private DateTime? releaseDate;
 
         /// <summary>
-        /// Runtime backing field
+        /// The rotten tomato id.
+        /// </summary>
+        private string rottenTomatoId;
+
+        /// <summary>
+        ///   Runtime backing field
         /// </summary>
         private int? runtime;
 
         /// <summary>
-        /// The scraper group.
+        ///   The scraper group.
         /// </summary>
         private string scraperGroup;
 
         /// <summary>
-        /// The set studio.
+        ///   The set studio.
         /// </summary>
         private string setStudio;
 
         /// <summary>
-        /// SmallPoster backing field
+        ///   SmallPoster backing field
         /// </summary>
         private Image smallFanart;
 
         /// <summary>
-        /// SmallPoster backing field
+        ///   SmallPoster backing field
         /// </summary>
         private Image smallPoster;
 
         /// <summary>
-        /// Tagline backing field
+        /// The sratim id.
+        /// </summary>
+        private string sratimId;
+
+        /// <summary>
+        ///   Tagline backing field
         /// </summary>
         private string tagline;
 
         /// <summary>
-        /// Title backing field
+        ///   Title backing field
         /// </summary>
         private string title;
 
         /// <summary>
-        /// The tmdb id.
+        ///   The tmdb id.
         /// </summary>
         private string tmdbId;
 
         /// <summary>
-        /// Top250 backing field
+        ///   Top250 backing field
         /// </summary>
         private int? top250;
 
         /// <summary>
-        /// The trailer path on disk.
+        ///   The trailer path on disk.
         /// </summary>
         private string trailerPathOnDisk;
 
         /// <summary>
-        /// The video source.
+        ///   The video source.
         /// </summary>
         private string videoSource;
 
         /// <summary>
-        /// Votes backing field
+        ///   Votes backing field
         /// </summary>
         private long? votes;
 
         /// <summary>
-        /// The watched.
+        ///   The watched.
         /// </summary>
         private bool watched;
 
         /// <summary>
-        /// The yanfoe id.
+        ///   The yanfoe id.
         /// </summary>
         private string yanfoeID;
 
         /// <summary>
-        /// Year backing field
+        ///   Year backing field
         /// </summary>
         private int? year;
 
@@ -291,7 +315,7 @@ namespace YANFOE.Models.MovieModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieModel"/> class.
+        ///   Initializes a new instance of the <see cref="MovieModel" /> class.
         /// </summary>
         public MovieModel()
         {
@@ -304,7 +328,7 @@ namespace YANFOE.Models.MovieModels
             this.ChangedText = false;
             this.ChangedPoster = false;
             this.ChangedTrailer = false;
-            this.changeList = new BindingList<string>();
+            this.changeList = new ThreadedBindingList<string>();
 
             this.FileInfo = new FileInfoModel();
 
@@ -312,25 +336,25 @@ namespace YANFOE.Models.MovieModels
             this.OriginalTitle = string.Empty;
             this.Year = null;
             this.Rating = null;
-            this.Director = new BindingList<PersonModel>();
+            this.Director = new ThreadedBindingList<PersonModel>();
             this.Plot = string.Empty;
             this.Outline = string.Empty;
             this.Certification = string.Empty;
-            this.Country = new BindingList<string>();
-            this.Language = new BindingList<string>();
-            this.Genre = new BindingList<string>();
-            this.Cast = new BindingList<PersonModel>();
+            this.Country = new ThreadedBindingList<string>();
+            this.Language = new ThreadedBindingList<string>();
+            this.Genre = new ThreadedBindingList<string>();
+            this.Cast = new ThreadedBindingList<PersonModel>();
             this.Tagline = string.Empty;
             this.Top250 = null;
-            this.Studios = new BindingList<string>();
+            this.Studios = new ThreadedBindingList<string>();
             this.Votes = null;
             this.ReleaseDate = new DateTime();
             this.Mpaa = string.Empty;
             this.Runtime = null;
-            this.Writers = new BindingList<PersonModel>();
-            this.AlternativePosters = new BindingList<ImageDetailsModel>();
-            this.AlternativeFanart = new BindingList<ImageDetailsModel>();
-            this.AlternativeTrailers = new BindingList<TrailerDetailsModel>();
+            this.Writers = new ThreadedBindingList<PersonModel>();
+            this.AlternativePosters = new ThreadedBindingList<ImageDetailsModel>();
+            this.AlternativeFanart = new ThreadedBindingList<ImageDetailsModel>();
+            this.AlternativeTrailers = new ThreadedBindingList<TrailerDetailsModel>();
             this.AssociatedFiles = new AssociatedFilesModel();
 
             this.AllocineId = string.Empty;
@@ -356,38 +380,32 @@ namespace YANFOE.Models.MovieModels
 
         #endregion
 
-        #region Events
-
-        [field: NonSerialized]
-        public event EventHandler MediaInfoChanged;
-
-        public void InvokeMediaInfoChanged(EventArgs e)
-        {
-            EventHandler handler = this.MediaInfoChanged;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
+        #region Public Events
 
         /// <summary>
-        /// The locked status changed.
+        ///   The locked status changed.
         /// </summary>
         [field: NonSerialized]
         public event EventHandler LockedStatusChanged;
 
         /// <summary>
-        /// The marked status changed.
+        ///   The marked status changed.
         /// </summary>
         [field: NonSerialized]
         public event EventHandler MarkedStatusChanged;
 
+        /// <summary>
+        /// The media info changed.
+        /// </summary>
+        [field: NonSerialized]
+        public event EventHandler MediaInfoChanged;
+
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets a value indicating whether ActorsEnabled.
+        ///   Gets a value indicating whether ActorsEnabled.
         /// </summary>
         public bool ActorsEnabled
         {
@@ -397,10 +415,8 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
-        public bool Hidden { get; set; }
-
         /// <summary>
-        /// Gets or sets AllocineId.
+        ///   Gets or sets AllocineId.
         /// </summary>
         public string AllocineId
         {
@@ -414,34 +430,36 @@ namespace YANFOE.Models.MovieModels
                 this.allocineId = value;
                 this.OnPropertyChanged("AllocineId");
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets the fanart.
+        ///   Gets or sets the fanart.
         /// </summary>
-        /// <value>The fanart.</value>
-        public BindingList<ImageDetailsModel> AlternativeFanart { get; set; }
+        /// <value> The fanart. </value>
+        public ThreadedBindingList<ImageDetailsModel> AlternativeFanart { get; set; }
 
         /// <summary>
-        /// Gets or sets the poster.
+        ///   Gets or sets the poster.
         /// </summary>
-        /// <value>The poster.</value>
-        public BindingList<ImageDetailsModel> AlternativePosters { get; set; }
+        /// <value> The poster. </value>
+        public ThreadedBindingList<ImageDetailsModel> AlternativePosters { get; set; }
 
         /// <summary>
-        /// Gets or sets the trailer.
+        ///   Gets or sets the trailer.
         /// </summary>
-        /// <value>The poster.</value>
-        public BindingList<TrailerDetailsModel> AlternativeTrailers { get; set; }
+        /// <value> The poster. </value>
+        public ThreadedBindingList<TrailerDetailsModel> AlternativeTrailers { get; set; }
 
         /// <summary>
-        /// Gets or sets AssociatedFiles.
+        ///   Gets or sets AssociatedFiles.
         /// </summary>
         public AssociatedFilesModel AssociatedFiles { get; set; }
 
         /// <summary>
-        /// Gets Busy.
+        ///   Gets Busy.
         /// </summary>
         [JsonIgnore]
         public Image Busy
@@ -458,11 +476,14 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the cast.
+        ///   Gets or sets the cast.
         /// </summary>
-        /// <value>The cast binding list.</value>
-        public BindingList<PersonModel> Cast { get; set; }
+        /// <value> The cast binding list. </value>
+        public ThreadedBindingList<PersonModel> Cast { get; set; }
 
+        /// <summary>
+        /// Gets the cast as string.
+        /// </summary>
         [JsonIgnore]
         public string CastAsString
         {
@@ -470,7 +491,7 @@ namespace YANFOE.Models.MovieModels
             {
                 var sb = new StringBuilder();
 
-                foreach (var actor in Cast)
+                foreach (var actor in this.Cast)
                 {
                     sb.Append(actor.Name + ",");
                 }
@@ -480,9 +501,9 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the certification.
+        ///   Gets or sets the certification.
         /// </summary>
-        /// <value>The certification.</value>
+        /// <value> The certification. </value>
         public string Certification
         {
             get
@@ -496,12 +517,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.certification = value;
                     this.OnPropertyChanged("Certification", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedFanart.
+        ///   Gets or sets a value indicating whether ChangedFanart.
         /// </summary>
         public bool ChangedFanart
         {
@@ -522,9 +545,9 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [changed image].
+        ///   Gets or sets a value indicating whether [changed image].
         /// </summary>
-        /// <value><c>true</c> if [changed image]; otherwise, <c>false</c>.</value>
+        /// <value> <c>true</c> if [changed image]; otherwise, <c>false</c> . </value>
         public bool ChangedPoster
         {
             get
@@ -544,9 +567,9 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [changed text].
+        ///   Gets or sets a value indicating whether [changed text].
         /// </summary>
-        /// <value><c>true</c> if [changed text]; otherwise, <c>false</c>.</value>
+        /// <value> <c>true</c> if [changed text]; otherwise, <c>false</c> . </value>
         public bool ChangedText
         {
             get
@@ -566,9 +589,9 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [changed image].
+        ///   Gets or sets a value indicating whether [changed image].
         /// </summary>
-        /// <value><c>true</c> if [changed image]; otherwise, <c>false</c>.</value>
+        /// <value> <c>true</c> if [changed image]; otherwise, <c>false</c> . </value>
         public bool ChangedTrailer
         {
             get
@@ -588,13 +611,13 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the country.
+        ///   Gets or sets the country.
         /// </summary>
-        /// <value>The country binding list.</value>
-        public BindingList<string> Country { get; set; }
+        /// <value> The country binding list. </value>
+        public ThreadedBindingList<string> Country { get; set; }
 
         /// <summary>
-        /// Gets or sets CountryAsString.
+        ///   Gets or sets CountryAsString.
         /// </summary>
         public string CountryAsString
         {
@@ -609,12 +632,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.Country = value.ToBindingStringList();
                     this.OnPropertyChanged("CountryAsString", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets CurrentFanartImage.
+        ///   Gets CurrentFanartImage.
         /// </summary>
         [JsonIgnore]
         public Image CurrentFanartImage
@@ -643,7 +668,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets CurrentFanartImageUrl.
+        ///   Gets or sets CurrentFanartImageUrl.
         /// </summary>
         public string CurrentFanartImageUrl
         {
@@ -662,13 +687,15 @@ namespace YANFOE.Models.MovieModels
 
                     this.OnPropertyChanged("CurrentFanartImageUrl", true);
                     this.OnPropertyChanged("CurrentFanartImage", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                     this.ChangedFanart = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets the current nfo body (loaded from disk)
+        ///   Gets the current nfo body (loaded from disk)
         /// </summary>
         [JsonIgnore]
         public string CurrentNFO
@@ -685,7 +712,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets CurrentPosterImage.
+        ///   Gets CurrentPosterImage.
         /// </summary>
         [JsonIgnore]
         public Image CurrentPosterImage
@@ -714,7 +741,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets CurrentPosterImageUrl.
+        ///   Gets or sets CurrentPosterImageUrl.
         /// </summary>
         public string CurrentPosterImageUrl
         {
@@ -733,13 +760,15 @@ namespace YANFOE.Models.MovieModels
 
                     this.OnPropertyChanged("CurrentPosterImageUrl", true);
                     this.OnPropertyChanged("CurrentPosterImage", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                     this.ChangedPoster = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets CurrentTrailerUrl.
+        ///   Gets or sets CurrentTrailerUrl.
         /// </summary>
         public string CurrentTrailerUrl
         {
@@ -755,27 +784,27 @@ namespace YANFOE.Models.MovieModels
                     this.currentTrailerUrl = value;
 
                     this.OnPropertyChanged("CurrentTrailerUrl", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                     this.ChangedTrailer = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [database saved].
+        ///   Gets or sets a value indicating whether [database saved].
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if [database saved]; otherwise, <c>false</c>.
-        /// </value>
+        /// <value> <c>true</c> if [database saved]; otherwise, <c>false</c> . </value>
         public bool DatabaseSaved { get; set; }
 
         /// <summary>
-        /// Gets or sets the director.
+        ///   Gets or sets the director.
         /// </summary>
-        /// <value>The director.</value>
-        public BindingList<PersonModel> Director { get; set; }
+        /// <value> The director. </value>
+        public ThreadedBindingList<PersonModel> Director { get; set; }
 
         /// <summary>
-        /// Gets or sets DirectorAsString.
+        ///   Gets or sets DirectorAsString.
         /// </summary>
         public string DirectorAsString
         {
@@ -790,12 +819,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.Director = value.ToPersonList();
                     this.OnPropertyChanged("DirectorAsString", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets FanartAltGallery.
+        ///   Gets FanartAltGallery.
         /// </summary>
         public GalleryItemGroup FanartAltGallery
         {
@@ -825,7 +856,7 @@ namespace YANFOE.Models.MovieModels
                             thumbPath = path.Replace("-poster", "-thumb");
                         }
 
-                        Image resizedimage = ImageHandler.LoadImage(thumbPath, YANFOE.Settings.Get.Ui.PictureThumbnailFanart);
+                        Image resizedimage = ImageHandler.LoadImage(thumbPath, Get.Ui.PictureThumbnailFanart);
 
                         var galleryItem = new GalleryItem(resizedimage, string.Empty, image.Width + "x" + image.Height)
                             {
@@ -841,7 +872,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets FanartPathOnDisk.
+        ///   Gets or sets FanartPathOnDisk.
         /// </summary>
         public string FanartPathOnDisk
         {
@@ -861,13 +892,13 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the file info.
+        ///   Gets or sets the file info.
         /// </summary>
-        /// <value>The file info.</value>
+        /// <value> The file info. </value>
         public FileInfoModel FileInfo { get; set; }
 
         /// <summary>
-        /// Gets or sets FilmAffinityId.
+        ///   Gets or sets FilmAffinityId.
         /// </summary>
         public string FilmAffinityId
         {
@@ -881,11 +912,13 @@ namespace YANFOE.Models.MovieModels
                 this.filmAffinityId = value;
                 this.OnPropertyChanged("FilmAffinityId", true);
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets FilmDeltaId.
+        ///   Gets or sets FilmDeltaId.
         /// </summary>
         public string FilmDeltaId
         {
@@ -899,11 +932,13 @@ namespace YANFOE.Models.MovieModels
                 this.filmDeltaId = value;
                 this.OnPropertyChanged("FilmDeltaId", true);
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets FilmUpId.
+        ///   Gets or sets FilmUpId.
         /// </summary>
         public string FilmUpId
         {
@@ -917,11 +952,13 @@ namespace YANFOE.Models.MovieModels
                 this.filmUpId = value;
                 this.OnPropertyChanged("FilmUpId", true);
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets FilmWebId.
+        ///   Gets or sets FilmWebId.
         /// </summary>
         public string FilmWebId
         {
@@ -935,40 +972,19 @@ namespace YANFOE.Models.MovieModels
                 this.filmWebId = value;
                 this.OnPropertyChanged("FilmWebId", true);
                 this.OnPropertyChanged("Status");
-            }
-        }
-
-        private string movieMeterId;
-
-        /// <summary>
-        /// Gets or sets the movie meter id.
-        /// </summary>
-        /// <value>
-        /// The movie meter id.
-        /// </value>
-        public string MovieMeterId
-        {
-            get
-            {
-                return this.movieMeterId;
-            }
-
-            set
-            {
-                this.movieMeterId = value;
-                this.OnPropertyChanged("MovieMeterId", true);
-                this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets the genre.
+        ///   Gets or sets the genre.
         /// </summary>
-        /// <value>The genre binding list.</value>
-        public BindingList<string> Genre { get; set; }
+        /// <value> The genre binding list. </value>
+        public ThreadedBindingList<string> Genre { get; set; }
 
         /// <summary>
-        /// Gets or sets GenreAsString.
+        ///   Gets or sets GenreAsString.
         /// </summary>
         public string GenreAsString
         {
@@ -983,12 +999,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.Genre = value.ToBindingStringList();
                     this.OnPropertyChanged("GenreAsString", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets GetBaseFilePath.
+        ///   Gets GetBaseFilePath.
         /// </summary>
         [JsonIgnore]
         public string GetBaseFilePath
@@ -1007,9 +1025,14 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the imdb id.
+        /// Gets or sets a value indicating whether hidden.
         /// </summary>
-        /// <value>The imdb id.</value>
+        public bool Hidden { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the imdb id.
+        /// </summary>
+        /// <value> The imdb id. </value>
         public string ImdbId
         {
             get
@@ -1029,12 +1052,14 @@ namespace YANFOE.Models.MovieModels
                     this.imdbId = value;
                     this.OnPropertyChanged("ImdbId", true);
                     this.OnPropertyChanged("Status");
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets ImpawardsId.
+        ///   Gets or sets ImpawardsId.
         /// </summary>
         public string ImpawardsId
         {
@@ -1048,11 +1073,13 @@ namespace YANFOE.Models.MovieModels
                 this.impawardsId = value;
                 this.OnPropertyChanged("ImpawardsId", true);
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether IsBusy.
+        ///   Gets or sets a value indicating whether IsBusy.
         /// </summary>
         public bool IsBusy
         {
@@ -1073,7 +1100,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether IsNew.
+        ///   Gets or sets a value indicating whether IsNew.
         /// </summary>
         public bool IsNew
         {
@@ -1093,7 +1120,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets KinopoiskId.
+        ///   Gets or sets KinopoiskId.
         /// </summary>
         public string KinopoiskId
         {
@@ -1107,17 +1134,19 @@ namespace YANFOE.Models.MovieModels
                 this.kinopoiskId = value;
                 this.OnPropertyChanged("KinopoiskId", true);
                 this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
             }
         }
 
         /// <summary>
-        /// Gets or sets the language.
+        ///   Gets or sets the language.
         /// </summary>
-        /// <value>The language binding list.</value>
-        public BindingList<string> Language { get; set; }
+        /// <value> The language binding list. </value>
+        public ThreadedBindingList<string> Language { get; set; }
 
         /// <summary>
-        /// Gets or sets LanguageAsString.
+        ///   Gets or sets LanguageAsString.
         /// </summary>
         public string LanguageAsString
         {
@@ -1132,12 +1161,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.Language = value.ToBindingStringList();
                     this.OnPropertyChanged("LanguageAsString", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether Locked.
+        ///   Gets or sets a value indicating whether Locked.
         /// </summary>
         public bool Locked
         {
@@ -1157,16 +1188,8 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
-        public bool Unlocked
-        {
-            get
-            {
-                return !this.locked;
-            }
-        }
-
         /// <summary>
-        /// Gets LockedImage.
+        ///   Gets LockedImage.
         /// </summary>
         [JsonIgnore]
         public Image LockedImage
@@ -1183,7 +1206,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether Marked.
+        ///   Gets or sets a value indicating whether Marked.
         /// </summary>
         public bool Marked
         {
@@ -1204,7 +1227,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets MarkedImage.
+        ///   Gets MarkedImage.
         /// </summary>
         [JsonIgnore]
         public Image MarkedImage
@@ -1221,12 +1244,52 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets unique id for the movie object.
+        /// Gets the media info image.
+        /// </summary>
+        [JsonIgnore]
+        public Image MediaInfoImage
+        {
+            get
+            {
+                if (this.ContainsMediaInfo())
+                {
+                    return Resources.search32;
+                }
+                else
+                {
+                    return Resources.searchred;
+                }
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the movie meter id.
+        /// </summary>
+        /// <value> The movie meter id. </value>
+        public string MovieMeterId
+        {
+            get
+            {
+                return this.movieMeterId;
+            }
+
+            set
+            {
+                this.movieMeterId = value;
+                this.OnPropertyChanged("MovieMeterId", true);
+                this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
+            }
+        }
+
+        /// <summary>
+        ///   Gets unique id for the movie object.
         /// </summary>
         public string MovieUniqueId { get; set; }
 
         /// <summary>
-        /// Gets or sets Mpaa.
+        ///   Gets or sets Mpaa.
         /// </summary>
         public string Mpaa
         {
@@ -1240,13 +1303,15 @@ namespace YANFOE.Models.MovieModels
                 if (this.mpaa != value)
                 {
                     this.mpaa = value;
-                    this.OnPropertyChanged("Runtime", true);
+                    this.OnPropertyChanged("Mpaa", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether MultiSelectModel.
+        ///   Gets or sets a value indicating whether MultiSelectModel.
         /// </summary>
         public bool MultiSelectModel
         {
@@ -1265,34 +1330,8 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
-        [JsonIgnore]
-        public Image MediaInfoImage
-        {
-            get
-            {
-                if (ContainsMediaInfo())
-                {
-                    return Resources.search32;
-                }
-                else
-                {
-                    return Resources.searchred;
-                }
-            }
-        }
-
-        private bool ContainsMediaInfo()
-        {
-            if (this.AssociatedFiles.Media.Count == 0)
-            {
-                return false;
-            }
-
-            return File.Exists(this.AssociatedFiles.Media[0].PathAndFilename + ".mediainfo");
-        }
-
         /// <summary>
-        /// Gets or sets Nfo Path.
+        ///   Gets or sets Nfo Path.
         /// </summary>
         public string NfoPathOnDisk
         {
@@ -1312,9 +1351,29 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the Original title.
+        /// Gets or sets the ofdb id.
         /// </summary>
-        /// <value>The Original title.</value>
+        public string OfdbId
+        {
+            get
+            {
+                return this.ofdbbId;
+            }
+
+            set
+            {
+                this.ofdbbId = value;
+                this.OnPropertyChanged("OfdbId", true);
+                this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the Original title.
+        /// </summary>
+        /// <value> The Original title. </value>
         public string OriginalTitle
         {
             get
@@ -1328,14 +1387,16 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.originalTitle = value;
                     this.OnPropertyChanged("OriginalTitle", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the outline.
+        ///   Gets or sets the outline.
         /// </summary>
-        /// <value>The outline.</value>
+        /// <value> The outline. </value>
         public string Outline
         {
             get
@@ -1349,14 +1410,16 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.outline = value;
                     this.OnPropertyChanged("Outline", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the plot.
+        ///   Gets or sets the plot.
         /// </summary>
-        /// <value>The plot value.</value>
+        /// <value> The plot value. </value>
         public string Plot
         {
             get
@@ -1370,12 +1433,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.plot = value;
                     this.OnPropertyChanged("Plot", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets SeriesPosterAltGallery.
+        ///   Gets SeriesPosterAltGallery.
         /// </summary>
         public GalleryItemGroup PosterAltGallery
         {
@@ -1406,7 +1471,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets PosterPathOnDisk.
+        ///   Gets or sets PosterPathOnDisk.
         /// </summary>
         public string PosterPathOnDisk
         {
@@ -1423,9 +1488,9 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the rating.
+        ///   Gets or sets the rating.
         /// </summary>
-        /// <value>The rating.</value>
+        /// <value> The rating. </value>
         public double? Rating
         {
             get
@@ -1439,14 +1504,16 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.rating = value;
                     this.OnPropertyChanged("Rating", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the release date.
+        ///   Gets or sets the release date.
         /// </summary>
-        /// <value>The release date.</value>
+        /// <value> The release date. </value>
         public DateTime? ReleaseDate
         {
             get
@@ -1460,14 +1527,36 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.releaseDate = value;
                     this.OnPropertyChanged("ReleaseDate", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the runtime.
+        /// Gets or sets the rotten tomato id.
         /// </summary>
-        /// <value>The runtime.</value>
+        public string RottenTomatoId
+        {
+            get
+            {
+                return this.rottenTomatoId;
+            }
+
+            set
+            {
+                this.rottenTomatoId = value;
+                this.OnPropertyChanged("RottenTomatoId", true);
+                this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the runtime.
+        /// </summary>
+        /// <value> The runtime. </value>
         public int? Runtime
         {
             get
@@ -1482,12 +1571,14 @@ namespace YANFOE.Models.MovieModels
                     this.runtime = value;
                     this.OnPropertyChanged("Runtime", true);
                     this.OnPropertyChanged("RuntimeInHourMin");
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets RuntimeInHourMin.
+        ///   Gets or sets RuntimeInHourMin.
         /// </summary>
         public string RuntimeInHourMin
         {
@@ -1531,7 +1622,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets ScraperGroup.
+        ///   Gets or sets ScraperGroup.
         /// </summary>
         public string ScraperGroup
         {
@@ -1545,13 +1636,13 @@ namespace YANFOE.Models.MovieModels
                 if (this.scraperGroup != value)
                 {
                     this.scraperGroup = value;
-                    this.OnPropertyChanged("SmallPoster");
+                    this.OnPropertyChanged("ScraperGroup");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets SetStudio.
+        ///   Gets or sets SetStudio.
         /// </summary>
         public string SetStudio
         {
@@ -1566,12 +1657,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.setStudio = value;
                     this.OnPropertyChanged("SetStudio", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets SmallFanart.
+        ///   Gets or sets SmallFanart.
         /// </summary>
         [JsonIgnore]
         public Image SmallFanart
@@ -1592,7 +1685,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets SmallPoster.
+        ///   Gets or sets SmallPoster.
         /// </summary>
         [JsonIgnore]
         public Image SmallPoster
@@ -1613,7 +1706,27 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets Status.
+        /// Gets or sets the sratim id.
+        /// </summary>
+        public string SratimId
+        {
+            get
+            {
+                return this.sratimId;
+            }
+
+            set
+            {
+                this.sratimId = value;
+                this.OnPropertyChanged("SratimId", true);
+                this.OnPropertyChanged("Status");
+                this.OnPropertyChanged("YamjXmlRtf");
+                this.OnPropertyChanged("XbmcXmlRtf");
+            }
+        }
+
+        /// <summary>
+        ///   Gets Status.
         /// </summary>
         [JsonIgnore]
         public Image Status
@@ -1630,15 +1743,15 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the studio.
+        ///   Gets or sets the studio.
         /// </summary>
-        /// <value>The studio.</value>
-        public BindingList<string> Studios { get; set; }
+        /// <value> The studio. </value>
+        public ThreadedBindingList<string> Studios { get; set; }
 
         /// <summary>
-        /// Gets or sets the tagline.
+        ///   Gets or sets the tagline.
         /// </summary>
-        /// <value>The tagline.</value>
+        /// <value> The tagline. </value>
         public string Tagline
         {
             get
@@ -1652,14 +1765,32 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.tagline = value;
                     this.OnPropertyChanged("Tagline", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the title.
+        /// Gets or sets the the movie db id.
         /// </summary>
-        /// <value>The title.</value>
+        public string TheMovieDbId
+        {
+            get
+            {
+                return this.TmdbId;
+            }
+
+            set
+            {
+                this.TmdbId = value;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the title.
+        /// </summary>
+        /// <value> The title. </value>
         public string Title
         {
             get
@@ -1674,12 +1805,14 @@ namespace YANFOE.Models.MovieModels
                     this.title = value;
                     this.ChangedText = true;
                     this.OnPropertyChanged("Title", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets a value indicating whether TitleEnabled.
+        ///   Gets a value indicating whether TitleEnabled.
         /// </summary>
         public bool TitleEnabled
         {
@@ -1689,20 +1822,8 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
-        public string TheMovieDbId
-        {
-            get
-            {
-                return TmdbId;
-            }
-            set
-            {
-                TmdbId = value;
-            }
-        }
-
         /// <summary>
-        /// Gets or sets TmdbId.
+        ///   Gets or sets TmdbId.
         /// </summary>
         public string TmdbId
         {
@@ -1719,14 +1840,16 @@ namespace YANFOE.Models.MovieModels
                     this.OnPropertyChanged("TmdbId", true);
                     this.OnPropertyChanged("TheMovieDbId", true);
                     this.OnPropertyChanged("Status");
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the top250.
+        ///   Gets or sets the top250.
         /// </summary>
-        /// <value>The top250.</value>
+        /// <value> The top250. </value>
         public int? Top250
         {
             get
@@ -1740,12 +1863,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.top250 = value;
                     this.OnPropertyChanged("Top250", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets TrailerPathOnDisk.
+        ///   Gets or sets TrailerPathOnDisk.
         /// </summary>
         public string TrailerPathOnDisk
         {
@@ -1765,7 +1890,18 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets VideoSource.
+        /// Gets a value indicating whether unlocked.
+        /// </summary>
+        public bool Unlocked
+        {
+            get
+            {
+                return !this.locked;
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets VideoSource.
         /// </summary>
         public string VideoSource
         {
@@ -1780,14 +1916,16 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.videoSource = value;
                     this.OnPropertyChanged("VideoSource", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the votes.
+        ///   Gets or sets the votes.
         /// </summary>
-        /// <value>The votes.</value>
+        /// <value> The votes. </value>
         public long? Votes
         {
             get
@@ -1801,12 +1939,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.votes = value;
                     this.OnPropertyChanged("Votes", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether Watched.
+        ///   Gets or sets a value indicating whether Watched.
         /// </summary>
         [JsonIgnore]
         public bool Watched
@@ -1840,17 +1980,19 @@ namespace YANFOE.Models.MovieModels
                     }
                     else
                     {
-                        Tools.Text.IO.WriteTextToFile(path, " ");
+                        IO.WriteTextToFile(path, " ");
                     }
 
                     this.OnPropertyChanged("Watched");
                     this.OnPropertyChanged("WatchedImage", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets the watched image.
+        ///   Gets the watched image.
         /// </summary>
         [JsonIgnore]
         public Image WatchedImage
@@ -1862,13 +2004,13 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets the writers.
+        ///   Gets or sets the writers.
         /// </summary>
-        /// <value>The writers.</value>
-        public BindingList<PersonModel> Writers { get; set; }
+        /// <value> The writers. </value>
+        public ThreadedBindingList<PersonModel> Writers { get; set; }
 
         /// <summary>
-        /// Gets or sets WritersAsString.
+        ///   Gets or sets WritersAsString.
         /// </summary>
         public string WritersAsString
         {
@@ -1883,25 +2025,14 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.Writers = value.ToPersonList();
                     this.OnPropertyChanged("WritersAsString", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
             }
         }
 
         /// <summary>
-        /// Gets YamjXml.
-        /// </summary>
-        public string YamjXml
-        {
-            get
-            {
-                var yamj = new YAMJ();
-                return yamj.GenerateMovieOutput(this);
-            }
-        }
-
-
-        /// <summary>
-        /// Gets XbmcXml.
+        ///   Gets XbmcXml.
         /// </summary>
         public string XbmcXml
         {
@@ -1913,7 +2044,43 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets or sets YanfoeID.
+        ///   Gets YamjXml.
+        /// </summary>
+        public string XbmcXmlRtf
+        {
+            get
+            {
+                var xbmc = new XBMC();
+                return XFormat.GetRichText(xbmc.GenerateMovieOutput(this));
+            }
+        }
+
+        /// <summary>
+        ///   Gets YamjXml.
+        /// </summary>
+        public string YamjXml
+        {
+            get
+            {
+                var yamj = new YAMJ();
+                return yamj.GenerateMovieOutput(this);
+            }
+        }
+
+        /// <summary>
+        ///   Gets YamjXml.
+        /// </summary>
+        public string YamjXmlRtf
+        {
+            get
+            {
+                var yamj = new YAMJ();
+                return XFormat.GetRichText(yamj.GenerateMovieOutput(this));
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets YanfoeID.
         /// </summary>
         public string YanfoeID
         {
@@ -1927,15 +2094,15 @@ namespace YANFOE.Models.MovieModels
                 if (this.yanfoeID != value)
                 {
                     this.yanfoeID = value;
-                    this.OnPropertyChanged("SmallPoster");
+                    this.OnPropertyChanged("YanfoeID");
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the year.
+        ///   Gets or sets the year.
         /// </summary>
-        /// <value>The year value</value>
+        /// <value> The year value </value>
         public int? Year
         {
             get
@@ -1949,97 +2116,53 @@ namespace YANFOE.Models.MovieModels
                 {
                     this.year = value;
                     this.OnPropertyChanged("Year", true);
+                    this.OnPropertyChanged("YamjXmlRtf");
+                    this.OnPropertyChanged("XbmcXmlRtf");
                 }
-            }
-        }
-
-        private string ofdbbId;
-
-        public string OfdbId
-        {
-            get
-            {
-                return this.ofdbbId;
-            }
-
-            set
-            {
-                this.ofdbbId = value;
-                this.OnPropertyChanged("OfdbId", true);
-                this.OnPropertyChanged("Status");
-            }
-        }
-
-        private string sratimId;
-
-        public string SratimId
-        {
-            get
-            {
-                return this.sratimId;
-            }
-
-            set
-            {
-                this.sratimId = value;
-                this.OnPropertyChanged("SratimId", true);
-                this.OnPropertyChanged("Status");
-            }
-        }
-
-        private string rottenTomatoId;
-
-        public string RottenTomatoId
-        {
-            get
-            {
-                return this.rottenTomatoId;
-            }
-
-            set
-            {
-                this.rottenTomatoId = value;
-                this.OnPropertyChanged("RottenTomatoId", true);
-                this.OnPropertyChanged("Status");
             }
         }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
-        public void DoMediaInfoLookupBgw()
+        /// <summary>
+        /// The do media info lookup.
+        /// </summary>
+        public void DoMediaInfoLookup()
         {
-            foreach (var media in AssociatedFiles.Media)
+            foreach (var media in this.AssociatedFiles.Media)
             {
-                var bgw = new BackgroundWorker();
-                bgw.DoWork += (bgwSender, bgwE) =>
-                {
-                    var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
-
-                    bgwE.Result = result;
-                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie().FileInfo);
-                };
-
-                bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
-                {
-                    this.OnPropertyChanged("MediaInfoImage");
-                    this.InvokeMediaInfoChanged(new EventArgs());
-                };
-
-
-                bgw.RunWorkerAsync();
+                var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
+                MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.Instance.GetCurrentMovie().FileInfo);
+                this.OnPropertyChanged("MediaInfoImage");
+                this.InvokeMediaInfoChanged(new EventArgs());
             }
         }
 
-        public void DoMediaInfoLookup()
+        /// <summary>
+        /// The do media info lookup bgw.
+        /// </summary>
+        public void DoMediaInfoLookupBgw()
         {
-            foreach (var media in AssociatedFiles.Media)
+            foreach (var media in this.AssociatedFiles.Media)
             {
-                    var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
-                    MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.GetCurrentMovie().FileInfo);
-                    this.OnPropertyChanged("MediaInfoImage");
-                    this.InvokeMediaInfoChanged(new EventArgs());
+                var bgw = new BackgroundWorker();
+                bgw.DoWork += (bgwSender, bgwE) =>
+                    {
+                        var result = MediaInfoFactory.DoMediaInfoScan(media.PathAndFilename);
+
+                        bgwE.Result = result;
+                        MediaInfoFactory.InjectResponseModel(result, MovieDBFactory.Instance.GetCurrentMovie().FileInfo);
+                    };
+
+                bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
+                    {
+                        this.OnPropertyChanged("MediaInfoImage");
+                        this.InvokeMediaInfoChanged(new EventArgs());
+                    };
+
+                bgw.RunWorkerAsync();
             }
         }
 
@@ -2047,7 +2170,7 @@ namespace YANFOE.Models.MovieModels
         /// The generate small fanart.
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         public void GenerateSmallFanart(string path = null)
         {
@@ -2060,7 +2183,7 @@ namespace YANFOE.Models.MovieModels
         /// The generate small poster.
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         public void GenerateSmallPoster(string path = null)
         {
@@ -2070,14 +2193,22 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// Gets the super tip for the movie
+        /// When implemented by a class, this method returns information on an error associated with a business object.
         /// </summary>
-        /// <returns>
-        /// A supertip object
-        /// </returns>
+        /// <param name="info">
+        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error. 
+        /// </param>
+        public void GetError(ErrorInfo info)
+        {
+        }
+
+        /// <summary>
+        ///   Gets the super tip for the movie
+        /// </summary>
+        /// <returns> A supertip object </returns>
         public SuperToolTip GetMovieSuperTip()
         {
-            var superTip = new SuperToolTip { AllowHtmlText = DefaultBoolean.True };
+            var superTip = new SuperToolTip { AllowHtmlText = true };
 
             string yearValue;
 
@@ -2158,30 +2289,14 @@ namespace YANFOE.Models.MovieModels
             return superTip;
         }
 
-        #endregion
-
-        #region Implemented Interfaces
-
-        #region IDXDataErrorInfo
-
-        /// <summary>
-        /// When implemented by a class, this method returns information on an error associated with a business object.
-        /// </summary>
-        /// <param name="info">
-        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.
-        /// </param>
-        public void GetError(ErrorInfo info)
-        {
-        }
-
         /// <summary>
         /// When implemented by a class, this method returns information on an error associated with a specific business object's property.
         /// </summary>
         /// <param name="propertyName">
-        /// A string that identifies the name of the property for which information on an error is to be returned.
+        /// A string that identifies the name of the property for which information on an error is to be returned. 
         /// </param>
         /// <param name="info">
-        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error.
+        /// An <see cref="T:DevExpress.XtraEditors.DXErrorProvider.ErrorInfo"/> object that contains information on an error. 
         /// </param>
         public void GetPropertyError(string propertyName, ErrorInfo info)
         {
@@ -2229,14 +2344,27 @@ namespace YANFOE.Models.MovieModels
             }
         }
 
-        #endregion
+        /// <summary>
+        /// The invoke media info changed.
+        /// </summary>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        public void InvokeMediaInfoChanged(EventArgs e)
+        {
+            EventHandler handler = this.MediaInfoChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// The on locked status changed.
+        ///   The on locked status changed.
         /// </summary>
         protected void OnLockedStatusChanged()
         {
@@ -2249,7 +2377,7 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
-        /// The on marked status changed.
+        ///   The on marked status changed.
         /// </summary>
         protected void OnMarkedStatusChanged()
         {
@@ -2262,13 +2390,29 @@ namespace YANFOE.Models.MovieModels
         }
 
         /// <summary>
+        /// The contains media info.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ContainsMediaInfo()
+        {
+            if (this.AssociatedFiles.Media.Count == 0)
+            {
+                return false;
+            }
+
+            return File.Exists(this.AssociatedFiles.Media[0].PathAndFilename + ".mediainfo");
+        }
+
+        /// <summary>
         /// Handles the PropertyChanged event of the MovieModel control.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The source of the event. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.
+        /// The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data. 
         /// </param>
         private void MovieModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

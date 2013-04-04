@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Find.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Find.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Class contain IO functions to find information or files.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.IO
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -30,19 +34,27 @@ namespace YANFOE.Tools.IO
     using YANFOE.Tools.Restructure;
     using YANFOE.Tools.ThirdParty;
 
+    #endregion
+
     /// <summary>
-    /// Class contain IO functions to find information or files.
+    ///   Class contain IO functions to find information or files.
     /// </summary>
     public static class Find
     {
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The find all files in a path
         /// </summary>
-        /// <param name="path">The files path.</param>
-        /// <param name="type">The SearchOption type.</param>
-        /// <returns>All files in the path</returns>
+        /// <param name="path">
+        /// The files path. 
+        /// </param>
+        /// <param name="type">
+        /// The SearchOption type. 
+        /// </param>
+        /// <returns>
+        /// All files in the path 
+        /// </returns>
         public static string[] FindAll(string path, SearchOption type)
         {
             return FileHelper.GetFilesRecursive(path).ToArray();
@@ -51,10 +63,14 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds the files in path.
         /// </summary>
-        /// <param name="path">The files path.</param>
-        /// <param name="type">The SearchOption type.</param>
+        /// <param name="path">
+        /// The files path. 
+        /// </param>
+        /// <param name="type">
+        /// The SearchOption type. 
+        /// </param>
         /// <returns>
-        /// A collection of files and FileInfo collections
+        /// A collection of files and FileInfo collections 
         /// </returns>
         public static Dictionary<string, Section> FindFilesInPath(string path, SearchOption type)
         {
@@ -79,11 +95,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds a fanart image related to a movie file
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The find fanart.
+        /// The find fanart. 
         /// </returns>
         public static string FindMovieFanart(string fileName, string path, string[] fileList = null)
         {
@@ -94,22 +116,31 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds the NFO.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The find nfo.
+        /// The find nfo. 
         /// </returns>
         public static string FindMovieNFO(string fileName, string path, string[] fileList = null)
         {
-            string nfo = FindCore(fileName, path, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+            string nfo = FindCore(
+                fileName, path, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
 
             if (nfo == string.Empty)
             {
                 // Attempt to find any nfo file stored in the folder
                 string[] files = Directory.GetFiles(path, "*.nfo", SearchOption.TopDirectoryOnly);
                 if (files.Length > 0)
+                {
                     nfo = files[0];
+                }
             }
 
             return nfo;
@@ -118,11 +149,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds the poster.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="fileName">
+        /// Name of the file. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The find poster.
+        /// The find poster. 
         /// </returns>
         public static string FindMoviePoster(string fileName, string path, string[] fileList = null)
         {
@@ -133,11 +170,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds the season NFO.
         /// </summary>
-        /// <param name="seriesName">Name of the season.</param>
-        /// <param name="seasonPath">The season path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="seriesName">
+        /// Name of the season. 
+        /// </param>
+        /// <param name="seasonPath">
+        /// The season path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The found nfo.
+        /// The found nfo. 
         /// </returns>
         public static string FindNFO(string seriesName, string seasonPath, string[] fileList = null)
         {
@@ -149,16 +192,20 @@ namespace YANFOE.Tools.IO
                 return find;
             }
 
-            seriesName = FileSystemCharChange.To(seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Hex);
-            find = FindCore(seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+            seriesName = FileSystemCharChange.To(
+                seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Hex);
+            find = FindCore(
+                seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
 
             if (!string.IsNullOrEmpty(find))
             {
                 return find;
             }
 
-            seriesName = FileSystemCharChange.To(seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
-            find = FindCore(seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
+            seriesName = FileSystemCharChange.To(
+                seriesName, FileSystemCharChange.ConvertArea.Tv, FileSystemCharChange.ConvertType.Char);
+            find = FindCore(
+                seriesName, seasonPath, Get.InOutCollection.NFOTypes, Get.InOutCollection.NfoExtentions, fileList);
 
             if (!string.IsNullOrEmpty(find))
             {
@@ -171,11 +218,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Finds a season banner in a path
         /// </summary>
-        /// <param name="seasonName">The season name.</param>
-        /// <param name="seasonPath">The season path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="seasonName">
+        /// The season name. 
+        /// </param>
+        /// <param name="seasonPath">
+        /// The season path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The season banner.
+        /// The season banner. 
         /// </returns>
         public static string FindSeasonBanner(string seasonName, string seasonPath, string[] fileList = null)
         {
@@ -186,11 +239,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find season fanart.
         /// </summary>
-        /// <param name="seasonName">The season name.</param>
-        /// <param name="seasonPath">The season path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="seasonName">
+        /// The season name. 
+        /// </param>
+        /// <param name="seasonPath">
+        /// The season path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The season fanart.
+        /// The season fanart. 
         /// </returns>
         public static string FindSeasonFanart(string seasonName, string seasonPath, string[] fileList = null)
         {
@@ -201,11 +260,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find season poster.
         /// </summary>
-        /// <param name="seasonName">The season name.</param>
-        /// <param name="seasonPath">The season path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="seasonName">
+        /// The season name. 
+        /// </param>
+        /// <param name="seasonPath">
+        /// The season path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The season poster.
+        /// The season poster. 
         /// </returns>
         public static string FindSeasonPoster(string seasonName, string seasonPath, string[] fileList = null)
         {
@@ -216,11 +281,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find series banner.
         /// </summary>
-        /// <param name="name">The series name.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="name">
+        /// The series name. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The series banner.
+        /// The series banner. 
         /// </returns>
         public static string FindSeriesBanner(string name, string path, string[] fileList = null)
         {
@@ -230,11 +301,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find series fanart.
         /// </summary>
-        /// <param name="name">The series name.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="name">
+        /// The series name. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The series fanart.
+        /// The series fanart. 
         /// </returns>
         public static string FindSeriesFanart(string name, string path, string[] fileList = null)
         {
@@ -244,11 +321,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find series poster.
         /// </summary>
-        /// <param name="name">The series name.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="name">
+        /// The series name. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The series poster.
+        /// The series poster. 
         /// </returns>
         public static string FindSeriesPoster(string name, string path, string[] fileList = null)
         {
@@ -258,11 +341,17 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Find tv series screenshot.
         /// </summary>
-        /// <param name="fileName">The file name.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="fileName">
+        /// The file name. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The tv series screenshot.
+        /// The tv series screenshot. 
         /// </returns>
         public static string FindTvSeriesScreenshot(string fileName, string path, string[] fileList = null)
         {
@@ -273,10 +362,14 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Return the largest file in a specific path using the pattern specified.
         /// </summary>
-        /// <param name="path">The file path.</param>
-        /// <param name="pattern">The pattern.</param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern. 
+        /// </param>
         /// <returns>
-        /// The largest file in path.
+        /// The largest file in path. 
         /// </returns>
         public static string LargestFileInPath(string path, string pattern = "*.*")
         {
@@ -315,13 +408,23 @@ namespace YANFOE.Tools.IO
         /// <summary>
         /// Core find routine
         /// </summary>
-        /// <param name="name">The name to search for.</param>
-        /// <param name="path">The file path.</param>
-        /// <param name="types">The types.</param>
-        /// <param name="extentions">The extentions.</param>
-        /// <param name="fileList">The file list.</param>
+        /// <param name="name">
+        /// The name to search for. 
+        /// </param>
+        /// <param name="path">
+        /// The file path. 
+        /// </param>
+        /// <param name="types">
+        /// The types. 
+        /// </param>
+        /// <param name="extentions">
+        /// The extentions. 
+        /// </param>
+        /// <param name="fileList">
+        /// The file list. 
+        /// </param>
         /// <returns>
-        /// The find core.
+        /// The find core. 
         /// </returns>
         private static string FindCore(
             string name, string path, List<string> types, List<string> extentions, string[] fileList = null)
@@ -376,9 +479,19 @@ namespace YANFOE.Tools.IO
             return string.Empty;
         }
 
+        /// <summary>
+        /// The remove part.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         private static string RemovePart(string path)
         {
-            return Regex.Replace(path, "(?:(?:CD[0-9]+)|(?:DISC[0-9]+)|(?:DISK[0-9]+)|(?:PART[0-9]+))", "", RegexOptions.IgnoreCase);
+            return Regex.Replace(
+                path, "(?:(?:CD[0-9]+)|(?:DISC[0-9]+)|(?:DISK[0-9]+)|(?:PART[0-9]+))", string.Empty, RegexOptions.IgnoreCase);
         }
 
         #endregion

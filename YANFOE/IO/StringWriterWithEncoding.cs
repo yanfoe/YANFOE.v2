@@ -1,31 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringWriterWithEncoding.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="StringWriterWithEncoding.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The string writer with encoding.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.IO
 {
+    #region Required Namespaces
+
     using System.IO;
     using System.Text;
 
+    #endregion
+
     /// <summary>
-    /// The string writer with encoding.
+    ///   The string writer with encoding.
     /// </summary>
     public sealed class StringWriterWithEncoding : StringWriter
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The encoding.
+        ///   The encoding.
         /// </summary>
         private readonly Encoding encoding;
 
@@ -37,7 +43,7 @@ namespace YANFOE.IO
         /// Initializes a new instance of the <see cref="StringWriterWithEncoding"/> class.
         /// </summary>
         /// <param name="encoding">
-        /// The encoding.
+        /// The encoding. 
         /// </param>
         public StringWriterWithEncoding(Encoding encoding)
         {
@@ -46,10 +52,10 @@ namespace YANFOE.IO
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets Encoding.
+        ///   Gets Encoding.
         /// </summary>
         public override Encoding Encoding
         {

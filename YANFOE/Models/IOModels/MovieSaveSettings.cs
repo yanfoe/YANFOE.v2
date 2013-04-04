@@ -1,138 +1,144 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieSaveSettings.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieSaveSettings.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Settings related to saving movie nfo and images.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.IOModels
 {
+    #region Required Namespaces
+
     using System;
 
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// Settings related to saving movie nfo and images.
+    ///   Settings related to saving movie nfo and images.
     /// </summary>
     [Serializable]
     public class MovieSaveSettings : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The bluray fanart name template.
+        ///   The bluray fanart name template.
         /// </summary>
         private string blurayFanartNameTemplate;
 
         /// <summary>
-        /// The bluray nfo name template.
+        ///   The bluray nfo name template.
         /// </summary>
         private string blurayNfoNameTemplate;
 
         /// <summary>
-        /// The bluray poster name template.
+        ///   The bluray poster name template.
         /// </summary>
         private string blurayPosterNameTemplate;
 
         /// <summary>
-        /// The bluray trailer name template.
-        /// </summary>
-        private string blurayTrailerNameTemplate;
-
-        /// <summary>
-        /// The bluray set fanart name template.
+        ///   The bluray set fanart name template.
         /// </summary>
         private string bluraySetFanartNameTemplate;
 
         /// <summary>
-        /// The bluray set poster name template.
+        ///   The bluray set poster name template.
         /// </summary>
         private string bluraySetPosterNameTemplate;
 
         /// <summary>
-        /// The dvd fanart name template.
+        ///   The bluray trailer name template.
+        /// </summary>
+        private string blurayTrailerNameTemplate;
+
+        /// <summary>
+        ///   The dvd fanart name template.
         /// </summary>
         private string dvdFanartNameTemplate;
 
         /// <summary>
-        /// The dvd nfo name template.
+        ///   The dvd nfo name template.
         /// </summary>
         private string dvdNfoNameTemplate;
 
         /// <summary>
-        /// The dvd poster name template.
+        ///   The dvd poster name template.
         /// </summary>
         private string dvdPosterNameTemplate;
 
         /// <summary>
-        /// The dvd trailer name template.
-        /// </summary>
-        private string dvdTrailerNameTemplate;
-
-        /// <summary>
-        /// The dvd set fanart name template.
+        ///   The dvd set fanart name template.
         /// </summary>
         private string dvdSetFanartNameTemplate;
 
         /// <summary>
-        /// The dvd set poster name template.
+        ///   The dvd set poster name template.
         /// </summary>
         private string dvdSetPosterNameTemplate;
 
         /// <summary>
-        /// The image path.
+        ///   The dvd trailer name template.
+        /// </summary>
+        private string dvdTrailerNameTemplate;
+
+        /// <summary>
+        ///   The image path.
         /// </summary>
         private string imagePath;
 
         /// <summary>
-        /// The nfo path.
+        ///   The nfo path.
         /// </summary>
         private string nfoPath;
 
         /// <summary>
-        /// The normal fanart name template.
+        ///   The normal fanart name template.
         /// </summary>
         private string normalFanartNameTemplate;
 
         /// <summary>
-        /// The normal nfo name template.
+        ///   The normal nfo name template.
         /// </summary>
         private string normalNfoNameTemplate;
 
         /// <summary>
-        /// The normal poster name template.
+        ///   The normal poster name template.
         /// </summary>
         private string normalPosterNameTemplate;
 
         /// <summary>
-        /// The normal trailer name template.
-        /// </summary>
-        private string normalTrailerNameTemplate;
-
-        /// <summary>
-        /// The normal set fanart name template.
+        ///   The normal set fanart name template.
         /// </summary>
         private string normalSetFanartNameTemplate;
 
         /// <summary>
-        /// The normal set poster name template.
+        ///   The normal set poster name template.
         /// </summary>
         private string normalSetPosterNameTemplate;
+
+        /// <summary>
+        ///   The normal trailer name template.
+        /// </summary>
+        private string normalTrailerNameTemplate;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieSaveSettings"/> class.
+        ///   Initializes a new instance of the <see cref="MovieSaveSettings" /> class.
         /// </summary>
         public MovieSaveSettings()
         {
@@ -163,14 +169,12 @@ namespace YANFOE.Models.IOModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the bluray fanart name template.
+        ///   Gets or sets the bluray fanart name template.
         /// </summary>
-        /// <value>
-        /// The bluray fanart name template.
-        /// </value>
+        /// <value> The bluray fanart name template. </value>
         public string BlurayFanartNameTemplate
         {
             get
@@ -186,11 +190,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the bluray nfo name template.
+        ///   Gets or sets the bluray nfo name template.
         /// </summary>
-        /// <value>
-        /// The bluray nfo name template.
-        /// </value>
+        /// <value> The bluray nfo name template. </value>
         public string BlurayNfoNameTemplate
         {
             get
@@ -206,11 +208,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the bluray poster name template.
+        ///   Gets or sets the bluray poster name template.
         /// </summary>
-        /// <value>
-        /// The bluray poster name template.
-        /// </value>
+        /// <value> The bluray poster name template. </value>
         public string BlurayPosterNameTemplate
         {
             get
@@ -226,31 +226,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the bluray trailer name template.
+        ///   Gets or sets the bluray set fanart name template.
         /// </summary>
-        /// <value>
-        /// The bluray trailer name template.
-        /// </value>
-        public string BlurayTrailerNameTemplate
-        {
-            get
-            {
-                return this.blurayTrailerNameTemplate;
-            }
-
-            set
-            {
-                this.blurayTrailerNameTemplate = value;
-                this.OnPropertyChanged("BlurayTrailerNameTemplate");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the bluray set fanart name template.
-        /// </summary>
-        /// <value>
-        /// The bluray set fanart name template.
-        /// </value>
+        /// <value> The bluray set fanart name template. </value>
         public string BluraySetFanartNameTemplate
         {
             get
@@ -266,11 +244,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the bluray set poster name template.
+        ///   Gets or sets the bluray set poster name template.
         /// </summary>
-        /// <value>
-        /// The bluray set poster name template.
-        /// </value>
+        /// <value> The bluray set poster name template. </value>
         public string BluraySetPosterNameTemplate
         {
             get
@@ -286,11 +262,27 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the DVD fanart name template.
+        ///   Gets or sets the bluray trailer name template.
         /// </summary>
-        /// <value>
-        /// The DVD fanart name template.
-        /// </value>
+        /// <value> The bluray trailer name template. </value>
+        public string BlurayTrailerNameTemplate
+        {
+            get
+            {
+                return this.blurayTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.blurayTrailerNameTemplate = value;
+                this.OnPropertyChanged("BlurayTrailerNameTemplate");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the DVD fanart name template.
+        /// </summary>
+        /// <value> The DVD fanart name template. </value>
         public string DvdFanartNameTemplate
         {
             get
@@ -306,11 +298,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the DVD nfo name template.
+        ///   Gets or sets the DVD nfo name template.
         /// </summary>
-        /// <value>
-        /// The DVD nfo name template.
-        /// </value>
+        /// <value> The DVD nfo name template. </value>
         public string DvdNfoNameTemplate
         {
             get
@@ -326,11 +316,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the DVD poster name template.
+        ///   Gets or sets the DVD poster name template.
         /// </summary>
-        /// <value>
-        /// The DVD poster name template.
-        /// </value>
+        /// <value> The DVD poster name template. </value>
         public string DvdPosterNameTemplate
         {
             get
@@ -346,31 +334,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the DVD trailer name template.
+        ///   Gets or sets the DVD set fanart name template.
         /// </summary>
-        /// <value>
-        /// The DVD trailer name template.
-        /// </value>
-        public string DvdTrailerNameTemplate
-        {
-            get
-            {
-                return this.dvdTrailerNameTemplate;
-            }
-
-            set
-            {
-                this.dvdTrailerNameTemplate = value;
-                this.OnPropertyChanged("DvdTrailerNameTemplate");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the DVD set fanart name template.
-        /// </summary>
-        /// <value>
-        /// The DVD set fanart name template.
-        /// </value>
+        /// <value> The DVD set fanart name template. </value>
         public string DvdSetFanartNameTemplate
         {
             get
@@ -386,11 +352,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the DVD set poster name template.
+        ///   Gets or sets the DVD set poster name template.
         /// </summary>
-        /// <value>
-        /// The DVD set poster name template.
-        /// </value>
+        /// <value> The DVD set poster name template. </value>
         public string DvdSetPosterNameTemplate
         {
             get
@@ -406,11 +370,27 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the path which to save Images too. If with movie leave blank
+        ///   Gets or sets the DVD trailer name template.
         /// </summary>
-        /// <value>
-        /// The image path.
-        /// </value>
+        /// <value> The DVD trailer name template. </value>
+        public string DvdTrailerNameTemplate
+        {
+            get
+            {
+                return this.dvdTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.dvdTrailerNameTemplate = value;
+                this.OnPropertyChanged("DvdTrailerNameTemplate");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the path which to save Images too. If with movie leave blank
+        /// </summary>
+        /// <value> The image path. </value>
         public string ImagePath
         {
             get
@@ -426,16 +406,14 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets IoType.
+        ///   Gets or sets IoType.
         /// </summary>
         public MovieIOType IoType { get; set; }
 
         /// <summary>
-        /// Gets or sets the path which to save NFO too. If with movie leave blank
+        ///   Gets or sets the path which to save NFO too. If with movie leave blank
         /// </summary>
-        /// <value>
-        /// The nfo path.
-        /// </value>
+        /// <value> The nfo path. </value>
         public string NfoPath
         {
             get
@@ -446,16 +424,14 @@ namespace YANFOE.Models.IOModels
             set
             {
                 this.nfoPath = value;
-                this.OnPropertyChanged("NfoPath");
+                this.OnPropertyChanged("NFOPath");
             }
         }
 
         /// <summary>
-        /// Gets or sets the fanart name template.
+        ///   Gets or sets the fanart name template.
         /// </summary>
-        /// <value>
-        /// The fanart name template.
-        /// </value>
+        /// <value> The fanart name template. </value>
         public string NormalFanartNameTemplate
         {
             get
@@ -471,11 +447,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the nfo name template.
+        ///   Gets or sets the nfo name template.
         /// </summary>
-        /// <value>
-        /// The nfo name template.
-        /// </value>
+        /// <value> The nfo name template. </value>
         public string NormalNfoNameTemplate
         {
             get
@@ -491,11 +465,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the poster name template.
+        ///   Gets or sets the poster name template.
         /// </summary>
-        /// <value>
-        /// The poster name template.
-        /// </value>
+        /// <value> The poster name template. </value>
         public string NormalPosterNameTemplate
         {
             get
@@ -511,31 +483,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the trailer name template.
+        ///   Gets or sets the normal set fanart name template.
         /// </summary>
-        /// <value>
-        /// The trailer name template.
-        /// </value>
-        public string NormalTrailerNameTemplate
-        {
-            get
-            {
-                return this.normalTrailerNameTemplate;
-            }
-
-            set
-            {
-                this.normalTrailerNameTemplate = value;
-                this.OnPropertyChanged("NormalTrailerNameTemplate");
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the normal set fanart name template.
-        /// </summary>
-        /// <value>
-        /// The normal set fanart name template.
-        /// </value>
+        /// <value> The normal set fanart name template. </value>
         public string NormalSetFanartNameTemplate
         {
             get
@@ -551,11 +501,9 @@ namespace YANFOE.Models.IOModels
         }
 
         /// <summary>
-        /// Gets or sets the normal set poster name template.
+        ///   Gets or sets the normal set poster name template.
         /// </summary>
-        /// <value>
-        /// The normal set poster name template.
-        /// </value>
+        /// <value> The normal set poster name template. </value>
         public string NormalSetPosterNameTemplate
         {
             get
@@ -567,6 +515,24 @@ namespace YANFOE.Models.IOModels
             {
                 this.normalSetPosterNameTemplate = value;
                 this.OnPropertyChanged("NormalSetPosterNameTemplate");
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the trailer name template.
+        /// </summary>
+        /// <value> The trailer name template. </value>
+        public string NormalTrailerNameTemplate
+        {
+            get
+            {
+                return this.normalTrailerNameTemplate;
+            }
+
+            set
+            {
+                this.normalTrailerNameTemplate = value;
+                this.OnPropertyChanged("NormalTrailerNameTemplate");
             }
         }
 

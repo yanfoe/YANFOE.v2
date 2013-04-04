@@ -1,0 +1,54 @@
+﻿<Window x:Class="YANFOE.UI.Dialogs.General.WndEditMediaPath"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Scraper="clr-namespace:YANFOE.Factories.Scraper"
+        xmlns:Settings="clr-namespace:YANFOE.Settings" Title="YANFOE: Import Details" Height="271" Width="595" DataContext="{Binding RelativeSource={RelativeSource self}, Path=EditingMediaPathModel}">
+    <Grid>
+        <GroupBox Header="Import Details" Name="groupBox1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="32" />
+                    <RowDefinition Height="75*" />
+                    <RowDefinition Height="85*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="238*" />
+                    <ColumnDefinition Width="240*" />
+                    <ColumnDefinition Width="84*" />
+                </Grid.ColumnDefinitions>
+                <Button Height="40" Margin="3,6,6,0" Name="button1" VerticalAlignment="Top" Grid.Column="2" Grid.RowSpan="2" Click="BtnMediaPathBrowseClick">
+                    <Image Source="/YANFOE;component/Resources/folder1.png" />
+                </Button>
+                <Button Margin="3,0,6,48" Name="btnOK" Height="39" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Click="BtnOkClick">
+                    <Image Source="/YANFOE;component/Resources/accept1.png" />
+                </Button>
+                <Button Margin="3,0,6,6" Name="button3" Height="39" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="3" Click="BtnCancelClick">
+                    <Image Source="/YANFOE;component/Resources/delete.png" />
+                </Button>
+                <GroupBox Header="Import Type" Margin="6,0,0,1" Name="groupBox2" Grid.Row="2">
+                    <StackPanel>
+                        <RadioButton IsChecked="{Binding ContainsMovies}" Content="Folder Contains Movies" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsMovies" VerticalAlignment="Top" Unchecked="chkFolderContainsMovies_CheckedChanged" Checked="chkFolderContainsMovies_CheckedChanged" />
+                        <RadioButton IsChecked="{Binding ContainsTV}" Content="Folder Contains TV Shows" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsTvShows" VerticalAlignment="Top" Checked="chkFolderContainsTvShows_CheckedChanged" Unchecked="chkFolderContainsTvShows_CheckedChanged" />
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="Movie Naming" Margin="6,5,0,0" Name="groupMovieNaming" Grid.Row="3" Height="72" VerticalAlignment="Top">
+                    <StackPanel>
+                        <RadioButton IsChecked="{Binding ImportUsingFileName}" Content="Import using file name" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkImportUsingFileName" VerticalAlignment="Top" />
+                        <RadioButton IsChecked="{Binding ImportUsingParentFolderName}" Content="Import using parent folder name" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkImportUsingParentFolderName" VerticalAlignment="Top" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Movie Defaults" Margin="0,0,3,0" Name="groupMovieDefaults" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Height="128" VerticalAlignment="Top">
+                    <StackPanel>
+                        <Label Content="Movie Scraper Group:" />
+                        <ComboBox Name="cmbScraperGroup" Text="{Binding ScraperGroup}" ItemsSource="{Binding Source={x:Static Scraper:MovieScraperGroupFactory.Instance}, Path=ScraperGroupsOnDisk}" />
+                        <Label Content="Source:" />
+                        <ComboBox Name="cmbSource" Text="{Binding DefaultSource}" ItemsSource="{Binding Source={x:Static Settings:Get.Keywords}, Path=Sources.Keys}"/>
+                    </StackPanel>
+                </GroupBox>
+                <TextBox Text="{Binding MediaPath}" Margin="6,3,0,6" Name="txtMediaPath" Grid.ColumnSpan="2" Grid.Row="1" TextChanged="txtMediaPath_TextChanged" />
+                <Label Content="Select a Media Path" Margin="6,0,0,3" Name="label1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="118" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

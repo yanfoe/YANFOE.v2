@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Naming.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Naming.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie naming.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Importing
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -24,46 +28,79 @@ namespace YANFOE.Tools.Importing
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
 
+    #endregion
+
     /// <summary>
-    /// The movie naming.
+    ///   The movie naming.
     /// </summary>
     public static class MovieNaming
     {
         #region Enums
 
         /// <summary>
-        /// The movie file type.
+        ///   The movie file type.
         /// </summary>
         public enum MovieFileType
         {
             /// <summary>
-            /// File is a main movie
+            ///   File is a main movie
             /// </summary>
             Movie, 
 
             /// <summary>
-            /// File is a sample video
+            ///   File is a sample video
             /// </summary>
             Sample, 
 
             /// <summary>
-            /// File is a trailer video
+            ///   File is a trailer video
             /// </summary>
             Trailer
         }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
+
+        /// <summary>
+        /// The add spaces to sentence.
+        /// </summary>
+        /// <param name="text">
+        /// The text.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string AddSpacesToSentence(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            StringBuilder newText = new StringBuilder(text.Length * 2);
+            newText.Append(text[0]);
+            for (int i = 1; i < text.Length; i++)
+            {
+                if (char.IsUpper(text[i]))
+                {
+                    newText.Append(' ');
+                }
+
+                newText.Append(text[i]);
+            }
+
+            return newText.ToString();
+        }
 
         /// <summary>
         /// The get blu ray name.
         /// </summary>
         /// <param name="path">
-        /// The path of the bluray
+        /// The path of the bluray 
         /// </param>
         /// <returns>
-        /// The BluRay name.
+        /// The BluRay name. 
         /// </returns>
         public static string GetBluRayName(string path)
         {
@@ -75,10 +112,10 @@ namespace YANFOE.Tools.Importing
         /// The get blu ray path.
         /// </summary>
         /// <param name="path">
-        /// The path of the bluray
+        /// The path of the bluray 
         /// </param>
         /// <returns>
-        /// The BluRay path.
+        /// The BluRay path. 
         /// </returns>
         public static string GetBluRayPath(string path)
         {
@@ -91,10 +128,10 @@ namespace YANFOE.Tools.Importing
         /// The get dvd name.
         /// </summary>
         /// <param name="path">
-        /// The DVD path.
+        /// The DVD path. 
         /// </param>
         /// <returns>
-        /// The dvd name.
+        /// The dvd name. 
         /// </returns>
         public static string GetDvdName(string path)
         {
@@ -106,10 +143,10 @@ namespace YANFOE.Tools.Importing
         /// The get dvd path.
         /// </summary>
         /// <param name="path">
-        /// The full DVD path.
+        /// The full DVD path. 
         /// </param>
         /// <returns>
-        /// The dvd path.
+        /// The dvd path. 
         /// </returns>
         public static string GetDvdPath(string path)
         {
@@ -122,10 +159,10 @@ namespace YANFOE.Tools.Importing
         /// The get file type.
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         /// <returns>
-        /// MovieFileType object
+        /// MovieFileType object 
         /// </returns>
         public static MovieFileType GetFileType(string path)
         {
@@ -146,13 +183,13 @@ namespace YANFOE.Tools.Importing
         /// Get the movie name.
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         /// <param name="type">
-        /// The AddFolderType type.
+        /// The AddFolderType type. 
         /// </param>
         /// <returns>
-        /// The movie name.
+        /// The movie name. 
         /// </returns>
         public static string GetMovieName(string path, AddFolderType type)
         {
@@ -244,10 +281,10 @@ namespace YANFOE.Tools.Importing
         /// Get the movie year.
         /// </summary>
         /// <param name="text">
-        /// The text string
+        /// The text string 
         /// </param>
         /// <returns>
-        /// The movie year
+        /// The movie year 
         /// </returns>
         public static int? GetMovieYear(string text)
         {
@@ -294,10 +331,10 @@ namespace YANFOE.Tools.Importing
         /// The disk part number.
         /// </summary>
         /// <param name="fileName">
-        /// The file name.
+        /// The file name. 
         /// </param>
         /// <returns>
-        /// The part number.
+        /// The part number. 
         /// </returns>
         public static int GetPartNumber(string fileName)
         {
@@ -323,10 +360,10 @@ namespace YANFOE.Tools.Importing
         /// get set name.
         /// </summary>
         /// <param name="fileName">
-        /// The file name.
+        /// The file name. 
         /// </param>
         /// <returns>
-        /// The set name.
+        /// The set name. 
         /// </returns>
         public static string GetSetName(string fileName)
         {
@@ -346,10 +383,10 @@ namespace YANFOE.Tools.Importing
         /// Check if path is a bluray
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         /// <returns>
-        /// Is bluray.
+        /// Is bluray. 
         /// </returns>
         public static bool IsBluRay(string path)
         {
@@ -367,10 +404,10 @@ namespace YANFOE.Tools.Importing
         /// Check if path is a dvd
         /// </summary>
         /// <param name="path">
-        /// The file path.
+        /// The file path. 
         /// </param>
         /// <returns>
-        /// Path is a dvd.
+        /// Path is a dvd. 
         /// </returns>
         public static bool IsDVD(string path)
         {
@@ -386,29 +423,14 @@ namespace YANFOE.Tools.Importing
         /// Remove brackets from a string
         /// </summary>
         /// <param name="fileName">
-        /// The file name.
+        /// The file name. 
         /// </param>
         /// <returns>
-        /// The processed string
+        /// The processed string 
         /// </returns>
         public static string RemoveBrackets(string fileName)
         {
             return Regex.Replace(fileName, @"\[.*?\]", string.Empty, RegexOptions.IgnoreCase);
-        }
-
-        public static string AddSpacesToSentence(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return "";
-            StringBuilder newText = new StringBuilder(text.Length * 2);
-            newText.Append(text[0]);
-            for (int i = 1; i < text.Length; i++)
-            {
-                if (char.IsUpper(text[i]))
-                    newText.Append(' ');
-                newText.Append(text[i]);
-            }
-            return newText.ToString();
         }
 
         #endregion

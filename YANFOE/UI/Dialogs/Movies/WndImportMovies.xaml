@@ -1,0 +1,114 @@
+﻿<Window x:Class="YANFOE.UI.UserControls.MediaManagerControls.WndImportMovies"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Import="clr-namespace:YANFOE.Factories.Import"
+        xmlns:UI="clr-namespace:YANFOE.Tools.UI" Title="WndImportMovies" Height="493" Width="1209"
+        DataContext="{Binding Source={x:Static Import:ImportMoviesFactory.Instance}, Path=ImportDatabase}" >
+    
+    <Window.Resources>
+        <UI:ImageConverter x:Key="imageConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="191*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="486*" />
+            <ColumnDefinition Width="334*" />
+            <ColumnDefinition Width="85*" />
+            <ColumnDefinition Width="81*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*" />
+            <RowDefinition Height="291*" />
+            <RowDefinition Height="23*" />
+            <RowDefinition Height="38*" />
+            <RowDefinition Height="53*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="4" Name="btnCancel" Grid.Column="5" Click="BtnCancelClick">
+            <Image Source="/YANFOE;component/Resources/delete.png" />
+        </Button>
+        <Button Grid.Row="4" Name="btnOK" Grid.Column="4" Click="BtnOkClick">
+            <Image Source="/YANFOE;component/Resources/accept1.png" />
+        </Button>
+        <GroupBox Grid.Row="4" Header="Current Activity" Name="groupBox1" Grid.ColumnSpan="4">
+            <Label Content="Idle" Name="lblCurrentActivity" />
+        </GroupBox>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Name="gridSplitter1" VerticalAlignment="Stretch" Grid.RowSpan="4" />
+        <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="movieList" Grid.RowSpan="2" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="..." IsReadOnly="True" Width="5">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Status, Converter={StaticResource imageConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Path=Title}" Header="Title" Width="40*" />
+                <DataGridTextColumn Binding="{Binding Path=Year}" CanUserSort="False" Header="Year" Width="40" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="3" Name="button3" Click="btnBulkScan_Click">
+            <Image Source="/YANFOE;component/Resources/globe.png" />
+        </Button>
+        <ProgressBar Grid.Row="2" Name="progressBarControl1" />
+        <GroupBox Grid.Column="2" Header="Edit Default Scan Settings" Name="grpMain" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="357*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="46*" />
+                    <ColumnDefinition Width="382*" />
+                    <ColumnDefinition Width="44*" />
+                    <ColumnDefinition Width="72*" />
+                    <ColumnDefinition Width="54*" />
+                    <ColumnDefinition Width="167*" />
+                    <ColumnDefinition Width="56*" />
+                    <ColumnDefinition Width="153*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Title" />
+                <TextBox Text="{Binding Title}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <Label Content="Year"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <TextBox Text="{Binding Year}" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <Label Content="tMDb Id"  Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <TextBox Text="{Binding TmdbId}" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <Label Content="IMDB Id"  Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <TextBox Text="{Binding ImdbId}" Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </Grid>
+
+            <Grid Name="grid1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="267*" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*" />
+                    <ColumnDefinition Width="441*" />
+                    <ColumnDefinition Width="60*" />
+                    <ColumnDefinition Width="434*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="button4" VerticalAlignment="Stretch" Click="btnChangeNfo_Click">
+                    <Image Source="/YANFOE;component/Resources/folder1.png" />
+                </Button>
+                <Button Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="button5" VerticalAlignment="Stretch" Click="btnChangePoster_Click">
+                    <Image Source="/YANFOE;component/Resources/folder1.png" />
+                </Button>
+                <Button Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="button6" VerticalAlignment="Stretch" Click="btnChangeFanart_Click">
+                    <Image Source="/YANFOE;component/Resources/folder1.png" />
+                </Button>
+                <Label Content="NFO" Grid.Row="1" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="label1" VerticalAlignment="Stretch" HorizontalContentAlignment="Right" />
+                <Label Content="Poster" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="label2" VerticalAlignment="Stretch" HorizontalContentAlignment="Right" />
+                <Label Content="Fanart" Grid.Row="3" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="label3" VerticalAlignment="Stretch" HorizontalContentAlignment="Right" />
+                <TextBox Text="{Binding NfoPathOnDisk}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Name="txtNfo" VerticalAlignment="Stretch" />
+                <TextBox Text="{Binding PosterPathOnDisk}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Name="txtPoster" VerticalAlignment="Stretch" />
+                <TextBox Text="{Binding FanartPathOnDisk}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Name="txtFanart" VerticalAlignment="Stretch" />
+                <Image Source="{Binding SmallPoster, Converter={StaticResource imageConverter}}" Grid.Column="3" Name="image1" Stretch="Uniform" Grid.RowSpan="4" />
+                <DataGrid AutoGenerateColumns="False" Name="dataGrid2" Grid.ColumnSpan="3" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

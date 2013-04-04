@@ -1,21 +1,31 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DatabaseIOFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="DatabaseIOFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
+// <license>
+//   This software is licensed under a Creative Commons License
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+//   http://creativecommons.org/licenses/by-nc-sa/3.0/
+//   See this page: http://www.yanfoe.com/license
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
+// </license>
 // <summary>
 //   The database io factory.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Internal
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
-    using System.Windows.Forms;
+    using System.Timers;
 
     using BitFactory.Logging;
 
@@ -36,52 +46,53 @@ namespace YANFOE.Factories.Internal
     using YANFOE.Tools.Compression;
     using YANFOE.Tools.IO;
     using YANFOE.Tools.ThirdParty;
+    using YANFOE.Tools.UI;
     using YANFOE.UI.Dialogs.General;
 
-    using Timer = System.Windows.Forms.Timer;
+    #endregion
 
     /// <summary>
-    /// The database io factory.
+    ///   The database io factory.
     /// </summary>
     public static class DatabaseIOFactory
     {
-        #region Constants and Fields
-
-        /// <summary>
-        /// The saving count.
-        /// </summary>
-        public static int SavingCount;
+        #region Static Fields
 
         /// <summary>
         ///   Timer for the Start save dialog
         /// </summary>
-        private static readonly Timer tmr = new Timer();
+        private static readonly Timer Tmr = new Timer();
 
         /// <summary>
-        /// The database dirty.
+        ///   The database dirty.
         /// </summary>
         private static bool databaseDirty;
 
         /// <summary>
         ///   The start save dialog
         /// </summary>
-        private static FrmSavingDB frmSavingDB = new FrmSavingDB();
+        private static WndSavingDB frmSavingDB = new WndSavingDB();
+
+        /// <summary>
+        ///   The saving count.
+        /// </summary>
+        private static int savingCount;
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        ///   Initializes static members of the <see cref = "DatabaseIOFactory" /> class.
+        ///   Initializes static members of the <see cref="DatabaseIOFactory" /> class.
         /// </summary>
         static DatabaseIOFactory()
         {
-            tmr.Tick += tmr_Tick;
+            Tmr.Elapsed += TmrTick;
         }
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
         ///   The database dirty changed.
@@ -94,7 +105,7 @@ namespace YANFOE.Factories.Internal
         #region Enums
 
         /// <summary>
-        /// The output name.
+        ///   The output name.
         /// </summary>
         public enum OutputName
         {
@@ -104,12 +115,12 @@ namespace YANFOE.Factories.Internal
             None, 
 
             /// <summary>
-            ///   The media path db.
+            ///   The media path DB.
             /// </summary>
             MediaPathDb, 
 
             /// <summary>
-            ///   The movie db.
+            ///   The movie DB.
             /// </summary>
             MovieDb, 
 
@@ -119,12 +130,12 @@ namespace YANFOE.Factories.Internal
             MovieSets, 
 
             /// <summary>
-            ///   The tv db.
+            ///   The TV DB.
             /// </summary>
             TvDb, 
 
             /// <summary>
-            ///   The scan series pick db
+            ///   The scan series pick DB
             /// </summary>
             ScanSeriesPick, 
 
@@ -136,10 +147,10 @@ namespace YANFOE.Factories.Internal
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether AppLoading.
+        ///   Gets or sets a value indicating whether AppLoading.
         /// </summary>
         public static bool AppLoading { get; set; }
 
@@ -157,6 +168,22 @@ namespace YANFOE.Factories.Internal
             {
                 databaseDirty = value;
                 InvokeDatabaseDirtyChanged(new EventArgs());
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the saving count.
+        /// </summary>
+        public static int SavingCount
+        {
+            get
+            {
+                return savingCount;
+            }
+
+            set
+            {
+                savingCount = value;
             }
         }
 
@@ -192,13 +219,13 @@ namespace YANFOE.Factories.Internal
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The invoke database dirty changed.
         /// </summary>
         /// <param name="e">
-        /// The e.
+        /// The e. 
         /// </param>
         public static void InvokeDatabaseDirtyChanged(EventArgs e)
         {
@@ -213,7 +240,7 @@ namespace YANFOE.Factories.Internal
         /// Loads the specified output name.
         /// </summary>
         /// <param name="outputName">
-        /// Name of the output.
+        /// Name of the output. 
         /// </param>
         public static void Load(OutputName outputName)
         {
@@ -223,13 +250,13 @@ namespace YANFOE.Factories.Internal
                     LoadMovieDB();
                     break;
                 case OutputName.MediaPathDb:
-                    LoadMediaPathDb();
+                    LoadMediaPathDB();
                     break;
                 case OutputName.MovieSets:
                     LoadMovieSets();
                     break;
                 case OutputName.TvDb:
-                    LoadTvDB();
+                    LoadTVDB();
                     break;
                 case OutputName.ScanSeriesPick:
                     LoadScanSeriesPick();
@@ -237,11 +264,11 @@ namespace YANFOE.Factories.Internal
                 case OutputName.All:
                     LoadMovieDB();
                     LoadMovieSets();
-                    LoadMediaPathDb();
+                    LoadMediaPathDB();
                     MasterMediaDBFactory.PopulateMasterMovieMediaDatabase();
-                    LoadTvDB();
+                    LoadTVDB();
                     LoadScanSeriesPick();
-                    MasterMediaDBFactory.PopulateMasterTvMediaDatabase();
+                    MasterMediaDBFactory.PopulateMasterTVMediaDatabase();
                     break;
             }
         }
@@ -250,11 +277,11 @@ namespace YANFOE.Factories.Internal
         /// Saves the specified type.
         /// </summary>
         /// <param name="type">
-        /// The OutputName type.
+        /// The OutputName type. 
         /// </param>
         public static void Save(OutputName type)
         {
-            if (SavingCount > 0)
+            if (savingCount > 0)
             {
                 return;
             }
@@ -265,13 +292,13 @@ namespace YANFOE.Factories.Internal
                     SaveMovieDB();
                     break;
                 case OutputName.MediaPathDb:
-                    SaveMediaPathDb();
+                    SaveMediaPathDB();
                     break;
                 case OutputName.MovieSets:
                     SaveMovieSets();
                     break;
                 case OutputName.TvDb:
-                    SaveTvDB();
+                    SaveTVDB();
                     break;
                 case OutputName.ScanSeriesPick:
                     SaveScanSeriesPick();
@@ -279,9 +306,9 @@ namespace YANFOE.Factories.Internal
                 case OutputName.All:
                     StartSaveDialog();
                     SaveMovieDB();
-                    SaveMediaPathDb();
+                    SaveMediaPathDB();
                     SaveMovieSets();
-                    SaveTvDB();
+                    SaveTVDB();
                     SaveScanSeriesPick();
                     DatabaseDirty = false;
                     break;
@@ -289,7 +316,7 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// The set database dirty.
+        ///   The set database dirty.
         /// </summary>
         public static void SetDatabaseDirty()
         {
@@ -300,13 +327,91 @@ namespace YANFOE.Factories.Internal
         #region Methods
 
         /// <summary>
-        /// Loads the media path db.
+        /// Handles the DoWork event of the BGWSaveMediaPathDB control.
         /// </summary>
-        private static void LoadMediaPathDb()
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
+        /// </param>
+        private static void BgwSaveMediaPathDbDoWork(object sender, DoWorkEventArgs e)
         {
-            if (MediaPathDBFactory.MediaPathDB == null)
+            savingCount++;
+
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
+            Directory.CreateDirectory(path);
+            Folders.DeleteFilesInFolder(path);
+
+            int count = 0;
+
+            foreach (var json in MediaPathDBFactory.Instance.MediaPathDB.Select(JsonConvert.SerializeObject))
             {
-                MediaPathDBFactory.MediaPathDB = new BindingList<MediaPathModel>();
+                Gzip.CompressString(json, path + count + ".MediaPath.gz");
+
+                count++;
+            }
+
+            savingCount--;
+        }
+
+        /// <summary>
+        /// The save movie sets do work.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender. 
+        /// </param>
+        /// <param name="e">
+        /// The e. 
+        /// </param>
+        private static void BgwSaveMovieSetsDoWork(object sender, DoWorkEventArgs e)
+        {
+            savingCount++;
+
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
+            Directory.CreateDirectory(path);
+            Folders.DeleteFilesInFolder(path);
+
+            foreach (MovieSetModel set in MovieSetManager.CurrentDatabase)
+            {
+                string json = JsonConvert.SerializeObject(set);
+                Gzip.CompressString(json, path + FileNaming.RemoveIllegalChars(set.SetName) + ".MovieSet.gz");
+            }
+
+            savingCount--;
+        }
+
+        /// <summary>
+        /// The save scan series pick do work.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender. 
+        /// </param>
+        /// <param name="e">
+        /// The e. 
+        /// </param>
+        private static void BgwSaveScanSeriesPickDoWork(object sender, DoWorkEventArgs e)
+        {
+            savingCount++;
+
+            string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
+            Directory.CreateDirectory(path);
+
+            const string WritePath = "SeriesPick";
+            string json = JsonConvert.SerializeObject(ImportTvFactory.Instance.ScanSeriesPicks);
+            Gzip.CompressString(json, path + WritePath + "SeriesPick.gz");
+
+            savingCount--;
+        }
+
+        /// <summary>
+        ///   Loads the media path DB.
+        /// </summary>
+        private static void LoadMediaPathDB()
+        {
+            if (MediaPathDBFactory.Instance.MediaPathDB == null)
+            {
+                MediaPathDBFactory.Instance.MediaPathDB = new ThreadedBindingList<MediaPathModel>();
             }
 
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
@@ -318,102 +423,29 @@ namespace YANFOE.Factories.Internal
             {
                 string json = Gzip.Decompress(file);
                 var mediaPath = JsonConvert.DeserializeObject(json, typeof(MediaPathModel)) as MediaPathModel;
-                MediaPathDBFactory.MediaPathDB.Add(mediaPath);
+                MediaPathDBFactory.Instance.MediaPathDB.Add(mediaPath);
             }
         }
 
         /// <summary>
-        /// Loads the movie DB.
+        ///   Loads the movie DB.
         /// </summary>
         private static void LoadMovieDB()
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
-            MovieDBFactory.MovieDatabase.Clear();
+            MovieDBFactory.Instance.MovieDatabase.Clear();
 
             var files = FileHelper.GetFilesRecursive(path, "*.movie.gz").ToArray();
-            LoadMovies(path, files, MovieDBFactory.MovieDatabase);
+            LoadMovies(path, files, MovieDBFactory.Instance.MovieDatabase);
 
             files = FileHelper.GetFilesRecursive(path, "*.hiddenmovie.gz").ToArray();
-            LoadMovies(path, files, MovieDBFactory.HiddenMovieDatabase);
-        }
-
-        private static void LoadMovies(string path, string[] files, BindingList<MovieModel> database)
-        {
-            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
-
-            Parallel.ForEach(
-                files,
-                parallelOptions,
-                file =>
-                    {
-                        string json = Gzip.Decompress(file);
-
-                        var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
-
-                        if (json.Contains(@"ChangedText"":false"))
-                        {
-                            movieModel.ChangedText = false;
-                        }
-
-                        if (json.Contains(@"ChangedPoster"":false"))
-                        {
-                            movieModel.ChangedPoster = false;
-                        }
-
-                        if (json.Contains(@"ChangedFanart"":false"))
-                        {
-                            movieModel.ChangedFanart = false;
-                        }
-
-                        movieModel.DatabaseSaved = true;
-
-                        if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
-                        {
-                            if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
-                            {
-                                Log.WriteToLog(
-                                    LogSeverity.Info,
-                                    LoggerName.GeneralLog,
-                                    "Internal > DatabaseIOFactory > LoadMovieDB",
-                                    string.Format(
-                                        "Deleting {0}. Movie not found on the filesystem",
-                                        movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
-                                // We should check for network path and make sure the file has actually been deleted or removed
-                                File.Delete(file);
-                            }
-                        }
-
-                        if (movieModel != null)
-                        {
-                            lock (database)
-                            {
-                                database.Add(movieModel);
-                            }
-                        }
-
-                        string title = FileNaming.RemoveIllegalChars(movieModel.Title);
-
-                        string poster = path + title + ".poster.jpg";
-                        string fanart = path + title + ".fanart.jpg";
-
-                        if (File.Exists(poster))
-                        {
-                            movieModel.SmallPoster = ImageHandler.LoadImage(poster);
-                        }
-
-                        if (File.Exists(fanart))
-                        {
-                            movieModel.SmallFanart = ImageHandler.LoadImage(fanart);
-                        }
-
-
-                    });
+            LoadMovies(path, files, MovieDBFactory.Instance.HiddenMovieDatabase);
         }
 
         /// <summary>
-        /// Loads the movie sets db.
+        ///   Loads the movie sets DB.
         /// </summary>
         private static void LoadMovieSets()
         {
@@ -434,7 +466,91 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Loads the scan series pick db
+        /// The load movies.
+        /// </summary>
+        /// <param name="path">
+        /// The path. 
+        /// </param>
+        /// <param name="files">
+        /// The files. 
+        /// </param>
+        /// <param name="database">
+        /// The database. 
+        /// </param>
+        private static void LoadMovies(string path, string[] files, ThreadedBindingList<MovieModel> database)
+        {
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
+
+            Parallel.ForEach(
+                files, 
+                parallelOptions, 
+                file =>
+                    {
+                        string json = Gzip.Decompress(file);
+
+                        var movieModel = JsonConvert.DeserializeObject(json, typeof(MovieModel)) as MovieModel;
+
+                        if (movieModel != null)
+                        {
+                            if (json.Contains(@"ChangedText"":false"))
+                            {
+                                movieModel.ChangedText = false;
+                            }
+
+                            if (json.Contains(@"ChangedPoster"":false"))
+                            {
+                                movieModel.ChangedPoster = false;
+                            }
+
+                            if (json.Contains(@"ChangedFanart"":false"))
+                            {
+                                movieModel.ChangedFanart = false;
+                            }
+
+                            movieModel.DatabaseSaved = true;
+
+                            if (movieModel.AssociatedFiles.GetMediaCollection().Count > 0)
+                            {
+                                if (!File.Exists(movieModel.AssociatedFiles.GetMediaCollection()[0].PathAndFilename))
+                                {
+                                    Log.WriteToLog(
+                                        LogSeverity.Info, 
+                                        LoggerName.GeneralLog, 
+                                        "Internal > DatabaseIOFactory > LoadMovieDB", 
+                                        string.Format(
+                                            "Deleting {0}. Movie not found on the filesystem", 
+                                            movieModel.AssociatedFiles.GetMediaCollection()[0].FileName));
+
+                                    // We should check for network path and make sure the file has actually been deleted or removed
+                                    File.Delete(file);
+                                }
+                            }
+
+                            lock (database)
+                            {
+                                database.Add(movieModel);
+                            }
+
+                            string title = FileNaming.RemoveIllegalChars(movieModel.Title);
+
+                            string poster = path + title + ".poster.jpg";
+                            string fanart = path + title + ".fanart.jpg";
+
+                            if (File.Exists(poster))
+                            {
+                                movieModel.SmallPoster = ImageHandler.LoadImage(poster);
+                            }
+
+                            if (File.Exists(fanart))
+                            {
+                                movieModel.SmallFanart = ImageHandler.LoadImage(fanart);
+                            }
+                        }
+                    });
+        }
+
+        /// <summary>
+        ///   Loads the scan series pick DB
         /// </summary>
         private static void LoadScanSeriesPick()
         {
@@ -445,38 +561,39 @@ namespace YANFOE.Factories.Internal
             {
                 string json = Gzip.Decompress(path + "SeriesPickSeriesPick.gz");
 
-                ImportTvFactory.ScanSeriesPicks =
-                    JsonConvert.DeserializeObject(json, typeof(BindingList<ScanSeriesPick>)) as
-                    BindingList<ScanSeriesPick>;
+                ImportTvFactory.Instance.ScanSeriesPicks =
+                    JsonConvert.DeserializeObject(json, typeof(ThreadedBindingList<ScanSeriesPick>)) as
+                    ThreadedBindingList<ScanSeriesPick>;
             }
         }
 
         /// <summary>
-        /// Loads the TV DB db
+        ///   Loads the TV DB
         /// </summary>
-        private static void LoadTvDB()
+        private static void LoadTVDB()
         {
             string path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
             Directory.CreateDirectory(path);
 
             List<string> files = FileHelper.GetFilesRecursive(path, "*.Series.gz");
 
-            TvDBFactory.TvDatabase.Clear();
+            TVDBFactory.Instance.TVDatabase.Clear();
 
             var hidden = path + "hidden.hiddenSeries.gz";
 
             if (File.Exists(hidden))
             {
                 var json = Gzip.Decompress(hidden);
-                TvDBFactory.HiddenTvDatabase =
-                    JsonConvert.DeserializeObject(json, typeof(BindingList<Series>)) as BindingList<Series>;
+                TVDBFactory.Instance.HiddenTVDB =
+                    JsonConvert.DeserializeObject(json, typeof(ThreadedBindingList<Series>)) as
+                    ThreadedBindingList<Series>;
             }
 
             var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
             Parallel.ForEach(
-                files,
-                parallelOptions,
+                files, 
+                parallelOptions, 
                 file =>
                     {
                         var json = Gzip.Decompress(file);
@@ -506,52 +623,54 @@ namespace YANFOE.Factories.Internal
 
                         foreach (var season in series.Seasons)
                         {
-                            for (int index = 0; index < season.Value.Episodes.Count; index++)
+                            for (int index = 0; index < season.Episodes.Count; index++)
                             {
-                                var episode = season.Value.Episodes[index];
+                                var episode = season.Episodes[index];
                                 if (episode.FilePath.PathAndFilename != string.Empty
                                     && !File.Exists(episode.FilePath.PathAndFilename))
                                 {
                                     Log.WriteToLog(
-                                        LogSeverity.Info,
-                                        LoggerName.GeneralLog,
-                                        "Internal > DatabaseIOFactory > LoadTvDB",
+                                        LogSeverity.Info, 
+                                        LoggerName.GeneralLog, 
+                                        "Internal > DatabaseIOFactory > LoadTVDB", 
                                         string.Format(
-                                            "Deleting {0}. Episode not found on the filesystem",
+                                            "Deleting {0}. Episode not found on the filesystem", 
                                             episode.FilePath.PathAndFilename));
+
                                     // We should check for network path and make sure the file has actually been deleted or removed
                                     File.Delete(file);
-                                    series.Seasons[season.Key].Episodes.Remove(episode);
+                                    series.Seasons.First(x => x.SeasonNumber == season.SeasonNumber).Episodes.Remove(
+                                        episode);
                                 }
                             }
                         }
 
-                        lock (TvDBFactory.TvDatabase)
+                        lock (TVDBFactory.Instance.TVDatabase)
                         {
-                            TvDBFactory.TvDatabase.Add(series.SeriesName, series);
+                            TVDBFactory.Instance.TVDatabase.Add(series);
                         }
                     });
 
-            TvDBFactory.GeneratePictureGallery();
-            TvDBFactory.GenerateMasterSeriesList();
+            TVDBFactory.Instance.GeneratePictureGallery();
+            TVDBFactory.Instance.GenerateMasterSeriesList();
         }
 
         /// <summary>
-        /// Saves the media path db.
+        ///   Saves the media path DB.
         /// </summary>
-        private static void SaveMediaPathDb()
+        private static void SaveMediaPathDB()
         {
             var bgwSaveMediaPathDb = new BackgroundWorker();
-            bgwSaveMediaPathDb.DoWork += bgwSaveMediaPathDb_DoWork;
+            bgwSaveMediaPathDb.DoWork += BgwSaveMediaPathDbDoWork;
             bgwSaveMediaPathDb.RunWorkerAsync();
         }
 
         /// <summary>
-        /// Saves the movie DB.
+        ///   Saves the movie DB.
         /// </summary>
         private static void SaveMovieDB()
         {
-            SavingCount++;
+            savingCount++;
 
             SavingMovieDB = true;
 
@@ -562,81 +681,33 @@ namespace YANFOE.Factories.Internal
             SavingMovieValue = 0;
             SavingMovieMax = 0;
 
-            SaveMovies(MovieDBFactory.MovieDatabase);
-            SaveMovies(MovieDBFactory.HiddenMovieDatabase);
+            SaveMovies(MovieDBFactory.Instance.MovieDatabase);
+            SaveMovies(MovieDBFactory.Instance.HiddenMovieDatabase);
 
             SavingMovieDB = false;
 
-            SavingCount--;
+            savingCount--;
 
             frmSavingDB.TvDBFinished();
         }
 
         /// <summary>
-        /// Saves the movie sets db
+        ///   Saves the movie sets DB
         /// </summary>
         private static void SaveMovieSets()
         {
             var bgwSaveMovieSets = new BackgroundWorker();
-            bgwSaveMovieSets.DoWork += bgwSaveMovieSets_DoWork;
+            bgwSaveMovieSets.DoWork += BgwSaveMovieSetsDoWork;
             bgwSaveMovieSets.RunWorkerAsync();
         }
 
         /// <summary>
-        /// Saves the scan series pick.
+        /// The save movies.
         /// </summary>
-        private static void SaveScanSeriesPick()
-        {
-            var bgwSaveScanSeriesPick = new BackgroundWorker();
-            bgwSaveScanSeriesPick.DoWork += bgwSaveScanSeriesPick_DoWork;
-            bgwSaveScanSeriesPick.RunWorkerAsync();
-        }
-
-        /// <summary>
-        /// Opens the StartSaveDialog
-        /// </summary>
-        private static void StartSaveDialog()
-        {
-            frmSavingDB = new FrmSavingDB();
-            SavingMovieValue = -1;
-            SavingTVDBValue = -1;
-            frmSavingDB.Reset();
-            frmSavingDB.Show();
-            tmr.Start();
-        }
-
-        /// <summary>
-        /// Handles the DoWork event of the bgwSaveMediaPathDb control.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
+        /// <param name="database">
+        /// The database. 
         /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveMediaPathDb_DoWork(object sender, DoWorkEventArgs e)
-        {
-            SavingCount++;
-
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.MediaPathDb + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-            Folders.DeleteFilesInFolder(path);
-
-            int count = 0;
-
-            for (int index = 0; index < MediaPathDBFactory.MediaPathDB.Count; index++)
-            {
-                MediaPathModel mediaPath = MediaPathDBFactory.MediaPathDB[index];
-                string json = JsonConvert.SerializeObject(mediaPath);
-                Gzip.CompressString(json, path + count + ".MediaPath.gz");
-
-                count++;
-            }
-
-            SavingCount--;
-        }
-
-        private static void SaveMovies(BindingList<MovieModel> database)
+        private static void SaveMovies(ThreadedBindingList<MovieModel> database)
         {
             int max = database.Count;
 
@@ -649,11 +720,11 @@ namespace YANFOE.Factories.Internal
             var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
             Parallel.ForEach(
-                database,
-                parallelOptions,
+                database, 
+                parallelOptions, 
                 movie =>
                     {
-                        SavingCount++;
+                        savingCount++;
 
                         var path = Get.FileSystemPaths.PathDatabases + OutputName.MovieDb + Path.DirectorySeparatorChar;
 
@@ -687,8 +758,6 @@ namespace YANFOE.Factories.Internal
                             movie.SmallFanart.Save(fanartPath);
                         }
 
-                        Application.DoEvents();
-
                         SavingMovieValue++;
                     });
 
@@ -698,57 +767,21 @@ namespace YANFOE.Factories.Internal
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSaveMovieSets control.
+        ///   Saves the scan series pick.
         /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveMovieSets_DoWork(object sender, DoWorkEventArgs e)
+        private static void SaveScanSeriesPick()
         {
-            SavingCount++;
-
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.MovieSets + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-            Folders.DeleteFilesInFolder(path);
-
-            foreach (MovieSetModel set in MovieSetManager.CurrentDatabase)
-            {
-                string json = JsonConvert.SerializeObject(set);
-                Gzip.CompressString(json, path + FileNaming.RemoveIllegalChars(set.SetName) + ".MovieSet.gz");
-            }
-
-            SavingCount--;
+            var bgwSaveScanSeriesPick = new BackgroundWorker();
+            bgwSaveScanSeriesPick.DoWork += BgwSaveScanSeriesPickDoWork;
+            bgwSaveScanSeriesPick.RunWorkerAsync();
         }
 
         /// <summary>
-        /// Handles the DoWork event of the bgwSaveScanSeriesPick control.
+        ///   The save TV DB.
         /// </summary>
-        /// <param name="sender">
-        /// The source of the event.
-        /// </param>
-        /// <param name="e">
-        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.
-        /// </param>
-        private static void bgwSaveScanSeriesPick_DoWork(object sender, DoWorkEventArgs e)
+        private static void SaveTVDB()
         {
-            SavingCount++;
-
-            string path = Get.FileSystemPaths.PathDatabases + OutputName.ScanSeriesPick + Path.DirectorySeparatorChar;
-            Directory.CreateDirectory(path);
-
-            const string WritePath = "SeriesPick";
-            string json = JsonConvert.SerializeObject(ImportTvFactory.ScanSeriesPicks);
-            Gzip.CompressString(json, path + WritePath + "SeriesPick.gz");
-
-            SavingCount--;
-        }
-
-        private static void SaveTvDB()
-        {
-            SavingCount++;
+            savingCount++;
 
             var path = Get.FileSystemPaths.PathDatabases + OutputName.TvDb + Path.DirectorySeparatorChar;
 
@@ -756,62 +789,78 @@ namespace YANFOE.Factories.Internal
             Folders.DeleteFilesInFolder(path);
 
             string writePath = path + "hidden.hiddenSeries";
-            string json = JsonConvert.SerializeObject(TvDBFactory.HiddenTvDatabase);
+            string json = JsonConvert.SerializeObject(TVDBFactory.Instance.HiddenTVDB);
             Gzip.CompressString(json, writePath + ".gz");
 
             var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 6 };
 
-            SavingTVDBMax = TvDBFactory.TvDatabase.Count;
+            SavingTVDBMax = TVDBFactory.Instance.TVDatabase.Count;
             SavingTVDBValue = 0;
 
             Parallel.ForEach(
-                TvDBFactory.TvDatabase,
-                parallelOptions,
+                TVDBFactory.Instance.TVDatabase, 
+                parallelOptions, 
                 series =>
                     {
-                        var title = FileNaming.RemoveIllegalChars(series.Value.SeriesName);
-                        var seriesPath = string.Concat(Get.FileSystemPaths.PathDatabases, OutputName.TvDb, Path.DirectorySeparatorChar, title, ".Series.gz");
+                        var title = FileNaming.RemoveIllegalChars(series.SeriesName);
+                        var seriesPath = string.Concat(
+                            Get.FileSystemPaths.PathDatabases, 
+                            OutputName.TvDb, 
+                            Path.DirectorySeparatorChar, 
+                            title, 
+                            ".Series.gz");
 
-                        json = JsonConvert.SerializeObject(series.Value);
+                        json = JsonConvert.SerializeObject(series);
                         Gzip.CompressString(json, seriesPath);
 
-                        if (series.Value.SmallBanner != null)
+                        if (series.SmallBanner != null)
                         {
-                            var smallBanner = new Bitmap(series.Value.SmallBanner);
+                            var smallBanner = new Bitmap(series.SmallBanner);
                             smallBanner.Save(path + title + ".banner.jpg");
                         }
 
-                        if (series.Value.SmallFanart != null)
+                        if (series.SmallFanart != null)
                         {
-                            var smallFanart = new Bitmap(series.Value.SmallFanart);
+                            var smallFanart = new Bitmap(series.SmallFanart);
                             smallFanart.Save(path + title + ".fanner.jpg");
                         }
 
-                        if (series.Value.SmallPoster != null)
+                        if (series.SmallPoster != null)
                         {
-                            var smallPoster = new Bitmap(series.Value.SmallPoster);
+                            var smallPoster = new Bitmap(series.SmallPoster);
                             smallPoster.Save(path + title + ".poster.jpg");
                         }
 
                         SavingTVDBValue++;
-
-                        Application.DoEvents();
                     });
 
-            SavingCount--;
+            savingCount--;
             frmSavingDB.TvDBFinished();
         }
 
         /// <summary>
-        /// Handles the Tick event of the tmr control.
+        ///   Opens the StartSaveDialog
+        /// </summary>
+        private static void StartSaveDialog()
+        {
+            frmSavingDB = new WndSavingDB();
+            SavingMovieValue = -1;
+            SavingTVDBValue = -1;
+            frmSavingDB.Reset();
+            frmSavingDB.Show();
+            Tmr.Start();
+        }
+
+        /// <summary>
+        /// The timer tick.
         /// </summary>
         /// <param name="sender">
-        /// The source of the event.
+        /// The sender. 
         /// </param>
         /// <param name="e">
-        /// The <see cref="System.EventArgs"/> instance containing the event data.
+        /// The e. 
         /// </param>
-        private static void tmr_Tick(object sender, EventArgs e)
+        private static void TmrTick(object sender, EventArgs e)
         {
             frmSavingDB.SetMovieValue(SavingMovieValue);
             frmSavingDB.SetMovieDBMax(SavingMovieMax);

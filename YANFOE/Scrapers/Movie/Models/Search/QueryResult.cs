@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="QueryResult.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="QueryResult.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   A result from a movie search
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Scrapers.Movie.Models.Search
 {
+    #region Required Namespaces
+
     using System;
     using System.Drawing;
 
@@ -22,15 +26,17 @@ namespace YANFOE.Scrapers.Movie.Models.Search
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
 
+    #endregion
+
     /// <summary>
-    /// A result from a movie search 
+    ///   A result from a movie search
     /// </summary>
     public class QueryResult
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryResult"/> class.
+        ///   Initializes a new instance of the <see cref="QueryResult" /> class.
         /// </summary>
         public QueryResult()
         {
@@ -57,112 +63,94 @@ namespace YANFOE.Scrapers.Movie.Models.Search
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the movie overview.
+        ///   Gets or sets the movie overview.
         /// </summary>
-        /// <value>The movie overview.</value>
+        /// <value> The movie overview. </value>
         public string AdditionalInfo { get; set; }
 
         /// <summary>
-        /// Gets or sets the imdb Id.
+        ///   Gets or sets the allocine id.
         /// </summary>
-        /// <value>The imdb Id.</value>
-        public string ImdbID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the allocine id.
-        /// </summary>
-        /// <value>
-        /// The allocine id.
-        /// </value>
+        /// <value> The allocine id. </value>
         public string AllocineId { get; set; }
 
         /// <summary>
-        /// Gets or sets the film affinity id.
+        ///   Gets or sets the film affinity id.
         /// </summary>
-        /// <value>
-        /// The film affinity id.
-        /// </value>
+        /// <value> The film affinity id. </value>
         public string FilmAffinityId { get; set; }
 
         /// <summary>
-        /// Gets or sets the film delta id.
+        ///   Gets or sets the film delta id.
         /// </summary>
-        /// <value>
-        /// The film delta id.
-        /// </value>
+        /// <value> The film delta id. </value>
         public string FilmDeltaId { get; set; }
 
         /// <summary>
-        /// Gets or sets the film up id.
+        ///   Gets or sets the film up id.
         /// </summary>
-        /// <value>
-        /// The film up id.
-        /// </value>
+        /// <value> The film up id. </value>
         public string FilmUpId { get; set; }
 
         /// <summary>
-        /// Gets or sets the film web id.
+        ///   Gets or sets the film web id.
         /// </summary>
-        /// <value>
-        /// The film web id.
-        /// </value>
+        /// <value> The film web id. </value>
         public string FilmWebId { get; set; }
 
         /// <summary>
-        /// Gets or sets the ofdb id.
+        ///   Gets or sets the imdb Id.
         /// </summary>
-        /// <value>
-        /// The ofdb id.
-        /// </value>
-        public string OfdbId { get; set; }
+        /// <value> The imdb Id. </value>
+        public string ImdbID { get; set; }
 
         /// <summary>
-        /// Gets or sets the sratim id.
+        ///   Gets or sets the impawards id.
         /// </summary>
-        /// <value>
-        /// The sratim id.
-        /// </value>
-        public string SratimId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the impawards id.
-        /// </summary>
-        /// <value>
-        /// The impawards id.
-        /// </value>
+        /// <value> The impawards id. </value>
         public string ImpawardsId { get; set; }
 
         /// <summary>
-        /// Gets or sets the kinopoisk id.
+        ///   Gets or sets the kinopoisk id.
         /// </summary>
-        /// <value>
-        /// The kinopoisk id.
-        /// </value>
+        /// <value> The kinopoisk id. </value>
         public string KinopoiskId { get; set; }
 
         /// <summary>
-        /// Gets or sets the language.
+        ///   Gets or sets the language.
         /// </summary>
-        /// <value>The movies language.</value>
+        /// <value> The movies language. </value>
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the Original title.
+        ///   Gets or sets the movie meter id.
         /// </summary>
-        /// <value>The Original title.</value>
+        /// <value> The movie meter id. </value>
+        public string MovieMeterId { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the ofdb id.
+        /// </summary>
+        /// <value> The ofdb id. </value>
+        public string OfdbId { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the Original title.
+        /// </summary>
+        /// <value> The Original title. </value>
         public string OriginalTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the image URL.
+        ///   Gets or sets the image URL.
         /// </summary>
-        /// <value>The image URL of an image associated.</value>
+        /// <value> The image URL of an image associated. </value>
         public Image Poster { get; set; }
 
         /// <summary>
-        /// Sets PosterUrl.
+        ///   Sets PosterUrl.
         /// </summary>
         public string PosterUrl
         {
@@ -174,51 +162,49 @@ namespace YANFOE.Scrapers.Movie.Models.Search
         }
 
         /// <summary>
-        /// Gets or sets ReleaseDate.
+        ///   Gets or sets ReleaseDate.
         /// </summary>
         public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the scraper.
+        ///   Gets or sets the name of the scraper.
         /// </summary>
-        /// <value>The name of the scraper.</value>
+        /// <value> The name of the scraper. </value>
         public ScraperList ScraperName { get; set; }
 
         /// <summary>
-        /// Gets or sets the title.
+        ///   Gets or sets the sratim id.
         /// </summary>
-        /// <value>The movie title</value>
+        /// <value> The sratim id. </value>
+        public string SratimId { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the title.
+        /// </summary>
+        /// <value> The movie title </value>
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets TmdbID.
+        ///   Gets or sets TmdbID.
         /// </summary>
         public string TmdbID { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL
+        ///   Gets or sets the URL
         /// </summary>
-        /// <value>The Result URL.</value>
+        /// <value> The Result URL. </value>
         public string URL { get; set; }
 
         /// <summary>
-        /// Gets or sets YanfoeId.
+        ///   Gets or sets YanfoeId.
         /// </summary>
         public string YanfoeId { get; set; }
 
         /// <summary>
-        /// Gets or sets the year.
+        ///   Gets or sets the year.
         /// </summary>
-        /// <value>The movies year.</value>
+        /// <value> The movies year. </value>
         public int Year { get; set; }
-
-        /// <summary>
-        /// Gets or sets the movie meter id.
-        /// </summary>
-        /// <value>
-        /// The movie meter id.
-        /// </value>
-        public string MovieMeterId { get; set; }
 
         #endregion
     }

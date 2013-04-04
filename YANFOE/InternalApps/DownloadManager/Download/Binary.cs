@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Binary.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Binary.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Download binary to a file.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.DownloadManager.Download
 {
+    #region Required Namespaces
+
     using System;
     using System.Diagnostics;
     using System.IO;
@@ -22,15 +26,21 @@ namespace YANFOE.InternalApps.DownloadManager.Download
     using YANFOE.InternalApps.DownloadManager.Cache;
     using YANFOE.InternalApps.DownloadManager.Model;
 
+    #endregion
+
     /// <summary>
-    /// Download binary to a file.
+    ///   Download binary to a file.
     /// </summary>
-    public class Binary 
+    public class Binary
     {
+        #region Public Methods and Operators
+
         /// <summary>
         /// Gets the specified download item.
         /// </summary>
-        /// <param name="downloadItem">The download item.</param>
+        /// <param name="downloadItem">
+        /// The download item. 
+        /// </param>
         public static void Get(DownloadItem downloadItem)
         {
             downloadItem.Result = new BinaryResult();
@@ -62,10 +72,10 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                 downloadItem.Result.Result = path;
                 return;
             }
-            
+
             if (File.Exists(path))
             {
-                //TODO System.IO.IOException: file used by another process - possible exception
+                // TODO System.IO.IOException: file used by another process - possible exception
                 File.Delete(path);
             }
 
@@ -78,8 +88,6 @@ namespace YANFOE.InternalApps.DownloadManager.Download
             downloadItem.Progress.Percent = 0;
             downloadItem.Progress.Message = string.Format("Connecting to {0}", urlToReadFileFrom);
 
-            HttpWebResponse response;
-            HttpWebRequest request;
             bool error;
             var count = 0;
 
@@ -90,7 +98,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                     long runningByteTotal = 0;
 
                     var url2 = new Uri(urlToReadFileFrom);
-                    request = (HttpWebRequest)WebRequest.Create(url2);
+                    var request = (HttpWebRequest)WebRequest.Create(url2);
                     request.MaximumAutomaticRedirections = 4;
                     request.UserAgent = Settings.Get.Web.UserAgent;
                     request.Timeout = 20000;
@@ -101,11 +109,14 @@ namespace YANFOE.InternalApps.DownloadManager.Download
 
                     if (Settings.Get.Web.EnableProxy)
                     {
-                        var proxy = new WebProxy(string.Format("{0}:{1}", Settings.Get.Web.ProxyIP, Settings.Get.Web.ProxyPort));
+                        var proxy =
+                            new WebProxy(string.Format("{0}:{1}", Settings.Get.Web.ProxyIP, Settings.Get.Web.ProxyPort));
 
-                        if (!string.IsNullOrEmpty(Settings.Get.Web.ProxyUserName) && !string.IsNullOrEmpty(Settings.Get.Web.ProxyPassword))
+                        if (!string.IsNullOrEmpty(Settings.Get.Web.ProxyUserName)
+                            && !string.IsNullOrEmpty(Settings.Get.Web.ProxyPassword))
                         {
-                            proxy.Credentials = new NetworkCredential(Settings.Get.Web.ProxyUserName, Settings.Get.Web.ProxyPassword);
+                            proxy.Credentials = new NetworkCredential(
+                                Settings.Get.Web.ProxyUserName, Settings.Get.Web.ProxyPassword);
                         }
 
                         request.Proxy = proxy;
@@ -116,6 +127,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                     }
 
                     request.KeepAlive = false;
+                    HttpWebResponse response;
                     using (response = (HttpWebResponse)request.GetResponse())
                     {
                         var size = response.ContentLength;
@@ -127,11 +139,9 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                             return;
                         }
 
-                        using (Stream streamLocal = new FileStream(
-                            filePathToWriteFileTo,
-                            FileMode.Create,
-                            FileAccess.Write,
-                            FileShare.None))
+                        using (
+                            Stream streamLocal = new FileStream(
+                                filePathToWriteFileTo, FileMode.Create, FileAccess.Write, FileShare.None))
                         {
                             var byteBuffer = new byte[size];
 
@@ -162,11 +172,11 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                                     {
                                         var speedbps = runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000);
 
-                                        var speedkbps = (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000)) / 1024;
+                                        var speedkbps = (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000))
+                                                        / 1024;
 
-                                        var speedmbps =
-                                            (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000))
-                                            / (1024 * 1024);
+                                        var speedmbps = (runningByteTotal / ((double)sw1.ElapsedMilliseconds / 1000))
+                                                        / (1024 * 1024);
 
                                         if (speedmbps >= 1)
                                         {
@@ -189,9 +199,9 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                                     downloadItem.Progress.Percent = progressPercentageInteger;
 
                                     downloadItem.Progress.Message = string.Format(
-                                        "Downloading {1}: {0}% : {2}",
-                                        progressPercentageInteger,
-                                        urlToReadFileFrom,
+                                        "Downloading {1}: {0}% : {2}", 
+                                        progressPercentageInteger, 
+                                        urlToReadFileFrom, 
                                         speed);
 
                                     sw1.Start();
@@ -219,7 +229,8 @@ namespace YANFOE.InternalApps.DownloadManager.Download
                         }
                     }
 
-                    downloadItem.Progress.Message = string.Format("Restarting Attempt: {0} - {1}", count + 1, urlToReadFileFrom);
+                    downloadItem.Progress.Message = string.Format(
+                        "Restarting Attempt: {0} - {1}", count + 1, urlToReadFileFrom);
                     downloadItem.Progress.Percent = 0;
                     error = true;
 
@@ -249,5 +260,7 @@ namespace YANFOE.InternalApps.DownloadManager.Download
 
             return;
         }
+
+        #endregion
     }
 }

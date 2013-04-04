@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.MovieControls.MoviesPreviewsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="621" xmlns:my="clr-namespace:YANFOE.Tools.UI">
+    <Grid>
+        <TabControl Name="tabControl1">
+            <TabItem Header="YAMJ" Name="tabItem1">
+                <Grid>
+                    <ScrollViewer>
+                        <my:BindableRichTextBox x:Name="bindableRichTextBox1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Path=YamjXmlRtf, Mode=OneWay}" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="XBMC">
+                <Grid>
+                    <ScrollViewer>
+                        <my:BindableRichTextBox x:Name="bindableRichTextBox2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Path=XbmcXmlRtf, Mode=OneWay}" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="UMM">
+                <Grid>
+                    <my:BindableRichTextBox x:Name="bindableRichTextBox3" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

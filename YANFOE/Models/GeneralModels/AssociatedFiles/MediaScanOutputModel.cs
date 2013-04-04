@@ -1,37 +1,43 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MediaScanOutputModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MediaScanOutputModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The media scan output.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
+    #region Required Namespaces
+
     using System;
-    using System.ComponentModel;
     using System.Globalization;
     using System.Xml;
 
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
 
+    #endregion
+
     /// <summary>
-    /// The media scan output.
+    ///   The media scan output.
     /// </summary>
     [Serializable]
     public class MediaScanOutput : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The media info output.
+        ///   The media info output.
         /// </summary>
         private string mediaInfoOutput;
 
@@ -40,12 +46,12 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MediaScanOutput"/> class.
+        ///   Initializes a new instance of the <see cref="MediaScanOutput" /> class.
         /// </summary>
         public MediaScanOutput()
         {
-            this.AudioStreams = new BindingList<AudioStreamModel>();
-            this.Subtitles = new BindingList<SubtitleStreamModel>();
+            this.AudioStreams = new ThreadedBindingList<AudioStreamModel>();
+            this.Subtitles = new ThreadedBindingList<SubtitleStreamModel>();
 
             this.Format = string.Empty;
             this.FileSize = string.Empty;
@@ -78,40 +84,40 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets AudioStreams.
+        ///   Gets or sets AudioStreams.
         /// </summary>
-        public BindingList<AudioStreamModel> AudioStreams { get; set; }
+        public ThreadedBindingList<AudioStreamModel> AudioStreams { get; set; }
 
         /// <summary>
-        /// Gets or sets Duration.
+        ///   Gets or sets Duration.
         /// </summary>
         public string Duration { get; set; }
 
         /// <summary>
-        /// Gets or sets EncodedDate.
+        ///   Gets or sets EncodedDate.
         /// </summary>
         public string EncodedDate { get; set; }
 
         /// <summary>
-        /// Gets or sets FilePath.
+        ///   Gets or sets FilePath.
         /// </summary>
         public string FilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets FileSize.
+        ///   Gets or sets FileSize.
         /// </summary>
         public string FileSize { get; set; }
 
         /// <summary>
-        /// Gets or sets Format.
+        ///   Gets or sets Format.
         /// </summary>
         public string Format { get; set; }
 
         /// <summary>
-        /// Gets or sets MediaInfoOutput.
+        ///   Gets or sets MediaInfoOutput.
         /// </summary>
         public string MediaInfoOutput
         {
@@ -138,7 +144,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
                 foreach (XmlNode result in track)
                 {
-                    if (result.Attributes["type"].Value == "Video")
+                    if (result.Attributes != null && result.Attributes["type"].Value == "Video")
                     {
                         foreach (XmlNode subresults in result.ChildNodes)
                         {
@@ -192,7 +198,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                             }
                         }
                     }
-                    else if (result.Attributes["type"].Value == "Audio")
+                    else if (result.Attributes != null && result.Attributes["type"].Value == "Audio")
                     {
                         var stream = new AudioStreamModel();
                         try
@@ -270,7 +276,7 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
                         this.AudioStreams.Add(stream);
                     }
-                    else if (result.Attributes["type"].Value == "Text")
+                    else if (result.Attributes != null && result.Attributes["type"].Value == "Text")
                     {
                         var stream = new SubtitleStreamModel();
 
@@ -283,10 +289,9 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
                             stream.ID = 1;
                         }
 
-                        string sub;
-
                         foreach (XmlNode subresults in result.ChildNodes)
                         {
+                            string sub;
                             switch (subresults.Name)
                             {
                                 case "Format":
@@ -339,107 +344,107 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets OverallBitRate.
+        ///   Gets or sets OverallBitRate.
         /// </summary>
         public string OverallBitRate { get; set; }
 
         /// <summary>
-        /// Gets or sets Subtitles.
+        ///   Gets or sets Subtitles.
         /// </summary>
-        public BindingList<SubtitleStreamModel> Subtitles { get; set; }
+        public ThreadedBindingList<SubtitleStreamModel> Subtitles { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoBitRate.
+        ///   Gets or sets VideoBitRate.
         /// </summary>
         public string VideoBitRate { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoBits.
+        ///   Gets or sets VideoBits.
         /// </summary>
         public string VideoBits { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoCodecID.
+        ///   Gets or sets VideoCodecID.
         /// </summary>
         public string VideoCodecID { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoCodecIDHint.
+        ///   Gets or sets VideoCodecIDHint.
         /// </summary>
         public string VideoCodecIDHint { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoColorimetry.
+        ///   Gets or sets Video Colorimetry.
         /// </summary>
         public string VideoColorimetry { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoDisplayAspectRatio.
+        ///   Gets or sets VideoDisplayAspectRatio.
         /// </summary>
         public string VideoDisplayAspectRatio { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoDuration.
+        ///   Gets or sets VideoDuration.
         /// </summary>
         public string VideoDuration { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoFormat.
+        ///   Gets or sets VideoFormat.
         /// </summary>
         public string VideoFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoFormatProfile.
+        ///   Gets or sets VideoFormatProfile.
         /// </summary>
         public string VideoFormatProfile { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoFrame.
+        ///   Gets or sets VideoFrame.
         /// </summary>
         public string VideoFrame { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoHeight.
+        ///   Gets or sets VideoHeight.
         /// </summary>
         public string VideoHeight { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoID.
+        ///   Gets or sets VideoID.
         /// </summary>
         public string VideoID { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoResolution.
+        ///   Gets or sets VideoResolution.
         /// </summary>
         public string VideoResolution { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoScanType.
+        ///   Gets or sets VideoScanType.
         /// </summary>
         public string VideoScanType { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoStreamSize.
+        ///   Gets or sets VideoStreamSize.
         /// </summary>
         public string VideoStreamSize { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoWidth.
+        ///   Gets or sets VideoWidth.
         /// </summary>
         public string VideoWidth { get; set; }
 
         /// <summary>
-        /// Gets or sets VideoWritingLibrary.
+        ///   Gets or sets VideoWritingLibrary.
         /// </summary>
         public string VideoWritingLibrary { get; set; }
 
         /// <summary>
-        /// Gets or sets WritingApplication.
+        ///   Gets or sets WritingApplication.
         /// </summary>
         public string WritingApplication { get; set; }
 
         /// <summary>
-        /// Gets or sets WritingLibrary.
+        ///   Gets or sets WritingLibrary.
         /// </summary>
         public string WritingLibrary { get; set; }
 

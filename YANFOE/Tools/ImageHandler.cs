@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ImageHandler.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="ImageHandler.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The image handler.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools
 {
+    #region Required Namespaces
+
     using System;
     using System.Diagnostics;
     using System.Drawing;
@@ -21,47 +25,64 @@ namespace YANFOE.Tools
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using BitFactory.Logging;
 
+    using YANFOE.InternalApps.Logs;
     using YANFOE.Properties;
+    using YANFOE.Settings;
 
+    using Brushes = System.Drawing.Brushes;
+
+    #endregion
+
+    /// <summary>
+    /// The image handler.
+    /// </summary>
     public class ImageHandler
     {
+        #region Public Methods and Operators
+
         /// <summary>
-        /// Resize the image to the specified width and height.
+        /// The compare.
         /// </summary>
-        /// <param name="image">The image to resize.</param>
-        /// <param name="width">The width to resize to.</param>
-        /// <param name="height">The height to resize to.</param>
-        /// <returns>The resized image.</returns>
-        public static Image ResizeImage(Image image, int width, int height)
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="uniqueID">
+        /// The unique id.
+        /// </param>
+        /// <param name="s">
+        /// The s.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public static bool Compare(Image value, string uniqueID, string s)
         {
-            var bitmap = new Bitmap(width, height);
+            var path = Path.Combine(new[] { Get.FileSystemPaths.PathDirTemp, uniqueID + s });
 
-            try
-            {
-                // use a graphics object to draw the resized image into the bitmap
-                using (var graphics = Graphics.FromImage(bitmap))
-                {
-                    // set the resize quality modes to high quality
-                    graphics.CompositingQuality = CompositingQuality.HighQuality;
-                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+            bool matchCase;
 
-                    // draw the image into the target bitmap
-                    graphics.DrawImage(image, 0, 0, width, height);
-                }
-            }
-            catch (Exception ex)
+            using (var image = LoadImage(path))
             {
-                Debug.Write(ex.Message);
+                matchCase = image == value;
             }
 
-            // return the resulting bitmap
-            return bitmap;
+            return matchCase;
         }
 
+        /// <summary>
+        /// The load image.
+        /// </summary>
+        /// <param name="filePath">
+        /// The file path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Image"/>.
+        /// </returns>
         public static Image LoadImage(string filePath)
         {
             try
@@ -73,10 +94,9 @@ namespace YANFOE.Tools
                     return Resources.picture;
                 }
 
-                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    returnImage = Image.FromStream(fs);
-                }
+                var ms = new MemoryStream(File.ReadAllBytes(filePath));
+
+                returnImage = Image.FromStream(ms);
 
                 return returnImage;
             }
@@ -86,11 +106,38 @@ namespace YANFOE.Tools
             }
         }
 
+        /// <summary>
+        /// The load image.
+        /// </summary>
+        /// <param name="filePath">
+        /// The file path.
+        /// </param>
+        /// <param name="size">
+        /// The size.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Image"/>.
+        /// </returns>
         public static Image LoadImage(string filePath, Size size)
         {
             return LoadImage(filePath, size.Width, size.Height);
         }
 
+        /// <summary>
+        /// The load image.
+        /// </summary>
+        /// <param name="filePath">
+        /// The file path.
+        /// </param>
+        /// <param name="width">
+        /// The width.
+        /// </param>
+        /// <param name="height">
+        /// The height.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Image"/>.
+        /// </returns>
         public static Image LoadImage(string filePath, int width, int height)
         {
             if (!File.Exists(filePath))
@@ -120,7 +167,7 @@ namespace YANFOE.Tools
                 }
                 catch (Exception ex)
                 {
-                    InternalApps.Logs.Log.WriteToLog(LogSeverity.Error, 0, ex.Message, ex.StackTrace);
+                    Log.WriteToLog(LogSeverity.Error, 0, ex.Message, ex.StackTrace);
                 }
             }
 
@@ -132,7 +179,141 @@ namespace YANFOE.Tools
             return resizedImage;
         }
 
-        public static void ResizeImage(string OriginalFile, string NewFile, int newWidth, int MaxHeight, bool OnlyResizeIfWider, int quality)
+        /// <summary>
+        /// The load image source.
+        /// </summary>
+        /// <param name="filePath">
+        /// The file path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ImageSource"/>.
+        /// </returns>
+        public static ImageSource LoadImageSource(string filePath)
+        {
+            try
+            {
+                BitmapImage bi = new BitmapImage(new Uri(filePath));
+                return bi;
+            }
+            catch (Exception)
+            {
+                return null;
+
+                // return Resources.picture.GetHbitmap();
+            }
+        }
+
+        /// <summary>
+        /// The load thumb.
+        /// </summary>
+        /// <param name="uniqueID">
+        /// The unique id.
+        /// </param>
+        /// <param name="s">
+        /// The s.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Image"/>.
+        /// </returns>
+        public static Image LoadThumb(string uniqueID, string s)
+        {
+            var path = Path.Combine(new[] { Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+
+            return !File.Exists(path) ? null : LoadImage(path);
+        }
+
+        /// <summary>
+        /// The make thumbnail.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <param name="width">
+        /// The width.
+        /// </param>
+        /// <param name="height">
+        /// The height.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Image"/>.
+        /// </returns>
+        public static Image MakeThumbnail(Image input, int width, int height)
+        {
+            var thumbNailImg = ResizeImage(input, width, height);
+            var g = Graphics.FromImage(thumbNailImg);
+
+            g.FillRectangle(Brushes.White, 0, 0, width, height);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(input, 0, 0, width, height);
+
+            return thumbNailImg;
+        }
+
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">
+        /// The image to resize. 
+        /// </param>
+        /// <param name="width">
+        /// The width to resize to. 
+        /// </param>
+        /// <param name="height">
+        /// The height to resize to. 
+        /// </param>
+        /// <returns>
+        /// The resized image. 
+        /// </returns>
+        public static Image ResizeImage(Image image, int width, int height)
+        {
+            var bitmap = new Bitmap(width, height);
+
+            try
+            {
+                // use a graphics object to draw the resized image into the bitmap
+                using (var graphics = Graphics.FromImage(bitmap))
+                {
+                    // set the resize quality modes to high quality
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+                    // draw the image into the target bitmap
+                    graphics.DrawImage(image, 0, 0, width, height);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Write(ex.Message);
+            }
+
+            // return the resulting bitmap
+            return bitmap;
+        }
+
+        /// <summary>
+        /// The resize image.
+        /// </summary>
+        /// <param name="OriginalFile">
+        /// The original file.
+        /// </param>
+        /// <param name="NewFile">
+        /// The new file.
+        /// </param>
+        /// <param name="newWidth">
+        /// The new width.
+        /// </param>
+        /// <param name="MaxHeight">
+        /// The max height.
+        /// </param>
+        /// <param name="OnlyResizeIfWider">
+        /// The only resize if wider.
+        /// </param>
+        /// <param name="quality">
+        /// The quality.
+        /// </param>
+        public static void ResizeImage(
+            string OriginalFile, string NewFile, int newWidth, int MaxHeight, bool OnlyResizeIfWider, int quality)
         {
             if (OriginalFile == string.Empty || !File.Exists(OriginalFile))
             {
@@ -179,48 +360,21 @@ namespace YANFOE.Tools
             }
         }
 
-        private static ImageCodecInfo GetEncoderInfo(string mimeType)
-        {
-            // Get image codecs for all image formats
-            var codecs = ImageCodecInfo.GetImageEncoders();
-
-            // Find the correct image codec
-            return codecs.FirstOrDefault(t => t.MimeType == mimeType);
-        }
-
-        public static Image MakeThumbnail(Image input, int width, int height)
-        {
-            var thumbNailImg = ResizeImage(input, width, height);
-            var g = Graphics.FromImage(thumbNailImg);
-
-            g.FillRectangle(Brushes.White, 0, 0, width, height);
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(input, 0, 0, width, height);
-
-            return thumbNailImg;
-        }
-
-        public static Image LoadThumb(string uniqueID, string s)
-        {
-            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
-
-            return !File.Exists(path) ? null : LoadImage(path);
-        }
-
-        public static bool Compare(Image value, string uniqueID, string s)
-        {
-            var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
-
-            bool matchCase;
-
-            using (var image = LoadImage(path))
-            {
-                matchCase = image == value;
-            }
-
-            return matchCase;
-        }
-
+        /// <summary>
+        /// The save thumb.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="uniqueID">
+        /// The unique id.
+        /// </param>
+        /// <param name="s">
+        /// The s.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public static bool SaveThumb(Image value, string uniqueID, string s)
         {
             try
@@ -230,7 +384,7 @@ namespace YANFOE.Tools
                     return false;
                 }
 
-                var path = Path.Combine(new[] { YANFOE.Settings.Get.FileSystemPaths.PathDirTemp, uniqueID + s });
+                var path = Path.Combine(new[] { Get.FileSystemPaths.PathDirTemp, uniqueID + s });
 
                 value.Save(path);
 
@@ -241,5 +395,29 @@ namespace YANFOE.Tools
                 return false;
             }
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// The get encoder info.
+        /// </summary>
+        /// <param name="mimeType">
+        /// The mime type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ImageCodecInfo"/>.
+        /// </returns>
+        private static ImageCodecInfo GetEncoderInfo(string mimeType)
+        {
+            // Get image codecs for all image formats
+            var codecs = ImageCodecInfo.GetImageEncoders();
+
+            // Find the correct image codec
+            return codecs.FirstOrDefault(t => t.MimeType == mimeType);
+        }
+
+        #endregion
     }
 }

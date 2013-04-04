@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.TvControls.TvSeriesDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="410" d:DesignWidth="1036" xmlns:my="clr-namespace:YANFOE.UI.UserControls.TvControls">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="300*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52" />
+            <RowDefinition Height="337*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="78" />
+                <ColumnDefinition Width="230*" />
+                <ColumnDefinition Width="78" />
+                <ColumnDefinition Width="148*" />
+                <ColumnDefinition Width="78" />
+                <ColumnDefinition Width="98*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="337*" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="26" />
+            </Grid.RowDefinitions>
+            <Label Content="Title" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="1" />
+            <TextBox Text="{Binding SeriesName}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" />
+            <Label Content="Overview" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="2" />
+            <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Overview}" TextWrapping="WrapWithOverflow" />
+            </ScrollViewer>
+            <Label Content="Language" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="3" />
+            <TextBox Text="{Binding Language}" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" />
+            <Label Content="Genre" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="4" />
+            <TextBox Text="{Binding GenreAsString}" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" />
+            <Label Content="Network" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" />
+            <TextBox Text="{Binding Network}" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="1" />
+            <Label Content="Status" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="6" />
+            <TextBox Text="{Binding Status}" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="1" />
+
+            <Label Content="Certification" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="2" />
+            <TextBox Text="{Binding ContentRating}" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" />
+            <Label Content="First Aired" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="2" />
+            <TextBox Text="{Binding FirstAired}" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3" />
+            <Label Content="Network ID" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="2" />
+            <TextBox Text="{Binding NetworkID}" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" />
+            <Label Content="Rating" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="2" />
+            <TextBox Text="{Binding Rating}" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="3" />
+
+            <Label Content="Runtime" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="4" />
+            <TextBox Text="{Binding Runtime}" VerticalContentAlignment="Center" Grid.Row="6" Grid.Column="5" />
+        </Grid>
+        <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" />
+        <GroupBox Grid.Column="2" Grid.Row="1" Header="Main Actors" Name="groupBox1">
+            <Grid>
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Actors}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="50*" />
+                        <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="50*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <my:TvTopMenu x:Name="tvTopMenu1" VerticalAlignment="Top" Grid.ColumnSpan="3" Type="SaveSeries" />
+    </Grid>
+</UserControl>

@@ -1,57 +1,63 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileSystem.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="FileSystem.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The file system.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.Renamer
 {
+    #region Required Namespaces
+
     using System;
     using System.IO;
 
+    #endregion
+
     /// <summary>
-    /// The file system.
+    ///   The file system.
     /// </summary>
     public class FileSystem
     {
         // Private delegate linked list (explicitly defined)
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The copy progress event handler delegate.
-        /// </summary>
-        private EventHandler<CopyProgressEventArgs> copyProgressEventHandlerDelegate;
-
-        /// <summary>
-        /// The _buffer size.
+        ///   The _buffer size.
         /// </summary>
         private int bufferSize = 3 * 1024 * 1024;
+
+        /// <summary>
+        ///   The copy progress event handler delegate.
+        /// </summary>
+        private EventHandler<CopyProgressEventArgs> copyProgressEventHandlerDelegate;
 
         #endregion
 
         #region Delegates
 
         /// <summary>
-        /// This represents the delegate method prototype that event receivers must implement
+        ///   This represents the delegate method prototype that event receivers must implement
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="args">The <see cref="FileCopyCompletedEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender"> The sender. </param>
+        /// <param name="args"> The <see cref="FileCopyCompletedEventArgs" /> instance containing the event data. </param>
         public delegate void FileCopyCompletedEventHandler(object sender, FileCopyCompletedEventArgs args);
 
         #endregion
 
-        #region Events
+        #region Public Events
 
         /// <summary>
-        /// Provide feedback for file processing progress
+        ///   Provide feedback for file processing progress
         /// </summary>
         public event EventHandler<CopyProgressEventArgs> CopyProgress
         {
@@ -70,16 +76,16 @@ namespace YANFOE.Factories.Renamer
         }
 
         /// <summary>
-        /// Occurs when [file copy completed].
+        ///   Occurs when [file copy completed].
         /// </summary>
         public event FileCopyCompletedEventHandler FileCopyCompleted;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets BufferSize.
+        ///   Gets or sets BufferSize.
         /// </summary>
         public int BufferSize
         {
@@ -96,15 +102,19 @@ namespace YANFOE.Factories.Renamer
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Copies the sourceFile to the outFile
         /// </summary>
-        /// <param name="sourceFile">Source file to be copied</param>
-        /// <param name="outFile">File copy destination</param>
+        /// <param name="sourceFile">
+        /// Source file to be copied 
+        /// </param>
+        /// <param name="outFile">
+        /// File copy destination 
+        /// </param>
         /// <returns>
-        /// A bool value that indicate a successful copy finished.
+        /// A boolean value that indicate a successful copy finished. 
         /// </returns>
         public bool CopyFile(string sourceFile, string outFile)
         {
@@ -173,10 +183,14 @@ namespace YANFOE.Factories.Renamer
         /// <summary>
         /// Move file.
         /// </summary>
-        /// <param name="sourceFile">The source file.</param>
-        /// <param name="outFile">The out file.</param>
+        /// <param name="sourceFile">
+        /// The source file. 
+        /// </param>
+        /// <param name="outFile">
+        /// The out file. 
+        /// </param>
         /// <returns>
-        /// The move file.
+        /// The move file. 
         /// </returns>
         public bool MoveFile(string sourceFile, string outFile)
         {
@@ -195,9 +209,11 @@ namespace YANFOE.Factories.Renamer
 
         /// <summary>
         /// This is the method that is responsible for notifying
-        /// receivers that the event occurred
+        ///   receivers that the event occurred
         /// </summary>
-        /// <param name="e">CopyProgressEventArgs eventargs</param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected virtual void OnCopyProgress(CopyProgressEventArgs e)
         {
             if (this.copyProgressEventHandlerDelegate != null)
@@ -208,9 +224,11 @@ namespace YANFOE.Factories.Renamer
 
         /// <summary>
         /// This is the method that is responsible for notifying
-        /// receivers that the event occurred
+        ///   receivers that the event occurred
         /// </summary>
-        /// <param name="e">FileCopyCompletedEventArgs eventargs</param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
         protected virtual void OnFileCopyCompleted(FileCopyCompletedEventArgs e)
         {
             if (this.FileCopyCompleted != null)

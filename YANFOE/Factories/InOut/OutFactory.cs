@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="OutFactory.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="OutFactory.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The out factory.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Factories.InOut
 {
+    #region Required Namespaces
+
     using System;
     using System.ComponentModel;
 
@@ -21,6 +25,7 @@ namespace YANFOE.Factories.InOut
 
     using YANFOE.Factories.InOut.Enum;
     using YANFOE.Factories.InOut.Model;
+    using YANFOE.Factories.UI;
     using YANFOE.InternalApps.Logs;
     using YANFOE.IO;
     using YANFOE.Models.IOModels;
@@ -28,36 +33,37 @@ namespace YANFOE.Factories.InOut
     using YANFOE.Models.TvModels.Show;
     using YANFOE.Settings;
     using YANFOE.Tools.Enums;
-    using YANFOE.UI.Dialogs.General;
+
+    #endregion
 
     /// <summary>
-    /// The out factory.
+    ///   The out factory.
     /// </summary>
     public static class OutFactory
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The Saving dialog.
+        ///   The XBMC handler object.
         /// </summary>
-        private static readonly FrmSavingDialog dialog = new FrmSavingDialog();
+        private static readonly XBMC Xbmc = new XBMC();
+
+        // private static readonly WndSavingDialog dialog = new WndSavingDialog();
 
         /// <summary>
-        /// The YAMJ handler object.
+        ///   The Saving dialog.
         /// </summary>
-        private static readonly YAMJ yamj = new YAMJ();
-
         /// <summary>
-        /// The XBMC handler object.
+        ///   The YAMJ handler object.
         /// </summary>
-        private static readonly XBMC xbmc = new XBMC();
+        private static readonly YAMJ Yamj = new YAMJ();
 
         #endregion
 
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="OutFactory"/> class. 
+        ///   Initializes static members of the <see cref="OutFactory" /> class.
         /// </summary>
         static OutFactory()
         {
@@ -66,50 +72,59 @@ namespace YANFOE.Factories.InOut
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="OutFactory"/> is cancel.
+        ///   Gets or sets a value indicating whether this <see cref="OutFactory" /> is cancel.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if cancel; otherwise, <c>false</c>.
-        /// </value>
+        /// <value> <c>true</c> if cancel; otherwise, <c>false</c> . </value>
         public static bool Cancel { get; set; }
 
         /// <summary>
-        /// Gets or sets the progress model.
+        ///   Gets or sets the episode max.
         /// </summary>
-        /// <value>
-        /// The progress model.
-        /// </value>
+        public static int EpisodeMax { get; set; }
+
+        /// <summary>
+        ///   Gets or sets a value indicating whether this <see cref="OutFactory" /> is finished.
+        /// </summary>
+        /// <value> <c>true</c> if finished; otherwise, <c>false</c> . </value>
+        public static bool Finished { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the progress model.
+        /// </summary>
+        /// <value> The progress model. </value>
         public static SaveProgressModel ProgressModel { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [refresh grids].
+        ///   Gets or sets a value indicating whether [refresh grids].
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if [refresh grids]; otherwise, <c>false</c>.
-        /// </value>
+        /// <value> <c>true</c> if [refresh grids]; otherwise, <c>false</c> . </value>
         public static bool RefreshGrids { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="OutFactory"/> is finished.
+        ///   Gets or sets the season max.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if finished; otherwise, <c>false</c>.
-        /// </value>
-        public static bool Finished { get; set; }
+        public static int SeasonMax { get; set; }
+
+        /// <summary>
+        ///   Gets or sets the series max.
+        /// </summary>
+        public static int SeriesMax { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The load movie.
         /// </summary>
-        /// <param name="movie">The movie.</param>
+        /// <param name="movie">
+        /// The movie. 
+        /// </param>
         /// <returns>
-        /// Always returns true
+        /// Always returns true 
         /// </returns>
         public static bool LoadMovie(MovieModel movie)
         {
@@ -117,11 +132,11 @@ namespace YANFOE.Factories.InOut
             {
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
-                    yamj.LoadMovie(movie);
+                    Yamj.LoadMovie(movie);
                 }
                 else if (Get.InOutCollection.IoType == NFOType.XBMC)
                 {
-                    xbmc.LoadMovie(movie);
+                    Xbmc.LoadMovie(movie);
                 }
 
                 return true;
@@ -136,9 +151,11 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// Load Series
         /// </summary>
-        /// <param name="series">The series.</param>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
         /// <returns>
-        /// Process succeeded.
+        /// Process succeeded. 
         /// </returns>
         public static bool LoadSeries(Series series)
         {
@@ -146,11 +163,11 @@ namespace YANFOE.Factories.InOut
             {
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
-                    yamj.LoadSeries(series);
+                    Yamj.LoadSeries(series);
                 }
                 else if (Get.InOutCollection.IoType == NFOType.XBMC)
                 {
-                    xbmc.LoadSeries(series);
+                    Xbmc.LoadSeries(series);
                 }
 
                 return true;
@@ -165,15 +182,17 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save all selected episode details.
         /// </summary>
-        /// <param name="type">The EpisodeIOType type.</param>
+        /// <param name="type">
+        /// The EpisodeIOType type. 
+        /// </param>
         /// <returns>
-        /// Process succeeded
+        /// Process succeeded 
         /// </returns>
         public static bool SaveAllSelectedEpisodeDetails(EpisodeIOType type = EpisodeIOType.All)
         {
             try
             {
-                foreach (var episode in TvDBFactory.CurrentSelectedEpisode)
+                foreach (var episode in TVDBFactory.Instance.CurrentSelectedEpisode)
                 {
                     SaveSpecificEpisode(episode, type);
                 }
@@ -190,15 +209,17 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save all selected season details.
         /// </summary>
-        /// <param name="type">The SeasonIOType type.</param>
+        /// <param name="type">
+        /// The SeasonIOType type. 
+        /// </param>
         /// <returns>
-        /// Process Succeeded.
+        /// Process Succeeded. 
         /// </returns>
         public static bool SaveAllSelectedSeasonDetails(SeasonIOType type = SeasonIOType.All)
         {
             try
             {
-                foreach (Season season in TvDBFactory.CurrentSelectedSeason)
+                foreach (Season season in TVDBFactory.Instance.CurrentSelectedSeason)
                 {
                     SaveSpecificSeason(season, type);
                 }
@@ -215,15 +236,17 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save all selected series details.
         /// </summary>
-        /// <param name="type">The SeriesIOType type.</param>
+        /// <param name="type">
+        /// The SeriesIOType type. 
+        /// </param>
         /// <returns>
-        /// Process succeeded.
+        /// Process succeeded. 
         /// </returns>
         public static bool SaveAllSelectedSeriesDetails(SeriesIOType type = SeriesIOType.All)
         {
             try
             {
-                foreach (var series in TvDBFactory.CurrentSelectedSeries)
+                foreach (var series in TVDBFactory.Instance.CurrentSelectedSeries)
                 {
                     SaveSpecificSeries(series, type);
                 }
@@ -240,9 +263,11 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save movie.
         /// </summary>
-        /// <param name="type">The MovieIOType type.</param>
+        /// <param name="type">
+        /// The MovieIOType type. 
+        /// </param>
         /// <returns>
-        /// Process succeeded status.
+        /// Process succeeded status. 
         /// </returns>
         public static bool SaveMovie(MovieIOType type = MovieIOType.All)
         {
@@ -252,16 +277,15 @@ namespace YANFOE.Factories.InOut
 
                 movieSaveSettings.IoType = type;
 
-                for (int index = 0; index < MovieDBFactory.MultiSelectedMovies.Count; index++)
+                foreach (MovieModel movie in MovieDBFactory.Instance.MultiSelectedMovies)
                 {
-                    MovieModel movie = MovieDBFactory.MultiSelectedMovies[index];
                     if (Get.InOutCollection.IoType == NFOType.YAMJ)
                     {
-                        yamj.SaveMovie(movie);
+                        Yamj.SaveMovie(movie);
                     }
                     else if (Get.InOutCollection.IoType == NFOType.XBMC)
                     {
-                        xbmc.SaveMovie(movie);
+                        Xbmc.SaveMovie(movie);
                     }
                 }
 
@@ -277,7 +301,9 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save recursive selected series details.
         /// </summary>
-        /// <param name="type">TVIoType type.</param>
+        /// <param name="type">
+        /// TVIoType type. 
+        /// </param>
         public static void SaveRecursiveSelectedSeriesDetails(TVIoType type = TVIoType.All)
         {
             Cancel = false;
@@ -285,40 +311,39 @@ namespace YANFOE.Factories.InOut
             var bgwSaveRecursiveSelectedSeriesDetails = new BackgroundWorker();
 
             bgwSaveRecursiveSelectedSeriesDetails.DoWork += BgwSaveRecursiveSelectedSeriesDetails_DoWork;
-            bgwSaveRecursiveSelectedSeriesDetails.RunWorkerCompleted += BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted;
+            bgwSaveRecursiveSelectedSeriesDetails.RunWorkerCompleted +=
+                BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted;
 
             bgwSaveRecursiveSelectedSeriesDetails.RunWorkerAsync();
 
+            SeriesMax = TVDBFactory.Instance.CurrentSelectedSeries.Count;
 
+            SeasonMax = 0;
 
-            dialog.SeriesMax = TvDBFactory.CurrentSelectedSeries.Count;
+            EpisodeMax = 0;
 
-            dialog.SeasonMax = 0;
-
-            dialog.EpisodeMax = 0;
-
-            foreach (Series series in TvDBFactory.CurrentSelectedSeries)
+            foreach (Series series in TVDBFactory.Instance.CurrentSelectedSeries)
             {
-                dialog.SeasonMax += series.Seasons.Count;
+                SeasonMax += series.Seasons.Count;
 
                 foreach (var season in series.Seasons)
                 {
-                    dialog.EpisodeMax += season.Value.Episodes.Count;
+                    EpisodeMax += season.Episodes.Count;
                 }
             }
-
-            UI.Windows7UIFactory.StartProgressState(dialog.EpisodeMax);
-
-            dialog.ShowDialog();
         }
 
         /// <summary>
         /// The save specific episode.
         /// </summary>
-        /// <param name="episode">The episode.</param>
-        /// <param name="type">The EpisodeIOType type.</param>
+        /// <param name="episode">
+        /// The episode. 
+        /// </param>
+        /// <param name="type">
+        /// The EpisodeIOType type. 
+        /// </param>
         /// <returns>
-        /// Process succeeded
+        /// Process succeeded 
         /// </returns>
         public static bool SaveSpecificEpisode(Episode episode, EpisodeIOType type = EpisodeIOType.All)
         {
@@ -326,11 +351,11 @@ namespace YANFOE.Factories.InOut
             {
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
-                    yamj.SaveEpisode(episode, type);
+                    Yamj.SaveEpisode(episode, type);
                 }
                 else if (Get.InOutCollection.IoType == NFOType.XBMC)
                 {
-                    xbmc.SaveEpisode(episode, type);
+                    Xbmc.SaveEpisode(episode, type);
                 }
             }
             catch (Exception exception)
@@ -345,10 +370,14 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// The save specific season.
         /// </summary>
-        /// <param name="season">The season.</param>
-        /// <param name="type">The SeasonIOType type.</param>
+        /// <param name="season">
+        /// The season. 
+        /// </param>
+        /// <param name="type">
+        /// The SeasonIOType type. 
+        /// </param>
         /// <returns>
-        /// Process Succeeded
+        /// Process Succeeded 
         /// </returns>
         public static bool SaveSpecificSeason(Season season, SeasonIOType type = SeasonIOType.All)
         {
@@ -356,11 +385,11 @@ namespace YANFOE.Factories.InOut
             {
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
-                    yamj.SaveSeason(season, type);
+                    Yamj.SaveSeason(season, type);
                 }
                 else if (Get.InOutCollection.IoType == NFOType.XBMC)
                 {
-                    xbmc.SaveSeason(season, type);
+                    Xbmc.SaveSeason(season, type);
                 }
             }
             catch (Exception exception)
@@ -375,20 +404,26 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// Saves the specific series.
         /// </summary>
-        /// <param name="series">The series.</param>
-        /// <param name="type">The SeriesIOType type.</param>
-        /// <returns>Process succeeded</returns>
+        /// <param name="series">
+        /// The series. 
+        /// </param>
+        /// <param name="type">
+        /// The SeriesIOType type. 
+        /// </param>
+        /// <returns>
+        /// Process succeeded 
+        /// </returns>
         public static bool SaveSpecificSeries(Series series, SeriesIOType type = SeriesIOType.All)
         {
             try
             {
                 if (Get.InOutCollection.IoType == NFOType.YAMJ)
                 {
-                    yamj.SaveSeries(series, type);
+                    Yamj.SaveSeries(series, type);
                 }
                 else if (Get.InOutCollection.IoType == NFOType.XBMC)
                 {
-                    xbmc.SaveSeries(series, type);
+                    Xbmc.SaveSeries(series, type);
                 }
             }
             catch (Exception exception)
@@ -407,8 +442,12 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// Handles the DoWork event of the Bgw_SaveRecursiveSelectedSeriesDetails control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data.</param>
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.DoWorkEventArgs"/> instance containing the event data. 
+        /// </param>
         private static void BgwSaveRecursiveSelectedSeriesDetails_DoWork(object sender, DoWorkEventArgs e)
         {
             ProgressModel.EnableSeries = true;
@@ -421,7 +460,7 @@ namespace YANFOE.Factories.InOut
 
             try
             {
-                foreach (var series in TvDBFactory.CurrentSelectedSeries)
+                foreach (var series in TVDBFactory.Instance.CurrentSelectedSeries)
                 {
                     ProgressModel.SeriesText = series.SeriesName;
 
@@ -434,14 +473,14 @@ namespace YANFOE.Factories.InOut
                         Log.WriteToLog(
                             LogSeverity.Info, 
                             0, 
-                            "Saving " + series.SeriesName + ", Season " + season.Value.SeasonNumber, 
+                            "Saving " + series.SeriesName + ", Season " + season.SeasonNumber, 
                             string.Empty);
 
-                        ProgressModel.SeasonText = "Season " + season.Value.SeasonNumber;
+                        ProgressModel.SeasonText = "Season " + season.SeasonNumber;
 
-                        SaveSpecificSeason(season.Value);
+                        SaveSpecificSeason(season);
 
-                        foreach (Episode episode in season.Value.Episodes)
+                        foreach (Episode episode in season.Episodes)
                         {
                             ProgressModel.EpisodeText = episode.EpisodeName;
 
@@ -449,7 +488,7 @@ namespace YANFOE.Factories.InOut
 
                             ProgressModel.EpisodeCurrent++;
 
-                            UI.Windows7UIFactory.SetProgressValue(ProgressModel.EpisodeCurrent);
+                            Windows7UIFactory.SetProgressValue(ProgressModel.EpisodeCurrent);
 
                             if (Cancel)
                             {
@@ -477,13 +516,16 @@ namespace YANFOE.Factories.InOut
         /// <summary>
         /// Handles the RunWorkerCompleted event of the bgwSaveRecursiveSelectedSeriesDetails control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data.</param>
-        private static void BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <param name="sender">
+        /// The source of the event. 
+        /// </param>
+        /// <param name="e">
+        /// The <see cref="System.ComponentModel.RunWorkerCompletedEventArgs"/> instance containing the event data. 
+        /// </param>
+        private static void BgwSaveRecursiveSelectedSeriesDetails_RunWorkerCompleted(
+            object sender, RunWorkerCompletedEventArgs e)
         {
-            dialog.Close();
             RefreshGrids = true;
-            UI.Windows7UIFactory.StopProgressState();
         }
 
         #endregion

@@ -1,44 +1,50 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Folder.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Folder.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The add folder type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels
 {
+    #region Required Namespaces
+
     using System;
 
+    #endregion
+
     /// <summary>
-    /// The add folder type.
+    ///   The add folder type.
     /// </summary>
     public enum AddFolderType
     {
         /// <summary>
-        /// Name by folder.
+        ///   Name by folder.
         /// </summary>
         NameByFolder = 0, 
 
         /// <summary>
-        /// Name by filename.
+        ///   Name by filename.
         /// </summary>
         NameByFilename = 1, 
 
         /// <summary>
-        /// Exclude from search.
+        ///   Exclude from search.
         /// </summary>
         Exclude = 2
     }
 
     /// <summary>
-    /// The folder.
+    ///   The folder.
     /// </summary>
     [Serializable]
     public class Folder
@@ -46,7 +52,7 @@ namespace YANFOE.Models.TvModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Folder"/> class.
+        ///   Initializes a new instance of the <see cref="Folder" /> class.
         /// </summary>
         public Folder()
         {
@@ -59,40 +65,40 @@ namespace YANFOE.Models.TvModels
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets AddType.
+        ///   Gets or sets AddType.
         /// </summary>
         public AddFolderType AddType { get; set; }
 
         /// <summary>
-        /// Gets or sets DefaultSource.
+        ///   Gets or sets DefaultSource.
         /// </summary>
         public string DefaultSource { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether DetectFirstMovieOnly.
+        ///   Gets or sets a value indicating whether DetectFirstMovieOnly.
         /// </summary>
         public bool DetectFirstMovieOnly { get; set; }
 
         /// <summary>
-        /// Gets or sets FolderPath.
+        ///   Gets or sets FolderPath.
         /// </summary>
         public string FolderPath { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether MakeChanges.
+        ///   Gets or sets a value indicating whether MakeChanges.
         /// </summary>
         public bool MakeChanges { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether RecursiveScan.
+        ///   Gets or sets a value indicating whether RecursiveScan.
         /// </summary>
         public bool RecursiveScan { get; set; }
 
         /// <summary>
-        /// Gets or sets Scrapergroup.
+        ///   Gets or sets Scrapergroup.
         /// </summary>
         public string Scrapergroup { get; set; }
 

@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MediaModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MediaModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The media model
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.GeneralModels.AssociatedFiles
 {
+    #region Required Namespaces
+
     using System;
     using System.IO;
 
@@ -21,28 +25,26 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
     using YANFOE.Factories.Apps.MediaInfo.Models;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.Text;
+
+    #endregion
 
     /// <summary>
-    /// The media model
+    ///   The media model
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     [Serializable]
     public class MediaModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// FilePath backing field
+        ///   The file path.
         /// </summary>
-        private MediaPathFileModel fileModel;
+        private string pathAndFilename;
 
         /// <summary>
-        /// The file path.
-        /// </summary>
-        private string _pathAndFilename;
-
-        /// <summary>
-        /// Order backing field
+        ///   Order backing field
         /// </summary>
         private int order;
 
@@ -51,37 +53,61 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MediaModel"/> class.
+        ///   Initializes a new instance of the <see cref="MediaModel" /> class.
         /// </summary>
         public MediaModel()
         {
-            this._pathAndFilename = string.Empty;
+            this.pathAndFilename = string.Empty;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets FilePath.
+        ///   Gets FileName.
         /// </summary>
-        public string PathAndFilename
+        [JsonIgnore]
+        public string FileName
         {
             get
             {
-                return this._pathAndFilename;
-            }
+                if (string.IsNullOrEmpty(this.pathAndFilename))
+                {
+                    return string.Empty;
+                }
 
-            set
-            {
-                this._pathAndFilename = value;
+                return Path.GetFileName(this.pathAndFilename);
             }
         }
 
         /// <summary>
-        /// Gets or sets the media info scan output.
+        /// Gets the filename with out ext.
         /// </summary>
-        /// <value>The media info scan output.</value>
+        public string FilenameWithOutExt
+        {
+            get
+            {
+                return Path.GetFileNameWithoutExtension(this.pathAndFilename);
+            }
+        }
+
+        /// <summary>
+        /// Gets the folder path.
+        /// </summary>
+        [JsonIgnore]
+        public string FolderPath
+        {
+            get
+            {
+                return Path.GetDirectoryName(this.pathAndFilename);
+            }
+        }
+
+        /// <summary>
+        ///   Gets the media info scan output.
+        /// </summary>
+        /// <value> The media info scan output. </value>
         [JsonIgnore]
         public MiResponseModel MiResponseModel
         {
@@ -91,8 +117,8 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
 
                 if (File.Exists(this.PathAndFilename + ".mediainfo"))
                 {
-                    var xml = Tools.Text.IO.ReadTextFromFile(this.PathAndFilename + ".mediainfo");
-                    responseModel.PopulateFromXML(xml);
+                    var xml = IO.ReadTextFromFile(this.PathAndFilename + ".mediainfo");
+                    responseModel.PopulateFromXml(xml);
                     return responseModel;
                 }
 
@@ -100,18 +126,10 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
             }
         }
 
-        public string ScanXML
-        {
-            get
-            {
-                return Tools.Text.IO.ReadTextFromFile(this.PathAndFilename + ".mediainfo");
-            }
-        }
-
         /// <summary>
-        /// Gets or sets the order.
+        ///   Gets or sets the order.
         /// </summary>
-        /// <value>The order.</value>
+        /// <value> The order. </value>
         public int Order
         {
             get
@@ -127,36 +145,29 @@ namespace YANFOE.Models.GeneralModels.AssociatedFiles
         }
 
         /// <summary>
-        /// Gets or sets FileName.
+        ///   Gets or sets FilePath.
         /// </summary>
-        [JsonIgnore]
-        public string FileName
+        public string PathAndFilename
         {
             get
             {
-                if (string.IsNullOrEmpty(this._pathAndFilename))
-                {
-                    return string.Empty;
-                }
+                return this.pathAndFilename;
+            }
 
-                return Path.GetFileName(this._pathAndFilename);
+            set
+            {
+                this.pathAndFilename = value;
             }
         }
 
-        [JsonIgnore]
-        public string FolderPath
+        /// <summary>
+        /// Gets the scan xml.
+        /// </summary>
+        public string ScanXml
         {
             get
             {
-                return Path.GetDirectoryName(this._pathAndFilename);
-            }
-        }
-
-        public string FilenameWithOutExt
-        {
-            get
-            {
-                return Path.GetFileNameWithoutExtension(this._pathAndFilename);
+                return IO.ReadTextFromFile(this.PathAndFilename + ".mediainfo");
             }
         }
 

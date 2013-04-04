@@ -1,25 +1,32 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Keywords.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Keywords.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Keywords of strings to filter from movie filenames
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Settings.UserSettings
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
+
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// Keywords of strings to filter from movie filenames
+    ///   Keywords of strings to filter from movie filenames
     /// </summary>
     [Serializable]
     public class Keywords
@@ -27,7 +34,7 @@ namespace YANFOE.Settings.UserSettings
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Keywords"/> class.
+        ///   Initializes a new instance of the <see cref="Keywords" /> class.
         /// </summary>
         public Keywords()
         {
@@ -36,49 +43,47 @@ namespace YANFOE.Settings.UserSettings
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a collection containing codecs to ignore.
+        ///   Gets or sets a collection containing codecs to ignore.
         /// </summary>
-        /// <value>A collection containing values to ignore.</value>
+        /// <value> A collection containing values to ignore. </value>
         public List<string> Codecs { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection containing values to ignore.
+        ///   Gets or sets a collection containing values to ignore.
         /// </summary>
-        /// <value>A collection containing values to ignore.</value>
+        /// <value> A collection containing values to ignore. </value>
         public List<string> IgnoreNames { get; set; }
 
         /// <summary>
-        /// Gets or sets Resolutions.
+        ///   Gets or sets Resolutions.
         /// </summary>
         public List<string> Resolutions { get; set; }
 
         /// <summary>
-        /// Gets or sets Sources.
+        ///   Gets or sets Sources.
         /// </summary>
         public Dictionary<string, List<string>> Sources { get; set; }
 
         /// <summary>
-        /// Gets or sets a collection containing tags to ignore.
+        ///   Gets or sets a collection containing tags to ignore.
         /// </summary>
-        /// <value>A collection containing values to ignore.</value>
+        /// <value> A collection containing values to ignore. </value>
         public List<string> Tags { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// The get sources as list.
+        ///   The get sources as list.
         /// </summary>
-        /// <returns>
-        /// Sources collection
-        /// </returns>
-        public BindingList<string> GetSourcesAsList()
+        /// <returns> Sources collection </returns>
+        public ThreadedBindingList<string> GetSourcesAsList()
         {
-            var outputList = new BindingList<string>();
+            var outputList = new ThreadedBindingList<string>();
 
             foreach (var keyPair in this.Sources)
             {
@@ -98,7 +103,7 @@ namespace YANFOE.Settings.UserSettings
         #region Methods
 
         /// <summary>
-        /// Contructs the values.
+        ///   Contructs the values.
         /// </summary>
         private void ContructDefaultValues()
         {
@@ -114,7 +119,7 @@ namespace YANFOE.Settings.UserSettings
         }
 
         /// <summary>
-        /// The generate codecs.
+        ///   The generate codecs.
         /// </summary>
         private void GenerateCodecs()
         {
@@ -122,32 +127,32 @@ namespace YANFOE.Settings.UserSettings
         }
 
         /// <summary>
-        /// The generate ignore names.
+        ///   The generate ignore names.
         /// </summary>
         private void GenerateIgnoreNames()
         {
             this.IgnoreNames = new List<string>
                 {
-                    "LIMITED",
-                    "KLAXXON",
-                    "AXXO",
-                    "NahNc3",
-                    "PUKKA",
-                    "iDHD",
-                    "PROPER",
-                    "REPACK",
-                    "DSR",
-                    "STV",
-                    "UNRATED",
-                    "RERIP",
-                    "Special Edition",
-                    "Extended Edition",
+                    "LIMITED", 
+                    "KLAXXON", 
+                    "AXXO", 
+                    "NahNc3", 
+                    "PUKKA", 
+                    "iDHD", 
+                    "PROPER", 
+                    "REPACK", 
+                    "DSR", 
+                    "STV", 
+                    "UNRATED", 
+                    "RERIP", 
+                    "Special Edition", 
+                    "Extended Edition", 
                     "Sp Edition"
                 };
         }
 
         /// <summary>
-        /// The generate resolutions.
+        ///   The generate resolutions.
         /// </summary>
         private void GenerateResolutions()
         {
@@ -155,7 +160,7 @@ namespace YANFOE.Settings.UserSettings
         }
 
         /// <summary>
-        /// The generate sources.
+        ///   The generate sources.
         /// </summary>
         private void GenerateSources()
         {
@@ -214,43 +219,43 @@ namespace YANFOE.Settings.UserSettings
         }
 
         /// <summary>
-        /// The generate tags.
+        ///   The generate tags.
         /// </summary>
         private void GenerateTags()
         {
             this.Tags = new List<string>
                 {
-                    "HDTV",
-                    "PDTV",
-                    "DVDRip",
-                    "DVDSCR",
-                    "DSRip",
-                    "CAM",
-                    "R5",
-                    "RC",
-                    "LINE",
-                    "HD2DVD",
-                    "DVD",
-                    "DVD5",
-                    "DVD9",
-                    "HRHDTV",
-                    "MVCD",
-                    "VCD",
-                    "VHSRip",
-                    "BluRay",
-                    "HDDVD",
-                    "D-THEATER",
-                    "SDTV",
-                    "DTS",
-                    "AC3",
-                    "5.1",
-                    "DD2.0",
-                    "DD5.1",
-                    "Sub",
-                    "eng",
-                    "mp3",
-                    "BRRip",
-                    "HD",
+                    "HDTV", 
+                    "PDTV", 
+                    "DVDRip", 
+                    "DVDSCR", 
+                    "DSRip", 
+                    "CAM", 
+                    "R5", 
+                    "RC", 
+                    "LINE", 
+                    "HD2DVD", 
+                    "DVD", 
+                    "DVD5", 
+                    "DVD9", 
+                    "HRHDTV", 
+                    "MVCD", 
+                    "VCD", 
+                    "VHSRip", 
+                    "BluRay", 
+                    "HDDVD", 
+                    "D-THEATER", 
+                    "SDTV", 
+                    "DTS", 
+                    "AC3", 
+                    "5.1", 
+                    "DD2.0", 
+                    "DD5.1", 
+                    "Sub", 
+                    "eng", 
+                    "mp3", 
+                    "BRRip", 
+                    "HD", 
                     "MP4"
                 };
         }

@@ -1,25 +1,29 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Apple.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Apple.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   Defines the Apple type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Scrapers.Movie
 {
+    #region Required Namespaces
+
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Text.RegularExpressions;
 
     using BitFactory.Logging;
+
+    using Newtonsoft.Json;
 
     using YANFOE.InternalApps.DownloadManager;
     using YANFOE.InternalApps.DownloadManager.Model;
@@ -29,49 +33,63 @@ namespace YANFOE.Scrapers.Movie
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// Defines the Apple type.
+    ///   Defines the Apple type.
     /// </summary>
     public class Apple : ScraperMovieBase, IMovieScraper
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Apple"/> class.
+        ///   Initializes a new instance of the <see cref="Apple" /> class.
         /// </summary>
         public Apple()
         {
             this.ScraperName = ScraperList.Apple;
 
-            this.AvailableSearchMethod.AddRange(new[]
-                                                    {
-                                                        ScrapeSearchMethod.Site
-                                                    });
+            this.AvailableSearchMethod.AddRange(new[] { ScrapeSearchMethod.Site });
 
-            this.AvailableScrapeMethods = new BindingList<ScrapeFields>();
+            this.AvailableScrapeMethods = new ThreadedBindingList<ScrapeFields>();
 
-            this.AvailableScrapeMethods.AddRange(new[]
-                                               {
-                                                   ScrapeFields.Trailer
-                                               });
+            this.AvailableScrapeMethods.AddRange(new[] { ScrapeFields.Trailer });
 
             this.IncludeInWebIDList = false;
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
         /// Scrapes trailers from source
         /// </summary>
-        /// <param name="id">The id value</param>
-        /// <param name="threadID">The thread id.</param>
-        /// <param name="output">The return output</param>
-        /// <param name="logCatagory">The log catagory.</param>
+        /// <param name="id">
+        /// The id value 
+        /// </param>
+        /// <param name="threadID">
+        /// The thread id. 
+        /// </param>
+        /// <param name="output">
+        /// The return output 
+        /// </param>
+        /// <param name="logCatagory">
+        /// The log catagory. 
+        /// </param>
         /// <returns>
-        /// Scrape succeeded [true/false]
+        /// Scrape succeeded [true/false] 
         /// </returns>
-        public new bool ScrapeTrailer(string id, int threadID, out BindingList<TrailerDetailsModel> output, string logCatagory)
+        public new bool ScrapeTrailer(
+            string id, int threadID, out ThreadedBindingList<TrailerDetailsModel> output, string logCatagory)
         {
-            output = new BindingList<TrailerDetailsModel>();
+            output = new ThreadedBindingList<TrailerDetailsModel>();
 
-            Regex trailerRegex = new Regex("http://(movies|images|trailers).apple.com/([0-9]*/us/media/trailers|trailers|movies)/[^\"]+?-(tlr|trailer)[^\"]+?\\.(mov|m4v)");
+            Regex trailerRegex =
+                new Regex(
+                    "http://(movies|images|trailers).apple.com/([0-9]*/us/media/trailers|trailers|movies)/[^\"]+?-(tlr|trailer)[^\"]+?\\.(mov|m4v)");
             MatchCollection matchCollection;
             int itmsIndex;
             string moviePage;
@@ -81,10 +99,11 @@ namespace YANFOE.Scrapers.Movie
                 var html =
                     Downloader.ProcessDownload(
                         string.Format(
-                            "http://trailers.apple.com/trailers/home/scripts/quickfind.php?callback=&q={0}", id),
-                        DownloadType.Html,
+                            "http://trailers.apple.com/trailers/home/scripts/quickfind.php?callback=&q={0}", id), 
+                        DownloadType.Html, 
                         Section.Movies);
-                var atsm = Newtonsoft.Json.JsonConvert.DeserializeObject(html, typeof(AppleTrailerSearchModel)) as AppleTrailerSearchModel;
+                var atsm =
+                    JsonConvert.DeserializeObject(html, typeof(AppleTrailerSearchModel)) as AppleTrailerSearchModel;
 
                 if (atsm != null && !atsm.error)
                 {
@@ -111,27 +130,37 @@ namespace YANFOE.Scrapers.Movie
                                 foreach (Match trailerMatch in matchCollection)
                                 {
                                     int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
-                                    if (lastUnderscore == -1) continue;
-                                    if (trailerMatch.Value[lastUnderscore+1] != 'h')
+                                    if (lastUnderscore == -1)
+                                    {
+                                        continue;
+                                    }
+
+                                    if (trailerMatch.Value[lastUnderscore + 1] != 'h')
                                     {
                                         output.Add(
                                             new TrailerDetailsModel(
-                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
-                                                "0",
-                                                "Unk",
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"), 
+                                                "0", 
+                                                "Unk", 
                                                 atsm.results[i].title));
                                     }
                                     else
                                     {
                                         if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                        {
                                             output.Add(
                                                 new TrailerDetailsModel(
-                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
-                                                    "0",
-                                                    "Unk",
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1), 
+                                                    "0", 
+                                                    "Unk", 
                                                     atsm.results[i].title));
+                                        }
                                         else
-                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, "0", "Unk", atsm.results[i].title));
+                                        {
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value, "0", "Unk", atsm.results[i].title));
+                                        }
                                     }
                                 }
 
@@ -145,27 +174,37 @@ namespace YANFOE.Scrapers.Movie
                                 foreach (Match trailerMatch in matchCollection)
                                 {
                                     int lastUnderscore = trailerMatch.Value.LastIndexOf('_');
-                                    if (lastUnderscore == -1) continue;
+                                    if (lastUnderscore == -1)
+                                    {
+                                        continue;
+                                    }
+
                                     if (trailerMatch.Value[lastUnderscore + 1] != 'h')
                                     {
                                         output.Add(
                                             new TrailerDetailsModel(
-                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"),
-                                                "0",
-                                                "Unk",
+                                                trailerMatch.Value.Insert(lastUnderscore + 1, "h"), 
+                                                "0", 
+                                                "Unk", 
                                                 atsm.results[i].title));
                                     }
                                     else
                                     {
                                         if (trailerMatch.Value[lastUnderscore + 2] == '.')
+                                        {
                                             output.Add(
                                                 new TrailerDetailsModel(
-                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1),
-                                                    "0",
-                                                    "Unk",
+                                                    trailerMatch.Value.Remove(lastUnderscore + 2, 1), 
+                                                    "0", 
+                                                    "Unk", 
                                                     atsm.results[i].title));
+                                        }
                                         else
-                                            output.Add(new TrailerDetailsModel(trailerMatch.Value, "0", "Unk", atsm.results[i].title));
+                                        {
+                                            output.Add(
+                                                new TrailerDetailsModel(
+                                                    trailerMatch.Value, "0", "Unk", atsm.results[i].title));
+                                        }
                                     }
                                 }
 
@@ -186,15 +225,27 @@ namespace YANFOE.Scrapers.Movie
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Gets the absolute URL.
         /// </summary>
-        /// <param name="baseURL">The base url.</param>
-        /// <param name="relativeURL">The relative url.</param>
-        /// <returns>The absolute url</returns>
+        /// <param name="baseURL">
+        /// The base url. 
+        /// </param>
+        /// <param name="relativeURL">
+        /// The relative url. 
+        /// </param>
+        /// <returns>
+        /// The absolute url 
+        /// </returns>
         private string GetAbsoluteURL(string baseURL, string relativeURL)
         {
             return new Uri(new Uri(baseURL), relativeURL).ToString();
         }
+
+        #endregion
     }
 }

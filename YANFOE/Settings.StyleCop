@@ -1,6 +1,10 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <BooleanProperty Name="WriteCache">False</BooleanProperty>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>colorimetry</Value>
+      <Value>fanart</Value>
+    </CollectionProperty>
   </GlobalSettings>
   <Analyzers>
     <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
@@ -10,13 +14,6 @@
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
-      <Rules>
-        <Rule Name="ElementMustBeginWithUpperCaseLetter">
-          <RuleSettings>
-            <BooleanProperty Name="Enabled">False</BooleanProperty>
-          </RuleSettings>
-        </Rule>
-      </Rules>
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
           <Value>tv</Value>

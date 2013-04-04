@@ -1,46 +1,52 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Generic.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Generic.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The runtime type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Settings.UserSettings.ScraperSettings
 {
+    #region Required Namespaces
+
     using System.Globalization;
 
+    #endregion
+
     /// <summary>
-    /// The runtime type.
+    ///   The runtime type.
     /// </summary>
     public enum RuntimeType
     {
         /// <summary>
-        /// RuntimeType: minutes.
+        ///   RuntimeType: minutes.
         /// </summary>
         Minutes, 
 
         /// <summary>
-        /// RuntimeType: Hh_MMm.
+        ///   RuntimeType: Hh_MMm.
         /// </summary>
         Hh_MMm
     }
 
     /// <summary>
-    /// The generic.
+    ///   The generic.
     /// </summary>
     public class Generic
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Generic"/> class.
+        ///   Initializes a new instance of the <see cref="Generic" /> class.
         /// </summary>
         public Generic()
         {
@@ -54,35 +60,35 @@ namespace YANFOE.Settings.UserSettings.ScraperSettings
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets a value indicating whether FormatDateTime.
+        ///   Gets or sets a value indicating whether FormatDateTime.
         /// </summary>
         public bool FormatDateTime { get; set; }
 
         /// <summary>
-        /// Gets or sets FormatDateTimeValue.
+        ///   Gets or sets FormatDateTimeValue.
         /// </summary>
         public string FormatDateTimeValue { get; set; }
 
         /// <summary>
-        /// Gets or sets FormatRuntime.
+        ///   Gets or sets FormatRuntime.
         /// </summary>
         public RuntimeType FormatRuntime { get; set; }
 
         /// <summary>
-        /// Gets or sets MaximumActors.
+        ///   Gets or sets MaximumActors.
         /// </summary>
         public int MaximumActors { get; set; }
 
         /// <summary>
-        /// Gets or sets NfoEncoding.
+        ///   Gets or sets NfoEncoding.
         /// </summary>
         public string NfoEncoding { get; set; }
 
         /// <summary>
-        /// Gets or sets NumberDecimalSeperator.
+        ///   Gets or sets NumberDecimalSeperator.
         /// </summary>
         public string NumberDecimalSeperator
         {
@@ -93,7 +99,6 @@ namespace YANFOE.Settings.UserSettings.ScraperSettings
 
             set
             {
-                
             }
         }
 

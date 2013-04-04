@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="YANFOE.UI.UserControls.MovieControls.MoviesUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Factories="clr-namespace:YANFOE.Factories" mc:Ignorable="d" 
+             d:DesignHeight="752" d:DesignWidth="1322"
+             DataContext="{Binding Source={x:Static Factories:MovieDBFactory.Instance}, Path=MovieDatabase}" xmlns:my="clr-namespace:YANFOE.UI.UserControls.MovieControls" xmlns:my1="clr-namespace:YANFOE.UI.UserControls.CommonControls"
+             xmlns:UI="clr-namespace:YANFOE.Tools.UI">
+
+    <UserControl.Resources>
+        <UI:ImageConverter x:Key="imageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="227*" />
+            <ColumnDefinition Width="13" />
+            <ColumnDefinition Width="953*" />
+        </Grid.ColumnDefinitions>
+        <my1:SuperToolTipController x:Name="tooltipController" />
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Name="gridSplitter1" VerticalAlignment="Stretch" Grid.RowSpan="4" />
+        <TabControl Name="tabControl1" Grid.RowSpan="4">
+            <TabItem Header="Title" Name="tabItem1">
+                <Grid>
+                    <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Margin="6" Name="gridViewByTitle" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="..." IsReadOnly="True" Width="5">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=Status, Converter={StaticResource imageConverter}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Path=Title}" Header="Title" Width="100*" />
+                            <DataGridTextColumn Binding="{Binding Path=Year}" CanUserSort="False" Header="Year" Width="40" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Locked}" Header="..." Width="5" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Marked}" Header="..." Width="5" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Watched}" Header="..." Width="5" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Poster">
+                <Grid>
+                    <ListView Name="listView1" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <!-- http://stackoverflow.com/questions/1041551/wpf-listview-with-horizontal-arrangement-of-items -->
+                                <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+    				                        ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+    				                        MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+    				                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=CurrentPosterImage, Converter={StaticResource imageConverter}}" Width="100" Height="150" Stretch="Uniform" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Grid Grid.Column="2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62" />
+                <RowDefinition Height="323*" />
+                <RowDefinition Height="13" />
+                <RowDefinition Height="345*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="14*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="164*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="80*" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnLoadFromWeb" Click="BtnLoadFromWebClick">
+                <Image Source="/YANFOE;component/Resources/globe1.png" />
+            </Button>
+            <Button Grid.Column="1">
+                <Image Source="/YANFOE;component/Resources/save.png" />
+            </Button>
+            <Button Grid.Column="3">
+                <Image Source="/YANFOE;component/Resources/monitor1.png" />
+            </Button>
+            <Button Grid.Column="4">
+                <Image Source="/YANFOE;component/Resources/folder1.png" />
+            </Button>
+            <Button Grid.Column="6">
+                <Image Source="/YANFOE;component/Resources/searchred.png" />
+            </Button>
+            <Button Grid.Column="7">
+                <Image Source="/YANFOE;component/Resources/watched_red.png" />
+            </Button>
+            <Button Grid.Column="8">
+                <Image Source="/YANFOE;component/Resources/watched_green.png" />
+            </Button>
+            <Button Grid.Column="9">
+                <Image Source="/YANFOE;component/Resources/watched_red.png" />
+            </Button>
+            <Button Grid.Column="10">
+                <Image Source="/YANFOE;component/Resources/promotion_new.png" />
+            </Button>
+            <Button Grid.Column="11">
+                <Image Source="/YANFOE;component/Resources/star_empty.png" />
+            </Button>
+            <Button Grid.Column="12">
+                <Image Source="/YANFOE;component/Resources/unlock.png" />
+            </Button>
+            <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter2" VerticalAlignment="Stretch" ResizeDirection="Rows" Grid.ColumnSpan="13" />
+            <TabControl Margin="6" Name="tabControl2" Grid.ColumnSpan="13" Grid.Row="1">
+                <TabItem Header="Main Details">
+                    <Grid>
+                        <my:MoviesMainDetailsUC x:Name="moviesMainDetailsUC1" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="File Info">
+                    <Grid>
+                        <my:MoviesFileInfoUC x:Name="moviesFileInfoUC1" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Identifier">
+                    <Grid>
+                        <my:MoviesIdentifierUC x:Name="moviesIdentifierUC1" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Set">
+                    <Grid>
+                        <my:MoviesSetUC x:Name="moviesSetUC1" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Trailers">
+                    <Grid>
+                        <my:MoviesTrailersUC x:Name="moviesTrailersUC1" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Previews">
+                    <Grid>
+                        <my:MoviesPreviewsUC x:Name="moviesPreviewsUC1" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid Grid.Row="3" Grid.ColumnSpan="13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="525*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="527*" />
+                </Grid.ColumnDefinitions>
+                <my1:DisplayPictureUserControl x:Name="displayPictureUserControl1" SelectedImage="{Binding CurrentPosterImage}" GalleryImages="{Binding PosterAltGallery}" />
+                <my1:DisplayPictureUserControl Grid.Column="2" x:Name="displayPictureUserControl2" SelectedImage="{Binding CurrentFanartImage}" GalleryImages="{Binding FanartAltGallery}"/>
+                <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

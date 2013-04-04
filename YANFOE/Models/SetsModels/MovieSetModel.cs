@@ -1,22 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MovieSetModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="MovieSetModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The movie set model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.SetsModels
 {
+    #region Required Namespaces
+
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Drawing;
     using System.Linq;
 
@@ -27,22 +30,25 @@ namespace YANFOE.Models.SetsModels
     using YANFOE.Tools;
     using YANFOE.Tools.Enums;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.UI;
+
+    #endregion
 
     /// <summary>
-    /// The movie set model.
+    ///   The movie set model.
     /// </summary>
     [Serializable]
     public class MovieSetModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The fanart url.
+        ///   The fanart url.
         /// </summary>
         private string fanartUrl;
 
         /// <summary>
-        /// The poster url.
+        ///   The poster url.
         /// </summary>
         private string posterUrl;
 
@@ -51,22 +57,22 @@ namespace YANFOE.Models.SetsModels
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MovieSetModel"/> class.
+        ///   Initializes a new instance of the <see cref="MovieSetModel" /> class.
         /// </summary>
         public MovieSetModel()
         {
             this.ID = Guid.NewGuid().ToString();
             this.SetName = string.Empty;
-            this.Movies = new BindingList<MovieSetObjectModel>();
+            this.Movies = new ThreadedBindingList<MovieSetObjectModel>();
             this.PosterUrl = string.Empty;
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets Fanart.
+        ///   Gets Fanart.
         /// </summary>
         public Image Fanart
         {
@@ -84,7 +90,7 @@ namespace YANFOE.Models.SetsModels
         }
 
         /// <summary>
-        /// Gets or sets FanartUrl.
+        ///   Gets or sets FanartUrl.
         /// </summary>
         public string FanartUrl
         {
@@ -105,17 +111,17 @@ namespace YANFOE.Models.SetsModels
         }
 
         /// <summary>
-        /// Gets or sets MovieUniqueId.
+        ///   Gets or sets MovieUniqueId.
         /// </summary>
         public string ID { get; set; }
 
         /// <summary>
-        /// Gets or sets Movies.
+        ///   Gets or sets Movies.
         /// </summary>
-        public BindingList<MovieSetObjectModel> Movies { get; set; }
+        public ThreadedBindingList<MovieSetObjectModel> Movies { get; set; }
 
         /// <summary>
-        /// Gets Poster.
+        ///   Gets Poster.
         /// </summary>
         public Image Poster
         {
@@ -133,7 +139,7 @@ namespace YANFOE.Models.SetsModels
         }
 
         /// <summary>
-        /// Gets or sets PosterUrl.
+        ///   Gets or sets PosterUrl.
         /// </summary>
         public string PosterUrl
         {
@@ -154,22 +160,22 @@ namespace YANFOE.Models.SetsModels
         }
 
         /// <summary>
-        /// Gets or sets SetName.
+        ///   Gets or sets SetName.
         /// </summary>
         public string SetName { get; set; }
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// The add movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
         /// <param name="order">
-        /// The order.
+        /// The order. 
         /// </param>
         public void AddMovie(MovieModel movieModel, int? order = null)
         {
@@ -191,10 +197,10 @@ namespace YANFOE.Models.SetsModels
         /// Determines whether the specified id contains movie.
         /// </summary>
         /// <param name="id">
-        /// The movie guid.
+        /// The movie guid. 
         /// </param>
         /// <returns>
-        /// <c>true</c> if the specified id contains movie; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified id contains movie; otherwise, <c>false</c> . 
         /// </returns>
         public bool ContainsMovie(string id)
         {
@@ -207,7 +213,7 @@ namespace YANFOE.Models.SetsModels
         /// The move movie down.
         /// </summary>
         /// <param name="movieUniqueId">
-        /// The movie unique id.
+        /// The movie unique id. 
         /// </param>
         public void MoveMovieDown(string movieUniqueId)
         {
@@ -230,7 +236,7 @@ namespace YANFOE.Models.SetsModels
         /// The move movie up.
         /// </summary>
         /// <param name="movieUniqueId">
-        /// The movie unique id.
+        /// The movie unique id. 
         /// </param>
         public void MoveMovieUp(string movieUniqueId)
         {
@@ -253,7 +259,7 @@ namespace YANFOE.Models.SetsModels
         /// Removes the movie.
         /// </summary>
         /// <param name="movieModel">
-        /// The movie model.
+        /// The movie model. 
         /// </param>
         public void RemoveMovie(MovieModel movieModel)
         {

@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Episode.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="Episode.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The episode.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Models.TvModels.Show
 {
+    #region Required Namespaces
+
     using System;
     using System.ComponentModel;
     using System.Drawing;
@@ -26,151 +30,162 @@ namespace YANFOE.Models.TvModels.Show
     using YANFOE.Factories;
     using YANFOE.Factories.Apps.MediaInfo;
     using YANFOE.Factories.Internal;
+    using YANFOE.InternalApps.DownloadManager;
+    using YANFOE.InternalApps.DownloadManager.Model;
     using YANFOE.Models.GeneralModels.AssociatedFiles;
-    using YANFOE.Models.IOModels;
     using YANFOE.Models.NFOModels;
     using YANFOE.Properties;
     using YANFOE.Tools;
+    using YANFOE.Tools.Enums;
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.Models;
+    using YANFOE.Tools.Text;
+    using YANFOE.Tools.UI;
     using YANFOE.Tools.Xml;
 
+    #endregion
+
     /// <summary>
-    /// The episode.
+    ///   The episode.
     /// </summary>
     [Serializable]
     [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class Episode : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The episode guid.
+        ///   The episode guid.
         /// </summary>
         private readonly string guid;
 
         /// <summary>
-        /// The absolute number.
+        ///   The absolute number.
         /// </summary>
         private string absoluteNumber;
 
         /// <summary>
-        /// The combined episodenumber.
+        ///   The combined episodenumber.
         /// </summary>
         private double? combinedEpisodenumber;
 
         /// <summary>
-        /// The combined season.
+        ///   The combined season.
         /// </summary>
         private int? combinedSeason;
 
         /// <summary>
-        /// The dvd chapter.
+        ///   The dvd chapter.
         /// </summary>
         private int? dvdChapter;
 
         /// <summary>
-        /// The dvd discid.
+        ///   The dvd discid.
         /// </summary>
         private int? dvdDiscid;
 
         /// <summary>
-        /// The dvd episodenumber.
+        ///   The dvd episodenumber.
         /// </summary>
         private double? dvdEpisodenumber;
 
         /// <summary>
-        /// The dvd season.
+        ///   The dvd season.
         /// </summary>
         private int? dvdSeason;
 
         /// <summary>
-        /// The episode flag image.
+        ///   The episode flag image.
         /// </summary>
         private int? episodeImgFlag;
 
         /// <summary>
-        /// The episode name.
+        ///   The episode name.
         /// </summary>
         private string episodeName;
 
         /// <summary>
-        /// The episode number.
+        ///   The episode number.
         /// </summary>
         private int? episodeNumber;
 
         /// <summary>
-        /// The episode screenshot path.
+        ///   The episode screenshot path.
         /// </summary>
         private string episodeScreenshotPath;
 
         /// <summary>
-        /// The filename.
+        ///   The filename.
         /// </summary>
         private string episodeScreenshotUrl;
 
         /// <summary>
-        /// The file path.
+        ///   The file path.
         /// </summary>
         private MediaModel filePath;
 
         /// <summary>
-        /// The first aired.
+        ///   The first aired.
         /// </summary>
         private DateTime? firstAired;
 
         /// <summary>
-        /// The episode object id.
+        ///   The episode object id.
         /// </summary>
         private uint? id;
 
         /// <summary>
-        /// The imdbid.
+        ///   The imdbid.
         /// </summary>
         private string imdbid;
 
         /// <summary>
-        /// The language.
+        ///   The is locked.
+        /// </summary>
+        private bool isLocked;
+
+        /// <summary>
+        ///   The language.
         /// </summary>
         private string language;
 
         /// <summary>
-        /// The lastupdated.
+        ///   The lastupdated.
         /// </summary>
         private string lastupdated;
 
         /// <summary>
-        /// The overview.
+        ///   The overview.
         /// </summary>
         private string overview;
 
         /// <summary>
-        /// The production code.
+        ///   The production code.
         /// </summary>
         private string productionCode;
 
         /// <summary>
-        /// The rating.
+        ///   The rating.
         /// </summary>
         private double? rating;
 
         /// <summary>
-        /// The season number.
+        ///   The season number.
         /// </summary>
         private int? seasonNumber;
 
         /// <summary>
-        /// The seasonid.
+        ///   The seasonid.
         /// </summary>
         private uint? seasonid;
 
         /// <summary>
-        /// The seriesid.
+        ///   The seriesid.
         /// </summary>
         private uint? seriesid;
 
         /// <summary>
-        /// The video source.
+        ///   The video source.
         /// </summary>
         private string videoSource;
 
@@ -179,7 +194,7 @@ namespace YANFOE.Models.TvModels.Show
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Episode"/> class.
+        ///   Initializes a new instance of the <see cref="Episode" /> class.
         /// </summary>
         public Episode()
         {
@@ -206,43 +221,35 @@ namespace YANFOE.Models.TvModels.Show
             this.Lastupdated = string.Empty;
             this.Seasonid = null;
             this.Seriesid = null;
-            this.Director = new BindingList<PersonModel>();
-            this.Writers = new BindingList<PersonModel>();
+            this.Director = new ThreadedBindingList<PersonModel>();
+            this.Writers = new ThreadedBindingList<PersonModel>();
             this.FilePath = new MediaModel();
-            this.GuestStars = new BindingList<PersonModel>();
+            this.GuestStars = new ThreadedBindingList<PersonModel>();
             this.FileInfo = new FileInfoModel();
 
             this.FileInfo.PropertyChanged += (sender, e) =>
-            {
-                DatabaseIOFactory.DatabaseDirty = true;
-                ChangedText = true;
-            };
+                {
+                    DatabaseIOFactory.DatabaseDirty = true;
+                    this.ChangedText = true;
+                };
         }
 
         #endregion
 
-        #region Properties
+        #region Public Events
 
         /// <summary>
-        /// Occurs when [media info changed].
+        ///   Occurs when [media info changed].
         /// </summary>
         [field: NonSerialized]
         public event EventHandler MediaInfoChanged;
 
-        public void InvokeMediaInfoChanged(EventArgs e)
-        {
-            EventHandler handler = this.MediaInfoChanged;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
+        #endregion
 
-        public FileInfoModel FileInfo { get; set; }
-        
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets AbsoluteNumber.
+        ///   Gets or sets AbsoluteNumber.
         /// </summary>
         public string AbsoluteNumber
         {
@@ -263,17 +270,17 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedScreenshot.
+        ///   Gets or sets a value indicating whether ChangedScreenshot.
         /// </summary>
         public bool ChangedScreenshot { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ChangedText.
+        ///   Gets or sets a value indicating whether ChangedText.
         /// </summary>
         public bool ChangedText { get; set; }
 
         /// <summary>
-        /// Gets or sets CombinedEpisodenumber.
+        ///   Gets or sets CombinedEpisodenumber.
         /// </summary>
         public double? CombinedEpisodenumber
         {
@@ -294,7 +301,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets CombinedSeason.
+        ///   Gets or sets CombinedSeason.
         /// </summary>
         public int? CombinedSeason
         {
@@ -315,7 +322,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets CurrentFilePathStatusImage.
+        ///   Gets CurrentFilePathStatusImage.
         /// </summary>
         public Image CurrentFilePathStatusImage
         {
@@ -326,7 +333,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets CurrentFilenameAndPath.
+        ///   Gets or sets CurrentFilenameAndPath.
         /// </summary>
         public string CurrentFilenameAndPath
         {
@@ -349,13 +356,13 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the director.
+        ///   Gets or sets the director.
         /// </summary>
-        /// <value>The director.</value>
-        public BindingList<PersonModel> Director { get; set; }
+        /// <value> The director. </value>
+        public ThreadedBindingList<PersonModel> Director { get; set; }
 
         /// <summary>
-        /// Gets or sets DirectorAsString.
+        ///   Gets or sets DirectorAsString.
         /// </summary>
         public string DirectorAsString
         {
@@ -376,7 +383,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets DvdChapter.
+        ///   Gets or sets DvdChapter.
         /// </summary>
         public int? DvdChapter
         {
@@ -397,9 +404,9 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the DVD discid.
+        ///   Gets or sets the DVD discid.
         /// </summary>
-        /// <value>The DVD discid.</value>
+        /// <value> The DVD discid. </value>
         public int? DvdDiscid
         {
             get
@@ -419,9 +426,9 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the DVD episodenumber.
+        ///   Gets or sets the DVD episodenumber.
         /// </summary>
-        /// <value>The DVD episodenumber.</value>
+        /// <value> The DVD episodenumber. </value>
         public double? DvdEpisodenumber
         {
             get
@@ -441,9 +448,9 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets the DVD season.
+        ///   Gets or sets the DVD season.
         /// </summary>
-        /// <value>The DVD season.</value>
+        /// <value> The DVD season. </value>
         public int? DvdSeason
         {
             get
@@ -462,22 +469,8 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
-        [JsonIgnore]
-        public Image MediaInfoImage
-        {
-            get
-            {
-                return this.ContainsMediaInfo() ? Resources.search32 : Resources.searchred;
-            }
-        }
-
-        private bool ContainsMediaInfo()
-        {
-            return File.Exists(this.FilePath.PathAndFilename + ".mediainfo");
-        }
-
         /// <summary>
-        /// Gets or sets episodeImgFlag.
+        ///   Gets or sets episodeImgFlag.
         /// </summary>
         public int? EpisodeImgFlag
         {
@@ -498,7 +491,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets EpisodeName.
+        ///   Gets or sets EpisodeName.
         /// </summary>
         public string EpisodeName
         {
@@ -519,7 +512,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets EpisodeNumber.
+        ///   Gets or sets EpisodeNumber.
         /// </summary>
         public int? EpisodeNumber
         {
@@ -541,7 +534,37 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets EpisodeScreenshotPath.
+        ///   Gets the fanart image.
+        /// </summary>
+        [JsonIgnore]
+        public Image EpisodeScreenshotImage
+        {
+            get
+            {
+                string url;
+
+                if (string.IsNullOrEmpty(this.EpisodeScreenshotPath))
+                {
+                    url = Downloader.ProcessDownload(
+                        TVDBFactory.Instance.GetImageUrl(this.EpisodeScreenshotUrl), DownloadType.Binary, Section.Movies);
+                    this.EpisodeScreenshotPath = url;
+                }
+                else
+                {
+                    url = this.EpisodeScreenshotPath;
+                }
+
+                if (!File.Exists(url))
+                {
+                    return null;
+                }
+
+                return ImageHandler.LoadImage(url);
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets EpisodeScreenshotPath.
         /// </summary>
         public string EpisodeScreenshotPath
         {
@@ -566,7 +589,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Filename.
+        ///   Gets or sets Filename.
         /// </summary>
         public string EpisodeScreenshotUrl
         {
@@ -592,7 +615,23 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Path.
+        ///   Gets a value indicating whether file assigned.
+        /// </summary>
+        public bool FileAssigned
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(this.FilePath.PathAndFilename);
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the file info.
+        /// </summary>
+        public FileInfoModel FileInfo { get; set; }
+
+        /// <summary>
+        ///   Gets or sets Path.
         /// </summary>
         public MediaModel FilePath
         {
@@ -616,7 +655,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets FirstAired.
+        ///   Gets or sets FirstAired.
         /// </summary>
         public DateTime? FirstAired
         {
@@ -637,12 +676,12 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets GuestStars.
+        ///   Gets or sets GuestStars.
         /// </summary>
-        public BindingList<PersonModel> GuestStars { get; set; }
+        public ThreadedBindingList<PersonModel> GuestStars { get; set; }
 
         /// <summary>
-        /// Gets Guid.
+        ///   Gets Guid.
         /// </summary>
         public string Guid
         {
@@ -653,7 +692,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Id.
+        ///   Gets or sets Id.
         /// </summary>
         public uint? ID
         {
@@ -674,7 +713,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets IMDBID.
+        ///   Gets or sets IMDBID.
         /// </summary>
         public string IMDBID
         {
@@ -694,14 +733,10 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
-        private bool isLocked;
-
         /// <summary>
-        /// Gets or sets a value indicating whether IsLocked.
+        ///   Gets or sets a value indicating whether IsLocked.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is locked; otherwise, <c>false</c>.
-        /// </value>
+        /// <value> <c>true</c> if this instance is locked; otherwise, <c>false</c> . </value>
         public bool IsLocked
         {
             get
@@ -718,27 +753,8 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
-        public bool NotLocked
-        {
-            get
-            {
-                return !this.isLocked;
-            }
-        }
-
         /// <summary>
-        /// Gets the locked image.
-        /// </summary>
-        public Image LockedImage
-        {
-            get
-            {
-                return this.IsLocked ? Resources.locked32 : Resources.unlock32;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets Language.
+        ///   Gets or sets Language.
         /// </summary>
         public string Language
         {
@@ -759,7 +775,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Lastupdated.
+        ///   Gets or sets Lastupdated.
         /// </summary>
         public string Lastupdated
         {
@@ -780,7 +796,41 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets a value indicating whether NotSecondary.
+        ///   Gets the locked image.
+        /// </summary>
+        public Image LockedImage
+        {
+            get
+            {
+                return this.IsLocked ? Resources.locked32 : Resources.unlock32;
+            }
+        }
+
+        /// <summary>
+        ///   Gets the media info image.
+        /// </summary>
+        [JsonIgnore]
+        public Image MediaInfoImage
+        {
+            get
+            {
+                return this.ContainsMediaInfo() ? Resources.search32 : Resources.searchred;
+            }
+        }
+
+        /// <summary>
+        ///   Gets a value indicating whether not locked.
+        /// </summary>
+        public bool NotLocked
+        {
+            get
+            {
+                return !this.isLocked;
+            }
+        }
+
+        /// <summary>
+        ///   Gets a value indicating whether NotSecondary.
         /// </summary>
         public bool NotSecondary
         {
@@ -791,7 +841,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Overview.
+        ///   Gets or sets Overview.
         /// </summary>
         public string Overview
         {
@@ -812,7 +862,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets ProductionCode.
+        ///   Gets or sets ProductionCode.
         /// </summary>
         public string ProductionCode
         {
@@ -833,7 +883,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Rating.
+        ///   Gets or sets Rating.
         /// </summary>
         public double? Rating
         {
@@ -854,7 +904,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SeasonNumber.
+        ///   Gets or sets SeasonNumber.
         /// </summary>
         public int? SeasonNumber
         {
@@ -875,7 +925,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Seasonid.
+        ///   Gets or sets Seasonid.
         /// </summary>
         public uint? Seasonid
         {
@@ -895,10 +945,8 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
-
-
         /// <summary>
-        /// Gets a value indicating whether Secondary.
+        ///   Gets a value indicating whether Secondary.
         /// </summary>
         public bool Secondary
         {
@@ -909,12 +957,12 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets SecondaryTo.
+        ///   Gets or sets SecondaryTo.
         /// </summary>
         public int? SecondaryTo { get; set; }
 
         /// <summary>
-        /// Gets or sets Seriesid.
+        ///   Gets or sets Seriesid.
         /// </summary>
         public uint? Seriesid
         {
@@ -935,7 +983,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets Status.
+        ///   Gets Status.
         /// </summary>
         public Image Status
         {
@@ -951,7 +999,7 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets VideoSource.
+        ///   Gets or sets VideoSource.
         /// </summary>
         public string VideoSource
         {
@@ -972,39 +1020,8 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
-        /// Gets or sets Writers.
+        ///   Gets or sets a value indicating whether watched.
         /// </summary>
-        public BindingList<PersonModel> Writers { get; set; }
-
-        /// <summary>
-        /// Gets or sets WritersAsString.
-        /// </summary>
-        public string WritersAsString
-        {
-            get
-            {
-                return this.Writers.ToString(',');
-            }
-
-            set
-            {
-                if (this.Writers != value.ToPersonList())
-                {
-                    this.Writers = value.ToPersonList();
-                    this.OnPropertyChanged("DirectorAsString", true);
-                    this.ChangedText = true;
-                }
-            }
-        }
-
-        public bool FileAssigned
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(this.FilePath.PathAndFilename);
-            }
-        }
-
         [JsonIgnore]
         public bool Watched
         {
@@ -1015,8 +1032,7 @@ namespace YANFOE.Models.TvModels.Show
                     return false;
                 }
 
-                return File.Exists(
-                    Path.Combine(new[] { this.FilePath.PathAndFilename + ".watched" }));
+                return File.Exists(Path.Combine(new[] { this.FilePath.PathAndFilename + ".watched" }));
             }
 
             set
@@ -1038,7 +1054,7 @@ namespace YANFOE.Models.TvModels.Show
                     }
                     else
                     {
-                        Tools.Text.IO.WriteTextToFile(path, " ");
+                        IO.WriteTextToFile(path, " ");
                     }
 
                     this.OnPropertyChanged("Watched");
@@ -1047,6 +1063,9 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        /// <summary>
+        ///   Gets the watched image.
+        /// </summary>
         [JsonIgnore]
         public Image WatchedImage
         {
@@ -1056,46 +1075,95 @@ namespace YANFOE.Models.TvModels.Show
             }
         }
 
+        /// <summary>
+        ///   Gets or sets Writers.
+        /// </summary>
+        public ThreadedBindingList<PersonModel> Writers { get; set; }
+
+        /// <summary>
+        ///   Gets or sets WritersAsString.
+        /// </summary>
+        public string WritersAsString
+        {
+            get
+            {
+                return this.Writers.ToString(',');
+            }
+
+            set
+            {
+                if (this.Writers != value.ToPersonList())
+                {
+                    this.Writers = value.ToPersonList();
+                    this.OnPropertyChanged("DirectorAsString", true);
+                    this.ChangedText = true;
+                }
+            }
+        }
+
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
-        /// Gets the season the episode belongs to.
+        ///   The do media info lookup.
         /// </summary>
-        /// <returns>The season the episode belongs to.</returns>
+        public void DoMediaInfoLookup()
+        {
+            var bgw = new BackgroundWorker();
+            bgw.DoWork += (bgwSender, bgwE) =>
+                {
+                    var result = MediaInfoFactory.DoMediaInfoScan(this.FilePath.PathAndFilename);
+
+                    bgwE.Result = result;
+                    MediaInfoFactory.InjectResponseModel(result, this.FileInfo);
+                };
+
+            bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
+                {
+                    this.OnPropertyChanged("MediaInfoImage");
+                    this.InvokeMediaInfoChanged(new EventArgs());
+                };
+
+            bgw.RunWorkerAsync();
+        }
+
+        /// <summary>
+        ///   Gets the season the episode belongs to.
+        /// </summary>
+        /// <returns> The season the episode belongs to. </returns>
         public Season GetSeason()
         {
-            return (from series in TvDBFactory.TvDatabase
-                    from season in series.Value.Seasons
-                    where season.Value.Episodes.Any(episode => episode == this)
-                    select season.Value).FirstOrDefault();
+            return (from series in TVDBFactory.Instance.TVDatabase
+                    from season in series.Seasons
+                    where season.Episodes.Any(episode => episode == this)
+                    select season).FirstOrDefault();
         }
 
         /// <summary>
-        /// Gets the series the episode belongs to.
+        ///   Gets the series the episode belongs to.
         /// </summary>
-        /// <returns>The series the episode belongs to</returns>
+        /// <returns> The series the episode belongs to </returns>
         public Series GetSeries()
         {
-            return (from series in TvDBFactory.TvDatabase
-                    from season in series.Value.Seasons
-                    from episode in season.Value.Episodes
+            return (from series in TVDBFactory.Instance.TVDatabase
+                    from season in series.Seasons
+                    from episode in season.Episodes
                     where episode == this
-                    select series.Value).FirstOrDefault();
+                    select series).FirstOrDefault();
         }
 
         /// <summary>
-        /// Gets the name of the series the episode belongs to.
+        ///   Gets the name of the series the episode belongs to.
         /// </summary>
-        /// <returns>The name of the series the episode belongs to.</returns>
+        /// <returns> The name of the series the episode belongs to. </returns>
         public string GetSeriesName()
         {
-            foreach (var series in TvDBFactory.TvDatabase)
+            foreach (var series in TVDBFactory.Instance.TVDatabase)
             {
-                if (series.Value.Seasons.SelectMany(season => season.Value.Episodes).Any(episode => episode == this))
+                if (series.Seasons.SelectMany(season => season.Episodes).Any(episode => episode == this))
                 {
-                    return series.Value.SeriesName;
+                    return series.SeriesName;
                 }
             }
 
@@ -1103,11 +1171,28 @@ namespace YANFOE.Models.TvModels.Show
         }
 
         /// <summary>
+        /// The invoke media info changed.
+        /// </summary>
+        /// <param name="e">
+        /// The e. 
+        /// </param>
+        public void InvokeMediaInfoChanged(EventArgs e)
+        {
+            EventHandler handler = this.MediaInfoChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
         /// Populates the current episode with episodeXml.
         /// </summary>
-        /// <param name="xml">The XML used to populate the values of the episode object.</param>
+        /// <param name="xml">
+        /// The XML used to populate the values of the episode object. 
+        /// </param>
         /// <returns>
-        /// Population sucessful.
+        /// Population sucessful. 
         /// </returns>
         public bool Populate(string xml)
         {
@@ -1152,26 +1237,17 @@ namespace YANFOE.Models.TvModels.Show
 
         #endregion
 
-        public void DoMediaInfoLookup()
+        #region Methods
+
+        /// <summary>
+        ///   The contains media info.
+        /// </summary>
+        /// <returns> The <see cref="bool" /> . </returns>
+        private bool ContainsMediaInfo()
         {
-
-            var bgw = new BackgroundWorker();
-            bgw.DoWork += (bgwSender, bgwE) =>
-            {
-                var result = MediaInfoFactory.DoMediaInfoScan(this.FilePath.PathAndFilename);
-
-                bgwE.Result = result;
-                MediaInfoFactory.InjectResponseModel(result, this.FileInfo);
-            };
-
-            bgw.RunWorkerCompleted += (bgwSender, bgwE) =>
-            {
-                this.OnPropertyChanged("MediaInfoImage");
-                this.InvokeMediaInfoChanged(new EventArgs());
-            };
-
-
-            bgw.RunWorkerAsync();
+            return File.Exists(this.FilePath.PathAndFilename + ".mediainfo");
         }
+
+        #endregion
     }
 }

@@ -1,33 +1,36 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NameBy.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="NameBy.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
 // <summary>
 //   The name by.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.Tools.Lists
 {
+    #region Required Namespaces
+
     using System.Collections.Generic;
 
+    #endregion
+
     /// <summary>
-    /// The name by.
+    ///   The name by.
     /// </summary>
     public static class NameBy
     {
-        #region Constants and Fields
+        #region Static Fields
 
         /// <summary>
-        /// The name by selections.
+        ///   The name by selections.
         /// </summary>
         private static readonly Dictionary<int, string> nameBySelections = new Dictionary<int, string>();
 
@@ -36,7 +39,7 @@ namespace YANFOE.Tools.Lists
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="NameBy"/> class. 
+        ///   Initializes static members of the <see cref="NameBy" /> class.
         /// </summary>
         static NameBy()
         {
@@ -49,27 +52,27 @@ namespace YANFOE.Tools.Lists
         #region Enums
 
         /// <summary>
-        /// The name by list.
+        ///   The name by list.
         /// </summary>
         public enum NameByList
         {
             /// <summary>
-            /// Name by folder.
+            ///   Name by folder.
             /// </summary>
             Folder = 0, 
 
             /// <summary>
-            /// Name by file.
+            ///   Name by file.
             /// </summary>
             File = 1
         }
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets NameBySelections.
+        ///   Gets NameBySelections.
         /// </summary>
         public static Dictionary<int, string> NameBySelections
         {

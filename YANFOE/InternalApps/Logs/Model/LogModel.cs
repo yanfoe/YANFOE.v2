@@ -1,58 +1,64 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LogModel.cs" company="The YANFOE Project">
+// <copyright company="The YANFOE Project" file="LogModel.cs">
 //   Copyright 2011 The YANFOE Project
 // </copyright>
 // <license>
 //   This software is licensed under a Creative Commons License
-//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) 
+//   Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 //   http://creativecommons.org/licenses/by-nc-sa/3.0/
 //   See this page: http://www.yanfoe.com/license
-//   For any reuse or distribution, you must make clear to others the 
-//   license terms of this work.  
+//   For any reuse or distribution, you must make clear to others the
+//   license terms of this work.
 // </license>
+// <summary>
+//   The log model.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace YANFOE.InternalApps.Logs.Model
 {
+    #region Required Namespaces
+
     using System;
 
     using BitFactory.Logging;
 
     using YANFOE.Tools.Models;
 
+    #endregion
+
     /// <summary>
-    /// The log model.
+    ///   The log model.
     /// </summary>
     public class LogModel : ModelBase
     {
-        #region Constants and Fields
+        #region Fields
 
         /// <summary>
-        /// The header.
+        ///   The header.
         /// </summary>
         private string header;
 
         /// <summary>
-        /// The message.
+        ///   The message.
         /// </summary>
         private string message;
 
         /// <summary>
-        /// The time stamp.
+        ///   The time stamp.
         /// </summary>
         private string timeStamp;
 
         /// <summary>
-        /// The log severity type.
+        ///   The log severity type.
         /// </summary>
         private LogSeverity type;
 
         #endregion
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets Header.
+        ///   Gets or sets Header.
         /// </summary>
         public string Header
         {
@@ -69,7 +75,7 @@ namespace YANFOE.InternalApps.Logs.Model
         }
 
         /// <summary>
-        /// Gets or sets Message.
+        ///   Gets or sets Message.
         /// </summary>
         public string Message
         {
@@ -86,7 +92,7 @@ namespace YANFOE.InternalApps.Logs.Model
         }
 
         /// <summary>
-        /// Gets TimeStamp.
+        ///   Gets TimeStamp.
         /// </summary>
         public string TimeStamp
         {
@@ -102,7 +108,7 @@ namespace YANFOE.InternalApps.Logs.Model
         }
 
         /// <summary>
-        /// Gets or sets Type.
+        ///   Gets or sets Type.
         /// </summary>
         public LogSeverity Type
         {
@@ -120,15 +126,23 @@ namespace YANFOE.InternalApps.Logs.Model
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods and Operators
 
         /// <summary>
         /// Create a log entry
         /// </summary>
-        /// <param name="type">The log type</param>
-        /// <param name="header">The log header.</param>
-        /// <param name="message">The log message.</param>
-        /// <returns>The LogModel</returns>
+        /// <param name="type">
+        /// The log type 
+        /// </param>
+        /// <param name="header">
+        /// The log header. 
+        /// </param>
+        /// <param name="message">
+        /// The log message. 
+        /// </param>
+        /// <returns>
+        /// The LogModel 
+        /// </returns>
         public static LogModel Create(LogSeverity type, string header, string message)
         {
             var log = new LogModel { Type = type, Header = header, Message = message };

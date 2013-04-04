@@ -1,0 +1,30 @@
+﻿<Window x:Class="YANFOE.UI.Dialogs.TV.WndUpdateShows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Shows" Height="446" Width="866" ResizeMode="NoResize" Name="UpdateShowsWindow">
+    <Grid>
+        <GroupBox Header="Series List" Margin="12" Name="groupBox1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="345*" />
+                    <ColumnDefinition Width="345*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="243*" />
+                    <RowDefinition Height="45*" />
+                    <RowDefinition Height="45*" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="2" Name="btnOK" Click="BtnOk_Click">
+                    <Image Source="/YANFOE;component/Resources/accept1.png" />
+                </Button>
+                <Button Grid.Column="1" Grid.Row="2" Name="btnCancel" Click="BtnCancel_Click">
+                    <Image Source="/YANFOE;component/Resources/delete.png" />
+                </Button>
+                <GroupBox Grid.Row="1" Grid.ColumnSpan="2" Header="Status">
+                    <Label Content="{Binding ElementName=UpdateShowsWindow, Path=CurrentStatus}" Name="lblStatus" />
+                </GroupBox>
+                <DataGrid CanUserAddRows="False" AutoGenerateColumns="True" Name="dataGrid1" Grid.ColumnSpan="2" ItemsSource="{Binding ElementName=UpdateShowsWindow, Path=UpdateDatabase}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
