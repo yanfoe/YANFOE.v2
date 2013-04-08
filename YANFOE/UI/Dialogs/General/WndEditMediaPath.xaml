@@ -27,26 +27,26 @@
                 </Button>
                 <GroupBox Header="Import Type" Margin="6,0,0,1" Name="groupBox2" Grid.Row="2">
                     <StackPanel>
-                        <RadioButton IsChecked="{Binding ContainsMovies}" Content="Folder Contains Movies" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsMovies" VerticalAlignment="Top" Unchecked="chkFolderContainsMovies_CheckedChanged" Checked="chkFolderContainsMovies_CheckedChanged" />
-                        <RadioButton IsChecked="{Binding ContainsTV}" Content="Folder Contains TV Shows" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsTvShows" VerticalAlignment="Top" Checked="chkFolderContainsTvShows_CheckedChanged" Unchecked="chkFolderContainsTvShows_CheckedChanged" />
+                        <RadioButton IsChecked="{Binding ContainsMovies}" Content="Folder Contains Movies" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsMovies" VerticalAlignment="Top" />
+                        <RadioButton IsChecked="{Binding ContainsTV}" Content="Folder Contains TV Shows" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkFolderContainsTvShows" VerticalAlignment="Top" />
                     </StackPanel>
 
                 </GroupBox>
-                <GroupBox Header="Movie Naming" Margin="6,5,0,0" Name="groupMovieNaming" Grid.Row="3" Height="72" VerticalAlignment="Top">
+                <GroupBox IsEnabled="{Binding ElementName=chkFolderContainsMovies, Path=IsChecked}" Header="Movie Naming" Margin="6,5,0,0" Name="groupMovieNaming" Grid.Row="3" Height="72" VerticalAlignment="Top">
                     <StackPanel>
                         <RadioButton IsChecked="{Binding ImportUsingFileName}" Content="Import using file name" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkImportUsingFileName" VerticalAlignment="Top" />
                         <RadioButton IsChecked="{Binding ImportUsingParentFolderName}" Content="Import using parent folder name" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="chkImportUsingParentFolderName" VerticalAlignment="Top" />
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Movie Defaults" Margin="0,0,3,0" Name="groupMovieDefaults" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Height="128" VerticalAlignment="Top">
+                <GroupBox IsEnabled="{Binding ElementName=chkFolderContainsMovies, Path=IsChecked}" Header="Movie Defaults" Margin="0,0,3,0" Name="groupMovieDefaults" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Height="128" VerticalAlignment="Top">
                     <StackPanel>
                         <Label Content="Movie Scraper Group:" />
-                        <ComboBox Name="cmbScraperGroup" Text="{Binding ScraperGroup}" ItemsSource="{Binding Source={x:Static Scraper:MovieScraperGroupFactory.Instance}, Path=ScraperGroupsOnDisk}" />
+                        <ComboBox Name="cmbScraperGroup" Text="{Binding ScraperGroup}" ItemsSource="{Binding Source={x:Static Scraper:MovieScraperGroupFactory.Instance}, Path=ScraperGroupsOnDisk}" DisplayMemberPath="ScraperName" />
                         <Label Content="Source:" />
                         <ComboBox Name="cmbSource" Text="{Binding DefaultSource}" ItemsSource="{Binding Source={x:Static Settings:Get.Keywords}, Path=Sources.Keys}"/>
                     </StackPanel>
                 </GroupBox>
-                <TextBox Text="{Binding MediaPath}" Margin="6,3,0,6" Name="txtMediaPath" Grid.ColumnSpan="2" Grid.Row="1" TextChanged="txtMediaPath_TextChanged" />
+                <TextBox Text="{Binding MediaPath}" Margin="6,3,0,6" Name="txtMediaPath" Grid.ColumnSpan="2" Grid.Row="1" TextChanged="TxtMediaPathTextChanged" />
                 <Label Content="Select a Media Path" Margin="6,0,0,3" Name="label1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="118" />
             </Grid>
         </GroupBox>
