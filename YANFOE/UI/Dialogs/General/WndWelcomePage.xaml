@@ -1,25 +1,48 @@
 ﻿<Window x:Class="YANFOE.UI.Dialogs.General.WndWelcomePage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WndWelcomePage" Height="321" Width="488" ResizeMode="NoResize">
+        Title="Welcome to YANFOE v2" Height="308" Width="559" ResizeMode="NoResize">
     <Grid>
-        <Button Height="44" HorizontalAlignment="Left" Margin="373,226,0,0" Name="btnOK" VerticalAlignment="Top" Width="75" Click="btnOK_Click">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="114*" />
+            <RowDefinition Height="162*" />
+            <RowDefinition Height="59*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="250*" />
+        </Grid.ColumnDefinitions>
+        <Button HorizontalAlignment="Right" Margin="0,4,22,9" Name="btnOK" Width="75" Click="BtnOkClick" Grid.Column="1" Grid.Row="2">
             <Image Source="/YANFOE;component/Resources/accept1.png" />
         </Button>
-        <GroupBox Header="Welcome To YANFOE v2" Height="100" HorizontalAlignment="Left" Margin="12,120,0,0" Name="groupBox1" VerticalAlignment="Top" Width="236">
-            <Grid />
+        <GroupBox Header="Welcome To YANFOE v2" Margin="12,6,10,3" Name="groupBox1" Grid.Row="1">
+            <TextBlock TextWrapping="Wrap">
+                <TextBlock.Text>
+                    This build of YANFOE is an alpha build.  This means it is still very heavily in development and problems will occur during normal use.
+                    Please use caution when using YANFOE and report any bugs you find to our issues tracker.
+                </TextBlock.Text>
+            </TextBlock>
         </GroupBox>
-        <GroupBox Header="Support YANFOE" Height="100" HorizontalAlignment="Left" Margin="254,120,0,0" Name="groupBox2" VerticalAlignment="Top" Width="200">
+        <GroupBox Header="Support YANFOE" Margin="10,6,16,3" Name="groupBox2" Grid.Column="1" Grid.Row="1">
             <Grid>
-                <Button Height="30" HorizontalAlignment="Left" Margin="0,47,0,0" Name="btnDonate" VerticalAlignment="Top" Width="188" Click="btnDonate_Click">
+                <TextBlock TextWrapping="Wrap">
+                <TextBlock.Text>
+                    If you find YANFOE useful please make a donation to support further development.
+                </TextBlock.Text>
+                </TextBlock>
+                <Button Name="btnDonate" Click="BtnDonateClick" Height="36" VerticalAlignment="Bottom" Margin="12,0,12,12">
                     <Image Source="/YANFOE;component/Resources/btn_donate_SM.gif" />
                 </Button>
             </Grid>
         </GroupBox>
-        <GroupBox Header="License" Height="100" HorizontalAlignment="Left" Margin="254,12,0,0" Name="groupBox3" VerticalAlignment="Top" Width="200">
-            <Grid />
+        <GroupBox Header="License" Margin="10,12,16,2" Name="groupBox3" Grid.Column="1">
+            <TextBlock TextWrapping="Wrap">
+                <TextBlock.Text>
+                    YANFOE 2 is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+                </TextBlock.Text>
+            </TextBlock>
         </GroupBox>
-        <Image Height="100" HorizontalAlignment="Left" Margin="12,12,0,0" Name="image1" Stretch="Uniform" VerticalAlignment="Top" Width="230" Source="/YANFOE;component/Resources/Untitled-3.png" />
-        <CheckBox Content="Never show this again." Height="16" HorizontalAlignment="Left" Margin="12,254,0,0" Name="chkNeverShowAgain" VerticalAlignment="Top" />
+        <Image Margin="12,12,10,2" Name="image1" Stretch="Uniform" Source="/YANFOE;component/Resources/Untitled-3.png" />
+        <CheckBox Content="Never show this again." Height="16" HorizontalAlignment="Left" Margin="12,0,0,12" Name="chkNeverShowAgain" VerticalAlignment="Bottom" Grid.Row="2" />
     </Grid>
 </Window>
