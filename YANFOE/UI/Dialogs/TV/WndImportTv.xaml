@@ -5,16 +5,16 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="601*" />
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="26" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="430*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="26" />
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="1" Header="{Binding ElementName=TvSeriesLookupWindow, Path=CurrentStatus}" Name="lblStatus">
             <Grid>
-                <ProgressBar Name="progressBar" Maximum="{Binding Source={x:Static Import:ImportTvFactory.Instance}, Path=Scan.Count}" Value="{Binding ElementName=TvSeriesLookupWindow, Path=Count}" />
+                <ProgressBar Name="progressBar" Maximum="{Binding Source={x:Static Import:ImportTvFactory.Instance}, Path=Scan.Count}" Value="{Binding ElementName=TvSeriesLookupWindow, Path=Count}" Margin="0,4,0,-4" />
             </Grid>
         </GroupBox>
         <Button Grid.Column="1" Grid.Row="1" Name="btnCancel" Click="btnCancel_Click">

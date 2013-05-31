@@ -64,25 +64,25 @@
         <Grid Grid.Column="2">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="62" />
+                <RowDefinition Height="26" />
                 <RowDefinition Height="323*" />
                 <RowDefinition Height="13" />
                 <RowDefinition Height="345*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
                 <ColumnDefinition Width="14*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
                 <ColumnDefinition Width="164*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="80*" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
             </Grid.ColumnDefinitions>
             <Button Name="btnLoadFromWeb" Click="BtnLoadFromWebClick">
                 <Image Source="/YANFOE;component/Resources/globe1.png" />

@@ -13,20 +13,21 @@
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="486*" />
             <ColumnDefinition Width="334*" />
-            <ColumnDefinition Width="85*" />
-            <ColumnDefinition Width="81*" />
+            <ColumnDefinition Width="26" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="26" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="49*" />
+            <RowDefinition Height="49" />
             <RowDefinition Height="291*" />
-            <RowDefinition Height="23*" />
-            <RowDefinition Height="38*" />
-            <RowDefinition Height="53*" />
+            <RowDefinition Height="23" />
+            <RowDefinition Height="38" />
+            <RowDefinition Height="46" />
         </Grid.RowDefinitions>
-        <Button Grid.Row="4" Name="btnCancel" Grid.Column="5" Click="BtnCancelClick">
+        <Button Grid.Row="4" Name="btnCancel" Grid.Column="4" Click="BtnCancelClick" Height="26" VerticalAlignment="Bottom">
             <Image Source="/YANFOE;component/Resources/delete.png" />
         </Button>
-        <Button Grid.Row="4" Name="btnOK" Grid.Column="4" Click="BtnOkClick">
+        <Button Grid.Row="4" Name="btnOK" Grid.Column="6" Click="BtnOkClick" Height="26" VerticalAlignment="Bottom">
             <Image Source="/YANFOE;component/Resources/accept1.png" />
         </Button>
         <GroupBox Grid.Row="4" Header="Current Activity" Name="groupBox1" Grid.ColumnSpan="4">
@@ -50,7 +51,7 @@
             <Image Source="/YANFOE;component/Resources/globe.png" />
         </Button>
         <ProgressBar Grid.Row="2" Name="progressBarControl1" />
-        <GroupBox Grid.Column="2" Header="Edit Default Scan Settings" Name="grpMain" Grid.ColumnSpan="4" Grid.RowSpan="4">
+        <GroupBox Grid.Column="2" Header="Edit Default Scan Settings" Name="grpMain" Grid.ColumnSpan="5" Grid.RowSpan="4">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="28" />
@@ -87,7 +88,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="51*" />
                     <ColumnDefinition Width="441*" />
-                    <ColumnDefinition Width="60*" />
+                    <ColumnDefinition Width="26*" />
                     <ColumnDefinition Width="434*" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="1" HorizontalAlignment="Stretch" Name="button4" VerticalAlignment="Stretch" Click="btnChangeNfo_Click">

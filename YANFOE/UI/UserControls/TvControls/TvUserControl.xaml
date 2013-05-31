@@ -13,12 +13,12 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="38" />
+            <RowDefinition Height="26" />
             <RowDefinition Height="322*" />
             <RowDefinition Height="167*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="38" />
+            <ColumnDefinition Width="26" />
             <ColumnDefinition Width="36*" />
             <ColumnDefinition Width="129*" />
             <ColumnDefinition Width="5" />

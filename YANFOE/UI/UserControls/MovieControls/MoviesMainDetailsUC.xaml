@@ -28,7 +28,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="198*" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="26" />
                 </Grid.RowDefinitions>
                 <DataGrid AutoGenerateColumns="False" Name="dataGrid1" Grid.ColumnSpan="3" DataContext="{Binding Path=Cast}" ItemsSource="{Binding}">
                     <DataGrid.Columns>

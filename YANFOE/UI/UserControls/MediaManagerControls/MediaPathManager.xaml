@@ -22,17 +22,19 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="78*" />
-                <ColumnDefinition Width="82*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="82*" />
-                <ColumnDefinition Width="48*" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="26" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="26" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="363*" />
-                <RowDefinition Height="41" />
+                <RowDefinition Height="26" />
             </Grid.RowDefinitions>
-            <GroupBox Header="Media Paths" Name="groupBox1" Grid.ColumnSpan="5">
+            <GroupBox Header="Media Paths" Name="groupBox1" Grid.ColumnSpan="7">
             <Grid>
                     <DataGrid AutoGenerateColumns="False" Name="mediaPathList" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathDB}" ItemsSource="{Binding}" CanUserAddRows="false" >
                         <DataGrid.Columns>
@@ -44,19 +46,19 @@
                     </DataGrid>
                 </Grid>
             </GroupBox>
-        <Button Name="button1" Margin="0,0,3,0" Grid.Row="1" Click="BtnAdd_Click">
+        <Button Name="button1" Grid.Row="1" Click="BtnAdd_Click">
             <Image Source="/YANFOE;component/Resources/add.png" />
         </Button>
-        <Button Margin="3,0,4,0" Name="button2" Grid.Row="1" Grid.Column="1" Click="btnEdit_Click">
+        <Button Name="button2" Grid.Row="1" Grid.Column="1" Click="btnEdit_Click">
             <Image Source="/YANFOE;component/Resources/pencil.png" />
         </Button>
-        <Button Margin="2,0,3,0" Name="button3" Grid.Row="1" Grid.Column="2" Click="BtnDelete_Click">
+        <Button Name="button3" Grid.Row="1" Grid.Column="3" Click="BtnDelete_Click">
             <Image Source="/YANFOE;component/Resources/trash.png" />
         </Button>
-        <Button Margin="3,0,4,0" Name="button4" Grid.Row="1" Grid.Column="3" Click="btnClean_Click">
+        <Button Name="button4" Grid.Row="1" Grid.Column="4" Click="btnClean_Click">
             <Image Source="/YANFOE;component/Resources/remove2.png" />
         </Button>
-        <Button Margin="1,0,0,0" Name="button5" Grid.Row="1" Grid.Column="4" Click="ButRefresh_Click">
+        <Button Name="button5" Grid.Row="1" Grid.Column="7" Click="ButRefresh_Click">
             <Image Source="/YANFOE;component/Resources/refresh.png" />
         </Button>
         </Grid>
@@ -70,9 +72,9 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="158*" />
-                        <RowDefinition Height="35" />
+                        <RowDefinition Height="26" />
                     </Grid.RowDefinitions>
-                    <Button Height="34" Name="button8" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessMovies_Click">
+                    <Button Name="button8" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessMovies_Click">
                         <Image Source="/YANFOE;component/Resources/next.png" />
                     </Button>
                     <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="dataGrid1" Margin="0,0,0,2" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathMoviesUnsorted}" ItemsSource="{Binding}">
@@ -87,9 +89,9 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="151*" />
-                        <RowDefinition Height="37" />
+                        <RowDefinition Height="26" />
                     </Grid.RowDefinitions>
-                    <Button Name="button7" Height="34" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessTv_Click">
+                    <Button Name="button7" VerticalAlignment="Bottom" Grid.Row="1" Click="BtnProcessTv_Click">
                         <Image Source="/YANFOE;component/Resources/next.png" />
                     </Button>
                     <DataGrid CanUserAddRows="False" AutoGenerateColumns="False" Name="dataGrid2" DataContext="{Binding Source={x:Static Media:MediaPathDBFactory.Instance}, Path=MediaPathTvUnsorted}" ItemsSource="{Binding}">

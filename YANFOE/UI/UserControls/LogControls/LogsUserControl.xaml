@@ -23,9 +23,9 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="403*" />
-                <RowDefinition Height="52" />
+                <RowDefinition Height="26" />
             </Grid.RowDefinitions>
-            <Button Height="52" HorizontalAlignment="Left" Name="btnClearLog" VerticalAlignment="Bottom" Width="75" Grid.Row="1" Click="btnClearLog_Click">
+            <Button HorizontalAlignment="Left" Name="btnClearLog" VerticalAlignment="Bottom" Grid.Row="1" Click="btnClearLog_Click">
                 <Image Source="/YANFOE;component/Resources/trash.png" />
             </Button>
             <DataGrid Name="grdLog" DataContext="{Binding Source={StaticResource ResourceKey=GetLogger}}" ItemsSource="{Binding}" AutoGenerateColumns="False">

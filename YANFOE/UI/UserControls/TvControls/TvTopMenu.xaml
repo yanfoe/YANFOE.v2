@@ -7,25 +7,25 @@
              d:DesignHeight="159" d:DesignWidth="604">
 
     <Grid>
-        <Button HorizontalAlignment="Left" Width="52" Name="btnUpdate" Click="btnUpdate_Click">
+        <Button HorizontalAlignment="Left" Name="btnUpdate" Click="btnUpdate_Click">
             <Image Source="/YANFOE;component/Resources/globe.png" />
         </Button>
-        <Button Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="52" Margin="52,0,0,0">
+        <Button Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="26,0,0,0">
             <Image Source="/YANFOE;component/Resources/save.png" />
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Left" Width="52" Margin="104,0,0,0">
+        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="52,0,0,0">
             <Image Source="/YANFOE;component/Resources/saveseries.png" />
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,0,0">
+        <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,0,0">
             <Image Source="/YANFOE;component/Resources/greendrive.png" />
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,52,0">
+        <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,26,0">
             <Image Source="/YANFOE;component/Resources/unlock.png" />
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,104,0">
+        <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,52,0">
             <Image Source="/YANFOE;component/Resources/watched_red.png" />
         </Button>
-        <Button Grid.Column="1" HorizontalAlignment="Right" Width="52" Margin="0,0,156,0">
+        <Button Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,78,0">
             <Image Source="/YANFOE;component/Resources/searchred.png" />
         </Button>
     </Grid>

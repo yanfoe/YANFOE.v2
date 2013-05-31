@@ -32,7 +32,7 @@
                     <RowDefinition Height="26" />
                     <RowDefinition Height="26" />
                     <RowDefinition Height="12" />
-                    <RowDefinition Height="42" />
+                    <RowDefinition Height="26" />
                 </Grid.RowDefinitions>
                 <Label Content="Series Name:" Grid.Row="1" />
                 <Label Content="&lt;series name&gt;" Name="lblSeriesName" Grid.Row="2" />
@@ -44,17 +44,27 @@
 
                 <Label Content="Search Again:" Grid.Row="8" />
                 <TextBox Grid.Row="9" Name="txtSearch" />
-                <Button Name="btnSearchAgain" Grid.Row="11" Width="62" HorizontalAlignment="Right">
-                    <Image Source="/YANFOE;component/Resources/globe1.png" />
-                </Button>
+                <Grid Grid.Row="11" Grid.ColumnSpan="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220" />
+                        <ColumnDefinition Width="196*" />
+                        <ColumnDefinition Width="26" />
+                        <ColumnDefinition Width="6" />
+                        <ColumnDefinition Width="26" />
+                    </Grid.ColumnDefinitions>
+                    <Button Name="btnSearchAgain">
+                        <Image Source="/YANFOE;component/Resources/globe1.png" />
+                    </Button>
 
-                <Button Name="btnCancel" Grid.Row="11" Grid.Column="4" Width="62" HorizontalAlignment="Right" Margin="0,0,34,0" Grid.ColumnSpan="2">
-                    <Image Source="/YANFOE;component/Resources/delete.png" />
-                </Button>
+                    <Button Name="btnCancel" Grid.Column="2" HorizontalAlignment="Right">
+                        <Image Source="/YANFOE;component/Resources/delete.png" />
+                    </Button>
 
-                <Button Name="btnOK" Grid.Row="11" Grid.Column="5" Width="62" HorizontalAlignment="Right" Grid.ColumnSpan="3">
-                    <Image Source="/YANFOE;component/Resources/accept1.png" />
-                </Button>
+                    <Button Name="btnOK" Grid.Column="5" HorizontalAlignment="Right">
+                        <Image Source="/YANFOE;component/Resources/accept1.png" />
+                    </Button>
+                </Grid>
+                
                 <Border BorderBrush="Silver" BorderThickness="1" Grid.Column="1" Grid.RowSpan="11" Margin="6" Name="border1" Grid.ColumnSpan="7" />
                 <Label Content="Series Name:" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" />
                 <Label Content="Lang:" Grid.Row="4" Grid.Column="5" />

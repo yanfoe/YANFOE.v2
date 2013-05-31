@@ -6,12 +6,12 @@
          ResizeMode="NoResize">
     <Grid DataContext="{Binding Source={x:Static Scraper:MovieScraperGroupFactory.Instance}, Path=ScraperGroupsOnDisk}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="28" />
+            <ColumnDefinition Width="26" />
             <ColumnDefinition Width="87" />
             <ColumnDefinition Width="232*" />
             <ColumnDefinition Width="115" />
             <ColumnDefinition Width="204*" />
-            <ColumnDefinition Width="28" />
+            <ColumnDefinition Width="26" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
@@ -30,7 +30,7 @@
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
-            <RowDefinition Height="42" />
+            <RowDefinition Height="26" />
         </Grid.RowDefinitions>
         <Label Content="Scraper Group Manager" Grid.Column="1" Grid.ColumnSpan="5" />
         <ComboBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding}" DisplayMemberPath="ScraperName" IsSynchronizedWithCurrentItem="True" Name="cmbScraperGroupList" />
@@ -62,31 +62,31 @@
         <ComboBox Grid.Row="15" Grid.Column="2" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=TrailerScrapersAsStringList}" Text="{Binding Trailer}" Name="cmbTrailer" />
 
         <Label Content="Genre" Grid.Row="4" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="4" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=GenreScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Genre}" Name="cmbGenre" />
+        <ComboBox Grid.Row="4" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=GenreScrapersAsStringList}" Text="{Binding Genre}" Name="cmbGenre" />
         <Label Content="Language" Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="5" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=LanguageScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Language}" Name="cmbLanguage" />
+        <ComboBox Grid.Row="5" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=LanguageScrapersAsStringList}" Text="{Binding Language}" Name="cmbLanguage" />
         <Label Content="Runtime" Grid.Row="6" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="6" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=RuntimeScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Runtime}" Name="cmbRuntime" />
+        <ComboBox Grid.Row="6" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=RuntimeScrapersAsStringList}" Text="{Binding Runtime}" Name="cmbRuntime" />
         <Label Content="Top 250" Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="7" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=Top250ScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Top250}" Name="cmbTop250" />
+        <ComboBox Grid.Row="7" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=Top250ScrapersAsStringList}" Text="{Binding Top250}" Name="cmbTop250" />
         <Label Content="Release Date" Grid.Row="8" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="8" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=ReleaseDateScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding ReleaseDate}" Name="cmbReleaseDate" />
+        <ComboBox Grid.Row="8" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=ReleaseDateScrapersAsStringList}" Text="{Binding ReleaseDate}" Name="cmbReleaseDate" />
         <Label Content="Votes" Grid.Row="9" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="9" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=VotesScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Votes}" Name="cmbVotes" />
+        <ComboBox Grid.Row="9" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=VotesScrapersAsStringList}" Text="{Binding Votes}" Name="cmbVotes" />
         <Label Content="Cast" Grid.Row="10" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="10" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=CastScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Cast}" Name="cmbCast" />
+        <ComboBox Grid.Row="10" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=CastScrapersAsStringList}" Text="{Binding Cast}" Name="cmbCast" />
         <Label Content="Director" Grid.Row="11" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="11" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=DirectorScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Director}" Name="cmbDirector" />
+        <ComboBox Grid.Row="11" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=DirectorScrapersAsStringList}" Text="{Binding Director}" Name="cmbDirector" />
         <Label Content="Studio" Grid.Row="12" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="12" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=StudioScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Studio}" Name="cmbStudio" />
+        <ComboBox Grid.Row="12" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=StudioScrapersAsStringList}" Text="{Binding Studio}" Name="cmbStudio" />
         <Label Content="Fanart" Grid.Row="13" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="13" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=FanartScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Fanart}" Name="cmbFanart" />
+        <ComboBox Grid.Row="13" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=FanartScrapersAsStringList}" Text="{Binding Fanart}" Name="cmbFanart" />
         <Label Content="Poster" Grid.Row="14" Grid.Column="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <ComboBox Grid.Row="14" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=PosterScrapersAsStringList}" Grid.ColumnSpan="2" Text="{Binding Poster}" Name="cmbPoster" />
-        <Button Grid.Column="4" Grid.Row="16" Width="42" HorizontalAlignment="Right" Grid.ColumnSpan="2" Name="btnOK" Click="btnOK_Click">
+        <ComboBox Grid.Row="14" Grid.Column="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=PosterScrapersAsStringList}" Text="{Binding Poster}" Name="cmbPoster" />
+        <Button Grid.Column="4" Grid.Row="16" HorizontalAlignment="Right" Grid.ColumnSpan="2" Name="btnOK" Click="btnOK_Click">
             <Image Source="/YANFOE;component/Resources/accept1.png" />
         </Button>
-        <Button Grid.Row="16" Width="42" HorizontalAlignment="Left" Grid.ColumnSpan="2" Name="btnClearScraperGroup" Click="btnClearScraperGroup_Click">
+        <Button Grid.Row="16" HorizontalAlignment="Left" Grid.ColumnSpan="2" Name="btnClearScraperGroup" Click="btnClearScraperGroup_Click">
             <Image Source="/YANFOE;component/Resources/promotion_new.png" />
         </Button>
         <Grid Grid.ColumnSpan="6" Name="grid1" Grid.RowSpan="3">
@@ -97,8 +97,6 @@
                 <ColumnDefinition Width="334*" />
                 <ColumnDefinition Width="190*" />
                 <ColumnDefinition Width="28" />
-                <ColumnDefinition Width="28" />
-                <ColumnDefinition Width="28" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="26" />
@@ -107,7 +105,7 @@
                 <RowDefinition Height="26" />
                 <RowDefinition Height="26" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="4" Grid.Row="3" Content="Autopopulate" Grid.ColumnSpan="2" />
+            <Label Grid.Column="4" Grid.Row="3" Content="Autopopulate" />
             <ComboBox Grid.Column="4" Grid.Row="4" ItemsSource="{Binding Source={x:Static Movie:MovieScraperHandler.Instance}, Path=AllScrapersAsStringList}" Name="cmbAutopopulate" />
             <Button Grid.Column="1" Grid.Row="3" Name="btnAdd" Click="btnAdd_Click">
                 <Image Source="/YANFOE;component/Resources/add.png" />
@@ -121,7 +119,7 @@
             <Button Grid.Column="2" Grid.Row="4" Name="btnSave" Click="btnSave_Click" IsEnabled="{Binding IsDirty}">
                 <Image Source="/YANFOE;component/Resources/save1.png" />
             </Button>
-            <Button Grid.Column="5" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="btnAutopopulate" Click="btnAutopopulate_Click">
+            <Button Grid.Column="7" Grid.Row="4" Grid.RowSpan="1" Grid.ColumnSpan="1" Name="btnAutopopulate" Click="btnAutopopulate_Click">
                 <Image Source="/YANFOE;component/Resources/down.png" />
             </Button>
         </Grid>
