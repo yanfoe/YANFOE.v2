@@ -231,6 +231,13 @@ namespace YANFOE.Factories.Import
                         FanartPathOnDisk =
                             this.FindFanart(file.FilenameWithOutExt, this.FindFilePath(title, file), getFiles)
                     };
+                movieModel.MovieSize = (new FileInfo(file.PathAndFileName)).Length;
+                movieModel.TotalSize = 0;
+                var files = FileHelper.GetFilesRecursive(file.Path);
+                files.ForEach(f =>
+                {
+                    movieModel.TotalSize += (new FileInfo(f)).Length;
+                });
 
                 if (!string.IsNullOrEmpty(movieModel.NfoPathOnDisk))
                 {

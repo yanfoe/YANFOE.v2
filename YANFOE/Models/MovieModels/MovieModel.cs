@@ -310,6 +310,17 @@ namespace YANFOE.Models.MovieModels
         /// </summary>
         private int? year;
 
+        /// <summary>
+        ///   Movie size backing field
+        /// </summary>
+        /// 
+        private long? movieSize;
+
+        /// <summary>
+        ///   Total size backing field
+        /// </summary>
+        private long? totalSize;
+
         #endregion
 
         #region Constructors and Destructors
@@ -2118,6 +2129,48 @@ namespace YANFOE.Models.MovieModels
                     this.OnPropertyChanged("Year", true);
                     this.OnPropertyChanged("YamjXmlRtf");
                     this.OnPropertyChanged("XbmcXmlRtf");
+                }
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the size of the movie.
+        /// </summary>
+        /// <value> The size value </value>
+        public long? MovieSize
+        {
+            get
+            {
+                return this.movieSize;
+            }
+
+            set
+            {
+                if (this.movieSize != value)
+                {
+                    this.movieSize = value;
+                    this.OnPropertyChanged("movieSize", true);
+                }
+            }
+        }
+
+        /// <summary>
+        ///   Gets or sets the size of the movie folder (including images and nfo).
+        /// </summary>
+        /// <value> The size value </value>
+        public long? TotalSize
+        {
+            get
+            {
+                return this.totalSize;
+            }
+
+            set
+            {
+                if (this.totalSize != value)
+                {
+                    this.totalSize = value;
+                    this.OnPropertyChanged("totalSize", true);
                 }
             }
         }
