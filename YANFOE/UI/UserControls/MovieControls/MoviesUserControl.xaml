@@ -33,9 +33,9 @@
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Binding="{Binding Path=Title}" Header="Title" Width="100*" />
                             <DataGridTextColumn Binding="{Binding Path=Year}" CanUserSort="False" Header="Year" Width="40" />
-                            <DataGridCheckBoxColumn Binding="{Binding Path=Locked}" Header="..." Width="5" />
-                            <DataGridCheckBoxColumn Binding="{Binding Path=Marked}" Header="..." Width="5" />
-                            <DataGridCheckBoxColumn Binding="{Binding Path=Watched}" Header="..." Width="5" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Locked}" Header="L" Width="5" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Marked}" Header="M" Width="5" />
+                            <DataGridCheckBoxColumn Binding="{Binding Path=Watched}" Header="W" Width="5" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -87,41 +87,47 @@
             <Button Name="btnLoadFromWeb" Click="BtnLoadFromWebClick">
                 <Image Source="/YANFOE;component/Resources/globe1.png" />
             </Button>
-            <Button Grid.Column="1">
+            <Button Grid.Column="1" Click="BtnSaveClick">
                 <Image Source="/YANFOE;component/Resources/save.png" />
             </Button>
-            <Button Grid.Column="3">
+            <Button Grid.Column="3" Click="btnOpenFileClick">
                 <Image Source="/YANFOE;component/Resources/monitor1.png" />
             </Button>
-            <Button Grid.Column="4">
+            <Button Grid.Column="4" Click="btnOpenFolderClick">
                 <Image Source="/YANFOE;component/Resources/folder1.png" />
             </Button>
             <Button Grid.Column="6">
                 <Image Source="/YANFOE;component/Resources/searchred.png" />
             </Button>
-            <Button Grid.Column="7">
+            <Button Grid.Column="6">
+                <Image Source="/YANFOE;component/Resources/search.png" />
+            </Button>
+            <Button Grid.Column="7" Click="btnWatchedClick">
                 <Image Source="/YANFOE;component/Resources/watched_red.png" />
             </Button>
-            <Button Grid.Column="8">
+            <Button Grid.Column="7" Click="btnWatchedClick">
                 <Image Source="/YANFOE;component/Resources/watched_green.png" />
-            </Button>
-            <Button Grid.Column="9">
-                <Image Source="/YANFOE;component/Resources/watched_red.png" />
             </Button>
             <Button Grid.Column="10">
                 <Image Source="/YANFOE;component/Resources/promotion_new.png" />
             </Button>
-            <Button Grid.Column="11">
+            <Button Grid.Column="11" Click="BtnMarkedClick">
                 <Image Source="/YANFOE;component/Resources/star_empty.png" />
             </Button>
-            <Button Grid.Column="12">
+            <Button Grid.Column="11" Click="BtnMarkedClick">
+                <Image Source="/YANFOE;component/Resources/star_full.png" />
+            </Button>
+            <Button Grid.Column="12" Click="BtnLockClick">
                 <Image Source="/YANFOE;component/Resources/unlock.png" />
+            </Button>
+            <Button Grid.Column="12" Click="BtnLockClick">
+                <Image Source="/YANFOE;component/Resources/lock.png" />
             </Button>
             <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Name="gridSplitter2" VerticalAlignment="Stretch" ResizeDirection="Rows" Grid.ColumnSpan="13" />
             <TabControl Margin="6" Name="tabControl2" Grid.ColumnSpan="13" Grid.Row="1">
                 <TabItem Header="Main Details">
                     <Grid>
-                        <my:MoviesMainDetailsUC x:Name="moviesMainDetailsUC1" />
+                        <my:MoviesMainDetailsUC x:Name="moviesMainDetailsUC1" Margin="-18,0,18,0" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="File Info">

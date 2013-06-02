@@ -26,6 +26,10 @@ namespace YANFOE.UI.UserControls.MovieControls
     using YANFOE.Tools.Extentions;
     using YANFOE.Tools.UI;
     using YANFOE.UI.UserControls.CommonControls;
+    using YANFOE.Factories.InOut.Enum;
+    using YANFOE.Factories;
+    using System.Diagnostics;
+    using System.IO;
 
     #endregion
 
@@ -83,6 +87,74 @@ namespace YANFOE.UI.UserControls.MovieControls
                 MovieScrapeFactory.RunMultiScrape(movieList);
 
                 // gridViewByTitle.SelectedIndex = -1;
+            }
+        }
+
+        private void BtnLockClick(object sender, RoutedEventArgs e)
+        {
+            foreach (MovieModel movie in this.gridViewByTitle.SelectedItems)
+            {
+                movie.Locked = !movie.Locked;
+            }
+        }
+
+        private void btnWatchedClick(object sender, RoutedEventArgs e)
+        {
+            foreach (MovieModel movie in this.gridViewByTitle.SelectedItems)
+            {
+                movie.Watched = !movie.Watched;
+            }
+        }
+
+        private void BtnMarkedClick(object sender, RoutedEventArgs e)
+        {
+            foreach (MovieModel movie in this.gridViewByTitle.SelectedItems)
+            {
+                movie.Marked = !movie.Marked;
+            }
+        }
+
+        private void BtnSaveClick(object sender, RoutedEventArgs e)
+        {
+            this.StartSaveMovie();
+        }
+
+        private void StartSaveMovie(MovieIOType type = MovieIOType.All)
+        {
+            foreach (MovieModel movie in this.gridViewByTitle.SelectedItems)
+            {
+                MovieDBFactory.Instance.MultiSelectedMovies.Add(movie);
+            }
+            Factories.InOut.OutFactory.SaveMovie(type);
+        }
+
+        private void btnOpenFolderClick(object sender, RoutedEventArgs e)
+        {
+            if (this.gridViewByTitle.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("This is only supported for one selection");
+                return;
+            }
+            string argument = string.Format(
+                @"/select,""{0}""",
+                File.Exists((this.gridViewByTitle.SelectedItems[0] as MovieModel).AssociatedFiles.Media[0].PathAndFilename)
+                    ? (this.gridViewByTitle.SelectedItems[0] as MovieModel).AssociatedFiles.Media[0].PathAndFilename
+                    : (this.gridViewByTitle.SelectedItems[0] as MovieModel).AssociatedFiles.Media[0].FolderPath);
+
+            Process.Start("explorer.exe", argument);
+        }
+        
+
+        private void btnOpenFileClick(object sender, RoutedEventArgs e)
+        {
+            if (this.gridViewByTitle.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("This is only supported for one selection");
+                return;
+            }
+            if (File.Exists((this.gridViewByTitle.SelectedItems[0] as MovieModel).AssociatedFiles.Media[0].PathAndFilename))
+            {
+                Process.Start((this.gridViewByTitle.SelectedItems[0] as MovieModel).AssociatedFiles.Media[0].PathAndFilename);
             }
         }
 
